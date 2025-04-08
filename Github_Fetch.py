@@ -4,10 +4,14 @@ import os
 from dotenv import load_dotenv
 import re
 
+#######################################################################
+# Global Variables
 
 VERBOSE = True
-i = 0
-setMax = 1 # this determines how many commits in the JSON the program will request information for.
+AmountOfCommitsToProcess = 1
+
+#######################################################################
+# Functions
 
 def FormatUrl(url: str) -> str:
     """
@@ -29,77 +33,106 @@ def FormatUrl(url: str) -> str:
         print("Invalid GitHub commit URL format")
         return None
 
+#######################################################################
+# Main 
 
-# load .env file
-load_dotenv()
+def main():
 
-# get authentication token from .env
-token = os.getenv("GITHUB_TOKEN")
+    # Load .env file
+    load_dotenv()
 
-if token:
-    headers = {
-        "Authorization": f"token {token}"
-    }
-else:
-    headers = {}
-    print("WARNING, authentication not working. Ensure .env file is used with a 'GITHUB_TOKEN'")
+    # Load existing bad URLs as a dict
+    bad_urls_file = "bad_urls.json"
 
-
-# load the json and put it in the variable "filteredJson"
-with open('filtered_commits.json', 'r', encoding='utf-8') as f:
-    filteredJson = json.load(f)
-    if VERBOSE:
-        print("loaded JSON")
-
-# loop each commit in the Json 
-for commit in filteredJson:
-    if i >= setMax:
-        break
-    URL = commit['URL']
-    message = commit['Message']
-    #print(str(i) + ": " + message)
-
-    newURL = FormatUrl(url=URL)
-    if newURL == None:
-        pass # something went wrong with the URL formatting
-        #TODO: take these, append these to a json, and dump the json somewhere. (we can then manually check these.)
+    if os.path.exists(bad_urls_file):
+        with open(bad_urls_file, "r") as f:
+            try:
+                bad_urls = json.load(f)
+            except json.JSONDecodeError:
+                bad_urls = {}
     else:
-        # make a GET request
-        response = requests.get(url=newURL, headers=headers)
-        #print(response)
-        if response.status_code == 200:
-            data = response.json()
+        bad_urls = {}
+
+    # load the json and put it in the variable "filteredJson"
+    with open('filtered_commits.json', 'r', encoding='utf-8') as f:
+        filteredJson = json.load(f)
+        if VERBOSE:
+            print("loaded JSON")
+
+    # get authentication token from .env
+    token = os.getenv("GITHUB_TOKEN")
+
+    if token:
+        headers = {
+            "Authorization": f"token {token}"
+        }
+    else:
+        headers = {}
+        print("WARNING, authentication not working. Ensure .env file is used with a 'GITHUB_TOKEN'")
+
+
+    i = 0
+    # loop each commit in the Json 
+    for commit in filteredJson:
+        if i >= AmountOfCommitsToProcess:
+            break
+
+        if VERBOSE:
+            print("Processing file: " + str(i))
+        URL = commit['URL']
+        SHA = commit['Sha']
+        message = commit['Message']
+        #print(str(i) + ": " + message)
+
+        newURL = FormatUrl(url=URL)
+
+        if newURL is None:
+            print(f"Failed to format URL: {URL}")
+            if SHA not in bad_urls:
+                bad_urls[SHA] = URL
+                with open(bad_urls_file, "w") as f:
+                    json.dump(bad_urls, f, indent=2)
         else:
-            print(f"Error: {response.status_code}")
-    
-    if data:
-        files = data.get("files", [])
-        listOfMentionedFiles = []
+            try:
+                response = requests.get(url=newURL, headers=headers)
+                if response.status_code == 200:
+                    data = response.json()
+                else:
+                    print(f"Request failed with status: {response.status_code} for URL: {newURL}")
+            except requests.RequestException as e:
+                print(f"Request error: {e}")
+
+            if data:
+                files = data.get("files", [])
+                listOfMentionedFiles = []
 
 
-        for file in files:
-            '''
-            --- File ---
-            "sha": str (unique)
-            "filename": str
-            "status": str
-            "additions": int
-            "deletions": int
-            "changes": int (sum of add and del)
-            "blob_url": str
-            "raw_url": str
-            "contents_url": str
-            '''
-            fileName = file['filename']
+                for file in files:
+                    '''
+                    --- File ---
+                    "sha": str (unique)
+                    "filename": str
+                    "status": str
+                    "additions": int
+                    "deletions": int
+                    "changes": int (sum of add and del)
+                    "blob_url": str
+                    "raw_url": str
+                    "contents_url": str
+                    '''
+                    fileName = file['filename']
 
-            #TODO: somehow compare all these "file" objects with the converstations in the "commit" objects.
-            # Use a similarity comparison.
+                    #TODO: somehow compare all these "file" objects with the converstations in the "commit" objects.
+                    # Use a similarity comparison.
 
-            #TODO: potential performance issues with brute force, maybe find a way to see if there are any files that are not related to the conversations
+                    #TODO: potential performance issues with brute force, maybe find a way to see if there are any files that are not related to the conversations
+                    
+                    if VERBOSE:
+                        print(f"File: {fileName}")
+                        print(f"Changes: +{file['additions']} -{file['deletions']}")
+
             
-            if VERBOSE:
-                print(f"File: {fileName}")
-                print(f"Changes: +{file['additions']} -{file['deletions']}")
+        i += 1
 
-
-    i += 1
+if __name__ == "__main__":
+    main()
