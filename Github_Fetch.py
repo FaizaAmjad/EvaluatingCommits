@@ -4,6 +4,11 @@ import os
 from dotenv import load_dotenv
 import re
 
+
+VERBOSE = True
+i = 0
+setMax = 1 # this determines how many commits in the JSON the program will request information for.
+
 def FormatUrl(url: str) -> str:
     """
     Converts a GitHub web commit URL to its corresponding API URL.
@@ -43,13 +48,12 @@ else:
 # load the json and put it in the variable "filteredJson"
 with open('filtered_commits.json', 'r', encoding='utf-8') as f:
     filteredJson = json.load(f)
-
-i = 1
-setMax = 1
+    if VERBOSE:
+        print("loaded JSON")
 
 # loop each commit in the Json 
 for commit in filteredJson:
-    if i > setMax:
+    if i >= setMax:
         break
     URL = commit['URL']
     message = commit['Message']
@@ -65,7 +69,6 @@ for commit in filteredJson:
         #print(response)
         if response.status_code == 200:
             data = response.json()
-            print(json.dumps(data, indent=2))
         else:
             print(f"Error: {response.status_code}")
     
@@ -94,10 +97,9 @@ for commit in filteredJson:
 
             #TODO: potential performance issues with brute force, maybe find a way to see if there are any files that are not related to the conversations
             
-    
-            print(f"File: {fileName}")
-            #print(f"Changes: +{f['additions']} -{f['deletions']}")
-            #print(f"Patch:\n{f['patch']}\n")
+            if VERBOSE:
+                print(f"File: {fileName}")
+                print(f"Changes: +{file['additions']} -{file['deletions']}")
 
 
     i += 1
