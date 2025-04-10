@@ -1,0 +1,25 @@
+name: Notify Discord on Any Important Event
+
+on:
+  push:
+  pull_request:
+  issues:
+  create:
+  delete:
+  release:
+  workflow_dispatch:
+
+jobs:
+  discord:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send custom message to Discord
+        uses: Ilshidur/action-discord@master
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: |
+            🔔 **New GitHub Event Detected!**
+            - Event: ${{ github.event_name }}
+            - Ref: ${{ github.ref }}
+            - Repo: ${{ github.repository }}
+            - By: ${{ github.actor }}
