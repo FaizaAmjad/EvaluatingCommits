@@ -4,6 +4,16 @@ import re
 from tqdm import tqdm
 from collections import Counter
 from crystalbleu import corpus_bleu
+import fractions
+
+# Monkey patch to fix crystalBLEU issue with Fraction
+_orig_fraction_new = fractions.Fraction.__new__
+def _fixed_fraction_new(cls, *args, **kwargs):
+    kwargs.pop('_normalize', None)
+    return _orig_fraction_new(cls, *args, **kwargs)
+
+fractions.Fraction.__new__ = staticmethod(_fixed_fraction_new)
+
 
 # Helping auto-detect the programming language based on file extension
 EXTENSION_LANGUAGE_MAP = {
@@ -22,7 +32,9 @@ EXTENSION_LANGUAGE_MAP = {
 def detect_language(filename: str):
     for ext, lang in EXTENSION_LANGUAGE_MAP.items():
         if filename.endswith(ext):
+            print(f"\nlang found: {lang}")
             return lang
+        print ("No language found and will return none")
     return None
 
 # Removes comments depending on language
@@ -127,7 +139,7 @@ def process_commit_data(input_path: str, output_csv_path: str, top_k=500, n=1):
                 continue
 
     if not results:
-        print("⚠️ No valid results found. Check your input data or logic.")
+        print("⚠️  No valid results found. Check your input data or logic.")
         return
     
     # Write final results to a CSV file
