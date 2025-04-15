@@ -12,7 +12,7 @@ def _fixed_fraction_new(cls, *args, **kwargs):
     kwargs.pop('_normalize', None)
     return _orig_fraction_new(cls, *args, **kwargs)
 
-fractions.Fraction.__new__ = staticmethod(_fixed_fraction_new)
+fractions.Fraction.__new__ = staticmethod(_fixed_fraction_new) 
 
 
 # Helping auto-detect the programming language based on file extension
