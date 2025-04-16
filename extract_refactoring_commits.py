@@ -7,7 +7,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 import csv
 
-nltk.download('punkt_tab')
+nltk.download('punkt')
 nltk.download('wordnet')
 
 lemmatizer = WordNetLemmatizer()
@@ -18,8 +18,8 @@ def read_keywords_from_csv(filename):
         reader = csv.reader(file)
         return {row[0].strip().lower() for row in reader if row}  # Return a set of keywords
 
-# File path to the final list of keywords (created previously)
-keywords_file = 'final_list_of_keywords.csv'
+# File path to the keyword CSV file
+keywords_file = os.path.join("DevGPT_Commit_Dataset", "final_list_of_keywords.csv")
 
 # Read keywords from the final list of keywords CSV
 keywords = read_keywords_from_csv(keywords_file)
@@ -46,12 +46,6 @@ else:
     
 # Initialize a list to store filtered commits
 filtered_commits = []
-
-# Combine all keywords
-all_keywords = set(update_keywords + refactor_keywords)
-
-# Lemmatize the keywords
-lemmatized_keywords = set(lemmatizer.lemmatize(kw.lower()) for kw in all_keywords)
 
 # Initialize counters
 total_commits = 0
