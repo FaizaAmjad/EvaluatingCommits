@@ -1,0 +1,52 @@
+{
+  "sha": "e2478c4a83ae7766a8bf2db42698832b19dc5ca2",
+  "url": "https://github.com/tisztamo/Junior/commit/e2478c4a83ae7766a8bf2db42698832b19dc5ca2",
+  "message": "Create and replace logo file https://chat.openai.com/share/c94d2481-7aaf-45a7-b841-f5d691d9d5f5",
+  "code": {
+    "before": "",
+    "after": ""
+  },
+  "chatgpt_sharing": {
+    "title": "Create Logo SVG/PNG",
+    "url": "https://chat.openai.com/share/c94d2481-7aaf-45a7-b841-f5d691d9d5f5",
+    "number_of_prompts": 3,
+    "conversations": [
+      {
+        "prompt_id": "e2478c4a83ae7766a8bf2db42698832b19dc5ca2_s1_p1",
+        "prompt": "# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .github/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 .vscode/...\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 change.sh\n\u251c\u2500\u2500 docs/...\n\u251c\u2500\u2500 integrations/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 src/...\n\n```\n```\n./docs/assets/\n\u251c\u2500\u2500 logo.png\n\u251c\u2500\u2500 video_cover.jpg\n\n```\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nCreate a new 1:1 logo and save it as logo.svg! Then convert to png and overwrite the old one!\nThe logo consists of three same-height row stacked on each other with some space inbetween.\nThe first row is filled by a blue rounded rectangle\nThe second one is filled by an orange rounded rectangle\nThe last one contains two rounded rectangles: On the left a red one and on the right a green one. The two fill the row fully and there is some space between them\nconvert is installed\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Create and replace logo file\"\necho \"Plan:\"\necho \"1. Create the SVG logo file with the given specifications.\"\necho \"2. Convert the SVG file to PNG using 'convert'.\"\necho \"3. Overwrite the old PNG logo file.\"\n\n# Step 1: Create the SVG logo file with the given specifications.\ncat > ./docs/assets/logo.svg << 'EOF'\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 120 120\">\n    <rect x=\"10\" y=\"10\" rx=\"10\" ry=\"10\" width=\"100\" height=\"20\" style=\"fill:blue;\" />\n    <rect x=\"10\" y=\"40\" rx=\"10\" ry=\"10\" width=\"100\" height=\"20\" style=\"fill:orange;\" />\n    <rect x=\"10\" y=\"70\" rx=\"10\" ry=\"10\" width=\"40\" height=\"20\" style=\"fill:red;\" />\n    <rect x=\"60\" y=\"70\" rx=\"10\" ry=\"10\" width=\"40\" height=\"20\" style=\"fill:green;\" />\n</svg>\nEOF\n\n# Step 2: Convert the SVG file to PNG using 'convert'.\nconvert ./docs/assets/logo.svg ./docs/assets/logo.png\n\n# Step 3: Overwrite the old PNG logo file.\nmv -f ./docs/assets/logo.png ./docs/assets/logo.png\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "e2478c4a83ae7766a8bf2db42698832b19dc5ca2_s1_p2",
+        "prompt": "Great but the last row is not fully filled, and  less space is needed between them, and no padding around! ",
+        "answer": "I see. Let's adjust the SVG dimensions, the positions, and the sizes of the rectangles to fill the SVG fully. Here is the adjusted script:[CODE_BLOCK_0]This script adjusts the SVG dimensions to 100x100, removes the padding around the rectangles, and fills the last row fully with less space between the rectangles.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Create and replace logo file\"\necho \"Plan:\"\necho \"1. Create the SVG logo file with the given specifications.\"\necho \"2. Convert the SVG file to PNG using 'convert'.\"\necho \"3. Overwrite the old PNG logo file.\"\n\n# Step 1: Create the SVG logo file with the given specifications.\ncat > ./docs/assets/logo.svg << 'EOF'\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\">\n    <rect x=\"0\" y=\"0\" rx=\"10\" ry=\"10\" width=\"100\" height=\"25\" style=\"fill:blue;\" />\n    <rect x=\"0\" y=\"35\" rx=\"10\" ry=\"10\" width=\"100\" height=\"25\" style=\"fill:orange;\" />\n    <rect x=\"0\" y=\"70\" rx=\"10\" ry=\"10\" width=\"48\" height=\"30\" style=\"fill:red;\" />\n    <rect x=\"52\" y=\"70\" rx=\"10\" ry=\"10\" width=\"48\" height=\"30\" style=\"fill:green;\" />\n</svg>\nEOF\n\n# Step 2: Convert the SVG file to PNG using 'convert'.\nconvert ./docs/assets/logo.svg ./docs/assets/logo.png\n\n# Step 3: Overwrite the old PNG logo file.\nmv -f ./docs/assets/logo.png ./docs/assets/logo.png\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "e2478c4a83ae7766a8bf2db42698832b19dc5ca2_s1_p3",
+        "prompt": "Great, but needs less space between the rows too",
+        "answer": "Understood. I will reduce the vertical space between the rows. Here's the updated script:[CODE_BLOCK_0]Now the vertical space between rows is reduced by making the height of each row 30 units, with 3 units of space between each. The final row rectangles are resized to fill the space fully.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Create and replace logo file\"\necho \"Plan:\"\necho \"1. Create the SVG logo file with the given specifications.\"\necho \"2. Convert the SVG file to PNG using 'convert'.\"\necho \"3. Overwrite the old PNG logo file.\"\n\n# Step 1: Create the SVG logo file with the given specifications.\ncat > ./docs/assets/logo.svg << 'EOF'\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\">\n    <rect x=\"0\" y=\"0\" rx=\"10\" ry=\"10\" width=\"100\" height=\"30\" style=\"fill:blue;\" />\n    <rect x=\"0\" y=\"33\" rx=\"10\" ry=\"10\" width=\"100\" height=\"30\" style=\"fill:orange;\" />\n    <rect x=\"0\" y=\"66\" rx=\"10\" ry=\"10\" width=\"48\" height=\"34\" style=\"fill:red;\" />\n    <rect x=\"52\" y=\"66\" rx=\"10\" ry=\"10\" width=\"48\" height=\"34\" style=\"fill:green;\" />\n</svg>\nEOF\n\n# Step 2: Convert the SVG file to PNG using 'convert'.\nconvert ./docs/assets/logo.svg ./docs/assets/logo.png\n\n# Step 3: Overwrite the old PNG logo file.\nmv -f ./docs/assets/logo.png ./docs/assets/logo.png\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  }
+}

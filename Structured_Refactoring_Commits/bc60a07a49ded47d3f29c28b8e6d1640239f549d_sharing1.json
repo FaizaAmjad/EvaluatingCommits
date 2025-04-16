@@ -1,0 +1,40 @@
+{
+  "sha": "bc60a07a49ded47d3f29c28b8e6d1640239f549d",
+  "url": "https://github.com/tisztamo/Junior/commit/bc60a07a49ded47d3f29c28b8e6d1640239f549d",
+  "message": "Move clearBranchesCommand.js, update import, delete deleteBranchesCommand.js https://chat.openai.com/share/65ee35ed-921b-47b9-a7be-ef79a7a194ef",
+  "code": {
+    "before": "",
+    "after": ""
+  },
+  "chatgpt_sharing": {
+    "title": "Move & Delete Git Scripts",
+    "url": "https://chat.openai.com/share/65ee35ed-921b-47b9-a7be-ef79a7a194ef",
+    "number_of_prompts": 2,
+    "conversations": [
+      {
+        "prompt_id": "bc60a07a49ded47d3f29c28b8e6d1640239f549d_s1_p1",
+        "prompt": "You are Junior, an AI system aiding developers. You are working with a part of a large program called the \"Working Set.\" Ask for contents of subdirectories if needed. Some files are printed in the working set. Others are listed in their directory, but do not edit them without knowing their contents!\n\n# Working set\n\n```\n./\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .github/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 .vscode/...\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 change.sh\n\u251c\u2500\u2500 docs/...\n\u251c\u2500\u2500 integrations/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 scripts/...\n\u251c\u2500\u2500 src/...\n\n```\n```\n./scripts/\n\u251c\u2500\u2500 deleteBranchesCommand.js\n\u251c\u2500\u2500 updateLogo.js\n\n```\nsrc/git/clearBranches.js:\n```\nimport { promisify } from 'util';\nimport { exec as execCb } from 'child_process';\n\nconst exec = promisify(execCb);\n\nexport default async function clearBranches(exceptions = []) {\n  try {\n    const { stdout: currentBranch } = await exec('git rev-parse --abbrev-ref HEAD');\n    const { stdout: allBranches } = await exec('git for-each-ref --format=\"%(refname:short)\" refs/heads');\n\n    const branches = allBranches.split('\\n').filter(branch => branch !== currentBranch.trim() && !exceptions.includes(branch));\n\n    for (const branch of branches) {\n      await executeCommand(`git branch -d ${branch}`);\n    }\n  } catch (err) {\n    console.error(`An error occurred: ${err}`);\n  }\n}\n\nasync function executeCommand(command) {\n  try {\n    console.log(`Running command: ${command}`);\n    const { stdout } = await exec(command);\n    console.log(`stdout: ${stdout}`);\n  } catch (err) {\n    throw err;\n  }\n}\n\n```\n\nsrc/git/clearBranchesCommand.js:\n```\nimport clearBranches from './clearBranches';\n\nconst exceptions = process.argv.slice(2);\n\nasync function run() {\n  try {\n    await clearBranches(exceptions);\n    console.log('Branches deleted successfully.');\n  } catch (err) {\n    console.error(`An error occurred while deleting branches: ${err}`);\n    process.exit(1);\n  }\n}\n\nrun();\n\n\n```\n\n\n# Task\n\nMove the following files to the specified target dirs!\n\nFind out the best target dir if it is not specified!\n\nYou need to follow dependencies to maintain coherence.\n\nBefore executing, write a concise plan! The plan should show:\n - How do you avoid breaking other parts of the code.\n - If you had to choose, your way of thinking.\n\nMove clearBranchesCommand.js to scripts/\nDelete scripts/deleteBranchesCommand.js\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Move and delete specific git scripts\"\necho \"Plan:\"\necho \"1. Move clearBranchesCommand.js from src/git/ to scripts/, this script imports clearBranches.js so no dependency will be broken.\"\necho \"2. Delete deleteBranchesCommand.js from scripts/ as it's no longer needed.\"\necho \"3. Since clearBranchesCommand.js is moved, if there are any references to the previous path, it will need to be updated. In this case, however, there doesn't appear to be any, so we can proceed with the move.\"\n\n# Moving clearBranchesCommand.js to the scripts directory\nmv ./src/git/clearBranchesCommand.js ./scripts/clearBranchesCommand.js\n\n# Deleting deleteBranchesCommand.js from the scripts directory\nrm ./scripts/deleteBranchesCommand.js\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "bc60a07a49ded47d3f29c28b8e6d1640239f549d_s1_p2",
+        "prompt": "No, update the import in the moved file",
+        "answer": "Certainly! It seems I overlooked the need to update the import path in the moved file. Here's the corrected script that will do just that.[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Move clearBranchesCommand.js, update import, delete deleteBranchesCommand.js\"\necho \"Plan:\"\necho \"1. Move clearBranchesCommand.js from src/git/ to scripts/, and update the import path for clearBranches.js within the moved file.\"\necho \"2. Delete deleteBranchesCommand.js from scripts/ as it's no longer needed.\"\n\n# Moving clearBranchesCommand.js to the scripts directory\nmv ./src/git/clearBranchesCommand.js ./scripts/clearBranchesCommand.js\n\n# Updating the import path for clearBranches.js within the moved file\ncat <<EOF > ./scripts/clearBranchesCommand.js\nimport clearBranches from '../src/git/clearBranches';\n\nconst exceptions = process.argv.slice(2);\n\nasync function run() {\n  try {\n    await clearBranches(exceptions);\n    console.log('Branches deleted successfully.');\n  } catch (err) {\n    console.error(\\`An error occurred while deleting branches: \\${err}\\`);\n    process.exit(1);\n  }\n}\n\nrun();\nEOF\n\n# Deleting deleteBranchesCommand.js from the scripts directory\nrm ./scripts/deleteBranchesCommand.js\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  }
+}

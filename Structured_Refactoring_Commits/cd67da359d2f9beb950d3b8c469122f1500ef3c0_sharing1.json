@@ -1,0 +1,28 @@
+{
+  "sha": "cd67da359d2f9beb950d3b8c469122f1500ef3c0",
+  "url": "https://github.com/tisztamo/Junior/commit/cd67da359d2f9beb950d3b8c469122f1500ef3c0",
+  "message": "Refactor setupRoutes.js https://chat.openai.com/share/6336615e-5196-4306-ae86-941650681131",
+  "code": {
+    "before": "",
+    "after": ""
+  },
+  "chatgpt_sharing": {
+    "title": "Refactor and Reorder Routes",
+    "url": "https://chat.openai.com/share/6336615e-5196-4306-ae86-941650681131",
+    "number_of_prompts": 1,
+    "conversations": [
+      {
+        "prompt_id": "cd67da359d2f9beb950d3b8c469122f1500ef3c0_s1_p1",
+        "prompt": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\nsrc/backend/setupRoutes.js:\n```\nimport { generateHandler } from './handlers/generateHandler.js';\nimport { servePromptDescriptor } from './handlers/servePromptDescriptor.js';\nimport { updateTaskHandler } from './handlers/updateTaskHandler.js';\nimport { listTasks } from './handlers/listTasks.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport gitStatusHandler from './handlers/git/gitStatusHandler.js';\nimport commitGitHandler from './handlers/git/commitGitHandler.js';\nimport resetGitHandler from './handlers/git/resetGitHandler.js';\nimport updateRequirementsHandler from './handlers/updateRequirementsHandler.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', updateTaskHandler);\n  app.post('/execute', executeHandler);\n\n  // Git routes grouped\n  app.get('/git/status', gitStatusHandler);\n  app.post('/git/reset', resetGitHandler);\n  app.post('/git/commit', commitGitHandler);\n\n  // New endpoint for updating requirements\n  app.post('/requirements/update', updateRequirementsHandler);\n}\n\n```\n\n\n# Task\n\nRefactor!\n\nRoute the new endpoint on &#34;/requirements&#34;\nRemove comments.\nMove updatetask to the end\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Refactor setupRoutes.js\"\necho \"Plan:\"\necho \"1. Refactor src/backend/setupRoutes.js by removing comments, reordering routes, and changing endpoint.\"\n\ncat > src/backend/setupRoutes.js << 'EOF'\nimport { generateHandler } from './handlers/generateHandler.js';\nimport { servePromptDescriptor } from './handlers/servePromptDescriptor.js';\nimport { listTasks } from './handlers/listTasks.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport gitStatusHandler from './handlers/git/gitStatusHandler.js';\nimport commitGitHandler from './handlers/git/commitGitHandler.js';\nimport resetGitHandler from './handlers/git/resetGitHandler.js';\nimport updateRequirementsHandler from './handlers/updateRequirementsHandler.js';\nimport { updateTaskHandler } from './handlers/updateTaskHandler.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n  app.post('/generate', generateHandler);\n  app.post('/execute', executeHandler);\n  app.get('/git/status', gitStatusHandler);\n  app.post('/git/reset', resetGitHandler);\n  app.post('/git/commit', commitGitHandler);\n  app.post('/requirements', updateRequirementsHandler);\n  app.post('/updatetask', updateTaskHandler);\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  }
+}

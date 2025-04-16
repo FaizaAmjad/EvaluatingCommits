@@ -1,0 +1,28 @@
+{
+  "sha": "dd86842931542190931fab2a332db371697810a7",
+  "url": "https://github.com/tisztamo/Junior/commit/dd86842931542190931fab2a332db371697810a7",
+  "message": "Replace text input with textarea in ExecuteButton https://chat.openai.com/share/ac7beb37-586d-4b08-bd3b-f2f2eaeb408d",
+  "code": {
+    "before": "",
+    "after": ""
+  },
+  "chatgpt_sharing": {
+    "title": "Replace ExecuteButton input",
+    "url": "https://chat.openai.com/share/ac7beb37-586d-4b08-bd3b-f2f2eaeb408d",
+    "number_of_prompts": 1,
+    "conversations": [
+      {
+        "prompt_id": "dd86842931542190931fab2a332db371697810a7_s1_p1",
+        "prompt": "# Working set\n\nsrc/frontend/components/ExecuteButton.jsx:\n```\nimport { createEffect, createSignal } from 'solid-js';\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\n\nconst ExecuteButton = () => {\n  const [inputAvailable, setInputAvailable] = createSignal(true);\n  const [changeInput, setChangeInput] = createSignal('');\n\n  const handleExecuteChange = async () => {\n    let change = changeInput();\n    if (inputAvailable() && navigator.clipboard) {\n      change = await navigator.clipboard.readText();\n    }\n    const response = await executeChange(change);\n    setChange(change);\n    setExecutionResult(response.output);\n    console.log(response.output);\n  };\n\n  // Check if clipboard reading is available\n  createEffect(() => {\n    if (!navigator.clipboard || !navigator.clipboard.readText) {\n      setInputAvailable(false);\n    }\n  });\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-orange-300 text-white rounded\" onClick={handleExecuteChange}>\n      {inputAvailable() ? (\n        'Paste & Execute Change'\n      ) : (\n        <input\n          type=\"text\"\n          class=\"w-full px-2 py-2 bg-white text-black\"\n          placeholder=\"Paste the change here to execute\"\n          value={changeInput()}\n          onInput={(e) => setChangeInput(e.currentTarget.value)}\n        />\n      )}\n    </button>\n  );\n};\n\nexport default ExecuteButton;\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nUse a textarea instead of the text input to prevent losing newline characters. Make it looking single-row.\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Replace text input with textarea in ExecuteButton\"\necho \"Plan:\"\necho \"1. Modify the ExecuteButton.jsx file to replace the input field with a single-row textarea.\"\n\ncat > src/frontend/components/ExecuteButton.jsx << 'EOF'\nimport { createEffect, createSignal } from 'solid-js';\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\n\nconst ExecuteButton = () => {\n  const [inputAvailable, setInputAvailable] = createSignal(true);\n  const [changeInput, setChangeInput] = createSignal('');\n\n  const handleExecuteChange = async () => {\n    let change = changeInput();\n    if (inputAvailable() && navigator.clipboard) {\n      change = await navigator.clipboard.readText();\n    }\n    const response = await executeChange(change);\n    setChange(change);\n    setExecutionResult(response.output);\n    console.log(response.output);\n  };\n\n  // Check if clipboard reading is available\n  createEffect(() => {\n    if (!navigator.clipboard || !navigator.clipboard.readText) {\n      setInputAvailable(false);\n    }\n  });\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-orange-300 text-white rounded\" onClick={handleExecuteChange}>\n      {inputAvailable() ? (\n        'Paste & Execute Change'\n      ) : (\n        <textarea\n          rows=\"1\"\n          class=\"w-full px-2 py-2 bg-white text-black resize-none\"\n          placeholder=\"Paste the change here to execute\"\n          value={changeInput()}\n          onInput={(e) => setChangeInput(e.currentTarget.value)}\n        />\n      )}\n    </button>\n  );\n};\n\nexport default ExecuteButton;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  }
+}

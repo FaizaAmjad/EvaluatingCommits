@@ -1,0 +1,28 @@
+{
+  "sha": "020f2c644be54fde501fb8d199948e8f68c8e125",
+  "url": "https://github.com/tisztamo/Junior/commit/020f2c644be54fde501fb8d199948e8f68c8e125",
+  "message": "Refactor git-related routes https://chat.openai.com/share/a5c3e5c5-09c8-4a0e-a908-c86a58813edb",
+  "code": {
+    "before": "",
+    "after": ""
+  },
+  "chatgpt_sharing": {
+    "title": "Refactor Git Routes",
+    "url": "https://chat.openai.com/share/a5c3e5c5-09c8-4a0e-a908-c86a58813edb",
+    "number_of_prompts": 1,
+    "conversations": [
+      {
+        "prompt_id": "020f2c644be54fde501fb8d199948e8f68c8e125_s1_p1",
+        "prompt": "# Working set\n\nsrc/frontend/service/fetchGitStatus.js:\n```\nimport { getBaseUrl } from '../getBaseUrl';\nimport { setGitStatus } from '../model/gitStatus';\n\nconst fetchGitStatus = async () => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/status`);\n\n  const data = await response.json();\n\n  setGitStatus(data);\n};\n\nexport { fetchGitStatus };\n\n```\n\nsrc/frontend/service/resetGit.js:\n```\nimport { getBaseUrl } from '../getBaseUrl';\n\nconst resetGit = async () => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/reset`, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n  });\n\n  const data = await response.json();\n\n  return data;\n};\n\nexport { resetGit };\n\n```\n\nsrc/frontend/service/postCommit.js:\n```\nimport { getBaseUrl } from '../getBaseUrl';\n\nconst postCommit = async (message) => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/commit`, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ message }),\n  });\n\n  const data = await response.json();\n\n  return data;\n};\n\nexport { postCommit };\n\n```\n\n\n# Task\n\nRefactor!\n\nGit-related routes were moved under /git/\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Refactor git-related routes\"\necho \"Plan:\"\necho \"1. Refactor fetchGitStatus.js to point to the updated /git/ route\"\necho \"2. Refactor resetGit.js to point to the updated /git/ route\"\necho \"3. Refactor postCommit.js to point to the updated /git/ route\"\n\n# 1. Refactor fetchGitStatus.js\ncat > src/frontend/service/fetchGitStatus.js << 'EOF'\nimport { getBaseUrl } from '../getBaseUrl';\nimport { setGitStatus } from '../model/gitStatus';\n\nconst fetchGitStatus = async () => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/git/status`);\n\n  const data = await response.json();\n\n  setGitStatus(data);\n};\n\nexport default fetchGitStatus;\nEOF\n\n# 2. Refactor resetGit.js\ncat > src/frontend/service/resetGit.js << 'EOF'\nimport { getBaseUrl } from '../getBaseUrl';\n\nconst resetGit = async () => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/git/reset`, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n  });\n\n  const data = await response.json();\n\n  return data;\n};\n\nexport default resetGit;\nEOF\n\n# 3. Refactor postCommit.js\ncat > src/frontend/service/postCommit.js << 'EOF'\nimport { getBaseUrl } from '../getBaseUrl';\n\nconst postCommit = async (message) => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/git/commit`, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ message }),\n  });\n\n  const data = await response.json();\n\n  return data;\n};\n\nexport default postCommit;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  }
+}

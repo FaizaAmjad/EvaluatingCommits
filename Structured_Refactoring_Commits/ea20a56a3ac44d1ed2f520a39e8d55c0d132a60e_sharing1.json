@@ -1,0 +1,28 @@
+{
+  "sha": "ea20a56a3ac44d1ed2f520a39e8d55c0d132a60e",
+  "url": "https://github.com/tisztamo/Junior/commit/ea20a56a3ac44d1ed2f520a39e8d55c0d132a60e",
+  "message": "Update 'message' field to 'output' https://chat.openai.com/share/8685f751-00c8-4a20-9ba8-bfeedc66c6a8",
+  "code": {
+    "before": "",
+    "after": ""
+  },
+  "chatgpt_sharing": {
+    "title": "Style Terminal Tailwind Prompt.",
+    "url": "https://chat.openai.com/share/8685f751-00c8-4a20-9ba8-bfeedc66c6a8",
+    "number_of_prompts": 1,
+    "conversations": [
+      {
+        "prompt_id": "ea20a56a3ac44d1ed2f520a39e8d55c0d132a60e_s1_p1",
+        "prompt": "# Working set\n\nsrc/frontend/components/ExecutionResultDisplay.jsx:\n```\nimport { onMount, createEffect } from 'solid-js';\nimport { Terminal } from 'xterm';\nimport 'xterm/css/xterm.css';\nimport { executionResult } from '../stores/executionResult';\n\nconst ExecutionResultDisplay = () => {\n  let container;\n  let term;\n\n  onMount(() => {\n    term = new Terminal();\n    term.open(container);\n  });\n\n  createEffect(() => {\n    if (term) {\n      term.write(executionResult());\n    }\n  });\n\n  return (\n    <div ref={container} class=\"w-64 px-4 py-4 bg-gray-300 text-black rounded\"></div>\n  );\n};\n\nexport default ExecutionResultDisplay;\n\n```\n\nsrc/frontend/components/PromptDescriptor.jsx:\n```\nimport { onMount, onCleanup } from 'solid-js';\nimport { fetchDescriptor } from '../service/fetchDescriptor';\nimport { useWebsocket } from '../service/useWebsocket';\nimport { promptDescriptor, setPromptDescriptor } from '../stores/promptDescriptor';\n\nconst PromptDescriptor = () => {\n\n  onMount(async () => {\n    const text = await fetchDescriptor();\n    setPromptDescriptor(text);\n  });\n\n  useWebsocket(async (e) => {\n    if (e.data === 'update') {\n      const text = await fetchDescriptor();\n      setPromptDescriptor(text);\n    }\n  });\n\n  onCleanup(() => {\n    setPromptDescriptor('');\n  });\n\n  return (\n    <div class=\"overflow-auto max-w-full\">\n      <div class=\"whitespace-pre-wrap overflow-x-scroll overflow-y-auto font-mono\">\n        {promptDescriptor()}\n      </div>\n    </div>\n  );\n};\n\nexport default PromptDescriptor;\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n- Every js file should only export a single function!\n- Use ES6 imports!\n\nRequirements:\n\nStyle the terminal using tailwind to have the same width as the prompt descriptor Remove its fixed width setting\n\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files using 'EOF' to prevent substitution.\nOS: OSX\nInstalled tools: npm, jq\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Style terminal with tailwind as prompt descriptor\"\necho \"Plan:\"\necho \"1. Remove the fixed width setting of the terminal\"\necho \"2. Set the terminal width same as prompt descriptor using tailwind CSS\"\n\necho \"Editing ExecutionResultDisplay.jsx...\"\ncat << 'EOF' > src/frontend/components/ExecutionResultDisplay.jsx\nimport { onMount, createEffect } from 'solid-js';\nimport { Terminal } from 'xterm';\nimport 'xterm/css/xterm.css';\nimport { executionResult } from '../stores/executionResult';\n\nconst ExecutionResultDisplay = () => {\n  let container;\n  let term;\n\n  onMount(() => {\n    term = new Terminal();\n    term.open(container);\n  });\n\n  createEffect(() => {\n    if (term) {\n term.write(executionResult());\n    }\n  });\n\n  return (\n    <div ref={container} class=\"px-4 py-4 bg-gray-300 text-black rounded overflow-auto max-w-full\"></div>\n  );\n};\n\nexport default ExecutionResultDisplay;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  }
+}

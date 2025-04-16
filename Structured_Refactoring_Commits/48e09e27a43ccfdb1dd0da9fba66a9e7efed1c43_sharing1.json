@@ -1,0 +1,28 @@
+{
+  "sha": "48e09e27a43ccfdb1dd0da9fba66a9e7efed1c43",
+  "url": "https://github.com/tisztamo/Junior/commit/48e09e27a43ccfdb1dd0da9fba66a9e7efed1c43",
+  "message": "Refactor dry-run API creation https://chat.openai.com/share/70f44ec0-1aad-4c8d-a3c2-98bdfb698f8e",
+  "code": {
+    "before": "",
+    "after": ""
+  },
+  "chatgpt_sharing": {
+    "title": "Fix JS Import Issue",
+    "url": "https://chat.openai.com/share/70f44ec0-1aad-4c8d-a3c2-98bdfb698f8e",
+    "number_of_prompts": 1,
+    "conversations": [
+      {
+        "prompt_id": "48e09e27a43ccfdb1dd0da9fba66a9e7efed1c43_s1_p1",
+        "prompt": "# Working set\n\nsrc/config.js:\n```\nimport readline from 'readline';\nimport createApi from './llm/openai/createApi.js';\nimport createFakeApi from './llm/fake/createFakeApi.js';\n\nfunction isDryRun() {\n  return process.argv.includes(\"-d\") || process.argv.includes(\"--dry-run\");\n}\n\nfunction get_model() {\n  const modelArg = process.argv.find(arg => arg.startsWith('--model='));\n  if (modelArg) {\n    return modelArg.split('=')[1];\n  }\n  return \"gpt-4\";\n}\n\nasync function getApi() {\n  if (isDryRun()) {\n    return createFakeApi();\n  } else {\n    return await createApi(get_model());\n  }\n}\n\nconst rl = readline.createInterface({\n  input: process.stdin,\n  output: process.stdout\n});\n\nexport { getApi, rl, get_model };\n\n```\n\nsrc/interactiveSession/saveAndSendPrompt.js:\n```\nimport { printNewText } from './printNewText.js';\nimport { handleApiResponse } from './handleApiResponse.js';\nimport { api, rl } from '../config.js';\n\nconst saveAndSendPrompt = async (prompt, task) => {\n  let lastTextLength = 0;\n  const res = await api.sendMessage(prompt, { onProgress: printNewText(lastTextLength) });\n  console.log(\"\\x1b[0m\");\n  const msg = res.text.trim();\n  console.log(\"\");\n  handleApiResponse(msg);\n}\n\nexport { saveAndSendPrompt };\n\n```\n\nsrc/main.js:\n```\n#!/usr/bin/env node\n\nimport { startInteractiveSession } from './interactiveSession/startInteractiveSession.js';\nimport { api, get_model, rl } from './config.js';\n\nconsole.log(\"Welcome to Junior. Model: \" + get_model() + \"\\n\");\n\nstartInteractiveSession(rl, api);\n\nexport { startInteractiveSession };\n\n```\n\n\n# Task\n\nFix the following issue!\n\nfile:///Users/ko/projects-new/Junior/src/interactiveSession/saveAndSendPrompt.js:3 import { api, rl } from &#39;../config.js&#39;;\n       ^^^\nSyntaxError: The requested module &#39;../config.js&#39; does not provide an export named &#39;api&#39;\n  at ModuleJob._instantiate\n\napi was changed to getApi() in config.js Also fix main.js to use getApi()\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files using 'EOF' to prevent substitution.\nOS: OSX\nInstalled tools: npm, jq\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Fix the issue with incorrect import in JS files\"\necho \"Plan:\"\necho \"1. Change 'api' import to 'getApi' function import in saveAndSendPrompt.js and main.js files\"\necho \"2. Use the 'getApi' function to get the API instance in both the files\"\necho \"3. Ensure the 'getApi' function is called asynchronously, as it is an async function\"\n\ncat > ./src/interactiveSession/saveAndSendPrompt.js << 'EOF'\nimport { getApi, rl } from '../config.js';\nimport { printNewText } from './printNewText.js';\nimport { handleApiResponse } from './handleApiResponse.js';\n\nconst saveAndSendPrompt = async (prompt, task) => {\n  let lastTextLength = 0;\n  const api = await getApi();\n  const res = await api.sendMessage(prompt, { onProgress: printNewText(lastTextLength) });\n  console.log(\"\\x1b[0m\");\n  const msg = res.text.trim();\n  console.log(\"\");\n  handleApiResponse(msg);\n}\n\nexport { saveAndSendPrompt };\nEOF\n\ncat > ./src/main.js << 'EOF'\n#!/usr/bin/env node\n\nimport { startInteractiveSession } from './interactiveSession/startInteractiveSession.js';\nimport { getApi, get_model, rl } from './config.js';\n\n(async () => {\n  console.log(\"Welcome to Junior. Model: \" + get_model() + \"\\n\");\n  const api = await getApi();\n  startInteractiveSession(rl, api);\n})();\n\nexport { startInteractiveSession };\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "sha": "2addc5f9963ce394cf10dbd25ac27fad50cd1732",
+  "url": "https://github.com/tisztamo/Junior/commit/2addc5f9963ce394cf10dbd25ac27fad50cd1732",
+  "message": "Rewrite system prompt in system.md to be concise https://chat.openai.com/share/e2cdc97c-ec36-452e-a6e1-646087e223f2",
+  "code": {
+    "before": "",
+    "after": ""
+  },
+  "chatgpt_sharing": {
+    "title": "New chat",
+    "url": "https://chat.openai.com/share/e2cdc97c-ec36-452e-a6e1-646087e223f2",
+    "number_of_prompts": 2,
+    "conversations": [
+      {
+        "prompt_id": "2addc5f9963ce394cf10dbd25ac27fad50cd1732_s1_p1",
+        "prompt": "You're the 'Junior', an AI system aiding authors.\n\nYou are working on the source of a program, too large for your memory, so only part of it, the \"Working Set\" is provided here.\n\nYou will see a partial directory structure. Ask for the contents of subdirs marked with /... if needed.\n\nSome files are printed in the working set.\n\nOther files are only listed in their dir, so you know they exists. Do not edit files without knowing their current content, ask for their contents instead!\n\n# Working set\n\nprompt/system.md:\n```\nYou're the 'Junior', an AI system aiding authors.\n\nYou are working on the source of a program, too large for your memory, so only part of it, the \"Working Set\" is provided here.\n\nYou will see a partial directory structure. Ask for the contents of subdirs marked with /... if needed.\n\nSome files are printed in the working set.\n\nOther files are only listed in their dir, so you know they exists. Do not edit files without knowing their current content, ask for their contents instead!\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nRewrite the system prompt in system.md to be concise but easy to &#34;understand&#34; for a language model. Start it with &#34;You are Junior, an AI system aiding developers&#34;\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Rewrite system prompt in system.md to be concise\"\necho \"Plan:\"\necho \"1. Create a backup of the current system.md file.\"\necho \"2. Rewrite the system prompt in system.md to be more concise.\"\necho \"3. Verify that the new content is correct.\"\n\n# Step 1: Create a backup of the current system.md file\ncp prompt/system.md prompt/system.md.bak\n\n# Step 2: Rewrite the system prompt in system.md to be more concise\ncat > prompt/system.md << 'EOF'\nYou are Junior, an AI system aiding developers. You are working with a part of a large program called the \"Working Set.\" Ask for contents of subdirectories if needed. Some files are printed in the working set. Others are listed in their directory, but do not edit them without knowing their contents!\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "2addc5f9963ce394cf10dbd25ac27fad50cd1732_s1_p2",
+        "prompt": "No .bak needed",
+        "answer": "Certainly! Here's the updated script without creating a backup file:[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Rewrite system prompt in system.md to be concise\"\necho \"Plan:\"\necho \"1. Rewrite the system prompt in system.md to be more concise.\"\necho \"2. Verify that the new content is correct.\"\n\n# Step 1: Rewrite the system prompt in system.md to be more concise\ncat > prompt/system.md << 'EOF'\nYou are Junior, an AI system aiding developers. You are working with a part of a large program called the \"Working Set.\" Ask for contents of subdirectories if needed. Some files are printed in the working set. Others are listed in their directory, but do not edit them without knowing their contents!\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  }
+}

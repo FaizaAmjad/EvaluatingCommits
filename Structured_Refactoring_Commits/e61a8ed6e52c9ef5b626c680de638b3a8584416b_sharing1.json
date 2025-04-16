@@ -1,0 +1,40 @@
+{
+  "sha": "e61a8ed6e52c9ef5b626c680de638b3a8584416b",
+  "url": "https://github.com/tisztamo/Junior/commit/e61a8ed6e52c9ef5b626c680de638b3a8584416b",
+  "message": "Refactor build.js into separate files and pass MarkdownIt as an argument https://chat.openai.com/share/76854e8a-0834-48be-8245-47551bd08c2e",
+  "code": {
+    "before": "",
+    "after": ""
+  },
+  "chatgpt_sharing": {
+    "title": "Refactor JS Build Script",
+    "url": "https://chat.openai.com/share/76854e8a-0834-48be-8245-47551bd08c2e",
+    "number_of_prompts": 2,
+    "conversations": [
+      {
+        "prompt_id": "e61a8ed6e52c9ef5b626c680de638b3a8584416b_s1_p1",
+        "prompt": "# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .github/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 babel.config.js\n\u251c\u2500\u2500 change.sh\n\u251c\u2500\u2500 doc/...\n\u251c\u2500\u2500 integrations/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 postcss.config.js\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 secret.sh\n\u251c\u2500\u2500 src/...\n\u251c\u2500\u2500 tailwind.config.js\n\n```\n./doc: err!\n\n./doc/build.js:\n```\nimport { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';\nimport { join, extname } from 'path';\nimport MarkdownIt from 'markdown-it';\nimport hljs from 'highlight.js';\n\nconst md = new MarkdownIt({\n  html: true,\n  linkify: true,\n  typographer: true,\n  highlight: function (str, lang) {\n    if (lang && hljs.getLanguage(lang)) {\n      try {\n        return hljs.highlight(str, { language: lang }).value;\n      } catch (__) {}\n    }\n    return ''; \n  }\n});\n\nconst convertDirectory = (dir) => {\n  const files = readdirSync(dir);\n  files.forEach(file => {\n    const filePath = join(dir, file);\n    const stats = statSync(filePath);\n    if (stats.isDirectory()) {\n      convertDirectory(filePath);\n    } else if (extname(file) === '.md') {\n      const markdown = readFileSync(filePath, 'utf8');\n      const html = md.render(markdown);\n      writeFileSync(filePath.replace('.md', '.html'), html);\n    }\n  });\n}\n\nconvertDirectory('./doc');\n\n```\n\n\n# Task\n\nFix the following issue!\n\nRename build.js dor buildDoc.js\nFactor the md = new MarkdownIt creation to createMarkdownRenderer.js\nSimilarly create convertDirectory.js\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files without substitution.\nAssume OSX.\nnpm and jq are installed.\nDo NOT write any text outside the script (the plan goes into it)!\n\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\n# Goal: [Task description, max 7 words]\n# Plan:\n# 1. [...]\n\n[Commands solving the task]\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\n# Goal: Refactor build.js into separate files\n# Plan:\n# 1. Rename build.js to buildDoc.js\n# 2. Create a new file, createMarkdownRenderer.js, that handles the creation of MarkdownIt\n# 3. Create a new file, convertDirectory.js, that handles directory conversion\n\n# Step 1\nmv ./doc/build.js ./doc/buildDoc.js\n\n# Step 2\ncat << EOF > ./doc/createMarkdownRenderer.js\nimport MarkdownIt from 'markdown-it';\nimport hljs from 'highlight.js';\n\nexport default function createMarkdownRenderer() {\n    return new MarkdownIt({\n        html: true,\n        linkify: true,\n        typographer: true,\n        highlight: function (str, lang) {\n            if (lang && hljs.getLanguage(lang)) {\n                try {\n                    return hljs.highlight(str, { language: lang }).value;\n                } catch (__) {}\n            }\n            return ''; \n        }\n    });\n}\nEOF\n\n# Step 3\ncat << EOF > ./doc/convertDirectory.js\nimport { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';\nimport { join, extname } from 'path';\nimport createMarkdownRenderer from './createMarkdownRenderer';\n\nconst md = createMarkdownRenderer();\n\nexport default function convertDirectory(dir) {\n    const files = readdirSync(dir);\n    files.forEach(file => {\n        const filePath = join(dir, file);\n        const stats = statSync(filePath);\n        if (stats.isDirectory()) {\n            convertDirectory(filePath);\n        } else if (extname(file) === '.md') {\n            const markdown = readFileSync(filePath, 'utf8');\n            const html = md.render(markdown);\n            writeFileSync(filePath.replace('.md', '.html'), html);\n        }\n    });\n}\nEOF\n\n# Step 4: Update the buildDoc.js\ncat << EOF > ./doc/buildDoc.js\nimport convertDirectory from './convertDirectory';\n\nconvertDirectory('./doc');\nEOF\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "e61a8ed6e52c9ef5b626c680de638b3a8584416b_s1_p2",
+        "prompt": "md should be passed to convertDirectory, but also allow this as default",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\n# Goal: Refactor build.js into separate files and pass MarkdownIt as an argument\n# Plan:\n# 1. Rename build.js to buildDoc.js\n# 2. Create a new file, createMarkdownRenderer.js, that handles the creation of MarkdownIt\n# 3. Create a new file, convertDirectory.js, that handles directory conversion\n# 4. Modify convertDirectory.js to accept MarkdownIt as an argument\n\n# Step 1\nmv ./doc/build.js ./doc/buildDoc.js\n\n# Step 2\ncat << EOF > ./doc/createMarkdownRenderer.js\nimport MarkdownIt from 'markdown-it';\nimport hljs from 'highlight.js';\n\nexport default function createMarkdownRenderer() {\n    return new MarkdownIt({\n        html: true,\n        linkify: true,\n        typographer: true,\n        highlight: function (str, lang) {\n            if (lang && hljs.getLanguage(lang)) {\n                try {\n                    return hljs.highlight(str, { language: lang }).value;\n                } catch (__) {}\n            }\n            return ''; \n        }\n    });\n}\nEOF\n\n# Step 3\ncat << EOF > ./doc/convertDirectory.js\nimport { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';\nimport { join, extname } from 'path';\nimport createMarkdownRenderer from './createMarkdownRenderer';\n\nexport default function convertDirectory(dir, md = createMarkdownRenderer()) {\n    const files = readdirSync(dir);\n    files.forEach(file => {\n        const filePath = join(dir, file);\n        const stats = statSync(filePath);\n        if (stats.isDirectory()) {\n            convertDirectory(filePath, md);\n        } else if (extname(file) === '.md') {\n            const markdown = readFileSync(filePath, 'utf8');\n            const html = md.render(markdown);\n            writeFileSync(filePath.replace('.md', '.html'), html);\n        }\n    });\n}\nEOF\n\n# Step 4: Update the buildDoc.js\ncat << EOF > ./doc/buildDoc.js\nimport createMarkdownRenderer from './createMarkdownRenderer';\nimport convertDirectory from './convertDirectory';\n\nconst md = createMarkdownRenderer();\nconvertDirectory('./doc', md);\nEOF\n"
+          }
+        ]
+      }
+    ]
+  }
+}

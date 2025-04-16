@@ -1,0 +1,28 @@
+{
+  "sha": "b6596bcf8234c8f18fe7c2f2ec42c6b80ce34337",
+  "url": "https://github.com/tisztamo/Junior/commit/b6596bcf8234c8f18fe7c2f2ec42c6b80ce34337",
+  "message": "Improve documentation and link jobs https://chat.openai.com/share/a310a288-8036-48e7-8463-e3ba6b256d72",
+  "code": {
+    "before": "",
+    "after": ""
+  },
+  "chatgpt_sharing": {
+    "title": "Improve Docs & Link Jobs",
+    "url": "https://chat.openai.com/share/a310a288-8036-48e7-8463-e3ba6b256d72",
+    "number_of_prompts": 1,
+    "conversations": [
+      {
+        "prompt_id": "b6596bcf8234c8f18fe7c2f2ec42c6b80ce34337_s1_p1",
+        "prompt": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\ndocs/open_jobs.md:\n```\n# Open Positions at Junior AI IDE\n\nWe're in the early stages of building an exciting startup based on our open source project, Junior AI IDE. Our primary goal right now is to find the right leadership to steer the ship and take our vision to the next level. Discover more about us at [aijunior.dev](https://aijunior.dev).\n\n## Co-founder CEO\n\n**Qualifications:**\n- Proven experience in marketing within a freemium user/product-led growth environment, especially from similar tools companies.\n- Strong networking abilities.\n- Strong leadership qualities, with the ability to motivate, inspire, and build a team.\n\n**Advice from Experts:**\nJared Schrieber suggested looking for a \"marketing person at a similar freemium user/product-led growth tools company.\" We're taking his advice to heart and would love to connect with professionals who align with this vision.\n\nInterested candidates or those who can connect us to potential candidates are encouraged to reach out. Together, we can make Junior AI IDE a groundbreaking success.\n\n\n```\n\ndocs/_sidebar.md:\n```\n* [Junior Docs](./README.md)\n* [Usage](./usage.md)\n* [Web](./web.md)\n* [Prompt Descriptor](./descriptor.md)\n* [Roadmap](./roadmap.md)\n\n```\n\n\n# Task\n\nImprove the documentation!\n\n1. The advisor is a \"helyi nagy\u00e1gy\u00fa\" (translate and quote this), but including his name was a bad mistake, remove! 2. link the jobs from the sidebar!\n\n\nDo not create backup files.\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Improve documentation and link jobs\"\necho \"Plan:\"\necho \"1. Remove advisor's name and translate 'helyi nagy\u00e1gy\u00fa'.\"\necho \"2. Link the jobs from the sidebar.\"\n\n# 1. Remove advisor's name and translate 'helyi nagy\u00e1gy\u00fa'.\ncat > docs/open_jobs.md << 'EOF'\n# Open Positions at Junior AI IDE\n\nWe're in the early stages of building an exciting startup based on our open source project, Junior AI IDE. Our primary goal right now is to find the right leadership to steer the ship and take our vision to the next level. Discover more about us at [aijunior.dev](https://aijunior.dev).\n\n## Co-founder CEO\n\n**Qualifications:**\n- Proven experience in marketing within a freemium user/product-led growth environment, especially from similar tools companies.\n- Strong networking abilities.\n- Strong leadership qualities, with the ability to motivate, inspire, and build a team.\n\n**Advice from Experts:**\nA \"local big gun\" (translated from \"helyi nagy\u00e1gy\u00fa\") suggested looking for a \"marketing person at a similar freemium user/product-led growth tools company.\" We're taking this advice to heart and would love to connect with professionals who align with this vision.\n\nInterested candidates or those who can connect us to potential candidates are encouraged to reach out. Together, we can make Junior AI IDE a groundbreaking success.\nEOF\n\n# 2. Link the jobs from the sidebar.\ncat > docs/_sidebar.md << 'EOF'\n* [Junior Docs](./README.md)\n* [Usage](./usage.md)\n* [Web](./web.md)\n* [Prompt Descriptor](./descriptor.md)\n* [Roadmap](./roadmap.md)\n* [Open Jobs](./open_jobs.md)\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  }
+}

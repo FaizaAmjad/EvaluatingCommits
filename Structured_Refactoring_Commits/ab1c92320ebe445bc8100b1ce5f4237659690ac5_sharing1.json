@@ -1,0 +1,28 @@
+{
+  "sha": "ab1c92320ebe445bc8100b1ce5f4237659690ac5",
+  "url": "https://github.com/tisztamo/Junior/commit/ab1c92320ebe445bc8100b1ce5f4237659690ac5",
+  "message": "Refactor GenerateButton to use html5 clipboard API https://chat.openai.com/share/d199e8cc-c8ee-470d-97fa-82b46c26c1dd",
+  "code": {
+    "before": "",
+    "after": ""
+  },
+  "chatgpt_sharing": {
+    "title": "Refactor GenerateButton: html5 API",
+    "url": "https://chat.openai.com/share/d199e8cc-c8ee-470d-97fa-82b46c26c1dd",
+    "number_of_prompts": 1,
+    "conversations": [
+      {
+        "prompt_id": "ab1c92320ebe445bc8100b1ce5f4237659690ac5_s1_p1",
+        "prompt": "# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .github/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 .vscode/...\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 change.sh\n\u251c\u2500\u2500 doc/...\n\u251c\u2500\u2500 integrations/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 src/...\n\n```\nsrc/frontend/components/GenerateButton.jsx:\n```\nimport { generatePrompt } from '../generatePrompt';\nimport { marked } from 'marked';\nimport copy from 'clipboard-copy';\nimport { setPrompt } from '../stores/prompt';\n\nconst GenerateButton = () => {\n  const handleGeneratePrompt = async () => {\n    const response = await generatePrompt();\n\n    copy(response.prompt)\n      .then(() => {\n        console.log('Prompt copied to clipboard!');\n      })\n      .catch(err => {\n        console.error('Failed to copy prompt: ', err);\n      });\n\n    const htmlPrompt = marked(response.prompt);\n\n    setPrompt(htmlPrompt);\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-blue-500 text-white rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt</button>\n  );\n};\n\nexport default GenerateButton;\n\n```\n\n\n# Task\n\nRefactor!\n\nUninstall clipboard-copy and use the html5 api directly!\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Refactor GenerateButton to use html5 clipboard API\"\necho \"Plan:\"\necho \"1. Uninstall clipboard-copy using npm\"\necho \"2. Modify GenerateButton.jsx to use the html5 clipboard API instead of clipboard-copy\"\necho \"3. Replacing the entire file with the updated content\"\n\n# Step 1: Uninstall clipboard-copy using npm\nnpm uninstall clipboard-copy\n\n# Step 2: Modify GenerateButton.jsx to use the html5 clipboard API instead of clipboard-copy\ncat > ./src/frontend/components/GenerateButton.jsx << 'EOF'\nimport { generatePrompt } from '../generatePrompt';\nimport { marked } from 'marked';\nimport { setPrompt } from '../stores/prompt';\n\nconst GenerateButton = () => {\n  const handleGeneratePrompt = async () => {\n    const response = await generatePrompt();\n\n    navigator.clipboard.writeText(response.prompt)\n      .then(() => {\n        console.log('Prompt copied to clipboard!');\n      })\n      .catch(err => {\n        console.error('Failed to copy prompt: ', err);\n      });\n\n    const htmlPrompt = marked(response.prompt);\n\n    setPrompt(htmlPrompt);\n  };\n\n  return (\n    <button className=\"w-64 px-4 py-4 bg-blue-500 text-white rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt</button>\n  );\n};\n\nexport default GenerateButton;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  }
+}

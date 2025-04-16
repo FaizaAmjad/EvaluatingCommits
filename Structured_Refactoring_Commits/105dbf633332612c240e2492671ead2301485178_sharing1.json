@@ -1,0 +1,28 @@
+{
+  "sha": "105dbf633332612c240e2492671ead2301485178",
+  "url": "https://github.com/tisztamo/Junior/commit/105dbf633332612c240e2492671ead2301485178",
+  "message": "Fix empty string update issue https://chat.openai.com/share/a530b572-95f6-48a8-b6f6-40a72534a954",
+  "code": {
+    "before": "",
+    "after": ""
+  },
+  "chatgpt_sharing": {
+    "title": "Fix Empty String Update",
+    "url": "https://chat.openai.com/share/a530b572-95f6-48a8-b6f6-40a72534a954",
+    "number_of_prompts": 1,
+    "conversations": [
+      {
+        "prompt_id": "105dbf633332612c240e2492671ead2301485178_s1_p1",
+        "prompt": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\nsrc/backend/handlers/updateDescriptorHandler.js:\n```\nimport yaml from 'js-yaml';\nimport { loadPromptDescriptor } from \"../../prompt/loadPromptDescriptor.js\";\nimport { savePromptDescriptor } from \"../../prompt/savePromptDescriptor.js\";\n\nconst updateDescriptorHandler = async (req, res) => {\n  const { requirements, attention } = req.body;\n  \n  try {\n    const fileContent = await loadPromptDescriptor();\n    const document = yaml.load(fileContent);\n\n    if (requirements) {\n      document.requirements = requirements;\n    }\n    \n    if (attention) {\n      document.attention = attention;\n    }\n    \n    const newYamlStr = yaml.dump(document);\n    await savePromptDescriptor(newYamlStr);\n    \n    res.status(200).json({ message: \"Descriptor updated successfully\" });\n  } catch (error) {\n    console.log(error);\n    res.status(500).json({ message: \"Internal server error\" });\n  }\n};\n\nexport default updateDescriptorHandler;\n\n```\n\n\n# Task\n\nFix the following issue!\n\nWhen empty string is coming in one of the fields, do the update. Only skip update for missing keys.\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Fix empty string update issue\"\necho \"Plan:\"\necho \"1. Modify updateDescriptorHandler.js to update fields even when they have empty strings.\"\n\ncat > src/backend/handlers/updateDescriptorHandler.js << 'EOF'\nimport yaml from 'js-yaml';\nimport { loadPromptDescriptor } from \"../../prompt/loadPromptDescriptor.js\";\nimport { savePromptDescriptor } from \"../../prompt/savePromptDescriptor.js\";\n\nconst updateDescriptorHandler = async (req, res) => {\n  const { requirements, attention } = req.body;\n  \n  try {\n    const fileContent = await loadPromptDescriptor();\n    const document = yaml.load(fileContent);\n\n    if (requirements !== undefined) {\n      document.requirements = requirements;\n    }\n    \n    if (attention !== undefined) {\n      document.attention = attention;\n    }\n    \n    const newYamlStr = yaml.dump(document);\n    await savePromptDescriptor(newYamlStr);\n    \n    res.status(200).json({ message: \"Descriptor updated successfully\" });\n  } catch (error) {\n    console.log(error);\n    res.status(500).json({ message: \"Internal server error\" });\n  }\n};\n\nexport default updateDescriptorHandler;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  }
+}
