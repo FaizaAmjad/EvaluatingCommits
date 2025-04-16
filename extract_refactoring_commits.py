@@ -5,15 +5,27 @@ import os
 import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
+import csv
 
 nltk.download('punkt_tab')
 nltk.download('wordnet')
 
 lemmatizer = WordNetLemmatizer()
 
-# Define the keywords for each category
-update_keywords = ['update', 'improve', 'upgrade', 'enhance', 'refine', 'modify', 'rewrite', 'simplify']
-refactor_keywords = ['refactor', 'optimize', 'clean', 'change', 'rename', 'uncomment', 'replace', 'restructure', 'reorganize', 'organize', 'overwrite', 'regenerate', 'concise', 'revert', 'remove', 'reduce', 'reformat']
+# Function to read keywords from the final list CSV
+def read_keywords_from_csv(filename):
+    with open(filename, mode='r', newline='', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        return {row[0].strip().lower() for row in reader if row}  # Return a set of keywords
+
+# File path to the final list of keywords (created previously)
+keywords_file = 'final_list_of_keywords.csv'
+
+# Read keywords from the final list of keywords CSV
+keywords = read_keywords_from_csv(keywords_file)
+
+# Lemmatize the keywords
+lemmatized_keywords = set(lemmatizer.lemmatize(kw) for kw in keywords)
 
 # Folder containing the JSON files
 folder_path = os.getcwd()

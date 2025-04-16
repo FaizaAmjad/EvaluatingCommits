@@ -1,14 +1,14 @@
 import csv
 
-# List of confirmed keywords (duplicates removed)
+# List of confirmed keywords (from literature and self observation)
 keywords = list(set([
     "reformat", "Reorganize", "Reorganise", "replace", 
-    "reorg", "refactor", "restructure", "optimised", "cleanup", "Improve", 
+    "reorg", "refactor", "restructure", "optimise","optimize" "cleanup", "Improve", 
     "clean", "Refine", "tidy", "enhance", "simplify", "efficient", 
     "reworked", "reduced", "clean-up", "Adjusted", "change", "Rename", 
     "Combine", "Gather", "Inline", "Merge", "Update", "organise", 
     "organize", "uncomment", "rewrite", "flatten", "consolidate", 
-    "concise"
+    "concise", "upgrade", "rewrite"
 ]))
 
 # Convert all keywords to lowercase
