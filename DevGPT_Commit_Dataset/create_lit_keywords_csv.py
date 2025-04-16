@@ -11,6 +11,9 @@ keywords = list(set([
     "concise"
 ]))
 
+# Convert all keywords to lowercase
+keywords = [keyword.lower() for keyword in keywords]
+
 # Define the name of the CSV file
 csv_filename = "literature_keywords.csv"
 
