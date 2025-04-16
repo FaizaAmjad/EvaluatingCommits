@@ -53,12 +53,17 @@ all_keywords = set(update_keywords + refactor_keywords)
 # Lemmatize the keywords
 lemmatized_keywords = set(lemmatizer.lemmatize(kw.lower()) for kw in all_keywords)
 
+# Initialize counters
+total_commits = 0
+filtered_refactoring_commits = 0
+
 # Process commit messages
 for file in json_files:
     with open(file, 'r') as f:
         data = json.load(f)
 
         for source in data.get("Sources", []):
+            total_commits += 1  # Increment total commits count
             commit_message = source.get('Message', '').lower()
 
             # Tokenize and lemmatize the commit message
@@ -68,6 +73,8 @@ for file in json_files:
             # Check if any keyword is in the lemmatized tokens
             if lemmatized_keywords.intersection(lemmatized_tokens):
                 filtered_commits.append(source)
+                filtered_refactoring_commits += 1  # Increment filtered refactoring commits count
+
 
 # Save the filtered commits to a new JSON file
 with open(output_file, 'w') as out_file:
@@ -75,12 +82,6 @@ with open(output_file, 'w') as out_file:
 
 print(f"✅ Filtered commits saved!")
 
-# Read the output file and count the number of commits
-with open(output_file, 'r') as f:
-    data = json.load(f)
-
-# If data is a list of commits, you can directly count the length
-commit_count = len(data)
-
-# Print the number of commits saved
-print(f"Total number of filtered commits saved in the output file: {commit_count}")
+# Print the number of commits processed and filtered
+print(f"Total number of commits processed: {total_commits}")
+print(f"Total number of filtered refactoring commits: {filtered_refactoring_commits}")
