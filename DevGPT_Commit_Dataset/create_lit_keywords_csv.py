@@ -1,21 +1,15 @@
 import csv
 
-# List of confirmed keywords
-keywords = [
-    "not used", "unused", "reformat", "import", "remove", "replace", 
-    "reorg", "refactor", "restructure", "optimised", "code cleanup", "Improve the performance", 
-    "Restructured the code", "Refined the logic", "Fixed some code issues", "Tidied up the code", 
-    "Enhanced code quality", "Simplified the code", "Made the code more efficient", "General improvements", 
-    "Reorganized the code", "Reworked the implementation", "Reduced code complexity", "Minor clean-up", 
-    "Adjusted the code structure", "Pull up", "Move", "Pull", "Shift", "Add", "Create", "Extract", 
-    "Separate", "Split", "Break up", "Push Down", "Push", "Reduce", "minimal code duplication", 
-    "push to method level", "stuff moved to separate", "Combine", "Gather", "Inline", "Merge", 
-    "more cleanup and merge resolution", "some consolidation of methods", "useless method inlined", 
-    "Change", "Fix", "Improve", "Rename", "Update", "better method name", "made the method name a bit more explicit", 
-    "method names in tests changed", "minor change to method name", "minor refactorings to method name", 
-    "more meaningful method name", "polish test method name", "standardization of method name", 
-    "using more correct method name", "tidy"
-]
+# List of confirmed keywords (duplicates removed)
+keywords = list(set([
+    "reformat", "Reorganize", "Reorganise", "replace", 
+    "reorg", "refactor", "restructure", "optimised", "cleanup", "Improve", 
+    "clean", "Refine", "tidy", "enhance", "simplify", "efficient", 
+    "reworked", "reduced", "clean-up", "Adjusted", "change", "Rename", 
+    "Combine", "Gather", "Inline", "Merge", "Update", "organise", 
+    "organize", "uncomment", "rewrite", "flatten", "consolidate", 
+    "concise"
+]))
 
 # Define the name of the CSV file
 csv_filename = "literature_keywords.csv"
