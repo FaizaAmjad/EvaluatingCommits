@@ -5,15 +5,27 @@ import os
 import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
+import csv
 
-nltk.download('punkt_tab')
+nltk.download('punkt')
 nltk.download('wordnet')
 
 lemmatizer = WordNetLemmatizer()
 
-# Define the keywords for each category
-update_keywords = ['update', 'improve', 'upgrade', 'enhance', 'refine', 'modify', 'rewrite', 'simplify']
-refactor_keywords = ['refactor', 'optimize', 'clean', 'change', 'rename', 'uncomment', 'replace', 'restructure', 'reorganize', 'organize', 'overwrite', 'regenerate', 'concise', 'revert', 'remove', 'reduce', 'reformat']
+# Function to read keywords from the final list CSV
+def read_keywords_from_csv(filename):
+    with open(filename, mode='r', newline='', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        return {row[0].strip().lower() for row in reader if row}  # Return a set of keywords
+
+# File path to the keyword CSV file
+keywords_file = os.path.join("DevGPT_Commit_Dataset", "final_list_of_keywords.csv")
+
+# Read keywords from the final list of keywords CSV
+keywords = read_keywords_from_csv(keywords_file)
+
+# Lemmatize the keywords
+lemmatized_keywords = set(lemmatizer.lemmatize(kw) for kw in keywords)
 
 # Folder containing the JSON files
 folder_path = os.getcwd()
@@ -35,11 +47,9 @@ else:
 # Initialize a list to store filtered commits
 filtered_commits = []
 
-# Combine all keywords
-all_keywords = set(update_keywords + refactor_keywords)
-
-# Lemmatize the keywords
-lemmatized_keywords = set(lemmatizer.lemmatize(kw.lower()) for kw in all_keywords)
+# Initialize counters
+total_commits = 0
+filtered_refactoring_commits = 0
 
 # Process commit messages
 for file in json_files:
@@ -47,6 +57,7 @@ for file in json_files:
         data = json.load(f)
 
         for source in data.get("Sources", []):
+            total_commits += 1  # Increment total commits count
             commit_message = source.get('Message', '').lower()
 
             # Tokenize and lemmatize the commit message
@@ -56,6 +67,8 @@ for file in json_files:
             # Check if any keyword is in the lemmatized tokens
             if lemmatized_keywords.intersection(lemmatized_tokens):
                 filtered_commits.append(source)
+                filtered_refactoring_commits += 1  # Increment filtered refactoring commits count
+
 
 # Save the filtered commits to a new JSON file
 with open(output_file, 'w') as out_file:
@@ -63,12 +76,6 @@ with open(output_file, 'w') as out_file:
 
 print(f"✅ Filtered commits saved!")
 
-# Read the output file and count the number of commits
-with open(output_file, 'r') as f:
-    data = json.load(f)
-
-# If data is a list of commits, you can directly count the length
-commit_count = len(data)
-
-# Print the number of commits saved
-print(f"Total number of filtered commits saved in the output file: {commit_count}")
+# Print the number of commits processed and filtered
+print(f"Total number of commits processed: {total_commits}")
+print(f"Total number of filtered refactoring commits: {filtered_refactoring_commits}")
