@@ -1,15 +1,28 @@
 {
   "sha": "8f5a32f08d6e44bb3b36f66b3cbf8779d13a5cb9",
   "url": "https://github.com/tisztamo/Junior/commit/8f5a32f08d6e44bb3b36f66b3cbf8779d13a5cb9",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Implement updateRequirements endpoint and refactor routes https://chat.openai.com/share/031cc9df-a646-4d45-b244-43ecd5d583a0",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-17T12:11:50.000+02:00",
+  "commitAt": "2023-08-17T12:11:50.000+02:00",
   "chatgpt_sharing": {
     "title": "Update Routes and Handlers",
     "url": "https://chat.openai.com/share/031cc9df-a646-4d45-b244-43ecd5d583a0",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/8f5a32f08d6e44bb3b36f66b3cbf8779d13a5cb9",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Implement updateRequirements endpoint and refactor routes https://chat.openai.com/share/031cc9df-a646-4d45-b244-43ecd5d583a0"
+    },
+    "status": 200,
+    "dateOfConversation": "August 17, 2023",
+    "dateOfAccess": "2023-08-24 10:22:08.493492",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 700,
+    "tokensOfAnswers": 564,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "8f5a32f08d6e44bb3b36f66b3cbf8779d13a5cb9_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

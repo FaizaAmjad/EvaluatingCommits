@@ -1,15 +1,28 @@
 {
   "sha": "d2d3a27471f41c33f0622c6c62d23561e2c178e9",
   "url": "https://github.com/tisztamo/Junior/commit/d2d3a27471f41c33f0622c6c62d23561e2c178e9",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Update App.jsx layout https://chat.openai.com/share/7ee72b63-3cab-4b96-8688-78ad09551b3e",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-16T09:28:15.000+02:00",
+  "commitAt": "2023-08-16T09:28:15.000+02:00",
   "chatgpt_sharing": {
     "title": "Update App.jsx Layout",
     "url": "https://chat.openai.com/share/7ee72b63-3cab-4b96-8688-78ad09551b3e",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/d2d3a27471f41c33f0622c6c62d23561e2c178e9",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update App.jsx layout https://chat.openai.com/share/7ee72b63-3cab-4b96-8688-78ad09551b3e"
+    },
+    "status": 200,
+    "dateOfConversation": "August 16, 2023",
+    "dateOfAccess": "2023-08-24 10:22:24.918501",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 491,
+    "tokensOfAnswers": 262,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "d2d3a27471f41c33f0622c6c62d23561e2c178e9_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

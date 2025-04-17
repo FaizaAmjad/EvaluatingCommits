@@ -1,15 +1,28 @@
 {
   "sha": "d55d9bed3d60f6fda0b0155884259040e76fc7e3",
   "url": "https://github.com/tisztamo/Junior/commit/d55d9bed3d60f6fda0b0155884259040e76fc7e3",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Replace Getting Started details with link https://chat.openai.com/share/0009359a-f33c-4da4-98fa-8733c354ea33",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-08T12:50:15.000+02:00",
+  "commitAt": "2023-08-08T12:50:15.000+02:00",
   "chatgpt_sharing": {
     "title": "Replace Getting Started section.",
     "url": "https://chat.openai.com/share/0009359a-f33c-4da4-98fa-8733c354ea33",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/d55d9bed3d60f6fda0b0155884259040e76fc7e3",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Replace Getting Started details with link https://chat.openai.com/share/0009359a-f33c-4da4-98fa-8733c354ea33"
+    },
+    "status": 200,
+    "dateOfConversation": "August 8, 2023",
+    "dateOfAccess": "2023-08-24 10:23:21.867744",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 841,
+    "tokensOfAnswers": 880,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "d55d9bed3d60f6fda0b0155884259040e76fc7e3_s1_p1",
@@ -36,5 +49,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

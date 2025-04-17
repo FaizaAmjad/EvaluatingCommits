@@ -1,15 +1,28 @@
 {
   "sha": "3cb94ad5171a8fbef3a964b348e9c47112a56d13",
   "url": "https://github.com/tisztamo/Junior/commit/3cb94ad5171a8fbef3a964b348e9c47112a56d13",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Rename stores to model, maintaining coherence https://chat.openai.com/share/bf149e10-1fbc-4c21-b569-c2b8e5269b22",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-03T06:47:50.000+02:00",
+  "commitAt": "2023-08-03T06:47:50.000+02:00",
   "chatgpt_sharing": {
     "title": "Rename and move files.",
     "url": "https://chat.openai.com/share/bf149e10-1fbc-4c21-b569-c2b8e5269b22",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/3cb94ad5171a8fbef3a964b348e9c47112a56d13",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Rename stores to model, maintaining coherence https://chat.openai.com/share/bf149e10-1fbc-4c21-b569-c2b8e5269b22"
+    },
+    "status": 200,
+    "dateOfConversation": "August 3, 2023",
+    "dateOfAccess": "2023-08-31 06:27:17.848829",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 504,
+    "tokensOfAnswers": 508,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "3cb94ad5171a8fbef3a964b348e9c47112a56d13_s1_p1",
@@ -36,5 +49,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

@@ -1,15 +1,28 @@
 {
   "sha": "024996ec1e98a43c1f2715a752b5ebbd1858cdee",
   "url": "https://github.com/tisztamo/Junior/commit/024996ec1e98a43c1f2715a752b5ebbd1858cdee",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor loadDefaults function in promptDescriptorDefaults.js https://chat.openai.com/share/f7d80da3-2bb5-4b21-a407-9cda89c62f20",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-26T11:22:22.000+02:00",
+  "commitAt": "2023-07-26T11:22:22.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor Prompt Defaults",
     "url": "https://chat.openai.com/share/f7d80da3-2bb5-4b21-a407-9cda89c62f20",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/024996ec1e98a43c1f2715a752b5ebbd1858cdee",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Refactor loadDefaults function in promptDescriptorDefaults.js https://chat.openai.com/share/f7d80da3-2bb5-4b21-a407-9cda89c62f20"
+    },
+    "status": 200,
+    "dateOfConversation": "July 26, 2023",
+    "dateOfAccess": "2023-08-31 06:27:55.002024",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 985,
+    "tokensOfAnswers": 742,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "024996ec1e98a43c1f2715a752b5ebbd1858cdee_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

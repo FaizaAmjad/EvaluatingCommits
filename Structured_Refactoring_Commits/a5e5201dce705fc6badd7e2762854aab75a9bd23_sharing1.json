@@ -1,15 +1,28 @@
 {
   "sha": "a5e5201dce705fc6badd7e2762854aab75a9bd23",
   "url": "https://github.com/tisztamo/Junior/commit/a5e5201dce705fc6badd7e2762854aab75a9bd23",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Rename project from 'The Junior' to 'Junior' https://chat.openai.com/share/70abea44-48b8-4310-a4ae-51f6b38acd0a",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-29T13:18:42.000+02:00",
+  "commitAt": "2023-07-29T13:18:42.000+02:00",
   "chatgpt_sharing": {
     "title": "Rename Project to Junior",
     "url": "https://chat.openai.com/share/70abea44-48b8-4310-a4ae-51f6b38acd0a",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/a5e5201dce705fc6badd7e2762854aab75a9bd23",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Rename project from 'The Junior' to 'Junior' https://chat.openai.com/share/70abea44-48b8-4310-a4ae-51f6b38acd0a"
+    },
+    "status": 200,
+    "dateOfConversation": "July 29, 2023",
+    "dateOfAccess": "2023-08-31 06:31:21.028223",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 858,
+    "tokensOfAnswers": 781,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "a5e5201dce705fc6badd7e2762854aab75a9bd23_s1_p1",
@@ -29,5 +42,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

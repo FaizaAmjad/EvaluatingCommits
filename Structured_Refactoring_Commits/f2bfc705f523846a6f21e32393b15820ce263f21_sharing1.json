@@ -1,15 +1,28 @@
 {
   "sha": "f2bfc705f523846a6f21e32393b15820ce263f21",
   "url": "https://github.com/tisztamo/Junior/commit/f2bfc705f523846a6f21e32393b15820ce263f21",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Reformat documentation headers https://chat.openai.com/share/f0d01943-de1e-49ba-a830-e2f85ef84817",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-24T14:15:40.000+02:00",
+  "commitAt": "2023-08-24T14:15:40.000+02:00",
   "chatgpt_sharing": {
     "title": "Update Documentation with Versioning",
     "url": "https://chat.openai.com/share/f0d01943-de1e-49ba-a830-e2f85ef84817",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/f2bfc705f523846a6f21e32393b15820ce263f21",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Reformat documentation headers https://chat.openai.com/share/f0d01943-de1e-49ba-a830-e2f85ef84817"
+    },
+    "status": 200,
+    "dateOfConversation": "August 24, 2023",
+    "dateOfAccess": "2023-08-31 06:23:57.954821",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 517,
+    "tokensOfAnswers": 591,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "f2bfc705f523846a6f21e32393b15820ce263f21_s1_p1",
@@ -36,5 +49,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

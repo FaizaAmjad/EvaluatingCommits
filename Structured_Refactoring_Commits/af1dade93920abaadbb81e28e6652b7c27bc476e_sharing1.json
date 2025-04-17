@@ -1,15 +1,28 @@
 {
   "sha": "af1dade93920abaadbb81e28e6652b7c27bc476e",
   "url": "https://github.com/tisztamo/Junior/commit/af1dade93920abaadbb81e28e6652b7c27bc476e",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Save content and execute change on paste https://chat.openai.com/share/0e73908f-8538-4f58-b597-c34bf3da9e60",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-04T20:48:20.000+02:00",
+  "commitAt": "2023-08-04T20:48:20.000+02:00",
   "chatgpt_sharing": {
     "title": "Save and Execute Changes",
     "url": "https://chat.openai.com/share/0e73908f-8538-4f58-b597-c34bf3da9e60",
-    "number_of_prompts": 3,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/af1dade93920abaadbb81e28e6652b7c27bc476e",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Save content and execute change on paste https://chat.openai.com/share/0e73908f-8538-4f58-b597-c34bf3da9e60"
+    },
+    "status": 200,
+    "dateOfConversation": "August 4, 2023",
+    "dateOfAccess": "2023-08-31 06:30:51.838318",
+    "numberOfPrompts": 3,
+    "tokensOfPrompts": 573,
+    "tokensOfAnswers": 1391,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "af1dade93920abaadbb81e28e6652b7c27bc476e_s1_p1",
@@ -48,5 +61,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

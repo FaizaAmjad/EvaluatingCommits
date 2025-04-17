@@ -1,15 +1,28 @@
 {
   "sha": "ac36c113268a2badf8314cfbb30297671611b8e8",
   "url": "https://github.com/tisztamo/Junior/commit/ac36c113268a2badf8314cfbb30297671611b8e8",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Rename build:docs to build:doc in package.json https://chat.openai.com/share/1775107d-e050-4f7c-86f1-dce69a37b40f",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-23T21:15:35.000+02:00",
+  "commitAt": "2023-07-23T21:15:35.000+02:00",
   "chatgpt_sharing": {
     "title": "Rename build:docs to build:doc",
     "url": "https://chat.openai.com/share/1775107d-e050-4f7c-86f1-dce69a37b40f",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/ac36c113268a2badf8314cfbb30297671611b8e8",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Rename build:docs to build:doc in package.json https://chat.openai.com/share/1775107d-e050-4f7c-86f1-dce69a37b40f"
+    },
+    "status": 200,
+    "dateOfConversation": "July 23, 2023",
+    "dateOfAccess": "2023-08-31 06:31:51.342808",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 737,
+    "tokensOfAnswers": 480,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "ac36c113268a2badf8314cfbb30297671611b8e8_s1_p1",
@@ -36,5 +49,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

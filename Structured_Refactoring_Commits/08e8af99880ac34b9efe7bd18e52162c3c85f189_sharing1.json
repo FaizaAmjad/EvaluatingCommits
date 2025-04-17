@@ -1,15 +1,28 @@
 {
   "sha": "08e8af99880ac34b9efe7bd18e52162c3c85f189",
   "url": "https://github.com/tisztamo/Junior/commit/08e8af99880ac34b9efe7bd18e52162c3c85f189",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Update Cypress config for v10 https://chat.openai.com/share/f75ec365-2665-4967-b437-3d48ff78d194",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-28T21:03:59.000+02:00",
+  "commitAt": "2023-08-28T21:03:59.000+02:00",
   "chatgpt_sharing": {
     "title": "Update Cypress Config v10",
     "url": "https://chat.openai.com/share/f75ec365-2665-4967-b437-3d48ff78d194",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/08e8af99880ac34b9efe7bd18e52162c3c85f189",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update Cypress config for v10 https://chat.openai.com/share/f75ec365-2665-4967-b437-3d48ff78d194"
+    },
+    "status": 200,
+    "dateOfConversation": "August 28, 2023",
+    "dateOfAccess": "2023-08-31 06:23:41.375963",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 512,
+    "tokensOfAnswers": 137,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "08e8af99880ac34b9efe7bd18e52162c3c85f189_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

@@ -1,15 +1,28 @@
 {
   "sha": "8ba2f3d4ee07003a2c2a9b4096c09fbeef8fd389",
   "url": "https://github.com/tisztamo/Junior/commit/8ba2f3d4ee07003a2c2a9b4096c09fbeef8fd389",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Update roadmap.md with completed task https://chat.openai.com/share/0bc5c1d5-f736-444a-a1c6-c8560afff010",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-07T15:56:34.000+02:00",
+  "commitAt": "2023-08-07T15:56:34.000+02:00",
   "chatgpt_sharing": {
     "title": "Update Roadmap with Completed Task",
     "url": "https://chat.openai.com/share/0bc5c1d5-f736-444a-a1c6-c8560afff010",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/8ba2f3d4ee07003a2c2a9b4096c09fbeef8fd389",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update roadmap.md with completed task https://chat.openai.com/share/0bc5c1d5-f736-444a-a1c6-c8560afff010"
+    },
+    "status": 200,
+    "dateOfConversation": "August 7, 2023",
+    "dateOfAccess": "2023-08-24 10:23:27.205819",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 318,
+    "tokensOfAnswers": 224,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "8ba2f3d4ee07003a2c2a9b4096c09fbeef8fd389_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

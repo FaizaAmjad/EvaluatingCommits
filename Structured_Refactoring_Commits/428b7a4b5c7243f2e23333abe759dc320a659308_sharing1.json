@@ -1,15 +1,28 @@
 {
   "sha": "428b7a4b5c7243f2e23333abe759dc320a659308",
   "url": "https://github.com/tisztamo/Junior/commit/428b7a4b5c7243f2e23333abe759dc320a659308",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Improve the documentation https://chat.openai.com/share/a0a53875-344b-4e84-a907-928ab6fcbc8f",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-30T11:58:22.000+02:00",
+  "commitAt": "2023-08-30T11:58:22.000+02:00",
   "chatgpt_sharing": {
     "title": "Improve Cover Colors",
     "url": "https://chat.openai.com/share/a0a53875-344b-4e84-a907-928ab6fcbc8f",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/428b7a4b5c7243f2e23333abe759dc320a659308",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Improve the documentation https://chat.openai.com/share/a0a53875-344b-4e84-a907-928ab6fcbc8f"
+    },
+    "status": 200,
+    "dateOfConversation": "August 30, 2023",
+    "dateOfAccess": "2023-08-31 06:23:33.532578",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 853,
+    "tokensOfAnswers": 373,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "428b7a4b5c7243f2e23333abe759dc320a659308_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

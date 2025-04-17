@@ -1,15 +1,28 @@
 {
   "sha": "9dac0b6b6797fb6d62cf41369227d0138f4397a5",
   "url": "https://github.com/tisztamo/Junior/commit/9dac0b6b6797fb6d62cf41369227d0138f4397a5",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Update docs/descriptor.md https://chat.openai.com/share/f9d1c692-9808-49bf-8c4f-20e8acdef237",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-22T16:13:49.000+02:00",
+  "commitAt": "2023-08-22T16:13:49.000+02:00",
   "chatgpt_sharing": {
     "title": "Update Prompt Descriptor Content",
     "url": "https://chat.openai.com/share/f9d1c692-9808-49bf-8c4f-20e8acdef237",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/9dac0b6b6797fb6d62cf41369227d0138f4397a5",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update docs/descriptor.md https://chat.openai.com/share/f9d1c692-9808-49bf-8c4f-20e8acdef237"
+    },
+    "status": 200,
+    "dateOfConversation": "August 22, 2023",
+    "dateOfAccess": "2023-08-31 06:24:26.721433",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 795,
+    "tokensOfAnswers": 577,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "9dac0b6b6797fb6d62cf41369227d0138f4397a5_s1_p1",
@@ -54,5 +67,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

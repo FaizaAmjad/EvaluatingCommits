@@ -1,15 +1,28 @@
 {
   "sha": "aa1ecf3d183acabb26c1932b548b1881b8401c89",
   "url": "https://github.com/tisztamo/Junior/commit/aa1ecf3d183acabb26c1932b548b1881b8401c89",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Improve documentation and embed video https://chat.openai.com/share/dde8c893-2189-4664-b1bf-fcbf0152fadc",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-30T11:36:46.000+02:00",
+  "commitAt": "2023-07-30T11:36:46.000+02:00",
   "chatgpt_sharing": {
     "title": "Embed Video in README",
     "url": "https://chat.openai.com/share/dde8c893-2189-4664-b1bf-fcbf0152fadc",
-    "number_of_prompts": 4,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/aa1ecf3d183acabb26c1932b548b1881b8401c89",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Improve documentation and embed video https://chat.openai.com/share/dde8c893-2189-4664-b1bf-fcbf0152fadc"
+    },
+    "status": 200,
+    "dateOfConversation": "July 30, 2023",
+    "dateOfAccess": "2023-08-31 06:27:34.741850",
+    "numberOfPrompts": 4,
+    "tokensOfPrompts": 1118,
+    "tokensOfAnswers": 1020,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "aa1ecf3d183acabb26c1932b548b1881b8401c89_s1_p1",
@@ -60,5 +73,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

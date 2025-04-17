@@ -1,15 +1,28 @@
 {
   "sha": "8f780f95eaacde2d7f58ff98700b8254e99c1702",
   "url": "https://github.com/tisztamo/Junior/commit/8f780f95eaacde2d7f58ff98700b8254e99c1702",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor .gitignore creation and check duplicates https://chat.openai.com/share/9202c772-3173-4a9d-916f-3e527294d2dd",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-27T12:36:33.000+02:00",
+  "commitAt": "2023-07-27T12:36:33.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor gitignore creation",
     "url": "https://chat.openai.com/share/9202c772-3173-4a9d-916f-3e527294d2dd",
-    "number_of_prompts": 4,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/8f780f95eaacde2d7f58ff98700b8254e99c1702",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Refactor .gitignore creation and check duplicates https://chat.openai.com/share/9202c772-3173-4a9d-916f-3e527294d2dd"
+    },
+    "status": 200,
+    "dateOfConversation": "July 27, 2023",
+    "dateOfAccess": "2023-08-31 06:27:43.512733",
+    "numberOfPrompts": 4,
+    "tokensOfPrompts": 499,
+    "tokensOfAnswers": 2138,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "8f780f95eaacde2d7f58ff98700b8254e99c1702_s1_p1",
@@ -60,5 +73,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

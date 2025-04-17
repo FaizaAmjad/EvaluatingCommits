@@ -1,15 +1,28 @@
 {
   "sha": "34141e6499264b1a405556b2901b44d73dba0456",
   "url": "https://github.com/pstackebrandt/pstackebrandt.github.io/commit/34141e6499264b1a405556b2901b44d73dba0456",
+  "author": "pstackebrandt",
+  "repoName": "pstackebrandt/pstackebrandt.github.io",
+  "repoLanguage": "CSS",
   "message": "Add postbuild script to let internal routing work on gh pages hosting.\nFile deploy.js changes content of build folder after build process.\n- Create a 404.html (copy of index.html with small inserted script)\n- Add small script to index.html\nsee for details https://chat.openai.com/share/91efd434-e030-466b-984d-2ccc8a3b78d7 (at the end)",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-04T09:10:49.000+02:00",
+  "commitAt": "2023-08-04T09:10:49.000+02:00",
   "chatgpt_sharing": {
     "title": "React App auf GitHub Pages",
     "url": "https://chat.openai.com/share/91efd434-e030-466b-984d-2ccc8a3b78d7",
-    "number_of_prompts": 4,
+    "mention": {
+      "mentioned_url": "https://github.com/pstackebrandt/pstackebrandt.github.io/commit/34141e6499264b1a405556b2901b44d73dba0456",
+      "mentioned_property": "message",
+      "mentioned_author": "pstackebrandt",
+      "mentioned_text": "Add postbuild script to let internal routing work on gh pages hosting.\nFile deploy.js changes content of build folder after build process.\n- Create a 404.html (copy of index.html with small inserted script)\n- Add small script to index.html\nsee for details https://chat.openai.com/share/91efd434-e030-466b-984d-2ccc8a3b78d7 (at the end)"
+    },
+    "status": 200,
+    "dateOfConversation": "August 3, 2023",
+    "dateOfAccess": "2023-08-31 06:32:56.516471",
+    "numberOfPrompts": 4,
+    "tokensOfPrompts": 256,
+    "tokensOfAnswers": 1719,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "34141e6499264b1a405556b2901b44d73dba0456_s1_p1",
@@ -74,5 +87,9 @@
         "list_of_code": []
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

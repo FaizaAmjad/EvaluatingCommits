@@ -1,15 +1,28 @@
 {
   "sha": "de2f3119e770c37a4968d65c0bb5324702357155",
   "url": "https://github.com/tisztamo/Junior/commit/de2f3119e770c37a4968d65c0bb5324702357155",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "update prompt.yaml when task selected https://chat.openai.com/share/e9f4664e-50a5-40c1-8604-befe89a2dd36",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-06T21:08:57.000+02:00",
+  "commitAt": "2023-07-06T21:08:57.000+02:00",
   "chatgpt_sharing": {
     "title": "Add Task Event Handler",
     "url": "https://chat.openai.com/share/e9f4664e-50a5-40c1-8604-befe89a2dd36",
-    "number_of_prompts": 5,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/de2f3119e770c37a4968d65c0bb5324702357155",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "update prompt.yaml when task selected https://chat.openai.com/share/e9f4664e-50a5-40c1-8604-befe89a2dd36"
+    },
+    "status": 200,
+    "dateOfConversation": "July 6, 2023",
+    "dateOfAccess": "2023-08-31 06:29:23.553977",
+    "numberOfPrompts": 5,
+    "tokensOfPrompts": 1164,
+    "tokensOfAnswers": 2664,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "de2f3119e770c37a4968d65c0bb5324702357155_s1_p1",
@@ -72,5 +85,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

@@ -1,15 +1,28 @@
 {
   "sha": "3d0e64860574f04ee312db8e28c49e4c7416efb0",
   "url": "https://github.com/tisztamo/Junior/commit/3d0e64860574f04ee312db8e28c49e4c7416efb0",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Update 'message' field to 'output' https://chat.openai.com/share/51f3cc36-f90c-4efd-b422-879fb42f650a",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-24T12:14:03.000+02:00",
+  "commitAt": "2023-07-24T12:14:03.000+02:00",
   "chatgpt_sharing": {
     "title": "Update 'message' to 'output'",
     "url": "https://chat.openai.com/share/51f3cc36-f90c-4efd-b422-879fb42f650a",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/3d0e64860574f04ee312db8e28c49e4c7416efb0",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Update 'message' field to 'output' https://chat.openai.com/share/51f3cc36-f90c-4efd-b422-879fb42f650a"
+    },
+    "status": 200,
+    "dateOfConversation": "July 24, 2023",
+    "dateOfAccess": "2023-08-31 06:28:07.597084",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 321,
+    "tokensOfAnswers": 195,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "3d0e64860574f04ee312db8e28c49e4c7416efb0_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

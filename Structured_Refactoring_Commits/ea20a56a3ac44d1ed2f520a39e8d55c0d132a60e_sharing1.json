@@ -1,15 +1,28 @@
 {
   "sha": "ea20a56a3ac44d1ed2f520a39e8d55c0d132a60e",
   "url": "https://github.com/tisztamo/Junior/commit/ea20a56a3ac44d1ed2f520a39e8d55c0d132a60e",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Update 'message' field to 'output' https://chat.openai.com/share/8685f751-00c8-4a20-9ba8-bfeedc66c6a8",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-24T12:45:43.000+02:00",
+  "commitAt": "2023-07-24T12:45:43.000+02:00",
   "chatgpt_sharing": {
     "title": "Style Terminal Tailwind Prompt.",
     "url": "https://chat.openai.com/share/8685f751-00c8-4a20-9ba8-bfeedc66c6a8",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/ea20a56a3ac44d1ed2f520a39e8d55c0d132a60e",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Update 'message' field to 'output' https://chat.openai.com/share/8685f751-00c8-4a20-9ba8-bfeedc66c6a8"
+    },
+    "status": 200,
+    "dateOfConversation": "July 24, 2023",
+    "dateOfAccess": "2023-08-31 06:28:06.673984",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 551,
+    "tokensOfAnswers": 237,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "ea20a56a3ac44d1ed2f520a39e8d55c0d132a60e_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

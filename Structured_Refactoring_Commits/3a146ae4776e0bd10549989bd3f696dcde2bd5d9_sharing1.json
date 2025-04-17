@@ -1,15 +1,28 @@
 {
   "sha": "3a146ae4776e0bd10549989bd3f696dcde2bd5d9",
   "url": "https://github.com/REReal8/CCWorldPlatform/commit/3a146ae4776e0bd10549989bd3f696dcde2bd5d9",
+  "author": "REReal8",
+  "repoName": "REReal8/CCWorldPlatform",
+  "repoLanguage": "Lua",
   "message": "rename MObjHost methods.\n\nbased on this discussion:\n\nhttps://chat.openai.com/share/65d3e63b-7618-4522-a436-e88964f4d293",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-03T23:23:32.000+02:00",
+  "commitAt": "2023-08-03T23:23:32.000+02:00",
   "chatgpt_sharing": {
     "title": "Host/Unhost Objects",
     "url": "https://chat.openai.com/share/65d3e63b-7618-4522-a436-e88964f4d293",
-    "number_of_prompts": 20,
+    "mention": {
+      "mentioned_url": "https://github.com/REReal8/CCWorldPlatform/commit/3a146ae4776e0bd10549989bd3f696dcde2bd5d9",
+      "mentioned_property": "message",
+      "mentioned_author": "REReal8",
+      "mentioned_text": "rename MObjHost methods.\n\nbased on this discussion:\n\nhttps://chat.openai.com/share/65d3e63b-7618-4522-a436-e88964f4d293"
+    },
+    "status": 200,
+    "dateOfConversation": "August 3, 2023",
+    "dateOfAccess": "2023-08-31 06:23:16.625712",
+    "numberOfPrompts": 20,
+    "tokensOfPrompts": 1543,
+    "tokensOfAnswers": 4519,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "3a146ae4776e0bd10549989bd3f696dcde2bd5d9_s1_p1",
@@ -132,5 +145,9 @@
         "list_of_code": []
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

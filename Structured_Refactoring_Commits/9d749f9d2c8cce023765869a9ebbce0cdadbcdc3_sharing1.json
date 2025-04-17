@@ -1,15 +1,28 @@
 {
   "sha": "9d749f9d2c8cce023765869a9ebbce0cdadbcdc3",
   "url": "https://github.com/tisztamo/Junior/commit/9d749f9d2c8cce023765869a9ebbce0cdadbcdc3",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Update div styling in App.jsx https://chat.openai.com/share/00b111a5-00b5-4689-9b0f-2a47408621c6",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-04T10:07:52.000+02:00",
+  "commitAt": "2023-08-04T10:07:52.000+02:00",
   "chatgpt_sharing": {
     "title": "Update div styling App.jsx.",
     "url": "https://chat.openai.com/share/00b111a5-00b5-4689-9b0f-2a47408621c6",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/9d749f9d2c8cce023765869a9ebbce0cdadbcdc3",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update div styling in App.jsx https://chat.openai.com/share/00b111a5-00b5-4689-9b0f-2a47408621c6"
+    },
+    "status": 200,
+    "dateOfConversation": "August 4, 2023",
+    "dateOfAccess": "2023-08-24 10:23:56.168934",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 516,
+    "tokensOfAnswers": 358,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "9d749f9d2c8cce023765869a9ebbce0cdadbcdc3_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

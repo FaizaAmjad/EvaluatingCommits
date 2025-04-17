@@ -1,15 +1,28 @@
 {
   "sha": "5440aaeee9e1de1854812b59dc7c6a83b9e8d6f7",
   "url": "https://github.com/tisztamo/Junior/commit/5440aaeee9e1de1854812b59dc7c6a83b9e8d6f7",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Rename delete-branches to clear-branches https://chat.openai.com/share/805fae2c-0fba-4c87-839a-ebc5227a3f97",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-10T09:46:18.000+02:00",
+  "commitAt": "2023-08-10T09:46:18.000+02:00",
   "chatgpt_sharing": {
     "title": "Rename delete-branches script.",
     "url": "https://chat.openai.com/share/805fae2c-0fba-4c87-839a-ebc5227a3f97",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/5440aaeee9e1de1854812b59dc7c6a83b9e8d6f7",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Rename delete-branches to clear-branches https://chat.openai.com/share/805fae2c-0fba-4c87-839a-ebc5227a3f97"
+    },
+    "status": 200,
+    "dateOfConversation": "August 10, 2023",
+    "dateOfAccess": "2023-08-24 10:22:57.286684",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 1142,
+    "tokensOfAnswers": 940,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "5440aaeee9e1de1854812b59dc7c6a83b9e8d6f7_s1_p1",
@@ -36,5 +49,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

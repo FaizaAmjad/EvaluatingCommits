@@ -1,15 +1,28 @@
 {
   "sha": "9874b2e07d41f5afc68f80b65188e00b56a49adc",
   "url": "https://github.com/tisztamo/Junior/commit/9874b2e07d41f5afc68f80b65188e00b56a49adc",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Move and rename ResetButton component https://chat.openai.com/share/2b402060-2cb3-4424-af25-970abeaada2d",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-24T13:14:42.000+02:00",
+  "commitAt": "2023-07-24T13:14:42.000+02:00",
   "chatgpt_sharing": {
     "title": "Move and Rename Component",
     "url": "https://chat.openai.com/share/2b402060-2cb3-4424-af25-970abeaada2d",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/9874b2e07d41f5afc68f80b65188e00b56a49adc",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Move and rename ResetButton component https://chat.openai.com/share/2b402060-2cb3-4424-af25-970abeaada2d"
+    },
+    "status": 200,
+    "dateOfConversation": "July 24, 2023",
+    "dateOfAccess": "2023-08-31 06:28:02.839158",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 530,
+    "tokensOfAnswers": 443,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "9874b2e07d41f5afc68f80b65188e00b56a49adc_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

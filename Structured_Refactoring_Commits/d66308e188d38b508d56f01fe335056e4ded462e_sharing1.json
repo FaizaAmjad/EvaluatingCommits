@@ -1,15 +1,28 @@
 {
   "sha": "d66308e188d38b508d56f01fe335056e4ded462e",
   "url": "https://github.com/tisztamo/Junior/commit/d66308e188d38b508d56f01fe335056e4ded462e",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Update video link and description https://chat.openai.com/share/768723c2-4a3f-42e3-9559-fed47e4e7db3",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-18T14:50:32.000+02:00",
+  "commitAt": "2023-08-18T14:50:32.000+02:00",
   "chatgpt_sharing": {
     "title": "Update Junior README & Video",
     "url": "https://chat.openai.com/share/768723c2-4a3f-42e3-9559-fed47e4e7db3",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/d66308e188d38b508d56f01fe335056e4ded462e",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update video link and description https://chat.openai.com/share/768723c2-4a3f-42e3-9559-fed47e4e7db3"
+    },
+    "status": 200,
+    "dateOfConversation": "August 18, 2023",
+    "dateOfAccess": "2023-08-24 10:21:57.748239",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 1135,
+    "tokensOfAnswers": 830,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "d66308e188d38b508d56f01fe335056e4ded462e_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

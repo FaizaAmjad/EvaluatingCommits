@@ -1,15 +1,28 @@
 {
   "sha": "f77b18ae27004c8f9b6a96906e8d89008555e0df",
   "url": "https://github.com/tisztamo/Junior/commit/f77b18ae27004c8f9b6a96906e8d89008555e0df",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor requirements editor component https://chat.openai.com/share/075621a9-3df1-4086-bad3-d563fbd09e02",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-23T13:43:11.000+02:00",
+  "commitAt": "2023-08-23T13:43:11.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor Requirements Editor",
     "url": "https://chat.openai.com/share/075621a9-3df1-4086-bad3-d563fbd09e02",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/f77b18ae27004c8f9b6a96906e8d89008555e0df",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor requirements editor component https://chat.openai.com/share/075621a9-3df1-4086-bad3-d563fbd09e02"
+    },
+    "status": 200,
+    "dateOfConversation": "August 23, 2023",
+    "dateOfAccess": "2023-08-31 06:24:21.645091",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 886,
+    "tokensOfAnswers": 262,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "f77b18ae27004c8f9b6a96906e8d89008555e0df_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

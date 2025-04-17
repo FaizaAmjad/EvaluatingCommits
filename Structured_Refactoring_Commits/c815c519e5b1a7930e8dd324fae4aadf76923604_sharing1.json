@@ -1,15 +1,28 @@
 {
   "sha": "c815c519e5b1a7930e8dd324fae4aadf76923604",
   "url": "https://github.com/tisztamo/Junior/commit/c815c519e5b1a7930e8dd324fae4aadf76923604",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Improve documentation https://chat.openai.com/share/67317d14-928d-4870-8f77-a4d4c3367fe2",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-30T12:17:28.000+02:00",
+  "commitAt": "2023-08-30T12:17:28.000+02:00",
   "chatgpt_sharing": {
     "title": "Improve Documentation with Script",
     "url": "https://chat.openai.com/share/67317d14-928d-4870-8f77-a4d4c3367fe2",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/c815c519e5b1a7930e8dd324fae4aadf76923604",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Improve documentation https://chat.openai.com/share/67317d14-928d-4870-8f77-a4d4c3367fe2"
+    },
+    "status": 200,
+    "dateOfConversation": "August 30, 2023",
+    "dateOfAccess": "2023-08-31 06:23:32.328409",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 884,
+    "tokensOfAnswers": 146,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "c815c519e5b1a7930e8dd324fae4aadf76923604_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

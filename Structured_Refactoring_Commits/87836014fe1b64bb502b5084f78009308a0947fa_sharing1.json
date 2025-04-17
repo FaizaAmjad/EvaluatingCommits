@@ -1,15 +1,28 @@
 {
   "sha": "87836014fe1b64bb502b5084f78009308a0947fa",
   "url": "https://github.com/tisztamo/Junior/commit/87836014fe1b64bb502b5084f78009308a0947fa",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Simplify git reset function https://chat.openai.com/share/7d54af31-6012-4ee4-b192-ae92bf1641d5",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-28T15:59:28.000+02:00",
+  "commitAt": "2023-08-28T15:59:28.000+02:00",
   "chatgpt_sharing": {
     "title": "Simplify Git Reset",
     "url": "https://chat.openai.com/share/7d54af31-6012-4ee4-b192-ae92bf1641d5",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/87836014fe1b64bb502b5084f78009308a0947fa",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Simplify git reset function https://chat.openai.com/share/7d54af31-6012-4ee4-b192-ae92bf1641d5"
+    },
+    "status": 200,
+    "dateOfConversation": "August 28, 2023",
+    "dateOfAccess": "2023-08-31 06:23:45.571898",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 576,
+    "tokensOfAnswers": 242,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "87836014fe1b64bb502b5084f78009308a0947fa_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

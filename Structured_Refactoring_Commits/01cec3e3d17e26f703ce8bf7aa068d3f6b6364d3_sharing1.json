@@ -1,15 +1,28 @@
 {
   "sha": "01cec3e3d17e26f703ce8bf7aa068d3f6b6364d3",
   "url": "https://github.com/p3ob7o/Speak/commit/01cec3e3d17e26f703ce8bf7aa068d3f6b6364d3",
+  "author": "p3ob7o",
+  "repoName": "p3ob7o/Speak",
+  "repoLanguage": null,
   "message": "Refactored entirely based on https://chat.openai.com/share/c89e041e-ea23-42f9-972f-8543f4407db7",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-06T11:20:49.000-05:00",
+  "commitAt": "2023-07-06T11:20:49.000-05:00",
   "chatgpt_sharing": {
     "title": "Code Request: Expert Coder",
     "url": "https://chat.openai.com/share/c89e041e-ea23-42f9-972f-8543f4407db7",
-    "number_of_prompts": 8,
+    "mention": {
+      "mentioned_url": "https://github.com/p3ob7o/Speak/commit/01cec3e3d17e26f703ce8bf7aa068d3f6b6364d3",
+      "mentioned_property": "message",
+      "mentioned_author": "p3ob7o",
+      "mentioned_text": "Refactored entirely based on https://chat.openai.com/share/c89e041e-ea23-42f9-972f-8543f4407db7"
+    },
+    "status": 200,
+    "dateOfConversation": "July 6, 2023",
+    "dateOfAccess": "2023-08-31 06:22:47.719905",
+    "numberOfPrompts": 8,
+    "tokensOfPrompts": 1169,
+    "tokensOfAnswers": 3643,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "01cec3e3d17e26f703ce8bf7aa068d3f6b6364d3_s1_p1",
@@ -131,5 +144,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

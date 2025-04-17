@@ -1,15 +1,28 @@
 {
   "sha": "8e266c7e0a247c81be8468eff8dbcff5c69b626f",
   "url": "https://github.com/tisztamo/Junior/commit/8e266c7e0a247c81be8468eff8dbcff5c69b626f",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor NavBar and randomize subtitle https://chat.openai.com/share/074e0ac4-fdeb-47e6-ba3b-c85756ca8a93",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-18T14:01:14.000+02:00",
+  "commitAt": "2023-08-18T14:01:14.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor NavBar and SubTitle",
     "url": "https://chat.openai.com/share/074e0ac4-fdeb-47e6-ba3b-c85756ca8a93",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/8e266c7e0a247c81be8468eff8dbcff5c69b626f",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor NavBar and randomize subtitle https://chat.openai.com/share/074e0ac4-fdeb-47e6-ba3b-c85756ca8a93"
+    },
+    "status": 200,
+    "dateOfConversation": "August 18, 2023",
+    "dateOfAccess": "2023-08-24 10:21:58.975604",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 1300,
+    "tokensOfAnswers": 406,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "8e266c7e0a247c81be8468eff8dbcff5c69b626f_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

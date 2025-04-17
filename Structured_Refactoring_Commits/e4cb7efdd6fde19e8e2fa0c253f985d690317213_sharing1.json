@@ -1,15 +1,28 @@
 {
   "sha": "e4cb7efdd6fde19e8e2fa0c253f985d690317213",
   "url": "https://github.com/tisztamo/Junior/commit/e4cb7efdd6fde19e8e2fa0c253f985d690317213",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor clear-branches with better error handling https://chat.openai.com/share/8a7c43db-2fcf-4876-b20e-deea2caef09b",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-30T14:40:57.000+02:00",
+  "commitAt": "2023-08-30T14:40:57.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor clear-branches with simple-git",
     "url": "https://chat.openai.com/share/8a7c43db-2fcf-4876-b20e-deea2caef09b",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/e4cb7efdd6fde19e8e2fa0c253f985d690317213",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor clear-branches with better error handling https://chat.openai.com/share/8a7c43db-2fcf-4876-b20e-deea2caef09b"
+    },
+    "status": 200,
+    "dateOfConversation": "August 30, 2023",
+    "dateOfAccess": "2023-08-31 06:29:46.205166",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 1345,
+    "tokensOfAnswers": 754,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "e4cb7efdd6fde19e8e2fa0c253f985d690317213_s1_p1",
@@ -36,5 +49,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

@@ -1,15 +1,28 @@
 {
   "sha": "3f84389921c7963e1100802462a214dcb576f2dc",
   "url": "https://github.com/tisztamo/Junior/commit/3f84389921c7963e1100802462a214dcb576f2dc",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Improve documentation https://chat.openai.com/share/6891356a-3f05-4bf1-8980-32f927b3fb81",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-22T16:02:24.000+02:00",
+  "commitAt": "2023-08-22T16:02:24.000+02:00",
   "chatgpt_sharing": {
     "title": "Update Prompt Descriptor Structure",
     "url": "https://chat.openai.com/share/6891356a-3f05-4bf1-8980-32f927b3fb81",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/3f84389921c7963e1100802462a214dcb576f2dc",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Improve documentation https://chat.openai.com/share/6891356a-3f05-4bf1-8980-32f927b3fb81"
+    },
+    "status": 200,
+    "dateOfConversation": "August 22, 2023",
+    "dateOfAccess": "2023-08-31 06:24:27.950563",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 814,
+    "tokensOfAnswers": 545,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "3f84389921c7963e1100802462a214dcb576f2dc_s1_p1",
@@ -54,5 +67,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

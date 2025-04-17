@@ -1,15 +1,28 @@
 {
   "sha": "b36185a4ac8ef14bbb7df7244c97c9e041d1e087",
   "url": "https://github.com/tisztamo/Junior/commit/b36185a4ac8ef14bbb7df7244c97c9e041d1e087",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor and fix bugs https://chat.openai.com/share/e55d0fc9-fedf-445c-8fae-50d0253f4c5d",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-17T11:25:18.000+02:00",
+  "commitAt": "2023-07-17T11:25:18.000+02:00",
   "chatgpt_sharing": {
     "title": "Fixing File Loading Error",
     "url": "https://chat.openai.com/share/e55d0fc9-fedf-445c-8fae-50d0253f4c5d",
-    "number_of_prompts": 4,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/b36185a4ac8ef14bbb7df7244c97c9e041d1e087",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Refactor and fix bugs https://chat.openai.com/share/e55d0fc9-fedf-445c-8fae-50d0253f4c5d"
+    },
+    "status": 200,
+    "dateOfConversation": "July 17, 2023",
+    "dateOfAccess": "2023-08-31 06:28:59.181644",
+    "numberOfPrompts": 4,
+    "tokensOfPrompts": 1525,
+    "tokensOfAnswers": 2020,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "b36185a4ac8ef14bbb7df7244c97c9e041d1e087_s1_p1",
@@ -60,5 +73,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

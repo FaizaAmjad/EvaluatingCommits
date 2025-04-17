@@ -1,15 +1,28 @@
 {
   "sha": "cd67da359d2f9beb950d3b8c469122f1500ef3c0",
   "url": "https://github.com/tisztamo/Junior/commit/cd67da359d2f9beb950d3b8c469122f1500ef3c0",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor setupRoutes.js https://chat.openai.com/share/6336615e-5196-4306-ae86-941650681131",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-17T12:16:03.000+02:00",
+  "commitAt": "2023-08-17T12:16:03.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor and Reorder Routes",
     "url": "https://chat.openai.com/share/6336615e-5196-4306-ae86-941650681131",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/cd67da359d2f9beb950d3b8c469122f1500ef3c0",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor setupRoutes.js https://chat.openai.com/share/6336615e-5196-4306-ae86-941650681131"
+    },
+    "status": 200,
+    "dateOfConversation": "August 17, 2023",
+    "dateOfAccess": "2023-08-24 10:22:07.334310",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 538,
+    "tokensOfAnswers": 306,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "cd67da359d2f9beb950d3b8c469122f1500ef3c0_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

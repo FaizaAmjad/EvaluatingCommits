@@ -1,15 +1,28 @@
 {
   "sha": "d3fb42bf4a7ecd8d793f06d2cc6016db8bd9d52e",
   "url": "https://github.com/tisztamo/Junior/commit/d3fb42bf4a7ecd8d793f06d2cc6016db8bd9d52e",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor dry-run API creation https://chat.openai.com/share/e09049b3-f29d-4500-960b-d7f3e557d347",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-24T15:46:00.000+02:00",
+  "commitAt": "2023-07-24T15:46:00.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor Dry-Run API",
     "url": "https://chat.openai.com/share/e09049b3-f29d-4500-960b-d7f3e557d347",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/d3fb42bf4a7ecd8d793f06d2cc6016db8bd9d52e",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Refactor dry-run API creation https://chat.openai.com/share/e09049b3-f29d-4500-960b-d7f3e557d347"
+    },
+    "status": 200,
+    "dateOfConversation": "July 24, 2023",
+    "dateOfAccess": "2023-08-31 06:28:01.244292",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 778,
+    "tokensOfAnswers": 636,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "d3fb42bf4a7ecd8d793f06d2cc6016db8bd9d52e_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

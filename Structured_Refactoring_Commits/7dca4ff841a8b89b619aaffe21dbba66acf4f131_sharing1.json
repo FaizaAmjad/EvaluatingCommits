@@ -1,15 +1,28 @@
 {
   "sha": "7dca4ff841a8b89b619aaffe21dbba66acf4f131",
   "url": "https://github.com/tisztamo/Junior/commit/7dca4ff841a8b89b619aaffe21dbba66acf4f131",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Generate logo, favicon, and update HTML https://chat.openai.com/share/818d5139-d5a2-48ec-80a7-9d2d223ea729",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-31T12:57:31.000+02:00",
+  "commitAt": "2023-07-31T12:57:31.000+02:00",
   "chatgpt_sharing": {
     "title": "Update Documentation & Assets",
     "url": "https://chat.openai.com/share/818d5139-d5a2-48ec-80a7-9d2d223ea729",
-    "number_of_prompts": 3,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/7dca4ff841a8b89b619aaffe21dbba66acf4f131",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Generate logo, favicon, and update HTML https://chat.openai.com/share/818d5139-d5a2-48ec-80a7-9d2d223ea729"
+    },
+    "status": 200,
+    "dateOfConversation": "July 31, 2023",
+    "dateOfAccess": "2023-08-31 06:27:31.273403",
+    "numberOfPrompts": 3,
+    "tokensOfPrompts": 648,
+    "tokensOfAnswers": 1498,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "7dca4ff841a8b89b619aaffe21dbba66acf4f131_s1_p1",
@@ -48,5 +61,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

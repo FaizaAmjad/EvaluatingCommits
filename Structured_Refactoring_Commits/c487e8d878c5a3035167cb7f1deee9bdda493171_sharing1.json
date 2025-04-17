@@ -1,15 +1,28 @@
 {
   "sha": "c487e8d878c5a3035167cb7f1deee9bdda493171",
   "url": "https://github.com/tisztamo/Junior/commit/c487e8d878c5a3035167cb7f1deee9bdda493171",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Simplify function signatures https://chat.openai.com/share/d7c957e5-0750-42b1-ac51-5d20bea54e34",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-18T10:37:00.000+02:00",
+  "commitAt": "2023-07-18T10:37:00.000+02:00",
   "chatgpt_sharing": {
     "title": "Remove redundant function signatures",
     "url": "https://chat.openai.com/share/d7c957e5-0750-42b1-ac51-5d20bea54e34",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/c487e8d878c5a3035167cb7f1deee9bdda493171",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Simplify function signatures https://chat.openai.com/share/d7c957e5-0750-42b1-ac51-5d20bea54e34"
+    },
+    "status": 200,
+    "dateOfConversation": "July 18, 2023",
+    "dateOfAccess": "2023-08-31 06:28:53.666877",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 1251,
+    "tokensOfAnswers": 1035,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "c487e8d878c5a3035167cb7f1deee9bdda493171_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

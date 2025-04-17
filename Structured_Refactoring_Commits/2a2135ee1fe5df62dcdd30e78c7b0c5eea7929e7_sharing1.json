@@ -1,15 +1,28 @@
 {
   "sha": "2a2135ee1fe5df62dcdd30e78c7b0c5eea7929e7",
   "url": "https://github.com/tisztamo/Junior/commit/2a2135ee1fe5df62dcdd30e78c7b0c5eea7929e7",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Rename Home to Junior Docs in sidebar https://chat.openai.com/share/d8700200-3653-4dd0-8a8c-2d7a194837be",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-08T12:22:01.000+02:00",
+  "commitAt": "2023-08-08T12:22:01.000+02:00",
   "chatgpt_sharing": {
     "title": "Rename \"Home\" to \"Junior Docs\"",
     "url": "https://chat.openai.com/share/d8700200-3653-4dd0-8a8c-2d7a194837be",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/2a2135ee1fe5df62dcdd30e78c7b0c5eea7929e7",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Rename Home to Junior Docs in sidebar https://chat.openai.com/share/d8700200-3653-4dd0-8a8c-2d7a194837be"
+    },
+    "status": 200,
+    "dateOfConversation": "August 8, 2023",
+    "dateOfAccess": "2023-08-31 06:30:38.829386",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 282,
+    "tokensOfAnswers": 178,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "2a2135ee1fe5df62dcdd30e78c7b0c5eea7929e7_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

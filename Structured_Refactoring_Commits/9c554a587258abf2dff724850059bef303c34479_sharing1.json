@@ -1,15 +1,28 @@
 {
   "sha": "9c554a587258abf2dff724850059bef303c34479",
   "url": "https://github.com/tisztamo/Junior/commit/9c554a587258abf2dff724850059bef303c34479",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Fetch git status after code execution and websocket update https://chat.openai.com/share/d5dc2ada-4799-4c17-b741-4c71085c15b2",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-26T14:03:17.000+02:00",
+  "commitAt": "2023-07-26T14:03:17.000+02:00",
   "chatgpt_sharing": {
     "title": "Fetch Git Status Fix",
     "url": "https://chat.openai.com/share/d5dc2ada-4799-4c17-b741-4c71085c15b2",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/9c554a587258abf2dff724850059bef303c34479",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Fetch git status after code execution and websocket update https://chat.openai.com/share/d5dc2ada-4799-4c17-b741-4c71085c15b2"
+    },
+    "status": 200,
+    "dateOfConversation": "July 26, 2023",
+    "dateOfAccess": "2023-08-31 06:31:31.942860",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 542,
+    "tokensOfAnswers": 445,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "9c554a587258abf2dff724850059bef303c34479_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

@@ -1,15 +1,28 @@
 {
   "sha": "735ae381e1de7d8c9d8126b6b64b67aa29e02c6a",
   "url": "https://github.com/tisztamo/Junior/commit/735ae381e1de7d8c9d8126b6b64b67aa29e02c6a",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor code to make inputAvailable a const https://chat.openai.com/share/cb1912ce-7535-4732-b282-7b1dd8660be6",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-10T12:00:16.000+02:00",
+  "commitAt": "2023-08-10T12:00:16.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor: inputAvailable to boolean",
     "url": "https://chat.openai.com/share/cb1912ce-7535-4732-b282-7b1dd8660be6",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/735ae381e1de7d8c9d8126b6b64b67aa29e02c6a",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor code to make inputAvailable a const https://chat.openai.com/share/cb1912ce-7535-4732-b282-7b1dd8660be6"
+    },
+    "status": 200,
+    "dateOfConversation": "August 10, 2023",
+    "dateOfAccess": "2023-08-31 06:30:13.647230",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 619,
+    "tokensOfAnswers": 381,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "735ae381e1de7d8c9d8126b6b64b67aa29e02c6a_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

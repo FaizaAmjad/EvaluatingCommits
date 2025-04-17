@@ -1,15 +1,28 @@
 {
   "sha": "ee8354e4326113dd3113082fdc41e71bd4223861",
   "url": "https://github.com/tisztamo/Junior/commit/ee8354e4326113dd3113082fdc41e71bd4223861",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Update favicons when logo is updated https://chat.openai.com/share/0e299c39-3c92-4336-a072-57ad27da9f65",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-10T14:10:08.000+02:00",
+  "commitAt": "2023-08-10T14:10:08.000+02:00",
   "chatgpt_sharing": {
     "title": "Update Favicons on Logo Update",
     "url": "https://chat.openai.com/share/0e299c39-3c92-4336-a072-57ad27da9f65",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/ee8354e4326113dd3113082fdc41e71bd4223861",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update favicons when logo is updated https://chat.openai.com/share/0e299c39-3c92-4336-a072-57ad27da9f65"
+    },
+    "status": 200,
+    "dateOfConversation": "August 10, 2023",
+    "dateOfAccess": "2023-08-24 10:22:50.375635",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 991,
+    "tokensOfAnswers": 288,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "ee8354e4326113dd3113082fdc41e71bd4223861_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

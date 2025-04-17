@@ -1,15 +1,28 @@
 {
   "sha": "ff3f0687ca8a5ae6d5eba6eb5b1021421efdd2c6",
   "url": "https://github.com/tisztamo/Junior/commit/ff3f0687ca8a5ae6d5eba6eb5b1021421efdd2c6",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Update documentation with 'Task Interaction Files' https://chat.openai.com/share/25174ecc-834f-4c2c-97dd-ccd7e1671a9e",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-07T13:28:30.000+02:00",
+  "commitAt": "2023-08-07T13:28:30.000+02:00",
   "chatgpt_sharing": {
     "title": "Improve Documentation: Xx Files",
     "url": "https://chat.openai.com/share/25174ecc-834f-4c2c-97dd-ccd7e1671a9e",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/ff3f0687ca8a5ae6d5eba6eb5b1021421efdd2c6",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update documentation with 'Task Interaction Files' https://chat.openai.com/share/25174ecc-834f-4c2c-97dd-ccd7e1671a9e"
+    },
+    "status": 200,
+    "dateOfConversation": "August 7, 2023",
+    "dateOfAccess": "2023-08-24 10:23:39.388921",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 1262,
+    "tokensOfAnswers": 331,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "ff3f0687ca8a5ae6d5eba6eb5b1021421efdd2c6_s1_p1",
@@ -44,5 +57,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

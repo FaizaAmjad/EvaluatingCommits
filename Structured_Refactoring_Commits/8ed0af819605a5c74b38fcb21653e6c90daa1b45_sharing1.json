@@ -1,15 +1,28 @@
 {
   "sha": "8ed0af819605a5c74b38fcb21653e6c90daa1b45",
   "url": "https://github.com/tisztamo/Junior/commit/8ed0af819605a5c74b38fcb21653e6c90daa1b45",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Improve documentation for referencing .md files https://chat.openai.com/share/76c73bf3-59e4-45bd-ad42-b2e8176d56be",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-07T14:59:55.000+02:00",
+  "commitAt": "2023-08-07T14:59:55.000+02:00",
   "chatgpt_sharing": {
     "title": "Improve Prompt Descriptor Implementation.",
     "url": "https://chat.openai.com/share/76c73bf3-59e4-45bd-ad42-b2e8176d56be",
-    "number_of_prompts": 3,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/8ed0af819605a5c74b38fcb21653e6c90daa1b45",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Improve documentation for referencing .md files https://chat.openai.com/share/76c73bf3-59e4-45bd-ad42-b2e8176d56be"
+    },
+    "status": 200,
+    "dateOfConversation": "August 7, 2023",
+    "dateOfAccess": "2023-08-24 10:23:34.594307",
+    "numberOfPrompts": 3,
+    "tokensOfPrompts": 639,
+    "tokensOfAnswers": 1712,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "8ed0af819605a5c74b38fcb21653e6c90daa1b45_s1_p1",
@@ -58,5 +71,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

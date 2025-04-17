@@ -1,15 +1,28 @@
 {
   "sha": "b41dead62ea57e614b3c04c9a827b26bef61c28d",
   "url": "https://github.com/tisztamo/Junior/commit/b41dead62ea57e614b3c04c9a827b26bef61c28d",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Improve the documentation https://chat.openai.com/share/97a2a551-6c99-4807-9b3c-b906fb7d7fd4",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-29T18:47:30.000+02:00",
+  "commitAt": "2023-08-29T18:47:30.000+02:00",
   "chatgpt_sharing": {
     "title": "Improve Documentation, Remove Warnings",
     "url": "https://chat.openai.com/share/97a2a551-6c99-4807-9b3c-b906fb7d7fd4",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/b41dead62ea57e614b3c04c9a827b26bef61c28d",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Improve the documentation https://chat.openai.com/share/97a2a551-6c99-4807-9b3c-b906fb7d7fd4"
+    },
+    "status": 200,
+    "dateOfConversation": "August 29, 2023",
+    "dateOfAccess": "2023-08-31 06:23:39.114774",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 1243,
+    "tokensOfAnswers": 1071,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "b41dead62ea57e614b3c04c9a827b26bef61c28d_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

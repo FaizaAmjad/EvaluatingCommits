@@ -1,15 +1,28 @@
 {
   "sha": "ac5fcd44073dae51d3c5ff27e69bc27267fdc85a",
   "url": "https://github.com/tisztamo/Junior/commit/ac5fcd44073dae51d3c5ff27e69bc27267fdc85a",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Update project name https://chat.openai.com/share/9ae97584-86e5-4bff-8ed2-271b88deae89",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-19T10:41:44.000+02:00",
+  "commitAt": "2023-07-19T10:41:44.000+02:00",
   "chatgpt_sharing": {
     "title": "Rename Contributor to Junior",
     "url": "https://chat.openai.com/share/9ae97584-86e5-4bff-8ed2-271b88deae89",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/ac5fcd44073dae51d3c5ff27e69bc27267fdc85a",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Update project name https://chat.openai.com/share/9ae97584-86e5-4bff-8ed2-271b88deae89"
+    },
+    "status": 200,
+    "dateOfConversation": "July 19, 2023",
+    "dateOfAccess": "2023-08-31 06:28:40.684536",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 396,
+    "tokensOfAnswers": 454,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "ac5fcd44073dae51d3c5ff27e69bc27267fdc85a_s1_p1",
@@ -36,5 +49,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

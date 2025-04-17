@@ -1,15 +1,28 @@
 {
   "sha": "5b11f6350b1976768685b646dff3a64ab593a766",
   "url": "https://github.com/tisztamo/Junior/commit/5b11f6350b1976768685b646dff3a64ab593a766",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Move .js files from doc to src/doc and update package.json accordingly https://chat.openai.com/share/2b2eb38e-489e-4dd5-b0a7-731de4f728f8",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-23T21:03:57.000+02:00",
+  "commitAt": "2023-07-23T21:03:57.000+02:00",
   "chatgpt_sharing": {
     "title": "Move .js files, update package.json",
     "url": "https://chat.openai.com/share/2b2eb38e-489e-4dd5-b0a7-731de4f728f8",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/5b11f6350b1976768685b646dff3a64ab593a766",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Move .js files from doc to src/doc and update package.json accordingly https://chat.openai.com/share/2b2eb38e-489e-4dd5-b0a7-731de4f728f8"
+    },
+    "status": 200,
+    "dateOfConversation": "July 23, 2023",
+    "dateOfAccess": "2023-08-31 06:32:39.967003",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 872,
+    "tokensOfAnswers": 764,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "5b11f6350b1976768685b646dff3a64ab593a766_s1_p1",
@@ -36,5 +49,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

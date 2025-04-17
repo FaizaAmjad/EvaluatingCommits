@@ -1,15 +1,28 @@
 {
   "sha": "36fdb00f96e61db583b5d31ac6cded7071b83ed2",
   "url": "https://github.com/tisztamo/Junior/commit/36fdb00f96e61db583b5d31ac6cded7071b83ed2",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor RequirementsEditor event handlers https://chat.openai.com/share/c152b3a0-ca1e-46a8-86fc-666a09a618d8",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-23T14:59:30.000+02:00",
+  "commitAt": "2023-08-23T14:59:30.000+02:00",
   "chatgpt_sharing": {
     "title": "Fixing RequirementsEditor Event Handlers",
     "url": "https://chat.openai.com/share/c152b3a0-ca1e-46a8-86fc-666a09a618d8",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/36fdb00f96e61db583b5d31ac6cded7071b83ed2",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor RequirementsEditor event handlers https://chat.openai.com/share/c152b3a0-ca1e-46a8-86fc-666a09a618d8"
+    },
+    "status": 200,
+    "dateOfConversation": "August 23, 2023",
+    "dateOfAccess": "2023-08-31 06:24:14.288650",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 796,
+    "tokensOfAnswers": 438,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "36fdb00f96e61db583b5d31ac6cded7071b83ed2_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

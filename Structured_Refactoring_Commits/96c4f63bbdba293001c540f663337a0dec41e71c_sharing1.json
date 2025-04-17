@@ -1,15 +1,28 @@
 {
   "sha": "96c4f63bbdba293001c540f663337a0dec41e71c",
   "url": "https://github.com/fabricesemti80/work.ansible-prometheus-stack/commit/96c4f63bbdba293001c540f663337a0dec41e71c",
+  "author": "fabricesemti80",
+  "repoName": "fabricesemti80/work.ansible-prometheus-stack",
+  "repoLanguage": "Jinja",
   "message": "Update Vagrantfile\n\nAdd windows server core\r\n\r\nhttps://chat.openai.com/share/9d1a293d-d357-4913-b20d-9e308bf9c7c9",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-07T23:06:30.000+01:00",
+  "commitAt": "2023-08-07T23:06:30.000+01:00",
   "chatgpt_sharing": {
     "title": "Vagrant Config Check.",
     "url": "https://chat.openai.com/share/9d1a293d-d357-4913-b20d-9e308bf9c7c9",
-    "number_of_prompts": 3,
+    "mention": {
+      "mentioned_url": "https://github.com/fabricesemti80/work.ansible-prometheus-stack/commit/96c4f63bbdba293001c540f663337a0dec41e71c",
+      "mentioned_property": "message",
+      "mentioned_author": "fabricesemti80",
+      "mentioned_text": "Update Vagrantfile\n\nAdd windows server core\r\n\r\nhttps://chat.openai.com/share/9d1a293d-d357-4913-b20d-9e308bf9c7c9"
+    },
+    "status": 200,
+    "dateOfConversation": "August 7, 2023",
+    "dateOfAccess": "2023-08-31 06:22:43.529927",
+    "numberOfPrompts": 3,
+    "tokensOfPrompts": 139,
+    "tokensOfAnswers": 741,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "96c4f63bbdba293001c540f663337a0dec41e71c_s1_p1",
@@ -41,5 +54,9 @@
         "list_of_code": []
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

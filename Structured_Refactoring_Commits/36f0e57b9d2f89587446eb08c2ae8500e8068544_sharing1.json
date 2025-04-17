@@ -1,15 +1,28 @@
 {
   "sha": "36f0e57b9d2f89587446eb08c2ae8500e8068544",
   "url": "https://github.com/harryallerston/RPI-Wireless-Hotspot/commit/36f0e57b9d2f89587446eb08c2ae8500e8068544",
+  "author": "tomcatt360",
+  "repoName": "harryallerston/RPI-Wireless-Hotspot",
+  "repoLanguage": "Shell",
   "message": "Re-word feature list\n\nI wasn't sure about how to improve this feature list, but it felt a bit clunky, so I asked ChatGPT. \r\n\r\nhttps://chat.openai.com/share/d59b3439-1980-4146-9ef3-56a080da9f5c",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-06-01T21:42:06.000-06:00",
+  "commitAt": "2023-06-01T21:42:06.000-06:00",
   "chatgpt_sharing": {
     "title": "Improved WiFi Setup.",
     "url": "https://chat.openai.com/share/d59b3439-1980-4146-9ef3-56a080da9f5c",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/harryallerston/RPI-Wireless-Hotspot/commit/36f0e57b9d2f89587446eb08c2ae8500e8068544",
+      "mentioned_property": "message",
+      "mentioned_author": "tomcatt360",
+      "mentioned_text": "Re-word feature list\n\nI wasn't sure about how to improve this feature list, but it felt a bit clunky, so I asked ChatGPT. \r\n\r\nhttps://chat.openai.com/share/d59b3439-1980-4146-9ef3-56a080da9f5c"
+    },
+    "status": 200,
+    "dateOfConversation": "June 2, 2023",
+    "dateOfAccess": "2023-08-31 06:32:50.647471",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 161,
+    "tokensOfAnswers": 261,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "36f0e57b9d2f89587446eb08c2ae8500e8068544_s1_p1",
@@ -30,5 +43,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

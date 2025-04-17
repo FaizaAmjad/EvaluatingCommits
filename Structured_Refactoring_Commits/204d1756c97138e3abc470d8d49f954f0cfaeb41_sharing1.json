@@ -1,15 +1,28 @@
 {
   "sha": "204d1756c97138e3abc470d8d49f954f0cfaeb41",
   "url": "https://github.com/PrivateBin/PrivateBin/commit/204d1756c97138e3abc470d8d49f954f0cfaeb41",
+  "author": "rugk",
+  "repoName": "PrivateBin/PrivateBin",
+  "repoLanguage": "CSS",
   "message": "refactor: redirect support questions to discussions including form + more links\nDiscussions apparently onyl support forms see,\nso I quickly used ChatGPT to convert the Markdown file into the YAMl format\nand after telling the format it seems to have done that in a good eay:\nhttps://chat.openai.com/share/99718495-28d0-4382-ab5e-6a4a733c1ccb\n\n(maybe GitHub introduced that after end of 2021 hehe, so the LLM could not know that)",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-07T17:56:38.000Z",
+  "commitAt": "2023-08-07T17:59:07.000Z",
   "chatgpt_sharing": {
     "title": "GitHub Support: Form Conversion",
     "url": "https://chat.openai.com/share/99718495-28d0-4382-ab5e-6a4a733c1ccb",
-    "number_of_prompts": 3,
+    "mention": {
+      "mentioned_url": "https://github.com/PrivateBin/PrivateBin/commit/204d1756c97138e3abc470d8d49f954f0cfaeb41",
+      "mentioned_property": "message",
+      "mentioned_author": "rugk",
+      "mentioned_text": "refactor: redirect support questions to discussions including form + more links\nDiscussions apparently onyl support forms see,\nso I quickly used ChatGPT to convert the Markdown file into the YAMl format\nand after telling the format it seems to have done that in a good eay:\nhttps://chat.openai.com/share/99718495-28d0-4382-ab5e-6a4a733c1ccb\n\n(maybe GitHub introduced that after end of 2021 hehe, so the LLM could not know that)"
+    },
+    "status": 200,
+    "dateOfConversation": "August 7, 2023",
+    "dateOfAccess": "2023-08-31 06:32:57.835434",
+    "numberOfPrompts": 3,
+    "tokensOfPrompts": 757,
+    "tokensOfAnswers": 1359,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "204d1756c97138e3abc470d8d49f954f0cfaeb41_s1_p1",
@@ -48,5 +61,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

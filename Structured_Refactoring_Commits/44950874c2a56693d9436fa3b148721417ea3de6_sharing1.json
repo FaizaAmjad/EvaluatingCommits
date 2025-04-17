@@ -1,15 +1,28 @@
 {
   "sha": "44950874c2a56693d9436fa3b148721417ea3de6",
   "url": "https://github.com/tisztamo/Junior/commit/44950874c2a56693d9436fa3b148721417ea3de6",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Rename file, move files, eliminate variable https://chat.openai.com/share/eae5c1b1-95be-433e-b455-597b8b9fc3b3",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-08T13:49:35.000+02:00",
+  "commitAt": "2023-08-08T13:49:35.000+02:00",
   "chatgpt_sharing": {
     "title": "Rename & Move Files",
     "url": "https://chat.openai.com/share/eae5c1b1-95be-433e-b455-597b8b9fc3b3",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/44950874c2a56693d9436fa3b148721417ea3de6",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Rename file, move files, eliminate variable https://chat.openai.com/share/eae5c1b1-95be-433e-b455-597b8b9fc3b3"
+    },
+    "status": 200,
+    "dateOfConversation": "August 8, 2023",
+    "dateOfAccess": "2023-08-24 10:23:17.795655",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 603,
+    "tokensOfAnswers": 556,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "44950874c2a56693d9436fa3b148721417ea3de6_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

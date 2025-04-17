@@ -1,15 +1,28 @@
 {
   "sha": "2c8d84013d9809ac20cfbeca9da0aa68992f301e",
   "url": "https://github.com/tisztamo/Junior/commit/2c8d84013d9809ac20cfbeca9da0aa68992f301e",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Implement Working Set task changes https://chat.openai.com/share/404d0e79-0e67-48d7-bac3-27e3209a237d",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-14T07:22:20.000+02:00",
+  "commitAt": "2023-08-14T07:22:20.000+02:00",
   "chatgpt_sharing": {
     "title": "Edit JSX: Add Class",
     "url": "https://chat.openai.com/share/404d0e79-0e67-48d7-bac3-27e3209a237d",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/2c8d84013d9809ac20cfbeca9da0aa68992f301e",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Implement Working Set task changes https://chat.openai.com/share/404d0e79-0e67-48d7-bac3-27e3209a237d"
+    },
+    "status": 200,
+    "dateOfConversation": "August 14, 2023",
+    "dateOfAccess": "2023-08-24 10:22:32.732431",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 422,
+    "tokensOfAnswers": 212,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "2c8d84013d9809ac20cfbeca9da0aa68992f301e_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

@@ -1,15 +1,28 @@
 {
   "sha": "dd5bdf1f6eed4f7fd6d386c7458c680cdee9d54e",
   "url": "https://github.com/tisztamo/Junior/commit/dd5bdf1f6eed4f7fd6d386c7458c680cdee9d54e",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Improve documentation structure https://chat.openai.com/share/394cb47f-1f35-484f-a5c4-8a5c20297762",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-22T15:34:51.000+02:00",
+  "commitAt": "2023-08-22T15:34:51.000+02:00",
   "chatgpt_sharing": {
     "title": "Improving Prompt Descriptor Structure",
     "url": "https://chat.openai.com/share/394cb47f-1f35-484f-a5c4-8a5c20297762",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/dd5bdf1f6eed4f7fd6d386c7458c680cdee9d54e",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Improve documentation structure https://chat.openai.com/share/394cb47f-1f35-484f-a5c4-8a5c20297762"
+    },
+    "status": 200,
+    "dateOfConversation": "August 22, 2023",
+    "dateOfAccess": "2023-08-31 06:24:29.205985",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 772,
+    "tokensOfAnswers": 1408,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "dd5bdf1f6eed4f7fd6d386c7458c680cdee9d54e_s1_p1",
@@ -66,5 +79,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

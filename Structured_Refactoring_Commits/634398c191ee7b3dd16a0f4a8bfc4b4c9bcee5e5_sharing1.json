@@ -1,15 +1,28 @@
 {
   "sha": "634398c191ee7b3dd16a0f4a8bfc4b4c9bcee5e5",
   "url": "https://github.com/tisztamo/Junior/commit/634398c191ee7b3dd16a0f4a8bfc4b4c9bcee5e5",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Revert \"Update video link and project description https://chat.openai.com/share/dce1497a-acdd-421f-8e1c-1737975b2f60\"\n\nThis reverts commit 62f0d11004b160af9d837dcc0de5c5c019f73683.",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-18T22:09:31.000+02:00",
+  "commitAt": "2023-08-18T22:09:31.000+02:00",
   "chatgpt_sharing": {
     "title": "New chat",
     "url": "https://chat.openai.com/share/dce1497a-acdd-421f-8e1c-1737975b2f60",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/634398c191ee7b3dd16a0f4a8bfc4b4c9bcee5e5",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Revert \"Update video link and project description https://chat.openai.com/share/dce1497a-acdd-421f-8e1c-1737975b2f60\"\n\nThis reverts commit 62f0d11004b160af9d837dcc0de5c5c019f73683."
+    },
+    "status": 200,
+    "dateOfConversation": "August 18, 2023",
+    "dateOfAccess": "2023-08-31 06:32:30.903566",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 994,
+    "tokensOfAnswers": 743,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "634398c191ee7b3dd16a0f4a8bfc4b4c9bcee5e5_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

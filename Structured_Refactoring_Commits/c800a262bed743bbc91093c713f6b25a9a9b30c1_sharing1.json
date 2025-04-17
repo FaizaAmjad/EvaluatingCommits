@@ -1,15 +1,28 @@
 {
   "sha": "c800a262bed743bbc91093c713f6b25a9a9b30c1",
   "url": "https://github.com/tisztamo/Junior/commit/c800a262bed743bbc91093c713f6b25a9a9b30c1",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Rename deleteBranches to clearBranches and move files https://chat.openai.com/share/b4bbf814-c356-4c69-8c79-2b699c0f640e",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-09T20:50:54.000+02:00",
+  "commitAt": "2023-08-09T20:50:54.000+02:00",
   "chatgpt_sharing": {
     "title": "Rename & Move Files",
     "url": "https://chat.openai.com/share/b4bbf814-c356-4c69-8c79-2b699c0f640e",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/c800a262bed743bbc91093c713f6b25a9a9b30c1",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Rename deleteBranches to clearBranches and move files https://chat.openai.com/share/b4bbf814-c356-4c69-8c79-2b699c0f640e"
+    },
+    "status": 200,
+    "dateOfConversation": "August 9, 2023",
+    "dateOfAccess": "2023-08-31 06:30:20.746422",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 1144,
+    "tokensOfAnswers": 230,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "c800a262bed743bbc91093c713f6b25a9a9b30c1_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

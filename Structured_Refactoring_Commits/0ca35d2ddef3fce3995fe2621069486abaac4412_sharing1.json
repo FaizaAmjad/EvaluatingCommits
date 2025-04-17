@@ -1,15 +1,28 @@
 {
   "sha": "0ca35d2ddef3fce3995fe2621069486abaac4412",
   "url": "https://github.com/tisztamo/Junior/commit/0ca35d2ddef3fce3995fe2621069486abaac4412",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Change layout for commit and rollback buttons https://chat.openai.com/share/d984b3ea-3345-4eb6-a465-aebb681d0ee0",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-05T11:01:27.000+02:00",
+  "commitAt": "2023-08-05T11:01:27.000+02:00",
   "chatgpt_sharing": {
     "title": "Change Layout Commit Buttons",
     "url": "https://chat.openai.com/share/d984b3ea-3345-4eb6-a465-aebb681d0ee0",
-    "number_of_prompts": 4,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/0ca35d2ddef3fce3995fe2621069486abaac4412",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Change layout for commit and rollback buttons https://chat.openai.com/share/d984b3ea-3345-4eb6-a465-aebb681d0ee0"
+    },
+    "status": 200,
+    "dateOfConversation": "August 5, 2023",
+    "dateOfAccess": "2023-08-31 06:30:47.736753",
+    "numberOfPrompts": 4,
+    "tokensOfPrompts": 705,
+    "tokensOfAnswers": 2499,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "0ca35d2ddef3fce3995fe2621069486abaac4412_s1_p1",
@@ -60,5 +73,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

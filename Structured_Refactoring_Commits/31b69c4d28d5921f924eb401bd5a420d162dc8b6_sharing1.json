@@ -1,15 +1,28 @@
 {
   "sha": "31b69c4d28d5921f924eb401bd5a420d162dc8b6",
   "url": "https://github.com/tisztamo/Junior/commit/31b69c4d28d5921f924eb401bd5a420d162dc8b6",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Make TaskList dark theme-aware and update colors https://chat.openai.com/share/e3f26b34-9a02-4eb9-a543-579c0102c692",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-04T06:18:38.000+02:00",
+  "commitAt": "2023-08-04T06:18:38.000+02:00",
   "chatgpt_sharing": {
     "title": "Make TaskList Dark Theme",
     "url": "https://chat.openai.com/share/e3f26b34-9a02-4eb9-a543-579c0102c692",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/31b69c4d28d5921f924eb401bd5a420d162dc8b6",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Make TaskList dark theme-aware and update colors https://chat.openai.com/share/e3f26b34-9a02-4eb9-a543-579c0102c692"
+    },
+    "status": 200,
+    "dateOfConversation": "August 4, 2023",
+    "dateOfAccess": "2023-08-31 06:30:59.487981",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 1070,
+    "tokensOfAnswers": 669,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "31b69c4d28d5921f924eb401bd5a420d162dc8b6_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

@@ -1,15 +1,28 @@
 {
   "sha": "3ffcbcb54dd50f1b09acc37c8685ad6712d5b913",
   "url": "https://github.com/tisztamo/Junior/commit/3ffcbcb54dd50f1b09acc37c8685ad6712d5b913",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Improve the documentation https://chat.openai.com/share/d0275d42-1b9a-444c-ab97-4d203fd88aa1",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-22T12:06:52.000+02:00",
+  "commitAt": "2023-08-22T12:06:52.000+02:00",
   "chatgpt_sharing": {
     "title": "Improve Documentation: Remove Twitter",
     "url": "https://chat.openai.com/share/d0275d42-1b9a-444c-ab97-4d203fd88aa1",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/3ffcbcb54dd50f1b09acc37c8685ad6712d5b913",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Improve the documentation https://chat.openai.com/share/d0275d42-1b9a-444c-ab97-4d203fd88aa1"
+    },
+    "status": 200,
+    "dateOfConversation": "August 22, 2023",
+    "dateOfAccess": "2023-08-31 06:24:34.058184",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 787,
+    "tokensOfAnswers": 356,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "3ffcbcb54dd50f1b09acc37c8685ad6712d5b913_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

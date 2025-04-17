@@ -1,15 +1,28 @@
 {
   "sha": "8e20ea93e93c3a03b88dc0e07a8b654bb9a5a155",
   "url": "https://github.com/tisztamo/Junior/commit/8e20ea93e93c3a03b88dc0e07a8b654bb9a5a155",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Rename ConfirmationDialog, update properties, and style with Tailwind https://chat.openai.com/share/36689b19-dfb7-46fd-9e55-a9c8f81d60d3",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-09T12:18:27.000+02:00",
+  "commitAt": "2023-08-09T12:18:27.000+02:00",
   "chatgpt_sharing": {
     "title": "New chat",
     "url": "https://chat.openai.com/share/36689b19-dfb7-46fd-9e55-a9c8f81d60d3",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/8e20ea93e93c3a03b88dc0e07a8b654bb9a5a155",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Rename ConfirmationDialog, update properties, and style with Tailwind https://chat.openai.com/share/36689b19-dfb7-46fd-9e55-a9c8f81d60d3"
+    },
+    "status": 200,
+    "dateOfConversation": "August 9, 2023",
+    "dateOfAccess": "2023-08-31 06:30:27.463848",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 911,
+    "tokensOfAnswers": 1711,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "8e20ea93e93c3a03b88dc0e07a8b654bb9a5a155_s1_p1",
@@ -36,5 +49,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

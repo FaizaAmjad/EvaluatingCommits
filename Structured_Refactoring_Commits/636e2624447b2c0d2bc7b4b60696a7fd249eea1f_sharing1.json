@@ -1,15 +1,28 @@
 {
   "sha": "636e2624447b2c0d2bc7b4b60696a7fd249eea1f",
   "url": "https://github.com/tisztamo/Junior/commit/636e2624447b2c0d2bc7b4b60696a7fd249eea1f",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor ExecuteButton by moving handleExecuteChange https://chat.openai.com/share/c4282ca4-503d-4e77-baf5-0ea442b68077",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-10T12:55:19.000+02:00",
+  "commitAt": "2023-08-10T12:55:19.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor ExecuteButton: Move handleExecuteChange",
     "url": "https://chat.openai.com/share/c4282ca4-503d-4e77-baf5-0ea442b68077",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/636e2624447b2c0d2bc7b4b60696a7fd249eea1f",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor ExecuteButton by moving handleExecuteChange https://chat.openai.com/share/c4282ca4-503d-4e77-baf5-0ea442b68077"
+    },
+    "status": 200,
+    "dateOfConversation": "August 10, 2023",
+    "dateOfAccess": "2023-08-24 10:22:54.739364",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 701,
+    "tokensOfAnswers": 473,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "636e2624447b2c0d2bc7b4b60696a7fd249eea1f_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

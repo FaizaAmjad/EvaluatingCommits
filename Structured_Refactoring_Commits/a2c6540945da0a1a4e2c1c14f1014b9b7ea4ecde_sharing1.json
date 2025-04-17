@@ -1,15 +1,28 @@
 {
   "sha": "a2c6540945da0a1a4e2c1c14f1014b9b7ea4ecde",
   "url": "https://github.com/tisztamo/Junior/commit/a2c6540945da0a1a4e2c1c14f1014b9b7ea4ecde",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor code to handle OPENAI_API_KEY https://chat.openai.com/share/9d54d37b-5651-4e04-905a-47fcc93c069b",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-24T15:13:26.000+02:00",
+  "commitAt": "2023-07-24T15:13:26.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor OPENAI_API_KEY handling.",
     "url": "https://chat.openai.com/share/9d54d37b-5651-4e04-905a-47fcc93c069b",
-    "number_of_prompts": 4,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/a2c6540945da0a1a4e2c1c14f1014b9b7ea4ecde",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Refactor code to handle OPENAI_API_KEY https://chat.openai.com/share/9d54d37b-5651-4e04-905a-47fcc93c069b"
+    },
+    "status": 200,
+    "dateOfConversation": "July 24, 2023",
+    "dateOfAccess": "2023-08-31 06:31:38.275493",
+    "numberOfPrompts": 4,
+    "tokensOfPrompts": 537,
+    "tokensOfAnswers": 2242,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "a2c6540945da0a1a4e2c1c14f1014b9b7ea4ecde_s1_p1",
@@ -60,5 +73,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

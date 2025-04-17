@@ -1,15 +1,28 @@
 {
   "sha": "b07d341d598e763357a965c4c579894665855267",
   "url": "https://github.com/SupraSensum/TOP-project-etch-a-sketch/commit/b07d341d598e763357a965c4c579894665855267",
+  "author": "SupraSensum",
+  "repoName": "SupraSensum/TOP-project-etch-a-sketch",
+  "repoLanguage": "CSS",
   "message": "Improve flexBasis calculation\n- Thanks to almighty chatGPT's recommendation:\n   https://chat.openai.com/share/69616b53-6a75-478f-8985-09ea3fec73b0",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-20T19:21:15.000Z",
+  "commitAt": "2023-08-20T19:21:15.000Z",
   "chatgpt_sharing": {
     "title": "Flex Grid Width Solution",
     "url": "https://chat.openai.com/share/69616b53-6a75-478f-8985-09ea3fec73b0",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/SupraSensum/TOP-project-etch-a-sketch/commit/b07d341d598e763357a965c4c579894665855267",
+      "mentioned_property": "message",
+      "mentioned_author": "SupraSensum",
+      "mentioned_text": "Improve flexBasis calculation\n- Thanks to almighty chatGPT's recommendation:\n   https://chat.openai.com/share/69616b53-6a75-478f-8985-09ea3fec73b0"
+    },
+    "status": 200,
+    "dateOfConversation": "August 20, 2023",
+    "dateOfAccess": "2023-08-31 06:23:05.969248",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 1026,
+    "tokensOfAnswers": 280,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "b07d341d598e763357a965c4c579894665855267_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

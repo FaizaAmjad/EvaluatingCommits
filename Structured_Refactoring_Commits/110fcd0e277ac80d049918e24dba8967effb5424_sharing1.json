@@ -1,15 +1,28 @@
 {
   "sha": "110fcd0e277ac80d049918e24dba8967effb5424",
   "url": "https://github.com/tisztamo/Junior/commit/110fcd0e277ac80d049918e24dba8967effb5424",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor routes into separate files https://chat.openai.com/share/7a685f50-27b3-4d53-8713-c9afca1c4d7c",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-17T12:23:26.000+02:00",
+  "commitAt": "2023-08-17T12:23:26.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor Routes into Files",
     "url": "https://chat.openai.com/share/7a685f50-27b3-4d53-8713-c9afca1c4d7c",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/110fcd0e277ac80d049918e24dba8967effb5424",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor routes into separate files https://chat.openai.com/share/7a685f50-27b3-4d53-8713-c9afca1c4d7c"
+    },
+    "status": 200,
+    "dateOfConversation": "August 17, 2023",
+    "dateOfAccess": "2023-08-24 10:22:05.654615",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 539,
+    "tokensOfAnswers": 495,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "110fcd0e277ac80d049918e24dba8967effb5424_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

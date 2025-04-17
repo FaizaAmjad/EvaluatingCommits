@@ -1,15 +1,28 @@
 {
   "sha": "e6a01ec078e950a277e7caa21affd7c4ae23d244",
   "url": "https://github.com/jdustinwilliams/hibddbs/commit/e6a01ec078e950a277e7caa21affd7c4ae23d244",
+  "author": "dzdn",
+  "repoName": "jdustinwilliams/hibddbs",
+  "repoLanguage": "CSS",
   "message": "Make advanced search concise\n\nUsed ChatGPT for ideas: https://chat.openai.com/share/e476a2d0-5c29-4c5b-b5b4-7d977b469787",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-22T14:09:17.000-04:00",
+  "commitAt": "2023-08-22T14:09:17.000-04:00",
   "chatgpt_sharing": {
     "title": "Concise Query Building",
     "url": "https://chat.openai.com/share/e476a2d0-5c29-4c5b-b5b4-7d977b469787",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/jdustinwilliams/hibddbs/commit/e6a01ec078e950a277e7caa21affd7c4ae23d244",
+      "mentioned_property": "message",
+      "mentioned_author": "dzdn",
+      "mentioned_text": "Make advanced search concise\n\nUsed ChatGPT for ideas: https://chat.openai.com/share/e476a2d0-5c29-4c5b-b5b4-7d977b469787"
+    },
+    "status": 200,
+    "dateOfConversation": "August 22, 2023",
+    "dateOfAccess": "2023-08-31 06:23:04.806895",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 1663,
+    "tokensOfAnswers": 1067,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "e6a01ec078e950a277e7caa21affd7c4ae23d244_s1_p1",
@@ -41,5 +54,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

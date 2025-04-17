@@ -1,15 +1,28 @@
 {
   "sha": "e61a8ed6e52c9ef5b626c680de638b3a8584416b",
   "url": "https://github.com/tisztamo/Junior/commit/e61a8ed6e52c9ef5b626c680de638b3a8584416b",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor build.js into separate files and pass MarkdownIt as an argument https://chat.openai.com/share/76854e8a-0834-48be-8245-47551bd08c2e",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-23T20:46:40.000+02:00",
+  "commitAt": "2023-07-23T20:46:40.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor JS Build Script",
     "url": "https://chat.openai.com/share/76854e8a-0834-48be-8245-47551bd08c2e",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/e61a8ed6e52c9ef5b626c680de638b3a8584416b",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Refactor build.js into separate files and pass MarkdownIt as an argument https://chat.openai.com/share/76854e8a-0834-48be-8245-47551bd08c2e"
+    },
+    "status": 200,
+    "dateOfConversation": "July 23, 2023",
+    "dateOfAccess": "2023-08-31 06:32:40.935806",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 545,
+    "tokensOfAnswers": 865,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "e61a8ed6e52c9ef5b626c680de638b3a8584416b_s1_p1",
@@ -36,5 +49,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

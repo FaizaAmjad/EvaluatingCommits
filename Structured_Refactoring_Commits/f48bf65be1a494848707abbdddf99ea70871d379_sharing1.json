@@ -1,15 +1,28 @@
 {
   "sha": "f48bf65be1a494848707abbdddf99ea70871d379",
   "url": "https://github.com/tisztamo/Junior/commit/f48bf65be1a494848707abbdddf99ea70871d379",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor frontend service directories https://chat.openai.com/share/8459cbae-aa57-4fc7-8f9e-8cc21fade775",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-24T10:51:55.000+02:00",
+  "commitAt": "2023-08-24T10:51:55.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor Frontend Service Paths",
     "url": "https://chat.openai.com/share/8459cbae-aa57-4fc7-8f9e-8cc21fade775",
-    "number_of_prompts": 4,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/f48bf65be1a494848707abbdddf99ea70871d379",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor frontend service directories https://chat.openai.com/share/8459cbae-aa57-4fc7-8f9e-8cc21fade775"
+    },
+    "status": 200,
+    "dateOfConversation": "August 24, 2023",
+    "dateOfAccess": "2023-08-31 06:24:04.850210",
+    "numberOfPrompts": 4,
+    "tokensOfPrompts": 990,
+    "tokensOfAnswers": 2442,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "f48bf65be1a494848707abbdddf99ea70871d379_s1_p1",
@@ -54,5 +67,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

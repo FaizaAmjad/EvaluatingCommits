@@ -1,15 +1,28 @@
 {
   "sha": "78b0b353646463d5e1e252fcbdcb53a182b974cb",
   "url": "https://github.com/tisztamo/Junior/commit/78b0b353646463d5e1e252fcbdcb53a182b974cb",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Improve documentation and roadmap https://chat.openai.com/share/dd3d1664-619a-4288-b858-288001d9d72e",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-02T11:51:16.000+02:00",
+  "commitAt": "2023-08-02T11:51:16.000+02:00",
   "chatgpt_sharing": {
     "title": "Update Junior Roadmap.",
     "url": "https://chat.openai.com/share/dd3d1664-619a-4288-b858-288001d9d72e",
-    "number_of_prompts": 4,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/78b0b353646463d5e1e252fcbdcb53a182b974cb",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Improve documentation and roadmap https://chat.openai.com/share/dd3d1664-619a-4288-b858-288001d9d72e"
+    },
+    "status": 200,
+    "dateOfConversation": "August 2, 2023",
+    "dateOfAccess": "2023-08-31 06:27:27.145929",
+    "numberOfPrompts": 4,
+    "tokensOfPrompts": 1147,
+    "tokensOfAnswers": 945,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "78b0b353646463d5e1e252fcbdcb53a182b974cb_s1_p1",
@@ -60,5 +73,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

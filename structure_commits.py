@@ -23,16 +23,34 @@ for commit in data:
         structured_commit = {
             "sha": sha,
             "url": commit.get("URL"),
+            "author": commit.get("Author"),
+            "repoName": commit.get("RepoName"),
+            "repoLanguage": commit.get("RepoLanguage"),
             "message": commit.get("Message"),
-            "code": {
-                "before": "",  # PLACEHOLDER- ADJUST LATER
-                "after": ""    # PLACEHOLDER- ADJUST LATER
-            },
+            "authorAt": commit.get("AuthorAt"),
+            "commitAt": commit.get("CommitAt"),
+                     
             "chatgpt_sharing": {
                 "title": sharing.get("Title"),
                 "url": sharing.get("URL"),
-                "number_of_prompts": sharing.get("NumberOfPrompts"),
+                "mention": {
+                    "mentioned_url": sharing.get("Mention", {}).get("MentionedURL"),
+                    "mentioned_property": sharing.get("Mention", {}).get("MentionedProperty"),
+                    "mentioned_author": sharing.get("Mention", {}).get("MentionedAuthor"),
+                    "mentioned_text": sharing.get("Mention", {}).get("MentionedText"),
+                },
+                "status": sharing.get("Status"),
+                "dateOfConversation": sharing.get("DateOfConversation"),
+                "dateOfAccess": sharing.get("DateOfAccess"),
+                "numberOfPrompts": sharing.get("NumberOfPrompts"),
+                "tokensOfPrompts": sharing.get("TokensOfPrompts"),
+                "tokensOfAnswers": sharing.get("TokensOfAnswers"),
+                "model": sharing.get("Model"),
                 "conversations": []
+            },
+             "code": {
+                "before": "",  # PLACEHOLDER- ADJUST LATER
+                "after": ""    # PLACEHOLDER- ADJUST LATER
             }
         }
 

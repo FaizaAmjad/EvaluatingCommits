@@ -1,15 +1,28 @@
 {
   "sha": "ecf317837969cf830c58f3ec340cf45ec494787c",
   "url": "https://github.com/eodinzov94/IsraFit/commit/ecf317837969cf830c58f3ec340cf45ec494787c",
+  "author": "RonSCE",
+  "repoName": "eodinzov94/IsraFit",
+  "repoLanguage": "HTML",
   "message": "Missed some changes in routes.ts\nFinished goalsetpage design, tested formulas with chatgpt\nhttps://chat.openai.com/share/23441e4c-ea18-4d08-864a-2ed19a3f8a32\nadded steppper between goal set and calorie counter\nTODO: Connect with DB, to take values, and re-test page, add calories to DB",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-14T18:52:11.000+03:00",
+  "commitAt": "2023-07-14T18:52:11.000+03:00",
   "chatgpt_sharing": {
     "title": "Weight Goal Calculator.",
     "url": "https://chat.openai.com/share/23441e4c-ea18-4d08-864a-2ed19a3f8a32",
-    "number_of_prompts": 14,
+    "mention": {
+      "mentioned_url": "https://github.com/eodinzov94/IsraFit/commit/ecf317837969cf830c58f3ec340cf45ec494787c",
+      "mentioned_property": "message",
+      "mentioned_author": "RonSCE",
+      "mentioned_text": "Missed some changes in routes.ts\nFinished goalsetpage design, tested formulas with chatgpt\nhttps://chat.openai.com/share/23441e4c-ea18-4d08-864a-2ed19a3f8a32\nadded steppper between goal set and calorie counter\nTODO: Connect with DB, to take values, and re-test page, add calories to DB"
+    },
+    "status": 200,
+    "dateOfConversation": "July 14, 2023",
+    "dateOfAccess": "2023-08-31 06:32:55.113628",
+    "numberOfPrompts": 14,
+    "tokensOfPrompts": 2452,
+    "tokensOfAnswers": 4396,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "ecf317837969cf830c58f3ec340cf45ec494787c_s1_p1",
@@ -96,5 +109,9 @@
         "list_of_code": []
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

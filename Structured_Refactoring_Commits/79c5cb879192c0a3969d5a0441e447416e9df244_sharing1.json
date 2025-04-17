@@ -1,15 +1,28 @@
 {
   "sha": "79c5cb879192c0a3969d5a0441e447416e9df244",
   "url": "https://github.com/tisztamo/Junior/commit/79c5cb879192c0a3969d5a0441e447416e9df244",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Fix theme switcher to reflect changes on screen https://chat.openai.com/share/4569660b-6acf-4590-affc-ac4f80907b00",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-03T16:28:42.000+02:00",
+  "commitAt": "2023-08-03T16:28:42.000+02:00",
   "chatgpt_sharing": {
     "title": "Fix theme switcher styling.",
     "url": "https://chat.openai.com/share/4569660b-6acf-4590-affc-ac4f80907b00",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/79c5cb879192c0a3969d5a0441e447416e9df244",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Fix theme switcher to reflect changes on screen https://chat.openai.com/share/4569660b-6acf-4590-affc-ac4f80907b00"
+    },
+    "status": 200,
+    "dateOfConversation": "August 3, 2023",
+    "dateOfAccess": "2023-08-31 06:31:03.212554",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 577,
+    "tokensOfAnswers": 567,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "79c5cb879192c0a3969d5a0441e447416e9df244_s1_p1",
@@ -30,5 +43,9 @@
         "list_of_code": []
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

@@ -1,15 +1,28 @@
 {
   "sha": "add1a7171cc0b5688d2038f98990027afc3a954a",
   "url": "https://github.com/tisztamo/Junior/commit/add1a7171cc0b5688d2038f98990027afc3a954a",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor https://chat.openai.com/share/dbd163f7-aa90-4351-a9a7-a2deb906120e",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-06T22:16:56.000+02:00",
+  "commitAt": "2023-07-06T22:16:56.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor Frontend Files",
     "url": "https://chat.openai.com/share/dbd163f7-aa90-4351-a9a7-a2deb906120e",
-    "number_of_prompts": 8,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/add1a7171cc0b5688d2038f98990027afc3a954a",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Refactor https://chat.openai.com/share/dbd163f7-aa90-4351-a9a7-a2deb906120e"
+    },
+    "status": 200,
+    "dateOfConversation": "July 6, 2023",
+    "dateOfAccess": "2023-08-31 06:29:20.412391",
+    "numberOfPrompts": 8,
+    "tokensOfPrompts": 1133,
+    "tokensOfAnswers": 4115,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "add1a7171cc0b5688d2038f98990027afc3a954a_s1_p1",
@@ -113,5 +126,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

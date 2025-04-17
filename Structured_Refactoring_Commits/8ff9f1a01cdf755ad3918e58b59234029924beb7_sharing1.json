@@ -1,15 +1,28 @@
 {
   "sha": "8ff9f1a01cdf755ad3918e58b59234029924beb7",
   "url": "https://github.com/tisztamo/Junior/commit/8ff9f1a01cdf755ad3918e58b59234029924beb7",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Improve web interface documentation https://chat.openai.com/share/110c1fd3-eca3-48fa-80eb-e851973efb0d",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-29T05:57:02.000+02:00",
+  "commitAt": "2023-07-29T05:57:02.000+02:00",
   "chatgpt_sharing": {
     "title": "Web Interface Documentation Update",
     "url": "https://chat.openai.com/share/110c1fd3-eca3-48fa-80eb-e851973efb0d",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/8ff9f1a01cdf755ad3918e58b59234029924beb7",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Improve web interface documentation https://chat.openai.com/share/110c1fd3-eca3-48fa-80eb-e851973efb0d"
+    },
+    "status": 200,
+    "dateOfConversation": "July 29, 2023",
+    "dateOfAccess": "2023-08-31 06:27:35.817991",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 697,
+    "tokensOfAnswers": 567,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "8ff9f1a01cdf755ad3918e58b59234029924beb7_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

@@ -1,15 +1,28 @@
 {
   "sha": "b6596bcf8234c8f18fe7c2f2ec42c6b80ce34337",
   "url": "https://github.com/tisztamo/Junior/commit/b6596bcf8234c8f18fe7c2f2ec42c6b80ce34337",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Improve documentation and link jobs https://chat.openai.com/share/a310a288-8036-48e7-8463-e3ba6b256d72",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-29T15:43:14.000+02:00",
+  "commitAt": "2023-08-29T15:43:14.000+02:00",
   "chatgpt_sharing": {
     "title": "Improve Docs & Link Jobs",
     "url": "https://chat.openai.com/share/a310a288-8036-48e7-8463-e3ba6b256d72",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/b6596bcf8234c8f18fe7c2f2ec42c6b80ce34337",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Improve documentation and link jobs https://chat.openai.com/share/a310a288-8036-48e7-8463-e3ba6b256d72"
+    },
+    "status": 200,
+    "dateOfConversation": "August 29, 2023",
+    "dateOfAccess": "2023-08-31 06:23:40.243176",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 527,
+    "tokensOfAnswers": 401,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "b6596bcf8234c8f18fe7c2f2ec42c6b80ce34337_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

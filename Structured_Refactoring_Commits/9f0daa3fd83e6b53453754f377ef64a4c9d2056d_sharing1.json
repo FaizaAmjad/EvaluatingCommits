@@ -1,15 +1,28 @@
 {
   "sha": "9f0daa3fd83e6b53453754f377ef64a4c9d2056d",
   "url": "https://github.com/tisztamo/Junior/commit/9f0daa3fd83e6b53453754f377ef64a4c9d2056d",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Implementing code validation and refactoring https://chat.openai.com/share/7aa06d1a-ed8f-4f24-99df-0f57d409150e",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-26T13:09:27.000+02:00",
+  "commitAt": "2023-07-26T13:09:27.000+02:00",
   "chatgpt_sharing": {
     "title": "Code Validation & Refactoring",
     "url": "https://chat.openai.com/share/7aa06d1a-ed8f-4f24-99df-0f57d409150e",
-    "number_of_prompts": 4,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/9f0daa3fd83e6b53453754f377ef64a4c9d2056d",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Implementing code validation and refactoring https://chat.openai.com/share/7aa06d1a-ed8f-4f24-99df-0f57d409150e"
+    },
+    "status": 200,
+    "dateOfConversation": "July 26, 2023",
+    "dateOfAccess": "2023-08-31 06:27:51.028091",
+    "numberOfPrompts": 4,
+    "tokensOfPrompts": 620,
+    "tokensOfAnswers": 1581,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "9f0daa3fd83e6b53453754f377ef64a4c9d2056d_s1_p1",
@@ -60,5 +73,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

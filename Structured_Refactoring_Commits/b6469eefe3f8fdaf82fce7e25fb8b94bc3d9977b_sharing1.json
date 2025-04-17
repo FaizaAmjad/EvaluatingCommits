@@ -1,15 +1,28 @@
 {
   "sha": "b6469eefe3f8fdaf82fce7e25fb8b94bc3d9977b",
   "url": "https://github.com/tisztamo/Junior/commit/b6469eefe3f8fdaf82fce7e25fb8b94bc3d9977b",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Improve the prompt descriptor documentation https://chat.openai.com/share/20b55139-fa54-46a7-8b47-b997273d61e5",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-07T15:08:34.000+02:00",
+  "commitAt": "2023-08-07T15:08:34.000+02:00",
   "chatgpt_sharing": {
     "title": "New chat",
     "url": "https://chat.openai.com/share/20b55139-fa54-46a7-8b47-b997273d61e5",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/b6469eefe3f8fdaf82fce7e25fb8b94bc3d9977b",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Improve the prompt descriptor documentation https://chat.openai.com/share/20b55139-fa54-46a7-8b47-b997273d61e5"
+    },
+    "status": 200,
+    "dateOfConversation": "August 7, 2023",
+    "dateOfAccess": "2023-08-24 10:23:33.198607",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 673,
+    "tokensOfAnswers": 457,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "b6469eefe3f8fdaf82fce7e25fb8b94bc3d9977b_s1_p1",
@@ -34,5 +47,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

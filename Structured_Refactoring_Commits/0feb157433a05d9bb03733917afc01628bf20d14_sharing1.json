@@ -1,15 +1,28 @@
 {
   "sha": "0feb157433a05d9bb03733917afc01628bf20d14",
   "url": "https://github.com/tisztamo/Junior/commit/0feb157433a05d9bb03733917afc01628bf20d14",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Move handleExecuteChange to service dir, update imports https://chat.openai.com/share/679fd505-93a8-46b6-8f34-39e32149e6ba",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-10T13:52:50.000+02:00",
+  "commitAt": "2023-08-10T13:52:50.000+02:00",
   "chatgpt_sharing": {
     "title": "Move & Update Code",
     "url": "https://chat.openai.com/share/679fd505-93a8-46b6-8f34-39e32149e6ba",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/0feb157433a05d9bb03733917afc01628bf20d14",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Move handleExecuteChange to service dir, update imports https://chat.openai.com/share/679fd505-93a8-46b6-8f34-39e32149e6ba"
+    },
+    "status": 200,
+    "dateOfConversation": "August 10, 2023",
+    "dateOfAccess": "2023-08-31 06:30:11.266401",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 755,
+    "tokensOfAnswers": 606,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "0feb157433a05d9bb03733917afc01628bf20d14_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

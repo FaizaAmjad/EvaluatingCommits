@@ -1,15 +1,28 @@
 {
   "sha": "a28c2cb4ee54fba2e6e6d4301847987f9f0be77b",
   "url": "https://github.com/tisztamo/Junior/commit/a28c2cb4ee54fba2e6e6d4301847987f9f0be77b",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor server.js, add port configuration https://chat.openai.com/share/770878d5-ad8f-4015-bfe3-c8c756dfec3c",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-18T21:40:30.000+02:00",
+  "commitAt": "2023-07-18T21:40:30.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor server.js, change port",
     "url": "https://chat.openai.com/share/770878d5-ad8f-4015-bfe3-c8c756dfec3c",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/a28c2cb4ee54fba2e6e6d4301847987f9f0be77b",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Refactor server.js, add port configuration https://chat.openai.com/share/770878d5-ad8f-4015-bfe3-c8c756dfec3c"
+    },
+    "status": 200,
+    "dateOfConversation": "July 18, 2023",
+    "dateOfAccess": "2023-08-31 06:28:45.914399",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 845,
+    "tokensOfAnswers": 505,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "a28c2cb4ee54fba2e6e6d4301847987f9f0be77b_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

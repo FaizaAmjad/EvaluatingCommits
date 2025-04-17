@@ -1,15 +1,28 @@
 {
   "sha": "23023fd771e49598688dd47defd446ac90dcc053",
   "url": "https://github.com/tisztamo/Junior/commit/23023fd771e49598688dd47defd446ac90dcc053",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Fix task update issue with new save/load prompt descriptors https://chat.openai.com/share/e5efc695-316d-4c1a-b5a1-57c01c5e85d3",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-26T22:22:21.000+02:00",
+  "commitAt": "2023-07-26T22:22:21.000+02:00",
   "chatgpt_sharing": {
     "title": "Fix Task Update Issue",
     "url": "https://chat.openai.com/share/e5efc695-316d-4c1a-b5a1-57c01c5e85d3",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/23023fd771e49598688dd47defd446ac90dcc053",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Fix task update issue with new save/load prompt descriptors https://chat.openai.com/share/e5efc695-316d-4c1a-b5a1-57c01c5e85d3"
+    },
+    "status": 200,
+    "dateOfConversation": "July 26, 2023",
+    "dateOfAccess": "2023-08-31 06:31:27.001941",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 512,
+    "tokensOfAnswers": 343,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "23023fd771e49598688dd47defd446ac90dcc053_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

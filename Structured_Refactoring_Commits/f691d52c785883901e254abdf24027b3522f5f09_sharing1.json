@@ -1,15 +1,28 @@
 {
   "sha": "f691d52c785883901e254abdf24027b3522f5f09",
   "url": "https://github.com/tisztamo/Junior/commit/f691d52c785883901e254abdf24027b3522f5f09",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Update default baseUrl https://chat.openai.com/share/dabca582-6dee-4491-8aa1-7c2f788a5678",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-16T09:44:37.000+02:00",
+  "commitAt": "2023-08-16T09:44:37.000+02:00",
   "chatgpt_sharing": {
     "title": "Update Default baseUrl",
     "url": "https://chat.openai.com/share/dabca582-6dee-4491-8aa1-7c2f788a5678",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/f691d52c785883901e254abdf24027b3522f5f09",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update default baseUrl https://chat.openai.com/share/dabca582-6dee-4491-8aa1-7c2f788a5678"
+    },
+    "status": 200,
+    "dateOfConversation": "August 16, 2023",
+    "dateOfAccess": "2023-08-24 10:22:23.884570",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 359,
+    "tokensOfAnswers": 168,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "f691d52c785883901e254abdf24027b3522f5f09_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

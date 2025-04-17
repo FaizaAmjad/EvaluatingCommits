@@ -1,15 +1,28 @@
 {
   "sha": "6ed655be1ac60eacb05b3c947cb89c49a13026e9",
   "url": "https://github.com/tisztamo/Junior/commit/6ed655be1ac60eacb05b3c947cb89c49a13026e9",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor git routes and handlers https://chat.openai.com/share/d13410a4-4e0d-470c-93f7-d69aacde16cf",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-17T11:52:35.000+02:00",
+  "commitAt": "2023-08-17T11:52:35.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor Git Routes",
     "url": "https://chat.openai.com/share/d13410a4-4e0d-470c-93f7-d69aacde16cf",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/6ed655be1ac60eacb05b3c947cb89c49a13026e9",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor git routes and handlers https://chat.openai.com/share/d13410a4-4e0d-470c-93f7-d69aacde16cf"
+    },
+    "status": 200,
+    "dateOfConversation": "August 17, 2023",
+    "dateOfAccess": "2023-08-24 10:22:14.738549",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 845,
+    "tokensOfAnswers": 751,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "6ed655be1ac60eacb05b3c947cb89c49a13026e9_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

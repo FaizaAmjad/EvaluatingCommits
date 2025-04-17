@@ -1,15 +1,28 @@
 {
   "sha": "76a0f7723c8145f08fb30132450c73e06c33fd32",
   "url": "https://github.com/tisztamo/Junior/commit/76a0f7723c8145f08fb30132450c73e06c33fd32",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Rename prompt files https://chat.openai.com/share/033abd83-9664-4aeb-a348-02b800c80053",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-05T20:48:19.000+02:00",
+  "commitAt": "2023-07-05T20:48:19.000+02:00",
   "chatgpt_sharing": {
     "title": "Rename & Update Dependencies",
     "url": "https://chat.openai.com/share/033abd83-9664-4aeb-a348-02b800c80053",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/76a0f7723c8145f08fb30132450c73e06c33fd32",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Rename prompt files https://chat.openai.com/share/033abd83-9664-4aeb-a348-02b800c80053"
+    },
+    "status": 200,
+    "dateOfConversation": "July 5, 2023",
+    "dateOfAccess": "2023-08-31 06:29:32.064169",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 758,
+    "tokensOfAnswers": 529,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "76a0f7723c8145f08fb30132450c73e06c33fd32_s1_p1",
@@ -36,5 +49,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

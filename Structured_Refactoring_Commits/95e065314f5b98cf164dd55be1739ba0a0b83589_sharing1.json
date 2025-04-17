@@ -1,15 +1,28 @@
 {
   "sha": "95e065314f5b98cf164dd55be1739ba0a0b83589",
   "url": "https://github.com/tisztamo/Junior/commit/95e065314f5b98cf164dd55be1739ba0a0b83589",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Implement commit message input update feature https://chat.openai.com/share/745b062b-d78a-43c1-a088-2dc4479a8971",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-02T21:16:52.000+02:00",
+  "commitAt": "2023-08-02T21:16:52.000+02:00",
   "chatgpt_sharing": {
     "title": "Update commit message input.",
     "url": "https://chat.openai.com/share/745b062b-d78a-43c1-a088-2dc4479a8971",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/95e065314f5b98cf164dd55be1739ba0a0b83589",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Implement commit message input update feature https://chat.openai.com/share/745b062b-d78a-43c1-a088-2dc4479a8971"
+    },
+    "status": 200,
+    "dateOfConversation": "August 2, 2023",
+    "dateOfAccess": "2023-08-31 06:27:22.462085",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 376,
+    "tokensOfAnswers": 433,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "95e065314f5b98cf164dd55be1739ba0a0b83589_s1_p1",
@@ -36,5 +49,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

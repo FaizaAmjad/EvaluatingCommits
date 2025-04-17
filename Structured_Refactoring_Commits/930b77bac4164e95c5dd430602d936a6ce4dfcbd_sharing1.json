@@ -1,15 +1,28 @@
 {
   "sha": "930b77bac4164e95c5dd430602d936a6ce4dfcbd",
   "url": "https://github.com/tisztamo/Junior/commit/930b77bac4164e95c5dd430602d936a6ce4dfcbd",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Switch the two buttons in ChangeFinalization https://chat.openai.com/share/c80b6c0f-6175-455e-a8c1-464960bd9f8b",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-05T11:32:21.000+02:00",
+  "commitAt": "2023-08-05T11:32:21.000+02:00",
   "chatgpt_sharing": {
     "title": "Switch buttons in ChangeFinalization",
     "url": "https://chat.openai.com/share/c80b6c0f-6175-455e-a8c1-464960bd9f8b",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/930b77bac4164e95c5dd430602d936a6ce4dfcbd",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Switch the two buttons in ChangeFinalization https://chat.openai.com/share/c80b6c0f-6175-455e-a8c1-464960bd9f8b"
+    },
+    "status": 200,
+    "dateOfConversation": "August 5, 2023",
+    "dateOfAccess": "2023-08-24 10:23:48.138713",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 320,
+    "tokensOfAnswers": 170,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "930b77bac4164e95c5dd430602d936a6ce4dfcbd_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

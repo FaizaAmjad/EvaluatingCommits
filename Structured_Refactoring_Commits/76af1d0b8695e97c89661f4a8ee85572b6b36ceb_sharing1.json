@@ -1,15 +1,28 @@
 {
   "sha": "76af1d0b8695e97c89661f4a8ee85572b6b36ceb",
   "url": "https://github.com/tisztamo/Junior/commit/76af1d0b8695e97c89661f4a8ee85572b6b36ceb",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Refactor code, rename function, remove import https://chat.openai.com/share/d4c57328-b99d-4c8e-83c4-197b92d350f0",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-03T06:30:08.000+02:00",
+  "commitAt": "2023-08-03T06:30:08.000+02:00",
   "chatgpt_sharing": {
     "title": "Refactor code, rename function.",
     "url": "https://chat.openai.com/share/d4c57328-b99d-4c8e-83c4-197b92d350f0",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/76af1d0b8695e97c89661f4a8ee85572b6b36ceb",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor code, rename function, remove import https://chat.openai.com/share/d4c57328-b99d-4c8e-83c4-197b92d350f0"
+    },
+    "status": 200,
+    "dateOfConversation": "August 3, 2023",
+    "dateOfAccess": "2023-08-31 06:27:18.817261",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 506,
+    "tokensOfAnswers": 409,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "76af1d0b8695e97c89661f4a8ee85572b6b36ceb_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

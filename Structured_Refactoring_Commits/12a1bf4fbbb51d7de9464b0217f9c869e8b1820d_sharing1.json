@@ -1,15 +1,28 @@
 {
   "sha": "12a1bf4fbbb51d7de9464b0217f9c869e8b1820d",
   "url": "https://github.com/tisztamo/Junior/commit/12a1bf4fbbb51d7de9464b0217f9c869e8b1820d",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Live update of change.sh output to the terminal https://chat.openai.com/share/2e5d1311-af04-4932-b93e-e58e58d541f0",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-18T09:26:04.000+02:00",
+  "commitAt": "2023-07-18T09:26:04.000+02:00",
   "chatgpt_sharing": {
     "title": "Improved Code Execution",
     "url": "https://chat.openai.com/share/2e5d1311-af04-4932-b93e-e58e58d541f0",
-    "number_of_prompts": 5,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/12a1bf4fbbb51d7de9464b0217f9c869e8b1820d",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Live update of change.sh output to the terminal https://chat.openai.com/share/2e5d1311-af04-4932-b93e-e58e58d541f0"
+    },
+    "status": 200,
+    "dateOfConversation": "July 18, 2023",
+    "dateOfAccess": "2023-08-31 06:32:25.070402",
+    "numberOfPrompts": 5,
+    "tokensOfPrompts": 805,
+    "tokensOfAnswers": 3312,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "12a1bf4fbbb51d7de9464b0217f9c869e8b1820d_s1_p1",
@@ -72,5 +85,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

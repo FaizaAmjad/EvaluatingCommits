@@ -1,15 +1,28 @@
 {
   "sha": "821d0f262c97aebb445721f078b617a08f55c30d",
   "url": "https://github.com/tisztamo/Junior/commit/821d0f262c97aebb445721f078b617a08f55c30d",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Center the content on desktop and change max-width https://chat.openai.com/share/f4bf124f-3916-42a5-b937-b3e9c7563227",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-20T21:33:24.000+02:00",
+  "commitAt": "2023-07-20T21:33:24.000+02:00",
   "chatgpt_sharing": {
     "title": "Center content, change max-width",
     "url": "https://chat.openai.com/share/f4bf124f-3916-42a5-b937-b3e9c7563227",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/821d0f262c97aebb445721f078b617a08f55c30d",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Center the content on desktop and change max-width https://chat.openai.com/share/f4bf124f-3916-42a5-b937-b3e9c7563227"
+    },
+    "status": 200,
+    "dateOfConversation": "July 20, 2023",
+    "dateOfAccess": "2023-08-31 06:32:07.855520",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 714,
+    "tokensOfAnswers": 559,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "821d0f262c97aebb445721f078b617a08f55c30d_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

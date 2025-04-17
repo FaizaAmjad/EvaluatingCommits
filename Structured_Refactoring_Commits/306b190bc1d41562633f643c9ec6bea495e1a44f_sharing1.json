@@ -1,15 +1,28 @@
 {
   "sha": "306b190bc1d41562633f643c9ec6bea495e1a44f",
   "url": "https://github.com/tisztamo/Junior/commit/306b190bc1d41562633f643c9ec6bea495e1a44f",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Update doc/ references to docs/ https://chat.openai.com/share/01163fbd-cb50-491d-ae84-7ee81ad9c83a",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-06T10:45:41.000+02:00",
+  "commitAt": "2023-08-06T10:45:41.000+02:00",
   "chatgpt_sharing": {
     "title": "Update doc/ references!",
     "url": "https://chat.openai.com/share/01163fbd-cb50-491d-ae84-7ee81ad9c83a",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/306b190bc1d41562633f643c9ec6bea495e1a44f",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update doc/ references to docs/ https://chat.openai.com/share/01163fbd-cb50-491d-ae84-7ee81ad9c83a"
+    },
+    "status": 200,
+    "dateOfConversation": "August 6, 2023",
+    "dateOfAccess": "2023-08-24 10:23:45.467338",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 985,
+    "tokensOfAnswers": 795,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "306b190bc1d41562633f643c9ec6bea495e1a44f_s1_p1",
@@ -29,5 +42,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

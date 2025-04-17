@@ -1,15 +1,28 @@
 {
   "sha": "659cd2feabe4e5651110a971ab73a14f8b180a9b",
   "url": "https://github.com/tisztamo/Junior/commit/659cd2feabe4e5651110a971ab73a14f8b180a9b",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Bind X to handleExecuteChange, update label https://chat.openai.com/share/015724cc-a808-4827-b585-fa3363796b1f",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-10T13:02:48.000+02:00",
+  "commitAt": "2023-08-10T13:02:48.000+02:00",
   "chatgpt_sharing": {
     "title": "Bind 'X' Key & Label",
     "url": "https://chat.openai.com/share/015724cc-a808-4827-b585-fa3363796b1f",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/659cd2feabe4e5651110a971ab73a14f8b180a9b",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Bind X to handleExecuteChange, update label https://chat.openai.com/share/015724cc-a808-4827-b585-fa3363796b1f"
+    },
+    "status": 200,
+    "dateOfConversation": "August 10, 2023",
+    "dateOfAccess": "2023-08-24 10:22:53.613687",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 724,
+    "tokensOfAnswers": 458,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "659cd2feabe4e5651110a971ab73a14f8b180a9b_s1_p1",
@@ -24,5 +37,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

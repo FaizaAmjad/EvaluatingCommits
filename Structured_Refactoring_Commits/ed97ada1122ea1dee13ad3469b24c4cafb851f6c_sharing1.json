@@ -1,15 +1,28 @@
 {
   "sha": "ed97ada1122ea1dee13ad3469b24c4cafb851f6c",
   "url": "https://github.com/tisztamo/Junior/commit/ed97ada1122ea1dee13ad3469b24c4cafb851f6c",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Improve Junior project's README.md https://chat.openai.com/share/524146cc-2dee-4a6b-91d9-a66597c45c1a",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-03T10:21:15.000+02:00",
+  "commitAt": "2023-08-03T10:21:15.000+02:00",
   "chatgpt_sharing": {
     "title": "Improve Junior README.",
     "url": "https://chat.openai.com/share/524146cc-2dee-4a6b-91d9-a66597c45c1a",
-    "number_of_prompts": 1,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/ed97ada1122ea1dee13ad3469b24c4cafb851f6c",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Improve Junior project's README.md https://chat.openai.com/share/524146cc-2dee-4a6b-91d9-a66597c45c1a"
+    },
+    "status": 200,
+    "dateOfConversation": "August 3, 2023",
+    "dateOfAccess": "2023-08-31 06:27:15.004587",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 978,
+    "tokensOfAnswers": 867,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "ed97ada1122ea1dee13ad3469b24c4cafb851f6c_s1_p1",
@@ -29,5 +42,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

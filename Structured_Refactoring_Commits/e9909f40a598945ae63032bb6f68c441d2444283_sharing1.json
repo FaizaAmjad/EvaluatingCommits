@@ -1,15 +1,28 @@
 {
   "sha": "e9909f40a598945ae63032bb6f68c441d2444283",
   "url": "https://github.com/tisztamo/Junior/commit/e9909f40a598945ae63032bb6f68c441d2444283",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Rename project everywhere https://chat.openai.com/share/a87f8a40-e635-4624-a563-3e00cd1c2d62",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-07-15T11:28:34.000+02:00",
+  "commitAt": "2023-07-15T11:28:34.000+02:00",
   "chatgpt_sharing": {
     "title": "Rename project to Junior.",
     "url": "https://chat.openai.com/share/a87f8a40-e635-4624-a563-3e00cd1c2d62",
-    "number_of_prompts": 3,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/e9909f40a598945ae63032bb6f68c441d2444283",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Rename project everywhere https://chat.openai.com/share/a87f8a40-e635-4624-a563-3e00cd1c2d62"
+    },
+    "status": 200,
+    "dateOfConversation": "July 15, 2023",
+    "dateOfAccess": "2023-08-31 06:29:04.440449",
+    "numberOfPrompts": 3,
+    "tokensOfPrompts": 1582,
+    "tokensOfAnswers": 1198,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "e9909f40a598945ae63032bb6f68c441d2444283_s1_p1",
@@ -48,5 +61,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }

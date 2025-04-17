@@ -1,15 +1,28 @@
 {
   "sha": "3fd1dfbc8cf43ec94f582d521060f13c464a87b2",
   "url": "https://github.com/tisztamo/Junior/commit/3fd1dfbc8cf43ec94f582d521060f13c464a87b2",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
   "message": "Implement signal to save and clear change https://chat.openai.com/share/1969f31f-e3e5-48f0-bab5-0fc5099acd7e",
-  "code": {
-    "before": "",
-    "after": ""
-  },
+  "authorAt": "2023-08-02T21:29:24.000+02:00",
+  "commitAt": "2023-08-02T21:29:24.000+02:00",
   "chatgpt_sharing": {
     "title": "Save & Clear Change.",
     "url": "https://chat.openai.com/share/1969f31f-e3e5-48f0-bab5-0fc5099acd7e",
-    "number_of_prompts": 2,
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/3fd1dfbc8cf43ec94f582d521060f13c464a87b2",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Implement signal to save and clear change https://chat.openai.com/share/1969f31f-e3e5-48f0-bab5-0fc5099acd7e"
+    },
+    "status": 200,
+    "dateOfConversation": "August 2, 2023",
+    "dateOfAccess": "2023-08-31 06:31:05.556096",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 926,
+    "tokensOfAnswers": 1319,
+    "model": "Default",
     "conversations": [
       {
         "prompt_id": "3fd1dfbc8cf43ec94f582d521060f13c464a87b2_s1_p1",
@@ -36,5 +49,9 @@
         ]
       }
     ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
   }
 }
