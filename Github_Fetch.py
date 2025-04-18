@@ -3,12 +3,16 @@ import json
 import os
 from dotenv import load_dotenv
 import re
+import warnings
+import datetime
 
 #######################################################################
 # Global Variables
 
 VERBOSE = True
 AmountOfCommitsToProcess = 1
+SAVE_TO_DISK = False
+
 
 #######################################################################
 # Functions
@@ -17,6 +21,7 @@ def FormatUrl(url: str) -> str:
     """
     Converts a GitHub web commit URL to its corresponding API URL.
     If the input is already an API URL, it returns it unchanged.
+    If if fails, it returns an exception
     """
     # If already API format, return as-is
     if url.startswith("https://api.github.com/repos/"):
@@ -31,7 +36,51 @@ def FormatUrl(url: str) -> str:
         return f"https://api.github.com/repos/{owner}/{repo}/commits/{sha}"
     else:
         print("Invalid GitHub commit URL format")
-        return None
+        raise ValueError
+
+def reconstruct_from_unified_diff(diff_str: str) -> (str | str):
+    """
+    Given a unified diff string, returns a tuple (old_file, new_file),
+    reconstructing each version line-by-line.
+    """
+    old_lines = []
+    new_lines = []
+    total_adds = 0
+    total_dels = 0
+    hunk_header = re.compile(r'^@@ -\d+(?:,\d+)? \+\d+(?:,\d+)? @@')
+
+    for raw_line in diff_str.splitlines(keepends=True):
+        # Skip file header lines
+        if raw_line.startswith('--- ') or raw_line.startswith('+++ '):
+            continue
+        # Skip hunk headers
+        if hunk_header.match(raw_line):
+            continue
+
+        marker = raw_line[:1]
+        content = raw_line[1:]
+
+        if marker == ' ':        # context line
+            old_lines.append(content)
+            new_lines.append(content)
+        elif marker == '-':      # removed from old
+            old_lines.append(content)
+            total_dels += 1
+        elif marker == '+':      # added to new
+            new_lines.append(content)
+            total_adds += 1
+        elif raw_line.startswith('\\'):  
+            # “\ No newline at end of file” — strip trailing newline
+            if old_lines:
+                old_lines[-1] = old_lines[-1].rstrip('\n')
+            if new_lines:
+                new_lines[-1] = new_lines[-1].rstrip('\n')
+        else:
+            # any other lines (shouldn’t happen in a well-formed diff)
+            continue
+
+    return ''.join(old_lines), ''.join(new_lines), total_dels, total_adds
+
 
 #######################################################################
 # Main 
@@ -64,12 +113,12 @@ def main():
 
     if token:
         headers = {
+            "Accept": "application/vnd.github+json",
             "Authorization": f"token {token}"
         }
     else:
         headers = {}
-        print("WARNING, authentication not working. Ensure .env file is used with a 'GITHUB_TOKEN'")
-
+        warnings.warn("WARNING, authentication token not found. Ensure .env file is used with an authentication token named 'GITHUB_TOKEN'")
 
     i = 0
     # loop each commit in the Json 
@@ -82,17 +131,9 @@ def main():
         URL = commit['URL']
         SHA = commit['Sha']
         message = commit['Message']
-        #print(str(i) + ": " + message)
 
-        newURL = FormatUrl(url=URL)
-
-        if newURL is None:
-            print(f"Failed to format URL: {URL}")
-            if SHA not in bad_urls:
-                bad_urls[SHA] = URL
-                with open(bad_urls_file, "w") as f:
-                    json.dump(bad_urls, f, indent=2)
-        else:
+        try:
+            newURL = FormatUrl(url=URL)
             try:
                 response = requests.get(url=newURL, headers=headers)
                 if response.status_code == 200:
@@ -104,33 +145,28 @@ def main():
 
             if data:
                 files = data.get("files", [])
-                listOfMentionedFiles = []
-
-
+                j = 0
                 for file in files:
-                    '''
-                    --- File ---
-                    "sha": str (unique)
-                    "filename": str
-                    "status": str
-                    "additions": int
-                    "deletions": int
-                    "changes": int (sum of add and del)
-                    "blob_url": str
-                    "raw_url": str
-                    "contents_url": str
-                    '''
-                    fileName = file['filename']
+                    #here is where important functionality goes, right now there is debug code in here
+                    testFile = "api/whisper.js"
+                    j += 1
+                    if file['filename'] == testFile:
+                        print(file)
+                        old, new, total_dels, total_adds = reconstruct_from_unified_diff(file['patch'])
+                        oldLen = str(len(old))
+                        newLen = str(len(new))
+                        print(f"Old File ({oldLen} chars):\n", old)
+                        print(f"\n\nNew File ({newLen} chars) (total deletions/additions: {total_dels}/{total_adds}):\n", new)
 
-                    #TODO: somehow compare all these "file" objects with the converstations in the "commit" objects.
-                    # Use a similarity comparison.
-
-                    #TODO: potential performance issues with brute force, maybe find a way to see if there are any files that are not related to the conversations
-                    
-                    if VERBOSE:
-                        print(f"File: {fileName}")
-                        print(f"Changes: +{file['additions']} -{file['deletions']}")
-
+                print(f"number of files in commit with SHA \"{SHA}\" :" + str(j))
+        
+        except ValueError as error:
+            print(f"Failed to format URL: {URL}")
+            print(f"error: {error}")
+            if SHA not in bad_urls:
+                bad_urls[SHA] = URL
+                with open(bad_urls_file, "w") as f:
+                    json.dump(bad_urls, f, indent=2)
             
         i += 1
 
