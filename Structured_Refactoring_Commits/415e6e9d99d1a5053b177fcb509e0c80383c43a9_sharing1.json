@@ -1,0 +1,45 @@
+{
+  "sha": "415e6e9d99d1a5053b177fcb509e0c80383c43a9",
+  "url": "https://github.com/tisztamo/Junior/commit/415e6e9d99d1a5053b177fcb509e0c80383c43a9",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Move and rename monitorChangeSignal.js https://chat.openai.com/share/f6b29974-d288-48f3-832c-ef85ffe88d3a",
+  "authorAt": "2023-08-03T06:18:24.000+02:00",
+  "commitAt": "2023-08-03T06:18:24.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Move monitorChangeSignal.js (4 words)",
+    "url": "https://chat.openai.com/share/f6b29974-d288-48f3-832c-ef85ffe88d3a",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/415e6e9d99d1a5053b177fcb509e0c80383c43a9",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Move and rename monitorChangeSignal.js https://chat.openai.com/share/f6b29974-d288-48f3-832c-ef85ffe88d3a"
+    },
+    "status": 200,
+    "dateOfConversation": "August 3, 2023",
+    "dateOfAccess": "2023-08-31 06:27:20.204727",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 509,
+    "tokensOfAnswers": 461,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "415e6e9d99d1a5053b177fcb509e0c80383c43a9_s1_p1",
+        "prompt": "# Working set\n\nsrc/frontend/components/CommitMessageInput.jsx:\n```\nimport { onCleanup } from 'solid-js';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChangeSignal from '../service/monitorChangeSignal';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n  monitorChangeSignal();\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" className=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" value={commitMessage()} onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\n\n```\n\nsrc/frontend/service/monitorChangeSignal.js:\n```\nimport { createEffect } from 'solid-js';\nimport { change } from '../stores/change';\nimport { setCommitMessage } from '../stores/commitMessage';\n\nlet monitoring = false;\n\nconst monitorChangeSignal = () => {\n  if (monitoring) return;\n\n  monitoring = true;\n\n  createEffect(() => {\n    const newChangeContent = change();\n    const goalLineMatch = newChangeContent.match(/goal=\"(.+?)\"/);\n    \n    if (goalLineMatch) {\n      const goalValue = goalLineMatch[1];\n      \n      setCommitMessage(goalValue);\n    }\n  });\n};\n\nexport default monitorChangeSignal;\n\n```\n\n\n# Task\n\nMove the following files to the specified target dirs!\n\nFind out the best target dir if it is not specified!\n\nYou need to follow dependencies to maintain coherence.\n\nBefore executing, write a concise plan! The plan should show:\n - How do you avoid breaking other parts of the code.\n - If you had to choose, your way of thinking.\n\nMove monitorChangeSignal.js to src/frontend/stores/ and rename it to monitorChange.js\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Move and rename monitorChangeSignal.js\"\necho \"Plan:\"\necho \"1. Move monitorChangeSignal.js from src/frontend/service/ to src/frontend/stores/ and rename it to monitorChange.js.\"\necho \"2. Update the import path in CommitMessageInput.jsx to reflect the new location and name of monitorChange.js.\"\necho \"3. Ensure no other parts of the code depend on the old path of monitorChangeSignal.js.\"\n\n# Move and rename monitorChangeSignal.js to monitorChange.js\nmv src/frontend/service/monitorChangeSignal.js src/frontend/stores/monitorChange.js\n\n# Update CommitMessageInput.jsx with the new import path for monitorChange.js\ncat << 'EOF' > src/frontend/components/CommitMessageInput.jsx\nimport { onCleanup } from 'solid-js';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChangeSignal from '../stores/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n  monitorChangeSignal();\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" className=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" value={commitMessage()} onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\nEOF\n\n# Update monitorChange.js with the new content\ncat << 'EOF' > src/frontend/stores/monitorChange.js\nimport { createEffect } from 'solid-js';\nimport { change } from '../stores/change';\nimport { setCommitMessage } from '../stores/commitMessage';\n\nlet monitoring = false;\n\nconst monitorChangeSignal = () => {\n  if (monitoring) return;\n\n  monitoring = true;\n\n  createEffect(() => {\n    const newChangeContent = change();\n    const goalLineMatch = newChangeContent.match(/goal=\"(.+?)\"/);\n    \n    if (goalLineMatch) {\n      const goalValue = goalLineMatch[1];\n      \n      setCommitMessage(goalValue);\n    }\n  });\n};\n\nexport default monitorChangeSignal;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

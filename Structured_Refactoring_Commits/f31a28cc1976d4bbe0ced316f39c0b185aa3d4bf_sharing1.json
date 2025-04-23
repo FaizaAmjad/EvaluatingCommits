@@ -1,0 +1,45 @@
+{
+  "sha": "f31a28cc1976d4bbe0ced316f39c0b185aa3d4bf",
+  "url": "https://github.com/tisztamo/Junior/commit/f31a28cc1976d4bbe0ced316f39c0b185aa3d4bf",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Install docsify-cli and reorganize documentation https://chat.openai.com/share/937d8682-300c-4e1f-84e5-607425cc4b21",
+  "authorAt": "2023-08-06T09:58:22.000+02:00",
+  "commitAt": "2023-08-06T09:58:22.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Organize docsify installation.",
+    "url": "https://chat.openai.com/share/937d8682-300c-4e1f-84e5-607425cc4b21",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/f31a28cc1976d4bbe0ced316f39c0b185aa3d4bf",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Install docsify-cli and reorganize documentation https://chat.openai.com/share/937d8682-300c-4e1f-84e5-607425cc4b21"
+    },
+    "status": 200,
+    "dateOfConversation": "August 6, 2023",
+    "dateOfAccess": "2023-08-24 10:23:46.672278",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 937,
+    "tokensOfAnswers": 754,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "f31a28cc1976d4bbe0ced316f39c0b185aa3d4bf_s1_p1",
+        "prompt": "# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .github/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 .vscode/...\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 change.sh\n\u251c\u2500\u2500 doc/...\n\u251c\u2500\u2500 integrations/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 src/...\n\n```\n```\n./doc/\n\u251c\u2500\u2500 assets/...\n\u251c\u2500\u2500 example.html\n\u251c\u2500\u2500 example.md\n\u251c\u2500\u2500 index.html\n\u251c\u2500\u2500 roadmap.html\n\u251c\u2500\u2500 roadmap.md\n\u251c\u2500\u2500 screenshot.png\n\u251c\u2500\u2500 web.html\n\u251c\u2500\u2500 web.md\n\n```\npackage.json:\n```\n{\n  \"name\": \"@aijunior/dev\",\n  \"version\": \"0.1.1\",\n  \"description\": \"Your AI Contributor which codes itself\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"junior\": \"src/main.js\",\n    \"junior-web\": \"src/web.js\",\n    \"junior-init\": \"src/init.js\"\n  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"build:doc\": \"node ./src/doc/buildDoc.js\"\n  },\n  \"keywords\": [\n    \"cli\",\n    \"uppercase\"\n  ],\n  \"author\": \"\",\n  \"license\": \"GPL\",\n  \"dependencies\": {\n    \"@types/js-yaml\": \"^4.0.5\",\n    \"autoprefixer\": \"^10.4.14\",\n    \"chatgpt\": \"^5.2.4\",\n    \"cors\": \"^2.8.5\",\n    \"ejs\": \"^3.1.9\",\n    \"express\": \"^4.18.2\",\n    \"highlight.js\": \"^11.8.0\",\n    \"js-yaml\": \"^4.1.0\",\n    \"markdown-it\": \"^13.0.1\",\n    \"marked\": \"^5.1.0\",\n    \"postcss\": \"^8.4.26\",\n    \"postcss-nested\": \"^6.0.1\",\n    \"simple-git\": \"^3.19.1\",\n    \"solid-js\": \"^1.7.7\",\n    \"tailwindcss\": \"^3.3.3\",\n    \"vite\": \"^4.3.9\",\n    \"vite-plugin-solid\": \"^2.7.0\",\n    \"ws\": \"^8.13.0\"\n  },\n  \"directories\": {\n    \"doc\": \"doc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/tisztamo/Junior.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/Junior/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/Junior#readme\"\n}\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\n- Install docsify-cli locally\n- npx run docsify init ./docs\n- Move md and png files and assets dir from doc to docs\n- Delete doc/\n- Delete the docs build command from package.json\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Install docsify-cli and reorganize documentation\"\necho \"Plan:\"\necho \"1. Install docsify-cli locally using npm\"\necho \"2. Run docsify init in the new ./docs directory\"\necho \"3. Move markdown and png files and assets directory from doc to docs\"\necho \"4. Remove the doc/ directory\"\necho \"5. Remove the docs build command from package.json\"\n\n# Step 1: Install docsify-cli locally using npm\nnpm install docsify-cli --save-dev\n\n# Step 2: Run docsify init in the new ./docs directory\nnpx docsify init ./docs\n\n# Step 3: Move markdown and png files and assets directory from doc to docs\nmv ./doc/*.md ./docs\nmv ./doc/*.png ./docs\nmv ./doc/assets ./docs\n\n# Step 4: Remove the doc/ directory\nrm -rf ./doc\n\n# Step 5: Remove the docs build command from package.json\n# Instead of using sed or similar tools, we write the whole package.json with the required changes\ncat > package.json <<- 'EOF'\n{\n  \"name\": \"@aijunior/dev\",\n  \"version\": \"0.1.1\",\n  \"description\": \"Your AI Contributor which codes itself\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"junior\": \"src/main.js\",\n    \"junior-web\": \"src/web.js\",\n    \"junior-init\": \"src/init.js\"\n  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\"\n  },\n  \"keywords\": [\n    \"cli\",\n    \"uppercase\"\n  ],\n  \"author\": \"\",\n  \"license\": \"GPL\",\n  \"dependencies\": {\n    \"@types/js-yaml\": \"^4.0.5\",\n    \"autoprefixer\": \"^10.4.14\",\n    \"chatgpt\": \"^5.2.4\",\n    \"cors\": \"^2.8.5\",\n    \"ejs\": \"^3.1.9\",\n    \"express\": \"^4.18.2\",\n    \"highlight.js\": \"^11.8.0\",\n    \"js-yaml\": \"^4.1.0\",\n    \"markdown-it\": \"^13.0.1\",\n    \"marked\": \"^5.1.0\",\n    \"postcss\": \"^8.4.26\",\n    \"postcss-nested\": \"^6.0.1\",\n    \"simple-git\": \"^3.19.1\",\n    \"solid-js\": \"^1.7.7\",\n    \"tailwindcss\": \"^3.3.3\",\n    \"vite\": \"^4.3.9\",\n    \"vite-plugin-solid\": \"^2.7.0\",\n    \"ws\": \"^8.13.0\",\n    \"docsify-cli\": \"^4.4.7\"\n  },\n  \"directories\": {\n    \"doc\": \"docs\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/tisztamo/Junior.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/Junior/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/Junior#readme\"\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

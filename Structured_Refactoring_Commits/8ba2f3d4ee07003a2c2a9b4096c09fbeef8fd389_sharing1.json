@@ -1,0 +1,45 @@
+{
+  "sha": "8ba2f3d4ee07003a2c2a9b4096c09fbeef8fd389",
+  "url": "https://github.com/tisztamo/Junior/commit/8ba2f3d4ee07003a2c2a9b4096c09fbeef8fd389",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Update roadmap.md with completed task https://chat.openai.com/share/0bc5c1d5-f736-444a-a1c6-c8560afff010",
+  "authorAt": "2023-08-07T15:56:34.000+02:00",
+  "commitAt": "2023-08-07T15:56:34.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Update Roadmap with Completed Task",
+    "url": "https://chat.openai.com/share/0bc5c1d5-f736-444a-a1c6-c8560afff010",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/8ba2f3d4ee07003a2c2a9b4096c09fbeef8fd389",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update roadmap.md with completed task https://chat.openai.com/share/0bc5c1d5-f736-444a-a1c6-c8560afff010"
+    },
+    "status": 200,
+    "dateOfConversation": "August 7, 2023",
+    "dateOfAccess": "2023-08-24 10:23:27.205819",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 318,
+    "tokensOfAnswers": 224,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "8ba2f3d4ee07003a2c2a9b4096c09fbeef8fd389_s1_p1",
+        "prompt": "# Working set\n\ndocs/roadmap.md:\n```\n# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Auto-attention\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in an (embedded) vector database\n\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually\n\n```\n\n\n# Task\n\nImprove the documentation!\n\n&#34;Write docs to allow using Junior for developing external projects&#34; is also done.\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Update roadmap.md with completed task\"\necho \"Plan:\"\necho \"1. Modify docs/roadmap.md file to mark the 'Write docs to allow using Junior for developing external projects' task as completed.\"\n\ncat > docs/roadmap.md << 'EOF'\n# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Auto-attention\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in an (embedded) vector database\n\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

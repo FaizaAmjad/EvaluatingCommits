@@ -1,0 +1,45 @@
+{
+  "sha": "067b5b9c809949b66068f92ad779972fd731b66e",
+  "url": "https://github.com/tisztamo/Junior/commit/067b5b9c809949b66068f92ad779972fd731b66e",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Enhance confirmation dialog visibility and add fade effect https://chat.openai.com/share/6a8cd576-48bd-4ec8-8a1c-8803fe963b28",
+  "authorAt": "2023-08-09T10:15:41.000+02:00",
+  "commitAt": "2023-08-09T10:15:41.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Enhance Confirmation Dialog",
+    "url": "https://chat.openai.com/share/6a8cd576-48bd-4ec8-8a1c-8803fe963b28",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/067b5b9c809949b66068f92ad779972fd731b66e",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Enhance confirmation dialog visibility and add fade effect https://chat.openai.com/share/6a8cd576-48bd-4ec8-8a1c-8803fe963b28"
+    },
+    "status": 200,
+    "dateOfConversation": "August 9, 2023",
+    "dateOfAccess": "2023-08-31 06:30:31.679409",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 660,
+    "tokensOfAnswers": 355,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "067b5b9c809949b66068f92ad779972fd731b66e_s1_p1",
+        "prompt": "# Working set\n\nsrc/frontend/components/RollbackButton.jsx:\n```\nimport { createSignal } from \"solid-js\";\nimport { resetGit } from '../service/resetGit';\nimport ConfirmationDialog from './ConfirmationDialog';\n\nconst RollbackButton = () => {\n  const [showConfirmation, setShowConfirmation] = createSignal(false);\n\n  const handleReset = async () => {\n    const response = await resetGit();\n\n    console.log(response.message);\n  };\n\n  const handleConfirm = () => {\n    setShowConfirmation(false);\n    handleReset();\n  };\n\n  const handleRollbackClick = () => {\n    setShowConfirmation(true);\n  };\n\n  return (\n    <>\n      <button className=\"w-full px-4 py-4 bg-red-700 text-white rounded\" onClick={handleRollbackClick}>Roll Back</button>\n      <ConfirmationDialog visible={showConfirmation()} onConfirm={handleConfirm} onCancel={() => setShowConfirmation(false)} />\n    </>\n  );\n};\n\nexport default RollbackButton;\n\n```\n\nsrc/frontend/components/ConfirmationDialog.jsx:\n```\nimport { createEffect, createSignal } from \"solid-js\";\n\nconst ConfirmationDialog = (props) => {\n  const [visible, setVisible] = createSignal(false);\n\n  createEffect(() => {\n    setVisible(props.visible);\n  });\n\n  return (\n    <div className={visible() ? \"block\" : \"hidden\"}>\n      <div className=\"fixed inset-0 flex items-center justify-center z-50\">\n        <div className=\"bg-white p-8 rounded shadow-lg\">\n          <p>Are you sure you want to roll back? This will reset the repo to the last commit and delete new files.</p>\n          <button className=\"bg-red-700 text-white px-4 py-2 rounded mr-4\" onClick={props.onConfirm}>Confirm</button>\n          <button className=\"bg-gray-400 text-white px-4 py-2 rounded\" onClick={props.onCancel}>Cancel</button>\n        </div>\n      </div>\n    </div>\n  );\n};\n\nexport default ConfirmationDialog;\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\n- Make the confirmation question a bit more visible and separated from the rest of the text. - Fade the ui outside of the dialog while it is opened\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Enhance confirmation dialog visibility and add fade effect\"\necho \"Plan:\"\necho \"1. Modify the ConfirmationDialog component to separate the confirmation question from the rest of the text.\"\necho \"2. Add a fade effect to the UI outside of the dialog while it is opened.\"\n\necho \"Modifying ConfirmationDialog component for better visibility\"\ncat > src/frontend/components/ConfirmationDialog.jsx << 'EOF'\nimport { createEffect, createSignal } from \"solid-js\";\n\nconst ConfirmationDialog = (props) => {\n  const [visible, setVisible] = createSignal(false);\n\n  createEffect(() => {\n    setVisible(props.visible);\n  });\n\n  return (\n    <div className={visible() ? \"block\" : \"hidden\"}>\n      <div className=\"fixed inset-0 flex items-center justify-center z-50\">\n        <div className=\"bg-white p-8 rounded shadow-lg\">\n          <h3 className=\"text-xl mb-4\">Are you sure you want to roll back?</h3>\n          <p>This will reset the repo to the last commit and delete new files.</p>\n          <button className=\"bg-red-700 text-white px-4 py-2 rounded mr-4\" onClick={props.onConfirm}>Confirm</button>\n          <button className=\"bg-gray-400 text-white px-4 py-2 rounded\" onClick={props.onCancel}>Cancel</button>\n        </div>\n      </div>\n      <div className={visible() ? \"fixed inset-0 bg-black opacity-50\" : \"hidden\"}></div>\n    </div>\n  );\n};\n\nexport default ConfirmationDialog;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

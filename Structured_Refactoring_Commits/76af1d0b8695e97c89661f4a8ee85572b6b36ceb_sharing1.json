@@ -1,0 +1,45 @@
+{
+  "sha": "76af1d0b8695e97c89661f4a8ee85572b6b36ceb",
+  "url": "https://github.com/tisztamo/Junior/commit/76af1d0b8695e97c89661f4a8ee85572b6b36ceb",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Refactor code, rename function, remove import https://chat.openai.com/share/d4c57328-b99d-4c8e-83c4-197b92d350f0",
+  "authorAt": "2023-08-03T06:30:08.000+02:00",
+  "commitAt": "2023-08-03T06:30:08.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Refactor code, rename function.",
+    "url": "https://chat.openai.com/share/d4c57328-b99d-4c8e-83c4-197b92d350f0",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/76af1d0b8695e97c89661f4a8ee85572b6b36ceb",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor code, rename function, remove import https://chat.openai.com/share/d4c57328-b99d-4c8e-83c4-197b92d350f0"
+    },
+    "status": 200,
+    "dateOfConversation": "August 3, 2023",
+    "dateOfAccess": "2023-08-31 06:27:18.817261",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 506,
+    "tokensOfAnswers": 409,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "76af1d0b8695e97c89661f4a8ee85572b6b36ceb_s1_p1",
+        "prompt": "# Working set\n\nsrc/frontend/components/CommitMessageInput.jsx:\n```\nimport { onCleanup } from 'solid-js';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChangeSignal from '../stores/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n  monitorChangeSignal();\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" className=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" value={commitMessage()} onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\n\n```\n\nsrc/frontend/stores/monitorChange.js:\n```\nimport { createEffect } from 'solid-js';\nimport { change } from '../stores/change';\nimport { setCommitMessage } from '../stores/commitMessage';\n\nlet monitoring = false;\n\nconst monitorChangeSignal = () => {\n  if (monitoring) return;\n\n  monitoring = true;\n\n  createEffect(() => {\n    const newChangeContent = change();\n    const goalLineMatch = newChangeContent.match(/goal=\"(.+?)\"/);\n    \n    if (goalLineMatch) {\n      const goalValue = goalLineMatch[1];\n      \n      setCommitMessage(goalValue);\n    }\n  });\n};\n\nexport default monitorChangeSignal;\n\n```\n\n\n# Task\n\nRefactor!\n\nRename monitorChangeSignal to monitorChange and add a short descriptive comment about the function to the very beginning of the file Remove onCleanup import from CommitMessageInput\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Refactor code, rename function, remove import\"\necho \"Plan:\"\necho \"1. Rename monitorChangeSignal to monitorChange and add a comment in src/frontend/stores/monitorChange.js\"\necho \"2. Update the function name in src/frontend/components/CommitMessageInput.jsx and remove unnecessary import\"\necho \"3. Save changes to the corresponding files\"\n\n# Step 1\ncat > src/frontend/stores/monitorChange.js << 'EOF'\nimport { createEffect } from 'solid-js';\nimport { change } from '../stores/change';\nimport { setCommitMessage } from '../stores/commitMessage';\n\n// The monitorChange function starts monitoring the change store,\n// and if a goal is found, it sets the commit message accordingly.\nlet monitoring = false;\n\nconst monitorChange = () => {\n  if (monitoring) return;\n\n  monitoring = true;\n\n  createEffect(() => {\n    const newChangeContent = change();\n    const goalLineMatch = newChangeContent.match(/goal=\"(.+?)\"/);\n    \n    if (goalLineMatch) {\n      const goalValue = goalLineMatch[1];\n      \n      setCommitMessage(goalValue);\n    }\n  });\n};\n\nexport default monitorChange;\nEOF\n\n# Step 2\ncat > src/frontend/components/CommitMessageInput.jsx << 'EOF'\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChange from '../stores/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n  monitorChange();\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" className=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" value={commitMessage()} onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}
