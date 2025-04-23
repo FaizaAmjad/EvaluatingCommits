@@ -146,17 +146,64 @@ def main():
             if data:
                 files = data.get("files", [])
                 j = 0
+                code_diffs = []
+
+                # List of path patterns to exclude
+                excluded_dirs = [
+                    "node_modules/", "venv/", "env/", "site-packages/", "__pycache__/",
+                    "lib/", "target/", "build/", "vendor/bundle/", ".bundle/", "gems/",
+                    "vendor/", ".cargo/", "go/pkg/", "go/bin/", "go/pkg/mod/",
+                    "packages/", "bin/", "obj/", ".nuget/", "_build/", "deps/",
+                    ".stack-work/", "dist-newstyle/", ".build/", ".deno/", "Package.resolved"
+                ]
+
+                def is_excluded_path(path):
+                    return any(part in path for part in excluded_dirs)
+
                 for file in files:
-                    #here is where important functionality goes, right now there is debug code in here
-                    testFile = "api/whisper.js"
                     j += 1
-                    if file['filename'] == testFile:
-                        print(file)
-                        old, new, total_dels, total_adds = reconstruct_from_unified_diff(file['patch'])
-                        oldLen = str(len(old))
-                        newLen = str(len(new))
-                        print(f"Old File ({oldLen} chars):\n", old)
-                        print(f"\n\nNew File ({newLen} chars) (total deletions/additions: {total_dels}/{total_adds}):\n", new)
+                    filename = file["filename"]
+                    
+                    if is_excluded_path(filename):
+                        if VERBOSE:
+                            print(f"Skipping excluded path: {filename}")
+                        continue
+
+                    if "patch" not in file:
+                        continue  # skip binary or unchanged files
+
+                    old, new, total_dels, total_adds = reconstruct_from_unified_diff(file['patch'])
+
+                    code_entry = {
+                        "filename": file["filename"],
+                        "before": old,
+                        "after": new,
+                        "total_deletions": total_dels,
+                        "total_additions": total_adds
+                    }
+
+                    code_diffs.append(code_entry)
+
+                # Path to the existing structured commit file
+                json_path = os.path.join("Structured_Refactoring_Commits", f"{SHA}.json")
+
+                if os.path.exists(json_path):
+                    with open(json_path, "r", encoding="utf-8") as f:
+                        structured_data = json.load(f)
+                else:
+                    structured_data = {
+                        "sha": SHA,
+                        "url": URL
+                    }
+
+                # Update or create the "code" field as a list
+                structured_data["code"] = code_diffs
+
+                with open(json_path, "w", encoding="utf-8") as f:
+                    json.dump(structured_data, f, indent=2)
+
+                if VERBOSE:
+                    print(f"Updated structured commit at: {json_path} with {len(code_diffs)} file(s)")
 
                 print(f"number of files in commit with SHA \"{SHA}\" :" + str(j))
         
