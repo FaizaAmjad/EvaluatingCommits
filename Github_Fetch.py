@@ -123,8 +123,8 @@ def main():
     i = 0
     # loop each commit in the Json 
     for commit in filteredJson:
-        if i >= AmountOfCommitsToProcess:
-            break
+        #if i >= AmountOfCommitsToProcess:
+         #   break
 
         if VERBOSE:
             print("Processing file: " + str(i))
