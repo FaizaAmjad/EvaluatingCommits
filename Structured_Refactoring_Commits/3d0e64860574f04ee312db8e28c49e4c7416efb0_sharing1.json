@@ -1,0 +1,45 @@
+{
+  "sha": "3d0e64860574f04ee312db8e28c49e4c7416efb0",
+  "url": "https://github.com/tisztamo/Junior/commit/3d0e64860574f04ee312db8e28c49e4c7416efb0",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Update 'message' field to 'output' https://chat.openai.com/share/51f3cc36-f90c-4efd-b422-879fb42f650a",
+  "authorAt": "2023-07-24T12:14:03.000+02:00",
+  "commitAt": "2023-07-24T12:14:03.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Update 'message' to 'output'",
+    "url": "https://chat.openai.com/share/51f3cc36-f90c-4efd-b422-879fb42f650a",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/3d0e64860574f04ee312db8e28c49e4c7416efb0",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Update 'message' field to 'output' https://chat.openai.com/share/51f3cc36-f90c-4efd-b422-879fb42f650a"
+    },
+    "status": 200,
+    "dateOfConversation": "July 24, 2023",
+    "dateOfAccess": "2023-08-31 06:28:07.597084",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 321,
+    "tokensOfAnswers": 195,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "3d0e64860574f04ee312db8e28c49e4c7416efb0_s1_p1",
+        "prompt": "# Working set\n\nsrc/frontend/components/ExecuteButton.jsx:\n```\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../stores/executionResult';\n\nconst ExecuteButton = () => {\n  const handleExecuteChange = async () => {\n    const change = await navigator.clipboard.readText();\n    const response = await executeChange(change);\n    setExecutionResult(response.message);\n    console.log(response.message);\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-orange-300 text-white rounded\" onClick={handleExecuteChange}>Paste & Execute Change</button>\n  );\n};\n\nexport default ExecuteButton;\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n- Every js file should only export a single function!\n- Use ES6 imports!\n\nRequirements:\n\nThe field to use is called output, not message\n\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files using 'EOF' to prevent substitution.\nOS: OSX\nInstalled tools: npm, jq\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Update 'message' field to 'output'\"\necho \"Plan:\"\necho \"1. Replace 'message' with 'output' in ExecuteButton.jsx\"\n\ncat > src/frontend/components/ExecuteButton.jsx << 'EOF'\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../stores/executionResult';\n\nconst ExecuteButton = () => {\n  const handleExecuteChange = async () => {\n    const change = await navigator.clipboard.readText();\n    const response = await executeChange(change);\n    setExecutionResult(response.output);\n    console.log(response.output);\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-orange-300 text-white rounded\" onClick={handleExecuteChange}>Paste & Execute Change</button>\n  );\n};\n\nexport default ExecuteButton;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

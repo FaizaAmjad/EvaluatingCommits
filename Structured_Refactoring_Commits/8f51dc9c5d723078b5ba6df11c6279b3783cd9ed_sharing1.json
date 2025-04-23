@@ -1,0 +1,57 @@
+{
+  "sha": "8f51dc9c5d723078b5ba6df11c6279b3783cd9ed",
+  "url": "https://github.com/tisztamo/Junior/commit/8f51dc9c5d723078b5ba6df11c6279b3783cd9ed",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Refactor https://chat.openai.com/share/19ad33f8-c595-4fd7-8ddf-272e56e1337d",
+  "authorAt": "2023-07-15T19:53:07.000+02:00",
+  "commitAt": "2023-07-15T19:53:07.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Refactor code, split file.",
+    "url": "https://chat.openai.com/share/19ad33f8-c595-4fd7-8ddf-272e56e1337d",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/8f51dc9c5d723078b5ba6df11c6279b3783cd9ed",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Refactor https://chat.openai.com/share/19ad33f8-c595-4fd7-8ddf-272e56e1337d"
+    },
+    "status": 200,
+    "dateOfConversation": "July 15, 2023",
+    "dateOfAccess": "2023-08-31 06:29:03.194621",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 485,
+    "tokensOfAnswers": 676,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "8f51dc9c5d723078b5ba6df11c6279b3783cd9ed_s1_p1",
+        "prompt": "# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 .vscode/...\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 babel.config.js\n\u251c\u2500\u2500 change.sh\n\u251c\u2500\u2500 dist/...\n\u251c\u2500\u2500 doc/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 secret.sh\n\u251c\u2500\u2500 src/...\n\u251c\u2500\u2500 tmp/...\n\n```\nsrc/backend/listTasks.js:\n```\nimport fs from 'fs';\nimport path from 'path';\n\nimport { fileURLToPath } from 'url';\nimport { dirname } from 'path';\n\nconst __filename = fileURLToPath(import.meta.url);\nconst __dirname = dirname(__filename);\n\nfunction readDirRecursively(dir) {\n    const files = [];\n\n    fs.readdirSync(dir).forEach(file => {\n        const filePath = path.join(dir, file);\n\n        if (fs.statSync(filePath).isDirectory()) {\n            files.push(...readDirRecursively(filePath));\n        } else {\n            files.push(filePath);\n        }\n    });\n\n    return files;\n}\n\nexport const listTasks = () => {\n    const tasksDir = path.join(__dirname, '../../prompt/task');\n    return readDirRecursively(tasksDir).map(file => path.relative(tasksDir, file));\n};\n\n```\n\n\n# Task\n\n## Refactor by split\n\nA file is too big. We need to split it into parts.\nIdentify the possible parts and refactor the code in separate files!\n\nCreate backend/fileutils/readDirRecursively.js!\n\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files without substitution.\nAssume OSX.\nnpm and jq are installed.\nDo NOT write any text outside the script (the plan goes into it)!\n\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\n# Goal: [Task description, max 7 words]\n# Plan:\n# 1. [...]\n\n[Commands solving the task]\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\n# Goal: Split a file into parts to enhance manageability\n# Plan:\n# 1. Identify the reusable functions in the original file.\n# 2. Create a new file for the reusable function.\n# 3. Write the function in the new file.\n# 4. Import the function in the original file and use it.\n\ncat > ./src/backend/fileutils/readDirRecursively.js << 'EOF'\nimport fs from 'fs';\nimport path from 'path';\n\nexport const readDirRecursively = (dir) => {\n    const files = [];\n\n    fs.readdirSync(dir).forEach(file => {\n        const filePath = path.join(dir, file);\n\n        if (fs.statSync(filePath).isDirectory()) {\n            files.push(...readDirRecursively(filePath));\n        } else {\n            files.push(filePath);\n        }\n    });\n\n    return files;\n};\nEOF\n\ncat > ./src/backend/listTasks.js << 'EOF'\nimport path from 'path';\n\nimport { fileURLToPath } from 'url';\nimport { dirname } from 'path';\n\nimport { readDirRecursively } from './fileutils/readDirRecursively.js';\n\nconst __filename = fileURLToPath(import.meta.url);\nconst __dirname = dirname(__filename);\n\nexport const listTasks = () => {\n    const tasksDir = path.join(__dirname, '../../prompt/task');\n    return readDirRecursively(tasksDir).map(file => path.relative(tasksDir, file));\n};\nEOF\n\necho \"Code has been refactored successfully.\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "8f51dc9c5d723078b5ba6df11c6279b3783cd9ed_s1_p2",
+        "prompt": "\n./change.sh: line 9: ./src/backend/fileutils/readDirRecursively.js: No such file or directory",
+        "answer": "I apologize for the oversight. We need to ensure that the directory exists before attempting to create a file in it. Here's the corrected script:[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\n# Goal: Split a file into parts to enhance manageability\n# Plan:\n# 1. Identify the reusable functions in the original file.\n# 2. Create the necessary directory for the new file.\n# 3. Create a new file for the reusable function.\n# 4. Write the function in the new file.\n# 5. Import the function in the original file and use it.\n\n# Create necessary directory if it doesn't exist\nmkdir -p ./src/backend/fileutils\n\ncat > ./src/backend/fileutils/readDirRecursively.js << 'EOF'\nimport fs from 'fs';\nimport path from 'path';\n\nexport const readDirRecursively = (dir) => {\n    const files = [];\n\n    fs.readdirSync(dir).forEach(file => {\n        const filePath = path.join(dir, file);\n\n        if (fs.statSync(filePath).isDirectory()) {\n            files.push(...readDirRecursively(filePath));\n        } else {\n            files.push(filePath);\n        }\n    });\n\n    return files;\n};\nEOF\n\ncat > ./src/backend/listTasks.js << 'EOF'\nimport path from 'path';\n\nimport { fileURLToPath } from 'url';\nimport { dirname } from 'path';\n\nimport { readDirRecursively } from './fileutils/readDirRecursively.js';\n\nconst __filename = fileURLToPath(import.meta.url);\nconst __dirname = dirname(__filename);\n\nexport const listTasks = () => {\n    const tasksDir = path.join(__dirname, '../../prompt/task');\n    return readDirRecursively(tasksDir).map(file => path.relative(tasksDir, file));\n};\nEOF\n\necho \"Code has been refactored successfully.\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

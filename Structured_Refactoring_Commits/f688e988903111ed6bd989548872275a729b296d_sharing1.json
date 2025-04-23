@@ -1,0 +1,45 @@
+{
+  "sha": "f688e988903111ed6bd989548872275a729b296d",
+  "url": "https://github.com/tisztamo/Junior/commit/f688e988903111ed6bd989548872275a729b296d",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Rewrite startVite to use Vite's JS API https://chat.openai.com/share/d5fbbdaf-10e5-460f-88b2-8f095b04277f",
+  "authorAt": "2023-07-31T15:12:50.000+02:00",
+  "commitAt": "2023-07-31T15:12:50.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Rewrite startVite with Vite's JS API.",
+    "url": "https://chat.openai.com/share/d5fbbdaf-10e5-460f-88b2-8f095b04277f",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/f688e988903111ed6bd989548872275a729b296d",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Rewrite startVite to use Vite's JS API https://chat.openai.com/share/d5fbbdaf-10e5-460f-88b2-8f095b04277f"
+    },
+    "status": 200,
+    "dateOfConversation": "July 31, 2023",
+    "dateOfAccess": "2023-08-31 06:31:17.017515",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 413,
+    "tokensOfAnswers": 206,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "f688e988903111ed6bd989548872275a729b296d_s1_p1",
+        "prompt": "# Working set\n\nsrc/frontend/startVite.js:\n```\nimport { exec } from 'child_process';\nimport path from 'path';\nimport { fileURLToPath } from 'url';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\nconst projectRoot = path.resolve(__dirname, '../..');\n\nexport function startVite() {\n  const vite = exec(`${projectRoot}/node_modules/.bin/vite ${projectRoot}/src/frontend --open`);\n  vite.stdout.pipe(process.stdout);\n  vite.stderr.pipe(process.stderr);\n\n  process.on('exit', () => vite.kill());\n}\n\n```\n\n\n# Task\n\nImprove the documentation!\n\nRewrite startVite to use the js api! Here is a sample from the vite docs for your help:\nimport { fileURLToPath } from &#39;url&#39; import { createServer } from &#39;vite&#39;\nconst __dirname = fileURLToPath(new URL(&#39;.&#39;, import.meta.url))\n;(async () =&gt; {\n  const server = await createServer({\n    root: __dirname,\n    server: {\n      port: 1337,\n    },\n  })\n  await server.listen()\n\n  server.printUrls()\n})()\n\ndefault port is ok, but be sure to open the browser and start from the dir found in the current version of startVite.js\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Rewrite startVite to use Vite's JS API\"\necho \"Plan:\"\necho \"1. Modify src/frontend/startVite.js to use the Vite JS API.\"\necho \"2. Ensure to open the browser and start from the directory found in the current version of startVite.js.\"\n\ncat << 'EOF' > src/frontend/startVite.js\nimport path from 'path';\nimport { fileURLToPath } from 'url';\nimport { createServer } from 'vite';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\nconst projectRoot = path.resolve(__dirname, '../..');\n\nexport async function startVite() {\n  const server = await createServer({\n    root: projectRoot + '/src/frontend',\n    server: {\n      open: true,\n    },\n  });\n  await server.listen();\n  server.printUrls();\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

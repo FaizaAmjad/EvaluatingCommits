@@ -1,0 +1,75 @@
+{
+  "sha": "9dac0b6b6797fb6d62cf41369227d0138f4397a5",
+  "url": "https://github.com/tisztamo/Junior/commit/9dac0b6b6797fb6d62cf41369227d0138f4397a5",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Update docs/descriptor.md https://chat.openai.com/share/f9d1c692-9808-49bf-8c4f-20e8acdef237",
+  "authorAt": "2023-08-22T16:13:49.000+02:00",
+  "commitAt": "2023-08-22T16:13:49.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Update Prompt Descriptor Content",
+    "url": "https://chat.openai.com/share/f9d1c692-9808-49bf-8c4f-20e8acdef237",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/9dac0b6b6797fb6d62cf41369227d0138f4397a5",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update docs/descriptor.md https://chat.openai.com/share/f9d1c692-9808-49bf-8c4f-20e8acdef237"
+    },
+    "status": 200,
+    "dateOfConversation": "August 22, 2023",
+    "dateOfAccess": "2023-08-31 06:24:26.721433",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 795,
+    "tokensOfAnswers": 577,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "9dac0b6b6797fb6d62cf41369227d0138f4397a5_s1_p1",
+        "prompt": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\ndocs/descriptor.md:\n```\n# Prompt Descriptor\n\nThe prompt descriptor is a YAML file (prompt.yaml) that outlines the details necessary for generating a task prompt for the AI model. It is used to specify the task, attention, requirements, and other attributes.\n\n## Example\n\n```yaml\ntask: prompt/task/feature/implement.md\nattention:\n  - src/interactiveSession/startInteractiveSession.js\n  - src/prompt/createPrompt.js\n  - src/attention/readAttention.js\n  - prompt.yaml\nrequirements: >\n  Write a README.md for this _exploratory_ project!\n```\n\n## Attributes\n\n- task: Describes the task type and scope.\n- attention: Lists the files and directories most relevant to the task.\n- requirements: Describes the actual task in a human-readable format.\n- format: (Optional and half-working) Determines how the output will be formatted. It should be avoided for now.\n- os: (Default: \"Debian\") Specifies the operating system.\n- installedTools: By default, this includes \"npm, jq.\" Allows the user to mention his tools, e.g. when drawing. The user can create prompt/installedTools.md to overwrite.\n\n### Overwriting Attributes\n\nUsers can overwrite attributes in prompt.yaml or create prompt/attributeName.md with the content for any attribute. If both are present, the value in prompt.yaml has preference.\n\nFor example, to set a default operating system in a separate file:\n\n```markdown\n# prompt/os.md\nDebian\n```\n\nAnd then to overwrite it in the prompt.yaml:\n\n```yaml\nos: Ubuntu\n```\n\n## Attributes referencing .md files\n\nWhen a yaml attribute refers to an existing file, its content will be used. For example, the line `task: prompt/task/feature/implement.md` in the example yaml refers to an existing markdown file and its content is injected into the task section of the prompt.\n\n## Template Files\n\n```\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\n<%= requirements %>\n\n<%= projectSpecifics %>\n```\n\nPrompt parts are markdown template files, and [ejs](https://ejs.co/) runs on them. Attributes from the yaml file are available in the template, e.g., `<%= requirements %>` injects the requirements.\n\n## Custom Attributes\n\nThe user can also define custom attributes not listed above. These can be stored in a markdown file and can be injected into prompt template files using the ejs syntax.\n\nFor example, to set a new custom attribute called \"documentationRequirements\":\n\n```markdown\n# prompt/documentationRequirements.md\nEnsure that all functions are documented.\n```\n\nAnd then it can be injected into the prompt template:\n\n```\n<%= documentationRequirements %>\n```\n```\n\n\n# Task\n\nImprove the documentation!\n\n- At the format attribute do not say it should be avoided.\nWrite instead that prompt/format/new_file_version.md may help\nwhen Junior has issues understanding the script.\n- Make \"outlines the details\" bold\n- Add a link at the task attribute to the list of current tasks: https://github.com/tisztamo/Junior/tree/main/prompt/task\n\n\n# Output Format\n\nProvide the new or modified file(s) as code blocks, each prefixed with its path and a colon.\nJS files should only export a single function and be named after the function: e.g. `myFn.js` should export `myFn()`.\nAlways output full files, copying unchanged content.\n\nE.g.:\n\ntexts/sample.txt:\n```\nA sample text file.\n```\n\n\n",
+        "answer": "To complete the task, I'll be updating the docs/descriptor.md file. Let's proceed with the necessary changes.Here's the updated content for docs/descriptor.md:docs/descriptor.md:[CODE_BLOCK_0]Attributestask: Describes the task type and scope. See the list of current tasksattention: Lists the files and directories most relevant to the task.requirements: Describes the actual task in a human-readable format.format: (Optional and half-working) If Junior has issues understanding the script, referring to prompt/format/new_file_version.md may help.os: (Default: \"Debian\") Specifies the operating system.installedTools: By default, this includes \"npm, jq.\" Allows the user to mention his tools, e.g. when drawing. The user can create prompt/installedTools.md to overwrite.Overwriting AttributesUsers can overwrite attributes in prompt.yaml or create prompt/attributeName.md with the content for any attribute. If both are present, the value in prompt.yaml has preference.For example, to set a default operating system in a separate file:[CODE_BLOCK_1]And then to overwrite it in the prompt.yaml:[CODE_BLOCK_2]Attributes referencing .md filesWhen a yaml attribute refers to an existing file, its content will be used. For example, the line task: prompt/task/feature/implement.md in the example yaml refers to an existing markdown file and its content is injected into the task section of the prompt.Template Files[CODE_BLOCK_3]Prompt parts are markdown template files, and ejs runs on them. Attributes from the yaml file are available in the template, e.g., <%= requirements %> injects the requirements.Custom AttributesThe user can also define custom attributes not listed above. These can be stored in a markdown file and can be injected into prompt template files using the ejs syntax.For example, to set a new custom attribute called \"documentationRequirements\":[CODE_BLOCK_4]And then it can be injected into the prompt template:[CODE_BLOCK_5][CODE_BLOCK_6]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "markdown",
+            "Content": "# Prompt Descriptor\n\nThe prompt descriptor is a YAML file (prompt.yaml) that **outlines the details** necessary for generating a task prompt for the AI model. It is used to specify the task, attention, requirements, and other attributes.\n\n## Example\n\n```yaml\ntask: prompt/task/feature/implement.md\nattention:\n  - src/interactiveSession/startInteractiveSession.js\n  - src/prompt/createPrompt.js\n  - src/attention/readAttention.js\n  - prompt.yaml\nrequirements: >\n  Write a README.md for this _exploratory_ project!\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "markdown",
+            "Content": "# prompt/os.md\nDebian\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_2]",
+            "Type": "yaml",
+            "Content": "os: Ubuntu\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_3]",
+            "Type": "sql",
+            "Content": "Implement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\n<%= requirements %>\n\n<%= projectSpecifics %>\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_4]",
+            "Type": "markdown",
+            "Content": "# prompt/documentationRequirements.md\nEnsure that all functions are documented.\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_5]",
+            "Type": null,
+            "Content": "<%= documentationRequirements %>\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_6]",
+            "Type": "yaml",
+            "Content": "\n---\n\nThis completes the requested task. The `docs/descriptor.md` file has been updated with the necessary changes.\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

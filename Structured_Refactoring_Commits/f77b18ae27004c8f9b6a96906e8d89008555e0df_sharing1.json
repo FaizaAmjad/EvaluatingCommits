@@ -1,0 +1,45 @@
+{
+  "sha": "f77b18ae27004c8f9b6a96906e8d89008555e0df",
+  "url": "https://github.com/tisztamo/Junior/commit/f77b18ae27004c8f9b6a96906e8d89008555e0df",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Refactor requirements editor component https://chat.openai.com/share/075621a9-3df1-4086-bad3-d563fbd09e02",
+  "authorAt": "2023-08-23T13:43:11.000+02:00",
+  "commitAt": "2023-08-23T13:43:11.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Refactor Requirements Editor",
+    "url": "https://chat.openai.com/share/075621a9-3df1-4086-bad3-d563fbd09e02",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/f77b18ae27004c8f9b6a96906e8d89008555e0df",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor requirements editor component https://chat.openai.com/share/075621a9-3df1-4086-bad3-d563fbd09e02"
+    },
+    "status": 200,
+    "dateOfConversation": "August 23, 2023",
+    "dateOfAccess": "2023-08-31 06:24:21.645091",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 886,
+    "tokensOfAnswers": 262,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "f77b18ae27004c8f9b6a96906e8d89008555e0df_s1_p1",
+        "prompt": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\nsrc/frontend/service/postDescriptor.js:\n```\nimport { getBaseUrl } from '../getBaseUrl';\n\nconst postDescriptor = async (descriptor) => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/descriptor`, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify(descriptor),\n  });\n\n  return await response.json();\n};\n\nexport default postDescriptor;\n\n```\n\nsrc/frontend/components/TasksList.jsx:\n```\nimport { onMount, createEffect } from 'solid-js';\nimport { fetchTasks } from '../fetchTasks';\nimport { handleTaskChange } from '../service/handleTaskChange';\nimport { selectedTask, setSelectedTask } from '../model/selectedTask';\nimport { promptDescriptor } from '../model/promptDescriptor';\nimport { getYamlEntry } from '../service/getYamlEntry';\n\nconst TasksList = () => {\n  const tasks = fetchTasks();\n\n  createEffect(() => {\n    const descriptor = promptDescriptor();\n    if (descriptor !== '') {\n      const taskWithPath = getYamlEntry(descriptor, 'task');\n      // Remove 'prompt/task/' prefix here\n      const task = taskWithPath.replace('prompt/task/', '');\n      setSelectedTask(task);\n    }\n  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded border border-border\">\n      <label class=\"text-lg mr-2\">Task:</label>\n      <select class=\"w-full bg-emphasize text-emphasize text-lg\" value={selectedTask()} onChange={e => handleTaskChange(e)}>\n        {tasks().map(task => <option value={task}>{task}</option>)}\n      </select>\n    </div>\n  );\n};\n\nexport default TasksList;\n\n```\n\nsrc/frontend/components/RequirementsEditor.jsx:\n```\nimport { createSignal } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\n\nconst RequirementsEditor = () => {\n  const [requirements, setRequirements] = createSignal('');\n\n  const handleRequirementsChange = async (e) => {\n    setRequirements(e.target.value);\n    await postDescriptor({ requirements: e.target.value });\n  };\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded border border-border mt-4\">\n      <label class=\"text-lg mr-2\">Requirements:</label>\n      <textarea\n        class=\"w-full bg-emphasize text-emphasize text-lg\"\n        value={requirements()}\n        onInput={e => handleRequirementsChange(e)}\n      />\n    </div>\n  );\n};\n\nexport default RequirementsEditor;\n\n```\n\nsrc/frontend/model/promptDescriptor.js:\n```\nimport { createSignal } from 'solid-js';\n\nexport const [promptDescriptor, setPromptDescriptor] = createSignal('');\n\n```\n\n\n# Task\n\nRefactor!\n\nEliminate the signal from the requirements editor component\nand fill it from the promptDescriptor signals requirements section,\nsimilarly to how TasksList works.\nAlso remove the label and use \"Enter your requirements...\" placeholder instead\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx file accordingly!\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Refactor requirements editor component\"\necho \"Plan:\"\necho \"1. Modify RequirementsEditor.jsx to utilize promptDescriptor and remove signal\"\necho \"2. Adjust placeholder and remove label\"\n\ncat > src/frontend/components/RequirementsEditor.jsx << 'EOF'\nimport { createEffect } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\nimport { promptDescriptor } from '../model/promptDescriptor';\n\nconst RequirementsEditor = () => {\n  let requirements = promptDescriptor().requirements || '';\n\n  const handleRequirementsChange = async (e) => {\n    requirements = e.target.value;\n    await postDescriptor({ requirements: requirements });\n  };\n\n  createEffect(() => {\n    requirements = promptDescriptor().requirements || '';\n  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded border border-border mt-4\">\n      <textarea\n        class=\"w-full bg-emphasize text-emphasize text-lg\"\n        placeholder=\"Enter your requirements...\"\n        value={requirements}\n        onInput={e => handleRequirementsChange(e)}\n      />\n    </div>\n  );\n};\n\nexport default RequirementsEditor;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

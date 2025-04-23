@@ -1,0 +1,57 @@
+{
+  "sha": "3765fcc7602c8fa865f118829157ff7f249d2578",
+  "url": "https://github.com/tisztamo/Junior/commit/3765fcc7602c8fa865f118829157ff7f249d2578",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Rename project https://chat.openai.com/share/cbcf1cae-b0a6-485c-aa78-3c7f7cefe664",
+  "authorAt": "2023-07-15T11:15:27.000+02:00",
+  "commitAt": "2023-07-15T11:15:27.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Rename Project to @aijunior/dev",
+    "url": "https://chat.openai.com/share/cbcf1cae-b0a6-485c-aa78-3c7f7cefe664",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/3765fcc7602c8fa865f118829157ff7f249d2578",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Rename project https://chat.openai.com/share/cbcf1cae-b0a6-485c-aa78-3c7f7cefe664"
+    },
+    "status": 200,
+    "dateOfConversation": "July 15, 2023",
+    "dateOfAccess": "2023-08-31 06:29:06.936713",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 784,
+    "tokensOfAnswers": 246,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "3765fcc7602c8fa865f118829157ff7f249d2578_s1_p1",
+        "prompt": "# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 .vscode/...\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 babel.config.js\n\u251c\u2500\u2500 change.sh\n\u251c\u2500\u2500 dist/...\n\u251c\u2500\u2500 doc/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 secret.sh\n\u251c\u2500\u2500 src/...\n\u251c\u2500\u2500 tmp/...\n\n```\n./package.json:\n```\n{\n  \"name\": \"gpcontrib\",\n  \"version\": \"0.0.1\",\n  \"description\": \"Build large documents with AI\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"contrib\": \"src/main.js\"\n  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/backend/server.js --prompt=prompt.yaml -s & vite src --open \"\n  },\n  \"keywords\": [\n    \"cli\",\n    \"uppercase\"\n  ],\n  \"author\": \"\",\n  \"license\": \"GPL\",\n  \"dependencies\": {\n    \"autoprefixer\": \"^10.4.14\",\n    \"chatgpt\": \"^5.2.4\",\n    \"clipboard-copy\": \"^4.0.1\",\n    \"cors\": \"^2.8.5\",\n    \"ejs\": \"^3.1.9\",\n    \"express\": \"^4.18.2\",\n    \"js-yaml\": \"^4.1.0\",\n    \"marked\": \"^5.1.0\",\n    \"postcss\": \"^8.4.24\",\n    \"solid-js\": \"^1.7.7\",\n    \"tailwindcss\": \"^3.3.2\",\n    \"vite\": \"^4.3.9\",\n    \"vite-plugin-solid\": \"^2.7.0\"\n  },\n  \"directories\": {\n    \"doc\": \"doc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/tisztamo/contributor.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/contributor/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/contributor#readme\",\n  \"devDependencies\": {\n    \"babel-preset-solid\": \"^1.7.7\"\n  }\n}\n\n```\n\n```\n./src/\n\u251c\u2500\u2500 attention/...\n\u251c\u2500\u2500 backend/...\n\u251c\u2500\u2500 config.js\n\u251c\u2500\u2500 execute/...\n\u251c\u2500\u2500 frontend/...\n\u251c\u2500\u2500 index.html\n\u251c\u2500\u2500 interactiveSession/...\n\u251c\u2500\u2500 main.js\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 vite.config.js\n\n```\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n- Every js file should only export a single function!\n- Use ES6 imports!\n\nRequirements:\n\nRename the project to @aijunior/dev\n\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files without substitution.\nAssume OSX.\nnpm and jq are installed.\nDo NOT write any text outside the script (the plan goes into it)!\n\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\n# Goal: [Task description, max 7 words]\n# Plan:\n# 1. [...]\n\n[Commands solving the task]\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\n# Goal: Rename the project to @aijunior/dev\n# Plan:\n# 1. Change the name field in package.json to \"@aijunior/dev\".\n# 2. No new files are needed for this task.\n\n# Updating package.json with new project name\njq '.name = \"@aijunior/dev\"' package.json > package_temp.json && mv package_temp.json package.json\n\necho \"Project renamed to @aijunior/dev successfully\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "3765fcc7602c8fa865f118829157ff7f249d2578_s1_p2",
+        "prompt": "Also change the description to \"Your AI Contributor\"",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\n# Goal: Rename the project to @aijunior/dev and change description\n# Plan:\n# 1. Change the name field in package.json to \"@aijunior/dev\".\n# 2. Change the description field in package.json to \"Your AI Contributor\".\n# 3. No new files are needed for this task.\n\n# Updating package.json with new project name and description\njq '.name = \"@aijunior/dev\"' package.json > package_temp.json && mv package_temp.json package.json\njq '.description = \"Your AI Contributor\"' package.json > package_temp.json && mv package_temp.json package.json\n\necho \"Project renamed to @aijunior/dev and description changed to 'Your AI Contributor' successfully\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}
