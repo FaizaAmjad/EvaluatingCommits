@@ -1,0 +1,97 @@
+{
+  "sha": "e61a8ed6e52c9ef5b626c680de638b3a8584416b",
+  "url": "https://github.com/tisztamo/Junior/commit/e61a8ed6e52c9ef5b626c680de638b3a8584416b",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Refactor build.js into separate files and pass MarkdownIt as an argument https://chat.openai.com/share/76854e8a-0834-48be-8245-47551bd08c2e",
+  "authorAt": "2023-07-23T20:46:40.000+02:00",
+  "commitAt": "2023-07-23T20:46:40.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Refactor JS Build Script",
+    "url": "https://chat.openai.com/share/76854e8a-0834-48be-8245-47551bd08c2e",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/e61a8ed6e52c9ef5b626c680de638b3a8584416b",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Refactor build.js into separate files and pass MarkdownIt as an argument https://chat.openai.com/share/76854e8a-0834-48be-8245-47551bd08c2e"
+    },
+    "status": 200,
+    "dateOfConversation": "July 23, 2023",
+    "dateOfAccess": "2023-08-31 06:32:40.935806",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 545,
+    "tokensOfAnswers": 865,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "e61a8ed6e52c9ef5b626c680de638b3a8584416b_s1_p1",
+        "prompt": "# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .github/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 babel.config.js\n\u251c\u2500\u2500 change.sh\n\u251c\u2500\u2500 doc/...\n\u251c\u2500\u2500 integrations/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 postcss.config.js\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 secret.sh\n\u251c\u2500\u2500 src/...\n\u251c\u2500\u2500 tailwind.config.js\n\n```\n./doc: err!\n\n./doc/build.js:\n```\nimport { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';\nimport { join, extname } from 'path';\nimport MarkdownIt from 'markdown-it';\nimport hljs from 'highlight.js';\n\nconst md = new MarkdownIt({\n  html: true,\n  linkify: true,\n  typographer: true,\n  highlight: function (str, lang) {\n    if (lang && hljs.getLanguage(lang)) {\n      try {\n        return hljs.highlight(str, { language: lang }).value;\n      } catch (__) {}\n    }\n    return ''; \n  }\n});\n\nconst convertDirectory = (dir) => {\n  const files = readdirSync(dir);\n  files.forEach(file => {\n    const filePath = join(dir, file);\n    const stats = statSync(filePath);\n    if (stats.isDirectory()) {\n      convertDirectory(filePath);\n    } else if (extname(file) === '.md') {\n      const markdown = readFileSync(filePath, 'utf8');\n      const html = md.render(markdown);\n      writeFileSync(filePath.replace('.md', '.html'), html);\n    }\n  });\n}\n\nconvertDirectory('./doc');\n\n```\n\n\n# Task\n\nFix the following issue!\n\nRename build.js dor buildDoc.js\nFactor the md = new MarkdownIt creation to createMarkdownRenderer.js\nSimilarly create convertDirectory.js\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files without substitution.\nAssume OSX.\nnpm and jq are installed.\nDo NOT write any text outside the script (the plan goes into it)!\n\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\n# Goal: [Task description, max 7 words]\n# Plan:\n# 1. [...]\n\n[Commands solving the task]\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\n# Goal: Refactor build.js into separate files\n# Plan:\n# 1. Rename build.js to buildDoc.js\n# 2. Create a new file, createMarkdownRenderer.js, that handles the creation of MarkdownIt\n# 3. Create a new file, convertDirectory.js, that handles directory conversion\n\n# Step 1\nmv ./doc/build.js ./doc/buildDoc.js\n\n# Step 2\ncat << EOF > ./doc/createMarkdownRenderer.js\nimport MarkdownIt from 'markdown-it';\nimport hljs from 'highlight.js';\n\nexport default function createMarkdownRenderer() {\n    return new MarkdownIt({\n        html: true,\n        linkify: true,\n        typographer: true,\n        highlight: function (str, lang) {\n            if (lang && hljs.getLanguage(lang)) {\n                try {\n                    return hljs.highlight(str, { language: lang }).value;\n                } catch (__) {}\n            }\n            return ''; \n        }\n    });\n}\nEOF\n\n# Step 3\ncat << EOF > ./doc/convertDirectory.js\nimport { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';\nimport { join, extname } from 'path';\nimport createMarkdownRenderer from './createMarkdownRenderer';\n\nconst md = createMarkdownRenderer();\n\nexport default function convertDirectory(dir) {\n    const files = readdirSync(dir);\n    files.forEach(file => {\n        const filePath = join(dir, file);\n        const stats = statSync(filePath);\n        if (stats.isDirectory()) {\n            convertDirectory(filePath);\n        } else if (extname(file) === '.md') {\n            const markdown = readFileSync(filePath, 'utf8');\n            const html = md.render(markdown);\n            writeFileSync(filePath.replace('.md', '.html'), html);\n        }\n    });\n}\nEOF\n\n# Step 4: Update the buildDoc.js\ncat << EOF > ./doc/buildDoc.js\nimport convertDirectory from './convertDirectory';\n\nconvertDirectory('./doc');\nEOF\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "e61a8ed6e52c9ef5b626c680de638b3a8584416b_s1_p2",
+        "prompt": "md should be passed to convertDirectory, but also allow this as default",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\n# Goal: Refactor build.js into separate files and pass MarkdownIt as an argument\n# Plan:\n# 1. Rename build.js to buildDoc.js\n# 2. Create a new file, createMarkdownRenderer.js, that handles the creation of MarkdownIt\n# 3. Create a new file, convertDirectory.js, that handles directory conversion\n# 4. Modify convertDirectory.js to accept MarkdownIt as an argument\n\n# Step 1\nmv ./doc/build.js ./doc/buildDoc.js\n\n# Step 2\ncat << EOF > ./doc/createMarkdownRenderer.js\nimport MarkdownIt from 'markdown-it';\nimport hljs from 'highlight.js';\n\nexport default function createMarkdownRenderer() {\n    return new MarkdownIt({\n        html: true,\n        linkify: true,\n        typographer: true,\n        highlight: function (str, lang) {\n            if (lang && hljs.getLanguage(lang)) {\n                try {\n                    return hljs.highlight(str, { language: lang }).value;\n                } catch (__) {}\n            }\n            return ''; \n        }\n    });\n}\nEOF\n\n# Step 3\ncat << EOF > ./doc/convertDirectory.js\nimport { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';\nimport { join, extname } from 'path';\nimport createMarkdownRenderer from './createMarkdownRenderer';\n\nexport default function convertDirectory(dir, md = createMarkdownRenderer()) {\n    const files = readdirSync(dir);\n    files.forEach(file => {\n        const filePath = join(dir, file);\n        const stats = statSync(filePath);\n        if (stats.isDirectory()) {\n            convertDirectory(filePath, md);\n        } else if (extname(file) === '.md') {\n            const markdown = readFileSync(filePath, 'utf8');\n            const html = md.render(markdown);\n            writeFileSync(filePath.replace('.md', '.html'), html);\n        }\n    });\n}\nEOF\n\n# Step 4: Update the buildDoc.js\ncat << EOF > ./doc/buildDoc.js\nimport createMarkdownRenderer from './createMarkdownRenderer';\nimport convertDirectory from './convertDirectory';\n\nconst md = createMarkdownRenderer();\nconvertDirectory('./doc', md);\nEOF\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": ".babelrc",
+      "before": "",
+      "after": "{\n  \"presets\": [\n    [\"@babel/preset-env\", {\n      \"targets\": {\n        \"node\": \"current\"\n      }\n    }]\n  ]\n}",
+      "total_deletions": 0,
+      "total_additions": 9
+    },
+    {
+      "filename": "game.js",
+      "before": "function startPlaying() {\n    var rikishi = document.querySelector('#rikishi').value;\n    var user = getUser();\n    var picks = getPicks(user);\n    var message = \"You selected: \" + rikishi + \"\\nPrevious Picks: \" + JSON.stringify(picks);\n    updatePicks(user, rikishi); // Update the picks with the new selection\n    return message;\n}\n\nfunction getUser() {\n    // get user from local storage\n    var user = localStorage.getItem('user');\n    if (!user) {\n        user = 'admin';\n        localStorage.setItem('user', user);\n    }\n    return user;\n}\n\nfunction getPicks(user) {\n    var picks = JSON.parse(localStorage.getItem(user));\n    if (!picks) {\n        picks = {};\n    }\n    return picks;\n}\n\nfunction updatePicks(user, rikishi) {\n    var picks = getPicks(user);\n    var currentContest = new Date().getMonth();\n    if ([0, 2, 4, 6, 8, 10].includes(currentContest)) {\n        var contestName = new Date().toLocaleString('default', { month: 'long' }) + ' ' + new Date().getFullYear();\n        picks[contestName] = rikishi;\n        localStorage.setItem(user, JSON.stringify(picks));\n    }\n}\n\nfunction switchUser() {\n    var newUser = document.querySelector('#userSwitch').value;\n    localStorage.setItem('user', newUser);\n    document.querySelector('#user').textContent = 'Current user: ' + newUser;;\n}\n\nfunction backfillResults() {\n    var user = getUser();\n    var contestName = document.querySelector('#backfillContest').value;\n    var rikishi = document.querySelector('#backfillRikishi').value;\n    var picks = getPicks(user);\n    picks[contestName] = rikishi;\n    localStorage.setItem(user, JSON.stringify(picks));\n}\n\nfunction initialize() {\n    var user = getUser();\n    var userElement = document.querySelector('#user');\n    if (userElement) {\n        userElement.textContent = 'Current user: ' + user;\n    }\n}\n\ninitialize();\n\nmodule.exports = { startPlaying, switchUser, backfillResults, initialize };\n",
+      "after": "export default class Game {\n    constructor() {\n        this.user = this.getUser();\n        this.initialize();\n    }\n\n    startPlaying() {\n        var rikishi = document.querySelector('#rikishi').value;\n        var picks = this.getPicks();\n        var message = \"You selected: \" + rikishi + \"\\nPrevious Picks: \" + JSON.stringify(picks);\n        this.updatePicks(rikishi); // Update the picks with the new selection\n        return message;\n    }\n\n    getUser() {\n        // get user from local storage\n        var user = localStorage.getItem('user');\n        if (!user) {\n            user = 'admin';\n            localStorage.setItem('user', user);\n        }\n        return user;\n    }\n\n    getPicks() {\n        var picks = JSON.parse(localStorage.getItem(this.user));\n        if (!picks) {\n            picks = {};\n        }\n        return picks;\n    }\n\n    updatePicks(rikishi) {\n        var picks = this.getPicks();\n        var currentContest = new Date().getMonth();\n        if ([0, 2, 4, 6, 8, 10].includes(currentContest)) {\n            var contestName = new Date().toLocaleString('default', { month: 'long' }) + ' ' + new Date().getFullYear();\n            picks[contestName] = rikishi;\n            localStorage.setItem(this.user, JSON.stringify(picks));\n        }\n    }\n\n    switchUser() {\n        var newUser = document.querySelector('#userSwitch').value;\n        localStorage.setItem('user', newUser);\n        document.querySelector('#user').textContent = 'Current user: ' + newUser;\n        this.user = newUser;\n    }\n\n    backfillResults() {\n        var contestName = document.querySelector('#backfillContest').value;\n        var rikishi = document.querySelector('#backfillRikishi').value;\n        var picks = this.getPicks();\n        picks[contestName] = rikishi;\n        localStorage.setItem(this.user, JSON.stringify(picks));\n    }\n\n    initialize() {\n        var userElement = document.querySelector('#user');\n        if (userElement) {\n            userElement.textContent = 'Current user: ' + this.user;\n        }\n    }\n}\n\nfunction initGame() {\n  const game = new Game();\n\n  document.querySelector(\"#startPlayingButton\").addEventListener('click', () => game.startPlaying());\n  document.querySelector(\"#switchUserButton\").addEventListener('click', () => game.switchUser());\n  document.querySelector(\"#backfillResultsButton\").addEventListener('click', () => game.backfillResults());\n}\n\nif (typeof window !== 'undefined') {\n    window.onload = initGame;\n}",
+      "total_deletions": 50,
+      "total_additions": 63
+    },
+    {
+      "filename": "game.test.js",
+      "before": "const jsdom = require('jsdom');\nconst { JSDOM } = jsdom;\n\nconst dom = new JSDOM('<!doctype html><html><body></body></html>', {\n    url: \"http://localhost/\",\n    resources: \"usable\",\n    runScripts: \"dangerously\",\n});\n\nglobal.window = dom.window;\nglobal.document = dom.window.document;\nglobal.localStorage = dom.window.localStorage;\n\nconst { startPlaying, switchUser, backfillResults, initialize } = require('./game');\n\nbeforeEach(() => {\n    localStorage.clear(); // clear localStorage before each test\n    // Reset the HTML body before each test\n    document.body.innerHTML = `\n        <p id=\"user\"></p>\n        <select id=\"rikishi\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n    `;\n    initialize();\n});\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    localStorage.setItem('user', 'testUser');\n    localStorage.setItem('testUser', JSON.stringify({ 'July 2023': '1' })); // Assume a previous pick\n    document.querySelector('#rikishi').value = '1';\n    const result = startPlaying();\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n",
+      "after": "import 'jest-localstorage-mock';\nimport Game from './game.js';\n\nlet game;\n\nbeforeEach(() => {\n    localStorage.clear();\n    // set localStorage values\n    localStorage.setItem('user', 'testUser');\n    localStorage.setItem('testUser', JSON.stringify({ 'July 2023': '1' }));\n\n    document.body.innerHTML = `\n        <p id=\"user\"></p>\n        <select id=\"rikishi\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n    `;\n    game = new Game();\n});\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    document.querySelector('#rikishi').value = '1';\n    const result = game.startPlaying();\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n",
+      "total_deletions": 19,
+      "total_additions": 10
+    },
+    {
+      "filename": "jest.config.js",
+      "before": "",
+      "after": "module.exports = {\n  setupFilesAfterEnv: ['./jest.setup.js'],\n  testEnvironment: 'jsdom',\n  transform: {\n    '^.+\\\\.js$': 'babel-jest',\n  },\n};",
+      "total_deletions": 0,
+      "total_additions": 7
+    },
+    {
+      "filename": "jest.setup.js",
+      "before": "",
+      "after": "import 'jest-localstorage-mock';\nimport { TextEncoder, TextDecoder } from 'text-encoding';\n\nglobal.TextEncoder = TextEncoder;\nglobal.TextDecoder = TextDecoder;",
+      "total_deletions": 0,
+      "total_additions": 5
+    },
+    {
+      "filename": "package.json",
+      "before": "  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"jest\": \"^29.5.0\",\n    \"jest-localstorage-mock\": \"^2.4.26\",\n    \"jsdom\": \"^22.1.0\"\n  }\n}",
+      "after": "  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"@babel/core\": \"^7.22.5\",\n    \"@babel/preset-env\": \"^7.22.5\",\n    \"babel-jest\": \"^29.5.0\",\n    \"jest\": \"^29.5.0\",\n    \"jest-environment-jsdom\": \"^29.5.0\",\n    \"jest-localstorage-mock\": \"^2.4.26\",\n    \"jsdom\": \"^22.1.0\"\n  },\n  \"dependencies\": {\n    \"text-encoding\": \"^0.7.0\"\n  }\n}",
+      "total_deletions": 0,
+      "total_additions": 7
+    }
+  ]
+}

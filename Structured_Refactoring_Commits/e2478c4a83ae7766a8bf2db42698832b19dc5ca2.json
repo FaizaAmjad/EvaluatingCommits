@@ -1,0 +1,109 @@
+{
+  "sha": "e2478c4a83ae7766a8bf2db42698832b19dc5ca2",
+  "url": "https://github.com/tisztamo/Junior/commit/e2478c4a83ae7766a8bf2db42698832b19dc5ca2",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Create and replace logo file https://chat.openai.com/share/c94d2481-7aaf-45a7-b841-f5d691d9d5f5",
+  "authorAt": "2023-08-06T21:17:41.000+02:00",
+  "commitAt": "2023-08-06T21:17:41.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Create Logo SVG/PNG",
+    "url": "https://chat.openai.com/share/c94d2481-7aaf-45a7-b841-f5d691d9d5f5",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/e2478c4a83ae7766a8bf2db42698832b19dc5ca2",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Create and replace logo file https://chat.openai.com/share/c94d2481-7aaf-45a7-b841-f5d691d9d5f5"
+    },
+    "status": 200,
+    "dateOfConversation": "August 6, 2023",
+    "dateOfAccess": "2023-08-24 10:23:43.908152",
+    "numberOfPrompts": 3,
+    "tokensOfPrompts": 485,
+    "tokensOfAnswers": 1086,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "e2478c4a83ae7766a8bf2db42698832b19dc5ca2_s1_p1",
+        "prompt": "# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .github/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 .vscode/...\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 change.sh\n\u251c\u2500\u2500 docs/...\n\u251c\u2500\u2500 integrations/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 src/...\n\n```\n```\n./docs/assets/\n\u251c\u2500\u2500 logo.png\n\u251c\u2500\u2500 video_cover.jpg\n\n```\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nCreate a new 1:1 logo and save it as logo.svg! Then convert to png and overwrite the old one!\nThe logo consists of three same-height row stacked on each other with some space inbetween.\nThe first row is filled by a blue rounded rectangle\nThe second one is filled by an orange rounded rectangle\nThe last one contains two rounded rectangles: On the left a red one and on the right a green one. The two fill the row fully and there is some space between them\nconvert is installed\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Create and replace logo file\"\necho \"Plan:\"\necho \"1. Create the SVG logo file with the given specifications.\"\necho \"2. Convert the SVG file to PNG using 'convert'.\"\necho \"3. Overwrite the old PNG logo file.\"\n\n# Step 1: Create the SVG logo file with the given specifications.\ncat > ./docs/assets/logo.svg << 'EOF'\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 120 120\">\n    <rect x=\"10\" y=\"10\" rx=\"10\" ry=\"10\" width=\"100\" height=\"20\" style=\"fill:blue;\" />\n    <rect x=\"10\" y=\"40\" rx=\"10\" ry=\"10\" width=\"100\" height=\"20\" style=\"fill:orange;\" />\n    <rect x=\"10\" y=\"70\" rx=\"10\" ry=\"10\" width=\"40\" height=\"20\" style=\"fill:red;\" />\n    <rect x=\"60\" y=\"70\" rx=\"10\" ry=\"10\" width=\"40\" height=\"20\" style=\"fill:green;\" />\n</svg>\nEOF\n\n# Step 2: Convert the SVG file to PNG using 'convert'.\nconvert ./docs/assets/logo.svg ./docs/assets/logo.png\n\n# Step 3: Overwrite the old PNG logo file.\nmv -f ./docs/assets/logo.png ./docs/assets/logo.png\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "e2478c4a83ae7766a8bf2db42698832b19dc5ca2_s1_p2",
+        "prompt": "Great but the last row is not fully filled, and  less space is needed between them, and no padding around! ",
+        "answer": "I see. Let's adjust the SVG dimensions, the positions, and the sizes of the rectangles to fill the SVG fully. Here is the adjusted script:[CODE_BLOCK_0]This script adjusts the SVG dimensions to 100x100, removes the padding around the rectangles, and fills the last row fully with less space between the rectangles.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Create and replace logo file\"\necho \"Plan:\"\necho \"1. Create the SVG logo file with the given specifications.\"\necho \"2. Convert the SVG file to PNG using 'convert'.\"\necho \"3. Overwrite the old PNG logo file.\"\n\n# Step 1: Create the SVG logo file with the given specifications.\ncat > ./docs/assets/logo.svg << 'EOF'\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\">\n    <rect x=\"0\" y=\"0\" rx=\"10\" ry=\"10\" width=\"100\" height=\"25\" style=\"fill:blue;\" />\n    <rect x=\"0\" y=\"35\" rx=\"10\" ry=\"10\" width=\"100\" height=\"25\" style=\"fill:orange;\" />\n    <rect x=\"0\" y=\"70\" rx=\"10\" ry=\"10\" width=\"48\" height=\"30\" style=\"fill:red;\" />\n    <rect x=\"52\" y=\"70\" rx=\"10\" ry=\"10\" width=\"48\" height=\"30\" style=\"fill:green;\" />\n</svg>\nEOF\n\n# Step 2: Convert the SVG file to PNG using 'convert'.\nconvert ./docs/assets/logo.svg ./docs/assets/logo.png\n\n# Step 3: Overwrite the old PNG logo file.\nmv -f ./docs/assets/logo.png ./docs/assets/logo.png\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "e2478c4a83ae7766a8bf2db42698832b19dc5ca2_s1_p3",
+        "prompt": "Great, but needs less space between the rows too",
+        "answer": "Understood. I will reduce the vertical space between the rows. Here's the updated script:[CODE_BLOCK_0]Now the vertical space between rows is reduced by making the height of each row 30 units, with 3 units of space between each. The final row rectangles are resized to fill the space fully.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Create and replace logo file\"\necho \"Plan:\"\necho \"1. Create the SVG logo file with the given specifications.\"\necho \"2. Convert the SVG file to PNG using 'convert'.\"\necho \"3. Overwrite the old PNG logo file.\"\n\n# Step 1: Create the SVG logo file with the given specifications.\ncat > ./docs/assets/logo.svg << 'EOF'\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\">\n    <rect x=\"0\" y=\"0\" rx=\"10\" ry=\"10\" width=\"100\" height=\"30\" style=\"fill:blue;\" />\n    <rect x=\"0\" y=\"33\" rx=\"10\" ry=\"10\" width=\"100\" height=\"30\" style=\"fill:orange;\" />\n    <rect x=\"0\" y=\"66\" rx=\"10\" ry=\"10\" width=\"48\" height=\"34\" style=\"fill:red;\" />\n    <rect x=\"52\" y=\"66\" rx=\"10\" ry=\"10\" width=\"48\" height=\"34\" style=\"fill:green;\" />\n</svg>\nEOF\n\n# Step 2: Convert the SVG file to PNG using 'convert'.\nconvert ./docs/assets/logo.svg ./docs/assets/logo.png\n\n# Step 3: Overwrite the old PNG logo file.\nmv -f ./docs/assets/logo.png ./docs/assets/logo.png\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": ".babelrc",
+      "before": "",
+      "after": "{\n  \"presets\": [\n    [\"@babel/preset-env\", {\n      \"targets\": {\n        \"node\": \"current\"\n      }\n    }]\n  ]\n}",
+      "total_deletions": 0,
+      "total_additions": 9
+    },
+    {
+      "filename": "game.js",
+      "before": "function startPlaying() {\n    var rikishi = document.querySelector('#rikishi').value;\n    var user = getUser();\n    var picks = getPicks(user);\n    var message = \"You selected: \" + rikishi + \"\\nPrevious Picks: \" + JSON.stringify(picks);\n    updatePicks(user, rikishi); // Update the picks with the new selection\n    return message;\n}\n\nfunction getUser() {\n    // get user from local storage\n    var user = localStorage.getItem('user');\n    if (!user) {\n        user = 'admin';\n        localStorage.setItem('user', user);\n    }\n    return user;\n}\n\nfunction getPicks(user) {\n    var picks = JSON.parse(localStorage.getItem(user));\n    if (!picks) {\n        picks = {};\n    }\n    return picks;\n}\n\nfunction updatePicks(user, rikishi) {\n    var picks = getPicks(user);\n    var currentContest = new Date().getMonth();\n    if ([0, 2, 4, 6, 8, 10].includes(currentContest)) {\n        var contestName = new Date().toLocaleString('default', { month: 'long' }) + ' ' + new Date().getFullYear();\n        picks[contestName] = rikishi;\n        localStorage.setItem(user, JSON.stringify(picks));\n    }\n}\n\nfunction switchUser() {\n    var newUser = document.querySelector('#userSwitch').value;\n    localStorage.setItem('user', newUser);\n    document.querySelector('#user').textContent = 'Current user: ' + newUser;;\n}\n\nfunction backfillResults() {\n    var user = getUser();\n    var contestName = document.querySelector('#backfillContest').value;\n    var rikishi = document.querySelector('#backfillRikishi').value;\n    var picks = getPicks(user);\n    picks[contestName] = rikishi;\n    localStorage.setItem(user, JSON.stringify(picks));\n}\n\nfunction initialize() {\n    var user = getUser();\n    var userElement = document.querySelector('#user');\n    if (userElement) {\n        userElement.textContent = 'Current user: ' + user;\n    }\n}\n\ninitialize();\n\nmodule.exports = { startPlaying, switchUser, backfillResults, initialize };\n",
+      "after": "export default class Game {\n    constructor() {\n        this.user = this.getUser();\n        this.initialize();\n    }\n\n    startPlaying() {\n        var rikishi = document.querySelector('#rikishi').value;\n        var picks = this.getPicks();\n        var message = \"You selected: \" + rikishi + \"\\nPrevious Picks: \" + JSON.stringify(picks);\n        this.updatePicks(rikishi); // Update the picks with the new selection\n        return message;\n    }\n\n    getUser() {\n        // get user from local storage\n        var user = localStorage.getItem('user');\n        if (!user) {\n            user = 'admin';\n            localStorage.setItem('user', user);\n        }\n        return user;\n    }\n\n    getPicks() {\n        var picks = JSON.parse(localStorage.getItem(this.user));\n        if (!picks) {\n            picks = {};\n        }\n        return picks;\n    }\n\n    updatePicks(rikishi) {\n        var picks = this.getPicks();\n        var currentContest = new Date().getMonth();\n        if ([0, 2, 4, 6, 8, 10].includes(currentContest)) {\n            var contestName = new Date().toLocaleString('default', { month: 'long' }) + ' ' + new Date().getFullYear();\n            picks[contestName] = rikishi;\n            localStorage.setItem(this.user, JSON.stringify(picks));\n        }\n    }\n\n    switchUser() {\n        var newUser = document.querySelector('#userSwitch').value;\n        localStorage.setItem('user', newUser);\n        document.querySelector('#user').textContent = 'Current user: ' + newUser;\n        this.user = newUser;\n    }\n\n    backfillResults() {\n        var contestName = document.querySelector('#backfillContest').value;\n        var rikishi = document.querySelector('#backfillRikishi').value;\n        var picks = this.getPicks();\n        picks[contestName] = rikishi;\n        localStorage.setItem(this.user, JSON.stringify(picks));\n    }\n\n    initialize() {\n        var userElement = document.querySelector('#user');\n        if (userElement) {\n            userElement.textContent = 'Current user: ' + this.user;\n        }\n    }\n}\n\nfunction initGame() {\n  const game = new Game();\n\n  document.querySelector(\"#startPlayingButton\").addEventListener('click', () => game.startPlaying());\n  document.querySelector(\"#switchUserButton\").addEventListener('click', () => game.switchUser());\n  document.querySelector(\"#backfillResultsButton\").addEventListener('click', () => game.backfillResults());\n}\n\nif (typeof window !== 'undefined') {\n    window.onload = initGame;\n}",
+      "total_deletions": 50,
+      "total_additions": 63
+    },
+    {
+      "filename": "game.test.js",
+      "before": "const jsdom = require('jsdom');\nconst { JSDOM } = jsdom;\n\nconst dom = new JSDOM('<!doctype html><html><body></body></html>', {\n    url: \"http://localhost/\",\n    resources: \"usable\",\n    runScripts: \"dangerously\",\n});\n\nglobal.window = dom.window;\nglobal.document = dom.window.document;\nglobal.localStorage = dom.window.localStorage;\n\nconst { startPlaying, switchUser, backfillResults, initialize } = require('./game');\n\nbeforeEach(() => {\n    localStorage.clear(); // clear localStorage before each test\n    // Reset the HTML body before each test\n    document.body.innerHTML = `\n        <p id=\"user\"></p>\n        <select id=\"rikishi\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n    `;\n    initialize();\n});\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    localStorage.setItem('user', 'testUser');\n    localStorage.setItem('testUser', JSON.stringify({ 'July 2023': '1' })); // Assume a previous pick\n    document.querySelector('#rikishi').value = '1';\n    const result = startPlaying();\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n",
+      "after": "import 'jest-localstorage-mock';\nimport Game from './game.js';\n\nlet game;\n\nbeforeEach(() => {\n    localStorage.clear();\n    // set localStorage values\n    localStorage.setItem('user', 'testUser');\n    localStorage.setItem('testUser', JSON.stringify({ 'July 2023': '1' }));\n\n    document.body.innerHTML = `\n        <p id=\"user\"></p>\n        <select id=\"rikishi\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n    `;\n    game = new Game();\n});\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    document.querySelector('#rikishi').value = '1';\n    const result = game.startPlaying();\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n",
+      "total_deletions": 19,
+      "total_additions": 10
+    },
+    {
+      "filename": "jest.config.js",
+      "before": "",
+      "after": "module.exports = {\n  setupFilesAfterEnv: ['./jest.setup.js'],\n  testEnvironment: 'jsdom',\n  transform: {\n    '^.+\\\\.js$': 'babel-jest',\n  },\n};",
+      "total_deletions": 0,
+      "total_additions": 7
+    },
+    {
+      "filename": "jest.setup.js",
+      "before": "",
+      "after": "import 'jest-localstorage-mock';\nimport { TextEncoder, TextDecoder } from 'text-encoding';\n\nglobal.TextEncoder = TextEncoder;\nglobal.TextDecoder = TextDecoder;",
+      "total_deletions": 0,
+      "total_additions": 5
+    },
+    {
+      "filename": "package.json",
+      "before": "  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"jest\": \"^29.5.0\",\n    \"jest-localstorage-mock\": \"^2.4.26\",\n    \"jsdom\": \"^22.1.0\"\n  }\n}",
+      "after": "  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"@babel/core\": \"^7.22.5\",\n    \"@babel/preset-env\": \"^7.22.5\",\n    \"babel-jest\": \"^29.5.0\",\n    \"jest\": \"^29.5.0\",\n    \"jest-environment-jsdom\": \"^29.5.0\",\n    \"jest-localstorage-mock\": \"^2.4.26\",\n    \"jsdom\": \"^22.1.0\"\n  },\n  \"dependencies\": {\n    \"text-encoding\": \"^0.7.0\"\n  }\n}",
+      "total_deletions": 0,
+      "total_additions": 7
+    }
+  ]
+}

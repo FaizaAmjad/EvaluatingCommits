@@ -1,0 +1,97 @@
+{
+  "sha": "ac36c113268a2badf8314cfbb30297671611b8e8",
+  "url": "https://github.com/tisztamo/Junior/commit/ac36c113268a2badf8314cfbb30297671611b8e8",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Rename build:docs to build:doc in package.json https://chat.openai.com/share/1775107d-e050-4f7c-86f1-dce69a37b40f",
+  "authorAt": "2023-07-23T21:15:35.000+02:00",
+  "commitAt": "2023-07-23T21:15:35.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Rename build:docs to build:doc",
+    "url": "https://chat.openai.com/share/1775107d-e050-4f7c-86f1-dce69a37b40f",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/ac36c113268a2badf8314cfbb30297671611b8e8",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Rename build:docs to build:doc in package.json https://chat.openai.com/share/1775107d-e050-4f7c-86f1-dce69a37b40f"
+    },
+    "status": 200,
+    "dateOfConversation": "July 23, 2023",
+    "dateOfAccess": "2023-08-31 06:31:51.342808",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 737,
+    "tokensOfAnswers": 480,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "ac36c113268a2badf8314cfbb30297671611b8e8_s1_p1",
+        "prompt": "# Working set\n\n./package.json:\n```\n{\n  \"name\": \"@aijunior/dev\",\n  \"version\": \"0.0.1\",\n  \"description\": \"Your AI Contributor\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"junior\": \"src/main.js\",\n    \"junior-web\": \"src/web.js\"\n  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"build:docs\": \"node ./src/doc/buildDoc.js\"\n  },\n  \"keywords\": [\n    \"cli\",\n    \"uppercase\"\n  ],\n  \"author\": \"\",\n  \"license\": \"GPL\",\n  \"dependencies\": {\n    \"chatgpt\": \"^5.2.4\",\n    \"clipboard-copy\": \"^4.0.1\",\n    \"cors\": \"^2.8.5\",\n    \"ejs\": \"^3.1.9\",\n    \"express\": \"^4.18.2\",\n    \"js-yaml\": \"^4.1.0\",\n    \"marked\": \"^5.1.0\",\n    \"postcss-nested\": \"^6.0.1\",\n    \"simple-git\": \"^3.19.1\",\n    \"solid-js\": \"^1.7.7\",\n    \"vite\": \"^4.3.9\",\n    \"vite-plugin-solid\": \"^2.7.0\",\n    \"ws\": \"^8.13.0\"\n  },\n  \"directories\": {\n    \"doc\": \"doc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/tisztamo/Junior.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/Junior/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/Junior#readme\",\n  \"devDependencies\": {\n    \"@types/js-yaml\": \"^4.0.5\",\n    \"autoprefixer\": \"^10.4.14\",\n    \"babel-preset-solid\": \"^1.7.7\",\n    \"highlight.js\": \"^11.8.0\",\n    \"markdown-it\": \"^13.0.1\",\n    \"postcss\": \"^8.4.26\",\n    \"tailwindcss\": \"^3.3.3\"\n  }\n}\n\n```\n\n\n# Task\n\nFix the following issue!\n\nRename build:docs to build:doc\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files without substitution.\nAssume OSX.\nnpm and jq are installed.\nDo NOT write any text outside the script (the plan goes into it)!\n\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\n# Goal: [Task description, max 7 words]\n# Plan:\n# 1. [...]\n\n[Commands solving the task]\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]This script uses the jq command-line utility to process JSON data. The del function is used to remove the build:docs property from the scripts object. Then it uses the += operator to add a new build:doc property with the same value as the removed build:docs. The > operator is used to write the output to a temporary file, and then the mv command is used to replace the original package.json with the modified version.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\n# Goal: Rename build:docs to build:doc in package.json\n# Plan:\n# 1. Use jq (a lightweight and flexible command-line JSON processor) to modify the \"scripts\" object in the package.json file.\n# 2. Use jq to remove the \"build:docs\" property.\n# 3. Use jq to add a new property \"build:doc\" with the same value as the removed \"build:docs\".\n# 4. Save the modified JSON back to package.json.\n\njq '(.scripts | del(.[\"build:docs\"])) | .scripts += {\"build:doc\": \"node ./src/doc/buildDoc.js\"}' ./package.json > temp.json && mv temp.json package.json\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "ac36c113268a2badf8314cfbb30297671611b8e8_s1_p2",
+        "prompt": "It destroyed package.json, this is the content now:\n\n{\n  \"cli\": \"node src/main.js\",\n  \"start\": \"node src/web.js\",\n  \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n  \"scripts\": {\n    \"build:doc\": \"node ./src/doc/buildDoc.js\"\n  }\n}\n",
+        "answer": "I apologize for the confusion. I see where the mistake happened. The script failed to preserve the other properties of the package.json file. It only preserved the scripts object, causing the rest of the package.json properties to be deleted.Here is a corrected script:[CODE_BLOCK_0]The with_entries function allows us to transform each entry in the object (which are key-value pairs). Inside with_entries, we use an if condition to check if the key equals \"build:docs\". If it does, we change the key to \"build:doc\". Otherwise, we leave the entry unchanged. This way, we only rename the desired property while leaving the rest of the package.json file intact.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\n# Goal: Rename build:docs to build:doc in package.json\n# Plan:\n# 1. Use jq to rename the \"build:docs\" property to \"build:doc\" in the \"scripts\" object of the package.json file.\n# 2. Save the modified JSON back to package.json.\n\njq '.scripts |= with_entries(if .key == \"build:docs\" then .key = \"build:doc\" else . end)' ./package.json > temp.json && mv temp.json package.json\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": ".babelrc",
+      "before": "",
+      "after": "{\n  \"presets\": [\n    [\"@babel/preset-env\", {\n      \"targets\": {\n        \"node\": \"current\"\n      }\n    }]\n  ]\n}",
+      "total_deletions": 0,
+      "total_additions": 9
+    },
+    {
+      "filename": "game.js",
+      "before": "function startPlaying() {\n    var rikishi = document.querySelector('#rikishi').value;\n    var user = getUser();\n    var picks = getPicks(user);\n    var message = \"You selected: \" + rikishi + \"\\nPrevious Picks: \" + JSON.stringify(picks);\n    updatePicks(user, rikishi); // Update the picks with the new selection\n    return message;\n}\n\nfunction getUser() {\n    // get user from local storage\n    var user = localStorage.getItem('user');\n    if (!user) {\n        user = 'admin';\n        localStorage.setItem('user', user);\n    }\n    return user;\n}\n\nfunction getPicks(user) {\n    var picks = JSON.parse(localStorage.getItem(user));\n    if (!picks) {\n        picks = {};\n    }\n    return picks;\n}\n\nfunction updatePicks(user, rikishi) {\n    var picks = getPicks(user);\n    var currentContest = new Date().getMonth();\n    if ([0, 2, 4, 6, 8, 10].includes(currentContest)) {\n        var contestName = new Date().toLocaleString('default', { month: 'long' }) + ' ' + new Date().getFullYear();\n        picks[contestName] = rikishi;\n        localStorage.setItem(user, JSON.stringify(picks));\n    }\n}\n\nfunction switchUser() {\n    var newUser = document.querySelector('#userSwitch').value;\n    localStorage.setItem('user', newUser);\n    document.querySelector('#user').textContent = 'Current user: ' + newUser;;\n}\n\nfunction backfillResults() {\n    var user = getUser();\n    var contestName = document.querySelector('#backfillContest').value;\n    var rikishi = document.querySelector('#backfillRikishi').value;\n    var picks = getPicks(user);\n    picks[contestName] = rikishi;\n    localStorage.setItem(user, JSON.stringify(picks));\n}\n\nfunction initialize() {\n    var user = getUser();\n    var userElement = document.querySelector('#user');\n    if (userElement) {\n        userElement.textContent = 'Current user: ' + user;\n    }\n}\n\ninitialize();\n\nmodule.exports = { startPlaying, switchUser, backfillResults, initialize };\n",
+      "after": "export default class Game {\n    constructor() {\n        this.user = this.getUser();\n        this.initialize();\n    }\n\n    startPlaying() {\n        var rikishi = document.querySelector('#rikishi').value;\n        var picks = this.getPicks();\n        var message = \"You selected: \" + rikishi + \"\\nPrevious Picks: \" + JSON.stringify(picks);\n        this.updatePicks(rikishi); // Update the picks with the new selection\n        return message;\n    }\n\n    getUser() {\n        // get user from local storage\n        var user = localStorage.getItem('user');\n        if (!user) {\n            user = 'admin';\n            localStorage.setItem('user', user);\n        }\n        return user;\n    }\n\n    getPicks() {\n        var picks = JSON.parse(localStorage.getItem(this.user));\n        if (!picks) {\n            picks = {};\n        }\n        return picks;\n    }\n\n    updatePicks(rikishi) {\n        var picks = this.getPicks();\n        var currentContest = new Date().getMonth();\n        if ([0, 2, 4, 6, 8, 10].includes(currentContest)) {\n            var contestName = new Date().toLocaleString('default', { month: 'long' }) + ' ' + new Date().getFullYear();\n            picks[contestName] = rikishi;\n            localStorage.setItem(this.user, JSON.stringify(picks));\n        }\n    }\n\n    switchUser() {\n        var newUser = document.querySelector('#userSwitch').value;\n        localStorage.setItem('user', newUser);\n        document.querySelector('#user').textContent = 'Current user: ' + newUser;\n        this.user = newUser;\n    }\n\n    backfillResults() {\n        var contestName = document.querySelector('#backfillContest').value;\n        var rikishi = document.querySelector('#backfillRikishi').value;\n        var picks = this.getPicks();\n        picks[contestName] = rikishi;\n        localStorage.setItem(this.user, JSON.stringify(picks));\n    }\n\n    initialize() {\n        var userElement = document.querySelector('#user');\n        if (userElement) {\n            userElement.textContent = 'Current user: ' + this.user;\n        }\n    }\n}\n\nfunction initGame() {\n  const game = new Game();\n\n  document.querySelector(\"#startPlayingButton\").addEventListener('click', () => game.startPlaying());\n  document.querySelector(\"#switchUserButton\").addEventListener('click', () => game.switchUser());\n  document.querySelector(\"#backfillResultsButton\").addEventListener('click', () => game.backfillResults());\n}\n\nif (typeof window !== 'undefined') {\n    window.onload = initGame;\n}",
+      "total_deletions": 50,
+      "total_additions": 63
+    },
+    {
+      "filename": "game.test.js",
+      "before": "const jsdom = require('jsdom');\nconst { JSDOM } = jsdom;\n\nconst dom = new JSDOM('<!doctype html><html><body></body></html>', {\n    url: \"http://localhost/\",\n    resources: \"usable\",\n    runScripts: \"dangerously\",\n});\n\nglobal.window = dom.window;\nglobal.document = dom.window.document;\nglobal.localStorage = dom.window.localStorage;\n\nconst { startPlaying, switchUser, backfillResults, initialize } = require('./game');\n\nbeforeEach(() => {\n    localStorage.clear(); // clear localStorage before each test\n    // Reset the HTML body before each test\n    document.body.innerHTML = `\n        <p id=\"user\"></p>\n        <select id=\"rikishi\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n    `;\n    initialize();\n});\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    localStorage.setItem('user', 'testUser');\n    localStorage.setItem('testUser', JSON.stringify({ 'July 2023': '1' })); // Assume a previous pick\n    document.querySelector('#rikishi').value = '1';\n    const result = startPlaying();\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n",
+      "after": "import 'jest-localstorage-mock';\nimport Game from './game.js';\n\nlet game;\n\nbeforeEach(() => {\n    localStorage.clear();\n    // set localStorage values\n    localStorage.setItem('user', 'testUser');\n    localStorage.setItem('testUser', JSON.stringify({ 'July 2023': '1' }));\n\n    document.body.innerHTML = `\n        <p id=\"user\"></p>\n        <select id=\"rikishi\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n    `;\n    game = new Game();\n});\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    document.querySelector('#rikishi').value = '1';\n    const result = game.startPlaying();\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n",
+      "total_deletions": 19,
+      "total_additions": 10
+    },
+    {
+      "filename": "jest.config.js",
+      "before": "",
+      "after": "module.exports = {\n  setupFilesAfterEnv: ['./jest.setup.js'],\n  testEnvironment: 'jsdom',\n  transform: {\n    '^.+\\\\.js$': 'babel-jest',\n  },\n};",
+      "total_deletions": 0,
+      "total_additions": 7
+    },
+    {
+      "filename": "jest.setup.js",
+      "before": "",
+      "after": "import 'jest-localstorage-mock';\nimport { TextEncoder, TextDecoder } from 'text-encoding';\n\nglobal.TextEncoder = TextEncoder;\nglobal.TextDecoder = TextDecoder;",
+      "total_deletions": 0,
+      "total_additions": 5
+    },
+    {
+      "filename": "package.json",
+      "before": "  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"jest\": \"^29.5.0\",\n    \"jest-localstorage-mock\": \"^2.4.26\",\n    \"jsdom\": \"^22.1.0\"\n  }\n}",
+      "after": "  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"@babel/core\": \"^7.22.5\",\n    \"@babel/preset-env\": \"^7.22.5\",\n    \"babel-jest\": \"^29.5.0\",\n    \"jest\": \"^29.5.0\",\n    \"jest-environment-jsdom\": \"^29.5.0\",\n    \"jest-localstorage-mock\": \"^2.4.26\",\n    \"jsdom\": \"^22.1.0\"\n  },\n  \"dependencies\": {\n    \"text-encoding\": \"^0.7.0\"\n  }\n}",
+      "total_deletions": 0,
+      "total_additions": 7
+    }
+  ]
+}

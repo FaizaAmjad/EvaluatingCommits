@@ -1,0 +1,121 @@
+{
+  "sha": "23664217eac5d87d4404a51b921f37d7475643a1",
+  "url": "https://github.com/tisztamo/Junior/commit/23664217eac5d87d4404a51b921f37d7475643a1",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Improve documentation with cover page https://chat.openai.com/share/7aa422af-fcdc-424a-8be8-3af33327db5f",
+  "authorAt": "2023-08-29T20:32:06.000+02:00",
+  "commitAt": "2023-08-29T20:32:06.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Improve Junior's Documentation",
+    "url": "https://chat.openai.com/share/7aa422af-fcdc-424a-8be8-3af33327db5f",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/23664217eac5d87d4404a51b921f37d7475643a1",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Improve documentation with cover page https://chat.openai.com/share/7aa422af-fcdc-424a-8be8-3af33327db5f"
+    },
+    "status": 200,
+    "dateOfConversation": "August 29, 2023",
+    "dateOfAccess": "2023-08-31 06:23:36.074164",
+    "numberOfPrompts": 4,
+    "tokensOfPrompts": 1339,
+    "tokensOfAnswers": 1791,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "23664217eac5d87d4404a51b921f37d7475643a1_s1_p1",
+        "prompt": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\n```\n./\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .github/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 .vscode/...\n\u251c\u2500\u2500 LICENSE.txt\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 change.sh\n\u251c\u2500\u2500 cypress/...\n\u251c\u2500\u2500 cypress.config.js\n\u251c\u2500\u2500 docs/...\n\u251c\u2500\u2500 integrations/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 scripts/...\n\u251c\u2500\u2500 src/...\n\n```\n```\ndocs/\n\u251c\u2500\u2500 .nojekyll\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 _sidebar.md\n\u251c\u2500\u2500 assets/...\n\u251c\u2500\u2500 descriptor.md\n\u251c\u2500\u2500 docsifyConfig.js\n\u251c\u2500\u2500 index.html\n\u251c\u2500\u2500 open_jobs.md\n\u251c\u2500\u2500 roadmap.md\n\u251c\u2500\u2500 screenshot.png\n\u251c\u2500\u2500 usage.md\n\u251c\u2500\u2500 web.md\n\n```\ndocs/README.md:\n```\n# Junior - Your AI-first IDE \n\n[![Video: Junior codes itself](/assets/video_cover.jpg)](https://youtu.be/NL4uFJSvfW0)\n\n*\"Video: Junior codes itself\"*\n\nJunior is an **AI-first IDE** designed specifically for professional programmers who have a preference for customizing and fine-tuning their tools. \n\nWith Junior, developers get a unique space where they can work hand-in-hand with AI throughout the development process. By using structured task descriptors and spotlighting relevant parts of a project, tasks like code implementation, documentation, and testing can be seamlessly delegated to Junior.\n\nAt its core, Junior embraces a design philosophy that prioritizes simplicity, configurability, and auditability. This ensures that the platform remains both accessible to its users and adaptable to a variety of use-cases.\n\nJunior has been crafted exclusively with AI-powered coding right from its early days, way before its core functionalities were in place. This demonstrates Junior's pioneering approach to harnessing the potential of artificial intelligence in software development.\n\n## Getting Started\n\nFor guidance on using Junior, please refer to [usage.md](usage.md).\n\n## Contributing and Support\n\nYour contributions make a difference! At Junior, we value the collaboration of the community. Your role as a contributor is to monitor the development, provide detailed prompts, and thoroughly review the generated outcomes.\n\nFor questions or assistance, please raise an issue in our GitHub repository.\n\n**Note:** We've tested Junior primarily with the GPT-4 model. However, you're welcome to experiment with similarly capable models and share your findings. It's not compatible with GPT-3.5.\n\n```\n\ndocs/index.html:\n```\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Document</title>\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />\n  <meta name=\"description\" content=\"Description\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=1.0\">\n  <link rel=\"icon\" href=\"assets/favicon.ico\" type=\"image/x-icon\">\n  <link rel=\"stylesheet\" href=\"//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css\">\n  <link rel=\"stylesheet\" href=\"assets/styles.css\">\n</head>\n<body>\n  <div id=\"app\"></div>\n  <script src=\"docsifyConfig.js\"></script>\n  <!-- Docsify v4 -->\n  <script src=\"//cdn.jsdelivr.net/npm/docsify@4\"></script>\n</body>\n</html>\n\n```\n\ndocs/docsifyConfig.js:\n```\nwindow.$docsify = {\n  name: 'Junior',\n  repo: 'https://github.com/tisztamo/Junior',\n  loadSidebar: true,\n  autoHeader: true,\n  logo: \"assets/logo.svg\",\n  nameLink: 'https://github.com/tisztamo/Junior'\n}\n\n```\n\ndocs/assets/styles.css:\n```\n.app-name-link img {\n  max-width: 70px;\n}\n\niframe {\n  margin: 16px;\n}\n\n```\n\ndocs/assets/logo.svg:\n```\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\">\n    <rect x=\"0\" y=\"0\" rx=\"10\" ry=\"10\" width=\"100\" height=\"30\" style=\"fill:rgb(59 130 246);\" />\n    <rect x=\"0\" y=\"33\" rx=\"10\" ry=\"10\" width=\"100\" height=\"30\" style=\"fill:rgb(253, 186, 116);\" />\n    <rect x=\"0\" y=\"66\" rx=\"10\" ry=\"10\" width=\"48\" height=\"34\" style=\"fill:rgb(185, 28, 28);\" />\n    <rect x=\"52\" y=\"66\" rx=\"10\" ry=\"10\" width=\"48\" height=\"34\" style=\"fill:rgb(21, 128, 61);\" />\n</svg>\n\n```\n\n\n# Task\n\nImprove the documentation!\n\nCreate a cover page for the docs, with \"You are the Pro, Junior codes\" as the main message. Use the logo colors extensively.\n\n\nDo not create backup files.\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Improve documentation with cover page\"\necho \"Plan:\"\necho \"1. Create a new cover.md file to serve as the cover page for the documentation.\"\necho \"2. Update docsifyConfig.js to make cover.md as the landing page.\"\necho \"3. Update styles.css to include styles corresponding to the logo colors for the cover page.\"\n\n# Step 1: Create cover.md file with the main message and extensive use of logo colors.\ncat > ./docs/cover.md << 'EOF'\n# <span style=\"color:rgb(59, 130, 246);\">You are the Pro,</span> <span style=\"color:rgb(253, 186, 116);\">Junior</span> <span style=\"color:rgb(185, 28, 28);\">codes</span>\n\nWelcome to **Junior**, your AI-first IDE.\n\n**Navigate through the following sections to know more:**\n- [Getting Started](usage.md)\n- [Open Jobs](open_jobs.md)\n- [Roadmap](roadmap.md)\n\nEOF\n\n# Step 2: Update docsifyConfig.js to make cover.md the landing page\ncat > ./docs/docsifyConfig.js << 'EOF'\nwindow.$docsify = {\n  name: 'Junior',\n  repo: 'https://github.com/tisztamo/Junior',\n  loadSidebar: true,\n  autoHeader: true,\n  logo: \"assets/logo.svg\",\n  nameLink: 'https://github.com/tisztamo/Junior',\n  homepage: 'cover.md'\n}\nEOF\n\n# Step 3: Update styles.css to use logo colors extensively for the cover page\ncat > ./docs/assets/styles.css << 'EOF'\n.app-name-link img {\n  max-width: 70px;\n}\n\niframe {\n  margin: 16px;\n}\n\n/* Adding logo colors to cover page */\n.cover-color-1 {\n  color: rgb(59, 130, 246);\n}\n\n.cover-color-2 {\n  color: rgb(253, 186, 116);\n}\n\n.cover-color-3 {\n  color: rgb(185, 28, 28);\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "23664217eac5d87d4404a51b921f37d7475643a1_s1_p2",
+        "prompt": " coverpage: true adds the cover page. no need for homepage config",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Improve documentation with cover page\"\necho \"Plan:\"\necho \"1. Create a new cover.md file to serve as the cover page for the documentation.\"\necho \"2. Update docsifyConfig.js to enable the cover page feature.\"\necho \"3. Update styles.css to include styles corresponding to the logo colors for the cover page.\"\n\n# Step 1: Create cover.md file with the main message and extensive use of logo colors.\ncat > ./docs/cover.md << 'EOF'\n# <span style=\"color:rgb(59, 130, 246);\">You are the Pro,</span> <span style=\"color:rgb(253, 186, 116);\">Junior</span> <span style=\"color:rgb(185, 28, 28);\">codes</span>\n\nWelcome to **Junior**, your AI-first IDE.\n\n**Navigate through the following sections to know more:**\n- [Getting Started](usage.md)\n- [Open Jobs](open_jobs.md)\n- [Roadmap](roadmap.md)\n\nEOF\n\n# Step 2: Update docsifyConfig.js to enable the cover page feature.\ncat > ./docs/docsifyConfig.js << 'EOF'\nwindow.$docsify = {\n  name: 'Junior',\n  repo: 'https://github.com/tisztamo/Junior',\n  loadSidebar: true,\n  autoHeader: true,\n  logo: \"assets/logo.svg\",\n  nameLink: 'https://github.com/tisztamo/Junior',\n  coverpage: true\n}\nEOF\n\n# Step 3: Update styles.css to use logo colors extensively for the cover page\ncat > ./docs/assets/styles.css << 'EOF'\n.app-name-link img {\n  max-width: 70px;\n}\n\niframe {\n  margin: 16px;\n}\n\n/* Adding logo colors to cover page */\n.cover-color-1 {\n  color: rgb(59, 130, 246);\n}\n\n.cover-color-2 {\n  color: rgb(253, 186, 116);\n}\n\n.cover-color-3 {\n  color: rgb(185, 28, 28);\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "23664217eac5d87d4404a51b921f37d7475643a1_s1_p3",
+        "prompt": "Use the new classes",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Improve documentation with cover page\"\necho \"Plan:\"\necho \"1. Create a new cover.md file to serve as the cover page for the documentation.\"\necho \"2. Update docsifyConfig.js to enable the cover page feature.\"\necho \"3. Update styles.css to include styles corresponding to the logo colors for the cover page.\"\necho \"4. Use the new classes in the cover.md file.\"\n\n# Step 1: Create cover.md file with the main message.\ncat > ./docs/cover.md << 'EOF'\n# <span class=\"cover-color-1\">You are the Pro,</span> <span class=\"cover-color-2\">Junior</span> <span class=\"cover-color-3\">codes</span>\n\nWelcome to **Junior**, your AI-first IDE.\n\n**Navigate through the following sections to know more:**\n- [Getting Started](usage.md)\n- [Open Jobs](open_jobs.md)\n- [Roadmap](roadmap.md)\n\nEOF\n\n# Step 2: Update docsifyConfig.js to enable the cover page feature.\ncat > ./docs/docsifyConfig.js << 'EOF'\nwindow.$docsify = {\n  name: 'Junior',\n  repo: 'https://github.com/tisztamo/Junior',\n  loadSidebar: true,\n  autoHeader: true,\n  logo: \"assets/logo.svg\",\n  nameLink: 'https://github.com/tisztamo/Junior',\n  coverpage: true\n}\nEOF\n\n# Step 3: Update styles.css to use logo colors extensively for the cover page\ncat > ./docs/assets/styles.css << 'EOF'\n.app-name-link img {\n  max-width: 70px;\n}\n\niframe {\n  margin: 16px;\n}\n\n/* Adding logo colors to cover page */\n.cover-color-1 {\n  color: rgb(59, 130, 246);\n}\n\n.cover-color-2 {\n  color: rgb(253, 186, 116);\n}\n\n.cover-color-3 {\n  color: rgb(185, 28, 28);\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "23664217eac5d87d4404a51b921f37d7475643a1_s1_p4",
+        "prompt": "No need for the navigation section.",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Improve documentation with cover page\"\necho \"Plan:\"\necho \"1. Create a new cover.md file to serve as the cover page for the documentation.\"\necho \"2. Update docsifyConfig.js to enable the cover page feature.\"\necho \"3. Update styles.css to include styles corresponding to the logo colors for the cover page.\"\necho \"4. Use the new classes in the cover.md file.\"\n\n# Step 1: Create cover.md file with the main message.\ncat > ./docs/cover.md << 'EOF'\n# <span class=\"cover-color-1\">You are the Pro,</span> <span class=\"cover-color-2\">Junior</span> <span class=\"cover-color-3\">codes</span>\n\nWelcome to **Junior**, your AI-first IDE.\n\nEOF\n\n# Step 2: Update docsifyConfig.js to enable the cover page feature.\ncat > ./docs/docsifyConfig.js << 'EOF'\nwindow.$docsify = {\n  name: 'Junior',\n  repo: 'https://github.com/tisztamo/Junior',\n  loadSidebar: true,\n  autoHeader: true,\n  logo: \"assets/logo.svg\",\n  nameLink: 'https://github.com/tisztamo/Junior',\n  coverpage: true\n}\nEOF\n\n# Step 3: Update styles.css to use logo colors extensively for the cover page\ncat > ./docs/assets/styles.css << 'EOF'\n.app-name-link img {\n  max-width: 70px;\n}\n\niframe {\n  margin: 16px;\n}\n\n/* Adding logo colors to cover page */\n.cover-color-1 {\n  color: rgb(59, 130, 246);\n}\n\n.cover-color-2 {\n  color: rgb(253, 186, 116);\n}\n\n.cover-color-3 {\n  color: rgb(185, 28, 28);\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": ".babelrc",
+      "before": "",
+      "after": "{\n  \"presets\": [\n    [\"@babel/preset-env\", {\n      \"targets\": {\n        \"node\": \"current\"\n      }\n    }]\n  ]\n}",
+      "total_deletions": 0,
+      "total_additions": 9
+    },
+    {
+      "filename": "game.js",
+      "before": "function startPlaying() {\n    var rikishi = document.querySelector('#rikishi').value;\n    var user = getUser();\n    var picks = getPicks(user);\n    var message = \"You selected: \" + rikishi + \"\\nPrevious Picks: \" + JSON.stringify(picks);\n    updatePicks(user, rikishi); // Update the picks with the new selection\n    return message;\n}\n\nfunction getUser() {\n    // get user from local storage\n    var user = localStorage.getItem('user');\n    if (!user) {\n        user = 'admin';\n        localStorage.setItem('user', user);\n    }\n    return user;\n}\n\nfunction getPicks(user) {\n    var picks = JSON.parse(localStorage.getItem(user));\n    if (!picks) {\n        picks = {};\n    }\n    return picks;\n}\n\nfunction updatePicks(user, rikishi) {\n    var picks = getPicks(user);\n    var currentContest = new Date().getMonth();\n    if ([0, 2, 4, 6, 8, 10].includes(currentContest)) {\n        var contestName = new Date().toLocaleString('default', { month: 'long' }) + ' ' + new Date().getFullYear();\n        picks[contestName] = rikishi;\n        localStorage.setItem(user, JSON.stringify(picks));\n    }\n}\n\nfunction switchUser() {\n    var newUser = document.querySelector('#userSwitch').value;\n    localStorage.setItem('user', newUser);\n    document.querySelector('#user').textContent = 'Current user: ' + newUser;;\n}\n\nfunction backfillResults() {\n    var user = getUser();\n    var contestName = document.querySelector('#backfillContest').value;\n    var rikishi = document.querySelector('#backfillRikishi').value;\n    var picks = getPicks(user);\n    picks[contestName] = rikishi;\n    localStorage.setItem(user, JSON.stringify(picks));\n}\n\nfunction initialize() {\n    var user = getUser();\n    var userElement = document.querySelector('#user');\n    if (userElement) {\n        userElement.textContent = 'Current user: ' + user;\n    }\n}\n\ninitialize();\n\nmodule.exports = { startPlaying, switchUser, backfillResults, initialize };\n",
+      "after": "export default class Game {\n    constructor() {\n        this.user = this.getUser();\n        this.initialize();\n    }\n\n    startPlaying() {\n        var rikishi = document.querySelector('#rikishi').value;\n        var picks = this.getPicks();\n        var message = \"You selected: \" + rikishi + \"\\nPrevious Picks: \" + JSON.stringify(picks);\n        this.updatePicks(rikishi); // Update the picks with the new selection\n        return message;\n    }\n\n    getUser() {\n        // get user from local storage\n        var user = localStorage.getItem('user');\n        if (!user) {\n            user = 'admin';\n            localStorage.setItem('user', user);\n        }\n        return user;\n    }\n\n    getPicks() {\n        var picks = JSON.parse(localStorage.getItem(this.user));\n        if (!picks) {\n            picks = {};\n        }\n        return picks;\n    }\n\n    updatePicks(rikishi) {\n        var picks = this.getPicks();\n        var currentContest = new Date().getMonth();\n        if ([0, 2, 4, 6, 8, 10].includes(currentContest)) {\n            var contestName = new Date().toLocaleString('default', { month: 'long' }) + ' ' + new Date().getFullYear();\n            picks[contestName] = rikishi;\n            localStorage.setItem(this.user, JSON.stringify(picks));\n        }\n    }\n\n    switchUser() {\n        var newUser = document.querySelector('#userSwitch').value;\n        localStorage.setItem('user', newUser);\n        document.querySelector('#user').textContent = 'Current user: ' + newUser;\n        this.user = newUser;\n    }\n\n    backfillResults() {\n        var contestName = document.querySelector('#backfillContest').value;\n        var rikishi = document.querySelector('#backfillRikishi').value;\n        var picks = this.getPicks();\n        picks[contestName] = rikishi;\n        localStorage.setItem(this.user, JSON.stringify(picks));\n    }\n\n    initialize() {\n        var userElement = document.querySelector('#user');\n        if (userElement) {\n            userElement.textContent = 'Current user: ' + this.user;\n        }\n    }\n}\n\nfunction initGame() {\n  const game = new Game();\n\n  document.querySelector(\"#startPlayingButton\").addEventListener('click', () => game.startPlaying());\n  document.querySelector(\"#switchUserButton\").addEventListener('click', () => game.switchUser());\n  document.querySelector(\"#backfillResultsButton\").addEventListener('click', () => game.backfillResults());\n}\n\nif (typeof window !== 'undefined') {\n    window.onload = initGame;\n}",
+      "total_deletions": 50,
+      "total_additions": 63
+    },
+    {
+      "filename": "game.test.js",
+      "before": "const jsdom = require('jsdom');\nconst { JSDOM } = jsdom;\n\nconst dom = new JSDOM('<!doctype html><html><body></body></html>', {\n    url: \"http://localhost/\",\n    resources: \"usable\",\n    runScripts: \"dangerously\",\n});\n\nglobal.window = dom.window;\nglobal.document = dom.window.document;\nglobal.localStorage = dom.window.localStorage;\n\nconst { startPlaying, switchUser, backfillResults, initialize } = require('./game');\n\nbeforeEach(() => {\n    localStorage.clear(); // clear localStorage before each test\n    // Reset the HTML body before each test\n    document.body.innerHTML = `\n        <p id=\"user\"></p>\n        <select id=\"rikishi\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n    `;\n    initialize();\n});\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    localStorage.setItem('user', 'testUser');\n    localStorage.setItem('testUser', JSON.stringify({ 'July 2023': '1' })); // Assume a previous pick\n    document.querySelector('#rikishi').value = '1';\n    const result = startPlaying();\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n",
+      "after": "import 'jest-localstorage-mock';\nimport Game from './game.js';\n\nlet game;\n\nbeforeEach(() => {\n    localStorage.clear();\n    // set localStorage values\n    localStorage.setItem('user', 'testUser');\n    localStorage.setItem('testUser', JSON.stringify({ 'July 2023': '1' }));\n\n    document.body.innerHTML = `\n        <p id=\"user\"></p>\n        <select id=\"rikishi\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n    `;\n    game = new Game();\n});\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    document.querySelector('#rikishi').value = '1';\n    const result = game.startPlaying();\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n",
+      "total_deletions": 19,
+      "total_additions": 10
+    },
+    {
+      "filename": "jest.config.js",
+      "before": "",
+      "after": "module.exports = {\n  setupFilesAfterEnv: ['./jest.setup.js'],\n  testEnvironment: 'jsdom',\n  transform: {\n    '^.+\\\\.js$': 'babel-jest',\n  },\n};",
+      "total_deletions": 0,
+      "total_additions": 7
+    },
+    {
+      "filename": "jest.setup.js",
+      "before": "",
+      "after": "import 'jest-localstorage-mock';\nimport { TextEncoder, TextDecoder } from 'text-encoding';\n\nglobal.TextEncoder = TextEncoder;\nglobal.TextDecoder = TextDecoder;",
+      "total_deletions": 0,
+      "total_additions": 5
+    },
+    {
+      "filename": "package.json",
+      "before": "  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"jest\": \"^29.5.0\",\n    \"jest-localstorage-mock\": \"^2.4.26\",\n    \"jsdom\": \"^22.1.0\"\n  }\n}",
+      "after": "  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"@babel/core\": \"^7.22.5\",\n    \"@babel/preset-env\": \"^7.22.5\",\n    \"babel-jest\": \"^29.5.0\",\n    \"jest\": \"^29.5.0\",\n    \"jest-environment-jsdom\": \"^29.5.0\",\n    \"jest-localstorage-mock\": \"^2.4.26\",\n    \"jsdom\": \"^22.1.0\"\n  },\n  \"dependencies\": {\n    \"text-encoding\": \"^0.7.0\"\n  }\n}",
+      "total_deletions": 0,
+      "total_additions": 7
+    }
+  ]
+}

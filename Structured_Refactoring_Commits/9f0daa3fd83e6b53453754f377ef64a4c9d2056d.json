@@ -1,0 +1,121 @@
+{
+  "sha": "9f0daa3fd83e6b53453754f377ef64a4c9d2056d",
+  "url": "https://github.com/tisztamo/Junior/commit/9f0daa3fd83e6b53453754f377ef64a4c9d2056d",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Implementing code validation and refactoring https://chat.openai.com/share/7aa06d1a-ed8f-4f24-99df-0f57d409150e",
+  "authorAt": "2023-07-26T13:09:27.000+02:00",
+  "commitAt": "2023-07-26T13:09:27.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Code Validation & Refactoring",
+    "url": "https://chat.openai.com/share/7aa06d1a-ed8f-4f24-99df-0f57d409150e",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/9f0daa3fd83e6b53453754f377ef64a4c9d2056d",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Implementing code validation and refactoring https://chat.openai.com/share/7aa06d1a-ed8f-4f24-99df-0f57d409150e"
+    },
+    "status": 200,
+    "dateOfConversation": "July 26, 2023",
+    "dateOfAccess": "2023-08-31 06:27:51.028091",
+    "numberOfPrompts": 4,
+    "tokensOfPrompts": 620,
+    "tokensOfAnswers": 1581,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "9f0daa3fd83e6b53453754f377ef64a4c9d2056d_s1_p1",
+        "prompt": "# Working set\n\nsrc/execute/executeAndForwardOutput.js:\n```\nimport { spawn } from 'child_process';\nimport { rl } from '../config.js';\n\nfunction executeAndForwardOutput(code, next) {\n  const child = spawn(code, { shell: true });\n  let commandOutput = '';\n\n  child.stdout.on('data', (data) => {\n    console.log(`${data}`);\n    commandOutput += data;\n  });\n\n  child.stderr.on('data', (data) => {\n    console.error(`${data}`);\n    commandOutput += data;\n  });\n\n  child.on('close', (code) => {\n    next(code, commandOutput);\n  });\n}\n\nexport { executeAndForwardOutput };\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nCheck if the code starts with a shebang and throw if not\nSave the code to ./change.sh and the run ./change.sh instead of feeding the lines directly to the shell\nremove the unused import &#34;rl&#34;\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Implementing code validation and refactoring\"\necho \"Plan:\"\necho \"1. Remove the unused import 'rl' from executeAndForwardOutput.js\"\necho \"2. Update the executeAndForwardOutput function to check if the code starts with a shebang\"\necho \"3. Save the code to a file './change.sh' and run it instead of feeding the lines directly to the shell\"\n\n# Step 1: Removing unused import 'rl'\ncat << 'EOF' > ./src/execute/executeAndForwardOutput.js\nimport { spawn } from 'child_process';\n\nfunction executeAndForwardOutput(code, next) {\n  const child = spawn(code, { shell: true });\n  let commandOutput = '';\n\n  child.stdout.on('data', (data) => {\n    console.log(`${data}`);\n    commandOutput += data;\n  });\n\n  child.stderr.on('data', (data) => {\n    console.error(`${data}`);\n    commandOutput += data;\n  });\n\n  child.on('close', (code) => {\n    next(code, commandOutput);\n  });\n}\n\nexport { executeAndForwardOutput };\nEOF\n\n# Step 2 and 3: Updating executeAndForwardOutput function to validate shebang and write code to file\ncat << 'EOF' > ./src/execute/executeAndForwardOutput.js\nimport { spawn, writeFile } from 'fs/promises';\nimport { spawn as spawnSync } from 'child_process';\n\nfunction executeAndForwardOutput(code, next) {\n  // Check if the code starts with a shebang\n  if (!code.startsWith('#!')) {\n    throw new Error('Code does not start with a shebang');\n  }\n\n  // Write code to change.sh\n  writeFile('./change.sh', code)\n    .then(() => {\n      const child = spawnSync('./change.sh', { shell: true });\n      let commandOutput = '';\n\n      child.stdout.on('data', (data) => {\n        console.log(`${data}`);\n        commandOutput += data;\n      });\n\n      child.stderr.on('data', (data) => {\n        console.error(`${data}`);\n        commandOutput += data;\n      });\n\n      child.on('close', (code) => {\n        next(code, commandOutput);\n      });\n    })\n    .catch((err) => {\n      console.error(err);\n    });\n}\n\nexport { executeAndForwardOutput };\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "9f0daa3fd83e6b53453754f377ef64a4c9d2056d_s1_p2",
+        "prompt": "\nfile:///Users/ko/projects-new/Junior/src/execute/executeAndForwardOutput.js:1\nimport { spawn, writeFile } from 'fs/promises';\n         ^^^^^\nSyntaxError: The requested module 'fs/promises' does not provide an export named 'spawn'\n    at ModuleJob._instantiate (node:internal/modules/esm/module_job:128:21)\n\n\nFix this and output the content of the file only once",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Implementing code validation and refactoring\"\necho \"Plan:\"\necho \"1. Remove the unused import 'rl' from executeAndForwardOutput.js\"\necho \"2. Update the executeAndForwardOutput function to check if the code starts with a shebang\"\necho \"3. Save the code to a file './change.sh' and run it instead of feeding the lines directly to the shell\"\n\n# Step 1, 2, and 3: Remove the unused import, validate shebang and write code to file\ncat << 'EOF' > ./src/execute/executeAndForwardOutput.js\nimport { writeFile } from 'fs/promises';\nimport { spawn } from 'child_process';\n\nfunction executeAndForwardOutput(code, next) {\n  // Check if the code starts with a shebang\n  if (!code.startsWith('#!')) {\n    throw new Error('Code does not start with a shebang');\n  }\n\n  // Write code to change.sh\n  writeFile('./change.sh', code)\n    .then(() => {\n      const child = spawn('./change.sh', { shell: true });\n      let commandOutput = '';\n\n      child.stdout.on('data', (data) => {\n        console.log(`${data}`);\n        commandOutput += data;\n      });\n\n      child.stderr.on('data', (data) => {\n        console.error(`${data}`);\n        commandOutput += data;\n      });\n\n      child.on('close', (code) => {\n        next(code, commandOutput);\n      });\n    })\n    .catch((err) => {\n      console.error(err);\n    });\n}\n\nexport { executeAndForwardOutput };\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "9f0daa3fd83e6b53453754f377ef64a4c9d2056d_s1_p3",
+        "prompt": "Got a bunch of error, like:\n\n/bin/sh: line 2: src/execute/executeAndForwardOutput.js:: No such file or directory\n\n/bin/sh: line 29: import: command not found\n\n/bin/sh: line 30: import: command not found\n\nYou should execute \"./chage.sh\"",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Implementing code validation and refactoring\"\necho \"Plan:\"\necho \"1. Remove the unused import 'rl' from executeAndForwardOutput.js\"\necho \"2. Update the executeAndForwardOutput function to check if the code starts with a shebang\"\necho \"3. Save the code to a file './change.sh' and run it instead of feeding the lines directly to the shell\"\n\n# Step 1, 2, and 3: Remove the unused import, validate shebang and write code to file\ncat << 'EOF' > ./src/execute/executeAndForwardOutput.js\nimport { writeFile } from 'fs/promises';\nimport { spawn } from 'child_process';\n\nfunction executeAndForwardOutput(code, next) {\n  // Check if the code starts with a shebang\n  if (!code.startsWith('#!')) {\n    throw new Error('Code does not start with a shebang');\n  }\n\n  // Write code to change.sh\n  writeFile('./change.sh', code)\n    .then(() => {\n      const child = spawn('./change.sh', [], { shell: true });\n      let commandOutput = '';\n\n      child.stdout.on('data', (data) => {\n        console.log(\\`$\\{data}\\`);\n        commandOutput += data;\n      });\n\n      child.stderr.on('data', (data) => {\n        console.error(\\`$\\{data}\\`);\n        commandOutput += data;\n      });\n\n      child.on('close', (code) => {\n        next(code, commandOutput);\n      });\n    })\n    .catch((err) => {\n      console.error(err);\n    });\n}\n\nexport { executeAndForwardOutput };\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "9f0daa3fd83e6b53453754f377ef64a4c9d2056d_s1_p4",
+        "prompt": "\nfile:///Users/ko/projects-new/Junior/src/execute/executeAndForwardOutput.js:17\n        console.log(\\`$\\{data}\\`);\n                    ^\n\nSyntaxError: Invalid or unexpected token\n    at ESMLoader.moduleStrategy (node:internal/modules/esm/translators:117:18)\n\n\nAlso: can we use async/await instead of promises?",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Implementing code validation and refactoring\"\necho \"Plan:\"\necho \"1. Remove the unused import 'rl' from executeAndForwardOutput.js\"\necho \"2. Update the executeAndForwardOutput function to check if the code starts with a shebang\"\necho \"3. Save the code to a file './change.sh' and run it instead of feeding the lines directly to the shell\"\n\n# Step 1, 2, and 3: Remove the unused import, validate shebang and write code to file\ncat << 'EOF' > ./src/execute/executeAndForwardOutput.js\nimport { writeFile } from 'fs/promises';\nimport { spawn } from 'child_process';\n\nasync function executeAndForwardOutput(code, next) {\n  // Check if the code starts with a shebang\n  if (!code.startsWith('#!')) {\n    throw new Error('Code does not start with a shebang');\n  }\n\n  try {\n    // Write code to change.sh\n    await writeFile('./change.sh', code);\n    const child = spawn('./change.sh', [], { shell: true });\n    let commandOutput = '';\n\n    child.stdout.on('data', (data) => {\n      console.log(`${data}`);\n      commandOutput += data;\n    });\n\n    child.stderr.on('data', (data) => {\n      console.error(`${data}`);\n      commandOutput += data;\n    });\n\n    child.on('close', (code) => {\n      next(code, commandOutput);\n    });\n  } catch (err) {\n    console.error(err);\n  }\n}\n\nexport { executeAndForwardOutput };\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": ".babelrc",
+      "before": "",
+      "after": "{\n  \"presets\": [\n    [\"@babel/preset-env\", {\n      \"targets\": {\n        \"node\": \"current\"\n      }\n    }]\n  ]\n}",
+      "total_deletions": 0,
+      "total_additions": 9
+    },
+    {
+      "filename": "game.js",
+      "before": "function startPlaying() {\n    var rikishi = document.querySelector('#rikishi').value;\n    var user = getUser();\n    var picks = getPicks(user);\n    var message = \"You selected: \" + rikishi + \"\\nPrevious Picks: \" + JSON.stringify(picks);\n    updatePicks(user, rikishi); // Update the picks with the new selection\n    return message;\n}\n\nfunction getUser() {\n    // get user from local storage\n    var user = localStorage.getItem('user');\n    if (!user) {\n        user = 'admin';\n        localStorage.setItem('user', user);\n    }\n    return user;\n}\n\nfunction getPicks(user) {\n    var picks = JSON.parse(localStorage.getItem(user));\n    if (!picks) {\n        picks = {};\n    }\n    return picks;\n}\n\nfunction updatePicks(user, rikishi) {\n    var picks = getPicks(user);\n    var currentContest = new Date().getMonth();\n    if ([0, 2, 4, 6, 8, 10].includes(currentContest)) {\n        var contestName = new Date().toLocaleString('default', { month: 'long' }) + ' ' + new Date().getFullYear();\n        picks[contestName] = rikishi;\n        localStorage.setItem(user, JSON.stringify(picks));\n    }\n}\n\nfunction switchUser() {\n    var newUser = document.querySelector('#userSwitch').value;\n    localStorage.setItem('user', newUser);\n    document.querySelector('#user').textContent = 'Current user: ' + newUser;;\n}\n\nfunction backfillResults() {\n    var user = getUser();\n    var contestName = document.querySelector('#backfillContest').value;\n    var rikishi = document.querySelector('#backfillRikishi').value;\n    var picks = getPicks(user);\n    picks[contestName] = rikishi;\n    localStorage.setItem(user, JSON.stringify(picks));\n}\n\nfunction initialize() {\n    var user = getUser();\n    var userElement = document.querySelector('#user');\n    if (userElement) {\n        userElement.textContent = 'Current user: ' + user;\n    }\n}\n\ninitialize();\n\nmodule.exports = { startPlaying, switchUser, backfillResults, initialize };\n",
+      "after": "export default class Game {\n    constructor() {\n        this.user = this.getUser();\n        this.initialize();\n    }\n\n    startPlaying() {\n        var rikishi = document.querySelector('#rikishi').value;\n        var picks = this.getPicks();\n        var message = \"You selected: \" + rikishi + \"\\nPrevious Picks: \" + JSON.stringify(picks);\n        this.updatePicks(rikishi); // Update the picks with the new selection\n        return message;\n    }\n\n    getUser() {\n        // get user from local storage\n        var user = localStorage.getItem('user');\n        if (!user) {\n            user = 'admin';\n            localStorage.setItem('user', user);\n        }\n        return user;\n    }\n\n    getPicks() {\n        var picks = JSON.parse(localStorage.getItem(this.user));\n        if (!picks) {\n            picks = {};\n        }\n        return picks;\n    }\n\n    updatePicks(rikishi) {\n        var picks = this.getPicks();\n        var currentContest = new Date().getMonth();\n        if ([0, 2, 4, 6, 8, 10].includes(currentContest)) {\n            var contestName = new Date().toLocaleString('default', { month: 'long' }) + ' ' + new Date().getFullYear();\n            picks[contestName] = rikishi;\n            localStorage.setItem(this.user, JSON.stringify(picks));\n        }\n    }\n\n    switchUser() {\n        var newUser = document.querySelector('#userSwitch').value;\n        localStorage.setItem('user', newUser);\n        document.querySelector('#user').textContent = 'Current user: ' + newUser;\n        this.user = newUser;\n    }\n\n    backfillResults() {\n        var contestName = document.querySelector('#backfillContest').value;\n        var rikishi = document.querySelector('#backfillRikishi').value;\n        var picks = this.getPicks();\n        picks[contestName] = rikishi;\n        localStorage.setItem(this.user, JSON.stringify(picks));\n    }\n\n    initialize() {\n        var userElement = document.querySelector('#user');\n        if (userElement) {\n            userElement.textContent = 'Current user: ' + this.user;\n        }\n    }\n}\n\nfunction initGame() {\n  const game = new Game();\n\n  document.querySelector(\"#startPlayingButton\").addEventListener('click', () => game.startPlaying());\n  document.querySelector(\"#switchUserButton\").addEventListener('click', () => game.switchUser());\n  document.querySelector(\"#backfillResultsButton\").addEventListener('click', () => game.backfillResults());\n}\n\nif (typeof window !== 'undefined') {\n    window.onload = initGame;\n}",
+      "total_deletions": 50,
+      "total_additions": 63
+    },
+    {
+      "filename": "game.test.js",
+      "before": "const jsdom = require('jsdom');\nconst { JSDOM } = jsdom;\n\nconst dom = new JSDOM('<!doctype html><html><body></body></html>', {\n    url: \"http://localhost/\",\n    resources: \"usable\",\n    runScripts: \"dangerously\",\n});\n\nglobal.window = dom.window;\nglobal.document = dom.window.document;\nglobal.localStorage = dom.window.localStorage;\n\nconst { startPlaying, switchUser, backfillResults, initialize } = require('./game');\n\nbeforeEach(() => {\n    localStorage.clear(); // clear localStorage before each test\n    // Reset the HTML body before each test\n    document.body.innerHTML = `\n        <p id=\"user\"></p>\n        <select id=\"rikishi\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n    `;\n    initialize();\n});\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    localStorage.setItem('user', 'testUser');\n    localStorage.setItem('testUser', JSON.stringify({ 'July 2023': '1' })); // Assume a previous pick\n    document.querySelector('#rikishi').value = '1';\n    const result = startPlaying();\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n",
+      "after": "import 'jest-localstorage-mock';\nimport Game from './game.js';\n\nlet game;\n\nbeforeEach(() => {\n    localStorage.clear();\n    // set localStorage values\n    localStorage.setItem('user', 'testUser');\n    localStorage.setItem('testUser', JSON.stringify({ 'July 2023': '1' }));\n\n    document.body.innerHTML = `\n        <p id=\"user\"></p>\n        <select id=\"rikishi\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n    `;\n    game = new Game();\n});\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    document.querySelector('#rikishi').value = '1';\n    const result = game.startPlaying();\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n",
+      "total_deletions": 19,
+      "total_additions": 10
+    },
+    {
+      "filename": "jest.config.js",
+      "before": "",
+      "after": "module.exports = {\n  setupFilesAfterEnv: ['./jest.setup.js'],\n  testEnvironment: 'jsdom',\n  transform: {\n    '^.+\\\\.js$': 'babel-jest',\n  },\n};",
+      "total_deletions": 0,
+      "total_additions": 7
+    },
+    {
+      "filename": "jest.setup.js",
+      "before": "",
+      "after": "import 'jest-localstorage-mock';\nimport { TextEncoder, TextDecoder } from 'text-encoding';\n\nglobal.TextEncoder = TextEncoder;\nglobal.TextDecoder = TextDecoder;",
+      "total_deletions": 0,
+      "total_additions": 5
+    },
+    {
+      "filename": "package.json",
+      "before": "  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"jest\": \"^29.5.0\",\n    \"jest-localstorage-mock\": \"^2.4.26\",\n    \"jsdom\": \"^22.1.0\"\n  }\n}",
+      "after": "  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"@babel/core\": \"^7.22.5\",\n    \"@babel/preset-env\": \"^7.22.5\",\n    \"babel-jest\": \"^29.5.0\",\n    \"jest\": \"^29.5.0\",\n    \"jest-environment-jsdom\": \"^29.5.0\",\n    \"jest-localstorage-mock\": \"^2.4.26\",\n    \"jsdom\": \"^22.1.0\"\n  },\n  \"dependencies\": {\n    \"text-encoding\": \"^0.7.0\"\n  }\n}",
+      "total_deletions": 0,
+      "total_additions": 7
+    }
+  ]
+}
