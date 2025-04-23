@@ -172,3 +172,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Ignore temporary or large files
+*.log
+*.tmp
+*.ipynb_checkpoints
+/DevGPT_Commits_Dataset/visualizations/
