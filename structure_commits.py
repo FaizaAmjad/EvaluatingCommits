@@ -65,7 +65,7 @@ for commit in data:
             })
 
         # Define the output path: one JSON file per commit sharing, named with SHA + index
-        output_path = os.path.join(output_folder, f"{sha}_sharing{j+1}.json")
+        output_path = os.path.join(output_folder, f"{sha}.json")
 
         # Save the structured commit as a JSON file
         with open(output_path, "w", encoding="utf-8") as out_f:
