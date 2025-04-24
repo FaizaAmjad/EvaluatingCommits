@@ -1,0 +1,71 @@
+{
+  "sha": "88a96712a0a62cb3d088b6f8751a3af92f01eca1",
+  "url": "https://github.com/tisztamo/Junior/commit/88a96712a0a62cb3d088b6f8751a3af92f01eca1",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Improve documentation https://chat.openai.com/share/09a4f6f0-1515-4b2c-b352-d4f9d6debc17",
+  "authorAt": "2023-08-18T23:26:20.000+02:00",
+  "commitAt": "2023-08-18T23:26:20.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Update Junior's Documentation",
+    "url": "https://chat.openai.com/share/09a4f6f0-1515-4b2c-b352-d4f9d6debc17",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/88a96712a0a62cb3d088b6f8751a3af92f01eca1",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Improve documentation https://chat.openai.com/share/09a4f6f0-1515-4b2c-b352-d4f9d6debc17"
+    },
+    "status": 200,
+    "dateOfConversation": "August 18, 2023",
+    "dateOfAccess": "2023-08-24 10:21:51.887650",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 552,
+    "tokensOfAnswers": 363,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "88a96712a0a62cb3d088b6f8751a3af92f01eca1_s1_p1",
+        "prompt": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\ndocs/README.md:\n```\nWarn: This README is AI generated, just like all the source files of this project.\n\n# Junior - Your AI-first IDE \n\n[![Video: Junior codes itself](/assets/video_cover.jpg)](https://youtu.be/NL4uFJSvfW0)\n\n*\"Video: Junior codes itself\"*\n\nJunior is an **AI-first IDE** designed to utilize the capabilities of language models. Much like how Linus Torvalds oversees Linux Kernel development, Junior provides a space for developers to collaborate directly with AI throughout the development process.\n\nEmbracing a design philosophy of simplicity and configurability, Junior aims to join the ranks of influential tools such as git and LISP in terms of its contribution to software development.\n\nWith a structured task descriptor and by spotlighting relevant parts of your project, you can delegate tasks such as code implementation, documentation, testing, and more, to Junior.\n\n## Getting Started\n\nFor guidance on using Junior, please refer to [usage.md](usage.md).\n\n## Contributing and Support\n\nYour contributions make a difference! At Junior, we value the collaboration of the community. Your role as a contributor is to monitor the development, provide detailed prompts, and thoroughly review the generated outcomes.\n\nFor questions or assistance, please raise an issue in our GitHub repository.\n\n**Note:** We've tested Junior primarily with the GPT-4 model. However, you're welcome to experiment with similarly capable models and share your findings. It's not compatible with GPT-3.5.\n\n\n```\n\n\n# Task\n\nImprove the documentation!\n\nReword &#34;design philosophy of simplicity and configurability&#34; to  &#34;design philosophy of being simple, configurable and auditable&#34;\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Improve documentation\"\necho \"Plan:\"\necho \"1. Modify design philosophy in README.md\"\n\ncat > docs/README.md << 'EOF'\nWarn: This README is AI generated, just like all the source files of this project.\n\n# Junior - Your AI-first IDE \n\n[![Video: Junior codes itself](/assets/video_cover.jpg)](https://youtu.be/NL4uFJSvfW0)\n\n*\"Video: Junior codes itself\"*\n\nJunior is an **AI-first IDE** designed to utilize the capabilities of language models. Much like how Linus Torvalds oversees Linux Kernel development, Junior provides a space for developers to collaborate directly with AI throughout the development process.\n\nEmbracing a design philosophy of being simple, configurable and auditable, Junior aims to join the ranks of influential tools such as git and LISP in terms of its contribution to software development.\n\nWith a structured task descriptor and by spotlighting relevant parts of your project, you can delegate tasks such as code implementation, documentation, testing, and more, to Junior.\n\n## Getting Started\n\nFor guidance on using Junior, please refer to [usage.md](usage.md).\n\n## Contributing and Support\n\nYour contributions make a difference! At Junior, we value the collaboration of the community. Your role as a contributor is to monitor the development, provide detailed prompts, and thoroughly review the generated outcomes.\n\nFor questions or assistance, please raise an issue in our GitHub repository.\n\n**Note:** We've tested Junior primarily with the GPT-4 model. However, you're welcome to experiment with similarly capable models and share your findings. It's not compatible with GPT-3.5.\n\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\n\ngoal=\"Improve documentation\"\necho \"Plan:\"\necho \"1. Update README.md with the desired changes.\"\n\ncat > docs/README.md << 'EOF'\nWarn: This README is AI generated, just like all the source files of this project.\n\nJunior is an **AI-first IDE** designed to utilize the capabilities of language models. Much like how Linus Torvalds oversees Linux Kernel development, Junior provides a space for developers to collaborate directly with AI throughout the development process.\n\nEmbracing a design philosophy of simplicity and configurability, Junior aims to join the ranks of influential tools such as git and LISP in terms of its contribution to software development.\n\nWith a structured task descriptor and by spotlighting relevant parts of your project, you can delegate tasks such as code implementation, documentation, testing, and more, to Junior.\n",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Improve documentation\"\necho \"Plan:\"\necho \"1. Modify design philosophy in README.md\"\n\ncat > docs/README.md << 'EOF'\nWarn: This README is AI generated, just like all the source files of this project.\n\nJunior is an **AI-first IDE** designed to utilize the capabilities of language models. Much like how Linus Torvalds oversees Linux Kernel development, Junior provides a space for developers to collaborate directly with AI throughout the development process.\n\nEmbracing a design philosophy of being simple, configurable and auditable, Junior aims to join the ranks of influential tools such as git and LISP in terms of its contribution to software development.\n\nWith a structured task descriptor and by spotlighting relevant parts of your project, you can delegate tasks such as code implementation, documentation, testing, and more, to Junior.\n",
+      "total_deletions": 3,
+      "total_additions": 2
+    },
+    {
+      "filename": "docs/README.md",
+      "before": "\nJunior is an **AI-first IDE** designed to utilize the capabilities of language models. Much like how Linus Torvalds oversees Linux Kernel development, Junior provides a space for developers to collaborate directly with AI throughout the development process.\n\nEmbracing a design philosophy of simplicity and configurability, Junior aims to join the ranks of influential tools such as git and LISP in terms of its contribution to software development.\n\nWith a structured task descriptor and by spotlighting relevant parts of your project, you can delegate tasks such as code implementation, documentation, testing, and more, to Junior.\n",
+      "after": "\nJunior is an **AI-first IDE** designed to utilize the capabilities of language models. Much like how Linus Torvalds oversees Linux Kernel development, Junior provides a space for developers to collaborate directly with AI throughout the development process.\n\nEmbracing a design philosophy of being simple, configurable and auditable, Junior aims to join the ranks of influential tools such as git and LISP in terms of its contribution to software development.\n\nWith a structured task descriptor and by spotlighting relevant parts of your project, you can delegate tasks such as code implementation, documentation, testing, and more, to Junior.\n",
+      "total_deletions": 1,
+      "total_additions": 1
+    },
+    {
+      "filename": "prompt.md",
+      "before": "\n*\"Video: Junior codes itself\"*\n\nJunior is an innovative **AI-first IDE** built to harness the full power of language models. With a setup reminiscent of how Linus Torvalds oversees the Linux Kernel development without writing the code himself, Junior offers a space for developers to communicate directly with AI and actively supervise the entire development process.\n\nGuided by the spirit of craftsmanship, Junior is not only configurable and hackable but also simple and auditable. Our vision is to propel Junior into the same league as iconic tools such as git - another masterpiece by Linus, and the legendary LISP, a language revered by Paul Graham for its significance in enabling rapid development.\n\nBy offering specific task details through a prompt descriptor and spotlighting pertinent parts of your project, you can entrust tasks like code implementation, documentation, testing, and more, all to your AI Junior.\n\n## Getting Started\n\nFor more insights on getting started, kindly refer to [usage.md](usage.md).\n\n## Contributing and Support\n\nYour contributions are invaluable! Bear in mind, we practice what we preach here. Junior is engineered to be self-reliant. As a contributor, your primary task will be to monitor the proceedings, provide comprehensive prompts, and rigorously review the outcomes.\n\nFor assistance, feel free to raise an issue in our GitHub repository.\n\n**Note:** To experience the best results, it's advised to utilize the GPT-4 model or its latest successors.\n\n\n```\n\nImprove the documentation!\n\nMake Getting Started and Contributing and Support a bit less hyping.\nChange the note at the end to say we test with that model only, but you can try out similarly capable models and report your success. It will not work with 3.5 (reword if needed)\n\n\n# Output Format",
+      "after": "\n*\"Video: Junior codes itself\"*\n\nJunior is an **AI-first IDE** designed to utilize the capabilities of language models. Much like how Linus Torvalds oversees Linux Kernel development, Junior provides a space for developers to collaborate directly with AI throughout the development process.\n\nEmbracing a design philosophy of simplicity and configurability, Junior aims to join the ranks of influential tools such as git and LISP in terms of its contribution to software development.\n\nWith a structured task descriptor and by spotlighting relevant parts of your project, you can delegate tasks such as code implementation, documentation, testing, and more, to Junior.\n\n## Getting Started\n\nFor guidance on using Junior, please refer to [usage.md](usage.md).\n\n## Contributing and Support\n\nYour contributions make a difference! At Junior, we value the collaboration of the community. Your role as a contributor is to monitor the development, provide detailed prompts, and thoroughly review the generated outcomes.\n\nFor questions or assistance, please raise an issue in our GitHub repository.\n\n**Note:** We've tested Junior primarily with the GPT-4 model. However, you're welcome to experiment with similarly capable models and share your findings. It's not compatible with GPT-3.5.\n\n\n```\n\nImprove the documentation!\n\nReword &#34;design philosophy of simplicity and configurability&#34; to  &#34;design philosophy of being simple, configurable and auditable&#34;\n\n\n# Output Format",
+      "total_deletions": 9,
+      "total_additions": 8
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "attention:\n  - docs/README.md\nrequirements: >\n  Make Getting Started and Contributing and Support a bit less hyping.\n\n  Change the note at the end to say we test with that model only, but you can\n  try out similarly capable models and report your success. It will not work\n  with 3.5 (reword if needed)\nos: OSX",
+      "after": "attention:\n  - docs/README.md\nrequirements: >\n  Reword \"design philosophy of simplicity and configurability\"\n  to \n  \"design philosophy of being simple, configurable and auditable\"\nos: OSX",
+      "total_deletions": 5,
+      "total_additions": 3
+    }
+  ]
+}

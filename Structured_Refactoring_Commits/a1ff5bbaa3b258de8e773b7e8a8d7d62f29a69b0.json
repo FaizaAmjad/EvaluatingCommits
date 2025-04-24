@@ -1,0 +1,71 @@
+{
+  "sha": "a1ff5bbaa3b258de8e773b7e8a8d7d62f29a69b0",
+  "url": "https://github.com/tisztamo/Junior/commit/a1ff5bbaa3b258de8e773b7e8a8d7d62f29a69b0",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Refine .gitignore behavior https://chat.openai.com/share/006570dd-ce57-484c-8c49-4657d5e944ec",
+  "authorAt": "2023-08-21T17:03:27.000+02:00",
+  "commitAt": "2023-08-21T17:03:27.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Refine Gitignore Behavior",
+    "url": "https://chat.openai.com/share/006570dd-ce57-484c-8c49-4657d5e944ec",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/a1ff5bbaa3b258de8e773b7e8a8d7d62f29a69b0",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refine .gitignore behavior https://chat.openai.com/share/006570dd-ce57-484c-8c49-4657d5e944ec"
+    },
+    "status": 200,
+    "dateOfConversation": "August 21, 2023",
+    "dateOfAccess": "2023-08-24 10:21:31.568574",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 731,
+    "tokensOfAnswers": 262,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "a1ff5bbaa3b258de8e773b7e8a8d7d62f29a69b0_s1_p1",
+        "prompt": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\nsrc/init.js:\n```\n#!/usr/bin/env node\nimport { execSync } from 'child_process';\nimport { fileURLToPath } from 'url';\nimport { createPromptYaml } from './prompt/createPromptYaml.js';\nimport { createGitignore } from './git/createGitignore.js';\nimport { createPromptDir } from './prompt/createPromptDir.js';\nimport copyDefaults from './command/init/copyDefaults.js';\nimport path from 'path';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\n\nasync function juniorInit() {\n  execSync('git init', { stdio: 'inherit' });\n\n  createGitignore();\n  await createPromptDir();\n  createPromptYaml();\n\n  // Correcting the path to the prompt/defaults folder in the installed version of Junior\n  const defaultsPath = path.join(__dirname, '../prompt/defaults');\n  await copyDefaults(defaultsPath, './prompt/');\n\n  execSync('git add .', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });\n\n  console.log('\\x1b[32mRepo initialized for Junior development\\x1b[0m');\n}\n\njuniorInit();\n\n```\n\nsrc/git/createGitignore.js:\n```\nimport { appendFileSync, writeFileSync, existsSync, readFileSync } from 'fs';\nimport { join } from 'path';\n\nfunction createGitignore() {\n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['prompt.yaml', 'prompt.md', 'change.sh', 'node_modules'];\n\n  let existingIgnores = [];\n\n  if (existsSync(gitignorePath)) {\n    const gitignoreFileContent = readFileSync(gitignorePath, 'utf-8');\n    existingIgnores = gitignoreFileContent.split('\\n');\n  }\n\n  ignoreContent.forEach((item) => {\n    if (!existingIgnores.includes(item)) {\n      appendFileSync(gitignorePath, `\\n${item}`);\n    }\n  });\n}\n\nexport { createGitignore };\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nOnly gitignore prompt files and change.sh in the root folder, not in subdirs\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx file accordingly!\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: Debian\n\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Refine .gitignore behavior\"\necho \"Plan:\"\necho \"1. Update createGitignore.js to only gitignore prompt files and change.sh in the root folder\"\necho \"2. Use heredoc to overwrite the content of createGitignore.js with the refined behavior\"\n\ncat > src/git/createGitignore.js << 'EOF'\nimport { appendFileSync, existsSync, readFileSync } from 'fs';\nimport { join } from 'path';\n\nfunction createGitignore() {\n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['/prompt.yaml', '/prompt.md', '/change.sh', 'node_modules'];\n\n  let existingIgnores = [];\n\n  if (existsSync(gitignorePath)) {\n    const gitignoreFileContent = readFileSync(gitignorePath, 'utf-8');\n    existingIgnores = gitignoreFileContent.split('\\n');\n  }\n\n  ignoreContent.forEach((item) => {\n    if (!existingIgnores.includes(item)) {\n      appendFileSync(gitignorePath, `\\n${item}`);\n    }\n  });\n}\n\nexport { createGitignore };\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "prompt/history/2023/08/21/17:03_Refine .gitignore behavior/change.sh",
+      "before": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refine .gitignore behavior\"\necho \"Plan:\"\necho \"1. Update createGitignore.js to only gitignore prompt files and change.sh in the root folder\"\necho \"2. Use heredoc to overwrite the content of createGitignore.js with the refined behavior\"\n\ncat > src/git/createGitignore.js << 'EOF'\nimport { appendFileSync, existsSync, readFileSync } from 'fs';\nimport { join } from 'path';\n\nfunction createGitignore() {\n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['/prompt.yaml', '/prompt.md', '/change.sh', 'node_modules'];\n\n  let existingIgnores = [];\n\n  if (existsSync(gitignorePath)) {\n    const gitignoreFileContent = readFileSync(gitignorePath, 'utf-8');\n    existingIgnores = gitignoreFileContent.split('\\n');\n  }\n\n  ignoreContent.forEach((item) => {\n    if (!existingIgnores.includes(item)) {\n      appendFileSync(gitignorePath, `\\n${item}`);\n    }\n  });\n}\n\nexport { createGitignore };\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 0,
+      "total_additions": 33
+    },
+    {
+      "filename": "prompt/history/2023/08/21/17:03_Refine .gitignore behavior/prompt.md",
+      "before": "",
+      "after": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\nsrc/init.js:\n```\n#!/usr/bin/env node\nimport { execSync } from 'child_process';\nimport { fileURLToPath } from 'url';\nimport { createPromptYaml } from './prompt/createPromptYaml.js';\nimport { createGitignore } from './git/createGitignore.js';\nimport { createPromptDir } from './prompt/createPromptDir.js';\nimport copyDefaults from './command/init/copyDefaults.js';\nimport path from 'path';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\n\nasync function juniorInit() {\n  execSync('git init', { stdio: 'inherit' });\n\n  createGitignore();\n  await createPromptDir();\n  createPromptYaml();\n\n  // Correcting the path to the prompt/defaults folder in the installed version of Junior\n  const defaultsPath = path.join(__dirname, '../prompt/defaults');\n  await copyDefaults(defaultsPath, './prompt/');\n\n  execSync('git add .', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });\n\n  console.log('\\x1b[32mRepo initialized for Junior development\\x1b[0m');\n}\n\njuniorInit();\n\n```\n\nsrc/git/createGitignore.js:\n```\nimport { appendFileSync, writeFileSync, existsSync, readFileSync } from 'fs';\nimport { join } from 'path';\n\nfunction createGitignore() {\n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['prompt.yaml', 'prompt.md', 'change.sh', 'node_modules'];\n\n  let existingIgnores = [];\n\n  if (existsSync(gitignorePath)) {\n    const gitignoreFileContent = readFileSync(gitignorePath, 'utf-8');\n    existingIgnores = gitignoreFileContent.split('\\n');\n  }\n\n  ignoreContent.forEach((item) => {\n    if (!existingIgnores.includes(item)) {\n      appendFileSync(gitignorePath, `\\n${item}`);\n    }\n  });\n}\n\nexport { createGitignore };\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nOnly gitignore prompt files and change.sh in the root folder, not in subdirs\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx file accordingly!\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: Debian\n\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n",
+      "total_deletions": 0,
+      "total_additions": 118
+    },
+    {
+      "filename": "prompt/history/2023/08/21/17:03_Refine .gitignore behavior/prompt.yaml",
+      "before": "",
+      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/init.js\n  - src/git/createGitignore.js\nrequirements: |\n  Only gitignore prompt files and change.sh in the root folder, not in subdirs",
+      "total_deletions": 0,
+      "total_additions": 6
+    },
+    {
+      "filename": "src/git/createGitignore.js",
+      "before": "import { appendFileSync, writeFileSync, existsSync, readFileSync } from 'fs';\nimport { join } from 'path';\n\nfunction createGitignore() {\n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['prompt.yaml', 'prompt.md', 'change.sh', 'node_modules'];\n\n  let existingIgnores = [];\n",
+      "after": "import { appendFileSync, existsSync, readFileSync } from 'fs';\nimport { join } from 'path';\n\nfunction createGitignore() {\n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['/prompt.yaml', '/prompt.md', '/change.sh', 'node_modules'];\n\n  let existingIgnores = [];\n",
+      "total_deletions": 2,
+      "total_additions": 2
+    }
+  ]
+}

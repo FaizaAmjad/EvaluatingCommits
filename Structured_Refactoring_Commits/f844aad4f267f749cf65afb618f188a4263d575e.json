@@ -1,0 +1,83 @@
+{
+  "sha": "f844aad4f267f749cf65afb618f188a4263d575e",
+  "url": "https://github.com/tisztamo/Junior/commit/f844aad4f267f749cf65afb618f188a4263d575e",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Update docs/open_jobs.md with project details https://chat.openai.com/share/8fc1705b-89fe-4582-8576-2d6b9c831b3f",
+  "authorAt": "2023-08-29T15:01:23.000+02:00",
+  "commitAt": "2023-08-29T15:01:23.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Create Co-Founder Job Description",
+    "url": "https://chat.openai.com/share/8fc1705b-89fe-4582-8576-2d6b9c831b3f",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/f844aad4f267f749cf65afb618f188a4263d575e",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update docs/open_jobs.md with project details https://chat.openai.com/share/8fc1705b-89fe-4582-8576-2d6b9c831b3f"
+    },
+    "status": 200,
+    "dateOfConversation": "August 29, 2023",
+    "dateOfAccess": "2023-08-31 06:29:48.055060",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 698,
+    "tokensOfAnswers": 536,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "f844aad4f267f749cf65afb618f188a4263d575e_s1_p1",
+        "prompt": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\ndocs/README.md:\n```\nWarn: This README is AI generated, just like all the source files of this project.\n\n# Junior - Your AI-first IDE \n\n[![Video: Junior codes itself](/assets/video_cover.jpg)](https://youtu.be/NL4uFJSvfW0)\n\n*\"Video: Junior codes itself\"*\n\nJunior is an **AI-first IDE** designed specifically for professional programmers who have a preference for customizing and fine-tuning their tools. \n\nWith Junior, developers get a unique space where they can work hand-in-hand with AI throughout the development process. By using structured task descriptors and spotlighting relevant parts of a project, tasks like code implementation, documentation, and testing can be seamlessly delegated to Junior.\n\nAt its core, Junior embraces a design philosophy that prioritizes simplicity, configurability, and auditability. This ensures that the platform remains both accessible to its users and adaptable to a variety of use-cases.\n\nJunior has been crafted exclusively with AI-powered coding right from its early days, way before its core functionalities were in place. This demonstrates Junior's pioneering approach to harnessing the potential of artificial intelligence in software development.\n\n## Getting Started\n\nFor guidance on using Junior, please refer to [usage.md](usage.md).\n\n## Contributing and Support\n\nYour contributions make a difference! At Junior, we value the collaboration of the community. Your role as a contributor is to monitor the development, provide detailed prompts, and thoroughly review the generated outcomes.\n\nFor questions or assistance, please raise an issue in our GitHub repository.\n\n**Note:** We've tested Junior primarily with the GPT-4 model. However, you're welcome to experiment with similarly capable models and share your findings. It's not compatible with GPT-3.5.\n\n```\n\n\n# Task\n\nImprove the documentation!\n\nCreate docs/open_jobs.md and fill it based on the following:\n\nI want to create a startup based on my open source project.\n\nThe first step is to find a co-founder CEO.\n\nI got the advice from Jared Schrieber to look for the following:\n\n\"marketing person at a similar freemium user/product-led growth tools company\"\n\nBased on this info write a text that I can forward to the headhunter!\n\nName Jared and quote his advice!\n\n\nDo not create backup files.\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Generate docs/open_jobs.md for co-founder\"\necho \"Plan:\"\necho \"1. Create and fill docs/open_jobs.md with headhunter info.\"\n\ncat > docs/open_jobs.md << 'EOF'\n# Open Positions at [Your Project Name]\n\nWe're in the early stages of building an exciting startup based on our open source project. Our primary goal right now is to find the right leadership to steer the ship and take our vision to the next level.\n\n## Co-founder CEO\n\n**Qualifications:**\n- Proven experience in marketing, particularly in a freemium user/product-led growth environment.\n- Experience or affiliation with similar freemium user/product-led growth tools companies.\n- Strong leadership qualities, with the ability to motivate, inspire, and build a team.\n\n**Advice from Experts:**\nJared Schrieber suggested looking for a \"marketing person at a similar freemium user/product-led growth tools company.\" We're taking his advice to heart and would love to connect with professionals who align with this vision.\n\nInterested candidates or those who can connect us to potential candidates are encouraged to reach out. Together, we can make our startup a groundbreaking success.\n\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "f844aad4f267f749cf65afb618f188a4263d575e_s1_p2",
+        "prompt": "Fill project name: Junior AI IDE\nAdd a link to aijunior.dev\nMerge first and second item in the list\nAdd networking to the needed abilities\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Update docs/open_jobs.md with project details\"\necho \"Plan:\"\necho \"1. Modify and fill docs/open_jobs.md with new specifications.\"\n\ncat > docs/open_jobs.md << 'EOF'\n# Open Positions at Junior AI IDE\n\nWe're in the early stages of building an exciting startup based on our open source project, Junior AI IDE. Our primary goal right now is to find the right leadership to steer the ship and take our vision to the next level. Discover more about us at [aijunior.dev](https://aijunior.dev).\n\n## Co-founder CEO\n\n**Qualifications:**\n- Proven experience in marketing within a freemium user/product-led growth environment, especially from similar tools companies.\n- Strong networking abilities.\n- Strong leadership qualities, with the ability to motivate, inspire, and build a team.\n\n**Advice from Experts:**\nJared Schrieber suggested looking for a \"marketing person at a similar freemium user/product-led growth tools company.\" We're taking his advice to heart and would love to connect with professionals who align with this vision.\n\nInterested candidates or those who can connect us to potential candidates are encouraged to reach out. Together, we can make Junior AI IDE a groundbreaking success.\n\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "docs/open_jobs.md",
+      "before": "",
+      "after": "# Open Positions at Junior AI IDE\n\nWe're in the early stages of building an exciting startup based on our open source project, Junior AI IDE. Our primary goal right now is to find the right leadership to steer the ship and take our vision to the next level. Discover more about us at [aijunior.dev](https://aijunior.dev).\n\n## Co-founder CEO\n\n**Qualifications:**\n- Proven experience in marketing within a freemium user/product-led growth environment, especially from similar tools companies.\n- Strong networking abilities.\n- Strong leadership qualities, with the ability to motivate, inspire, and build a team.\n\n**Advice from Experts:**\nJared Schrieber suggested looking for a \"marketing person at a similar freemium user/product-led growth tools company.\" We're taking his advice to heart and would love to connect with professionals who align with this vision.\n\nInterested candidates or those who can connect us to potential candidates are encouraged to reach out. Together, we can make Junior AI IDE a groundbreaking success.\n",
+      "total_deletions": 0,
+      "total_additions": 16
+    },
+    {
+      "filename": "prompt/history/2023/08/29/14:57_Update docs/open_jobs.md with project details/change.sh",
+      "before": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Update docs/open_jobs.md with project details\"\necho \"Plan:\"\necho \"1. Modify and fill docs/open_jobs.md with new specifications.\"\n\ncat > docs/open_jobs.md << 'EOF'\n# Open Positions at Junior AI IDE\n\nWe're in the early stages of building an exciting startup based on our open source project, Junior AI IDE. Our primary goal right now is to find the right leadership to steer the ship and take our vision to the next level. Discover more about us at [aijunior.dev](https://aijunior.dev).\n\n## Co-founder CEO\n\n**Qualifications:**\n- Proven experience in marketing within a freemium user/product-led growth environment, especially from similar tools companies.\n- Strong networking abilities.\n- Strong leadership qualities, with the ability to motivate, inspire, and build a team.\n\n**Advice from Experts:**\nJared Schrieber suggested looking for a \"marketing person at a similar freemium user/product-led growth tools company.\" We're taking his advice to heart and would love to connect with professionals who align with this vision.\n\nInterested candidates or those who can connect us to potential candidates are encouraged to reach out. Together, we can make Junior AI IDE a groundbreaking success.\n\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 0,
+      "total_additions": 26
+    },
+    {
+      "filename": "prompt/history/2023/08/29/14:57_Update docs/open_jobs.md with project details/prompt.md",
+      "before": "",
+      "after": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\ndocs/README.md:\n```\nWarn: This README is AI generated, just like all the source files of this project.\n\n# Junior - Your AI-first IDE \n\n[![Video: Junior codes itself](/assets/video_cover.jpg)](https://youtu.be/NL4uFJSvfW0)\n\n*\"Video: Junior codes itself\"*\n\nJunior is an **AI-first IDE** designed specifically for professional programmers who have a preference for customizing and fine-tuning their tools. \n\nWith Junior, developers get a unique space where they can work hand-in-hand with AI throughout the development process. By using structured task descriptors and spotlighting relevant parts of a project, tasks like code implementation, documentation, and testing can be seamlessly delegated to Junior.\n\nAt its core, Junior embraces a design philosophy that prioritizes simplicity, configurability, and auditability. This ensures that the platform remains both accessible to its users and adaptable to a variety of use-cases.\n\nJunior has been crafted exclusively with AI-powered coding right from its early days, way before its core functionalities were in place. This demonstrates Junior's pioneering approach to harnessing the potential of artificial intelligence in software development.\n\n## Getting Started\n\nFor guidance on using Junior, please refer to [usage.md](usage.md).\n\n## Contributing and Support\n\nYour contributions make a difference! At Junior, we value the collaboration of the community. Your role as a contributor is to monitor the development, provide detailed prompts, and thoroughly review the generated outcomes.\n\nFor questions or assistance, please raise an issue in our GitHub repository.\n\n**Note:** We've tested Junior primarily with the GPT-4 model. However, you're welcome to experiment with similarly capable models and share your findings. It's not compatible with GPT-3.5.\n\n```\n\n\n# Task\n\nImprove the documentation!\n\nCreate docs/open_jobs.md and fill it based on the following:\n\nI want to create a startup based on my open source project.\n\nThe first step is to find a co-founder CEO.\n\nI got the advice from Jared Schrieber to look for the following:\n\n\"marketing person at a similar freemium user/product-led growth tools company\"\n\nBased on this info write a text that I can forward to the headhunter!\n\nName Jared and quote his advice!\n\n\nDo not create backup files.\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n",
+      "total_deletions": 0,
+      "total_additions": 88
+    },
+    {
+      "filename": "prompt/history/2023/08/29/14:57_Update docs/open_jobs.md with project details/prompt.yaml",
+      "before": "",
+      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/README.md\nrequirements: |\n  Create docs/open_jobs.md and fill it based on the following:\n\n  I want to create a startup based on my open source project.\n\n  The first step is to find a co-founder CEO.\n\n  I got the advice from Jared Schrieber to look for the following:\n\n  \"marketing person at a similar freemium user/product-led growth tools company\"\n\n  Based on this info write a text that I can forward to the headhunter!\n\n  Name Jared and quote his advice!\nos: OSX",
+      "total_deletions": 0,
+      "total_additions": 18
+    }
+  ]
+}

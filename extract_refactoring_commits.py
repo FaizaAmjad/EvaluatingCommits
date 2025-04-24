@@ -12,6 +12,9 @@ nltk.download('wordnet')
 
 lemmatizer = WordNetLemmatizer()
 
+# Initialize a set to track seen commit SHAs
+seen_commit_shas = set()
+
 # Function to read keywords from the final list CSV
 def read_keywords_from_csv(filename):
     with open(filename, mode='r', newline='', encoding='utf-8') as file:
@@ -40,7 +43,7 @@ print("Found JSON files:", json_files)
 
 # Check if any files were found
 if json_files:
-    print(f"Total number of JSON files: {len(json_files)}")
+    print(f"Total number of JSON files in DevGPT_Commit_Dataset folder: {len(json_files)}")
 else:
     print("No JSON files found in the directory.")
     
@@ -59,6 +62,11 @@ for file in json_files:
         for source in data.get("Sources", []):
             total_commits += 1  # Increment total commits count
             commit_message = source.get('Message', '').lower()
+            commit_sha = source.get('Sha')
+
+            # Skip if this SHA has already been processed
+            if not commit_sha or commit_sha in seen_commit_shas:
+                continue
 
             # Tokenize and lemmatize the commit message
             tokens = word_tokenize(commit_message)
@@ -67,6 +75,7 @@ for file in json_files:
             # Check if any keyword is in the lemmatized tokens
             if lemmatized_keywords.intersection(lemmatized_tokens):
                 filtered_commits.append(source)
+                seen_commit_shas.add(commit_sha)  # Mark SHA as seen
                 filtered_refactoring_commits += 1  # Increment filtered refactoring commits count
 
 

@@ -1,0 +1,92 @@
+{
+  "sha": "09bb7662774169a19d86cec4df9dfc502cba4749",
+  "url": "https://github.com/tisztamo/Junior/commit/09bb7662774169a19d86cec4df9dfc502cba4749",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Refactor: separate routing https://chat.openai.com/share/75fe618c-b376-4cc9-bce2-e4c04d575751",
+  "authorAt": "2023-07-18T21:22:48.000+02:00",
+  "commitAt": "2023-07-18T21:22:48.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Split code into files",
+    "url": "https://chat.openai.com/share/75fe618c-b376-4cc9-bce2-e4c04d575751",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/09bb7662774169a19d86cec4df9dfc502cba4749",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Refactor: separate routing https://chat.openai.com/share/75fe618c-b376-4cc9-bce2-e4c04d575751"
+    },
+    "status": 200,
+    "dateOfConversation": "July 18, 2023",
+    "dateOfAccess": "2023-07-27 13:31:26.879039",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 502,
+    "tokensOfAnswers": 552,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "09bb7662774169a19d86cec4df9dfc502cba4749_s1_p1",
+        "prompt": "# Working set\n\nsrc/backend/server.js:\n```\nimport express from 'express';\nimport cors from 'cors';\nimport { createServer } from 'http';\nimport { WebSocketServer } from 'ws';\nimport { generateHandler, descriptorHandler, taskUpdateHandler } from './handlers.js';\nimport { listTasks } from './listTasks.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\n\nexport function startServer() {\n  console.log(process.cwd())\n  const app = express();\n\n  app.use(cors());\n  app.use(express.json());\n\n  const server = createServer(app);\n  const wss = new WebSocketServer({ server });\n\n  notifyOnFileChange(wss);\n\n  app.get('/descriptor', descriptorHandler);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', taskUpdateHandler);\n\n  server.listen(3000, () => {\n    console.log('Server is running on port 3000');\n  });\n}\n\n```\n\nsrc/backend/handlers.js:\n```\nimport processPrompt from '../prompt/promptProcessing.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\nimport { updateTaskHandler } from './updateTaskHandler.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n  const { prompt } = await processPrompt(notes);\n  res.json({ prompt: prompt });\n};\n\nexport const descriptorHandler = servePromptDescriptor;\nexport const taskUpdateHandler = updateTaskHandler;\n\n```\n\n\n# Task\n\n## Refactor by split\n\nA file is too big. We need to split it into parts.\nIdentify the possible parts and refactor the code in separate files!\n\nrouting should be separated to setupRoutes.js\nhandlers.js should be deleted\ngenerateHandler -&gt; separate file.\n\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files without substitution.\nAssume OSX.\nnpm and jq are installed.\nDo NOT write any text outside the script (the plan goes into it)!\n\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\n# Goal: [Task description, max 7 words]\n# Plan:\n# 1. [...]\n\n[Commands solving the task]\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]This script will refactor the code by splitting it into separate files. It creates a new file setupRoutes.js to handle all the routing logic, deletes the handlers.js file as it's no longer needed, and moves the generateHandler function to a new file generateHandler.js. The server.js file is also updated to use the new setupRoutes.js file.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\n# Goal: Refactor code by splitting into separate files\n# Plan:\n# 1. Create a new file setupRoutes.js and move all the routing logic from server.js to this new file.\n# 2. Delete handlers.js file as it's no longer needed.\n# 3. Create a new file generateHandler.js and move the generateHandler function from handlers.js to this new file.\n\n# Step 1: Create setupRoutes.js and move routing logic\ncat << EOF > src/backend/setupRoutes.js\nimport { generateHandler } from './generateHandler.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\nimport { updateTaskHandler } from './updateTaskHandler.js';\nimport { listTasks } from './listTasks.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', updateTaskHandler);\n}\nEOF\n\n# Step 2: Delete handlers.js\nrm src/backend/handlers.js\n\n# Step 3: Create generateHandler.js and move generateHandler function\ncat << EOF > src/backend/generateHandler.js\nimport processPrompt from '../prompt/promptProcessing.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n  const { prompt } = await processPrompt(notes);\n  res.json({ prompt: prompt });\n};\nEOF\n\n# Update server.js to use setupRoutes.js\ncat << EOF > src/backend/server.js\nimport express from 'express';\nimport cors from 'cors';\nimport { createServer } from 'http';\nimport { WebSocketServer } from 'ws';\nimport { setupRoutes } from './setupRoutes.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\n\nexport function startServer() {\n  console.log(process.cwd())\n  const app = express();\n\n  app.use(cors());\n  app.use(express.json());\n\n  const server = createServer(app);\n  const wss = new WebSocketServer({ server });\n\n  notifyOnFileChange(wss);\n\n  setupRoutes(app);\n\n  server.listen(3000, () => {\n    console.log('Server is running on port 3000');\n  });\n}\nEOF\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\n# Goal: Update prompt descriptor on file change\n# Plan:\n# 1. Implement a WebSocket on the backend to notify the frontend of file changes.\n# 2. Use the \"watchPromptDescriptor.js\" module to send a message through this WebSocket when the descriptor file changes.\n# 3. On the frontend, set up a WebSocket connection and listen for messages about file changes.\n# 4. When a message is received, make a request to fetch the new descriptor and update the state in the \"TasksList.jsx\" component.\n\ncat <<EOF >src/backend/notifyOnFileChange.js\nimport WebSocket from 'ws';\nimport { watchPromptDescriptor } from '../prompt/watchPromptDescriptor.js';\n\nexport const notifyOnFileChange = (wss) => {\n  watchPromptDescriptor(() => {\n    wss.clients.forEach((client) => {\n      if (client.readyState === WebSocket.OPEN) {\n        client.send('update');\n      }\n    });\n  });\n};\nEOF\n\ncat <<EOF >src/backend/server.js\nimport express from 'express';\nimport cors from 'cors';\nimport { createServer } from 'http';\nimport WebSocket from 'ws';\nimport { generateHandler, descriptorHandler, taskUpdateHandler } from './handlers.js';\nimport { listTasks } from './listTasks.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\n\nexport function startServer() {\n  app.use(express.json());\n\n  const server = createServer(app);\n  const wss = new WebSocket.Server({ server });\n\n  notifyOnFileChange(wss);\n\n  app.get('/descriptor', descriptorHandler);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', taskUpdateHandler);\n\n  server.listen(3000, () => {\n    console.log('Server is running on port 3000');\n  });\n}\nEOF\n\ncat <<EOF >src/frontend/service/useWebsocket.js\nimport { createEffect } from 'solid-js';\n\nexport const useWebsocket = (url, onMessage) => {\n  let socket = new WebSocket(url);\n\n  socket.onopen = () => console.log('WebSocket is connected');\n  socket.onmessage = onMessage;\n  socket.onerror = (error) => console.log('WebSocket error:', error);\n\n  createEffect(() => {\n    if (!socket || socket.readyState === WebSocket.CLOSED) {\n      socket = new WebSocket(url);\n      socket.onmessage = onMessage;\n    }\n  });\n\n  return () => {\n    if (socket && socket.readyState === WebSocket.OPEN) {\n      socket.close();\n    }\n  };\n};\nEOF\n\ncat <<EOF >src/frontend/components/TasksList.jsx\nimport { createSignal, onCleanup, onMount } from 'solid-js';\nimport { fetchTasks } from '../fetchTasks';\nimport { handleTaskChange } from '../service/handleTaskChange';\nimport { fetchDescriptor } from '../service/fetchDescriptor';\nimport { parseYamlAndGetTask } from '../service/parseYamlAndGetTask';\nimport { useWebsocket } from '../service/useWebsocket';\n\nconst TasksList = () => {\n  const tasks = fetchTasks();\n  const [promptDescriptor, setPromptDescriptor] = createSignal('');\n  const [selectedTask, setSelectedTask] = createSignal('');\n\n  onMount(async () => {\n    const text = await fetchDescriptor();\n    const task = parseYamlAndGetTask(text);\n    setPromptDescriptor(text);\n    setSelectedTask(task);\n  });\n\n  useWebsocket('ws://localhost:3000', async (e) => {\n    if (e.data === 'update') {\n      const text = await fetchDescriptor();\n      setPromptDescriptor(text);\n    }\n  });\n\n  onCleanup(() => {\n    setPromptDescriptor('');\n  });\n\n  return (\n    <div>\n      <label>Task:</label>\n      <select value={selectedTask()} onChange={e => handleTaskChange(e, setPromptDescriptor)}>\n        {tasks().map(task => <option value={task}>{task}</option>)}\n      </select>\n      <pre>{promptDescriptor()}</pre>\n    </div>\n  );\n};\n\nexport default TasksList;\nEOF",
+      "after": "#!/bin/sh\n# Goal: Refactor code by splitting into separate files\n# Plan:\n# 1. Create a new file setupRoutes.js and move all the routing logic from server.js to this new file.\n# 2. Delete handlers.js file as it's no longer needed.\n# 3. Create a new file generateHandler.js and move the generateHandler function from handlers.js to this new file.\n\n# Step 1: Create setupRoutes.js and move routing logic\ncat << EOF > src/backend/setupRoutes.js\nimport { generateHandler } from './generateHandler.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\nimport { updateTaskHandler } from './updateTaskHandler.js';\nimport { listTasks } from './listTasks.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', updateTaskHandler);\n}\nEOF\n\n# Step 2: Delete handlers.js\nrm src/backend/handlers.js\n\n# Step 3: Create generateHandler.js and move generateHandler function\ncat << EOF > src/backend/generateHandler.js\nimport processPrompt from '../prompt/promptProcessing.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n  const { prompt } = await processPrompt(notes);\n  res.json({ prompt: prompt });\n};\nEOF\n\n# Update server.js to use setupRoutes.js\ncat << EOF > src/backend/server.js\nimport express from 'express';\nimport cors from 'cors';\nimport { createServer } from 'http';\nimport { WebSocketServer } from 'ws';\nimport { setupRoutes } from './setupRoutes.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\n\nexport function startServer() {\n  app.use(express.json());\n\n  const server = createServer(app);\n  const wss = new WebSocketServer({ server });\n\n  notifyOnFileChange(wss);\n\n  setupRoutes(app);\n\n  server.listen(3000, () => {\n    console.log('Server is running on port 3000');\n  });\n}\nEOF\n",
+      "total_deletions": 96,
+      "total_additions": 36
+    },
+    {
+      "filename": "prompt.md",
+      "before": "import express from 'express';\nimport cors from 'cors';\nimport { createServer } from 'http';\nimport WebSocket from 'ws';\nimport { generateHandler, descriptorHandler, taskUpdateHandler } from './handlers.js';\nimport { listTasks } from './listTasks.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\n  app.use(express.json());\n\n  const server = createServer(app);\n  const wss = new WebSocket.Server({ server });\n\n  notifyOnFileChange(wss);\n\n\n```\n\n\n# Task\n\nFix the following issue!\n\nfile:///Users/ko/projects-new/Junior/src/backend/server.js:17 const wss = new WebSocket.Server({ server });\n            ^\nTypeError: WebSocket.Server is not a constructor\nThe api is correctly called like follows:\nimport { WebSocketServer } from &#39;ws&#39;; ... const wss = new WebSocketServer({ server });\n\n\n# Output Format",
+      "after": "import express from 'express';\nimport cors from 'cors';\nimport { createServer } from 'http';\nimport { WebSocketServer } from 'ws';\nimport { generateHandler, descriptorHandler, taskUpdateHandler } from './handlers.js';\nimport { listTasks } from './listTasks.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\n  app.use(express.json());\n\n  const server = createServer(app);\n  const wss = new WebSocketServer({ server });\n\n  notifyOnFileChange(wss);\n\n\n```\n\nsrc/backend/handlers.js:\n```\nimport processPrompt from '../prompt/promptProcessing.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\nimport { updateTaskHandler } from './updateTaskHandler.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n  const { prompt } = await processPrompt(notes);\n  res.json({ prompt: prompt });\n};\n\nexport const descriptorHandler = servePromptDescriptor;\nexport const taskUpdateHandler = updateTaskHandler;\n\n```\n\n\n# Task\n\n## Refactor by split\n\nA file is too big. We need to split it into parts.\nIdentify the possible parts and refactor the code in separate files!\n\nrouting should be separated to setupRoutes.js\nhandlers.js should be deleted\ngenerateHandler -&gt; separate file.\n\n\n\n# Output Format",
+      "total_deletions": 8,
+      "total_additions": 27
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/backend/server.js\nrequirements: >\n  file:///Users/ko/projects-new/Junior/src/backend/server.js:17\n  const wss = new WebSocket.Server({ server });\n              ^\n  TypeError: WebSocket.Server is not a constructor\n\n  The api is correctly called like follows:\n\n  import { WebSocketServer } from 'ws';\n  ...\n  const wss = new WebSocketServer({ server });\n\nformat: prompt/format/shell.md",
+      "after": "task: prompt/task/refactor/split.md\nattention:\n  - src/backend/server.js\n  - src/backend/handlers.js\nrequirements: |\n  routing should be separated to setupRoutes.js\n  handlers.js should be deleted\n  generateHandler -> separate file.\nformat: prompt/format/shell.md",
+      "total_deletions": 13,
+      "total_additions": 6
+    },
+    {
+      "filename": "src/backend/generateHandler.js",
+      "before": "",
+      "after": "import processPrompt from '../prompt/promptProcessing.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n  const { prompt } = await processPrompt(notes);\n  res.json({ prompt: prompt });\n};",
+      "total_deletions": 0,
+      "total_additions": 7
+    },
+    {
+      "filename": "src/backend/handlers.js",
+      "before": "import processPrompt from '../prompt/promptProcessing.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\nimport { updateTaskHandler } from './updateTaskHandler.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n  const { prompt } = await processPrompt(notes);\n  res.json({ prompt: prompt });\n};\n\nexport const descriptorHandler = servePromptDescriptor;\nexport const taskUpdateHandler = updateTaskHandler;",
+      "after": "",
+      "total_deletions": 12,
+      "total_additions": 0
+    },
+    {
+      "filename": "src/backend/server.js",
+      "before": "import cors from 'cors';\nimport { createServer } from 'http';\nimport { WebSocketServer } from 'ws';\nimport { generateHandler, descriptorHandler, taskUpdateHandler } from './handlers.js';\nimport { listTasks } from './listTasks.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\n\nexport function startServer() {\n\n  notifyOnFileChange(wss);\n\n  app.get('/descriptor', descriptorHandler);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', taskUpdateHandler);\n\n  server.listen(3000, () => {\n    console.log('Server is running on port 3000');",
+      "after": "import cors from 'cors';\nimport { createServer } from 'http';\nimport { WebSocketServer } from 'ws';\nimport { setupRoutes } from './setupRoutes.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\n\nexport function startServer() {\n\n  notifyOnFileChange(wss);\n\n  setupRoutes(app);\n\n  server.listen(3000, () => {\n    console.log('Server is running on port 3000');",
+      "total_deletions": 7,
+      "total_additions": 2
+    },
+    {
+      "filename": "src/backend/setupRoutes.js",
+      "before": "",
+      "after": "import { generateHandler } from './generateHandler.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\nimport { updateTaskHandler } from './updateTaskHandler.js';\nimport { listTasks } from './listTasks.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', updateTaskHandler);\n}",
+      "total_deletions": 0,
+      "total_additions": 12
+    }
+  ]
+}
