@@ -1,0 +1,111 @@
+{
+  "sha": "f2bfc705f523846a6f21e32393b15820ce263f21",
+  "url": "https://github.com/tisztamo/Junior/commit/f2bfc705f523846a6f21e32393b15820ce263f21",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Reformat documentation headers https://chat.openai.com/share/f0d01943-de1e-49ba-a830-e2f85ef84817",
+  "authorAt": "2023-08-24T14:15:40.000+02:00",
+  "commitAt": "2023-08-24T14:15:40.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Update Documentation with Versioning",
+    "url": "https://chat.openai.com/share/f0d01943-de1e-49ba-a830-e2f85ef84817",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/f2bfc705f523846a6f21e32393b15820ce263f21",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Reformat documentation headers https://chat.openai.com/share/f0d01943-de1e-49ba-a830-e2f85ef84817"
+    },
+    "status": 200,
+    "dateOfConversation": "August 24, 2023",
+    "dateOfAccess": "2023-08-31 06:23:57.954821",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 517,
+    "tokensOfAnswers": 591,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "f2bfc705f523846a6f21e32393b15820ce263f21_s1_p1",
+        "prompt": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\ndocs/roadmap.md:\n```\n# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- \u2705 Done: Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Auto-attention\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in an (embedded) vector database\n\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually\n\n```\n\n\n# Task\n\nImprove the documentation!\n\nIncorporate version numbers:\n  \"Usability & fixes\" is 0.2, released aug 2023\n  \"Programming on mobile\" will be 0.3, q4 2023\n    Add a new subitem as the second one: \"Allow secure hosting\" \n  Add a new item \"Plugin system\" 0.4 q4 2023\n    Allow writing any of the current components as a plugin\n  \"Auto-attention\" 0.5 q1 2024\n    Remove \"(embedded)\"\n  \"Prompt herds\" 0.6 q2 2024\n\n\nDo not create backup files.\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Improve documentation with versioning\"\necho \"Plan:\"\necho \"1. Update docs/roadmap.md with the given changes.\"\n\ncat > docs/roadmap.md << 'EOF'\n# Roadmap\n\n## Usability & fixes - v0.2 (Released: Aug 2023)\n- \u2705 Done: Implement the four buttons\n- \u2705 Done: Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile - v0.3 (Expected: Q4 2023)\n- Develop a file browser to allow the user to select attention files from mobile\n- Allow secure hosting\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Plugin system - v0.4 (Expected: Q4 2023)\n- Allow writing any of the current components as a plugin\n\n## Auto-attention - v0.5 (Expected: Q1 2024)\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in a vector database\n\n## Prompt herds - v0.6 (Expected: Q2 2024)\n- Scan and transform (refactor) the codebase gradually\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "f2bfc705f523846a6f21e32393b15820ce263f21_s1_p2",
+        "prompt": "The long headers look ugly. Put the version numbers to separate paragraphs right after the headings",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Reformat documentation headers\"\necho \"Plan:\"\necho \"1. Reformat docs/roadmap.md with version numbers on separate lines.\"\n\ncat > docs/roadmap.md << 'EOF'\n# Roadmap\n\n## Usability & fixes\nv0.2 (Released: Aug 2023)\n- \u2705 Done: Implement the four buttons\n- \u2705 Done: Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\nv0.3 (Expected: Q4 2023)\n- Develop a file browser to allow the user to select attention files from mobile\n- Allow secure hosting\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Plugin system\nv0.4 (Expected: Q4 2023)\n- Allow writing any of the current components as a plugin\n\n## Auto-attention\nv0.5 (Expected: Q1 2024)\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in a vector database\n\n## Prompt herds\nv0.6 (Expected: Q2 2024)\n- Scan and transform (refactor) the codebase gradually\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "docs/roadmap.md",
+      "before": "# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- \u2705 Done: Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Auto-attention\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in an (embedded) vector database\n\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually",
+      "after": "# Roadmap\n\n## Usability & fixes\nv0.2 (Released: Aug 2023)\n- \u2705 Done: Implement the four buttons\n- \u2705 Done: Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\nv0.3 (Expected: Q4 2023)\n- Develop a file browser to allow the user to select attention files from mobile\n- Allow secure hosting\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Plugin system\nv0.4 (Expected: Q4 2023)\n- Allow writing any of the current components as a plugin\n\n## Auto-attention\nv0.5 (Expected: Q1 2024)\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in a vector database\n\n## Prompt herds\nv0.6 (Expected: Q2 2024)\n- Scan and transform (refactor) the codebase gradually",
+      "total_deletions": 1,
+      "total_additions": 11
+    },
+    {
+      "filename": "prompt/history/2023/08/24/14:13_Improve documentation with versioning/change.sh",
+      "before": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Improve documentation with versioning\"\necho \"Plan:\"\necho \"1. Update docs/roadmap.md with the given changes.\"\n\ncat > docs/roadmap.md << 'EOF'\n# Roadmap\n\n## Usability & fixes - v0.2 (Released: Aug 2023)\n- \u2705 Done: Implement the four buttons\n- \u2705 Done: Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile - v0.3 (Expected: Q4 2023)\n- Develop a file browser to allow the user to select attention files from mobile\n- Allow secure hosting\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Plugin system - v0.4 (Expected: Q4 2023)\n- Allow writing any of the current components as a plugin\n\n## Auto-attention - v0.5 (Expected: Q1 2024)\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in a vector database\n\n## Prompt herds - v0.6 (Expected: Q2 2024)\n- Scan and transform (refactor) the codebase gradually\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 0,
+      "total_additions": 33
+    },
+    {
+      "filename": "prompt/history/2023/08/24/14:13_Improve documentation with versioning/prompt.md",
+      "before": "",
+      "after": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\ndocs/roadmap.md:\n```\n# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- \u2705 Done: Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Auto-attention\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in an (embedded) vector database\n\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually\n\n```\n\n\n# Task\n\nImprove the documentation!\n\nIncorporate version numbers:\n  \"Usability & fixes\" is 0.2, released aug 2023\n  \"Programming on mobile\" will be 0.3, q4 2023\n    Add a new subitem as the second one: \"Allow secure hosting\" \n  Add a new item \"Plugin system\" 0.4 q4 2023\n    Allow writing any of the current components as a plugin\n  \"Auto-attention\" 0.5 q1 2024\n    Remove \"(embedded)\"\n  \"Prompt herds\" 0.6 q2 2024\n\n\nDo not create backup files.\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n",
+      "total_deletions": 0,
+      "total_additions": 75
+    },
+    {
+      "filename": "prompt/history/2023/08/24/14:13_Improve documentation with versioning/prompt.yaml",
+      "before": "",
+      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/roadmap.md\nrequirements: |\n  Incorporate version numbers:\n    \"Usability & fixes\" is 0.2, released aug 2023\n    \"Programming on mobile\" will be 0.3, q4 2023\n      Add a new subitem as the second one: \"Allow secure hosting\" \n    Add a new item \"Plugin system\" 0.4 q4 2023\n      Allow writing any of the current components as a plugin\n    \"Auto-attention\" 0.5 q1 2024\n      Remove \"(embedded)\"\n    \"Prompt herds\" 0.6 q2 2024\nos: OSX",
+      "total_deletions": 0,
+      "total_additions": 14
+    },
+    {
+      "filename": "prompt/history/2023/08/24/14:15_Reformat documentation headers/change.sh",
+      "before": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Reformat documentation headers\"\necho \"Plan:\"\necho \"1. Reformat docs/roadmap.md with version numbers on separate lines.\"\n\ncat > docs/roadmap.md << 'EOF'\n# Roadmap\n\n## Usability & fixes\nv0.2 (Released: Aug 2023)\n- \u2705 Done: Implement the four buttons\n- \u2705 Done: Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\nv0.3 (Expected: Q4 2023)\n- Develop a file browser to allow the user to select attention files from mobile\n- Allow secure hosting\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Plugin system\nv0.4 (Expected: Q4 2023)\n- Allow writing any of the current components as a plugin\n\n## Auto-attention\nv0.5 (Expected: Q1 2024)\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in a vector database\n\n## Prompt herds\nv0.6 (Expected: Q2 2024)\n- Scan and transform (refactor) the codebase gradually\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 0,
+      "total_additions": 38
+    },
+    {
+      "filename": "prompt/history/2023/08/24/14:15_Reformat documentation headers/prompt.md",
+      "before": "",
+      "after": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\ndocs/roadmap.md:\n```\n# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- \u2705 Done: Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Auto-attention\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in an (embedded) vector database\n\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually\n\n```\n\n\n# Task\n\nImprove the documentation!\n\nIncorporate version numbers:\n  \"Usability & fixes\" is 0.2, released aug 2023\n  \"Programming on mobile\" will be 0.3, q4 2023\n    Add a new subitem as the second one: \"Allow secure hosting\" \n  Add a new item \"Plugin system\" 0.4 q4 2023\n    Allow writing any of the current components as a plugin\n  \"Auto-attention\" 0.5 q1 2024\n    Remove \"(embedded)\"\n  \"Prompt herds\" 0.6 q2 2024\n\n\nDo not create backup files.\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n",
+      "total_deletions": 0,
+      "total_additions": 75
+    },
+    {
+      "filename": "prompt/history/2023/08/24/14:15_Reformat documentation headers/prompt.yaml",
+      "before": "",
+      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/roadmap.md\nrequirements: |\n  Incorporate version numbers:\n    \"Usability & fixes\" is 0.2, released aug 2023\n    \"Programming on mobile\" will be 0.3, q4 2023\n      Add a new subitem as the second one: \"Allow secure hosting\" \n    Add a new item \"Plugin system\" 0.4 q4 2023\n      Allow writing any of the current components as a plugin\n    \"Auto-attention\" 0.5 q1 2024\n      Remove \"(embedded)\"\n    \"Prompt herds\" 0.6 q2 2024\nos: OSX",
+      "total_deletions": 0,
+      "total_additions": 14
+    },
+    {
+      "filename": "prompt/task/doc/improve.md",
+      "before": "Improve the documentation!\n\n<%= requirements %>",
+      "after": "Improve the documentation!\n<%= requirements %>\n\nDo not create backup files.",
+      "total_deletions": 1,
+      "total_additions": 3
+    }
+  ]
+}
