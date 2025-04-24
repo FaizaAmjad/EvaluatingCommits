@@ -18,7 +18,7 @@
     },
     "status": 200,
     "dateOfConversation": "August 7, 2023",
-    "dateOfAccess": "2023-08-24 10:23:27.205819",
+    "dateOfAccess": "2023-08-17 13:09:16.505241",
     "numberOfPrompts": 1,
     "tokensOfPrompts": 318,
     "tokensOfAnswers": 224,
@@ -40,46 +40,32 @@
   },
   "code": [
     {
-      "filename": ".babelrc",
-      "before": "",
-      "after": "{\n  \"presets\": [\n    [\"@babel/preset-env\", {\n      \"targets\": {\n        \"node\": \"current\"\n      }\n    }]\n  ]\n}",
-      "total_deletions": 0,
-      "total_additions": 9
-    },
-    {
-      "filename": "game.js",
-      "before": "function startPlaying() {\n    var rikishi = document.querySelector('#rikishi').value;\n    var user = getUser();\n    var picks = getPicks(user);\n    var message = \"You selected: \" + rikishi + \"\\nPrevious Picks: \" + JSON.stringify(picks);\n    updatePicks(user, rikishi); // Update the picks with the new selection\n    return message;\n}\n\nfunction getUser() {\n    // get user from local storage\n    var user = localStorage.getItem('user');\n    if (!user) {\n        user = 'admin';\n        localStorage.setItem('user', user);\n    }\n    return user;\n}\n\nfunction getPicks(user) {\n    var picks = JSON.parse(localStorage.getItem(user));\n    if (!picks) {\n        picks = {};\n    }\n    return picks;\n}\n\nfunction updatePicks(user, rikishi) {\n    var picks = getPicks(user);\n    var currentContest = new Date().getMonth();\n    if ([0, 2, 4, 6, 8, 10].includes(currentContest)) {\n        var contestName = new Date().toLocaleString('default', { month: 'long' }) + ' ' + new Date().getFullYear();\n        picks[contestName] = rikishi;\n        localStorage.setItem(user, JSON.stringify(picks));\n    }\n}\n\nfunction switchUser() {\n    var newUser = document.querySelector('#userSwitch').value;\n    localStorage.setItem('user', newUser);\n    document.querySelector('#user').textContent = 'Current user: ' + newUser;;\n}\n\nfunction backfillResults() {\n    var user = getUser();\n    var contestName = document.querySelector('#backfillContest').value;\n    var rikishi = document.querySelector('#backfillRikishi').value;\n    var picks = getPicks(user);\n    picks[contestName] = rikishi;\n    localStorage.setItem(user, JSON.stringify(picks));\n}\n\nfunction initialize() {\n    var user = getUser();\n    var userElement = document.querySelector('#user');\n    if (userElement) {\n        userElement.textContent = 'Current user: ' + user;\n    }\n}\n\ninitialize();\n\nmodule.exports = { startPlaying, switchUser, backfillResults, initialize };\n",
-      "after": "export default class Game {\n    constructor() {\n        this.user = this.getUser();\n        this.initialize();\n    }\n\n    startPlaying() {\n        var rikishi = document.querySelector('#rikishi').value;\n        var picks = this.getPicks();\n        var message = \"You selected: \" + rikishi + \"\\nPrevious Picks: \" + JSON.stringify(picks);\n        this.updatePicks(rikishi); // Update the picks with the new selection\n        return message;\n    }\n\n    getUser() {\n        // get user from local storage\n        var user = localStorage.getItem('user');\n        if (!user) {\n            user = 'admin';\n            localStorage.setItem('user', user);\n        }\n        return user;\n    }\n\n    getPicks() {\n        var picks = JSON.parse(localStorage.getItem(this.user));\n        if (!picks) {\n            picks = {};\n        }\n        return picks;\n    }\n\n    updatePicks(rikishi) {\n        var picks = this.getPicks();\n        var currentContest = new Date().getMonth();\n        if ([0, 2, 4, 6, 8, 10].includes(currentContest)) {\n            var contestName = new Date().toLocaleString('default', { month: 'long' }) + ' ' + new Date().getFullYear();\n            picks[contestName] = rikishi;\n            localStorage.setItem(this.user, JSON.stringify(picks));\n        }\n    }\n\n    switchUser() {\n        var newUser = document.querySelector('#userSwitch').value;\n        localStorage.setItem('user', newUser);\n        document.querySelector('#user').textContent = 'Current user: ' + newUser;\n        this.user = newUser;\n    }\n\n    backfillResults() {\n        var contestName = document.querySelector('#backfillContest').value;\n        var rikishi = document.querySelector('#backfillRikishi').value;\n        var picks = this.getPicks();\n        picks[contestName] = rikishi;\n        localStorage.setItem(this.user, JSON.stringify(picks));\n    }\n\n    initialize() {\n        var userElement = document.querySelector('#user');\n        if (userElement) {\n            userElement.textContent = 'Current user: ' + this.user;\n        }\n    }\n}\n\nfunction initGame() {\n  const game = new Game();\n\n  document.querySelector(\"#startPlayingButton\").addEventListener('click', () => game.startPlaying());\n  document.querySelector(\"#switchUserButton\").addEventListener('click', () => game.switchUser());\n  document.querySelector(\"#backfillResultsButton\").addEventListener('click', () => game.backfillResults());\n}\n\nif (typeof window !== 'undefined') {\n    window.onload = initGame;\n}",
-      "total_deletions": 50,
-      "total_additions": 63
-    },
-    {
-      "filename": "game.test.js",
-      "before": "const jsdom = require('jsdom');\nconst { JSDOM } = jsdom;\n\nconst dom = new JSDOM('<!doctype html><html><body></body></html>', {\n    url: \"http://localhost/\",\n    resources: \"usable\",\n    runScripts: \"dangerously\",\n});\n\nglobal.window = dom.window;\nglobal.document = dom.window.document;\nglobal.localStorage = dom.window.localStorage;\n\nconst { startPlaying, switchUser, backfillResults, initialize } = require('./game');\n\nbeforeEach(() => {\n    localStorage.clear(); // clear localStorage before each test\n    // Reset the HTML body before each test\n    document.body.innerHTML = `\n        <p id=\"user\"></p>\n        <select id=\"rikishi\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n    `;\n    initialize();\n});\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    localStorage.setItem('user', 'testUser');\n    localStorage.setItem('testUser', JSON.stringify({ 'July 2023': '1' })); // Assume a previous pick\n    document.querySelector('#rikishi').value = '1';\n    const result = startPlaying();\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n",
-      "after": "import 'jest-localstorage-mock';\nimport Game from './game.js';\n\nlet game;\n\nbeforeEach(() => {\n    localStorage.clear();\n    // set localStorage values\n    localStorage.setItem('user', 'testUser');\n    localStorage.setItem('testUser', JSON.stringify({ 'July 2023': '1' }));\n\n    document.body.innerHTML = `\n        <p id=\"user\"></p>\n        <select id=\"rikishi\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n    `;\n    game = new Game();\n});\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    document.querySelector('#rikishi').value = '1';\n    const result = game.startPlaying();\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n",
-      "total_deletions": 19,
-      "total_additions": 10
-    },
-    {
-      "filename": "jest.config.js",
-      "before": "",
-      "after": "module.exports = {\n  setupFilesAfterEnv: ['./jest.setup.js'],\n  testEnvironment: 'jsdom',\n  transform: {\n    '^.+\\\\.js$': 'babel-jest',\n  },\n};",
-      "total_deletions": 0,
-      "total_additions": 7
-    },
-    {
-      "filename": "jest.setup.js",
-      "before": "",
-      "after": "import 'jest-localstorage-mock';\nimport { TextEncoder, TextDecoder } from 'text-encoding';\n\nglobal.TextEncoder = TextEncoder;\nglobal.TextDecoder = TextDecoder;",
-      "total_deletions": 0,
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Update roadmap with completion marker\"\necho \"Plan:\"\necho \"1. Add a unicode character and a word to signify the completion of 'Implement the four buttons' in the roadmap.\"\ncat > docs/roadmap.md << 'EOF'\n# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually\nEOF\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Update roadmap.md with completed task\"\necho \"Plan:\"\necho \"1. Modify docs/roadmap.md file to mark the 'Write docs to allow using Junior for developing external projects' task as completed.\"\n\ncat > docs/roadmap.md << 'EOF'\n# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 3,
       "total_additions": 5
     },
     {
-      "filename": "package.json",
-      "before": "  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"jest\": \"^29.5.0\",\n    \"jest-localstorage-mock\": \"^2.4.26\",\n    \"jsdom\": \"^22.1.0\"\n  }\n}",
-      "after": "  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"@babel/core\": \"^7.22.5\",\n    \"@babel/preset-env\": \"^7.22.5\",\n    \"babel-jest\": \"^29.5.0\",\n    \"jest\": \"^29.5.0\",\n    \"jest-environment-jsdom\": \"^29.5.0\",\n    \"jest-localstorage-mock\": \"^2.4.26\",\n    \"jsdom\": \"^22.1.0\"\n  },\n  \"dependencies\": {\n    \"text-encoding\": \"^0.7.0\"\n  }\n}",
-      "total_deletions": 0,
-      "total_additions": 7
+      "filename": "docs/roadmap.md",
+      "before": "## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile",
+      "after": "## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile",
+      "total_deletions": 1,
+      "total_additions": 1
+    },
+    {
+      "filename": "prompt.md",
+      "before": "```\n# Roadmap\n## Usability & fixes\n- Implement the four buttons\n- Fix every major bug\n- Write docs to allow using Junior for developing external projects\n\n\nImprove the documentation!\n\n&#34;Implement the four buttons&#34; is done. Add a nice unicode character and a single word to show this.\n\n\n# Output Format",
+      "after": "```\n# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- Write docs to allow using Junior for developing external projects\n\n\nImprove the documentation!\n\n&#34;Write docs to allow using Junior for developing external projects&#34; is also done.\n\n\n# Output Format",
+      "total_deletions": 2,
+      "total_additions": 2
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "attention:\n  - docs/roadmap.md\nrequirements: >\n  \"Implement the four buttons\" is done. Add a nice unicode character and a single word to show this.\nos: OSX",
+      "after": "attention:\n  - docs/roadmap.md\nrequirements: >\n  \"Write docs to allow using Junior for developing external projects\" is also done.\nos: OSX",
+      "total_deletions": 1,
+      "total_additions": 1
     }
   ]
 }

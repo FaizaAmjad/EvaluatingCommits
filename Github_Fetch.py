@@ -108,18 +108,17 @@ def main():
         if VERBOSE:
             print("loaded JSON")
 
-    # get authentication token from .env
+     # get authentication token from .env
     token = os.getenv("GITHUB_TOKEN")
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"token {token}"
+    } if token else {}
 
-    if token:
-        headers = {
-            "Accept": "application/vnd.github+json",
-            "Authorization": f"token {token}"
-        }
-    else:
-        headers = {}
-        warnings.warn("WARNING, authentication token not found. Ensure .env file is used with an authentication token named 'GITHUB_TOKEN'")
+    if not token:
+        warnings.warn("WARNING: GitHub token not found. Requests may be rate-limited or unauthorized.")
 
+    seen_shas = set()
     i = 0
     # loop each commit in the Json 
     for commit in filteredJson:
@@ -132,8 +131,14 @@ def main():
         SHA = commit['Sha']
         message = commit['Message']
 
+        if SHA in seen_shas:
+            continue
+        seen_shas.add(SHA)
+
         try:
             newURL = FormatUrl(url=URL)
+            data = None #clear old data
+
             try:
                 response = requests.get(url=newURL, headers=headers)
                 if response.status_code == 200:
@@ -143,46 +148,47 @@ def main():
             except requests.RequestException as e:
                 print(f"Request error: {e}")
 
-            if data:
-                files = data.get("files", [])
-                j = 0
-                code_diffs = []
+            if not data:
+                continue # Don't proceed with invalid data
+
+            files = data.get("files", [])
+            code_diffs = []
 
                 # List of path patterns to exclude
-                excluded_dirs = [
-                    "node_modules/", "venv/", "env/", "site-packages/", "__pycache__/",
-                    "lib/", "target/", "build/", "vendor/bundle/", ".bundle/", "gems/",
-                    "vendor/", ".cargo/", "go/pkg/", "go/bin/", "go/pkg/mod/",
-                    "packages/", "bin/", "obj/", ".nuget/", "_build/", "deps/",
-                    ".stack-work/", "dist-newstyle/", ".build/", ".deno/", "Package.resolved"
-                ]
+            excluded_dirs = [
+                "node_modules/", "venv/", "env/", "site-packages/", "__pycache__/",
+                "lib/", "target/", "build/", "vendor/bundle/", ".bundle/", "gems/",
+                "vendor/", ".cargo/", "go/pkg/", "go/bin/", "go/pkg/mod/",
+                "packages/", "bin/", "obj/", ".nuget/", "_build/", "deps/",                ".stack-work/", "dist-newstyle/", ".build/", ".deno/", "Package.resolved"
+            ]
 
-                def is_excluded_path(path):
-                    return any(part in path for part in excluded_dirs)
+            def is_excluded_path(path):
+                return any(part in path for part in excluded_dirs)
 
-                for file in files:
-                    j += 1
-                    filename = file["filename"]
+            j = 0
+            for file in files:
+                j += 1
+                filename = file["filename"]
                     
-                    if is_excluded_path(filename):
-                        if VERBOSE:
-                            print(f"Skipping excluded path: {filename}")
-                        continue
+                if is_excluded_path(filename):
+                    #if VERBOSE:
+                        #print(f"Skipping excluded path: {filename}")
+                    continue
 
-                    if "patch" not in file:
-                        continue  # skip binary or unchanged files
+                if "patch" not in file:
+                    continue  # skip binary or unchanged files
 
-                    old, new, total_dels, total_adds = reconstruct_from_unified_diff(file['patch'])
+                old, new, total_dels, total_adds = reconstruct_from_unified_diff(file['patch'])
 
-                    code_entry = {
-                        "filename": file["filename"],
-                        "before": old,
-                        "after": new,
-                        "total_deletions": total_dels,
-                        "total_additions": total_adds
-                    }
+                code_entry = {
+                    "filename": file["filename"],
+                    "before": old,
+                    "after": new,
+                    "total_deletions": total_dels,
+                    "total_additions": total_adds
+                }
 
-                    code_diffs.append(code_entry)
+                code_diffs.append(code_entry)
 
                 # Path to the existing structured commit file
                 json_path = os.path.join("Structured_Refactoring_Commits", f"{SHA}.json")
