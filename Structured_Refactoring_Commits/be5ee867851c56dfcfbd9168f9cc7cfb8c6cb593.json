@@ -1,0 +1,78 @@
+{
+  "sha": "be5ee867851c56dfcfbd9168f9cc7cfb8c6cb593",
+  "url": "https://github.com/tisztamo/Junior/commit/be5ee867851c56dfcfbd9168f9cc7cfb8c6cb593",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Modify button and tailwind config https://chat.openai.com/share/4254d06b-c649-4d19-b346-1cd123deb349",
+  "authorAt": "2023-08-10T21:38:29.000+02:00",
+  "commitAt": "2023-08-10T21:38:29.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Fix Tailwind Button Style",
+    "url": "https://chat.openai.com/share/4254d06b-c649-4d19-b346-1cd123deb349",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/be5ee867851c56dfcfbd9168f9cc7cfb8c6cb593",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Modify button and tailwind config https://chat.openai.com/share/4254d06b-c649-4d19-b346-1cd123deb349"
+    },
+    "status": 200,
+    "dateOfConversation": "August 10, 2023",
+    "dateOfAccess": "2023-08-17 13:08:36.807673",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 631,
+    "tokensOfAnswers": 418,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "be5ee867851c56dfcfbd9168f9cc7cfb8c6cb593_s1_p1",
+        "prompt": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\nsrc/frontend/components/GenerateButton.jsx:\n```\nimport handleGeneratePrompt from '../service/handleGeneratePrompt';\n\nconst GenerateButton = () => {\n  return (\n    <button className=\"w-64 px-4 py-4 bg-blue-500 text-white rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt [G]</button>\n  );\n};\n\nexport default GenerateButton;\n\n```\n\nsrc/frontend/tailwind.config.cjs:\n```\nmodule.exports = {\n  darkMode: 'class',\n  content: [__dirname + '/**/*.html', __dirname + '/**/*.jsx'],\n  theme: {\n    screens: {\n      'xs': '320px',\n      'sm': '640px',\n      'md': '768px',\n      'lg': '1024px',\n    },\n    extend: {\n      spacing: {\n        '72': '18rem',\n        '84': '21rem',\n        '96': '24rem',\n        '128': '32rem',\n      },\n      fontSize: {\n        'btn': '1.5rem',\n      },\n      padding: {\n        'btn': '1.5rem',\n      },\n      maxWidth: {\n        'desktop': '640px',\n      },\n      colors: {\n        text: \"var(--text-color)\",\n        emphasize: \"var(--emphasize-color)\",\n      },\n      backgroundColor: {\n        main: \"var(--background-color)\",\n        emphasize: \"var(--background-emphasize-color)\",\n      },\n    },\n  },\n  variants: {\n    extend: {},\n  },\n  plugins: [],\n}\n\n```\n\n\n# Task\n\nFix the following issue!\n\nCreate a new foreground color in tailwind named &#34;bg&#34; with the same value as the main background.\nUse this for the GenerateButton label.\nAlso change its width to w-full and font size to text-lg.\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Modify button and tailwind config\"\necho \"Plan:\"\necho \"1. Modify tailwind.config.cjs to add new foreground color.\"\necho \"2. Update GenerateButton.jsx component's tailwind classes.\"\n\ncat <<EOF > src/frontend/tailwind.config.cjs\nmodule.exports = {\n  darkMode: 'class',\n  content: [__dirname + '/**/*.html', __dirname + '/**/*.jsx'],\n  theme: {\n    screens: {\n      'xs': '320px',\n      'sm': '640px',\n      'md': '768px',\n      'lg': '1024px',\n    },\n    extend: {\n      spacing: {\n        '72': '18rem',\n        '84': '21rem',\n        '96': '24rem',\n        '128': '32rem',\n      },\n      fontSize: {\n        'btn': '1.5rem',\n        'lg': '1.125rem',\n      },\n      padding: {\n        'btn': '1.5rem',\n      },\n      maxWidth: {\n        'desktop': '640px',\n      },\n      colors: {\n        text: \"var(--text-color)\",\n        emphasize: \"var(--emphasize-color)\",\n        bg: \"var(--background-color)\",\n      },\n      backgroundColor: {\n        main: \"var(--background-color)\",\n        emphasize: \"var(--background-emphasize-color)\",\n      },\n    },\n  },\n  variants: {\n    extend: {},\n  },\n  plugins: [],\n}\nEOF\n\ncat <<EOF > src/frontend/components/GenerateButton.jsx\nimport handleGeneratePrompt from '../service/handleGeneratePrompt';\n\nconst GenerateButton = () => {\n  return (\n    <button className=\"w-full px-4 py-4 bg-blue-500 text-bg text-lg rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt [G]</button>\n  );\n};\n\nexport default GenerateButton;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Increase font of task list input and label\"\necho \"Plan:\"\necho \"1. Modify the CSS classes for the task list input and its label to increase their font size\"\necho \"2. Save the changes to src/frontend/components/TasksList.jsx\"\n\ncat > src/frontend/components/TasksList.jsx << 'EOF'\nimport { onMount, createEffect } from 'solid-js';\nimport { fetchTasks } from '../fetchTasks';\nimport { handleTaskChange } from '../service/handleTaskChange';\nimport { selectedTask, setSelectedTask } from '../model/selectedTask';\nimport { promptDescriptor } from '../model/promptDescriptor';\nimport { parseYamlAndGetTask } from '../service/parseYamlAndGetTask';\n\nconst TasksList = () => {\n  const tasks = fetchTasks();\n\n  createEffect(() => {\n    const descriptor = promptDescriptor();\n    if (descriptor !== '') {\n      const task = parseYamlAndGetTask(descriptor);\n      setSelectedTask(task);\n    }\n  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded\">\n      <label class=\"text-lg mr-2\">Task:</label>\n      <select class=\"w-full bg-emphasize text-emphasize text-lg\" value={selectedTask()} onChange={e => handleTaskChange(e)}>\n        {tasks().map(task => <option value={task}>{task}</option>)}\n      </select>\n    </div>\n  );\n};\n\nexport default TasksList;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Modify button and tailwind config\"\necho \"Plan:\"\necho \"1. Modify tailwind.config.cjs to add new foreground color.\"\necho \"2. Update GenerateButton.jsx component's tailwind classes.\"\n\ncat <<EOF > src/frontend/tailwind.config.cjs\nmodule.exports = {\n  darkMode: 'class',\n  content: [__dirname + '/**/*.html', __dirname + '/**/*.jsx'],\n  theme: {\n    screens: {\n      'xs': '320px',\n      'sm': '640px',\n      'md': '768px',\n      'lg': '1024px',\n    },\n    extend: {\n      spacing: {\n        '72': '18rem',\n        '84': '21rem',\n        '96': '24rem',\n        '128': '32rem',\n      },\n      fontSize: {\n        'btn': '1.5rem',\n        'lg': '1.125rem',\n      },\n      padding: {\n        'btn': '1.5rem',\n      },\n      maxWidth: {\n        'desktop': '640px',\n      },\n      colors: {\n        text: \"var(--text-color)\",\n        emphasize: \"var(--emphasize-color)\",\n        bg: \"var(--background-color)\",\n      },\n      backgroundColor: {\n        main: \"var(--background-color)\",\n        emphasize: \"var(--background-emphasize-color)\",\n      },\n    },\n  },\n  variants: {\n    extend: {},\n  },\n  plugins: [],\n}\nEOF\n\ncat <<EOF > src/frontend/components/GenerateButton.jsx\nimport handleGeneratePrompt from '../service/handleGeneratePrompt';\n\nconst GenerateButton = () => {\n  return (\n    <button className=\"w-full px-4 py-4 bg-blue-500 text-bg text-lg rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt [G]</button>\n  );\n};\n\nexport default GenerateButton;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 28,
+      "total_additions": 54
+    },
+    {
+      "filename": "prompt.md",
+      "before": "\n# Working set\n\nsrc/frontend/App.jsx:\n```\nimport useKeyBindings from './service/useKeyBindings';\nimport keyBindings from './config/keyBindings';\nimport NavBar from './components/NavBar';\nimport PromptCreation from './components/PromptCreation';\nimport ChangeExecution from './components/ChangeExecution';\nimport ChangeInspection from './components/ChangeInspection';\nimport ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  // Define key bindings\n  const bindings = keyBindings();\n\n  // Use key bindings\n  useKeyBindings(bindings);\n\n  return (\n    <div id=\"app\" class=\"p-2 sm:p-4 xs:p-4\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />\n        <ChangeInspection />\n        <ChangeFinalization />\n      </div>\n    </div>\n  );\n};\n\nexport default App;\n\n```\n\nsrc/frontend/components/PromptCreation.jsx:\n```\nimport TasksList from './TasksList';\nimport PromptDescriptor from './PromptDescriptor';\nimport GenerateButton from './GenerateButton';\nimport PromptDisplay from './PromptDisplay';\n\nconst PromptCreation = () => {\n  return (\n    <>\n      <TasksList />\n      <PromptDescriptor />\n      <GenerateButton />\n      <PromptDisplay />\n    </>\n  );\n};\n\nexport default PromptCreation;\n\n```\n\nsrc/frontend/components/TasksList.jsx:\n```\nimport { onMount, createEffect } from 'solid-js';\nimport { fetchTasks } from '../fetchTasks';\nimport { handleTaskChange } from '../service/handleTaskChange';\nimport { selectedTask, setSelectedTask } from '../model/selectedTask';\nimport { promptDescriptor } from '../model/promptDescriptor';\nimport { parseYamlAndGetTask } from '../service/parseYamlAndGetTask';\n\nconst TasksList = () => {\n  const tasks = fetchTasks();\n\n  createEffect(() => {\n    const descriptor = promptDescriptor();\n    if (descriptor !== '') {\n      const task = parseYamlAndGetTask(descriptor);\n      setSelectedTask(task);\n    }\n  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded\">\n      <label class=\"mr-2\">Task:</label>\n      <select class=\"w-full bg-emphasize text-emphasize text-lg\" value={selectedTask()} onChange={e => handleTaskChange(e)}>\n        {tasks().map(task => <option value={task}>{task}</option>)}\n      </select>\n    </div>\n  );\n};\n\nexport default TasksList;\n\n\n```\n\n\nFix the following issue!\n\nIncrease font of the task list input and make its label the same size.\n\n\n",
+      "after": "\n# Working set\n\nsrc/frontend/components/GenerateButton.jsx:\n```\nimport handleGeneratePrompt from '../service/handleGeneratePrompt';\n\nconst GenerateButton = () => {\n  return (\n    <button className=\"w-64 px-4 py-4 bg-blue-500 text-white rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt [G]</button>\n  );\n};\n\nexport default GenerateButton;\n\n```\n\nsrc/frontend/tailwind.config.cjs:\n```\nmodule.exports = {\n  darkMode: 'class',\n  content: [__dirname + '/**/*.html', __dirname + '/**/*.jsx'],\n  theme: {\n    screens: {\n      'xs': '320px',\n      'sm': '640px',\n      'md': '768px',\n      'lg': '1024px',\n    },\n    extend: {\n      spacing: {\n        '72': '18rem',\n        '84': '21rem',\n        '96': '24rem',\n        '128': '32rem',\n      },\n      fontSize: {\n        'btn': '1.5rem',\n      },\n      padding: {\n        'btn': '1.5rem',\n      },\n      maxWidth: {\n        'desktop': '640px',\n      },\n      colors: {\n        text: \"var(--text-color)\",\n        emphasize: \"var(--emphasize-color)\",\n      },\n      backgroundColor: {\n        main: \"var(--background-color)\",\n        emphasize: \"var(--background-emphasize-color)\",\n      },\n    },\n  },\n  variants: {\n    extend: {},\n  },\n  plugins: [],\n}\n\n```\n\n\nFix the following issue!\n\nCreate a new foreground color in tailwind named &#34;bg&#34; with the same value as the main background.\nUse this for the GenerateButton label.\nAlso change its width to w-full and font size to text-lg.\n\n\n",
+      "total_deletions": 79,
+      "total_additions": 50
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/PromptCreation.jsx\n  - src/frontend/components/TasksList.jsx\nrequirements: |\n  Increase font of the task list input and make its label the same size.\nos: OSX",
+      "after": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/components/GenerateButton.jsx\n  - src/frontend/tailwind.config.cjs\nrequirements: >\n  Create a new foreground color in tailwind named \"bg\" with the same value as\n  the main background.\n\n  Use this for the GenerateButton label.\n\n  Also change its width to w-full and font size to text-lg.\nos: OSX",
+      "total_deletions": 5,
+      "total_additions": 9
+    },
+    {
+      "filename": "src/frontend/components/GenerateButton.jsx",
+      "before": "\nconst GenerateButton = () => {\n  return (\n    <button className=\"w-64 px-4 py-4 bg-blue-500 text-white rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt [G]</button>\n  );\n};\n",
+      "after": "\nconst GenerateButton = () => {\n  return (\n    <button className=\"w-full px-4 py-4 bg-blue-500 text-bg text-lg rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt [G]</button>\n  );\n};\n",
+      "total_deletions": 1,
+      "total_additions": 1
+    },
+    {
+      "filename": "src/frontend/tailwind.config.cjs",
+      "before": "      },\n      fontSize: {\n        'btn': '1.5rem',\n      },\n      padding: {\n        'btn': '1.5rem',\n      colors: {\n        text: \"var(--text-color)\",\n        emphasize: \"var(--emphasize-color)\",\n      },\n      backgroundColor: {\n        main: \"var(--background-color)\",",
+      "after": "      },\n      fontSize: {\n        'btn': '1.5rem',\n        'lg': '1.125rem',\n      },\n      padding: {\n        'btn': '1.5rem',\n      colors: {\n        text: \"var(--text-color)\",\n        emphasize: \"var(--emphasize-color)\",\n        bg: \"var(--background-color)\",\n      },\n      backgroundColor: {\n        main: \"var(--background-color)\",",
+      "total_deletions": 0,
+      "total_additions": 2
+    }
+  ]
+}
