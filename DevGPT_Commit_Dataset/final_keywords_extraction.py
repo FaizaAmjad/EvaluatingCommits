@@ -60,9 +60,10 @@ def generate_final_csv(commit_file, literature_file, word_frequency_file, output
     unmatched_commit_keywords = sorted([kw for kw in commit_keywords_set if kw not in matched_literature_keywords])
     with open("unmatched_commit_keywords.csv", mode='w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
-        writer.writerow(["Unmatched Commit Keyword"])
+        writer.writerow(["Unmatched Commit Keyword", "Frequency"])
         for word in unmatched_commit_keywords:
-            writer.writerow([word])
+            freq = final_keywords.get(word, 0)
+            writer.writerow([word, freq])
 
     # Print summary
     print(f"✅ Final list written to: {output_file}")
