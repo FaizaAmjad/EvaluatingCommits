@@ -34,7 +34,7 @@ def detect_language(filename: str):
         if filename.endswith(ext):
             print(f"\nlang found: {lang}")
             return lang
-        print ("No language found and will return none")
+    print ("No language found and will return none")
     return None
 
 # Removes comments depending on language
@@ -47,25 +47,27 @@ def strip_comments(code: str, language: str):
         return code
     return code
 
-# regex tokenizer: extracts words, punctuation, and symbols
+
+# balanced regex tokenizer: extracts words, punctuation, and symbols
 # Makes the code easier to compare in n-gram form
 def tokenize_code(code: str, language: str):
     # Simple tokenizer: split on non-alphanumeric characters
-    return re.findall(r"\b\w+\b", code)
+    return re.findall(r"\w+|[^\s\w]", code)
 
 # Turns token list into a list of n-grams
 def extract_ngrams(tokens, n=1):
     return [tuple(tokens[i:i+n]) for i in range(len(tokens) - n + 1)]
 
 # Collects top k most frequent n-grams from the whole dataset to ignore during BLEU scoring
-def get_trivially_shared_ngrams(corpus_tokens, top_k=500, n=1):
+def get_trivially_shared_ngrams(corpus_tokens, top_k=500, ngram_range=(1, 4)):
     all_ngrams = []
     for tokens in corpus_tokens:
-        all_ngrams.extend(extract_ngrams(tokens, n))
+        for n in range(ngram_range[0], ngram_range[1] + 1):
+            all_ngrams.extend(extract_ngrams(tokens, n))
     frequencies = Counter(all_ngrams)
     return dict(frequencies.most_common(top_k))
 
-def process_commit_data(input_path: str, output_csv_path: str, top_k=500, n=1):
+def process_commit_data(input_path: str, output_csv_path: str, top_k=500, ngram_range=(1, 4)):
     with open(input_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
@@ -94,7 +96,7 @@ def process_commit_data(input_path: str, output_csv_path: str, top_k=500, n=1):
             continue
 
     # Build shared n-grams to ignore
-    trivially_shared = get_trivially_shared_ngrams(all_tokens_for_ngram_analysis, top_k, n)
+    trivially_shared = get_trivially_shared_ngrams(all_tokens_for_ngram_analysis, top_k, ngram_range)
 
     results = []
 
