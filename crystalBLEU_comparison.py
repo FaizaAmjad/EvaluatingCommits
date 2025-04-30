@@ -5,7 +5,7 @@ import os
 import glob
 from tqdm import tqdm
 from collections import Counter
-from crystalbleu import corpus_bleu
+from crystalbleu import corpus_bleu, SmoothingFunction
 import fractions
 
 # Monkey patch to fix crystalBLEU issue with Fraction
@@ -76,8 +76,8 @@ def collect_tokens_for_ngram_analysis(file_paths):
 
                 for convo in conversations:
                     for code_obj in convo.get("code", []):
-                        code_content = code_obj.get("content", "")
-                        tokens_code = tokenize_code(strip_comments(code_content))
+                        code_content = code_obj.get("Content", "")
+                        tokens_code = tokenize_code(code_content)
                         all_tokens.append(tokens_code)
 
             except Exception as e:
@@ -109,7 +109,7 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
             filename = file_change.get("filename", "")
             before = file_change.get("before", "")
             after = file_change.get("after", "")
-
+            print (f"filename {filename}")
             #before = strip_comments(file_change.get("before", ""))
             #after = strip_comments(file_change.get("after", ""))
 
@@ -121,20 +121,24 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
                 best_prompt_id = None
 
                 # Compare after vs code snippets from conversations
-                for prompt_id, convo in enumerate(conversations):
+                for prompt_id, convo in enumerate(conversations, start=1):
+                    print (f"prompt_id {prompt_id}")
                     code_blocks = convo.get("list_of_code", [])
                     for code_obj in code_blocks:
-                        code_content = code_obj.get("content", "")
-                        print("CODE_CONTENT :", code_content)
+                        code_content = code_obj.get("Content", "")
+                        # print("CODE_CONTENT :", code_content)
                         tokens_code = tokenize_code(code_content)
-                        print("AFTER:", tokens_after)
-                        print("SUGGESTION CODE :", tokens_code)
-                        print("IGNORING:", len(trivially_shared))
+                        # print("AFTER:", tokens_after)
+                        # print("SUGGESTION CODE :", tokens_code)
+                        # print("IGNORING:", len(trivially_shared))
+
+                        sm_func = SmoothingFunction(epsilon=0.0001).method1
 
                         if tokens_after and tokens_code:
                             crystalbleu_score = corpus_bleu(
-                                references=[[tokens_after]],  # wrap reference in a list
-                                hypotheses=[tokens_code],     # wrap hypothesis in a list
+                                [[tokens_after]],  # wrap reference in a list
+                                [tokens_code],     # wrap hypothesis in a list
+                                smoothing_function=sm_func,
                                 ignoring=trivially_shared
                             )
 
