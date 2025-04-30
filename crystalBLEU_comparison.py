@@ -3,7 +3,6 @@ import csv
 import re
 import os
 import glob
-from tqdm import tqdm
 from collections import Counter
 from crystalbleu import corpus_bleu, SmoothingFunction
 import fractions
@@ -34,7 +33,7 @@ def extract_ngrams(tokens, n=1):
     return [tuple(tokens[i:i+n]) for i in range(len(tokens) - n + 1)]
 
 # Collects top k most frequent n-grams from the whole dataset to ignore during BLEU scoring
-def get_trivially_shared_ngrams(corpus_tokens, top_k=100, ngram_range=(1, 4)):
+def get_trivially_shared_ngrams(corpus_tokens, top_k, ngram_range=(1, 4)):
     all_ngrams = []
     for tokens in corpus_tokens:
         for n in range(ngram_range[0], ngram_range[1] + 1):
@@ -43,19 +42,15 @@ def get_trivially_shared_ngrams(corpus_tokens, top_k=100, ngram_range=(1, 4)):
     return dict(frequencies.most_common(top_k))
 
 def collect_tokens_for_ngram_analysis(file_paths):
-    files_processed = 0
     all_tokens = []
     
     for file_path in file_paths:
-        if files_processed >= 5:
-            break
         with open(file_path, 'r', encoding='utf-8') as f:
             try:
                 commit = json.load(f)
             except json.JSONDecodeError as e:
                 print(f"Error reading {file_path}: {e}")
                 continue
-        files_processed += 1
 
         files_changed = commit.get("code", [])
         conversations = commit.get("chatgpt_sharing", {}).get("conversations", [])
@@ -87,19 +82,16 @@ def collect_tokens_for_ngram_analysis(file_paths):
     return all_tokens
 
 def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
-    files_processed = 0
+    
     results = []
     
     for file_path in file_paths:
-        if files_processed >= 5:
-            break
         with open(file_path, 'r', encoding='utf-8') as f:
             try:
                 commit = json.load(f)
             except json.JSONDecodeError as e:
                 print(f"Error reading {file_path}: {e}")
                 continue
-        files_processed += 1
 
         sha = commit.get("sha", "unknown")
         files_changed = commit.get("code", [])
@@ -169,7 +161,7 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
         print("⚠️ No valid results found. Check your input data or logic.")
 
  
-def process_commit_data(input_folder: str, output_csv_path: str, top_k=100, ngram_range=(1, 4), file_limit=5):
+def process_commit_data(input_folder: str, output_csv_path: str, top_k, ngram_range, file_limit):
     # Get all JSON files in the folder
     json_files = glob.glob(os.path.join(input_folder, "*.json"))[:file_limit]
     if not json_files:
@@ -186,4 +178,4 @@ def process_commit_data(input_folder: str, output_csv_path: str, top_k=100, ngra
     evaluate_crystalbleu_scores(json_files, trivially_shared, output_csv_path)
 
 if __name__ == "__main__":
-    process_commit_data("structured_Refactoring_Commits", "evaluation_results.csv")
+    process_commit_data("structured_Refactoring_Commits", "evaluation_results.csv", top_k=500, ngram_range=(1, 4), file_limit=5)
