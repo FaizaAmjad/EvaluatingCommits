@@ -1,0 +1,9 @@
+sha,file,language,best_crystalbleu_after_vs_chatgpt,best_prompt_id
+01cec3e3d17e26f703ce8bf7aa068d3f6b6364d3,api/gpt.js,javascript,0.0,
+01cec3e3d17e26f703ce8bf7aa068d3f6b6364d3,api/whisper.js,javascript,0.0,
+020f2c644be54fde501fb8d199948e8f68c8e125,src/frontend/service/fetchGitStatus.js,javascript,0.0,
+020f2c644be54fde501fb8d199948e8f68c8e125,src/frontend/service/postCommit.js,javascript,0.0,
+020f2c644be54fde501fb8d199948e8f68c8e125,src/frontend/service/resetGit.js,javascript,0.0,
+024996ec1e98a43c1f2715a752b5ebbd1858cdee,src/prompt/createPrompt.js,javascript,0.0,
+024996ec1e98a43c1f2715a752b5ebbd1858cdee,src/prompt/getPromptDirectories.js,javascript,0.0,
+024996ec1e98a43c1f2715a752b5ebbd1858cdee,src/prompt/promptDescriptorDefaults.js,javascript,0.0,

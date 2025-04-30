@@ -16,43 +16,16 @@ def _fixed_fraction_new(cls, *args, **kwargs):
 
 fractions.Fraction.__new__ = staticmethod(_fixed_fraction_new) 
 
-
-# Helping auto-detect the programming language based on file extension
-EXTENSION_LANGUAGE_MAP = {
-    ".py": "python",
-    ".js": "javascript",
-    ".ts": "typescript",
-    ".java": "java",
-    ".cpp": "cpp",
-    ".c": "c",
-    ".cs": "c_sharp",
-    ".rb": "ruby",
-    ".go": "go",
-    ".rs": "rust"
-}
-# Checks file extension and returns a language
-def detect_language(filename: str):
-    for ext, lang in EXTENSION_LANGUAGE_MAP.items():
-        if filename.endswith(ext):
-            print(f"\nlang found: {lang}")
-            return lang
-    print ("No language found and will return none")
-    return None
-
-# Removes comments depending on language
-def strip_comments(code: str, language: str):
-    if language == "python":
-        return re.sub(r'#.*', '', code)
-    elif language in ["javascript", "typescript", "java", "cpp", "c", "c_sharp", "go", "rust"]:
-        code = re.sub(r'//.*', '', code)
-        code = re.sub(r'/\*.*?\*/', '', code, flags=re.DOTALL)
-        return code
+def strip_comments(code: str) -> str:
+    # Remove single-line comments (#, //) and multi-line comments (/* ... */)
+    code = re.sub(r'#.*', '', code)                     # Python-style
+    code = re.sub(r'//.*', '', code)                    # C/C++/Java/JS-style
+    code = re.sub(r'/\*.*?\*/', '', code, flags=re.DOTALL)  # Multiline
     return code
-
 
 # balanced regex tokenizer: extracts words, punctuation, and symbols
 # Makes the code easier to compare in n-gram form
-def tokenize_code(code: str, language: str):
+def tokenize_code(code: str):
     # Simple tokenizer: split on non-alphanumeric characters
     return re.findall(r"\w+|[^\s\w]", code)
 
@@ -61,7 +34,7 @@ def extract_ngrams(tokens, n=1):
     return [tuple(tokens[i:i+n]) for i in range(len(tokens) - n + 1)]
 
 # Collects top k most frequent n-grams from the whole dataset to ignore during BLEU scoring
-def get_trivially_shared_ngrams(corpus_tokens, top_k=500, ngram_range=(1, 4)):
+def get_trivially_shared_ngrams(corpus_tokens, top_k=100, ngram_range=(1, 4)):
     all_ngrams = []
     for tokens in corpus_tokens:
         for n in range(ngram_range[0], ngram_range[1] + 1):
@@ -69,59 +42,11 @@ def get_trivially_shared_ngrams(corpus_tokens, top_k=500, ngram_range=(1, 4)):
     frequencies = Counter(all_ngrams)
     return dict(frequencies.most_common(top_k))
 
-def process_commit_data(input_folder: str, output_csv_path: str, top_k=500, ngram_range=(1, 4)):
-        
-    # Get all JSON files in the folder
-    json_files = glob.glob(os.path.join(input_folder, "*.json"))
-    if not json_files:
-        print(f"No JSON files found in folder: {input_folder}")
-        return
-
-    all_tokens_for_ngram_analysis = []
-
+def collect_tokens_for_ngram_analysis(file_paths):
     files_processed = 0
-    # collect all tokens for n-gram analysis
-    for file_path in json_files:
-        if files_processed >= 5:
-            break
-        with open(file_path, 'r', encoding='utf-8') as f:
-            try:
-                data = json.load(f)
-            except json.JSONDecodeError as e:
-                print(f"Error reading {file_path}: {e}")
-                continue
-        files_processed += 1
-
-    # Process each file       
-    for item in data:
-        language = detect_language(item.get("file", ""))
-        if not language:
-            continue
-
-        before = strip_comments(item.get("before", ""), language)
-        after = strip_comments(item.get("after", ""), language)
-
-        try:
-            tokens_before = tokenize_code(before, language)
-            tokens_after = tokenize_code(after, language)
-            all_tokens_for_ngram_analysis.append(tokens_before)
-            all_tokens_for_ngram_analysis.append(tokens_after)
-
-            for sugg in item.get("suggestions", []):
-                tokens_sugg = tokenize_code(strip_comments(sugg.get("text", ""), language), language)
-                all_tokens_for_ngram_analysis.append(tokens_sugg)
-        except Exception as e:
-            print(f"Skipping token collection due to error: {e}")
-            continue
-
-    # Build shared n-grams to ignore
-    trivially_shared = get_trivially_shared_ngrams(all_tokens_for_ngram_analysis, top_k, ngram_range)
-
-    results = []
-
-    files_processed = 0
-    # Clean and tokenize before, after, and suggestions code for all commits
-    for file_path in json_files:
+    all_tokens = []
+    
+    for file_path in file_paths:
         if files_processed >= 5:
             break
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -131,69 +56,130 @@ def process_commit_data(input_folder: str, output_csv_path: str, top_k=500, ngra
                 print(f"Error reading {file_path}: {e}")
                 continue
         files_processed += 1
-        
-    sha = commit.get("sha", "unknown")
-    files_changed = commit.get("code", [])
-    conversations = commit.get("chatgpt_sharing", {}).get("conversations", [])
 
-    for file_change in files_changed:
-        filename = file_change.get("filename", "")
-        language = detect_language(filename)
-        if not language:
-            continue
+        files_changed = commit.get("code", [])
+        conversations = commit.get("chatgpt_sharing", {}).get("conversations", [])
 
-        before = strip_comments(file_change.get("before", ""), language)
-        after = strip_comments(file_change.get("after", ""), language)
+        for file_change in files_changed:
+            filename = file_change.get("filename", "")
+            before = file_change.get("before", "")
+            after = file_change.get("after", "")
 
-        try:
-            tokens_before = tokenize_code(before, language)
-            tokens_after = tokenize_code(after, language)
+            # before = strip_comments(file_change.get("before", ""))
+            # after = strip_comments(file_change.get("after", ""))
 
-            all_tokens_for_ngram_analysis.append(tokens_before)
-            all_tokens_for_ngram_analysis.append(tokens_after)
+            try:
+                tokens_before = tokenize_code(before)
+                tokens_after = tokenize_code(after)
+                all_tokens.append(tokens_before)
+                all_tokens.append(tokens_after)
 
-            # Collect all model-generated code blocks
-            best_bleu = 0.0
-            best_prompt_id = None
+                for convo in conversations:
+                    for code_obj in convo.get("code", []):
+                        code_content = code_obj.get("content", "")
+                        tokens_code = tokenize_code(strip_comments(code_content))
+                        all_tokens.append(tokens_code)
 
-            for prompt_id, convo in enumerate(conversations):
-                code_blocks = convo.get("code", [])
-                for code_obj in code_blocks:
-                    code_content = code_obj.get("content", "")
-                    try:
-                        tokens_code = tokenize_code(strip_comments(code_content, language), language)
-                        bleu = corpus_bleu([[tokens_after]], [tokens_code], ignoring=trivially_shared)
-                        if bleu > best_bleu:
-                            best_bleu = bleu
-                            best_prompt_id = prompt_id
-                    except Exception as e:
-                        print(f"Error comparing code snippet in {filename}: {e}")
-                        continue
-
-            results.append({
-                "sha": sha,
-                "file": filename,
-                "language": language,
-                "best_bleu_after_vs_chatgpt": round(best_bleu, 4),
-                "best_prompt_id": best_prompt_id
-            })
-
-        except Exception as e:
-            print(f"Error processing file {filename} in {file_path}: {e}")
-            continue
-
-
-    if not results:
-        print("⚠️  No valid results found. Check your input data or logic.")
-        return
+            except Exception as e:
+                print(f"Skipping token collection in {filename} due to error: {e}")
+                continue
     
-    # Write final results to a CSV file
-    with open(output_csv_path, "w", newline='', encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=results[0].keys())
-        writer.writeheader()
-        writer.writerows(results)
+    return all_tokens
 
-    print(f"\n✅ CrystalBLEU evaluation complete. Results saved to {output_csv_path}")
+def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
+    files_processed = 0
+    results = []
+    
+    for file_path in file_paths:
+        if files_processed >= 5:
+            break
+        with open(file_path, 'r', encoding='utf-8') as f:
+            try:
+                commit = json.load(f)
+            except json.JSONDecodeError as e:
+                print(f"Error reading {file_path}: {e}")
+                continue
+        files_processed += 1
+
+        sha = commit.get("sha", "unknown")
+        files_changed = commit.get("code", [])
+        conversations = commit.get("chatgpt_sharing", {}).get("conversations", [])
+
+        for file_change in files_changed:
+            filename = file_change.get("filename", "")
+            before = file_change.get("before", "")
+            after = file_change.get("after", "")
+
+            #before = strip_comments(file_change.get("before", ""))
+            #after = strip_comments(file_change.get("after", ""))
+
+            try:
+                tokens_before = tokenize_code(before)
+                tokens_after = tokenize_code(after)
+
+                best_crystalbleu = 0.0
+                best_prompt_id = None
+
+                # Compare after vs code snippets from conversations
+                for prompt_id, convo in enumerate(conversations):
+                    code_blocks = convo.get("list_of_code", [])
+                    for code_obj in code_blocks:
+                        code_content = code_obj.get("content", "")
+                        print("CODE_CONTENT :", code_content)
+                        tokens_code = tokenize_code(code_content)
+                        print("AFTER:", tokens_after)
+                        print("SUGGESTION CODE :", tokens_code)
+                        print("IGNORING:", len(trivially_shared))
+
+                        if tokens_after and tokens_code:
+                            crystalbleu_score = corpus_bleu(
+                                references=[[tokens_after]],  # wrap reference in a list
+                                hypotheses=[tokens_code],     # wrap hypothesis in a list
+                                ignoring=trivially_shared
+                            )
+
+                        if crystalbleu_score > best_crystalbleu:
+                            best_crystalbleu = crystalbleu_score
+                            best_prompt_id = prompt_id
+
+                results.append({
+                    "sha": sha,
+                    "file": filename,
+                    "best_crystalbleu_after_vs_chatgpt": best_crystalbleu,
+                    "best_prompt_id": best_prompt_id
+                })
+
+            except Exception as e:
+                print(f"Skipping CrystalBLEU evaluation for {filename} due to error: {e}")
+                continue
+
+    # Write results to CSV
+    if results:
+        with open(output_csv_path, "w", newline='', encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=results[0].keys())
+            writer.writeheader()
+            writer.writerows(results)
+
+        print(f"\n✅ CrystalBLEU evaluation complete. Results saved to {output_csv_path}")
+    else:
+        print("⚠️ No valid results found. Check your input data or logic.")
+
+ 
+def process_commit_data(input_folder: str, output_csv_path: str, top_k=100, ngram_range=(1, 4), file_limit=5):
+    # Get all JSON files in the folder
+    json_files = glob.glob(os.path.join(input_folder, "*.json"))[:file_limit]
+    if not json_files:
+        print("No JSON files found in folder.")
+        return
+
+    # Collect all tokens for n-gram analysis
+    all_tokens = collect_tokens_for_ngram_analysis(json_files)
+
+    # Build trivially shared n-grams (ignore most frequent ones)
+    trivially_shared = get_trivially_shared_ngrams(all_tokens, top_k, ngram_range)
+
+    # Evaluate BLEU scores based on the trivially shared n-grams
+    evaluate_crystalbleu_scores(json_files, trivially_shared, output_csv_path)
 
 if __name__ == "__main__":
     process_commit_data("structured_Refactoring_Commits", "evaluation_results.csv")
