@@ -49,6 +49,22 @@ def generate_final_csv(commit_file, literature_file, word_frequency_file, output
                     final_keywords[word] = freq
                     unmatched_literature_keywords.append(word)
 
+
+    # Read synonym keywords (from keywords_synonyms.csv)
+    with open('keywords_synonyms.csv', mode='r', newline='', encoding='utf-8') as f:
+        reader = csv.reader(f)
+        next(reader, None)  # Skip header
+        for row in reader:
+            if row:
+                word = row[0].strip().lower()
+                if word in commit_keywords_set:
+                    matched_literature_keywords.append(word)
+                else:
+                    freq = word_frequencies.get(word, 0)
+                    final_keywords[word] = freq
+                    unmatched_literature_keywords.append(word)
+                
+
     # Write to output CSV
     with open(output_file, mode='w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f)
