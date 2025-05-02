@@ -56,6 +56,9 @@ def collect_tokens_for_ngram_analysis(file_paths):
         conversations = commit.get("chatgpt_sharing", {}).get("conversations", [])
 
         for file_change in files_changed:
+            if not isinstance(file_change, dict):
+                print(f"Skipping malformed file_change in {file_path}: {file_change}")
+                continue
             filename = file_change.get("filename", "")
             before = file_change.get("before", "")
             after = file_change.get("after", "")
@@ -98,6 +101,9 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
         conversations = commit.get("chatgpt_sharing", {}).get("conversations", [])
 
         for file_change in files_changed:
+            if not isinstance(file_change, dict):
+                print(f"Skipping malformed file_change in {file_path}: {file_change}")
+                continue
             filename = file_change.get("filename", "")
             before = file_change.get("before", "")
             after = file_change.get("after", "")
@@ -113,8 +119,9 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
                 best_prompt_id = None
 
                 # Compare after vs code snippets from conversations
-                for prompt_id, convo in enumerate(conversations, start=1):
-                    print (f"prompt_id {prompt_id}")
+                for convo in conversations:
+                    prompt_id = convo.get("prompt_id")
+                    # print (f"prompt_id {prompt_id}")
                     code_blocks = convo.get("list_of_code", [])
                     for code_obj in code_blocks:
                         code_content = code_obj.get("Content", "")
@@ -163,7 +170,7 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
  
 def process_commit_data(input_folder: str, output_csv_path: str, top_k, ngram_range, file_limit):
     # Get all JSON files in the folder
-    json_files = glob.glob(os.path.join(input_folder, "*.json"))[:file_limit]
+    json_files = glob.glob(os.path.join(input_folder, "*.json"))
     if not json_files:
         print("No JSON files found in folder.")
         return
