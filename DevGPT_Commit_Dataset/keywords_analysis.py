@@ -50,15 +50,15 @@ filtered_words = [
 word_counts = Counter(filtered_words)
 
 # Get top 15 most common (non-refactoring) keywords
-top_common = set(word for word, _ in word_counts.most_common(35))
+# top_common = set(word for word, _ in word_counts.most_common(35))
 
 # Remove them from the count
-filtered_word_counts = Counter({word: count for word, count in word_counts.items() 
-                                if word not in top_common and count >= 50})
+# filtered_word_counts = Counter({word: count for word, count in word_counts.items() 
+#                                if word not in top_common and count >= 50})
 
-words = filtered_word_counts.most_common()
+# words = filtered_word_counts.most_common()
 
-print("Excluded top common keywords:", top_common)
+# print("Excluded top common keywords:", top_common)
 
 cleaned_commit_messages = [msg.replace('\n', ' ').replace('\r', '') for msg in commit_messages]
 
