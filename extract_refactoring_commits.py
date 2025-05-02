@@ -22,7 +22,7 @@ def read_keywords_from_csv(filename):
         return {row[0].strip().lower() for row in reader if row}  # Return a set of keywords
 
 # File path to the keyword CSV file
-keywords_file = os.path.join("DevGPT_Commit_Dataset", "final_list_of_keywords.csv")
+keywords_file = os.path.join("DevGPT_Commit_Dataset", "final_refactoring_keywords.csv")
 
 # Read keywords from the final list of keywords CSV
 keywords = read_keywords_from_csv(keywords_file)
