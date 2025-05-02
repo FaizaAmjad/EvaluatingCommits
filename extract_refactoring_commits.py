@@ -56,7 +56,7 @@ filtered_refactoring_commits = 0
 
 # Process commit messages
 for file in json_files:
-    with open(file, 'r') as f:
+    with open(file, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
         for source in data.get("Sources", []):
