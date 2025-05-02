@@ -1,0 +1,45 @@
+{
+  "sha": "c5f7ece348470d82db37c7315a70773a34d215e0",
+  "url": "https://github.com/tisztamo/Junior/commit/c5f7ece348470d82db37c7315a70773a34d215e0",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Remove sample code viewer from prompt creation https://chat.openai.com/share/a6f45862-753c-46f3-8c97-51cc4ab58853",
+  "authorAt": "2023-09-12T16:49:29.000+02:00",
+  "commitAt": "2023-09-12T16:49:29.000+02:00",
+  "chatgpt_sharing": {
+    "title": "I don't have access to real-time data or the ability to browse the internet, so I cannot provide the current date. My knowledge ",
+    "url": "https://chat.openai.com/share/a6f45862-753c-46f3-8c97-51cc4ab58853",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/c5f7ece348470d82db37c7315a70773a34d215e0",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Remove sample code viewer from prompt creation https://chat.openai.com/share/a6f45862-753c-46f3-8c97-51cc4ab58853"
+    },
+    "status": 200,
+    "dateOfConversation": "September 12, 2023",
+    "dateOfAccess": "2023-09-14 08:23:54.783666",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 466,
+    "tokensOfAnswers": 190,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "You are AI Junior, you code like Donald Knuth.\n# Working set\n\n./src/frontend/components/PromptCreation.jsx:\n```\nimport TasksList from './TasksList';\nimport AttentionFileList from './AttentionFileList';\nimport PromptDescriptor from './PromptDescriptor';\nimport GenerateButton from './GenerateButton';\nimport PromptDisplay from './PromptDisplay';\nimport RequirementsEditor from './RequirementsEditor';\nimport SourceFileDisplay from './files/SourceFileDisplay';\n\nconst PromptCreation = () => {\n  return (\n    <>\n      <TasksList />\n      <RequirementsEditor />\n      <AttentionFileList />\n      <PromptDescriptor />\n      <GenerateButton />\n      <PromptDisplay />\n      <SourceFileDisplay path=\"package.json\" />\n    </>\n  );\n};\n\nexport default PromptCreation;\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nRemove the sample code viewer from prompt creation\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Remove sample code viewer from prompt creation\"\necho \"Plan:\"\necho \"1. Remove the SourceFileDisplay component import from PromptCreation.jsx.\"\necho \"2. Remove the SourceFileDisplay usage in the PromptCreation component.\"\n\ncat > ./src/frontend/components/PromptCreation.jsx << 'EOF'\nimport TasksList from './TasksList';\nimport AttentionFileList from './AttentionFileList';\nimport PromptDescriptor from './PromptDescriptor';\nimport GenerateButton from './GenerateButton';\nimport PromptDisplay from './PromptDisplay';\nimport RequirementsEditor from './RequirementsEditor';\n\nconst PromptCreation = () => {\n  return (\n    <>\n      <TasksList />\n      <RequirementsEditor />\n      <AttentionFileList />\n      <PromptDescriptor />\n      <GenerateButton />\n      <PromptDisplay />\n    </>\n  );\n};\n\nexport default PromptCreation;\n\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

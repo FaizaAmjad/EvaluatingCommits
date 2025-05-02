@@ -58,7 +58,7 @@ for commit in data:
         conversations = sharing.get("Conversations", [])
         for i, conv in enumerate(conversations):
             structured_commit["chatgpt_sharing"]["conversations"].append({
-                "prompt_id": f"{sha}_s{j+1}_p{i+1}",
+                "prompt_id": f"p{i+1}",
                 "prompt": conv.get("Prompt"),
                 "answer": conv.get("Answer"),
                 "list_of_code": conv.get("ListOfCode", [])

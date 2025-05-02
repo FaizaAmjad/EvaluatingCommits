@@ -25,7 +25,7 @@
     "model": "Default",
     "conversations": [
       {
-        "prompt_id": "42255b0e7101849b37593aaae6fb77dadabed8d5_s1_p1",
+        "prompt_id": "p1",
         "prompt": "You are Junior, an AI system aiding developers. You are working with a part of a large program called the \"Working Set.\" Ask for contents of subdirectories if needed. Some files are printed in the working set. Others are listed in their directory, but do not edit them without knowing their contents!\n\n# Working set\n\npackage.json:\n```\n{\n  \"name\": \"@aijunior/dev\",\n  \"version\": \"0.1.3\",\n  \"description\": \"Your AI Contributor which codes itself\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"junior\": \"src/main.js\",\n    \"junior-web\": \"src/web.js\",\n    \"junior-init\": \"src/init.js\"\n  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"update-logo\": \"node ./scripts/updateLogo.js\",\n    \"delete-branches\": \"node ./scripts/deleteBranchesCommand.js\"\n  },\n  \"keywords\": [\n    \"cli\",\n    \"uppercase\"\n  ],\n  \"author\": \"\",\n  \"license\": \"GPL\",\n  \"dependencies\": {\n    \"@types/js-yaml\": \"^4.0.5\",\n    \"autoprefixer\": \"^10.4.14\",\n    \"chatgpt\": \"^5.2.4\",\n    \"cors\": \"^2.8.5\",\n    \"docsify-cli\": \"^4.4.4\",\n    \"ejs\": \"^3.1.9\",\n    \"express\": \"^4.18.2\",\n    \"highlight.js\": \"^11.8.0\",\n    \"js-yaml\": \"^4.1.0\",\n    \"markdown-it\": \"^13.0.1\",\n    \"marked\": \"^5.1.0\",\n    \"postcss\": \"^8.4.26\",\n    \"postcss-nested\": \"^6.0.1\",\n    \"sharp\": \"^0.32.4\",\n    \"simple-git\": \"^3.19.1\",\n    \"solid-js\": \"^1.7.7\",\n    \"tailwindcss\": \"^3.3.3\",\n    \"vite\": \"^4.3.9\",\n    \"vite-plugin-solid\": \"^2.7.0\",\n    \"ws\": \"^8.13.0\"\n  },\n  \"directories\": {\n    \"doc\": \"docs\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/tisztamo/Junior.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/Junior/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/Junior#readme\"\n}\n\n```\n\nsrc/git/deleteBranchesCommand.js:\n```\nimport clearBranches from './clearBranches';\n\nconst exceptions = process.argv.slice(2);\n\nasync function run() {\n  try {\n    await clearBranches(exceptions);\n    console.log('Branches deleted successfully.');\n  } catch (err) {\n    console.error(`An error occurred while deleting branches: ${err}`);\n    process.exit(1);\n  }\n}\n\nrun();\n\n\n```\n\nsrc/git/deleteBranches.js: err!\n\n\n# Task\n\nMove the following files to the specified target dirs!\n\nFind out the best target dir if it is not specified!\n\nYou need to follow dependencies to maintain coherence.\n\nBefore executing, write a concise plan! The plan should show:\n - How do you avoid breaking other parts of the code.\n - If you had to choose, your way of thinking.\n\nrename deleteBranchesCommand to clearBranchesCommand\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
         "answer": "[CODE_BLOCK_0]",
         "list_of_code": [
@@ -38,34 +38,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\nset -e\ngoal=\"Rename deleteBranches to clearBranches and move files\"\necho \"Plan:\"\necho \"1. Rename deleteBranches.js to clearBranches.js and update references.\"\necho \"2. Rename import deleteBranches in deleteBranchesCommand.js to import clearBranches.\"\necho \"3. Update all corresponding references and paths to make sure nothing breaks.\"\n\n# Rename deleteBranches.js to clearBranches.js\nmv src/git/deleteBranches.js src/git/clearBranches.js\n\n# Update the import statement in deleteBranchesCommand.js\ncat > src/git/deleteBranchesCommand.js <<EOF\nimport clearBranches from './clearBranches';\n\nconst exceptions = process.argv.slice(2);\n\nasync function run() {\n  try {\n    await clearBranches(exceptions);\n    console.log('Branches deleted successfully.');\n  } catch (err) {\n    console.error(\\`An error occurred while deleting branches: \\${err}\\`);\n    process.exit(1);\n  }\n}\n\nrun();\n\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Rename deleteBranchesCommand to clearBranchesCommand\"\necho \"Plan:\"\necho \"1. Rename the file src/git/deleteBranchesCommand.js to src/git/clearBranchesCommand.js.\"\necho \"2. Update the reference in package.json from src/deleteBranchesCommand.js to src/clearBranchesCommand.js to ensure coherence.\"\necho \"3. Since there is no reference to the deleteBranchesCommand.js file in the codebase, renaming it will not affect other parts of the code.\"\n\n# Rename deleteBranchesCommand.js to clearBranchesCommand.js\nmv src/git/deleteBranchesCommand.js src/git/clearBranchesCommand.js\n\n# Update the reference in package.json\njq '.scripts[\"delete-branches\"] = \"node ./scripts/clearBranchesCommand.js\"' package.json > tmp.json && mv tmp.json package.json\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "total_deletions": 25,
-      "total_additions": 8
-    },
-    {
-      "filename": "package.json",
-      "before": "    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"update-logo\": \"node ./scripts/updateLogo.js\",\n    \"delete-branches\": \"node ./scripts/deleteBranchesCommand.js\"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "after": "    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"update-logo\": \"node ./scripts/updateLogo.js\",\n    \"delete-branches\": \"node ./scripts/clearBranchesCommand.js\"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "prompt.md",
-      "before": "\nsrc/git/deleteBranchesCommand.js:\n```\nimport deleteBranches from './deleteBranches';\n\nconst exceptions = process.argv.slice(2);\n\nasync function run() {\n  try {\n    await deleteBranches(exceptions);\n    console.log('Branches deleted successfully.');\n  } catch (err) {\n    console.error(`An error occurred while deleting branches: ${err}`);\n\nrun();\n\n```\n\nsrc/git/deleteBranches.js:\n```\nimport { promisify } from 'util';\nimport { exec as execCb } from 'child_process';\n\nconst exec = promisify(execCb);\n\nexport default async function deleteBranches(exceptions = []) {\n  try {\n    const { stdout: currentBranch } = await exec('git rev-parse --abbrev-ref HEAD');\n    const { stdout: allBranches } = await exec('git for-each-ref --format=\"%(refname:short)\" refs/heads');\n\n    const branches = allBranches.split('\\n').filter(branch => branch !== currentBranch.trim() && !exceptions.includes(branch));\n\n    for (const branch of branches) {\n      await executeCommand(`git branch -d ${branch}`);\n    }\n  } catch (err) {\n    console.error(`An error occurred: ${err}`);\n  }\n}\n\nasync function executeCommand(command) {\n  try {\n    console.log(`Running command: ${command}`);\n    const { stdout } = await exec(command);\n    console.log(`stdout: ${stdout}`);\n  } catch (err) {\n    throw err;\n  }\n}\n\n```\n\n\n# Task\n - How do you avoid breaking other parts of the code.\n - If you had to choose, your way of thinking.\n\nrename deleteBranches to clearBranches\n\n\n# Output Format",
-      "after": "\nsrc/git/deleteBranchesCommand.js:\n```\nimport clearBranches from './clearBranches';\n\nconst exceptions = process.argv.slice(2);\n\nasync function run() {\n  try {\n    await clearBranches(exceptions);\n    console.log('Branches deleted successfully.');\n  } catch (err) {\n    console.error(`An error occurred while deleting branches: ${err}`);\n\nrun();\n\n\n```\n\nsrc/git/deleteBranches.js: err!\n\n\n# Task\n - How do you avoid breaking other parts of the code.\n - If you had to choose, your way of thinking.\n\nrename deleteBranchesCommand to clearBranchesCommand\n\n\n# Output Format",
-      "total_deletions": 35,
-      "total_additions": 4
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "  - src/git/deleteBranchesCommand.js\n  - src/git/deleteBranches.js\nrequirements: |\n  rename deleteBranches to clearBranches\nos: OSX",
-      "after": "  - src/git/deleteBranchesCommand.js\n  - src/git/deleteBranches.js\nrequirements: |\n  rename deleteBranchesCommand to clearBranchesCommand\nos: OSX",
-      "total_deletions": 1,
-      "total_additions": 1
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

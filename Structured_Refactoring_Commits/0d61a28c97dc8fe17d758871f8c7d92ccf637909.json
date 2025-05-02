@@ -25,7 +25,7 @@
     "model": "Default",
     "conversations": [
       {
-        "prompt_id": "0d61a28c97dc8fe17d758871f8c7d92ccf637909_s1_p1",
+        "prompt_id": "p1",
         "prompt": "Please move scripts and stylesheets out to separate files and set up a jest unit test.\n\n<!DOCTYPE html>\n<html>\n<head>\n    <title>Banzuke Surfing Game</title>\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n</head>\n<body>\n    <h1>Welcome to Banzuke Surfing Game!</h1>\n    <p>Select your Rikishi and start playing!</p>\n    <select id=\"rikishi\">\n        <option value=\"1\">Rikishi 1</option>\n        <option value=\"2\">Rikishi 2</option>\n        <!-- more options here -->\n    </select>\n    <button onclick=\"startPlaying()\">Start Playing</button>\n    <script>\n        function startPlaying() {\n            var rikishi = $('#rikishi').val();\n            // This is where you'd connect to your game logic\n            // For example:\n            // sendRikishiToServer(rikishi);\n            alert(\"You selected: \" + rikishi);\n        }\n    </script>\n</body>\n</html>",
         "answer": "Sure, I can help you do that. Here are the steps:Move your JavaScript code to a separate file. We'll call this game.js.[CODE_BLOCK_0]Include this script in your HTML:[CODE_BLOCK_1]There's no CSS included in your original code. But if you had, you'd create a new file (we'll call it styles.css) and move your CSS into it.Here's an example of how you'd link that CSS file in your HTML:[CODE_BLOCK_2]Setting up Jest for unit testing involves several steps. First, initialize a new npm project (if you haven't already):[CODE_BLOCK_3]Then, install Jest:[CODE_BLOCK_4]Add a test script to your package.json:[CODE_BLOCK_5]Finally, write a test. We'll create a new file, game.test.js. This is a simple test, checking if the startPlaying function is defined:[CODE_BLOCK_6]Now you can run your tests using npm test. The startPlaying function, in this case, doesn't do anything meaningful that can be checked by a unit test (it shows an alert box), so the test just checks if the function is defined. To make your code more testable, consider structuring it so that functions return values based on their input, which can then be checked by tests.Please note that the DOM manipulation library used here, jQuery, doesn't work out-of-the-box in Jest, because Jest tests run in a Node.js environment and not in a real browser. If you need to test DOM manipulation, consider using a library like jsdom, or testing frameworks that include DOM testing tools, like jest-dom or React Testing Library (for React projects).",
         "list_of_code": [
@@ -67,7 +67,7 @@
         ]
       },
       {
-        "prompt_id": "0d61a28c97dc8fe17d758871f8c7d92ccf637909_s1_p2",
+        "prompt_id": "p2",
         "prompt": "what's the updated index.html",
         "answer": "The updated index.html file, with the script and styles (if any) moved to separate files, looks like this:[CODE_BLOCK_0]This HTML file includes jQuery from a CDN, as well as an external JavaScript file (game.js) that you created to hold your game logic. The <link> element for including an external CSS file is commented out because you did not include any CSS in your original code, but I've included it for reference in case you need it in the future.Remember that all your JS, CSS and HTML files should be in the same directory or the paths should be adjusted accordingly.",
         "list_of_code": [
@@ -80,27 +80,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "game.js",
-      "before": "",
-      "after": "function startPlaying() {\n    var rikishi = $('#rikishi').val();\n    // This is where you'd connect to your game logic\n    // For example:\n    // sendRikishiToServer(rikishi);\n    alert(\"You selected: \" + rikishi);\n}",
-      "total_deletions": 0,
-      "total_additions": 7
-    },
-    {
-      "filename": "game.test.js",
-      "before": "",
-      "after": "const { startPlaying } = require('./game');\n\ntest('check if startPlaying is defined', () => {\n  expect(startPlaying).toBeDefined();\n});",
-      "total_deletions": 0,
-      "total_additions": 5
-    },
-    {
-      "filename": "index.html",
-      "before": "<head>\n    <title>Banzuke Surfing Game</title>\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n</head>\n<body>\n    <h1>Welcome to Banzuke Surfing Game!</h1>\n        <!-- more options here -->\n    </select>\n    <button onclick=\"startPlaying()\">Start Playing</button>\n    <script>\n        function startPlaying() {\n            var rikishi = $('#rikishi').val();\n            // This is where you'd connect to your game logic\n            // For example:\n            // sendRikishiToServer(rikishi);\n            alert(\"You selected: \" + rikishi);\n        }\n    </script>\n</body>\n</html>",
-      "after": "<head>\n    <title>Banzuke Surfing Game</title>\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n    <!-- Link to the external CSS file -->\n    <!-- Uncomment this if you have styles to include -->\n    <!-- <link rel=\"stylesheet\" href=\"styles.css\"> -->\n</head>\n<body>\n    <h1>Welcome to Banzuke Surfing Game!</h1>\n        <!-- more options here -->\n    </select>\n    <button onclick=\"startPlaying()\">Start Playing</button>\n    <!-- Link to the external JavaScript file -->\n    <script src=\"game.js\"></script>\n</body>\n</html>",
-      "total_deletions": 9,
-      "total_additions": 5
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

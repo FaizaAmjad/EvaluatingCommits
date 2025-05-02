@@ -25,7 +25,7 @@
     "model": "Default",
     "conversations": [
       {
-        "prompt_id": "76a0f7723c8145f08fb30132450c73e06c33fd32_s1_p1",
+        "prompt_id": "p1",
         "prompt": "You're the 'Contributor', an AI system aiding authors.\n\nYou are working on the source of a program, too large for your memory, so only part of it, the \"Working Set\" is provided here.\n\nYou will see a partial directory structure. Ask for the contents of subdirs marked with /... if needed.\n\nSome files are printed in the working set.\n\nOther files are only listed in their dir, so you know they exists, ask for the contents if needed.\n\n# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 .vscode/...\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 babel.config.js\n\u251c\u2500\u2500 current_prompt.md\n\u251c\u2500\u2500 current_prompt.yaml\n\u251c\u2500\u2500 dist/...\n\u251c\u2500\u2500 doc/...\n\u251c\u2500\u2500 frontend\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 operation.sh\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 secret.sh\n\u251c\u2500\u2500 src/...\n\u251c\u2500\u2500 tmp/...\n\n```\nsrc/prompt/createPrompt.js:\n```\nimport { readAttention } from \"../attention/readAttention.js\"\nimport util from 'util';\nimport fs from 'fs';\nimport yaml from 'js-yaml';\nimport ejs from 'ejs';\nimport { getPromptFlag } from './getPromptFlag.js';\nimport { getSystemPromptIfNeeded } from './getSystemPromptIfNeeded.js';\nimport { resolveTemplateVariables } from './resolveTemplateVariables.js';\nimport { extractTemplateVars } from './extractTemplateVars.js';\nconst readFile = util.promisify(fs.readFile);\n\nconst createPrompt = async (userInput) => {\n  const promptDescriptor = yaml.load(await readFile(getPromptFlag() || \"current_prompt.yaml\", \"utf8\"));\n  let templateVars = extractTemplateVars(promptDescriptor);\n\n  templateVars = await resolveTemplateVariables(templateVars);\n\n  const attention = await readAttention(promptDescriptor.attention);\n  const task = await ejs.renderFile(promptDescriptor.task, templateVars, {async: true});\n  const format = await ejs.renderFile(promptDescriptor.format, templateVars, {async: true});\n  const system = await getSystemPromptIfNeeded();\n  const saveto = promptDescriptor.saveto;\n  return {\n    prompt: `${system}# Working set\\n\\n${attention.join(\"\\n\")}\\n\\n# Task\\n\\n${task}\\n\\n# Output Format\\n\\n${format}\\n\\n${userInput ? userInput : \"\"}`,\n    saveto\n  };\n}\n\nexport { createPrompt };\n\n```\n\nsrc/prompt/promptProcessing.js:\n```\nimport { createPrompt } from './createPrompt.js';\nimport fs from 'fs/promises';\n\nconst processPrompt = async (task, last_command_result, saveto = 'current_prompt.md', parent_message_id = null) => {\n  const { prompt, saveto: newSaveto } = await createPrompt(task, last_command_result);\n  await fs.writeFile(newSaveto || saveto, prompt);\n  return { prompt, parent_message_id };\n}\n\nexport default processPrompt;\n\n```\n\n\n# Task\n\nRename the following files\n\nYou need to follow dependencies to maintain coherence.\n\nBefore executing, write a concise plan! The plan should show:\n - How do you avoid breaking other parts of the code.\n - If you had to choose, your way of thinking.\n\ncurrent_prompt.yaml to prompt.yaml and current_prompt.md to prompt.md.\n\n\n# Output Format\n\nA single shell script that creates everything.\n\nAssume Ubuntu. npm, nix, docker and jq are installed.\n\n",
         "answer": "PlanIdentify the dependencies: Both the files current_prompt.yaml and current_prompt.md are referenced in the createPrompt.js and processPrompt.js files under the src/prompt/ directory. So, we need to modify these files after renaming the two files.Rename the files: Use mv command to rename current_prompt.yaml to prompt.yaml and current_prompt.md to prompt.md.Modify dependencies:In createPrompt.js, replace the instance of current_prompt.yaml with prompt.yaml.In processPrompt.js, replace the instance of current_prompt.md with prompt.md.To prevent any breakages in the application, test the application thoroughly after making these changes.Shell Script[CODE_BLOCK_0]NotePlease run this script from the root directory of your project.Make sure you have a backup of your project or your project is under version control like git before running this script, to prevent any accidental loss of data or work.Remember to test the application thoroughly after running this script to ensure everything is still working as expected.",
         "list_of_code": [
@@ -37,7 +37,7 @@
         ]
       },
       {
-        "prompt_id": "76a0f7723c8145f08fb30132450c73e06c33fd32_s1_p2",
+        "prompt_id": "p2",
         "prompt": "sed: 1: \"./src/prompt/createProm ...\": invalid command code .",
         "answer": "I apologize for the confusion. The issue is due to a difference in the implementation of the sed command between GNU/Linux and BSD/OSX.The -i option in the sed command is used to make changes in-place in the file. In GNU/Linux, you can use sed -i 's/foo/bar/' filename but in BSD/OSX, you need to provide an extension for the backup file like so sed -i '' -e 's/foo/bar/' filename.Here is the modified script which should work on BSD/OSX systems:[CODE_BLOCK_0]Again, please make sure you have a backup of your project or your project is under version control like git before running this script. Test the application thoroughly after running this script to ensure everything is still working as expected.",
         "list_of_code": [
@@ -50,76 +50,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "README.md",
-      "before": "\n### The Prompt Descriptor\n\nA prompt descriptor (current_prompt.yaml) is a YAML file that provides details necessary to generate a prompt for the AI model.\n\nFor instance, here is an example of a prompt descriptor:\n\n  - src/interactiveSession/startInteractiveSession.js\n  - src/prompt/createPrompt.js\n  - src/attention/readAttention.js\n  - current_prompt.yaml\nrequirements: >\n  Write a README.md for this _exploratory_ project!\nformat: prompt/format/new_file_version.md",
-      "after": "\n### The Prompt Descriptor\n\nA prompt descriptor (prompt.yaml) provides details necessary to generate a prompt for the AI model.\n\nFor instance, here is an example of a prompt descriptor:\n\n  - src/interactiveSession/startInteractiveSession.js\n  - src/prompt/createPrompt.js\n  - src/attention/readAttention.js\n  - prompt.yaml\nrequirements: >\n  Write a README.md for this _exploratory_ project!\nformat: prompt/format/new_file_version.md",
-      "total_deletions": 2,
-      "total_additions": 2
-    },
-    {
-      "filename": "current_prompt.md",
-      "before": "You're the 'Contributor', an AI system aiding authors.\n\nYou are working on the source of a program, too large for your memory, so only part of it, the \"Working Set\" is provided here.\n\nYou will see a partial directory structure. Ask for the contents of subdirs marked with /... if needed.\n\nSome files are printed in the working set.\n\nOther files are only listed in their dir, so you know they exists, ask for the contents if needed.\n\n# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 .vscode/...\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 babel.config.js\n\u251c\u2500\u2500 current_prompt.md\n\u251c\u2500\u2500 current_prompt.yaml\n\u251c\u2500\u2500 doc/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 run.sh\n\u251c\u2500\u2500 secret.sh\n\u251c\u2500\u2500 src/...\n\u251c\u2500\u2500 tmp/...\n\n```\n```\nsrc/\n\u251c\u2500\u2500 attention/...\n\u251c\u2500\u2500 config.js\n\u251c\u2500\u2500 execute/...\n\u251c\u2500\u2500 frontend/...\n\u251c\u2500\u2500 frontend.jsx\n\u251c\u2500\u2500 index.html\n\u251c\u2500\u2500 interactiveSession/...\n\u251c\u2500\u2500 main.js\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 server.js\n\u251c\u2500\u2500 utils/...\n\u251c\u2500\u2500 vite.config.js\n\n```\nsrc/frontend.jsx:\n```\nimport { createSignal } from 'solid-js';\nimport { render } from 'solid-js/web';\nimport copy from 'clipboard-copy';\nimport { marked } from 'marked';\n\nconst App = () => {\n  const [notes, setNotes] = createSignal('');\n  const [prompt, setPrompt] = createSignal('');\n\n  const generatePrompt = async () => {\n    const response = await fetch('http://localhost:3000/generate', {\n      method: 'POST',\n      headers: { 'Content-Type': 'application/json' },\n      body: JSON.stringify({ notes: notes() })\n    });\n\n    const data = await response.json();\n\n    // Copy original markdown to clipboard\n    copy(data.prompt)\n      .then(() => {\n        console.log('Prompt copied to clipboard!');\n      })\n      .catch(err => {\n        console.error('Failed to copy prompt: ', err);\n      });\n\n    // Convert markdown to HTML for display\n    const htmlPrompt = marked(data.prompt);\n\n    setPrompt(htmlPrompt);\n  };\n\n  return (\n    <>\n      <input type=\"text\" value={notes()} onInput={e => setNotes(e.target.value)} />\n      <button onClick={generatePrompt}>Start</button>\n      <div innerHTML={prompt()}></div>\n    </>\n  );\n};\n\nrender(App, document.getElementById('app'));\n\n```\n\nsrc/index.html:\n```\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Contributor</title>\n</head>\n<body>\n  <div id=\"app\"></div>\n  <script type=\"module\" src=\"/frontend/index.jsx\"></script>\n</body>\n</html>\n\n```\n\n\n# Task\n\n## Refactor by split\n\nA file is too big. We need to split it into parts.\nIdentify the possible parts and refactor the code in separate files!\n\nCreate a new folder &#34;src/frontend&#34;, and move the frontend.jsx to it. Also split the file logically.\n\n\n\n# Output Format\n\nProvide the new or modified file(s) as code blocks, each prefixed with its path and a colon.\nJS files should only export a single function and be named after the function: e.g. `myFn.js` should export `myFn()`.\nAlways output full files, copying unchanged content.\n\nE.g.:\n\ntexts/sample.txt:\n```\nA sample text file.\n```\n\n",
-      "after": "",
-      "total_deletions": 139,
-      "total_additions": 0
-    },
-    {
-      "filename": "current_prompt.yaml",
-      "before": "task: prompt/task/refactor/split.md\nattention:\n  - ./\n  - src/\n  - src/frontend.jsx\n  - src/index.html\nrequirements: >\n  Create a new folder \"src/frontend\", and move the frontend.jsx to it.\n  Also split the file logically.\nformat: prompt/format/new_file_version.md",
-      "after": "",
-      "total_deletions": 10,
-      "total_additions": 0
-    },
-    {
-      "filename": "operation.sh",
-      "before": "",
-      "after": "#!/bin/bash\n\n# Step 1: Rename files\nmv ./current_prompt.yaml ./prompt.yaml\nmv ./current_prompt.md ./prompt.md\n\n# Step 2: Update dependencies\nsed -i '' -e 's/current_prompt\\.yaml/prompt.yaml/g' ./src/prompt/createPrompt.js\nsed -i '' -e 's/current_prompt\\.md/prompt.md/g' ./src/prompt/processPrompt.js\n\necho \"Files renamed and dependencies updated successfully.\"",
-      "total_deletions": 0,
-      "total_additions": 11
-    },
-    {
-      "filename": "package.json",
-      "before": "  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/server.js --prompt=current_prompt.yaml -s & vite src --open \"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "after": "  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/server.js --prompt=prompt.yaml -s & vite src --open \"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "prompt.md",
-      "before": "",
-      "after": "You're the 'Contributor', an AI system aiding authors.\n\nYou are working on the source of a program, too large for your memory, so only part of it, the \"Working Set\" is provided here.\n\nYou will see a partial directory structure. Ask for the contents of subdirs marked with /... if needed.\n\nSome files are printed in the working set.\n\nOther files are only listed in their dir, so you know they exists, ask for the contents if needed.\n\n# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 .vscode/...\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 babel.config.js\n\u251c\u2500\u2500 dist/...\n\u251c\u2500\u2500 doc/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 operation.sh\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 secret.sh\n\u251c\u2500\u2500 src/...\n\u251c\u2500\u2500 tmp/...\n\n```\nsrc/prompt/createPrompt.js:\n```\nimport { readAttention } from \"../attention/readAttention.js\"\nimport util from 'util';\nimport fs from 'fs';\nimport yaml from 'js-yaml';\nimport ejs from 'ejs';\nimport { getPromptFlag } from './getPromptFlag.js';\nimport { getSystemPromptIfNeeded } from './getSystemPromptIfNeeded.js';\nimport { resolveTemplateVariables } from './resolveTemplateVariables.js';\nimport { extractTemplateVars } from './extractTemplateVars.js';\nconst readFile = util.promisify(fs.readFile);\n\nconst createPrompt = async (userInput) => {\n  const promptDescriptor = yaml.load(await readFile(getPromptFlag() || \"prompt.yaml\", \"utf8\"));\n  let templateVars = extractTemplateVars(promptDescriptor);\n\n  templateVars = await resolveTemplateVariables(templateVars);\n\n  const attention = await readAttention(promptDescriptor.attention);\n  const task = await ejs.renderFile(promptDescriptor.task, templateVars, {async: true});\n  const format = await ejs.renderFile(promptDescriptor.format, templateVars, {async: true});\n  const system = await getSystemPromptIfNeeded();\n  const saveto = promptDescriptor.saveto;\n  return {\n    prompt: `${system}# Working set\\n\\n${attention.join(\"\\n\")}\\n\\n# Task\\n\\n${task}\\n\\n# Output Format\\n\\n${format}\\n\\n${userInput ? userInput : \"\"}`,\n    saveto\n  };\n}\n\nexport { createPrompt };\n\n```\n\nsrc/prompt/promptProcessing.js:\n```\nimport { createPrompt } from './createPrompt.js';\nimport fs from 'fs/promises';\n\nconst processPrompt = async (task, last_command_result, saveto = 'prompt.md', parent_message_id = null) => {\n  const { prompt, saveto: newSaveto } = await createPrompt(task, last_command_result);\n  await fs.writeFile(newSaveto || saveto, prompt);\n  return { prompt, parent_message_id };\n}\n\nexport default processPrompt;\n\n```\n\n\n# Task\n\nRename the following files\n\nYou need to follow dependencies to maintain coherence.\n\nBefore executing, write a concise plan! The plan should show:\n - How do you avoid breaking other parts of the code.\n - If you had to choose, your way of thinking.\n\ncurrent_prompt.yaml to prompt.yaml and current_prompt.md to prompt.md.\n\n\n# Output Format\n\nA single shell script that creates everything.\n\nAssume Ubuntu. npm, nix, docker and jq are installed.\n",
-      "total_deletions": 0,
-      "total_additions": 103
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/rename_file.md\nattention:\n  - ./\n  - src/prompt/createPrompt.js\n  - src/prompt/promptProcessing.js\nrequirements: >\n current_prompt.yaml to prompt.yaml and current_prompt.md to prompt.md.\nformat: prompt/format/shell.md",
-      "total_deletions": 0,
-      "total_additions": 8
-    },
-    {
-      "filename": "prompt/task/refactor/rename_file.md",
-      "before": "",
-      "after": "Rename the following files\n\nYou need to follow dependencies to maintain coherence.\n\nBefore executing, write a concise plan! The plan should show:\n - How do you avoid breaking other parts of the code.\n - If you had to choose, your way of thinking.\n\n<%= requirements %>",
-      "total_deletions": 0,
-      "total_additions": 9
-    },
-    {
-      "filename": "src/prompt/createPrompt.js",
-      "before": "const readFile = util.promisify(fs.readFile);\n\nconst createPrompt = async (userInput) => {\n  const promptDescriptor = yaml.load(await readFile(getPromptFlag() || \"current_prompt.yaml\", \"utf8\"));\n  let templateVars = extractTemplateVars(promptDescriptor);\n\n  templateVars = await resolveTemplateVariables(templateVars);",
-      "after": "const readFile = util.promisify(fs.readFile);\n\nconst createPrompt = async (userInput) => {\n  const promptDescriptor = yaml.load(await readFile(getPromptFlag() || \"prompt.yaml\", \"utf8\"));\n  let templateVars = extractTemplateVars(promptDescriptor);\n\n  templateVars = await resolveTemplateVariables(templateVars);",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/prompt/promptProcessing.js",
-      "before": "import { createPrompt } from './createPrompt.js';\nimport fs from 'fs/promises';\n\nconst processPrompt = async (task, last_command_result, saveto = 'current_prompt.md', parent_message_id = null) => {\n  const { prompt, saveto: newSaveto } = await createPrompt(task, last_command_result);\n  await fs.writeFile(newSaveto || saveto, prompt);\n  return { prompt, parent_message_id };",
-      "after": "import { createPrompt } from './createPrompt.js';\nimport fs from 'fs/promises';\n\nconst processPrompt = async (task, last_command_result, saveto = 'prompt.md', parent_message_id = null) => {\n  const { prompt, saveto: newSaveto } = await createPrompt(task, last_command_result);\n  await fs.writeFile(newSaveto || saveto, prompt);\n  return { prompt, parent_message_id };",
-      "total_deletions": 1,
-      "total_additions": 1
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

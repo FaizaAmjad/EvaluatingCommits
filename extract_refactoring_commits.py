@@ -22,7 +22,7 @@ def read_keywords_from_csv(filename):
         return {row[0].strip().lower() for row in reader if row}  # Return a set of keywords
 
 # File path to the keyword CSV file
-keywords_file = os.path.join("DevGPT_Commit_Dataset", "final_list_of_keywords.csv")
+keywords_file = os.path.join("DevGPT_Commit_Dataset", "final_refactoring_keywords.csv")
 
 # Read keywords from the final list of keywords CSV
 keywords = read_keywords_from_csv(keywords_file)
@@ -56,7 +56,7 @@ filtered_refactoring_commits = 0
 
 # Process commit messages
 for file in json_files:
-    with open(file, 'r') as f:
+    with open(file, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
         for source in data.get("Sources", []):

@@ -1,0 +1,69 @@
+{
+  "sha": "c02f0ffc5fcb621accd0afc8a1a2da97ac8d0e16",
+  "url": "https://github.com/pbrudny/jobsforit-de/commit/c02f0ffc5fcb621accd0afc8a1a2da97ac8d0e16",
+  "author": "pbrudny",
+  "repoName": "pbrudny/jobsforit-de",
+  "repoLanguage": "CSS",
+  "message": "Refactored FilterButton and ThemeSwitcher\n\nChatGPT shared link: https://chat.openai.com/share/6a73f8aa-0e9e-4704-a469-a73e4531ef84",
+  "authorAt": "2023-09-10T16:11:45.000+02:00",
+  "commitAt": "2023-09-10T16:11:45.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Refactor FilterButton to Hooks",
+    "url": "https://chat.openai.com/share/6a73f8aa-0e9e-4704-a469-a73e4531ef84",
+    "mention": {
+      "mentioned_url": "https://github.com/pbrudny/jobsforit-de/commit/c02f0ffc5fcb621accd0afc8a1a2da97ac8d0e16",
+      "mentioned_property": "message",
+      "mentioned_author": "pbrudny",
+      "mentioned_text": "Refactored FilterButton and ThemeSwitcher\n\nChatGPT shared link: https://chat.openai.com/share/6a73f8aa-0e9e-4704-a469-a73e4531ef84"
+    },
+    "status": 200,
+    "dateOfConversation": "September 10, 2023",
+    "dateOfAccess": "2023-09-14 08:16:01.969456",
+    "numberOfPrompts": 3,
+    "tokensOfPrompts": 1049,
+    "tokensOfAnswers": 1188,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "Refactor given component using functional components and hooks. \nPlease show all the lines so that I don't need to add anything myself.\n\nimport React, {Component} from \"react\";\nimport PropTypes from \"prop-types\";\nimport {observer} from \"mobx-react\";\nimport {withRouter} from \"react-router-dom\";\nimport style from './style.module.scss';\nimport {ThemeContext} from \"../../themeContext\";\n\nclass FilterButton extends Component {\n\n    state = {\n        clickCount: 0,\n        spanStyles: {}\n    }\n\n    showRipple = (e) => {\n        const rippleContainer = e.currentTarget;\n        const size = rippleContainer.offsetWidth;\n        const pos = rippleContainer.getBoundingClientRect();\n        const event_offsetX = e.pageX - pos.left;\n        const event_offsetY = e.pageY - window.pageYOffset - pos.top;\n        const x = event_offsetX - (size / 2);\n        const y = event_offsetY - (size / 2);\n        const spanStyles = {top: y + 'px', left: x + 'px', height: size + 'px', width: size + 'px'};\n        const count = this.state.clickCount + 1;\n        this.setState({\n            spanStyles: {...this.state.spanStyles, [count]: spanStyles},\n            clickCount: count\n        });\n    }\n\n    renderRippleSpan = () => {\n        const {showRipple = false, spanStyles = {}} = this.state;\n        const spanArray = Object.keys(spanStyles);\n        if (spanArray && spanArray.length > 0) {\n            return (\n                spanArray.map((key, index) => {\n                    return <span key={'spanCount_' + index} className=\"\" style={{...spanStyles[key]}}></span>\n                })\n            )\n        } else {\n            return null;\n        }\n    }\n\n    cleanUp = () => {\n        const initialState = {\n            clickCount: 0,\n            spanStyles: {}\n        };\n        this.setState({...initialState});\n    }\n\n    callCleanUp = (cleanup, delay) => {\n        return () => {\n            clearTimeout(this.bounce);\n            this.bounce = setTimeout(() => {\n                cleanup();\n            }, delay);\n        }\n    }\n\n    render() {\n        const themeContext = this.context;\n\n\n        const {buttonPressed} = this.props;\n        const pressed = buttonPressed ? 'pressed' : 'unpressed';\n\n        const classes = [style.FilterButton];\n\n        if(themeContext.theme === 'dark') {\n            classes.push(style.FilterButton_dark);\n        } else {\n            classes.push(style.FilterButton_light)\n        }\n\n        if (this.props.className) {\n            classes.push(this.props.className);\n        }\n\n        if (this.props.withIcon) {\n            classes.push(style.FilterButton__withIcon);\n        }\n\n        if (this.props.withIconRight) {\n            classes.push(style.FilterButton__withIconRight);\n        }\n\n        if (pressed === 'pressed') {\n            classes.push(style.FilterButton__pressed);\n        }\n\n        return (\n            <button\n                className={classes.join(' ')}\n                data-cy={this.props.dataCyPrefix + pressed}\n                value={this.props.value}\n                onClick={this.props.onClick}\n            >\n                {this.props.children}\n                <div className={style.FilterButton_rippleContainer} onMouseDown={this.showRipple}\n                     onMouseUp={this.callCleanUp(this.cleanUp, 2000)}>\n                    {this.renderRippleSpan()}\n                </div>\n            </button>\n        );\n    }\n}\n\nFilterButton.contextType = ThemeContext;\n\nFilterButton.propTypes = {\n    tech: PropTypes.any,\n    style: PropTypes.any,\n    onClick: PropTypes.func,\n    className: PropTypes.string\n};\n\nFilterButton = observer(FilterButton);\nFilterButton = withRouter(FilterButton);\n\nexport default FilterButton;",
+        "answer": "Here's a refactored version of the given FilterButton component using functional components and hooks:[CODE_BLOCK_0]Here's what has been done in the refactored code:Converted the class component to a functional component.Utilized the useState and useContext hooks for managing state and context respectively.Replaced lifecycle methods with the useEffect hook.Updated the event handlers to utilize the new state setters provided by useState.Replaced the class-based this references with functional equivalents.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "jsx",
+            "Content": "import React, { useState, useContext, useRef, useEffect } from \"react\";\nimport PropTypes from \"prop-types\";\nimport { observer } from \"mobx-react\";\nimport { withRouter } from \"react-router-dom\";\nimport style from './style.module.scss';\nimport { ThemeContext } from \"../../themeContext\";\n\nconst FilterButton = observer(withRouter(({ buttonPressed, dataCyPrefix, value, onClick, children, className, withIcon, withIconRight }) => {\n    const [clickCount, setClickCount] = useState(0);\n    const [spanStyles, setSpanStyles] = useState({});\n    const themeContext = useContext(ThemeContext);\n    const bounce = useRef(null);\n\n    const showRipple = (e) => {\n        const rippleContainer = e.currentTarget;\n        const size = rippleContainer.offsetWidth;\n        const pos = rippleContainer.getBoundingClientRect();\n        const event_offsetX = e.pageX - pos.left;\n        const event_offsetY = e.pageY - window.pageYOffset - pos.top;\n        const x = event_offsetX - (size / 2);\n        const y = event_offsetY - (size / 2);\n        const newSpanStyles = { top: y + 'px', left: x + 'px', height: size + 'px', width: size + 'px' };\n        const count = clickCount + 1;\n        setSpanStyles(prevStyles => ({ ...prevStyles, [count]: newSpanStyles }));\n        setClickCount(count);\n    }\n\n    const renderRippleSpan = () => {\n        const spanArray = Object.keys(spanStyles);\n        return (\n            spanArray.length > 0 ? (\n                spanArray.map((key, index) => (\n                    <span key={'spanCount_' + index} className=\"\" style={{ ...spanStyles[key] }}></span>\n                ))\n            ) : null\n        );\n    }\n\n    const cleanUp = () => {\n        setClickCount(0);\n        setSpanStyles({});\n    }\n\n    const callCleanUp = (delay) => {\n        return () => {\n            clearTimeout(bounce.current);\n            bounce.current = setTimeout(() => {\n                cleanUp();\n            }, delay);\n        }\n    }\n\n    useEffect(() => {\n        return () => {\n            if (bounce.current) {\n                clearTimeout(bounce.current);\n            }\n        };\n    }, []);\n\n    const pressed = buttonPressed ? 'pressed' : 'unpressed';\n\n    const classes = [style.FilterButton];\n\n    if (themeContext.theme === 'dark') {\n        classes.push(style.FilterButton_dark);\n    } else {\n        classes.push(style.FilterButton_light);\n    }\n\n    if (className) {\n        classes.push(className);\n    }\n\n    if (withIcon) {\n        classes.push(style.FilterButton__withIcon);\n    }\n\n    if (withIconRight) {\n        classes.push(style.FilterButton__withIconRight);\n    }\n\n    if (pressed === 'pressed') {\n        classes.push(style.FilterButton__pressed);\n    }\n\n    return (\n        <button\n            className={classes.join(' ')}\n            data-cy={dataCyPrefix + pressed}\n            value={value}\n            onClick={onClick}\n        >\n            {children}\n            <div className={style.FilterButton_rippleContainer} onMouseDown={showRipple}\n                onMouseUp={callCleanUp(2000)}>\n                {renderRippleSpan()}\n            </div>\n        </button>\n    );\n}));\n\nFilterButton.propTypes = {\n    tech: PropTypes.any,\n    style: PropTypes.any,\n    onClick: PropTypes.func,\n    className: PropTypes.string\n};\n\nexport default FilterButton;\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p2",
+        "prompt": "Do the same for ThemeSwither.js\n\nimport React from 'react';\n\nimport {ThemeContext} from \"../themeContext\";\n\nimport style from './ThemeSwitcher.module.scss';\n\nexport class ThemeSwitcher extends React.Component {\n\n    render() {\n\n        return (\n            <ThemeContext.Consumer>\n                {({theme, toggleTheme}) => (\n                    <label htmlFor=\"theme\" className={theme === 'dark' ? [style.ThemeSwitcher, style.ThemeSwitcher_dark].join(' ') : [style.ThemeSwitcher, style.ThemeSwitcher_light].join(' ')}>\n                        <input onChange={toggleTheme} type=\"checkbox\" name=\"theme\" id=\"theme\"/>\n                    </label>\n                )}\n            </ThemeContext.Consumer>\n        );\n    }\n}\n\nexport default ThemeSwitcher;",
+        "answer": "Here's the ThemeSwitcher component refactored to use a functional component:[CODE_BLOCK_0]Here's a summary of the changes:Converted the class component to a functional component.Used the useContext hook to directly get the theme and toggle function from the ThemeContext.Removed the ThemeContext.Consumer wrapper and directly used the context values in the component.Used a conditional (ternary) operator to set the className based on the current theme.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "jsx",
+            "Content": "import React, { useContext } from 'react';\n\nimport { ThemeContext } from \"../themeContext\";\n\nimport style from './ThemeSwitcher.module.scss';\n\nconst ThemeSwitcher = () => {\n    const { theme, toggleTheme } = useContext(ThemeContext);\n\n    const className = theme === 'dark' \n        ? [style.ThemeSwitcher, style.ThemeSwitcher_dark].join(' ')\n        : [style.ThemeSwitcher, style.ThemeSwitcher_light].join(' ');\n\n    return (\n        <label htmlFor=\"theme\" className={className}>\n            <input onChange={toggleTheme} type=\"checkbox\" name=\"theme\" id=\"theme\"/>\n        </label>\n    );\n}\n\nexport default ThemeSwitcher;\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p3",
+        "prompt": "do the same for AddMoreButton\n\nimport React from 'react';\nimport style from './style.module.scss';\n\nclass AddMoreButton extends React.Component {\n    render() {\n        const classes = [style.AddMoreButton];\n\n        if (this.props.className) {\n            classes.push(this.props.className);\n        }\n\n        return (\n          <button\n            className={classes.join(' ')}\n            onClick={this.props.onClick}\n            {...this.props.additionalProps}\n          >\n              {this.props.children}\n          </button>\n        );\n    }\n}\n\nexport default AddMoreButton;\n",
+        "answer": "Here's the AddMoreButton component refactored to use a functional component:[CODE_BLOCK_0]Here's a summary of the changes:Converted the class component to a functional component.Used functional component props directly without this.props.Removed the render method and directly returned the JSX.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "jsx",
+            "Content": "import React from 'react';\nimport style from './style.module.scss';\n\nconst AddMoreButton = ({ className, onClick, additionalProps, children }) => {\n    const classes = [style.AddMoreButton];\n\n    if (className) {\n        classes.push(className);\n    }\n\n    return (\n        <button\n            className={classes.join(' ')}\n            onClick={onClick}\n            {...additionalProps}\n        >\n            {children}\n        </button>\n    );\n}\n\nexport default AddMoreButton;\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}
