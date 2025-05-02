@@ -38,8 +38,41 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Refactor code to make inputAvailable a const\"\necho \"Plan:\"\necho \"1. Replace the variable inputAvailable with clipboardAvailable as a const boolean.\"\necho \"2. Update the JSX and function logic accordingly.\"\n\ncat > src/frontend/components/ExecuteButton.jsx << 'EOF'\nimport { createSignal } from 'solid-js';\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n  const [changeInput, setChangeInput] = createSignal('');\n\n  const handleExecuteChange = async () => {\n    const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor ExecuteButton by factoring changeInput\"\necho \"Plan:\"\necho \"1. Create a new file in model directory to handle changeInput\"\necho \"2. Update ExecuteButton.jsx to import changeInput from the new file\"\n\n# Step 1: Create a new file in model directory to handle changeInput\ncat > src/frontend/model/changeInput.js << 'EOF'\nimport { createSignal } from 'solid-js';\n\nconst [changeInput, setChangeInput] = createSignal('');\n\nexport { changeInput, setChangeInput };\nEOF\n\n# Step 2: Update ExecuteButton.jsx to import changeInput from the new file\ncat > src/frontend/components/ExecuteButton.jsx << 'EOF'\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\nimport { changeInput, setChangeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handleExecuteChange = async () => {\n    const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();",
+      "total_deletions": 5,
+      "total_additions": 14
+    },
+    {
+      "filename": "prompt.md",
+      "before": "\nsrc/frontend/components/ExecuteButton.jsx:\n```\nimport { createEffect, createSignal } from 'solid-js';\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\n\nconst ExecuteButton = () => {\n  const [inputAvailable, setInputAvailable] = createSignal(true);\n  const [changeInput, setChangeInput] = createSignal('');\n\n  const handleExecuteChange = async () => {\n    const change = inputAvailable() ? await navigator.clipboard.readText() : changeInput();\n    const response = await executeChange(change);\n    setChange(change);\n    setExecutionResult(response.output);\n    handleExecuteChange();\n  };\n\n  // Check if clipboard reading is available\n  createEffect(() => {\n    if (!navigator.clipboard || !navigator.clipboard.readText) {\n      setInputAvailable(false);\n    }\n  });\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-orange-300 text-white rounded\" onClick={handleExecuteChange}>\n      {inputAvailable() ? (\n        'Paste & Execute Change'\n      ) : (\n        <textarea\n\n```\n\n\n# Task\n\nRefactor!\n\nMake inputAvailable a boolean const! Name it clipboardAvailable!\n\n\n## Project Specifics",
+      "after": "\nsrc/frontend/components/ExecuteButton.jsx:\n```\nimport { createSignal } from 'solid-js';\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n  const [changeInput, setChangeInput] = createSignal('');\n\n  const handleExecuteChange = async () => {\n    const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();\n    const response = await executeChange(change);\n    setChange(change);\n    setExecutionResult(response.output);\n    handleExecuteChange();\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-orange-300 text-white rounded\" onClick={handleExecuteChange}>\n      {clipboardAvailable ? (\n        'Paste & Execute Change'\n      ) : (\n        <textarea\n\n```\n\nsrc/frontend/model/commitMessage.js:\n```\nimport { createSignal } from 'solid-js';\n\nconst [commitMessage, setCommitMessage] = createSignal('');\n\nexport { commitMessage, setCommitMessage };\n\n```\n\nsrc/frontend/service/handleGeneratePrompt.js:\n```\nimport { generatePrompt } from '../generatePrompt';\nimport { marked } from 'marked';\nimport { setPrompt } from '../model/prompt';\n\nconst handleGeneratePrompt = async () => {\n  const response = await generatePrompt();\n\n  navigator.clipboard.writeText(response.prompt)\n    .then(() => {\n      console.log('Prompt copied to clipboard!');\n    })\n    .catch(err => {\n      console.error('Failed to copy prompt: ', err);\n    });\n\n  const htmlPrompt = marked(response.prompt);\n\n  setPrompt(htmlPrompt);\n};\n\nexport default handleGeneratePrompt;\n\n```\n\n\n# Task\n\nRefactor!\n\nRefactor ExecuteButton!\n- Factor changeInput to its own file in model!\n\n\n\n## Project Specifics",
+      "total_deletions": 12,
+      "total_additions": 43
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/ExecuteButton.jsx\nrequirements: Make inputAvailable a boolean const! Name it clipboardAvailable!\n",
+      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/model/commitMessage.js\n  - src/frontend/service/handleGeneratePrompt.js\nrequirements: |\n  Refactor ExecuteButton!\n  - Factor changeInput to its own file in model!",
+      "total_deletions": 1,
+      "total_additions": 5
+    },
+    {
+      "filename": "src/frontend/components/ExecuteButton.jsx",
+      "before": "import { createSignal } from 'solid-js';\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n  const [changeInput, setChangeInput] = createSignal('');\n\n  const handleExecuteChange = async () => {\n    const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();",
+      "after": "import { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\nimport { changeInput, setChangeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handleExecuteChange = async () => {\n    const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();",
+      "total_deletions": 2,
+      "total_additions": 1
+    },
+    {
+      "filename": "src/frontend/model/changeInput.js",
+      "before": "",
+      "after": "import { createSignal } from 'solid-js';\n\nconst [changeInput, setChangeInput] = createSignal('');\n\nexport { changeInput, setChangeInput };",
+      "total_deletions": 0,
+      "total_additions": 5
+    }
+  ]
 }

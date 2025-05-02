@@ -143,10 +143,19 @@ def main():
                 response = requests.get(url=newURL, headers=headers)
                 if response.status_code == 200:
                     data = response.json()
+                elif response.status_code == 404:
+                    print(f"[404 Not Found] Commit not found: {newURL}")
+                    if SHA not in bad_urls:
+                        bad_urls[SHA] = URL
+                        with open(bad_urls_file, "w") as f:
+                            json.dump(bad_urls, f, indent=2)
+                    continue  # Skip this commit
                 else:
-                    print(f"Request failed with status: {response.status_code} for URL: {newURL}")
+                    print(f"[HTTP {response.status_code}] Failed to fetch: {newURL}")
+                    continue
             except requests.RequestException as e:
-                print(f"Request error: {e}")
+                print(f"[Request Exception] {e} for URL: {newURL}")
+                continue
 
             if not data:
                 continue # Don't proceed with invalid data

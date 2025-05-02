@@ -88,8 +88,20 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "deploy.js",
+      "before": "",
+      "after": "// deploy.js\nconst fs = require('fs');\nconst path = require('path');\n\n// Pfad zur index.html\nconst indexPath = path.join(__dirname, 'build', 'index.html');\n\n// Lese index.html\nfs.readFile(indexPath, 'utf8', function (err, data) {\n    if (err) {\n        return console.log(err);\n    }\n\n    // Erstelle 404.html\n    fs.writeFile(path.join(__dirname, 'build', '404.html'), data, 'utf8', function (err) {\n        if (err) return console.log(err);\n    });\n\n    // F\u00fcge Umleitungsskript hinzu\n    const redirectScript = `\n    <script>\n      (function(){\n        var redirect = sessionStorage.redirect;\n        delete sessionStorage.redirect;\n        if (redirect && redirect != location.href) {\n          history.replaceState(null, null, redirect);\n        }\n      })();\n    </script>\n  `;\n    const result = data.replace('<body>', '<body>' + redirectScript);\n\n    // Schreibe die \u00c4nderungen zur\u00fcck zu index.html\n    fs.writeFile(indexPath, result, 'utf8', function (err) {\n        if (err) return console.log(err);\n    });\n});",
+      "total_deletions": 0,
+      "total_additions": 37
+    },
+    {
+      "filename": "package.json",
+      "before": "  \"name\": \"pstackebrandt.github.io\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"dependencies\": {\n    \"@testing-library/jest-dom\": \"^5.17.0\",\n    \"@testing-library/react\": \"^13.4.0\",\n  \"scripts\": {\n    \"start\": \"react-scripts start\",\n    \"build\": \"react-scripts build\",\n    \"test\": \"react-scripts test\",\n    \"eject\": \"react-scripts eject\",\n    \"predeploy\": \"npm run build\",",
+      "after": "  \"name\": \"pstackebrandt.github.io\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"homepage\": \"http://pstackebrandt.github.io/\",\n  \"dependencies\": {\n    \"@testing-library/jest-dom\": \"^5.17.0\",\n    \"@testing-library/react\": \"^13.4.0\",\n  \"scripts\": {\n    \"start\": \"react-scripts start\",\n    \"build\": \"react-scripts build\",\n    \"postbuild\": \"node deploy.js\",\n    \"test\": \"react-scripts test\",\n    \"eject\": \"react-scripts eject\",\n    \"predeploy\": \"npm run build\",",
+      "total_deletions": 0,
+      "total_additions": 2
+    }
+  ]
 }

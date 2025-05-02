@@ -38,8 +38,34 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "prompt/history/2023/09/22/17:30_Change terminal wrapper div padding to p-2/change.sh",
+      "before": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Change terminal wrapper div padding to p-2\"\necho \"Plan:\"\necho \"1. Modify the TerminalComponent.jsx to change the padding of the terminal wrapper div.\"\n\n# Editing TerminalComponent.jsx file\ncat > ./src/frontend/components/terminal/TerminalComponent.jsx << 'EOF'\nimport { onCleanup, onMount } from 'solid-js';\nimport 'xterm/css/xterm.css';\nimport terminalConnection from '../../service/terminal/terminalConnection';\nimport { initializeXTerm } from '../../service/terminal/setupXTerm';\n\nconst TerminalComponent = () => {\n  let container;\n  const { term, fitAddon } = initializeXTerm();\n  \n  onMount(() => {\n    term.open(container);\n    fitAddon.fit();\n\n    terminalConnection.setOnDataReceived((data) => {\n      term.write(data);\n    });\n\n    term.onData((data) => {\n      terminalConnection.sendDataToTerminal(data);\n    });\n  });\n  \n  // Ensure terminal instance gets destroyed and WebSocket connection gets closed on component cleanup\n  onCleanup(() => {\n    term.dispose();\n    terminalConnection.closeConnection();\n  });\n\n  return (\n    <div class=\"rounded border p-2 w-full\" ref={container}>\n      {/* The terminal will be rendered inside this div */}\n    </div>\n  );\n};\n\nexport default TerminalComponent;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 0,
+      "total_additions": 47
+    },
+    {
+      "filename": "prompt/history/2023/09/22/17:30_Change terminal wrapper div padding to p-2/prompt.md",
+      "before": "",
+      "after": "You are AI Junior, you code like Donald Knuth.\n# Working set\n\n./src/frontend/components/terminal/TerminalComponent.jsx:\n```\nimport { onCleanup, onMount } from 'solid-js';\nimport 'xterm/css/xterm.css';\nimport terminalConnection from '../../service/terminal/terminalConnection';\nimport { initializeXTerm } from '../../service/terminal/setupXTerm';\n\nconst TerminalComponent = () => {\n  let container;\n  const { term, fitAddon } = initializeXTerm();\n  \n  onMount(() => {\n    term.open(container);\n    fitAddon.fit();\n\n    terminalConnection.setOnDataReceived((data) => {\n      term.write(data);\n    });\n\n    term.onData((data) => {\n      terminalConnection.sendDataToTerminal(data);\n    });\n  });\n  \n  // Ensure terminal instance gets destroyed and WebSocket connection gets closed on component cleanup\n  onCleanup(() => {\n    term.dispose();\n    terminalConnection.closeConnection();\n  });\n\n  return (\n    <div class=\"rounded border p-4 w-full\" ref={container}>\n      {/* The terminal will be rendered inside this div */}\n    </div>\n  );\n};\n\nexport default TerminalComponent;\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nChange the padding of the terminal wrapper div to p-2\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*! eg.: in createGitRepo.js: export function createGitRepo ( ....\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nBefore your solution, write a short, very concise readme about the working set, your task, and most importantly its challanges, if any.\n\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n\n",
+      "total_deletions": 0,
+      "total_additions": 107
+    },
+    {
+      "filename": "prompt/history/2023/09/22/17:30_Change terminal wrapper div padding to p-2/prompt.yaml",
+      "before": "",
+      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/terminal/TerminalComponent.jsx\nrequirements: Change the padding of the terminal wrapper div to p-2\nos: OSX",
+      "total_deletions": 0,
+      "total_additions": 5
+    },
+    {
+      "filename": "src/frontend/components/terminal/TerminalComponent.jsx",
+      "before": "  });\n\n  return (\n    <div class=\"rounded border p-4 w-full\" ref={container}>\n      {/* The terminal will be rendered inside this div */}\n    </div>\n  );",
+      "after": "  });\n\n  return (\n    <div class=\"rounded border p-2 w-full\" ref={container}>\n      {/* The terminal will be rendered inside this div */}\n    </div>\n  );",
+      "total_deletions": 1,
+      "total_additions": 1
+    }
+  ]
 }

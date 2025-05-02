@@ -303,8 +303,13 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "README.md",
+      "before": "\nThis repository contains a real-world job board application with a legacy codebase built using React, Contentful, and MobX. The application is a fully functional job listing platform that allows employers to post job offers and job seekers to apply. This project serves as a base for implementing AI-powered refactoring to improve code quality, maintainability, and performance.\n\n## Features\n\n- **Employer Dashboard**: Add, Edit, Delete job postings.\n- **Job Seeker Dashboard**: View jobs, apply, and manage applications.\n- **Admin Dashboard**: Oversee all activities and manage users.\n- **Search and Filtering**: Locate jobs based on criteria such as skills, location, and salary.\n\n## Tech Stack\n\n- **Frontend**: React.js\n    ```bash\n    yarn start\n    ```\n# jobsforit-de\n# jobsforit-de\n",
+      "after": "\nThis repository contains a real-world job board application with a legacy codebase built using React, Contentful, and MobX. The application is a fully functional job listing platform that allows employers to post job offers and job seekers to apply. This project serves as a base for implementing AI-powered refactoring to improve code quality, maintainability, and performance.\n\n## Tech Stack\n\n- **Frontend**: React.js\n    ```bash\n    yarn start\n    ```\n\n## Contributing\n\nContributions to this project are highly encouraged! Please follow these guidelines to ensure a smooth contribution process.\n\nAll contributions should be made in consultation with ChatGPT. The commit messages should include links to the 'share chat' from ChatGPT where the changes were discussed.\n\n### Steps for Contributing\n\n1. **Fork the Repository**\n   - Fork this repository to your GitHub account.\n\n2. **Clone Your Fork**\n    ```bash\n    git clone https://github.com/your-username/jobsforit-de.git\n    ```\n\n3. **Create a New Branch**\n    ```bash\n    git checkout -b feature/your-feature-name\n    ```\n\n4. **Make Changes**\n   - Consult with ChatGPT and make your changes.\n\n5. **Commit Your Changes**\n   - Make sure to include the 'share chat' link from ChatGPT in the commit message.\n\n6. **Push to Your Fork**\n    ```bash\n    git push origin feature/your-feature-name\n    ```\n\n7. **Create a Pull Request**\n   - Open a pull request from your fork to the original repository.\n\n\n",
+      "total_deletions": 9,
+      "total_additions": 38
+    }
+  ]
 }

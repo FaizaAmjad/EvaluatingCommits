@@ -66,8 +66,13 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": ".github/workflows/label.yml",
+      "before": "      - uses: actions/github-script@v6\n        with:\n          script: |\n            const creator = context.payload.sender.login\n            const opts = github.rest.issues.listForRepo.endpoint.merge({\n              ...context.issue,\n              creator,\n              state: 'all'\n            })\n            const issues = await github.paginate(opts)\n            for (const issue of issues) {\n              if (issue.number === context.issue.number) {\n                continue\n              }\n              if (issue.pull_request) {\n                return // creator is already a contributor\n              }\n            }\n            await github.rest.issues.addLabels({\n              issue_number: context.issue.number,\n              owner: context.repo.owner,\n              repo: context.repo.repo,\n              labels: ['new contributor']\n            })\n",
+      "after": "      - uses: actions/github-script@v6\n        with:\n          script: |\n            const creator = context.payload.sender.login;\n            const opts = github.rest.issues.listForRepo.endpoint.merge({\n              ...context.issue,\n              creator,\n              state: 'all',\n            });\n            \n            const issues = await github.paginate(opts);\n            \n            let isAlreadyContributor = false;\n            \n            for (const issue of issues) {\n              if (issue.number === context.issue.number) {\n                continue;\n              }\n              if (issue.pull_request && issue.user.login === creator) {\n                isAlreadyContributor = true;\n                break;\n              }\n            }\n            \n            if (!isAlreadyContributor) {\n              await github.rest.issues.addLabels({\n                issue_number: context.issue.number,\n                owner: context.repo.owner,\n                repo: context.repo.repo,\n                labels: ['new contributor'],\n              });\n            }",
+      "total_deletions": 13,
+      "total_additions": 21
+    }
+  ]
 }

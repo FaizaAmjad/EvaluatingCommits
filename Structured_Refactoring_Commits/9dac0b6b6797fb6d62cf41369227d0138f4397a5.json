@@ -68,8 +68,13 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "docs/descriptor.md",
+      "before": "# Prompt Descriptor\n\nThe prompt descriptor is a YAML file (prompt.yaml) that outlines the details necessary for generating a task prompt for the AI model. It is used to specify the task, attention, requirements, and other attributes.\n\n## Example\n\n\n## Attributes\n\n- task: Describes the task type and scope.\n- attention: Lists the files and directories most relevant to the task.\n- requirements: Describes the actual task in a human-readable format.\n- format: (Optional and half-working) Determines how the output will be formatted. It should be avoided for now.\n- os: (Default: \"Debian\") Specifies the operating system.\n- installedTools: By default, this includes \"npm, jq.\" Allows the user to mention his tools, e.g. when drawing. The user can create prompt/installedTools.md to overwrite.\n\n\n```\n<%= documentationRequirements %>\n```",
+      "after": "# Prompt Descriptor\n\nThe prompt descriptor is a YAML file (prompt.yaml) that **outlines the details** necessary for generating a task prompt for the AI model. It is used to specify the task, attention, requirements, and other attributes.\n\n## Example\n\n\n## Attributes\n\n- task: Describes the task type and scope. [See the list of current tasks](https://github.com/tisztamo/Junior/tree/main/prompt/task)\n- attention: Lists the files and directories most relevant to the task.\n- requirements: Describes the actual task in a human-readable format.\n- format: (Optional and half-working) If Junior has issues understanding the script, referring to `prompt/format/new_file_version.md` may help.\n- os: (Default: \"Debian\") Specifies the operating system.\n- installedTools: By default, this includes \"npm, jq.\" Allows the user to mention his tools, e.g. when drawing. The user can create prompt/installedTools.md to overwrite.\n\n\n```\n<%= documentationRequirements %>```",
+      "total_deletions": 4,
+      "total_additions": 4
+    }
+  ]
 }

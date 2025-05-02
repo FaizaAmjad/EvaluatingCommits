@@ -49,8 +49,11 @@ for commit in data:
                 "conversations": []
             },
              "code": {
+                "filename": "",
                 "before": "",  # PLACEHOLDER- ADJUST LATER
-                "after": ""    # PLACEHOLDER- ADJUST LATER
+                "after": "" ,   # PLACEHOLDER- ADJUST LATER
+                "total_deletions": 0,
+                "total_additions": 0,
             }
         }
 
