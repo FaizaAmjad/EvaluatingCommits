@@ -25,7 +25,7 @@
     "model": "",
     "conversations": [
       {
-        "prompt_id": "b34b156251999e95ed5c0b2db79f50c7e154a83f_s1_p1",
+        "prompt_id": "p1",
         "prompt": "# Working set\n\nsrc/frontend/components/GitStatusDisplay.jsx:\n```\nimport { onMount, createEffect } from 'solid-js';\nimport { gitStatus } from '../stores/gitStatus';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\n\nconst GitStatusDisplay = () => {\n  let statusContainer;\n\n  onMount(fetchGitStatus);\n\n  createEffect(() => {\n    const gitStatusValue = gitStatus();\n    if (gitStatusValue) {\n      if (gitStatusValue.error && gitStatusValue.error.stderr.includes('Not a git repository')) {\n        statusContainer.innerText = 'Not a git repo. Run \\'npx junior-init\\' to initialize!';\n      } else if (gitStatusValue.message && gitStatusValue.message !== '') {\n        statusContainer.innerText = gitStatusValue.message;\n      }\n    }\n  });\n\n  return (\n    <pre\n      ref={statusContainer}\n      class={`rounded overflow-auto max-w-full ${gitStatus() && gitStatus().message && gitStatus().message !== '' ? 'block' : 'hidden'}`}\n    />\n  );\n};\n\nexport default GitStatusDisplay;\n\n```\n\nsrc/backend/handlers/gitStatusHandler.js:\n```\nimport gitStatus from '../../git/gitStatus.js';\n\nexport default async function gitStatusHandler(req, res) {\n  try {\n    const status = await gitStatus();\n    res.status(200).send({ status });\n  } catch (error) {\n    res.status(500).send({ message: 'Error in getting Git status', error });\n  }\n}\n\n```\n\n\n# Task\n\nFix the following issue!\n\n1. Move the git status result from the status field of the response to the message field.\n2. When the endpoint reports an error in the error field similar to this (check stderr for &#34;Not a git repository&#34;):\n{\n  &#34;message&#34;: &#34;Error in getting Git status&#34;,\n  &#34;error&#34;: {\n    &#34;code&#34;: 128,\n    &#34;killed&#34;: false,\n    &#34;signal&#34;: null,\n    &#34;cmd&#34;: &#34;git status --porcelain=v1&#34;,\n    &#34;stdout&#34;: &#34;&#34;,\n    &#34;stderr&#34;: &#34;fatal: Not a git repository (or any of the parent directories): .git\\n&#34;\n  }\n}\nthen display &#34;Not a git repo. Run &#39;npx junior-init&#39; to initialize!&#34;.\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
         "answer": "[CODE_BLOCK_0]",
         "list_of_code": [
@@ -37,7 +37,7 @@
         ]
       },
       {
-        "prompt_id": "b34b156251999e95ed5c0b2db79f50c7e154a83f_s1_p2",
+        "prompt_id": "p2",
         "prompt": "Don't check for the text on the frontend, just show the message and error?.stderr if the error exists",
         "answer": "[CODE_BLOCK_0]",
         "list_of_code": [

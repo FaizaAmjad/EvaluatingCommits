@@ -25,7 +25,7 @@
     "model": "Default",
     "conversations": [
       {
-        "prompt_id": "93823592c73fb2f4c7f7195273a7c5fafa79068f_s1_p1",
+        "prompt_id": "p1",
         "prompt": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\nsrc/frontend/App.jsx:\n```\nimport useKeyBindings from './service/useKeyBindings';\nimport keyBindings from './config/keyBindings';\nimport NavBar from './components/NavBar';\nimport PromptCreation from './components/PromptCreation';\nimport ChangeExecution from './components/ChangeExecution';\nimport ChangeInspection from './components/ChangeInspection';\nimport ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  const bindings = keyBindings();\n  useKeyBindings(bindings);\n\n  return (\n    <div class=\"p-2 sm:p-4 xs:p-4\">\n      <div class=\"bg-main max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />\n        <ChangeInspection />\n        <ChangeFinalization />\n      </div>\n    </div>\n  );\n};\n\nexport default App;\n\n```\n\nsrc/frontend/index.html:\n```\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n  <link rel=\"icon\" href=\"/assets/favicon.ico\" type=\"image/x-icon\">\n  <title>Junior</title>\n</head>\n<body>\n  <div id=\"app\" class=\"bg-emphasize\"></div>\n  <script type=\"module\" src=\"/index.jsx\"></script>\n</body>\n</html>\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nThere is a margin around the content which should be removed.\nA horizontal padding should be added instead.\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
         "answer": "[CODE_BLOCK_0]",
         "list_of_code": [
@@ -37,7 +37,7 @@
         ]
       },
       {
-        "prompt_id": "93823592c73fb2f4c7f7195273a7c5fafa79068f_s1_p2",
+        "prompt_id": "p2",
         "prompt": "The vertical margin was removed, but the horizontal still looks like a margin, not padding.",
         "answer": "I apologize for the oversight. Let's correct it by moving the padding from the outer <div> to the inner <div>. This will ensure that the horizontal padding behaves as expected. Here's the modified shell script:[CODE_BLOCK_0]",
         "list_of_code": [

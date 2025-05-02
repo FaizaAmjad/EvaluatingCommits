@@ -25,7 +25,7 @@
     "model": "",
     "conversations": [
       {
-        "prompt_id": "cfe81593e46efa860aa8ab4cc9f1b421317b07af_s1_p1",
+        "prompt_id": "p1",
         "prompt": "# Working set\n\n```\nsrc/frontend/\n\u251c\u2500\u2500 App.jsx\n\u251c\u2500\u2500 assets/...\n\u251c\u2500\u2500 components/...\n\u251c\u2500\u2500 fetchTasks.js\n\u251c\u2500\u2500 generatePrompt.js\n\u251c\u2500\u2500 getBaseUrl.js\n\u251c\u2500\u2500 index.html\n\u251c\u2500\u2500 index.jsx\n\u251c\u2500\u2500 postcss.config.cjs\n\u251c\u2500\u2500 service/...\n\u251c\u2500\u2500 startVite.js\n\u251c\u2500\u2500 stores/...\n\u251c\u2500\u2500 styles/...\n\u251c\u2500\u2500 tailwind.config.cjs\n\u251c\u2500\u2500 vite.config.js\n\n```\n```\nsrc/frontend/service/\n\u251c\u2500\u2500 createWebSocket.js\n\u251c\u2500\u2500 executeChange.js\n\u251c\u2500\u2500 fetchDescriptor.js\n\u251c\u2500\u2500 fetchGitStatus.js\n\u251c\u2500\u2500 handleTaskChange.js\n\u251c\u2500\u2500 parseYamlAndGetTask.js\n\u251c\u2500\u2500 postCommit.js\n\u251c\u2500\u2500 resetGit.js\n\u251c\u2500\u2500 useWebsocket.js\n\n```\nsrc/frontend/stores/change.js:\n```\nimport { createSignal } from 'solid-js';\n\nexport const [change, setChange] = createSignal('');\n\n```\n\nsrc/frontend/stores/commitMessage.js:\n```\nimport { createSignal } from 'solid-js';\n\nconst [commitMessage, setCommitMessage] = createSignal('');\n\nexport { commitMessage, setCommitMessage };\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nCreate a function in the servitce directory, which, when called, starts to\nmonitor the change signal, parses its content, which should be a shells script,\nfor a line:\ngoal=&#34;Some goal description&#34;\nand if found, sets the commit message to the value of this goal variable\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
         "answer": "[CODE_BLOCK_0]",
         "list_of_code": [
@@ -37,7 +37,7 @@
         ]
       },
       {
-        "prompt_id": "cfe81593e46efa860aa8ab4cc9f1b421317b07af_s1_p2",
+        "prompt_id": "p2",
         "prompt": "There is no subscribe, change is a signal",
         "answer": "Apologies for the confusion! You're correct that signals in Solid.js don't use a \"subscribe\" method. Instead, you can use a reactive primitive to observe changes. Here's the updated script:[CODE_BLOCK_0]This corrected code utilizes the createEffect function from Solid.js to observe changes in the change signal and execute the appropriate logic when the value changes.",
         "list_of_code": [

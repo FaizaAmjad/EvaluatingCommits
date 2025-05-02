@@ -25,7 +25,7 @@
     "model": "",
     "conversations": [
       {
-        "prompt_id": "6f411731d6d2445f7c91bd2cedd481e67f5ce135_s1_p1",
+        "prompt_id": "p1",
         "prompt": "# Working set\n\nsrc/init.js:\n```\n#!/usr/bin/env node\nimport { execSync } from 'child_process';\nimport { writeFileSync } from 'fs';\nimport { join } from 'path';\nimport { createGitignore } from './git/createGitignore.js';\n\nfunction juniorInit() {\n  execSync('git init', { stdio: 'inherit' });\n\n  createGitignore();\n\n  execSync('git add .gitignore', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });\n\n  const yamlContent = `task: prompt/task/feature/implement.md\nattention:\n  - ./\nrequirements: Create a Hello World in Node.js`;\n\n  writeFileSync('prompt.yaml', yamlContent);\n\n  console.log('\\x1b[32mRepo initialized for Junior development\\x1b[0m');\n}\n\njuniorInit();\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\n- Factor out prompt.yaml creation to src/prompt/createPromptYaml.js! - Also create and call src/prompt/createProjectSpecifics.js which creates ./prompt/projectSpecifics.md with the content &#34;## Project Specifics\\n&#34;!\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
         "answer": "[CODE_BLOCK_0]",
         "list_of_code": [
@@ -37,7 +37,7 @@
         ]
       },
       {
-        "prompt_id": "6f411731d6d2445f7c91bd2cedd481e67f5ce135_s1_p2",
+        "prompt_id": "p2",
         "prompt": "file:///Users/ko/projects-new/Junior/src/init.js:6\nimport createGitignore from './git/createGitignore.js';\n       ^^^^^^^^^^^^^^^\nSyntaxError: The requested module './git/createGitignore.js' does not provide an export named 'default'\n\nUse named imports",
         "answer": "Apologies for the misunderstanding. The script I provided assumed that createGitignore.js was exporting a default function.If createGitignore.js is not using default export, you'll have to change the import statement to use named imports.Here is the updated script:[CODE_BLOCK_0]",
         "list_of_code": [

@@ -25,7 +25,7 @@
     "model": "Default",
     "conversations": [
       {
-        "prompt_id": "f34f3965095ce9b3b9303e95bbb10bbe241c2ca3_s1_p1",
+        "prompt_id": "p1",
         "prompt": "Refactor given component using functional components and hooks. \nPlease show all the lines so that I don't need to add anything myself.\n\nimport React from 'react';\n\nimport style from './Timeline.module.scss';\n\nclass Timeline extends React.Component {\n    render() {\n        const steps = this.props.steps;\n        const currentStep = this.props.currentStep;\n        return (\n            <ul className={style.Timeline}>\n                {steps.map((step, index) => {\n                    const stepClasses = [style.Timeline_item];\n                    \n                    if(index + 1 < currentStep) {\n                        stepClasses.push(style.Timeline_item__completed);\n                    } else if(currentStep === index + 1) {\n                        stepClasses.push(style.Timeline_item__current);\n                    }\n\n                    return (\n                        <li className={stepClasses.join(' ')} key={index}>\n                            <div className={style.Timeline_item_circle}></div>\n                            <span className={style.Timeline_item_text}>{step}</span>\n                        </li>\n                    )\n                })}\n            </ul>\n        );\n    }\n}\n\nexport default Timeline;",
         "answer": "Here's the refactored component using a functional component and hooks. Since we're only working with props and not any component state or lifecycle methods, the refactoring is straightforward:[CODE_BLOCK_0]Here are the changes made:Removed the class-based component and converted it into a functional component.Removed the render() method since it's not needed in functional components.Used destructuring to directly get the props inside the functional component's parameters. This makes the code a bit cleaner and more concise.That's it! No need to use hooks in this case since we aren't dealing with any local state or lifecycle methods.",
         "list_of_code": [
@@ -37,7 +37,7 @@
         ]
       },
       {
-        "prompt_id": "f34f3965095ce9b3b9303e95bbb10bbe241c2ca3_s1_p2",
+        "prompt_id": "p2",
         "prompt": "create a git commit for that refactoring. Below the message title there should the list of changes made and the  ChatGPT shared link: https://chat.openai.com/share/722a4dd0-6544-41db-aeb4-38b49547f572",
         "answer": "Certainly! When creating a git commit, the message is crucial for readability and understanding the purpose of the commit for future reference. Here's how you could craft a commit message for this refactoring:[CODE_BLOCK_0]To make this commit:First, make sure you've made the changes to the code.Stage the changes with: git add path/to/your/Timeline.component.jsCommit the changes with the given message:[CODE_BLOCK_1]This uses multiple -m options to specify multiple lines of commit messages.",
         "list_of_code": [

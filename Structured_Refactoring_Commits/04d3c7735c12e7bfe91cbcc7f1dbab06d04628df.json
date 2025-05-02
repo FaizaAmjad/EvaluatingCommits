@@ -25,7 +25,7 @@
     "model": "Default",
     "conversations": [
       {
-        "prompt_id": "04d3c7735c12e7bfe91cbcc7f1dbab06d04628df_s1_p1",
+        "prompt_id": "p1",
         "prompt": "\"I am building a JavaScript application to simulate a game based on sumo wrestling. The game includes multiple instances called 'waves', where each wave starts at a different point in time. Within each wave, players select a wrestler for each basho (tournament). I need to build a 'Basho' object that represents a basho. Each Basho should contain a dictionary mapping from player names to their picks for this basho.\"",
         "answer": "I'll provide a simple design for the Basho class in JavaScript.[CODE_BLOCK_0]This is a basic object-oriented design in JavaScript that might suit your needs. Depending on the complexity of your game, you might want to consider additional functionalities, like removing or changing a pick, adding more data to the wrestler picks, etc. You could add methods to handle such functionalities.For example, to add a method to change a player's pick:[CODE_BLOCK_1]You should adjust the design according to your specific requirements and application structure.",
         "list_of_code": [
@@ -42,7 +42,7 @@
         ]
       },
       {
-        "prompt_id": "04d3c7735c12e7bfe91cbcc7f1dbab06d04628df_s1_p2",
+        "prompt_id": "p2",
         "prompt": "please write basho.test.js",
         "answer": "Sure, here's an example of how you could write some simple unit tests for the Basho class using Jest, a popular JavaScript testing library. These tests are based on the Basho class provided in the previous response.[CODE_BLOCK_0]To run this test file, you would need to install Jest and add a script to your package.json file:[CODE_BLOCK_1]You can then run your tests with the command npm test in your terminal.Please note that these are basic tests and you might want to add more to fully test your class. These tests also do not check for the console log messages that are outputted when a player tries to select a wrestler for a basho they've already made a pick for. You could add tests for these using jest.spyOn() to spy on console.log if desired.",
         "list_of_code": [
@@ -59,7 +59,7 @@
         ]
       },
       {
-        "prompt_id": "04d3c7735c12e7bfe91cbcc7f1dbab06d04628df_s1_p3",
+        "prompt_id": "p3",
         "prompt": "you didn't incorporate the wave concept which feels important",
         "answer": "Apologies for the oversight. The wave concept would indeed be important if each wave is to start at a different point in time and contain multiple Bashos. You could represent this with a \"Wave\" class that contains multiple Bashos. Here's an example of how this might look:[CODE_BLOCK_0]And here's how you might update your Basho class to use",
         "list_of_code": [
@@ -71,7 +71,7 @@
         ]
       },
       {
-        "prompt_id": "04d3c7735c12e7bfe91cbcc7f1dbab06d04628df_s1_p4",
+        "prompt_id": "p4",
         "prompt": "no you didn't tell the basho its associated wave",
         "answer": "I see, you'd like to associate each Basho with a specific wave. In this case, we can add a waveId property to the Basho class. This waveId will represent the wave that the basho belongs to. Here's the updated Basho class:[CODE_BLOCK_0]Now, each Basho object will be aware of the wave it is associated with through the waveId property.The unit tests can be similarly updated to reflect the change:[CODE_BLOCK_1]This modification allows each Basho to be aware of its associated",
         "list_of_code": [
@@ -88,7 +88,7 @@
         ]
       },
       {
-        "prompt_id": "04d3c7735c12e7bfe91cbcc7f1dbab06d04628df_s1_p5",
+        "prompt_id": "p5",
         "prompt": "i hate this. write the files in full.",
         "answer": "I apologize if the previous response caused confusion. Here are the complete Basho and Wave classes, along with a full unit test file for the Basho class:Basho.js:[CODE_BLOCK_0]Wave.js:[CODE_BLOCK_1]basho.test.js:[CODE_BLOCK_2]You can run these tests using Jest with the command npm test.",
         "list_of_code": [
@@ -110,7 +110,7 @@
         ]
       },
       {
-        "prompt_id": "04d3c7735c12e7bfe91cbcc7f1dbab06d04628df_s1_p6",
+        "prompt_id": "p6",
         "prompt": "add wave.test.js",
         "answer": "Certainly! Here's the complete Wave class and a test file wave.test.js to test its functionality using Jest:Wave.js:[CODE_BLOCK_0]wave.test.js:[CODE_BLOCK_1]You can run these tests using Jest with the command npm test.",
         "list_of_code": [

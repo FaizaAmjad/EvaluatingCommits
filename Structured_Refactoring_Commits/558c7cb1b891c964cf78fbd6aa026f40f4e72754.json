@@ -25,7 +25,7 @@
     "model": "Default",
     "conversations": [
       {
-        "prompt_id": "558c7cb1b891c964cf78fbd6aa026f40f4e72754_s1_p1",
+        "prompt_id": "p1",
         "prompt": "Refactor given file\n\nimport React from 'react';\n\nimport style from './Loader.module.scss';\n\nclass Loader extends React.Component {\n    render() {\n        return(\n            <div className={style.Loader}>\n                <span></span>\n            </div>\n        )\n    }\n}\n\nexport default Loader;",
         "answer": "Let's refactor the given Loader component to use functional components instead of class components. Functional components with hooks are the more modern way to write React components as of the last updates leading up to 2021.Here's the refactored component:[CODE_BLOCK_0]This refactored code is more concise and is in line with the more modern and recommended way of writing React components.",
         "list_of_code": [
@@ -37,7 +37,7 @@
         ]
       },
       {
-        "prompt_id": "558c7cb1b891c964cf78fbd6aa026f40f4e72754_s1_p2",
+        "prompt_id": "p2",
         "prompt": "Refactor given component:\n\nimport React from 'react';\nimport Container from \"./Container/Container\";\nimport {ThemeContext} from \"../themeContext\";\nimport Heading from \"./Heading\";\nimport {toJS} from 'mobx';\nimport style from './Hero.module.scss';\n\nclass Hero extends React.Component {\n  render() {\n    const themeContext = this.context;\n\n    const classes = [style.Hero];\n\n    if (themeContext.theme === 'dark') {\n      classes.push(style.Hero_dark);\n    } else {\n      classes.push(style.Hero_light);\n    }\n\n    return (\n      <div className={classes.join(' ')}>\n        <Container>\n          <div className={style.Hero__cols}>\n            <div className={[style.Hero__col, style.Hero__col_content].join(' ')}>\n              <Heading variant='h2' theme={themeContext.theme} className={style.Hero__heading}>\n                {this.props.heading}\n              </Heading>\n              <p className={style.Hero__description}>\n                {this.props.description}\n              </p>\n            </div>\n            <div className={[style.Hero__col, style.Hero__col_img].join(' ')}>\n              <img\n                className={style.Hero__img}\n                 src={this.props.heroImage.fields.url || this.props.heroImage.fields.image.fields.file.url}\n                 alt={this.props.heroImage.fields.name}\n              />\n            </div>\n          </div>\n        </Container>\n      </div>\n    )\n  }\n}\n\nHero.contextType = ThemeContext;\n\nexport default Hero;",
         "answer": "Let's refactor the given Hero component to use a functional component. We'll also utilize React's useContext hook to access the ThemeContext.[CODE_BLOCK_0]Changes made:Used a functional component instead of a class component.Used the useContext hook to get the theme from ThemeContext.Destructured the props directly in the function arguments for better clarity.Replaced join(' ') with template literals for better readability when combining class names.Removed the unused import (toJS from mobx). If it's necessary elsewhere, you can add it back.",
         "list_of_code": [
@@ -49,7 +49,7 @@
         ]
       },
       {
-        "prompt_id": "558c7cb1b891c964cf78fbd6aa026f40f4e72754_s1_p3",
+        "prompt_id": "p3",
         "prompt": "refactor given component:\n\nimport React from \"react\";\n\nimport style from './Heading.module.scss';\n\nclass Heading extends React.Component {\n    render() {\n        const classes = [style.Heading];\n        let tag = '';\n        if(this.props.theme === 'dark') {\n            classes.push(style.Heading_white);\n        } else {\n            classes.push(style.Heading_black);\n        }\n        if(this.props.className) {\n            classes.push(this.props.className);\n        }\n        const variant = this.props.variant;\n        if(variant.includes('regular')) {\n            classes.push(style.Heading_regular)\n        }\n        if(variant.includes('h1')) {\n            classes.push(style.Heading_h1);\n            tag = (\n            <h1 className={classes.join(' ')}>{this.props.children}</h1>\n            );\n        } else if(variant.includes('h2')) {\n            classes.push(style.Heading_h2);\n            tag = (\n                <h2 className={classes.join(' ')}>{this.props.children}</h2>\n            );\n        } if(variant.includes('h3')) {\n            classes.push(style.Heading_h3);\n            tag = (\n                <h3 className={classes.join(' ')}>{this.props.children}</h3>\n            );\n        }\n        \n        return tag;\n    }\n}\n\nexport default Heading;",
         "answer": "Let's refactor the Heading component to be a functional component. This refactor will also simplify the conditional logic and improve readability:[CODE_BLOCK_0]Changes made:Converted to a functional component.Destructured the props directly in the function arguments for better clarity.Simplified the conditional logic by creating a Tag variable to determine the heading tag dynamically.Used the dynamic Tag component to render the appropriate heading.",
         "list_of_code": [
@@ -61,7 +61,7 @@
         ]
       },
       {
-        "prompt_id": "558c7cb1b891c964cf78fbd6aa026f40f4e72754_s1_p4",
+        "prompt_id": "p4",
         "prompt": "create a git commit for heading refactoring below the message title there should the list of changes made ",
         "answer": "Certainly! Here's how the commit message could be structured using the git commit command with an inline message:[CODE_BLOCK_0]If you're using a GUI tool or are in a commit editor, it would appear as:[CODE_BLOCK_1]Remember to stage your changes (git add . or git add <specific_files>) before making the commit.",
         "list_of_code": [
@@ -78,7 +78,7 @@
         ]
       },
       {
-        "prompt_id": "558c7cb1b891c964cf78fbd6aa026f40f4e72754_s1_p5",
+        "prompt_id": "p5",
         "prompt": "do the same for Loader component",
         "answer": "Certainly! Here's how the commit message could be structured for the Loader component refactoring:Using the git commit command with an inline message:[CODE_BLOCK_0]If you're using a GUI tool or are in a commit editor, it would appear as:[CODE_BLOCK_1]Remember to stage your changes (git add . or git add <specific_files>) before making the commit.",
         "list_of_code": [
@@ -95,7 +95,7 @@
         ]
       },
       {
-        "prompt_id": "558c7cb1b891c964cf78fbd6aa026f40f4e72754_s1_p6",
+        "prompt_id": "p6",
         "prompt": "Do the same for Hero component",
         "answer": "Of course! Here's how the commit message could be structured for the Hero component refactoring:Using the git commit command with an inline message:[CODE_BLOCK_0]If you're using a GUI tool or are in a commit editor, it would appear as:[CODE_BLOCK_1]Don't forget to stage your changes (git add . or git add <specific_files>) before making the commit.",
         "list_of_code": [
