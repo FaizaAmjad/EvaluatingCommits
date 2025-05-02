@@ -38,8 +38,62 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\n# Goal: Refactor code by splitting into separate files\n# Plan:\n# 1. Create a new file setupRoutes.js and move all the routing logic from server.js to this new file.\n# 2. Delete handlers.js file as it's no longer needed.\n# 3. Create a new file generateHandler.js and move the generateHandler function from handlers.js to this new file.\n\n# Step 1: Create setupRoutes.js and move routing logic\ncat << EOF > src/backend/setupRoutes.js\nimport { generateHandler } from './generateHandler.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\nimport { updateTaskHandler } from './updateTaskHandler.js';\nimport { listTasks } from './listTasks.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', updateTaskHandler);\n}\nEOF\n\n# Step 2: Delete handlers.js\nrm src/backend/handlers.js\n\n# Step 3: Create generateHandler.js and move generateHandler function\ncat << EOF > src/backend/generateHandler.js\nimport processPrompt from '../prompt/promptProcessing.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n  const { prompt } = await processPrompt(notes);\n  res.json({ prompt: prompt });\n};\nEOF\n\n# Update server.js to use setupRoutes.js\ncat << EOF > src/backend/server.js\nimport express from 'express';\nimport cors from 'cors';\nimport { createServer } from 'http';\nimport { WebSocketServer } from 'ws';\nimport { setupRoutes } from './setupRoutes.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\n\nexport function startServer() {\n  console.log(process.cwd())\n  const app = express();\n\n  app.use(cors());\n\n  setupRoutes(app);\n\n  server.listen(3000, () => {\n    console.log('Server is running on port 3000');\n  });\n}\nEOF\n",
+      "after": "#!/bin/sh\n# Goal: Refactor server.js, add port configuration\n# Plan:\n# 1. Create a new file `serverConfig.js` that exports a function to get the server port, either from environment variable JUNIOR_SERVER_PORT, or from command line argument --server-port=, or default to 10101 if neither are provided.\n# 2. Modify the `startServer()` function in `server.js` to use this new function to get the port number.\n# 3. Create a new file `startServer.js` in `backend` that imports `serverConfig.js` and implements the logic that was previously in `server.js`.\n# 4. Update `web.js` to import `startServer.js` from `backend` instead of `server.js`.\n# 5. Remove the `startServer.js` in `src` folder.\n# 6. Remove the `server.js` in `backend` folder.\n\ncat > src/backend/serverConfig.js << 'EOF'\nimport process from 'process';\n\nexport function getServerPort() {\n  const portArg = process.argv.find(arg => arg.startsWith('--server-port='));\n  if (portArg) {\n    return Number(portArg.split('=')[1]);\n  }\n  \n  if (process.env.JUNIOR_SERVER_PORT) {\n    return Number(process.env.JUNIOR_SERVER_PORT);\n  }\n  \n  return 10101;\n}\nEOF\n\ncat > src/backend/startServer.js << 'EOF'\nimport express from 'express';\nimport cors from 'cors';\nimport { createServer } from 'http';\nimport { WebSocketServer } from 'ws';\nimport { setupRoutes } from './setupRoutes.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\nimport { getServerPort } from './serverConfig.js';\n\nexport function startServer() {\n  const app = express();\n\n  app.use(cors());\n\n  setupRoutes(app);\n\n  const port = getServerPort();\n  server.listen(port, () => {\n    console.log('Server is running on port', port);\n  });\n}\nEOF\n\nsed -i.bak 's/\\.\\/startServer\\.js/\\.\\/backend\\/startServer\\.js/' src/web.js && rm src/web.js.bak\n\nrm src/startServer.js\nrm src/backend/server.js",
+      "total_deletions": 37,
+      "total_additions": 32
+    },
+    {
+      "filename": "prompt.md",
+      "before": "# Working set\n\nsrc/backend/server.js:\n```\nimport express from 'express';\nimport cors from 'cors';\nimport { createServer } from 'http';\nimport { WebSocketServer } from 'ws';\nimport { generateHandler, descriptorHandler, taskUpdateHandler } from './handlers.js';\nimport { listTasks } from './listTasks.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\n\nexport function startServer() {\n\n  notifyOnFileChange(wss);\n\n  app.get('/descriptor', descriptorHandler);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', taskUpdateHandler);\n\n  server.listen(3000, () => {\n    console.log('Server is running on port 3000');\n\n```\n\nsrc/backend/handlers.js:\n```\nimport processPrompt from '../prompt/promptProcessing.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\nimport { updateTaskHandler } from './updateTaskHandler.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n  const { prompt } = await processPrompt(notes);\n  res.json({ prompt: prompt });\n};\n\nexport const descriptorHandler = servePromptDescriptor;\nexport const taskUpdateHandler = updateTaskHandler;\n\n```\n\n\n# Task\n\n## Refactor by split\n\nA file is too big. We need to split it into parts.\nIdentify the possible parts and refactor the code in separate files!\n\nrouting should be separated to setupRoutes.js\nhandlers.js should be deleted\ngenerateHandler -&gt; separate file.\n\n\n",
+      "after": "# Working set\n\nsrc/config.js:\n```\nimport readline from 'readline';\nimport { ChatGPTAPI } from 'chatgpt';\nimport { getSystemPrompt } from \"./prompt/getSystemPrompt.js\";\n\nfunction isDryRun() {\n  return process.argv.includes(\"-d\") || process.argv.includes(\"--dry-run\");\n}\n\nconst api = isDryRun() ? {\n    sendMessage: () => { return {id: 42, text: \"DRY RUN, NOT SENT\"}}\n  } : new ChatGPTAPI({\n  debug: true,\n  apiKey: process.env.OPENAI_API_KEY,\n  systemMessage: await getSystemPrompt(),\n  completionParams: {\n    model: get_model(),\n    stream: true,\n    temperature: 0.5,\n    max_tokens: 2048,\n  }\n});\n\nconst rl = readline.createInterface({\n  input: process.stdin,\n  output: process.stdout\n});\n\nfunction get_model() {\n  const modelArg = process.argv.find(arg => arg.startsWith('--model='));\n  if (modelArg) {\n    return modelArg.split('=')[1];\n  }\n  return \"gpt-4\";\n}\n\nexport { api, rl, get_model };\n\n```\n\nsrc/backend/server.js:\n```\nimport express from 'express';\nimport cors from 'cors';\nimport { createServer } from 'http';\nimport { WebSocketServer } from 'ws';\nimport { setupRoutes } from './setupRoutes.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\n\nexport function startServer() {\n\n  notifyOnFileChange(wss);\n\n  setupRoutes(app);\n\n  server.listen(3000, () => {\n    console.log('Server is running on port 3000');\n\n```\n\nsrc/startServer.js:\n```\nimport { startServer as startBackendServer } from './backend/server.js';\n\nexport function startServer() {\n  startBackendServer();\n}\n\n```\n\nsrc/web.js:\n```\n#!/usr/bin/env node\nimport { startServer } from './startServer.js';\nimport { startVite } from './startVite.js';\n\nstartServer();\nstartVite();\n\n```\n\nsrc/backend/setupRoutes.js:\n```\nimport { generateHandler } from './generateHandler.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\nimport { updateTaskHandler } from './updateTaskHandler.js';\nimport { listTasks } from './listTasks.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', updateTaskHandler);\n}\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n- Every js file should only export a single function!\n- Use ES6 imports!\n\nRequirements:\n\nMove the server to port 10101, and allow configuration through the JUNIOR_SERVER_PORT environment variable or the --server-port=10101 command line argument. Create a new file in backend for handling this config, and reexport the functionality from config.js\nAlso refactor by moving the logic from backend/server.js to backend/startServer.js, and using src/backend/startServer.js from web.js instead of the current, outer one. Delete server.js and src/startServer.js\n\n\n",
+      "total_deletions": 22,
+      "total_additions": 82
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "task: prompt/task/refactor/split.md\nattention:\n  - src/backend/server.js\n  - src/backend/handlers.js\nrequirements: |\n  routing should be separated to setupRoutes.js\n  handlers.js should be deleted\n  generateHandler -> separate file.\nformat: prompt/format/shell.md",
+      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/config.js\n  - src/backend/server.js\n  - src/startServer.js\n  - src/web.js\n  - src/backend/setupRoutes.js\nrequirements: >\n  Move the server to port 10101, and allow configuration through the\n  JUNIOR_SERVER_PORT environment variable or the --server-port=10101\n  command line argument.\n  Create a new file in backend for handling this config,\n  and reexport the functionality from config.js\n\n  Also refactor by moving the logic from backend/server.js to backend/startServer.js, and\n  using src/backend/startServer.js from web.js instead of the current, outer one.\n  Delete server.js and src/startServer.js\nformat: prompt/format/shell.md",
+      "total_deletions": 6,
+      "total_additions": 15
+    },
+    {
+      "filename": "src/backend/getServerPort.js",
+      "before": "",
+      "after": "function getServerPort() {\n  const portArg = process.argv.find(arg => arg.startsWith('--server-port='));\n  if (portArg) {\n    return parseInt(portArg.split('=')[1], 10);\n  }\n  return process.env.JUNIOR_SERVER_PORT || 10101;\n}\n\nexport default getServerPort;",
+      "total_deletions": 0,
+      "total_additions": 9
+    },
+    {
+      "filename": "src/backend/serverConfig.js",
+      "before": "",
+      "after": "import process from 'process';\n\nexport function getServerPort() {\n  const portArg = process.argv.find(arg => arg.startsWith('--server-port='));\n  if (portArg) {\n    return Number(portArg.split('=')[1]);\n  }\n  \n  if (process.env.JUNIOR_SERVER_PORT) {\n    return Number(process.env.JUNIOR_SERVER_PORT);\n  }\n  \n  return 10101;\n}",
+      "total_deletions": 0,
+      "total_additions": 14
+    },
+    {
+      "filename": "src/backend/startServer.js",
+      "before": "import { WebSocketServer } from 'ws';\nimport { setupRoutes } from './setupRoutes.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\n\nexport function startServer() {\n  console.log(process.cwd())\n  const app = express();\n\n  app.use(cors());\n\n  setupRoutes(app);\n\n  server.listen(3000, () => {\n    console.log('Server is running on port 3000');\n  });\n}",
+      "after": "import { WebSocketServer } from 'ws';\nimport { setupRoutes } from './setupRoutes.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\nimport { getServerPort } from './serverConfig.js';\n\nexport function startServer() {\n  const app = express();\n\n  app.use(cors());\n\n  setupRoutes(app);\n\n  const port = getServerPort();\n  server.listen(port, () => {\n    console.log('Server is running on port', port);\n  });\n}",
+      "total_deletions": 3,
+      "total_additions": 4
+    },
+    {
+      "filename": "src/startServer.js",
+      "before": "import { startServer as startBackendServer } from './backend/server.js';\n\nexport function startServer() {\n  startBackendServer();\n}",
+      "after": "",
+      "total_deletions": 5,
+      "total_additions": 0
+    },
+    {
+      "filename": "src/web.js",
+      "before": "#!/usr/bin/env node\nimport { startServer } from './startServer.js';\nimport { startVite } from './startVite.js';\n\nstartServer();",
+      "after": "#!/usr/bin/env node\nimport { startServer } from './backend/startServer.js';\nimport { startVite } from './startVite.js';\n\nstartServer();",
+      "total_deletions": 1,
+      "total_additions": 1
+    }
+  ]
 }

@@ -38,8 +38,27 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "prompt.md",
+      "before": "# Working set\n\nsrc/frontend/components/ExecuteButton.jsx:\n```\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../stores/executionResult';\n\nconst ExecuteButton = () => {\n  const handleExecuteChange = async () => {\n    const change = await navigator.clipboard.readText();\n    const response = await executeChange(change);\n    setExecutionResult(response.message);\n    console.log(response.message);\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-orange-300 text-white rounded\" onClick={handleExecuteChange}>Paste & Execute Change</button>\n  );\n};\n\nexport default ExecuteButton;\n\n```\n\n\nRequirements:\n\nThe field to use is called output, not message\n\n\n",
+      "after": "# Working set\n\nsrc/frontend/components/ExecutionResultDisplay.jsx:\n```\nimport { onMount, createEffect } from 'solid-js';\nimport { Terminal } from 'xterm';\nimport 'xterm/css/xterm.css';\nimport { executionResult } from '../stores/executionResult';\n\nconst ExecutionResultDisplay = () => {\n  let container;\n  let term;\n\n  onMount(() => {\n    term = new Terminal();\n    term.open(container);\n  });\n\n  createEffect(() => {\n    if (term) {\n      term.write(executionResult());\n    }\n  });\n\n  return (\n    <div ref={container} class=\"w-64 px-4 py-4 bg-gray-300 text-black rounded\"></div>\n  );\n};\n\nexport default ExecutionResultDisplay;\n\n```\n\nsrc/frontend/components/PromptDescriptor.jsx:\n```\nimport { onMount, onCleanup } from 'solid-js';\nimport { fetchDescriptor } from '../service/fetchDescriptor';\nimport { useWebsocket } from '../service/useWebsocket';\nimport { promptDescriptor, setPromptDescriptor } from '../stores/promptDescriptor';\n\nconst PromptDescriptor = () => {\n\n  onMount(async () => {\n    const text = await fetchDescriptor();\n    setPromptDescriptor(text);\n  });\n\n  useWebsocket(async (e) => {\n    if (e.data === 'update') {\n      const text = await fetchDescriptor();\n      setPromptDescriptor(text);\n    }\n  });\n\n  onCleanup(() => {\n    setPromptDescriptor('');\n  });\n\n  return (\n    <div class=\"overflow-auto max-w-full\">\n      <div class=\"whitespace-pre-wrap overflow-x-scroll overflow-y-auto font-mono\">\n        {promptDescriptor()}\n      </div>\n    </div>\n  );\n};\n\nexport default PromptDescriptor;\n\n```\n\n\nRequirements:\n\nStyle the terminal using tailwind to have the same width as the prompt descriptor Remove its fixed width setting\n\n\n",
+      "total_deletions": 13,
+      "total_additions": 60
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/components/ExecutionResultDisplay.jsx\n  - src/frontend/stores/executionResult.js\nrequirements: >\n  Install and use xterm.js in ExecutionResultDisplay to display the execution\n  result.\n\n  This is a Solidjs project.\nos: OSX",
+      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/ExecutionResultDisplay.jsx\n  - src/frontend/components/PromptDescriptor.jsx\nrequirements: >\n  Style the terminal using tailwind to have the same width as the prompt descriptor\n  Remove its fixed width setting\nos: OSX",
+      "total_deletions": 7,
+      "total_additions": 3
+    },
+    {
+      "filename": "src/frontend/components/ExecutionResultDisplay.jsx",
+      "before": "\n  createEffect(() => {\n    if (term) {\n      term.write(executionResult());\n    }\n  });\n\n  return (\n    <div ref={container} class=\"w-64 px-4 py-4 bg-gray-300 text-black rounded\"></div>\n  );\n};\n",
+      "after": "\n  createEffect(() => {\n    if (term) {\n term.write(executionResult());\n    }\n  });\n\n  return (\n    <div ref={container} class=\"px-4 py-4 bg-gray-300 text-black rounded overflow-auto max-w-full\"></div>\n  );\n};\n",
+      "total_deletions": 2,
+      "total_additions": 2
+    }
+  ]
 }
