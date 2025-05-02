@@ -38,8 +38,41 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "prompt/history/2023/09/12/13:47_Implement source display popup modifications/change.sh",
+      "before": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Implement source display popup modifications\"\necho \"Plan:\"\necho \"1. Modify the FullScreenPopup to have width 'w-full mx-2' and remove the 'close' label from the button.\"\necho \"2. In the SourceFileDisplay component, ensure that Prism highlights the loaded content after mounting.\"\n\n# Modify the FullScreenPopup.jsx\ncat > ./src/frontend/components/MultiSelect/FullScreenPopup.jsx << 'EOF'\nimport SourceFileDisplay from '../files/SourceFileDisplay';\n\nconst FullScreenPopup = (props) => {\n  return (\n    <div class=\"fixed top-0 left-0 w-full h-full z-50\" onClick={props.onClose}>\n      <div class=\"absolute inset-0 bg-black opacity-50\"></div>\n      <div class=\"absolute inset-0 flex justify-center items-center\">\n        <div class=\"bg-white w-full mx-2 h-3/4 rounded-lg overflow-y-auto\">\n          <div class=\"absolute top-4 right-4\" onClick={props.onClose}></div>\n          <SourceFileDisplay path={props.path} />\n        </div>\n      </div>\n    </div>\n  );\n};\n\nexport default FullScreenPopup;\nEOF\n\n# Modify the SourceFileDisplay.jsx\ncat > ./src/frontend/components/files/SourceFileDisplay.jsx << 'EOF'\nimport { createSignal, onMount } from 'solid-js';\nimport fileReadService from '../../service/files/fileReadService';\n\nconst SourceFileDisplay = (props) => {\n  const [fileContent, setFileContent] = createSignal('');\n\n  const getLanguageFromPath = (path) => {\n    const extension = path.split('.').pop().toLowerCase();\n    return extension;\n  };\n\n  const fetchData = async () => {\n    const data = await fileReadService(props.path);\n    setFileContent(data);\n\n    // Ensure Prism highlights the loaded content\n    if (window.Prism) {\n      window.Prism.highlightAll();\n    }\n  };\n\n  onMount(fetchData);\n\n  const language = getLanguageFromPath(props.path);\n\n  return (\n    <div class=\"rounded border w-full overflow-x-auto\">\n      <pre class=\"m-0\"><code class={`language-${language}`}>{fileContent()}</code></pre>\n    </div>\n  );\n};\n\nexport default SourceFileDisplay;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 0,
+      "total_additions": 66
+    },
+    {
+      "filename": "prompt/history/2023/09/12/13:47_Implement source display popup modifications/prompt.md",
+      "before": "",
+      "after": "You are AI Junior, you code like Donald Knuth.\n# Working set\n\n./src/frontend/components/MultiSelect/FullScreenPopup.jsx:\n```\nimport SourceFileDisplay from '../files/SourceFileDisplay';\n\nconst FullScreenPopup = (props) => {\n  return (\n    <div class=\"fixed top-0 left-0 w-full h-full z-50\" onClick={props.onClose}>\n      <div class=\"absolute inset-0 bg-black opacity-50\"></div>\n      <div class=\"absolute inset-0 flex justify-center items-center\">\n        <div class=\"bg-white w-3/4 h-3/4 rounded-lg overflow-y-auto\">\n          <button class=\"absolute top-4 right-4\" onClick={props.onClose}>Close</button>\n          <SourceFileDisplay path={props.path} />\n        </div>\n      </div>\n    </div>\n  );\n};\n\nexport default FullScreenPopup;\n\n```\n\n./src/frontend/components/files/SourceFileDisplay.jsx:\n```\nimport { createSignal, onMount } from 'solid-js';\nimport fileReadService from '../../service/files/fileReadService';\n\nconst SourceFileDisplay = (props) => {\n  const [fileContent, setFileContent] = createSignal('');\n\n  const getLanguageFromPath = (path) => {\n    const extension = path.split('.').pop().toLowerCase();\n    return extension;\n  };\n\n  const fetchData = async () => {\n    const data = await fileReadService(props.path);\n    setFileContent(data);\n  };\n\n  onMount(fetchData);\n\n  const language = getLanguageFromPath(props.path);\n\n  return (\n    <div class=\"rounded border w-full overflow-x-auto\">\n      <pre class=\"m-0\"><code class={`language-${language}`}>{fileContent()}</code></pre>\n    </div>\n  );\n};\n\nexport default SourceFileDisplay;\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\n1. Make the source display popup w-full mx-2 (it should remain h-3/4)\n2. Remove the \"close\" label, it should just close on any click.\n3. Prism is not running on newly created source viewers. Do we need to call something on mount? (Prism is loaded from a cdn in the html)\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n\n",
+      "total_deletions": 0,
+      "total_additions": 122
+    },
+    {
+      "filename": "prompt/history/2023/09/12/13:47_Implement source display popup modifications/prompt.yaml",
+      "before": "",
+      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/MultiSelect/FullScreenPopup.jsx\n  - ./src/frontend/components/files/SourceFileDisplay.jsx\nrequirements: >-\n  1. Make the source display popup w-full mx-2 (it should remain h-3/4)\n\n  2. Remove the \"close\" label, it should just close on any click.\n\n  3. Prism is not running on newly created source viewers. Do we need to call\n  something on mount? (Prism is loaded from a cdn in the html)\nos: OSX",
+      "total_deletions": 0,
+      "total_additions": 12
+    },
+    {
+      "filename": "src/frontend/components/MultiSelect/FullScreenPopup.jsx",
+      "before": "    <div class=\"fixed top-0 left-0 w-full h-full z-50\" onClick={props.onClose}>\n      <div class=\"absolute inset-0 bg-black opacity-50\"></div>\n      <div class=\"absolute inset-0 flex justify-center items-center\">\n        <div class=\"bg-white w-3/4 h-3/4 rounded-lg overflow-y-auto\">\n          <button class=\"absolute top-4 right-4\" onClick={props.onClose}>Close</button>\n          <SourceFileDisplay path={props.path} />\n        </div>\n      </div>",
+      "after": "    <div class=\"fixed top-0 left-0 w-full h-full z-50\" onClick={props.onClose}>\n      <div class=\"absolute inset-0 bg-black opacity-50\"></div>\n      <div class=\"absolute inset-0 flex justify-center items-center\">\n        <div class=\"bg-white w-full mx-2 h-3/4 rounded-lg overflow-y-auto\">\n          <div class=\"absolute top-4 right-4\" onClick={props.onClose}></div>\n          <SourceFileDisplay path={props.path} />\n        </div>\n      </div>",
+      "total_deletions": 2,
+      "total_additions": 2
+    },
+    {
+      "filename": "src/frontend/components/files/SourceFileDisplay.jsx",
+      "before": "  const fetchData = async () => {\n    const data = await fileReadService(props.path);\n    setFileContent(data);\n  };\n\n  onMount(fetchData);",
+      "after": "  const fetchData = async () => {\n    const data = await fileReadService(props.path);\n    setFileContent(data);\n\n    // Ensure Prism highlights the loaded content\n    if (window.Prism) {\n      window.Prism.highlightAll();\n    }\n  };\n\n  onMount(fetchData);",
+      "total_deletions": 0,
+      "total_additions": 5
+    }
+  ]
 }

@@ -227,8 +227,13 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "cuemaker2.py",
+      "before": "",
+      "after": "import os\nimport glob\nimport subprocess\nimport re\nimport argparse\n\ndef pad_number(number, length=2, padding=\"0\"):\n    str_number = str(number)\n    if len(str_number) < length:\n        str_number = padding + str_number\n    return str_number\n\ndef make_cue_tracks(inp, pattern=\"(\\[)?((\\\\d{1,2}):)?(\\\\d{1,2}):(\\\\d{1,2})(\\])? (.*)\",\n                    hr=2, m=3, s=4, title=6, artist=None):\n\n    matcher = re.compile(pattern)\n    output = \"\"\n    lines = inp.strip(\"\\n\").split(\"\\n\")\n    if len(lines) > 999:\n        raise ValueError(\"A cue sheet cannot contain more than 999 tracks!\")\n\n    for line in range(len(lines)):\n        lines[line] = lines[line].strip()\n        str_track = pad_number(line + 1)\n\n        match = matcher.match(lines[line])\n        groups = list(match.groups())\n\n        if groups[hr] is None:\n            groups[hr] = \"00\"\n\n        output += f\"\\n    TRACK {str_track} AUDIO\\n\"\n        output += f\"        TITLE \\\"{groups[title]}\\\"\\n\"\n        if isinstance(artist, int):\n            output += f\"        PERFORMER {groups[artist]}\\n\"\n        output += f\"        INDEX 01 {pad_number(int(groups[hr]) * 60 + int(groups[m]))}:{pad_number(groups[s])}:00\"\n\n    return output\n\ndef make_cue(inp, performer, album, filename, ext, rems={}, *args, **kwargs):\n    output = f\"PERFORMER \\\"{performer}\\\"\\nTITLE \\\"{album}\\\"\\n\"\n\n    for key, item in rems.items():\n        output += f\"REM {key} {item}\\n\"\n\n    output += f\"FILE \\\"{filename}.{ext}\\\" WAVE\"\n    output += make_cue_tracks(inp, *args, **kwargs)\n    output += \"\\n\"\n    return output\n\ndef read_description(path):\n    with open(path, \"r\") as f:\n        description = f.read()\n    return description\n\ndef save_cue(path, data):\n    with open(path, \"w\") as f:\n        f.write(data)\n\ndef generate_cue_files(directory, album, performer, ext=\"m4a\"):\n    current_directory = os.getcwd()\n    search_pattern = os.path.join(current_directory, \"**\", f\"*.{ext}\")\n    files = glob.glob(search_pattern, recursive=True)\n\n    for file in files:\n        txt_file = os.path.splitext(os.path.basename(file))[0] + \".txt\"\n        txt_file_path = os.path.join(current_directory, txt_file)\n        if os.path.exists(txt_file_path):\n            filename = os.path.splitext(os.path.basename(file))[0]\n            description = read_description(txt_file_path)\n            output = make_cue(description, performer, album, filename, ext)\n            cue_file_path = os.path.join(current_directory, f\"{filename}.cue\")\n            save_cue(cue_file_path, output)\n            print(f\"Generated CUE file: {cue_file_path}\")\n\n    print(\"Done!\")\n\nif __name__ == \"__main__\":\n    parser = argparse.ArgumentParser()\n    parser.add_argument(\"--ext\", default=\"m4a\", help=\"Extension of your audio file. Defaults to \\\"m4a\\\"\")\n    args = parser.parse_args()\n\n    album = \"Album Name\"\n    performer = \"Performer Name\"\n\n    generate_cue_files(os.getcwd(), album, performer, args.ext)",
+      "total_deletions": 0,
+      "total_additions": 86
+    }
+  ]
 }

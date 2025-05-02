@@ -55,8 +55,13 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "Vagrantfile",
+      "before": "VAGRANTFILE_API_VERSION = \"2\"\n\nVagrant.configure(VAGRANTFILE_API_VERSION) do |config|\n  # General Vagrant VM configuration.\n  config.vm.box = \"geerlingguy/rockylinux8\"\n  config.ssh.insert_key = false\n  config.vm.synced_folder \".\", \"/vagrant\", disabled: true\n    v.linked_clone = true\n  end\n\n  # Observer servers.\n  config.vm.define \"padok-observer\" do |observer|\n    observer.vm.hostname = \"padok-observer.test\"",
+      "after": "VAGRANTFILE_API_VERSION = \"2\"\n\nVagrant.configure(VAGRANTFILE_API_VERSION) do |config|\n  # General Vagrant Linux VM configuration.\n  config.vm.box = \"geerlingguy/rockylinux8\"\n  config.ssh.insert_key = false\n  config.vm.synced_folder \".\", \"/vagrant\", disabled: true\n    v.linked_clone = true\n  end\n\nVagrant.configure(VAGRANTFILE_API_VERSION) do |config|\n  # General Vagrant Windows VM configuration.\n  config.vm.box = \"gusztavvargadr/windows-server-core\"\n  config.vm.communicator = \"winrm\"\n  # config.winrm.username = \"your_windows_username\"\n  # config.winrm.password = \"your_windows_password\"\n  config.vm.synced_folder \".\", \"/vagrant\", disabled: true\n  config.vm.provider :virtualbox do |v|\n    v.memory = 1024\n    v.cpus = 2\n    v.linked_clone = true\n  end\nend\n\n  # Observer servers.\n  config.vm.define \"padok-observer\" do |observer|\n    observer.vm.hostname = \"padok-observer.test\"",
+      "total_deletions": 1,
+      "total_additions": 15
+    }
+  ]
 }

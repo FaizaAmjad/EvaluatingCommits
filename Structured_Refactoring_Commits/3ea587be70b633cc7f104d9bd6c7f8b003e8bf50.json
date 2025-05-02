@@ -62,8 +62,34 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "prompt/history/2023/10/02/13:21_Remove bracketed paste control chars from terminal/change.sh",
+      "before": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Remove bracketed paste control chars from terminal\"\necho \"Plan:\"\necho \"1. Update prependAndExtractLastLine.js to use a more encompassing regex for removing control characters\"\ncat > ./src/frontend/components/terminal/prependAndExtractLastLine.js << 'EOF'\nexport function prependAndExtractLastLine(lastLine, currentData) {\n  const combinedData = `${lastLine}${currentData}`;\n  const cleanedData = combinedData\n    .replace(/\\x1B(\\[\\?2004[h|l]|\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?)/g, '');\n\n  const lines = cleanedData.split(/\\r(?!\\n)|\\n/);\n\n  return getValidLastLine(lines);\n}\n\nfunction getValidLastLine(lines) {\n  if (lines.length === 0) return '';\n\n  const lastLine = lines[lines.length - 1].trim();\n  if (lastLine === '' || lastLine.endsWith('$') || lastLine.endsWith('%')) {\n    return getValidLastLine(lines.slice(0, -1));\n  }\n  \n  return lastLine;\n}\nEOF\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 0,
+      "total_additions": 28
+    },
+    {
+      "filename": "prompt/history/2023/10/02/13:21_Remove bracketed paste control chars from terminal/prompt.md",
+      "before": "",
+      "after": "You are AI Junior, you code like Donald Knuth.\n\n# Working set\n\n./src/frontend/components/terminal/TerminalSummary.jsx:\n```\nimport { createEffect, createSignal } from 'solid-js';\nimport { prependAndExtractLastLine } from './prependAndExtractLastLine';\n\nexport function TerminalSummary(props) {\n  const [lastLineSignal, setLastLineSignal] = createSignal(\"\");\n  let localLastLine = \"\";\n\n  createEffect(() => {\n    localLastLine = prependAndExtractLastLine(localLastLine, props.lastWritten);\n    if (localLastLine !== \"\") {\n      setLastLineSignal(localLastLine);\n    }\n  });\n\n  return <span>{lastLineSignal()}</span>;\n}\n\n```\n./src/frontend/components/terminal/prependAndExtractLastLine.js:\n```\nexport function prependAndExtractLastLine(lastLine, currentData) {\n  const combinedData = `${lastLine}${currentData}`;\n  const cleanedData = combinedData.replace(/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?/g, '');\n\n  const lines = cleanedData.split(/\\r(?!\\n)|\\n/);\n\n  return getValidLastLine(lines);\n}\n\nfunction getValidLastLine(lines) {\n  if (lines.length === 0) return '';\n\n  const lastLine = lines[lines.length - 1].trim();\n  if (lastLine === '' || lastLine.endsWith('$') || lastLine.endsWith('%')) {\n    return getValidLastLine(lines.slice(0, -1));\n  }\n  \n  return lastLine;\n}\n\n```\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nAlso remove bracketed paste control characters from the terminal summary, e.g.  ^[[2004h and ^[[2004l \n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*! eg.: in createGitRepo.js: export function createGitRepo ( ....\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\nWrite concise, self-documenting and idiomatic ES6 code!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nBefore your solution, write a short, very concise readme about the working set, your task, and most importantly its challanges, if any.\n\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n",
+      "total_deletions": 0,
+      "total_additions": 111
+    },
+    {
+      "filename": "prompt/history/2023/10/02/13:21_Remove bracketed paste control chars from terminal/prompt.yaml",
+      "before": "",
+      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/terminal/TerminalSummary.jsx\n  - ./src/frontend/components/terminal/prependAndExtractLastLine.js\nrequirements: >-\n  Also remove bracketed paste control characters from the terminal summary,\n  e.g.  ^[[2004h and ^[[2004l \nos: OSX",
+      "total_deletions": 0,
+      "total_additions": 8
+    },
+    {
+      "filename": "src/frontend/components/terminal/prependAndExtractLastLine.js",
+      "before": "export function prependAndExtractLastLine(lastLine, currentData) {\n  const combinedData = `${lastLine}${currentData}`;\n  const cleanedData = combinedData.replace(/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?/g, '');\n\n  const lines = cleanedData.split(/\\r(?!\\n)|\\n/);\n",
+      "after": "export function prependAndExtractLastLine(lastLine, currentData) {\n  const combinedData = `${lastLine}${currentData}`;\n  const cleanedData = combinedData\n    .replace(/\\x1B(\\[\\?2004[h|l]|\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?)/g, '');\n\n  const lines = cleanedData.split(/\\r(?!\\n)|\\n/);\n",
+      "total_deletions": 1,
+      "total_additions": 2
+    }
+  ]
 }

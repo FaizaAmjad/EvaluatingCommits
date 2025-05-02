@@ -62,8 +62,41 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "prompt/history/2023/10/02/12:14_Refine TerminalSummary: Improved cleaning of control sequences/change.sh",
+      "before": "",
+      "after": "#!/bin/sh\nset -e\n\ngoal=\"Refine TerminalSummary: Improved cleaning of control sequences\"\necho \"Plan:\"\necho \"1. Update the cleaning method to remove ANSI escape codes.\"\necho \"2. Reapply the logic in TerminalSummary with the updated cleaning method.\"\n\n# 1. Update the prependAndExtractLastLine function to remove ANSI escape codes\ncat > ./src/frontend/components/terminal/prependAndExtractLastLine.js << 'EOF'\nexport function prependAndExtractLastLine(lastLine, currentData) {\n  const combinedData = `${lastLine}${currentData}`;\n  // Remove ANSI escape codes\n  const cleanedData = combinedData.replace(/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?/g, '');\n  const lines = cleanedData.split('\\n');\n  return lines[lines.length - 1];\n}\nEOF\n\n# 2. Reapply the logic in TerminalSummary component\ncat > ./src/frontend/components/terminal/TerminalSummary.jsx << 'EOF'\nimport { createEffect, createSignal } from 'solid-js';\nimport { prependAndExtractLastLine } from './prependAndExtractLastLine';\n\nexport function TerminalSummary(props) {\n  const [lastLineSignal, setLastLineSignal] = createSignal(\"\");\n  let localLastLine = \"\";\n\n  createEffect(() => {\n    localLastLine = prependAndExtractLastLine(localLastLine, props.lastWritten);\n    setLastLineSignal(localLastLine);\n  });\n\n  return <span>{lastLineSignal()}</span>;\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 0,
+      "total_additions": 38
+    },
+    {
+      "filename": "prompt/history/2023/10/02/12:14_Refine TerminalSummary: Improved cleaning of control sequences/prompt.md",
+      "before": "",
+      "after": "You are AI Junior, you code like Donald Knuth.\n\n# Working set\n\n./src/frontend/components/terminal/TerminalSummary.jsx:\n```\nimport { createEffect, createSignal } from 'solid-js';\n\nfunction extractLastLine(data) {\n  const lines = data.split('\\n');\n  return lines[lines.length - 1];\n}\n\nexport function TerminalSummary(props) {\n  const [lastLine, setLastLine] = createSignal(\"\");\n\n  createEffect(() => {\n    setLastLine(extractLastLine(props.lastWritten));\n  });\n\n  return <span>{lastLine()}</span>;\n}\n\n```\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\n- To handle multiple writes on the same line, TerminalSummary should prepend the last line to the current write before splitting it.\n- Delete every control character before rendering\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*! eg.: in createGitRepo.js: export function createGitRepo ( ....\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\nWrite concise, self-documenting and idiomatic ES6 code!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nBefore your solution, write a short, very concise readme about the working set, your task, and most importantly its challanges, if any.\n\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n",
+      "total_deletions": 0,
+      "total_additions": 89
+    },
+    {
+      "filename": "prompt/history/2023/10/02/12:14_Refine TerminalSummary: Improved cleaning of control sequences/prompt.yaml",
+      "before": "",
+      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/terminal/TerminalSummary.jsx\nrequirements: >-\n  - To handle multiple writes on the same line, TerminalSummary should prepend\n  the last line to the current write before splitting it.\n\n  - Delete every control character before rendering\nos: OSX",
+      "total_deletions": 0,
+      "total_additions": 9
+    },
+    {
+      "filename": "src/frontend/components/terminal/TerminalSummary.jsx",
+      "before": "import { createEffect, createSignal } from 'solid-js';\n\nfunction extractLastLine(data) {\n  const lines = data.split('\\n');\n  return lines[lines.length - 1];\n}\n\nexport function TerminalSummary(props) {\n  const [lastLine, setLastLine] = createSignal(\"\");\n\n  createEffect(() => {\n    setLastLine(extractLastLine(props.lastWritten));\n  });\n\n  return <span>{lastLine()}</span>;\n}",
+      "after": "import { createEffect, createSignal } from 'solid-js';\nimport { prependAndExtractLastLine } from './prependAndExtractLastLine';\n\nexport function TerminalSummary(props) {\n  const [lastLineSignal, setLastLineSignal] = createSignal(\"\");\n  let localLastLine = \"\";\n\n  createEffect(() => {\n    localLastLine = prependAndExtractLastLine(localLastLine, props.lastWritten);\n    setLastLineSignal(localLastLine);\n  });\n\n  return <span>{lastLineSignal()}</span>;\n}",
+      "total_deletions": 8,
+      "total_additions": 6
+    },
+    {
+      "filename": "src/frontend/components/terminal/prependAndExtractLastLine.js",
+      "before": "",
+      "after": "export function prependAndExtractLastLine(lastLine, currentData) {\n  const combinedData = `${lastLine}${currentData}`;\n  // Remove ANSI escape codes\n  const cleanedData = combinedData.replace(/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?/g, '');\n  const lines = cleanedData.split('\\n');\n  return lines[lines.length - 1];\n}",
+      "total_deletions": 0,
+      "total_additions": 7
+    }
+  ]
 }

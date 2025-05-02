@@ -38,8 +38,34 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Remove try-catch block in readAttention.js\"\necho \"Plan:\"\necho \"1. Modify readAttention.js to remove the try-catch, allowing errors to propagate\"\ncat << 'EOF' > src/attention/readAttention.js\nimport { processFile } from './processFile.js';\nimport { processInterfaceSection } from './processInterfaceSection.js';\nimport { printFolderStructure } from './printFolderStructure.js';\n\nexport const readAttention = async (attentionArray = [], attentionRootDir = '.') => {\n  if (!attentionArray) {\n    return [];\n  }\n  const processedLines = await Promise.all(attentionArray.map(line => {\n    const trimmedLine = line.trim();\n    if (trimmedLine.endsWith(' iface')) {\n      const filePath = trimmedLine.slice(0, -6).trim();\n      return processInterfaceSection(attentionRootDir, filePath);\n    } else if (trimmedLine.endsWith('/')) {\n      return printFolderStructure(attentionRootDir, trimmedLine.slice(0, -1).trim());\n    } else {\n      return processFile(attentionRootDir, trimmedLine);\n    }\n  }));\n  return processedLines;\n};\nEOF\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Remove try-catch, allow errors out in processFile\"\necho \"Plan:\"\necho \"1. Remove the try-catch block from src/attention/processFile.js\"\necho \"2. Simplify the function accordingly\"\n\ncat << 'EOF' > src/attention/processFile.js\nimport fs from 'fs'\nimport path from 'path'\nimport util from 'util'\n\nconst readFile = util.promisify(fs.readFile)\n\nexport const processFile = async (root, p) => {\n  const fullPath = path.join(root, p)\n  const content = await readFile(fullPath, \"utf8\")\n  return `${p}:\\n\\`\\`\\`\\n${content}\\n\\`\\`\\`\\n`\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 23,
+      "total_additions": 16
+    },
+    {
+      "filename": "prompt.md",
+      "before": "\n# Working set\n\nsrc/attention/readAttention.js:\n```\nimport { processFile } from './processFile.js';\nimport { processInterfaceSection } from './processInterfaceSection.js';\nimport { printFolderStructure } from './printFolderStructure.js';\n\nexport const readAttention = async (attentionArray = [], attentionRootDir = '.') => {\n  try {\n    if (!attentionArray) {\n      return [];\n    }\n    const processedLines = await Promise.all(attentionArray.map(line => {\n      const trimmedLine = line.trim();\n      if (trimmedLine.endsWith(' iface')) {\n        const filePath = trimmedLine.slice(0, -6).trim();\n        return processInterfaceSection(attentionRootDir, filePath);\n      } else if (trimmedLine.endsWith('/')) {\n        return printFolderStructure(attentionRootDir, trimmedLine.slice(0, -1).trim());\n      } else {\n        return processFile(attentionRootDir, trimmedLine);\n      }\n    }));\n    return processedLines;\n  } catch (error) {\n    console.warn(error);\n    throw new Error(\"Error processing attention lines!\");\n  }\n};\n\n```\n",
+      "after": "\n# Working set\n\nsrc/attention/processFile.js:\n```\nimport fs from 'fs'\nimport path from 'path'\nimport util from 'util'\n\nconst readFile = util.promisify(fs.readFile)\n\nexport const processFile = async (root, p) => {\n  const fullPath = path.join(root, p)\n  try {\n    const content = await readFile(fullPath, \"utf8\")\n    return `${p}:\\n\\`\\`\\`\\n${content}\\n\\`\\`\\`\\n`\n  } catch (error) {\n    return `${p}: err!\\n`\n  }\n}\n\n```\n",
+      "total_deletions": 23,
+      "total_additions": 12
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/attention/readAttention.js\nrequirements: |\n  Remove the try-catch, allow errors out!\nos: OSX",
+      "after": "task: prompt/task/bug/fix.md\nattention:\n  - src/attention/processFile.js\nrequirements: |\n  Remove the try-catch, allow errors out!\nos: OSX",
+      "total_deletions": 1,
+      "total_additions": 1
+    },
+    {
+      "filename": "src/attention/processFile.js",
+      "before": "\nexport const processFile = async (root, p) => {\n  const fullPath = path.join(root, p)\n  try {\n    const content = await readFile(fullPath, \"utf8\")\n    return `${p}:\\n\\`\\`\\`\\n${content}\\n\\`\\`\\`\\n`\n  } catch (error) {\n    return `${p}: err!\\n`\n  }\n}",
+      "after": "\nexport const processFile = async (root, p) => {\n  const fullPath = path.join(root, p)\n  const content = await readFile(fullPath, \"utf8\")\n  return `${p}:\\n\\`\\`\\`\\n${content}\\n\\`\\`\\`\\n`\n}",
+      "total_deletions": 6,
+      "total_additions": 2
+    }
+  ]
 }

@@ -38,8 +38,13 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "index.js",
+      "before": "   for(let i = 0; i < (squareSideSize ** 2); i++) {\n      const singleSquareDiv = document.createElement('div');\n      singleSquareDiv.classList.add('single-square-div');\n      singleSquareDiv.style.flexBasis = `${(theGridItself.clientWidth - 1) / squareSideSize}px`\n      theGridItself.appendChild(singleSquareDiv);\n   }\n}",
+      "after": "   for(let i = 0; i < (squareSideSize ** 2); i++) {\n      const singleSquareDiv = document.createElement('div');\n      singleSquareDiv.classList.add('single-square-div');\n      singleSquareDiv.style.flexBasis = `calc(100% / ${squareSideSize})`;\n      theGridItself.appendChild(singleSquareDiv);\n   }\n}",
+      "total_deletions": 1,
+      "total_additions": 1
+    }
+  ]
 }

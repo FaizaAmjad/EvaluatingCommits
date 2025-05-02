@@ -86,8 +86,13 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "src/backend/updateTaskHandler.js",
+      "before": "",
+      "after": "import { readFile, writeFile } from 'fs/promises';\nimport path from 'path';\nimport yaml from 'js-yaml';\n\nimport { fileURLToPath } from 'url';\nimport { dirname } from 'path';\n\nconst __filename = fileURLToPath(import.meta.url);\nconst __dirname = dirname(__filename);\n\nexport const updateTaskHandler = async (req, res) => {\n  const task = req.body.task;\n  const filePath = path.resolve(__dirname, '../../prompt.yaml');\n\n  try {\n    const fileContent = await readFile(filePath, 'utf-8');\n    const document = yaml.load(fileContent);\n\n    // assuming 'task' is a field in the yaml document\n    document.task = task;\n\n    const newYamlStr = yaml.dump(document);\n    await writeFile(filePath, newYamlStr, 'utf-8');\n    \n    res.status(200).json({ message: \"Task updated successfully\" });\n  } catch (error) {\n    console.log(error);\n    res.status(500).json({ message: \"Internal server error\" });\n  }\n};",
+      "total_deletions": 0,
+      "total_additions": 30
+    }
+  ]
 }
