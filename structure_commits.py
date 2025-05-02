@@ -48,13 +48,13 @@ for commit in data:
                 "model": sharing.get("Model"),
                 "conversations": []
             },
-             "code": {
+             "code": [{
                 "filename": "",
                 "before": "",  # PLACEHOLDER- ADJUST LATER
                 "after": "" ,   # PLACEHOLDER- ADJUST LATER
                 "total_deletions": 0,
                 "total_additions": 0,
-            }
+            }]
         }
 
         # Loop through each conversation related to the commit
