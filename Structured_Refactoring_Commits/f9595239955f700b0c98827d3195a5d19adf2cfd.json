@@ -50,8 +50,34 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": ".gitignore",
+      "before": "secret.sh\nnode_modules/\ntmp/\nprompt.yaml\nprompt.md\nchange.sh\n",
+      "after": "/secret.sh\n/node_modules/\n/tmp/\n/prompt.yaml\n/prompt.md\n/change.sh",
+      "total_deletions": 6,
+      "total_additions": 6
+    },
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Unregister key event listener on unmount\"\necho \"Plan:\"\necho \"1. Modify the App.jsx to utilize SolidJS lifecycle methods.\"\necho \"2. Adjust the useKeyBindings hook to return the unregister function.\"\necho \"3. Use the returned function in App.jsx to unregister the key event listener on component unmount.\"\n\n# 1. Modify the App.jsx to utilize SolidJS lifecycle methods.\ncat > src/frontend/App.jsx << 'EOF'\nimport { onCleanup } from 'solid-js';\nimport useKeyBindings from './service/useKeyBindings';\nimport keyBindings from './config/keyBindings';\nimport NavBar from './components/NavBar';\nimport PromptCreation from './components/PromptCreation';\nimport ChangeExecution from './components/ChangeExecution';\nimport ChangeInspection from './components/ChangeInspection';\nimport ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  const bindings = keyBindings();\n  const unregister = useKeyBindings(bindings);\n\n  onCleanup(unregister); \n\n  return (\n    <div class=\"bg-main min-h-screen max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 px-2 sm:px-4 xs:px-4 pb-8\">\n      <NavBar />\n      <PromptCreation />\n      <ChangeExecution />\n      <ChangeInspection />\n      <ChangeFinalization />\n    </div>\n  );\n};\n\nexport default App;\nEOF\n\n# 2. Adjust the useKeyBindings hook to return the unregister function.\n# (No changes needed as the current useKeyBindings.js already returns the unregister function)\n\n# 3. Use the returned function in App.jsx to unregister the key event listener on component unmount.\n# (Already handled in the modifications to App.jsx)\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "",
+      "total_deletions": 46,
+      "total_additions": 0
+    },
+    {
+      "filename": "prompt.md",
+      "before": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\nsrc/frontend/App.jsx:\n```\nimport useKeyBindings from './service/useKeyBindings';\nimport keyBindings from './config/keyBindings';\nimport NavBar from './components/NavBar';\nimport PromptCreation from './components/PromptCreation';\nimport ChangeExecution from './components/ChangeExecution';\nimport ChangeInspection from './components/ChangeInspection';\nimport ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  const bindings = keyBindings();\n  useKeyBindings(bindings);\n\n  return (\n    <div class=\"bg-main min-h-screen max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 px-2 sm:px-4 xs:px-4 pb-8\">\n      <NavBar />\n      <PromptCreation />\n      <ChangeExecution />\n      <ChangeInspection />\n      <ChangeFinalization />\n    </div>\n  );\n};\n\nexport default App;\n\n```\n\nsrc/frontend/service/useKeyBindings.js:\n```\nconst useKeyBindings = (bindings) => {\n  const handler = (e) => {\n    // Ignore bindings if target is input or textarea\n    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {\n      return;\n    }\n    const action = bindings[e.key.toUpperCase()];\n    if (action) {\n      action(e);\n    }\n  };\n\n  window.addEventListener('keydown', handler);\n\n  return () => {\n    window.removeEventListener('keydown', handler);\n  };\n};\n\nexport default useKeyBindings;\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nUnregister the key event listener when the app is unmounted\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx file accordingly!\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n",
+      "after": "",
+      "total_deletions": 109,
+      "total_additions": 0
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/service/useKeyBindings.js\nrequirements: Unregister the key event listener when the app is unmounted\nos: OSX",
+      "after": "",
+      "total_deletions": 6,
+      "total_additions": 0
+    }
+  ]
 }

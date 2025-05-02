@@ -38,8 +38,69 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "docs/README.md",
+      "before": "\n*\"Video: Junior codes itself\"*\n\nJunior is an **AI-first IDE** designed to utilize the capabilities of language models. Much like how Linus Torvalds oversees Linux Kernel development, Junior provides a space for developers to collaborate directly with AI throughout the development process.\n\nEmbracing a design philosophy of being simple, configurable and auditable, Junior aims to join the ranks of influential tools such as git and LISP in terms of its contribution to software development.\n\nWith a structured task descriptor and by spotlighting relevant parts of your project, you can delegate tasks such as code implementation, documentation, testing, and more, to Junior.\n\nFor questions or assistance, please raise an issue in our GitHub repository.\n\n**Note:** We've tested Junior primarily with the GPT-4 model. However, you're welcome to experiment with similarly capable models and share your findings. It's not compatible with GPT-3.5.\n",
+      "after": "\n*\"Video: Junior codes itself\"*\n\nJunior is an **AI-first IDE** targeting craftsmen, professional programmers who enjoy customizing and fine-tuning their tools. Embracing a design philosophy of being simple, configurable, and auditable, Junior offers a unique space where developers can work hand-in-hand with AI throughout the development process.\n\nWith a structured task descriptor and by spotlighting relevant parts of your project, you can delegate tasks such as code implementation, documentation, testing, and more, to Junior.\n\nFor questions or assistance, please raise an issue in our GitHub repository.\n\n**Note:** We've tested Junior primarily with the GPT-4 model. However, you're welcome to experiment with similarly capable models and share your findings. It's not compatible with GPT-3.5.\n",
+      "total_deletions": 4,
+      "total_additions": 1
+    },
+    {
+      "filename": "docs/README.md.backup",
+      "before": "Warn: This README is AI generated, just like all the source files of this project.\n\n# Junior - Your AI contributor which codes itself.\n\n[![Video: Junior codes itself](/assets/video_cover.jpg)](https://youtu.be/NL4uFJSvfW0)\n\n*\"Video: Junior codes itself\"*\n## Description\n\nJunior is an AI-first IDE designed from the ground up to leverage language models. This project allows developers to communicate with the AI and supervise the development process.\n\nIsn't that already possible with ChatGPT? No, LLMs have very limited \"working memory\", so it is not possible to directly work with them on large codebases.\n\nBy providing specific task details in a prompt descriptor and highlighting the relevant parts of your project, you can delegate code implementation, documentation, testing, and more to your AI Junior.\n\n## Getting Started\n\nFor more details on getting started, please refer to [usage.md](usage.md).\n\n## Contributing and Support\n\nContributions are welcome! Remember, we eat our own dog food in this project. Junior is designed to write itself. Your main role will be to oversee the work, provide detailed prompts, and review the outcomes.\n\nFor support, please create an issue in the GitHub repository.\n\n**Note:** For meaningful results, it's recommended to use the GPT-4 model or a more recent version.",
+      "after": "",
+      "total_deletions": 26,
+      "total_additions": 0
+    },
+    {
+      "filename": "docs/_sidebar_backup.md",
+      "before": "* [Junior Docs](./README.md)\n* [Usage](./usage.md)\n* [Web](./web.md)\n* [Prompt Descriptor](./descriptor.md)\n* [Roadmap](./roadmap.md)",
+      "after": "",
+      "total_deletions": 5,
+      "total_additions": 0
+    },
+    {
+      "filename": "prompt/history/2023/08/22/12:15_Improve the documentation/change.sh",
+      "before": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Improve the documentation\"\necho \"Plan:\"\necho \"1. Remove backup files from docs\"\necho \"2. Remove src/doc/ directory\"\necho \"3. Update README.md content\"\necho \"4. Confirm changes\"\n\n# 1. Remove backup files from docs\nrm docs/README.md.backup\nrm docs/_sidebar_backup.md\n\n# 2. Remove src/doc/ directory\nrm -rf src/doc/\n\n# 3. Update README.md content\ncat > docs/README.md <<'EOF'\nWarn: This README is AI generated, just like all the source files of this project.\n\n# Junior - Your AI-first IDE \n\n[![Video: Junior codes itself](/assets/video_cover.jpg)](https://youtu.be/NL4uFJSvfW0)\n\n*\"Video: Junior codes itself\"*\n\nJunior is an **AI-first IDE** targeting craftsmen, professional programmers who enjoy customizing and fine-tuning their tools. Embracing a design philosophy of being simple, configurable, and auditable, Junior offers a unique space where developers can work hand-in-hand with AI throughout the development process.\n\nWith a structured task descriptor and by spotlighting relevant parts of your project, you can delegate tasks such as code implementation, documentation, testing, and more, to Junior.\n\n## Getting Started\n\nFor guidance on using Junior, please refer to [usage.md](usage.md).\n\n## Contributing and Support\n\nYour contributions make a difference! At Junior, we value the collaboration of the community. Your role as a contributor is to monitor the development, provide detailed prompts, and thoroughly review the generated outcomes.\n\nFor questions or assistance, please raise an issue in our GitHub repository.\n\n**Note:** We've tested Junior primarily with the GPT-4 model. However, you're welcome to experiment with similarly capable models and share your findings. It's not compatible with GPT-3.5.\nEOF\n\n# 4. Confirm changes\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 0,
+      "total_additions": 45
+    },
+    {
+      "filename": "prompt/history/2023/08/22/12:15_Improve the documentation/prompt.md",
+      "before": "",
+      "after": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\n```\ndocs/\n\u251c\u2500\u2500 .nojekyll\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 README.md.backup\n\u251c\u2500\u2500 _sidebar.md\n\u251c\u2500\u2500 _sidebar_backup.md\n\u251c\u2500\u2500 assets/...\n\u251c\u2500\u2500 descriptor.md\n\u251c\u2500\u2500 docsifyConfig.js\n\u251c\u2500\u2500 index.html\n\u251c\u2500\u2500 roadmap.md\n\u251c\u2500\u2500 screenshot.png\n\u251c\u2500\u2500 usage.md\n\u251c\u2500\u2500 web.md\n\n```\n```\nsrc/\n\u251c\u2500\u2500 attention/...\n\u251c\u2500\u2500 backend/...\n\u251c\u2500\u2500 command/...\n\u251c\u2500\u2500 config.js\n\u251c\u2500\u2500 doc/...\n\u251c\u2500\u2500 execute/...\n\u251c\u2500\u2500 frontend/...\n\u251c\u2500\u2500 git/...\n\u251c\u2500\u2500 init.js\n\u251c\u2500\u2500 interactiveSession/...\n\u251c\u2500\u2500 llm/...\n\u251c\u2500\u2500 main.js\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 web.js\n\n```\ndocs/index.html:\n```\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Document</title>\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />\n  <meta name=\"description\" content=\"Description\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=1.0\">\n  <link rel=\"icon\" href=\"assets/favicon.ico\" type=\"image/x-icon\">\n  <link rel=\"stylesheet\" href=\"//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css\">\n  <link rel=\"stylesheet\" href=\"assets/styles.css\">\n</head>\n<body>\n  <div id=\"app\"></div>\n  <script src=\"docsifyConfig.js\"></script>\n  <!-- Docsify v4 -->\n  <script src=\"//cdn.jsdelivr.net/npm/docsify@4\"></script>\n</body>\n</html>\n\n```\n\ndocs/_sidebar.md:\n```\n* [Junior Docs](./README.md)\n* [Usage](./usage.md)\n* [Web](./web.md)\n* [Prompt Descriptor](./descriptor.md)\n* [Roadmap](./roadmap.md)\n\n```\n\ndocs/README.md:\n```\nWarn: This README is AI generated, just like all the source files of this project.\n\n# Junior - Your AI-first IDE \n\n[![Video: Junior codes itself](/assets/video_cover.jpg)](https://youtu.be/NL4uFJSvfW0)\n\n*\"Video: Junior codes itself\"*\n\nJunior is an **AI-first IDE** designed to utilize the capabilities of language models. Much like how Linus Torvalds oversees Linux Kernel development, Junior provides a space for developers to collaborate directly with AI throughout the development process.\n\nEmbracing a design philosophy of being simple, configurable and auditable, Junior aims to join the ranks of influential tools such as git and LISP in terms of its contribution to software development.\n\nWith a structured task descriptor and by spotlighting relevant parts of your project, you can delegate tasks such as code implementation, documentation, testing, and more, to Junior.\n\n## Getting Started\n\nFor guidance on using Junior, please refer to [usage.md](usage.md).\n\n## Contributing and Support\n\nYour contributions make a difference! At Junior, we value the collaboration of the community. Your role as a contributor is to monitor the development, provide detailed prompts, and thoroughly review the generated outcomes.\n\nFor questions or assistance, please raise an issue in our GitHub repository.\n\n**Note:** We've tested Junior primarily with the GPT-4 model. However, you're welcome to experiment with similarly capable models and share your findings. It's not compatible with GPT-3.5.\n\n\n```\n\n\n# Task\n\nImprove the documentation!\n\nremove files: docs/*backup*\nremove dir: src/doc/\nIn readme, instead of writing about lisp and git,\nwrite that Junior targets craftmans, aka professional programmers who like to tweak their tools. (Reword this)\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: Debian\n\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n",
+      "total_deletions": 0,
+      "total_additions": 146
+    },
+    {
+      "filename": "prompt/history/2023/08/22/12:15_Improve the documentation/prompt.yaml",
+      "before": "",
+      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/\n  - src/\n  - docs/index.html\n  - docs/_sidebar.md\n  - docs/README.md\nrequirements: |\n  remove files: docs/*backup*\n  remove dir: src/doc/\n  In readme, instead of writing about lisp and git,\n  write that Junior targets craftmans, aka professional programmers who like to tweak their tools. (Reword this)",
+      "total_deletions": 0,
+      "total_additions": 12
+    },
+    {
+      "filename": "src/doc/buildDoc.js",
+      "before": "import convertDirectory from './convertDirectory.js';\nimport createMarkdownRenderer from './createMarkdownRenderer.js';\n\nconst md = createMarkdownRenderer();\nconvertDirectory('./doc', md);",
+      "after": "",
+      "total_deletions": 5,
+      "total_additions": 0
+    },
+    {
+      "filename": "src/doc/convertDirectory.js",
+      "before": "import { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';\nimport { join, extname } from 'path';\nimport createMarkdownRenderer from './createMarkdownRenderer.js';\n\nexport default function convertDirectory(dir, md = createMarkdownRenderer()) {\n    const files = readdirSync(dir);\n    files.forEach(file => {\n        const filePath = join(dir, file);\n        const stats = statSync(filePath);\n        if (stats.isDirectory()) {\n            convertDirectory(filePath, md);\n        } else if (extname(file) === '.md') {\n            const markdown = readFileSync(filePath, 'utf8');\n            const html = md.render(markdown);\n            writeFileSync(filePath.replace('.md', '.html'), html);\n        }\n    });\n}",
+      "after": "",
+      "total_deletions": 18,
+      "total_additions": 0
+    },
+    {
+      "filename": "src/doc/createMarkdownRenderer.js",
+      "before": "import MarkdownIt from 'markdown-it';\nimport hljs from 'highlight.js';\n\nexport default function createMarkdownRenderer() {\n    return new MarkdownIt({\n        html: true,\n        linkify: true,\n        typographer: true,\n        highlight: function (str, lang) {\n            if (lang && hljs.getLanguage(lang)) {\n                try {\n                    return hljs.highlight(str, { language: lang }).value;\n                } catch (__) {}\n            }\n            return ''; \n        }\n    });\n}",
+      "after": "",
+      "total_deletions": 18,
+      "total_additions": 0
+    }
+  ]
 }

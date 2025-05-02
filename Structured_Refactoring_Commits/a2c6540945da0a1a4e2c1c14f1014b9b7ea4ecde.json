@@ -74,8 +74,48 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": ".vscode/launch.json",
+      "before": "",
+      "after": "{\n  // Use IntelliSense to learn about possible attributes.\n  // Hover to view descriptions of existing attributes.\n  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387\n  \"version\": \"0.2.0\",\n  \"configurations\": [\n    {\n      \"type\": \"node\",\n      \"request\": \"launch\",\n      \"name\": \"Launch Program\",\n      \"skipFiles\": [\n        \"<node_internals>/**\"\n      ],\n      \"program\": \"${workspaceFolder}/src/web.js\"\n    }\n  ]\n}",
+      "total_deletions": 0,
+      "total_additions": 17
+    },
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Hide details tag when prompt is empty\"\necho \"Plan:\"\necho \"1. Modify PromptDisplay.jsx to conditionally render the details tag based on the prompt content.\"\n\ncat > src/frontend/components/PromptDisplay.jsx << 'EOF'\nimport { createSignal, onMount, createEffect } from \"solid-js\";\nimport { prompt } from '../stores/prompt';\n\nconst PromptDisplay = () => {\n  let div;\n  let summary;\n\n  createEffect(() => {\n    if (div) {\n      div.innerHTML = prompt();\n      summary.innerHTML = `prompt length: ${prompt().length} chars`;\n    }\n  });\n\n  return (\n    <details class=\"w-full max-w-screen overflow-x-auto whitespace-normal markdown\" style={{ display: prompt().length > 0 ? 'block' : 'none' }}>\n      <summary ref={summary}></summary>\n      <div ref={div}></div>\n    </details>\n  );\n};\n\nexport default PromptDisplay;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor code to handle OPENAI_API_KEY\"\necho \"Plan:\"\necho \"1. Create the directory src/llm/openai\"\necho \"2. Create the file src/llm/openai/createApi.js\"\necho \"3. Move the logic for creating the ChatGPTAPI instance to createApi.js\"\necho \"4. Implement the logic to read the OPENAI_API_KEY from the environment variable or from the secret.sh file\"\necho \"5. Update src/config.js to import and use the createApi function from createApi.js\"\n\nmkdir -p src/llm/openai\n\ncat << 'EOF' > src/llm/openai/createApi.js\nimport fs from 'fs';\nimport { ChatGPTAPI } from 'chatgpt';\nimport { getSystemPrompt } from \"../../prompt/getSystemPrompt.js\";\n\nexport default async function createApi(model) {\n  let apiKey = process.env.OPENAI_API_KEY;\n\n  if (!apiKey) {\n    if (fs.existsSync('./secret.sh')) {\n      const secretFileContent = fs.readFileSync('./secret.sh', 'utf-8');\n      const match = secretFileContent.match(/export OPENAI_API_KEY=(\\S+)/);\n      if (match) {\n        apiKey = match[1];\n      }\n    }\n  }\n\n  if (!apiKey) {\n    throw new Error('OPENAI_API_KEY not found');\n  }\n\n  const systemMessage = await getSystemPrompt();\n\n  return new ChatGPTAPI({\n    debug: true,\n    apiKey,\n    systemMessage,\n    completionParams: {\n      model,\n      stream: true,\n      temperature: 0.5,\n      max_tokens: 2048,\n    }\n  });\n}\nEOF\n\ncat << 'EOF' > src/config.js\nimport readline from 'readline';\nimport createApi from './llm/openai/createApi.js';\n\nfunction isDryRun() {\n  return process.argv.includes(\"-d\") || process.argv.includes(\"--dry-run\");\n}\n\nfunction get_model() {\n  const modelArg = process.argv.find(arg => arg.startsWith('--model='));\n  if (modelArg) {\n    return modelArg.split('=')[1];\n  }\n  return \"gpt-4\";\n}\n\nasync function getApi() {\n  if (isDryRun()) {\n    return {\n      sendMessage: () => { return {id: 42, text: \"DRY RUN, NOT SENT\"}}\n    };\n  } else {\n    return await createApi(get_model());\n  }\n}\n\nconst rl = readline.createInterface({\n  input: process.stdin,\n  output: process.stdout\n});\n\nexport { getApi, rl, get_model };\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 20,
+      "total_additions": 72
+    },
+    {
+      "filename": "prompt.md",
+      "before": "# Working set\n\nsrc/frontend/components/PromptDisplay.jsx:\n```\nimport { createSignal, onMount, createEffect } from \"solid-js\";\nimport { prompt } from '../stores/prompt';\n\nconst PromptDisplay = () => {\n  let div;\n  let summary;\n\n  createEffect(() => {\n    if (div) {\n      div.innerHTML = prompt();\n      summary.innerHTML = `prompt length: ${prompt().length} chars`;\n    }\n  });\n\n  return (\n    <details class=\"w-full max-w-screen overflow-x-auto whitespace-normal markdown\">\n      <summary ref={summary}></summary>\n      <div ref={div}></div>\n    </details>\n  );\n};\n\nexport default PromptDisplay;\n\n```\n\n\nRequirements:\n\nWhen the prompt is empty, do not show the details tag\n\n\n",
+      "after": "# Working set\n\nsrc/config.js:\n```\nimport readline from 'readline';\nimport { ChatGPTAPI } from 'chatgpt';\nimport { getSystemPrompt } from \"./prompt/getSystemPrompt.js\";\n\nfunction isDryRun() {\n  return process.argv.includes(\"-d\") || process.argv.includes(\"--dry-run\");\n}\n\nconst api = isDryRun() ? {\n    sendMessage: () => { return {id: 42, text: \"DRY RUN, NOT SENT\"}}\n  } : new ChatGPTAPI({\n  debug: true,\n  apiKey: process.env.OPENAI_API_KEY,\n  systemMessage: await getSystemPrompt(),\n  completionParams: {\n    model: get_model(),\n    stream: true,\n    temperature: 0.5,\n    max_tokens: 2048,\n  }\n});\n\nconst rl = readline.createInterface({\n  input: process.stdin,\n  output: process.stdout\n});\n\nfunction get_model() {\n  const modelArg = process.argv.find(arg => arg.startsWith('--model='));\n  if (modelArg) {\n    return modelArg.split('=')[1];\n  }\n  return \"gpt-4\";\n}\n\nexport { api, rl, get_model };\n\n```\n\n\nRequirements:\n\nWhen no OPENAI_API_KEY env var presents, try to open ./secret.sh\nand parse it to get the key.\nMove this logic and the &#34;new ChatGPTAPI&#34; call to a function in src/llm/openai/createApi.js (create the dir).\n\n\n",
+      "total_deletions": 25,
+      "total_additions": 40
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/PromptDisplay.jsx\nrequirements: |\n  When the prompt is empty, do not show the details tag",
+      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/config.js\nrequirements: |\n  When no OPENAI_API_KEY env var presents, try to open ./secret.sh\n  and parse it to get the key.\n  Move this logic and the \"new ChatGPTAPI\" call to a function in src/llm/openai/createApi.js (create the dir).",
+      "total_deletions": 2,
+      "total_additions": 4
+    },
+    {
+      "filename": "src/config.js",
+      "before": "import readline from 'readline';\nimport { ChatGPTAPI } from 'chatgpt';\nimport { getSystemPrompt } from \"./prompt/getSystemPrompt.js\";\n\nfunction isDryRun() {\n  return process.argv.includes(\"-d\") || process.argv.includes(\"--dry-run\");\n}\n\nconst api = isDryRun() ? {\n    sendMessage: () => { return {id: 42, text: \"DRY RUN, NOT SENT\"}}\n  } : new ChatGPTAPI({\n  debug: true,\n  apiKey: process.env.OPENAI_API_KEY,\n  systemMessage: await getSystemPrompt(),\n  completionParams: {\n    model: get_model(),\n    stream: true,\n    temperature: 0.5,\n    max_tokens: 2048,\n  }\n});\n\nconst rl = readline.createInterface({\n  input: process.stdin,\n  output: process.stdout\n});\n\nfunction get_model() {\n  const modelArg = process.argv.find(arg => arg.startsWith('--model='));\n  if (modelArg) {\n  return \"gpt-4\";\n}\n\nexport { api, rl, get_model };\n",
+      "after": "import readline from 'readline';\nimport createApi from './llm/openai/createApi.js';\n\nfunction isDryRun() {\n  return process.argv.includes(\"-d\") || process.argv.includes(\"--dry-run\");\n}\n\nfunction get_model() {\n  const modelArg = process.argv.find(arg => arg.startsWith('--model='));\n  if (modelArg) {\n  return \"gpt-4\";\n}\n\nasync function getApi() {\n  if (isDryRun()) {\n    return {\n      sendMessage: () => { return {id: 42, text: \"DRY RUN, NOT SENT\"}}\n    };\n  } else {\n    return await createApi(get_model());\n  }\n}\n\nconst rl = readline.createInterface({\n  input: process.stdin,\n  output: process.stdout\n});\n\nexport { getApi, rl, get_model };",
+      "total_deletions": 22,
+      "total_additions": 17
+    },
+    {
+      "filename": "src/llm/openai/createApi.js",
+      "before": "",
+      "after": "import fs from 'fs';\nimport { ChatGPTAPI } from 'chatgpt';\nimport { getSystemPrompt } from \"../../prompt/getSystemPrompt.js\";\n\nexport default async function createApi(model) {\n  let apiKey = process.env.OPENAI_API_KEY;\n\n  if (!apiKey) {\n    if (fs.existsSync('./secret.sh')) {\n      const secretFileContent = fs.readFileSync('./secret.sh', 'utf-8');\n      const match = secretFileContent.match(/export OPENAI_API_KEY=(\\S+)/);\n      if (match) {\n        apiKey = match[1];\n      }\n    }\n  }\n\n  if (!apiKey) {\n    throw new Error('OPENAI_API_KEY not found');\n  }\n\n  const systemMessage = await getSystemPrompt();\n\n  return new ChatGPTAPI({\n    debug: true,\n    apiKey,\n    systemMessage,\n    completionParams: {\n      model,\n      stream: true,\n      temperature: 0.5,\n      max_tokens: 2048,\n    }\n  });\n}",
+      "total_deletions": 0,
+      "total_additions": 35
+    }
+  ]
 }

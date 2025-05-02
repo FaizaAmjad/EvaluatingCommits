@@ -44,8 +44,13 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "README.md",
+      "before": "\nFeatures:\n---------\n\n* Configured hotspot starts automatically on boot, no extra configuration necessary\n\n* Configured WiFi network is WPA encrypted.\n\n* Default SSID of \"RaspberryPiFi\" and WPA key of \"0123456789A\" can be modified during install\n\n* Once set up, the local network facilites of the Pi will still operate as normal\n\n* Easy setup of either a custom or preconfigured DNS server (including unblock-us for removing netflix geoblocks)\n\n* Router enumeration for WiFi network\n\n* Allows chromecast compatibility with unblock-us by intercepting google's DNS requests on the pi\n\nRequirements:\n-------------\nNotes and configuration\n-----------------------\n\n* To change default WiFi channel, edit /etc/hostapd/hostapd.conf accordingly\n\n* This setup has been tested on a fresh install of raspbian.\n\n* It is advised that this be set up on a fresh install\n\n* If set up on an existing install then any current config files will be backed up with the extension \".old\" in the relevant folders prior to installation (this allows returning to original network settings if required)\n",
+      "after": "\nFeatures:\n---------\n* Hotspot automatically starts on boot without extra configuration.\n\n* Configured WiFi network uses WPA encryption.\n\n* The default SSID is \"RaspberryPiFi\" and the WPA key is \"0123456789A,\" which can be changed during installation.\n\n* Pi's local network functions continue to operate normally after setup.\n\n* Easy setup of custom or preconfigured DNS server, including unblock-us for bypassing Netflix geoblocks.\n\n* Router enumeration for WiFi network.\n\n* Enables Chromecast compatibility with unblock-us by intercepting Google's DNS requests on the Pi.\n\n\nRequirements:\n-------------\nNotes and configuration\n-----------------------\n\n* To change default WiFi channel, edit /etc/hostapd/hostapd.conf accordingly.\n\n* This setup has been tested on a fresh install of raspbian.\n\n* It is advised that this be set up on a fresh install.\n\n* If set up on an existing install then any current config files will be backed up with the extension \".old\" in the relevant folders prior to installation. (this allows returning to original network settings if required)\n",
+      "total_deletions": 10,
+      "total_additions": 10
+    }
+  ]
 }

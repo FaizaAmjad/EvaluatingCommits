@@ -38,8 +38,41 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "prompt/history/2023/09/05/14:52_Refactor MultiSelect components/change.sh",
+      "before": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor MultiSelect components\"\necho \"Plan:\"\necho \"1. Refactor SearchBar.jsx to rename addFirstFilteredItem prop and remove the 'Enter' key check\"\necho \"2. Refactor MultiSelect.jsx to handle the 'Enter' key check and use the new prop name\"\n\n# Step 1: Refactor SearchBar.jsx\ncat > src/frontend/components/MultiSelect/SearchBar.jsx << 'EOF'\nconst SearchBar = (props) => {\n  const handleInputChange = (e) => {\n    props.setSearchValue(e.target.value);\n  };\n\n  return (\n    <input \n      type=\"text\"\n      placeholder=\"Enter space-separated search terms!\"\n      value={props.searchValue()}\n      onInput={handleInputChange}\n      onKeyPress={props.onKeyPress}\n      class=\"border border-gray-300 rounded p-2 w-full bg-emphasize text-emphasize my-2\"\n    />\n  );\n};\n\nexport default SearchBar;\nEOF\n\n# Step 2: Refactor MultiSelect.jsx\ncat > src/frontend/components/MultiSelect/MultiSelect.jsx << 'EOF'\nimport { createSignal, createEffect } from 'solid-js';\nimport SearchBar from './SearchBar';\nimport ResultSet from './ResultSet';\nimport FilteredList from './FilteredList';\nimport computeFilteredList from './computeFilteredList';\n\nconst MultiSelect = (props) => {\n  const [searchValue, setSearchValue] = createSignal('');\n  const [filteredList, setFilteredList] = createSignal([]);\n  const [selectedItems, setSelectedItems] = createSignal([...props.selectedItems]);\n\n  createEffect(() => {\n    const currentQuery = searchValue() || props.defaultQuery();\n    setFilteredList(computeFilteredList(currentQuery, props.availableItems, props.compare, props.itemCount, selectedItems()));\n  });\n\n  const handleKeyPress = (e) => {\n    if (e.key === 'Enter') {\n      const updatedItems = [filteredList()[0], ...selectedItems()];\n      setSelectedItems(updatedItems);\n    }\n  };\n\n  return (\n    <div class=\"w-full bg-emphasize text-emphasize p-2 rounded border border-border\">\n      <ResultSet items={selectedItems()} />\n      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} onKeyPress={handleKeyPress} />\n      <FilteredList items={filteredList()} />\n    </div>\n  );\n};\n\nexport default MultiSelect;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 0,
+      "total_additions": 67
+    },
+    {
+      "filename": "prompt/history/2023/09/05/14:52_Refactor MultiSelect components/prompt.md",
+      "before": "",
+      "after": "You are AI Junior, you code like Donald Knuth.\n# Working set\n\nsrc/frontend/components/MultiSelect/MultiSelect.jsx:\n```\nimport { createSignal, createEffect } from 'solid-js';\nimport SearchBar from './SearchBar';\nimport ResultSet from './ResultSet';\nimport FilteredList from './FilteredList';\nimport computeFilteredList from './computeFilteredList';\n\nconst MultiSelect = (props) => {\n  const [searchValue, setSearchValue] = createSignal('');\n  const [filteredList, setFilteredList] = createSignal([]);\n  const [selectedItems, setSelectedItems] = createSignal([...props.selectedItems]);\n\n  createEffect(() => {\n    const currentQuery = searchValue() || props.defaultQuery();\n    setFilteredList(computeFilteredList(currentQuery, props.availableItems, props.compare, props.itemCount, selectedItems()));\n  });\n\n  const addFirstFilteredItem = () => {\n    const updatedItems = [filteredList()[0], ...selectedItems()];\n    setSelectedItems(updatedItems);\n  };\n\n  return (\n    <div class=\"w-full bg-emphasize text-emphasize p-2 rounded border border-border\">\n      <ResultSet items={selectedItems()} />\n      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} addFirstFilteredItem={addFirstFilteredItem} />\n      <FilteredList items={filteredList()} />\n    </div>\n  );\n};\n\nexport default MultiSelect;\n\n```\n\nsrc/frontend/components/MultiSelect/SearchBar.jsx:\n```\nconst SearchBar = (props) => {\n  const handleInputChange = (e) => {\n    props.setSearchValue(e.target.value);\n  };\n\n  const handleKeyPress = (e) => {\n    if (e.key === 'Enter') {\n      props.addFirstFilteredItem();\n    }\n  };\n\n  return (\n    <input \n      type=\"text\"\n      placeholder=\"Enter space-separated search terms!\"\n      value={props.searchValue()}\n      onInput={handleInputChange}\n      onKeyPress={handleKeyPress}\n      class=\"border border-gray-300 rounded p-2 w-full bg-emphasize text-emphasize my-2\"\n    />\n  );\n};\n\nexport default SearchBar;\n\n```\n\n\n# Task\n\nRefactor!\n\nThe prop addFirstFilteredItem should be named onKeyPress. Move the if to multiselect\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\nBefore starting, check if you need more files to solve the task.\nDo not edit any file not provided in the working set!\nIf you need more files, do not try to solve the task, ask for the missing files instead!\n\nEXAMPLE START\n\n`filepath1` is needed to solve the task but is not in the working set.\n\nEXAMPLE END\n",
+      "total_deletions": 0,
+      "total_additions": 119
+    },
+    {
+      "filename": "prompt/history/2023/09/05/14:52_Refactor MultiSelect components/prompt.yaml",
+      "before": "",
+      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/MultiSelect/MultiSelect.jsx\n  - src/frontend/components/MultiSelect/SearchBar.jsx\nrequirements: >-\n  The prop addFirstFilteredItem should be named onKeyPress. Move the if to\n  multiselect\nos: OSX",
+      "total_deletions": 0,
+      "total_additions": 8
+    },
+    {
+      "filename": "src/frontend/components/MultiSelect/MultiSelect.jsx",
+      "before": "    setFilteredList(computeFilteredList(currentQuery, props.availableItems, props.compare, props.itemCount, selectedItems()));\n  });\n\n  const addFirstFilteredItem = () => {\n    const updatedItems = [filteredList()[0], ...selectedItems()];\n    setSelectedItems(updatedItems);\n  };\n\n  return (\n    <div class=\"w-full bg-emphasize text-emphasize p-2 rounded border border-border\">\n      <ResultSet items={selectedItems()} />\n      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} addFirstFilteredItem={addFirstFilteredItem} />\n      <FilteredList items={filteredList()} />\n    </div>\n  );",
+      "after": "    setFilteredList(computeFilteredList(currentQuery, props.availableItems, props.compare, props.itemCount, selectedItems()));\n  });\n\n  const handleKeyPress = (e) => {\n    if (e.key === 'Enter') {\n      const updatedItems = [filteredList()[0], ...selectedItems()];\n      setSelectedItems(updatedItems);\n    }\n  };\n\n  return (\n    <div class=\"w-full bg-emphasize text-emphasize p-2 rounded border border-border\">\n      <ResultSet items={selectedItems()} />\n      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} onKeyPress={handleKeyPress} />\n      <FilteredList items={filteredList()} />\n    </div>\n  );",
+      "total_deletions": 4,
+      "total_additions": 6
+    },
+    {
+      "filename": "src/frontend/components/MultiSelect/SearchBar.jsx",
+      "before": "    props.setSearchValue(e.target.value);\n  };\n\n  const handleKeyPress = (e) => {\n    if (e.key === 'Enter') {\n      props.addFirstFilteredItem();\n    }\n  };\n\n  return (\n    <input \n      type=\"text\"\n      placeholder=\"Enter space-separated search terms!\"\n      value={props.searchValue()}\n      onInput={handleInputChange}\n      onKeyPress={handleKeyPress}\n      class=\"border border-gray-300 rounded p-2 w-full bg-emphasize text-emphasize my-2\"\n    />\n  );",
+      "after": "    props.setSearchValue(e.target.value);\n  };\n\n  return (\n    <input \n      type=\"text\"\n      placeholder=\"Enter space-separated search terms!\"\n      value={props.searchValue()}\n      onInput={handleInputChange}\n      onKeyPress={props.onKeyPress}\n      class=\"border border-gray-300 rounded p-2 w-full bg-emphasize text-emphasize my-2\"\n    />\n  );",
+      "total_deletions": 7,
+      "total_additions": 1
+    }
+  ]
 }

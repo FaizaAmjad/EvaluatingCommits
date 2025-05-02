@@ -38,8 +38,34 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Update roadmap with completion marker\"\necho \"Plan:\"\necho \"1. Add a unicode character and a word to signify the completion of 'Implement the four buttons' in the roadmap.\"\ncat > docs/roadmap.md << 'EOF'\n# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually\nEOF\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Update roadmap.md with completed task\"\necho \"Plan:\"\necho \"1. Modify docs/roadmap.md file to mark the 'Write docs to allow using Junior for developing external projects' task as completed.\"\n\ncat > docs/roadmap.md << 'EOF'\n# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 3,
+      "total_additions": 5
+    },
+    {
+      "filename": "docs/roadmap.md",
+      "before": "## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile",
+      "after": "## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile",
+      "total_deletions": 1,
+      "total_additions": 1
+    },
+    {
+      "filename": "prompt.md",
+      "before": "```\n# Roadmap\n## Usability & fixes\n- Implement the four buttons\n- Fix every major bug\n- Write docs to allow using Junior for developing external projects\n\n\nImprove the documentation!\n\n&#34;Implement the four buttons&#34; is done. Add a nice unicode character and a single word to show this.\n\n\n# Output Format",
+      "after": "```\n# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- Write docs to allow using Junior for developing external projects\n\n\nImprove the documentation!\n\n&#34;Write docs to allow using Junior for developing external projects&#34; is also done.\n\n\n# Output Format",
+      "total_deletions": 2,
+      "total_additions": 2
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "attention:\n  - docs/roadmap.md\nrequirements: >\n  \"Implement the four buttons\" is done. Add a nice unicode character and a single word to show this.\nos: OSX",
+      "after": "attention:\n  - docs/roadmap.md\nrequirements: >\n  \"Write docs to allow using Junior for developing external projects\" is also done.\nos: OSX",
+      "total_deletions": 1,
+      "total_additions": 1
+    }
+  ]
 }

@@ -38,8 +38,41 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Bind X to handleExecuteChange, update label\"\necho \"Plan:\"\necho \"1. Update keyBindings.js to bind 'X' key to handleExecuteChange.\"\necho \"2. Update ExecuteButton.jsx to add [X] to the button label with some space.\"\n\n# Step 1: Update keyBindings.js to bind 'X' key to handleExecuteChange.\ncat << 'EOF' > src/frontend/config/keyBindings.js\nimport handleExecuteChange from '../model/handleExecuteChange';\nimport handleGeneratePrompt from '../service/handleGeneratePrompt';\n  return {\n    'G': (e) => {\n      handleGeneratePrompt();\n      console.log('G key pressed'); // Temporary log\n    },\n    'X': (e) => {\n      handleExecuteChange();\n      console.log('X key pressed'); // Temporary log\n    }\n  };\n};\n\nexport default keyBindings;\nEOF\n\n# Step 2: Update ExecuteButton.jsx to add [X] to the button label with some space.\ncat << 'EOF' > src/frontend/components/ExecuteButton.jsx\nimport handleExecuteChange from '../model/handleExecuteChange';\nimport { setChangeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handlePaste = async (e) => {\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);\n    handleExecuteChange();\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-orange-300 text-white rounded\" onClick={handleExecuteChange}>\n      {clipboardAvailable ? (\n        'Paste & Execute Change [X]'\n      ) : (\n        <textarea\n          rows=\"1\"\n          class=\"w-full px-2 py-2 bg-white text-black resize-none\"\n          placeholder=\"Paste here to execute\"\n          value={changeInput()}\n          onPaste={handlePaste}\n        />\n      )}\n    </button>\n  );\n};\n\nexport default ExecuteButton;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Add [G] to button label, remove console.logs\"\necho \"Plan:\"\necho \"1. Modify GenerateButton.jsx to include [G] in the button label\"\necho \"2. Remove unnecessary console.log statements from keyBindings.js\"\n\n# Step 1: Modify GenerateButton.jsx\ncat << 'EOF' > src/frontend/components/GenerateButton.jsx\nimport handleGeneratePrompt from '../service/handleGeneratePrompt';\n\nconst GenerateButton = () => {\n  return (\n    <button className=\"w-64 px-4 py-4 bg-blue-500 text-white rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt [G]</button>\n  );\n};\n\nexport default GenerateButton;\nEOF\n\n# Step 2: Remove unnecessary console.log statements\ncat << 'EOF' > src/frontend/config/keyBindings.js\nimport handleExecuteChange from '../model/handleExecuteChange';\nimport handleGeneratePrompt from '../service/handleGeneratePrompt';\n  return {\n    'G': (e) => {\n      handleGeneratePrompt();\n    },\n    'X': (e) => {\n      handleExecuteChange();\n    }\n  };\n};\n\nexport default keyBindings;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 40,
+      "total_additions": 17
+    },
+    {
+      "filename": "prompt.md",
+      "before": "\nsrc/frontend/config/keyBindings.js:\n```\nimport handleGeneratePrompt from '../service/handleGeneratePrompt';\n\nconst keyBindings = () => {\n  return {\n    'G': (e) => {\n      handleGeneratePrompt();\n      console.log('G key pressed'); // Temporary log\n    }\n  };\n};\n\n```\n\nsrc/frontend/components/ExecuteButton.jsx:\n```\nimport handleExecuteChange from '../model/handleExecuteChange';\nimport { setChangeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handlePaste = async (e) => {\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);\n    handleExecuteChange();\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-orange-300 text-white rounded\" onClick={handleExecuteChange}>\n      {clipboardAvailable ? (\n        'Paste & Execute Change'\n      ) : (\n        <textarea\n          rows=\"1\"\n          class=\"w-full px-2 py-2 bg-white text-black resize-none\"\n          placeholder=\"Paste here to execute\"\n          value={changeInput()}\n          onPaste={handlePaste}\n        />\n      )}\n    </button>\n  );\n};\n\nexport default ExecuteButton;\n\n```\n\nsrc/frontend/model/handleExecuteChange.js:\n```\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from './executionResult';\nimport { setChange } from './change';\nimport { changeInput } from './changeInput';\n\nconst handleExecuteChange = async () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n  const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();\n  const response = await executeChange(change);\n  setChange(change);\n  setExecutionResult(response.output);\n  console.log(response.output);\n};\n\nexport default handleExecuteChange;\n\n```\n\n\nRequirements:\n\n- Bind &#34;X&#34; to handleExecuteChange\n- Add [X] to the button label on the right with some space inbetween\n\n\n",
+      "after": "\nsrc/frontend/config/keyBindings.js:\n```\nimport handleExecuteChange from '../model/handleExecuteChange';\nimport handleGeneratePrompt from '../service/handleGeneratePrompt';\n\nconst keyBindings = () => {\n  return {\n    'G': (e) => {\n      handleGeneratePrompt();\n      console.log('G key pressed'); // Temporary log\n    },\n    'X': (e) => {\n      handleExecuteChange();\n      console.log('X key pressed'); // Temporary log\n    }\n  };\n};\n\n```\n\nsrc/frontend/components/GenerateButton.jsx:\n```\nimport handleGeneratePrompt from '../service/handleGeneratePrompt';\n\nconst GenerateButton = () => {\n  return (\n    <button className=\"w-64 px-4 py-4 bg-blue-500 text-white rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt</button>\n  );\n};\n\nexport default GenerateButton;\n\n```\n\n\nRequirements:\n\n- Add [G] to the button label on the right with some space inbetween\n- Remove unneded console.logs\n\n\n",
+      "total_deletions": 48,
+      "total_additions": 12
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/config/keyBindings.js\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/model/handleExecuteChange.js\nrequirements: |\n  - Bind \"X\" to handleExecuteChange\n  - Add [X] to the button label on the right with some space inbetween\nos: OSX",
+      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/config/keyBindings.js\n  - src/frontend/components/GenerateButton.jsx\nrequirements: |\n  - Add [G] to the button label on the right with some space inbetween\n  - Remove unneded console.logs\nos: OSX",
+      "total_deletions": 4,
+      "total_additions": 3
+    },
+    {
+      "filename": "src/frontend/components/GenerateButton.jsx",
+      "before": "\nconst GenerateButton = () => {\n  return (\n    <button className=\"w-64 px-4 py-4 bg-blue-500 text-white rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt</button>\n  );\n};\n",
+      "after": "\nconst GenerateButton = () => {\n  return (\n    <button className=\"w-64 px-4 py-4 bg-blue-500 text-white rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt [G]</button>\n  );\n};\n",
+      "total_deletions": 1,
+      "total_additions": 1
+    },
+    {
+      "filename": "src/frontend/config/keyBindings.js",
+      "before": "  return {\n    'G': (e) => {\n      handleGeneratePrompt();\n      console.log('G key pressed'); // Temporary log\n    },\n    'X': (e) => {\n      handleExecuteChange();\n      console.log('X key pressed'); // Temporary log\n    }\n  };\n};",
+      "after": "  return {\n    'G': (e) => {\n      handleGeneratePrompt();\n    },\n    'X': (e) => {\n      handleExecuteChange();\n    }\n  };\n};",
+      "total_deletions": 2,
+      "total_additions": 0
+    }
+  ]
 }
