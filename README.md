@@ -19,8 +19,9 @@ This folder (`DevGPT_Commits_Dataset/`) contains commit history data from the [D
 - `Structured_Refactoring_Commits/`: Restructured data of filtered refactoring commits (each file named by its SHA key)
 - `filtered_commits.json` : Filtered commit objects containing refactoring keywords
 - `extract_refactoring_commits.py`: Script to extract unique commit objects with refactoring-related terms
-- `Github_Fetch.py`: Fetches:
-    - Changed files' names
+- `Github_Fetch.py`: Fetches: committed code from github repository
+  Contributes: to fill dataset with following attributes
+    - Changed files'name
     - Number of additions and deletions
     - Code before and after changes
 
@@ -84,7 +85,7 @@ This project is licensed under ________________________
 
 ## Acknowledgements
 
-- This research was conducted at the University of Gothenburg???
+- This research was conducted at the University of Gothenburg.
 - Thanks to the maintainers of the DevGPT dataset for making this work possible.
 - Gratitude to our supervisor and peers for their continuous support.
 
