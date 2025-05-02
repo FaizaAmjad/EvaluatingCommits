@@ -1,0 +1,50 @@
+{
+  "sha": "a10ee2fe07a59ab954b8e81f39de2e95fa9e77c0",
+  "url": "https://github.com/CPSC-1520/CPSC-1520-Workbook-A02-dgilleland/commit/a10ee2fe07a59ab954b8e81f39de2e95fa9e77c0",
+  "author": "dgilleland",
+  "repoName": "CPSC-1520/CPSC-1520-Workbook-A02-dgilleland",
+  "repoLanguage": "CSS",
+  "message": "Update lesson 011\n\nDraft content generated through ChatGPT:\r\n\r\nhttps://chat.openai.com/share/4cb1ea21-fb2a-4d93-bb05-2d5f2a8e9514",
+  "authorAt": "2023-09-28T05:49:17.000-06:00",
+  "commitAt": "2023-09-28T05:49:17.000-06:00",
+  "chatgpt_sharing": {
+    "title": "JavaScript Function Organization",
+    "url": "https://chat.openai.com/share/4cb1ea21-fb2a-4d93-bb05-2d5f2a8e9514",
+    "mention": {
+      "mentioned_url": "https://github.com/CPSC-1520/CPSC-1520-Workbook-A02-dgilleland/commit/a10ee2fe07a59ab954b8e81f39de2e95fa9e77c0",
+      "mentioned_property": "message",
+      "mentioned_author": "dgilleland",
+      "mentioned_text": "Update lesson 011\n\nDraft content generated through ChatGPT:\r\n\r\nhttps://chat.openai.com/share/4cb1ea21-fb2a-4d93-bb05-2d5f2a8e9514"
+    },
+    "status": 200,
+    "dateOfConversation": "September 28, 2023",
+    "dateOfAccess": "2023-10-12 23:54:05.589025",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 267,
+    "tokensOfAnswers": 605,
+    "model": "Plugins",
+    "conversations": [
+      {
+        "prompt_id": "a10ee2fe07a59ab954b8e81f39de2e95fa9e77c0_s1_p1",
+        "prompt": "Create a lesson on \"Organizing Functions in JavaScript\". The lesson should be written in Markdown format. The lesson should be targeted at beginners. They have already been exposed to creating and calling functions and using JavaScript to access and modify parts of the DOM using `.innerText()` and `.innerHTML()` as well as using `document.querySelector()` to query the DOM for specific contents based on tags, classes and identifiers. At the end of the lesson, the student should be able to:\n\n- Explain what is meant by \"DRY\" code and list the benefits of making our code \"DRY\" and \"modular\"\n- Explain and demonstrate the concept of Function Scope in JavaScript\n- Explain the role of the \"stack\" in tracking function calls in JavaScript\n- Explain the benefits and drawbacks of using nested functions in JavaScript\n- Explain and demonstrate the concept of \"closures\" in JavaScript\n\nDo not include any flow-control logic that has to do with if-else, switch, or any looping logic. All functions used should be in the form of either Named or Anonymous Function Expressions and be assigned to `const` variables. Do not use Arrow Functions or Function Declaration syntax. Students should be directed to the following URL for the official documentation on functions in JavaScript: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions",
+        "answer": "ChatGPTOrganizing Functions in JavaScriptWelcome to this lesson on organizing functions in JavaScript! By the end of this lesson, you'll have a deeper understanding of how to structure your functions in a clean and efficient manner.1. DRY CodeDRY stands for \"Don't Repeat Yourself\". It's a principle aimed at reducing the repetition of code patterns.Benefits of DRY and Modular Code:Maintainability: Easier to update and maintain.Readability: Makes the code more understandable.Reusability: Allows you to reuse code in different parts of your application.Efficiency: Reduces the chances of bugs since you're not rewriting the same logic.2. Function Scope in JavaScriptIn JavaScript, each function creates its own scope. Variables defined inside a function cannot be accessed from outside that function.[CODE_BLOCK_0]In the example above, innerFunction has access to outerVar because it's defined in the outer scope. However, if you try to access outerVar outside of outerFunction, it will throw an error.3. The Role of the Stack in Tracking Function CallsWhen a function is called in JavaScript, it's added to a call stack. Once the function completes its execution, it's removed from the stack. If a function calls another function, the new function is added to the top of the stack.This is why when you have a series of nested function calls, the innermost function is executed first, and then the functions that called it are executed in reverse order.4. Nested Functions in JavaScriptA function defined inside another function is called a nested function.Benefits:Encapsulation: Helps in encapsulating the logic and keeping it hidden from the outside scope.Access to Outer Function Scope: Nested functions can access variables from their containing function.Drawbacks:Readability: Can make the code harder to follow if overused.Memory: Each nested function can increase the memory overhead.5. Closures in JavaScriptA closure is a function that has access to the parent scope, even after the parent function has closed.[CODE_BLOCK_1]In the example above, even though createGreeting has finished executing, the returned function still has access to the greeting variable. This is a closure in action!ConclusionFunctions are a fundamental part of JavaScript, and understanding how to organize and use them effectively is crucial. Remember to keep your code DRY, be mindful of your function scopes, and leverage the power of closures when needed.For more in-depth information on functions in JavaScript, please refer to the official documentation: MDN Functions Guide.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "javascript",
+            "Content": "const outerFunction = function() {\n    const outerVar = \"I'm outside!\";\n\n    const innerFunction = function() {\n        console.log(outerVar); // Outputs: \"I'm outside!\"\n    }\n\n    innerFunction();\n}\n\nouterFunction();\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "javascript",
+            "Content": "const createGreeting = function(greeting) {\n    return function(name) {\n        console.log(greeting + \", \" + name + \"!\");\n    }\n}\n\nconst sayHello = createGreeting(\"Hello\");\nsayHello(\"Alice\"); // Outputs: \"Hello, Alice!\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

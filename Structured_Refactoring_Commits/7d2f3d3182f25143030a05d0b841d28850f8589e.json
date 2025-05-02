@@ -38,48 +38,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\nset -e\ngoal=\"Update div styling in App.jsx\"\necho \"Plan:\"\necho \"1. Remove specific bg and text coloring classes from the app div in App.jsx\"\necho \"2. Replace m-2 with p-2 in the app div in App.jsx\"\necho \"3. Add bg-main class to the app div in App.jsx\"\n\ncat > src/frontend/App.jsx << 'EOF'\nimport GenerateButton from './components/GenerateButton';\nimport ExecuteButton from './components/ExecuteButton';\n\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2 bg-main\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />\nexport default App;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Update class attributes in specific components\"\necho \"Plan:\"\necho \"1. Add 'text-text' class to the app div in App.jsx\"\necho \"2. Remove coloring classes from CommitMessageInput and replace them with 'bg-emphasize text-emphasize'\"\necho \"3. Remove coloring classes from TasksList and replace them with 'bg-emphasize text-emphasize'\"\n\n# Step 1: Add 'text-text' class to the app div in App.jsx\ncat > src/frontend/App.jsx << 'EOF'\nimport GenerateButton from './components/GenerateButton';\nimport ExecuteButton from './components/ExecuteButton';\n\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2 bg-main text-text\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />\nexport default App;\nEOF\n\n# Step 2: Remove coloring classes from CommitMessageInput and replace them with 'bg-emphasize text-emphasize'\ncat > src/frontend/components/CommitMessageInput.jsx << 'EOF'\nimport { commitMessage, setCommitMessage } from '../model/commitMessage';\nimport monitorChange from '../model/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n  monitorChange();\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" className=\"w-full px-4 py-2 border rounded bg-emphasize text-emphasize\" placeholder=\"Commit message...\" value={commitMessage()} onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\nEOF\n\n# Step 3: Remove coloring classes from TasksList and replace them with 'bg-emphasize text-emphasize'\ncat > src/frontend/components/TasksList.jsx << 'EOF'\nimport { onMount, createEffect } from 'solid-js';\nimport { fetchTasks } from '../fetchTasks';\nimport { handleTaskChange } from '../service/handleTaskChange';\nimport { selectedTask, setSelectedTask } from '../model/selectedTask';\nimport { promptDescriptor } from '../model/promptDescriptor';\nimport { parseYamlAndGetTask } from '../service/parseYamlAndGetTask';\n\nconst TasksList = () => {\n  const tasks = fetchTasks();\n\n  createEffect(() => {\n    const descriptor = promptDescriptor();\n    if (descriptor !== '') {\n      const task = parseYamlAndGetTask(descriptor);\n      setSelectedTask(task);\n    }\n  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded\">\n      <label class=\"mr-2\">Task:</label>\n      <select class=\"w-full bg-emphasize text-emphasize\" value={selectedTask()} onChange={e => handleTaskChange(e)}>\n        {tasks().map(task => <option value={task}>{task}</option>)}\n      </select>\n    </div>\n  );\n};\n\nexport default TasksList;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "total_deletions": 5,
-      "total_additions": 60
-    },
-    {
-      "filename": "prompt.md",
-      "before": "\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"m-2 bg-maindark:bg-dark-background bg-light-background dark:text-dark-text text-light-text\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />\n\n```\n\n\n# Task\n\n\nRequirements:\n\nRemove every bg and text coloring classes from the app div and add bg-main!\nAlso replace m-2 with p-2 there!\n\n\n",
-      "after": "\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2 bg-main\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />\n\n```\n\nsrc/frontend/components/CommitMessageInput.jsx:\n```\nimport { commitMessage, setCommitMessage } from '../model/commitMessage';\nimport monitorChange from '../model/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n  monitorChange();\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" className=\"w-full px-4 py-2 border rounded dark:bg-dark-emphasize bg-light-emphasize\" placeholder=\"Commit message...\" value={commitMessage()} onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\n\n```\n\nsrc/frontend/components/TasksList.jsx:\n```\nimport { onMount, createEffect } from 'solid-js';\nimport { fetchTasks } from '../fetchTasks';\nimport { handleTaskChange } from '../service/handleTaskChange';\nimport { selectedTask, setSelectedTask } from '../model/selectedTask';\nimport { promptDescriptor } from '../model/promptDescriptor';\nimport { parseYamlAndGetTask } from '../service/parseYamlAndGetTask';\n\nconst TasksList = () => {\n  const tasks = fetchTasks();\n\n  createEffect(() => {\n    const descriptor = promptDescriptor();\n    if (descriptor !== '') {\n      const task = parseYamlAndGetTask(descriptor);\n      setSelectedTask(task);\n    }\n  });\n\n  return (\n    <div class=\"w-full flex justify-start dark:bg-dark-emphasize bg-light-emphasize p-2 rounded\">\n      <label class=\"mr-2\">Task:</label>\n      <select class=\"w-full dark:bg-dark-emphasize bg-light-emphasize\" value={selectedTask()} onChange={e => handleTaskChange(e)}>\n        {tasks().map(task => <option value={task}>{task}</option>)}\n      </select>\n    </div>\n  );\n};\n\nexport default TasksList;\n\n```\n\n\n# Task\n\n\nRequirements:\n\nAdd &#34;text-text&#34; class to the app div\nRemove every coloring classes from CommitMessageInput and TasksList, and replace them with &#34;bg-emphasize text-emphasize&#34;\n\n\n",
-      "total_deletions": 3,
-      "total_additions": 59
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\nrequirements: |\n  Remove every bg and text coloring classes from the app div and add bg-main!\n  Also replace m-2 with p-2 there!\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/CommitMessageInput.jsx\n  - src/frontend/components/TasksList.jsx\nrequirements: |\n  Add \"text-text\" class to the app div\n  Remove every coloring classes from CommitMessageInput and TasksList, and replace them with \"bg-emphasize text-emphasize\"\nos: OSX",
-      "total_deletions": 2,
-      "total_additions": 4
-    },
-    {
-      "filename": "src/frontend/App.jsx",
-      "before": "\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2 bg-main\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />",
-      "after": "\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2 bg-main text-text\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/frontend/components/CommitMessageInput.jsx",
-      "before": "  };\n\n  return (\n    <input type=\"text\" className=\"w-full px-4 py-2 border rounded dark:bg-dark-emphasize bg-light-emphasize\" placeholder=\"Commit message...\" value={commitMessage()} onInput={handleChange} />\n  );\n};\n",
-      "after": "  };\n\n  return (\n    <input type=\"text\" className=\"w-full px-4 py-2 border rounded bg-emphasize text-emphasize\" placeholder=\"Commit message...\" value={commitMessage()} onInput={handleChange} />\n  );\n};\n",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/frontend/components/TasksList.jsx",
-      "before": "  });\n\n  return (\n    <div class=\"w-full flex justify-start dark:bg-dark-emphasize bg-light-emphasize p-2 rounded\">\n      <label class=\"mr-2\">Task:</label>\n      <select class=\"w-full dark:bg-dark-emphasize bg-light-emphasize\" value={selectedTask()} onChange={e => handleTaskChange(e)}>\n        {tasks().map(task => <option value={task}>{task}</option>)}\n      </select>\n    </div>",
-      "after": "  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded\">\n      <label class=\"mr-2\">Task:</label>\n      <select class=\"w-full bg-emphasize text-emphasize\" value={selectedTask()} onChange={e => handleTaskChange(e)}>\n        {tasks().map(task => <option value={task}>{task}</option>)}\n      </select>\n    </div>",
-      "total_deletions": 2,
-      "total_additions": 2
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

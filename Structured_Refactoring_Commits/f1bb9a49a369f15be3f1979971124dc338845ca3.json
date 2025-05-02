@@ -1,0 +1,45 @@
+{
+  "sha": "f1bb9a49a369f15be3f1979971124dc338845ca3",
+  "url": "https://github.com/tisztamo/Junior/commit/f1bb9a49a369f15be3f1979971124dc338845ca3",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Split App.js logically https://chat.openai.com/share/330fa004-d116-44c3-bb42-12b031c783d5",
+  "authorAt": "2023-07-06T17:54:18.000+02:00",
+  "commitAt": "2023-07-06T17:54:18.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Refactor App.jsx with Components",
+    "url": "https://chat.openai.com/share/330fa004-d116-44c3-bb42-12b031c783d5",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/f1bb9a49a369f15be3f1979971124dc338845ca3",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Split App.js logically https://chat.openai.com/share/330fa004-d116-44c3-bb42-12b031c783d5"
+    },
+    "status": 200,
+    "dateOfConversation": "July 6, 2023",
+    "dateOfAccess": "2023-07-27 13:32:10.403862",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 720,
+    "tokensOfAnswers": 802,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "f1bb9a49a369f15be3f1979971124dc338845ca3_s1_p1",
+        "prompt": "You're the 'Contributor', an AI system aiding authors.\n\nYou are working on the source of a program, too large for your memory, so only part of it, the \"Working Set\" is provided here.\n\nYou will see a partial directory structure. Ask for the contents of subdirs marked with /... if needed.\n\nSome files are printed in the working set.\n\nOther files are only listed in their dir, so you know they exists, ask for the contents if needed.\n\n# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 .vscode/...\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 babel.config.js\n\u251c\u2500\u2500 change.sh\n\u251c\u2500\u2500 dist/...\n\u251c\u2500\u2500 doc/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 secret.sh\n\u251c\u2500\u2500 src/...\n\u251c\u2500\u2500 tmp/...\n\n```\n```\nsrc/\n\u251c\u2500\u2500 attention/...\n\u251c\u2500\u2500 backend/...\n\u251c\u2500\u2500 config.js\n\u251c\u2500\u2500 execute/...\n\u251c\u2500\u2500 frontend/...\n\u251c\u2500\u2500 index.html\n\u251c\u2500\u2500 interactiveSession/...\n\u251c\u2500\u2500 main.js\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 utils/...\n\u251c\u2500\u2500 vite.config.js\n\n```\n```\nsrc/frontend/\n\u251c\u2500\u2500 App.jsx\n\u251c\u2500\u2500 PromptDescriptorViewer.jsx\n\u251c\u2500\u2500 fetchTasks.js\n\u251c\u2500\u2500 generatePrompt.js\n\u251c\u2500\u2500 index.jsx\n\n```\nsrc/frontend/App.jsx:\n```\nimport { createSignal } from 'solid-js';\nimport { marked } from 'marked';\nimport copy from 'clipboard-copy';\nimport { generatePrompt } from './generatePrompt';\nimport { fetchTasks } from './fetchTasks';\nimport PromptDescriptorViewer from './PromptDescriptorViewer';\n\nconst App = () => {\n  const [notes, setNotes] = createSignal('');\n  const [prompt, setPrompt] = createSignal('');\n  const tasks = fetchTasks();\n\n  const handleGeneratePrompt = async () => {\n    const response = await generatePrompt(notes());\n\n    copy(response.prompt)\n      .then(() => {\n        console.log('Prompt copied to clipboard!');\n      })\n      .catch(err => {\n        console.error('Failed to copy prompt: ', err);\n      });\n\n    const htmlPrompt = marked(response.prompt);\n\n    setPrompt(htmlPrompt);\n  };\n\n  return (\n    <>\n      <PromptDescriptorViewer />\n      <input type=\"text\" value={notes()} onInput={e => setNotes(e.target.value)} />\n      <button onClick={handleGeneratePrompt}>Start</button>\n      <div innerHTML={prompt()}></div>\n      <div>\n        <label>Tasks:</label>\n        <select>\n          {tasks().map(task => <option value={task}>{task}</option>)}\n        </select>\n      </div>\n    </>\n  );\n};\n\nexport default App;\n\n```\n\n\n# Task\n\n## Refactor by split\n\nA file is too big. We need to split it into parts.\nIdentify the possible parts and refactor the code in separate files!\n\nApp.jsx is the file. We also need to stop the growth of it!\n\n\n\n# Output Format\n\n./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles should be heredoc.\nAssume OSX. npm and jq are installed.\n\n",
+        "answer": "Given the structure of the App.jsx file, it can be split into several components to help manage its growth. These components can be identified as follows:PromptDescriptorViewer: This component is already separated.NotesInput: This component will contain the text input for the notes.StartButton: This component will contain the start button and its event handling logic.PromptDisplay: This component will display the generated prompt.TasksList: This component will display the tasks in a select dropdown.Here is the shell script to create these components.[CODE_BLOCK_0]This script creates new files for each component in a newly created components directory under frontend. It then updates the App.jsx file to use these new components. The state and necessary props are passed to these components from the App component, keeping the state centralized in the App component. This structure should be easier to maintain and expand upon in the future.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "bash",
+            "Content": "cat > ./change.sh << EOF\n#!/bin/bash\n\n# Ensure the frontend/components directory exists\nmkdir -p ./src/frontend/components\n\n# Create the NotesInput component\ncat > ./src/frontend/components/NotesInput.jsx << EOL\nimport { createSignal } from 'solid-js';\n\nconst NotesInput = () => {\n  const [notes, setNotes] = createSignal('');\n  \n  return (\n    <input type=\"text\" value={notes()} onInput={e => setNotes(e.target.value)} />\n  );\n};\n\nexport default NotesInput;\nEOL\n\n# Create the StartButton component\ncat > ./src/frontend/components/StartButton.jsx << EOL\nimport { generatePrompt } from '../generatePrompt';\nimport { marked } from 'marked';\nimport copy from 'clipboard-copy';\n\nconst StartButton = ({notes, setPrompt}) => {\n  const handleGeneratePrompt = async () => {\n    const response = await generatePrompt(notes());\n\n    copy(response.prompt)\n      .then(() => {\n        console.log('Prompt copied to clipboard!');\n      })\n      .catch(err => {\n        console.error('Failed to copy prompt: ', err);\n      });\n\n    const htmlPrompt = marked(response.prompt);\n\n    setPrompt(htmlPrompt);\n  };\n\n  return (\n    <button onClick={handleGeneratePrompt}>Start</button>\n  );\n};\n\nexport default StartButton;\nEOL\n\n# Create the PromptDisplay component\ncat > ./src/frontend/components/PromptDisplay.jsx << EOL\nconst PromptDisplay = ({prompt}) => {\n  return (\n    <div innerHTML={prompt()}></div>\n  );\n};\n\nexport default PromptDisplay;\nEOL\n\n# Create the TasksList component\ncat > ./src/frontend/components/TasksList.jsx << EOL\nimport { fetchTasks } from '../fetchTasks';\n\nconst TasksList = () => {\n  const tasks = fetchTasks();\n\n  return (\n    <div>\n      <label>Tasks:</label>\n      <select>\n        {tasks().map(task => <option value={task}>{task}</option>)}\n      </select>\n    </div>\n  );\n};\n\nexport default TasksList;\nEOL\n\n# Update the App.jsx file to use the new components\ncat > ./src/frontend/App.jsx << EOL\nimport { createSignal } from 'solid-js';\nimport PromptDescriptorViewer from './PromptDescriptorViewer';\nimport NotesInput from './components/NotesInput';\nimport StartButton from './components/StartButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\n\nconst App = () => {\n  const [notes, setNotes] = createSignal('');\n  const [prompt, setPrompt] = createSignal('');\n\n  return (\n    <>\n      <PromptDescriptorViewer />\n      <NotesInput notes={notes} setNotes={setNotes} />\n      <StartButton notes={notes} setPrompt={setPrompt} />\n      <PromptDisplay prompt={prompt} />\n      <TasksList />\n    </>\n  );\n};\n\nexport default App;\nEOL\n\nEOF\n\n# Make the change.sh file executable\nchmod +x ./change.sh\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

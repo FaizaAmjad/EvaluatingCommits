@@ -1,0 +1,45 @@
+{
+  "sha": "ed2c1780ea1e8080d79d73a3de8dcdb73cb191c8",
+  "url": "https://github.com/tisztamo/Junior/commit/ed2c1780ea1e8080d79d73a3de8dcdb73cb191c8",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Enhance line extraction functionality https://chat.openai.com/share/cc949b43-b791-4ae8-be70-6d3e7d5b658a",
+  "authorAt": "2023-10-02T12:29:56.000+02:00",
+  "commitAt": "2023-10-02T12:29:56.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Extend line extraction functionality.",
+    "url": "https://chat.openai.com/share/cc949b43-b791-4ae8-be70-6d3e7d5b658a",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/ed2c1780ea1e8080d79d73a3de8dcdb73cb191c8",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Enhance line extraction functionality https://chat.openai.com/share/cc949b43-b791-4ae8-be70-6d3e7d5b658a"
+    },
+    "status": 200,
+    "dateOfConversation": "October 2, 2023",
+    "dateOfAccess": "2023-10-12 23:54:50.994829",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 533,
+    "tokensOfAnswers": 581,
+    "model": "GPT-4",
+    "conversations": [
+      {
+        "prompt_id": "ed2c1780ea1e8080d79d73a3de8dcdb73cb191c8_s1_p1",
+        "prompt": "You are AI Junior, you code like Donald Knuth.\n\n# Working set\n\n./src/frontend/components/terminal/prependAndExtractLastLine.js:\n```\nexport function prependAndExtractLastLine(lastLine, currentData) {\n  const combinedData = `${lastLine}${currentData}`;\n  // Remove ANSI escape codes\n  const cleanedData = combinedData.replace(/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?/g, '');\n  const lines = cleanedData.split('\\n');\n  return lines[lines.length - 1];\n}\n\n```\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\n- Also split at \\r\n- When the last line, after trimming, ends with \"$\" or \"%\", or is empty, use the previous one. Go back to the first that does not match this criteria. Return empty string if no line found.\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*! eg.: in createGitRepo.js: export function createGitRepo ( ....\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\nWrite concise, self-documenting and idiomatic ES6 code!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nBefore your solution, write a short, very concise readme about the working set, your task, and most importantly its challanges, if any.\n\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n\n",
+        "answer": "ChatGPTReadme:Working Set:\nWe have a JavaScript module in \"./src/frontend/components/terminal/prependAndExtractLastLine.js\" that exports a function prependAndExtractLastLine which combines the lastLine and currentData, cleans ANSI escape codes, and then extracts the last line of the combined data.Task:\nThe task is to extend the functionality to:Split the lines not just at \\n but also at \\r.When the last line, after trimming, ends with \"$\", \"%\" or is empty, we should return the previous line. This step should be repeated recursively to go back till the first line that does not match the mentioned criteria. If no line fits the requirement, an empty string should be returned.Challenges:While splitting on two characters might sound straightforward, dealing with edge cases like \"\\r\\n\" can be tricky.The recursive nature of the second requirement makes it interesting. We have to ensure we don't end up with stack overflow for very large inputs.Solution Plan:Modify the split mechanism to cater for both \\n and \\r while considering edge cases like \"\\r\\n\".Implement a recursive function to go back through the lines to find a line that doesn't end with \"$\" or \"%\" or is not empty.Let's begin.[CODE_BLOCK_0]Note: The function getValidLastLine is a recursive helper function which is defined within the module and is not exported. It finds the valid last line based on the given criteria.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Enhance line extraction functionality\"\necho \"Plan:\"\necho \"1. Modify splitting mechanism to consider '\\\\n' and '\\\\r'.\"\necho \"2. Implement recursion to go back through lines.\"\n\ncat > ./src/frontend/components/terminal/prependAndExtractLastLine.js << 'EOF'\nexport function prependAndExtractLastLine(lastLine, currentData) {\n  const combinedData = `${lastLine}${currentData}`;\n  // Remove ANSI escape codes\n  const cleanedData = combinedData.replace(/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?/g, '');\n\n  // Split on both \\r and \\n but not on \\r\\n\n  const lines = cleanedData.split(/\\r(?!\\n)|\\n/);\n\n  return getValidLastLine(lines);\n}\n\nfunction getValidLastLine(lines) {\n  if (lines.length === 0) return '';\n\n  const lastLine = lines[lines.length - 1].trim();\n  if (lastLine === '' || lastLine.endsWith('$') || lastLine.endsWith('%')) {\n    return getValidLastLine(lines.slice(0, -1));  // recursive call with all but the last line\n  }\n  \n  return lastLine;\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

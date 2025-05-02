@@ -50,62 +50,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\n\n# Goal: Rename project to Junior\n# Plan:\n# 1. Update package.json\n# 2. Update README.md\n# 3. Scan the source code files in the ./src directory recursively and replace old package name with the new one where found.\n\n# Step 1: Update package.json\ntmp_package_json=$(mktemp)\njq '.name=\"@aijunior/dev\" | .repository.url=\"git+https://github.com/tisztamo/Junior.git\" | .bugs.url=\"https://github.com/tisztamo/Junior/issues\" | .homepage=\"https://github.com/tisztamo/Junior#readme\"' package.json > \"$tmp_package_json\" && mv \"$tmp_package_json\" package.json\n\n# Step 2: Update README.md\nsed -i '' 's/The Contributor - Your AI contributor which writes itself./The Junior - Your AI Junior which writes itself./g' README.md\n\n# Step 3: Scan source code and replace old package name\nfind ./src -name '*.js' -print0 | while IFS= read -r -d '' file\ndo\n    sed -i '' 's#@aijunior/contributor#@aijunior/dev#g' \"$file\"\ndone\n",
-      "after": "#!/bin/sh\n# Goal: Split a file into parts to enhance manageability\n# Plan:\n# 1. Identify the reusable functions in the original file.\n# 2. Create the necessary directory for the new file.\n# 3. Create a new file for the reusable function.\n# 4. Write the function in the new file.\n# 5. Import the function in the original file and use it.\n\n# Create necessary directory if it doesn't exist\nmkdir -p ./src/backend/fileutils\n\ncat > ./src/backend/fileutils/readDirRecursively.js << 'EOF'\nimport fs from 'fs';\nimport path from 'path';\n\nexport const readDirRecursively = (dir) => {\n    const files = [];\n\n    fs.readdirSync(dir).forEach(file => {\n        const filePath = path.join(dir, file);\n\n        if (fs.statSync(filePath).isDirectory()) {\n            files.push(...readDirRecursively(filePath));\n        } else {\n            files.push(filePath);\n        }\n    });\n\n    return files;\n};\nEOF\n\ncat > ./src/backend/listTasks.js << 'EOF'\nimport path from 'path';\n\nimport { fileURLToPath } from 'url';\nimport { dirname } from 'path';\n\nimport { readDirRecursively } from './fileutils/readDirRecursively.js';\n\nconst __filename = fileURLToPath(import.meta.url);\nconst __dirname = dirname(__filename);\n\nexport const listTasks = () => {\n    const tasksDir = path.join(__dirname, '../../prompt/task');\n    return readDirRecursively(tasksDir).map(file => path.relative(tasksDir, file));\n};\nEOF\n\necho \"Code has been refactored successfully.\"",
-      "total_deletions": 18,
-      "total_additions": 49
-    },
-    {
-      "filename": "prompt.md",
-      "before": "\u251c\u2500\u2500 tmp/...\n\n```\n./package.json:\n```\n{\n  \"name\": \"@aijunior/dev\",\n  \"version\": \"0.0.1\",\n  \"description\": \"Your AI Contributor\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"contrib\": \"src/main.js\"\n  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/backend/server.js --prompt=prompt.yaml -s & vite src --open \"\n  },\n  \"keywords\": [\n    \"cli\",\n    \"uppercase\"\n  ],\n  \"author\": \"\",\n  \"license\": \"GPL\",\n  \"dependencies\": {\n    \"autoprefixer\": \"^10.4.14\",\n    \"chatgpt\": \"^5.2.4\",\n    \"clipboard-copy\": \"^4.0.1\",\n    \"cors\": \"^2.8.5\",\n    \"ejs\": \"^3.1.9\",\n    \"express\": \"^4.18.2\",\n    \"js-yaml\": \"^4.1.0\",\n    \"marked\": \"^5.1.0\",\n    \"postcss\": \"^8.4.24\",\n    \"solid-js\": \"^1.7.7\",\n    \"tailwindcss\": \"^3.3.2\",\n    \"vite\": \"^4.3.9\",\n    \"vite-plugin-solid\": \"^2.7.0\"\n  },\n  \"directories\": {\n    \"doc\": \"doc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/tisztamo/contributor.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/contributor/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/contributor#readme\",\n  \"devDependencies\": {\n    \"babel-preset-solid\": \"^1.7.7\"\n  }\n}\n\n```\n\n./README.md:\n```\nWarn: This README is AI generated, just like all the source files of this project.\n\n# The Contributor - Your AI contributor which writes itself.\n\n## Description\n\nThe Contributor is an exploratory project aimed at revolutionizing the way programmers interact with the development process. Just like how Linus Torvalds oversees the Linux Kernel development without coding himself, this project allows developers to communicate with the AI and supervise the development process.\n\nBy providing specific task details in a prompt descriptor and highlighting the relevant parts of your project, you can delegate code implementation, documentation, testing, and more to your AI Contributor.\n\n## Getting Started\n\n### Installation\n\nTo install, clone the repository and run `npm install` in the root directory.\n\n### Usage\n\nThere are two ways to use this project: a command-line interface (CLI) and a web interface.\n\n#### Command-line interface (CLI)\n\nTo start the CLI, use `npm run cli`. This mode uses the ChatGPT API, and you'll need an API key stored in the `OPENAI_API_KEY` environment variable.\n\n#### Web Interface\n\nRun the application with `npm start` to start a local server on port 3000, where you can generate a prompt and automatically copy it to paste into ChatGPT. The web interface is designed for use with ChatGPT Pro and doesn't require an API key.\n\n### The Prompt Descriptor\n\nA prompt descriptor is a YAML file (`prompt.yaml`) outlining the details necessary for generating a task prompt for the AI model.\n\nHere's an example of a prompt descriptor:\n\n```yaml\ntask: prompt/task/feature/implement.md\nattention:\n  - src/interactiveSession/startInteractiveSession.js\n  - src/prompt/createPrompt.js\n  - src/attention/readAttention.js\n  - prompt.yaml\nrequirements: >\n  Write a README.md for this _exploratory_ project!\nformat: prompt/format/new_file_version.md\n```\n\nEach element in the descriptor serves a specific purpose:\n- `task`: Describes the task type and scope. For example, `feature/implement`, `bug/fix`, or `refactor/`. You can check out the [prompt/task/implement.md](prompt/task/implement.md) file as an example.\n- `attention`: Lists the files and directories most relevant to the task.\n- `requirements`: Describes the actual task in a human-readable format.\n- `format`: Determines how the output will be formatted.\n\n### Attention Mechanism\n\nThe attention mechanism guides the AI model by providing it with a working set. It helps overcome the limited working memory of large language models.\n\nThe working set is a subset of the entire project that's currently in focus. It includes both files and directories. For files, the content is directly provided to the AI. For directories, a brief list of files and subdirectories within them is presented.\n\n## Contributing and Support\n\nContributions are welcome! Please remember that this project is designed to write itself. Your main role will be to oversee the work, provide detailed prompts, and review the outcomes.\n\nFor support, please create an issue in the GitHub repository.\n\n**Note:** For meaningful results, it's recommended to use the GPT-4 model or a more recent version.\n```\n\n```\n./src/\n\u251c\u2500\u2500 attention/...\n\u251c\u2500\u2500 backend/...\n\u251c\u2500\u2500 config.js\n\u251c\u2500\u2500 execute/...\n\u251c\u2500\u2500 frontend/...\n\u251c\u2500\u2500 index.html\n\u251c\u2500\u2500 interactiveSession/...\n\u251c\u2500\u2500 main.js\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 vite.config.js\n\n```\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n- Every js file should only export a single function!\n- Use ES6 imports!\n\nRequirements:\n\nThe project was renamed to Junior (github: tisztamo/Junior) (npm: @aijunior/dev). Update the package.json, README.md and all the sources!\n\n\n",
-      "after": "\u251c\u2500\u2500 tmp/...\n\n```\nsrc/backend/listTasks.js:\n```\nimport path from 'path';\n\nimport { fileURLToPath } from 'url';\nimport { dirname } from 'path';\n\nimport { readDirRecursively } from './fileutils/readDirRecursively.js';\n\nconst __filename = fileURLToPath(import.meta.url);\nconst __dirname = dirname(__filename);\n\nexport const listTasks = () => {\n    const tasksDir = path.join(__dirname, '../../prompt/task');\n    return readDirRecursively(tasksDir).map(file => path.relative(tasksDir, file));\n};\n\n```\n\n\n# Task\n\n## Refactor by split\n\nA file is too big. We need to split it into parts.\nIdentify the possible parts and refactor the code in separate files!\n\nCreate backend/fileutils/readDirRecursively.js!\n\n\n",
-      "total_deletions": 137,
-      "total_additions": 15
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - ./package.json\n  - ./README.md\n  - ./src/\nrequirements: >\n  The project was renamed to Junior (github: tisztamo/Junior) (npm: @aijunior/dev).\n  Update the package.json, README.md and all the sources!\nformat: prompt/format/shell.md",
-      "after": "task: prompt/task/refactor/split.md\nattention:\n  - ./\n  - src/backend/listTasks.js\nrequirements: |\n  Create backend/fileutils/readDirRecursively.js!\nformat: prompt/format/shell.md",
-      "total_deletions": 7,
-      "total_additions": 4
-    },
-    {
-      "filename": "prompt/format/descriptive.md",
-      "before": "Respond with very concise prose tuned to a specific, interesting tone: The tone of ${tone || \"Churchill\"}.",
-      "after": "",
-      "total_deletions": 1,
-      "total_additions": 0
-    },
-    {
-      "filename": "prompt/format/prose.md",
-      "before": "",
-      "after": "Concise english prose with calming rythm.",
-      "total_deletions": 0,
-      "total_additions": 1
-    },
-    {
-      "filename": "prompt/task/question/answer.md",
-      "before": "",
-      "after": "Answer the following question!\n\n<%= requirements %>",
-      "total_deletions": 0,
-      "total_additions": 3
-    },
-    {
-      "filename": "src/backend/fileutils/readDirRecursively.js",
-      "before": "",
-      "after": "import fs from 'fs';\nimport path from 'path';\n\nexport const readDirRecursively = (dir) => {\n    const files = [];\n\n    fs.readdirSync(dir).forEach(file => {\n        const filePath = path.join(dir, file);\n\n        if (fs.statSync(filePath).isDirectory()) {\n            files.push(...readDirRecursively(filePath));\n        } else {\n            files.push(filePath);\n        }\n    });\n\n    return files;\n};",
-      "total_deletions": 0,
-      "total_additions": 18
-    },
-    {
-      "filename": "src/backend/listTasks.js",
-      "before": "import fs from 'fs';\nimport path from 'path';\n\nimport { fileURLToPath } from 'url';\nimport { dirname } from 'path';\n\nconst __filename = fileURLToPath(import.meta.url);\nconst __dirname = dirname(__filename);\n\nfunction readDirRecursively(dir) {\n    const files = [];\n\n    fs.readdirSync(dir).forEach(file => {\n        const filePath = path.join(dir, file);\n\n        if (fs.statSync(filePath).isDirectory()) {\n            files.push(...readDirRecursively(filePath));\n        } else {\n            files.push(filePath);\n        }\n    });\n\n    return files;\n}\n\nexport const listTasks = () => {\n    const tasksDir = path.join(__dirname, '../../prompt/task');\n    return readDirRecursively(tasksDir).map(file => path.relative(tasksDir, file));",
-      "after": "import path from 'path';\n\nimport { fileURLToPath } from 'url';\nimport { dirname } from 'path';\n\nimport { readDirRecursively } from './fileutils/readDirRecursively.js';\n\nconst __filename = fileURLToPath(import.meta.url);\nconst __dirname = dirname(__filename);\n\nexport const listTasks = () => {\n    const tasksDir = path.join(__dirname, '../../prompt/task');\n    return readDirRecursively(tasksDir).map(file => path.relative(tasksDir, file));",
-      "total_deletions": 17,
-      "total_additions": 2
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

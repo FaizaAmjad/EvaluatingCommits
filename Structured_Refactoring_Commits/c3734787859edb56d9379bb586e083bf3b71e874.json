@@ -50,34 +50,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\n# Goal: Limit width of div in PromptDisplay to screen size and allow text wrap\n# Plan:\n# 1. Add tailwind utility classes to the div in PromptDisplay.jsx to make the div responsive and allow text wrapping\n\ncat << 'EOF' > ./src/frontend/components/PromptDisplay.jsx\nimport { createSignal, onMount, createEffect } from \"solid-js\";\nimport { prompt } from '../stores/prompt';\n\nconst PromptDisplay = () => {\n  let div;\n\n  createEffect(() => {\n    if (div) {\n      div.innerHTML = prompt();\n    }\n  });\n\n  return (\n    <div className=\"w-full max-w-screen overflow-x-auto whitespace-normal markdown\" ref={div}></div>\n  );\n};\n\nexport default PromptDisplay;\nEOF",
-      "after": "#!/bin/sh\n# Goal: Replace pre tag with monospace font\n# Plan:\n# 1. Replace the pre tag in PromptDescriptor.jsx with a div tag.\n# 2. Add the Tailwind CSS class \"font-mono\" to the new div to apply monospace font.\n\ncat << EOF > ./src/frontend/components/PromptDescriptor.jsx\nimport { onMount, onCleanup } from 'solid-js';\nimport { fetchDescriptor } from '../service/fetchDescriptor';\nimport { useWebsocket } from '../service/useWebsocket';\nimport { promptDescriptor, setPromptDescriptor } from '../stores/promptDescriptor';\n\nconst PromptDescriptor = () => {\n\n  onMount(async () => {\n    const text = await fetchDescriptor();\n    setPromptDescriptor(text);\n  });\n\n  useWebsocket(async (e) => {\n    if (e.data === 'update') {\n      const text = await fetchDescriptor();\n      setPromptDescriptor(text);\n    }\n  });\n\n  onCleanup(() => {\n    setPromptDescriptor('');\n  });\n\n  return (\n    <div class=\"overflow-auto max-w-full\">\n      <div class=\"whitespace-pre-wrap overflow-x-scroll overflow-y-auto font-mono\">\n        {promptDescriptor()}\n      </div>\n    </div>\n  );\n};\n\nexport default PromptDescriptor;\nEOF",
-      "total_deletions": 12,
-      "total_additions": 28
-    },
-    {
-      "filename": "prompt.md",
-      "before": "\n```\n\nsrc/frontend/components/PromptDisplay.jsx:\n```\nimport { createSignal, onMount, createEffect } from \"solid-js\";\nimport { prompt } from '../stores/prompt';\n\nconst PromptDisplay = () => {\n  let div;\n\n  createEffect(() => {\n    if (div) {\n      div.innerHTML = prompt();\n    }\n  });\n\n  return (\n    <div className=\"w-full max-w-screen overflow-x-auto whitespace-normal markdown\" ref={div}></div>\n  );\n};\n\nexport default PromptDisplay;\n\n```\n\n\nRequirements:\n\nThe div in PromptDisplay should never be wider than the screen.\nAllow wrapping of the text!\nadd an extra div if needed.\nUse tailwind utility classes.",
-      "after": "\n```\n\nsrc/frontend/components/PromptDescriptor.jsx:\n```\nimport { onMount, onCleanup } from 'solid-js';\nimport { fetchDescriptor } from '../service/fetchDescriptor';\nimport { useWebsocket } from '../service/useWebsocket';\nimport { promptDescriptor, setPromptDescriptor } from '../stores/promptDescriptor';\n\nconst PromptDescriptor = () => {\n\n  onMount(async () => {\n    const text = await fetchDescriptor();\n    setPromptDescriptor(text);\n  });\n\n  useWebsocket(async (e) => {\n    if (e.data === 'update') {\n      const text = await fetchDescriptor();\n      setPromptDescriptor(text);\n    }\n  });\n\n  onCleanup(() => {\n    setPromptDescriptor('');\n  });\n\n  return (\n    <div class=\"overflow-auto max-w-full\">\n      <div class=\"whitespace-pre-wrap overflow-x-scroll overflow-y-auto font-mono\">\n        {promptDescriptor()}\n      </div>\n    </div>\n  );\n};\n\nexport default PromptDescriptor;\n\n```\n\n\nRequirements:\n\nThe pre should not be wider than the screen.\nAllow wrapping of the text!\nadd an extra div if needed.\nUse tailwind utility classes.",
-      "total_deletions": 11,
-      "total_additions": 26
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/PromptDisplay.jsx\nrequirements: |\n  The div in PromptDisplay should never be wider than the screen.\n  Allow wrapping of the text!\n  add an extra div if needed.\n  Use tailwind utility classes.",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/PromptDescriptor.jsx\nrequirements: |\n  The pre should not be wider than the screen.\n  Allow wrapping of the text!\n  add an extra div if needed.\n  Use tailwind utility classes.",
-      "total_deletions": 2,
-      "total_additions": 2
-    },
-    {
-      "filename": "src/frontend/components/PromptDescriptor.jsx",
-      "before": "\n  return (\n    <div class=\"overflow-auto max-w-full\">\n      <pre>{promptDescriptor()}</pre>\n    </div>\n  );\n};",
-      "after": "\n  return (\n    <div class=\"overflow-auto max-w-full\">\n      <div class=\"whitespace-pre-wrap overflow-x-scroll overflow-y-auto font-mono\">\n        {promptDescriptor()}\n      </div>\n    </div>\n  );\n};",
-      "total_deletions": 1,
-      "total_additions": 3
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

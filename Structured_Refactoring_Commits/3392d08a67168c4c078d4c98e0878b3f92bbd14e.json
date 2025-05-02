@@ -101,20 +101,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "game.js",
-      "before": "export default class Game {\n    constructor(initializeImmediately = false) {\n        this.user = this.getUser();\n        if (initializeImmediately) {\n            this.initialize();\n        }\n    }\n\n    startPlaying() {\n        document.querySelector(\"#backfillResultsButton\").addEventListener('click', () => this.backfillResults());\n    }\n}\n\nif (typeof window !== 'undefined') {\n    window.game = new Game();\n}",
-      "after": "export default class Game {\n    constructor() {\n        this.user = this.getUser();\n    }\n\n    startPlaying() {\n        document.querySelector(\"#backfillResultsButton\").addEventListener('click', () => this.backfillResults());\n    }\n}\n",
-      "total_deletions": 8,
-      "total_additions": 1
-    },
-    {
-      "filename": "index.html",
-      "before": "    <button id=\"backfillResultsButton\">Backfill Results</button>\n    <p id=\"feedback\"></p>\n    <!-- Link to the external JavaScript file -->\n    <script type=\"module\" src=\"game.js\"></script>\n</body>\n</html>",
-      "after": "    <button id=\"backfillResultsButton\">Backfill Results</button>\n    <p id=\"feedback\"></p>\n    <!-- Link to the external JavaScript file -->\n    <script type=\"module\">\n        import { Game } from './game.js';\n        window.game = new Game();\n        window.game.initialize();\n    </script>\n</body>\n</html>",
-      "total_deletions": 1,
-      "total_additions": 5
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

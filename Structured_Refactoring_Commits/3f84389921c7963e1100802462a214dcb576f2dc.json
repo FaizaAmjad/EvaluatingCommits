@@ -68,13 +68,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "docs/descriptor.md",
-      "before": "\n## Attributes referencing .md files\n\nWhen a yaml attribute refers to an existing file, its content will be used. For example, the line `task: prompt/task/feature/implement.md` in the example yaml refers to an existing markdown file and its content is injected into the task.\n\nHere's the content of prompt/task/feature/implement.md as a supplement to the example:\n\n```\nImplement the following feature!\n<%= projectSpecifics %>\n```\n\n## Template Files\n\nPrompt parts are markdown template files, and [ejs](https://ejs.co/) runs on them. Attributes from the yaml file are available in the template, e.g., `<%= requirements %>` injects the requirements.\n\n## Custom Attributes",
-      "after": "\n## Attributes referencing .md files\n\nWhen a yaml attribute refers to an existing file, its content will be used. For example, the line `task: prompt/task/feature/implement.md` in the example yaml refers to an existing markdown file and its content is injected into the task section of the prompt.\n\n## Template Files\n\n```\nImplement the following feature!\n<%= projectSpecifics %>\n```\n\nPrompt parts are markdown template files, and [ejs](https://ejs.co/) runs on them. Attributes from the yaml file are available in the template, e.g., `<%= requirements %>` injects the requirements.\n\n## Custom Attributes",
-      "total_deletions": 4,
-      "total_additions": 2
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

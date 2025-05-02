@@ -1,0 +1,45 @@
+{
+  "sha": "876ee5b93281dddb5b40159484b09a0c3ed6121b",
+  "url": "https://github.com/tisztamo/Junior/commit/876ee5b93281dddb5b40159484b09a0c3ed6121b",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Factor out promptDescriptor defaults to a separate file https://chat.openai.com/share/2863135b-e9a9-4752-a145-90b670ee3508",
+  "authorAt": "2023-07-24T10:28:07.000+02:00",
+  "commitAt": "2023-07-24T10:28:07.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Factor Out Defaults.",
+    "url": "https://chat.openai.com/share/2863135b-e9a9-4752-a145-90b670ee3508",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/876ee5b93281dddb5b40159484b09a0c3ed6121b",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Factor out promptDescriptor defaults to a separate file https://chat.openai.com/share/2863135b-e9a9-4752-a145-90b670ee3508"
+    },
+    "status": 200,
+    "dateOfConversation": "July 24, 2023",
+    "dateOfAccess": "2023-07-27 13:33:06.447433",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 645,
+    "tokensOfAnswers": 489,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "876ee5b93281dddb5b40159484b09a0c3ed6121b_s1_p1",
+        "prompt": "# Working set\n\nsrc/prompt/createPrompt.js:\n```\nimport { readAttention } from \"../attention/readAttention.js\"\nimport yaml from 'js-yaml';\nimport { getSystemPromptIfNeeded } from './getSystemPromptIfNeeded.js';\nimport { resolveTemplateVariables } from './resolveTemplateVariables.js';\nimport { extractTemplateVars } from './extractTemplateVars.js';\nimport { loadPromptDescriptor } from './loadPromptDescriptor.js';\nimport { loadTaskTemplate } from './loadTaskTemplate.js';\nimport { loadFormatTemplate } from './loadFormatTemplate.js';\n\nconst createPrompt = async (userInput) => {\n  const promptDescriptor = yaml.load(await loadPromptDescriptor());\n  let templateVars = extractTemplateVars(promptDescriptor);\n\n  templateVars = await resolveTemplateVariables(templateVars);\n\n  const attention = await readAttention(promptDescriptor.attention);\n  const task = await loadTaskTemplate(promptDescriptor.task, templateVars);\n  \n  // Check if promptDescriptor.format is undefined. If it is, assign a default value\n  if(!promptDescriptor.format) {\n    promptDescriptor.format = \"prompt/format/shell.md\";\n  }\n  \n  const format = await loadFormatTemplate(promptDescriptor.format, templateVars);\n  const system = await getSystemPromptIfNeeded();\n  const saveto = promptDescriptor.saveto;\n  return {\n    prompt: `${system}# Working set\\n\\n${attention.join(\"\\n\")}\\n\\n# Task\\n\\n${task}\\n\\n# Output Format\\n\\n${format}\\n\\n${userInput ? userInput : \"\"}`,\n    saveto\n  };\n}\n\nexport { createPrompt };\n\n\n```\n\nsrc/prompt/extractTemplateVars.js:\n```\n// Extracts template variables from the prompt descriptor.\nfunction extractTemplateVars(promptDescriptor) {\n  return Object.keys(promptDescriptor)\n    .filter(key => ['task', 'format', 'attention', 'saveto'].indexOf(key) < 0)\n    .reduce((obj, key) => {\n      obj[key] = promptDescriptor[key];\n      return obj;\n    }, {});\n}\n\nexport { extractTemplateVars };\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n- Every js file should only export a single function!\n- Use ES6 imports!\n\nRequirements:\n\nCreate a new file promptDescriptorDefaults.js, and factor out the\nformat default handling to it.\nAlso add defaults for\n{ &#34;os&#34;: &#34;Debian&#34;, &#34;installedTools&#34;: &#34;npm, jq&#34;}\nFill in the defaults right after loading the yaml!\n\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files without substitution.\nOS: OSX\nInstalled tools: npm, jq\nDo NOT write any text outside the script (the plan goes into it)!\n\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\n# Goal: [Task description, max 7 words]\n# Plan:\n# 1. [...]\n\n[Commands solving the task]\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\n# Goal: Factor out promptDescriptor defaults to a separate file\n# Plan:\n# 1. Create a new file promptDescriptorDefaults.js\n# 2. Add the default handling of the format and add defaults for \"os\" and \"installedTools\"\n# 3. Modify createPrompt.js to import and use the defaults from promptDescriptorDefaults.js\n\n# Step 1: Create promptDescriptorDefaults.js\ncat > ./src/prompt/promptDescriptorDefaults.js << 'EOF'\nconst promptDescriptorDefaults = {\n  format: \"prompt/format/shell.md\",\n  os: \"Debian\",\n  installedTools: \"npm, jq\"\n};\n\nexport default promptDescriptorDefaults;\nEOF\n\n# Step 2: Modify createPrompt.js to import and use the defaults\ncat > ./src/prompt/createPrompt.js << 'EOF'\nimport { readAttention } from \"../attention/readAttention.js\"\nimport yaml from 'js-yaml';\nimport { getSystemPromptIfNeeded } from './getSystemPromptIfNeeded.js';\nimport { resolveTemplateVariables } from './resolveTemplateVariables.js';\nimport { extractTemplateVars } from './extractTemplateVars.js';\nimport { loadPromptDescriptor } from './loadPromptDescriptor.js';\nimport { loadTaskTemplate } from './loadTaskTemplate.js';\nimport { loadFormatTemplate } from './loadFormatTemplate.js';\nimport promptDescriptorDefaults from './promptDescriptorDefaults.js';\n\nconst createPrompt = async (userInput) => {\n  let promptDescriptor = yaml.load(await loadPromptDescriptor());\n\n  // Fill in the defaults from promptDescriptorDefaults.js\n  promptDescriptor = { ...promptDescriptorDefaults, ...promptDescriptor };\n\n  let templateVars = extractTemplateVars(promptDescriptor);\n  templateVars = await resolveTemplateVariables(templateVars);\n\n  const attention = await readAttention(promptDescriptor.attention);\n  const task = await loadTaskTemplate(promptDescriptor.task, templateVars);\n\n  const format = await loadFormatTemplate(promptDescriptor.format, templateVars);\n  const system = await getSystemPromptIfNeeded();\n  const saveto = promptDescriptor.saveto;\n  return {\n    prompt: `${system}# Working set\\n\\n${attention.join(\"\\n\")}\\n\\n# Task\\n\\n${task}\\n\\n# Output Format\\n\\n${format}\\n\\n${userInput ? userInput : \"\"}`,\n    saveto\n  };\n}\n\nexport { createPrompt };\nEOF\n\n# Task solved\necho \"Task solved.\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

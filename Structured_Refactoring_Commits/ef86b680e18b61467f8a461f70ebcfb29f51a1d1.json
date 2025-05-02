@@ -1,0 +1,45 @@
+{
+  "sha": "ef86b680e18b61467f8a461f70ebcfb29f51a1d1",
+  "url": "https://github.com/tisztamo/Junior/commit/ef86b680e18b61467f8a461f70ebcfb29f51a1d1",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Refactor ExecuteButton component https://chat.openai.com/share/b30d4ff4-02d8-4505-91c5-204ce24e9282",
+  "authorAt": "2023-09-11T14:41:51.000+02:00",
+  "commitAt": "2023-09-11T14:41:51.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Refactor ExecuteButton.jsx",
+    "url": "https://chat.openai.com/share/b30d4ff4-02d8-4505-91c5-204ce24e9282",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/ef86b680e18b61467f8a461f70ebcfb29f51a1d1",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor ExecuteButton component https://chat.openai.com/share/b30d4ff4-02d8-4505-91c5-204ce24e9282"
+    },
+    "status": 200,
+    "dateOfConversation": "September 11, 2023",
+    "dateOfAccess": "2023-09-14 08:16:42.190243",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 653,
+    "tokensOfAnswers": 333,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "ef86b680e18b61467f8a461f70ebcfb29f51a1d1_s1_p1",
+        "prompt": "You are AI Junior, you code like Donald Knuth.\n# Working set\n\nsrc/frontend/components/ExecuteButton.jsx:\n```\nimport { createEffect } from 'solid-js';\nimport handleExecuteChange from '../service/handleExecuteChange';\nimport { setChangeInput, changeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handlePaste = async (e) => {\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);\n    handleExecuteChange();\n    setChangeInput(''); // To clear the input after execution\n  };\n\n  // To clear the input content after execution\n  createEffect(() => {\n    if (changeInput()) {\n      handleExecuteChange();\n      setChangeInput('');\n    }\n  });\n\n  return (\n    <button className=\"w-full px-4 py-4 pb-3 bg-orange-300 text-lg text-bg font-semibold rounded\" onClick={handleExecuteChange}>\n      {clipboardAvailable ? (\n        'Paste & Execute Change [X]'\n      ) : (\n        <textarea\n          rows=\"1\"\n          className=\"w-full px-2 py-2 bg-orange-500 text-lg text-bg font-semibold resize-none\"  // Darker background than the button\n          placeholder=\"Paste here to execute\"\n          value={changeInput()}\n          onPaste={handlePaste}\n        />\n      )}\n    </button>\n  );\n};\n\nexport default ExecuteButton;\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nIn executebutton, remove the createEffect which tries to delete the change after commit, it is not working and not needed.\nAlso await the handleExecuteChange\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Refactor ExecuteButton component\"\necho \"Plan:\"\necho \"1. Remove the createEffect from ExecuteButton.jsx\"\necho \"2. Modify handlePaste to await handleExecuteChange\"\n\ncat > src/frontend/components/ExecuteButton.jsx << 'EOF'\nimport { createEffect } from 'solid-js';\nimport handleExecuteChange from '../service/handleExecuteChange';\nimport { setChangeInput, changeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handlePaste = async (e) => {\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);\n    await handleExecuteChange();\n    setChangeInput(''); // To clear the input after execution\n  };\n\n  return (\n    <button className=\"w-full px-4 py-4 pb-3 bg-orange-300 text-lg text-bg font-semibold rounded\" onClick={handleExecuteChange}>\n      {clipboardAvailable ? (\n        'Paste & Execute Change [X]'\n      ) : (\n        <textarea\n          rows=\"1\"\n          className=\"w-full px-2 py-2 bg-orange-500 text-lg text-bg font-semibold resize-none\"  // Darker background than the button\n          placeholder=\"Paste here to execute\"\n          value={changeInput()}\n          onPaste={handlePaste}\n        />\n      )}\n    </button>\n  );\n};\n\nexport default ExecuteButton;\n\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

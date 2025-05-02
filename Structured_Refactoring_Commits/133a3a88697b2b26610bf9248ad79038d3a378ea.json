@@ -50,83 +50,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\nset -e\ngoal=\"Fix html encoding in generated prompt\"\necho \"Plan:\"\necho \"1. Set up a consistent EJS configuration object\"\necho \"2. Adjust the loadPromptFile function to use this configuration\"\n\n# Step 1: Set up a consistent EJS configuration object\n\ncat <<EOF > src/prompt/ejsConfig.js\nconst ejsConfig = {\n    async: true,\n    escape: str => str\n};\n\nexport default ejsConfig;\nEOF\n\n# Step 2: Adjust the loadPromptFile function to use this configuration\n\ncat <<EOF > src/prompt/loadPromptFile.js\nimport fs from 'fs';\nimport path from 'path';\nimport ejs from 'ejs';\nimport { fileURLToPath } from 'url';\nimport ejsConfig from './ejsConfig.js';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\n\nconst loadPromptFile = async (filePath, templateVars) => {\n  try {\n    // Try to read the file relative to the current directory\n    return await ejs.renderFile(filePath, templateVars, ejsConfig);\n  } catch (err) {\n    // If the file doesn't exist, try reading it from the project root directory\n    const rootPath = path.resolve(__dirname, '../../', filePath);\n    return await ejs.renderFile(rootPath, templateVars, ejsConfig);\n  }\n};\n\nexport { loadPromptFile };\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Fix TypeScript error for promptFile\"\necho \"Plan:\"\necho \"1. Create types.ts to define the PromptFile interface\"\necho \"2. Update readPromptFile.ts to specify return type\"\necho \"3. Update writeAttention.ts to use the new interface\"\n\n# Step 1: Create types.ts\ncat << 'EOF' > integrations/vscode/src/types.ts\nexport interface PromptFile {\n    attention?: string[];\n    [key: string]: any;  // Allow additional properties\n}\nEOF\n\n# Step 2: Update readPromptFile.ts\ncat << 'EOF' > integrations/vscode/src/readPromptFile.ts\nimport * as fs from 'fs';\nimport * as yaml from 'js-yaml';\nimport { PromptFile } from './types';\n\nexport const readPromptFile = (filePath: string): PromptFile => {\n    return yaml.load(fs.readFileSync(filePath, 'utf8')) as PromptFile;\n};\nEOF\n\n# Step 3: Update writeAttention.ts\ncat << 'EOF' > integrations/vscode/src/writeAttention.ts\nimport * as vscode from 'vscode';\nimport { getRootWorkspace } from './getRootWorkspace';\nimport { getPromptFilePath } from './getPromptFilePath';\nimport { getCurrentOpenDocuments } from './getCurrentOpenDocuments';\nimport { readPromptFile } from './readPromptFile';\nimport { writePromptFile } from './writePromptFile';\nimport { updateAttentionSection } from './updateAttentionSection';\nimport { PromptFile } from './types';\n\nexport const writeAttention = async () => {\n    const rootFolder = getRootWorkspace();\n    if (!rootFolder) {\n        return;\n    }\n\n    const promptFilePath = getPromptFilePath(rootFolder);\n    const excludeList = vscode.workspace.getConfiguration('junior').get('attentionExcludeList', []);\n    try {\n        if (promptFilePath) {\n            const currentWindows = getCurrentOpenDocuments(rootFolder);\n            const attentionSection = updateAttentionSection(currentWindows, excludeList, rootFolder);\n            const promptFile: PromptFile = readPromptFile(promptFilePath);\n            promptFile.attention = attentionSection;\n            writePromptFile(promptFilePath, promptFile);\n            vscode.window.showInformationMessage('Prompt file updated successfully!');\n        } else {\n            vscode.window.showErrorMessage('No prompt.yaml file found in the project root!');\n        }\n    } catch (error) {\n        vscode.window.showErrorMessage('Error updating the prompt.yaml file!');\n    }\n};\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "total_deletions": 30,
-      "total_additions": 50
-    },
-    {
-      "filename": "integrations/vscode/src/getCurrentOpenDocuments.ts",
-      "before": "",
-      "after": "import * as vscode from 'vscode';\nimport * as path from 'path';\n\nexport const getCurrentOpenDocuments = (rootFolder: string) => {\n    return vscode.workspace.textDocuments.map(doc => path.relative(rootFolder, doc.fileName));\n};",
-      "total_deletions": 0,
-      "total_additions": 6
-    },
-    {
-      "filename": "integrations/vscode/src/getPromptFilePath.ts",
-      "before": "",
-      "after": "import * as path from 'path';\n\nexport const getPromptFilePath = (rootFolder: string) => {\n    return path.join(rootFolder, 'prompt.yaml');\n};",
-      "total_deletions": 0,
-      "total_additions": 5
-    },
-    {
-      "filename": "integrations/vscode/src/getRootWorkspace.ts",
-      "before": "",
-      "after": "import * as vscode from 'vscode';\n\nexport const getRootWorkspace = () => {\n    const workspaceFolders = vscode.workspace.workspaceFolders;\n    if (workspaceFolders === undefined) {\n        return;\n    }\n    return workspaceFolders[0].uri.fsPath;\n};",
-      "total_deletions": 0,
-      "total_additions": 9
-    },
-    {
-      "filename": "integrations/vscode/src/readPromptFile.ts",
-      "before": "",
-      "after": "import * as fs from 'fs';\nimport * as yaml from 'js-yaml';\nimport { PromptFile } from './types';\n\nexport const readPromptFile = (filePath: string): PromptFile => {\n    return yaml.load(fs.readFileSync(filePath, 'utf8')) as PromptFile;\n};",
-      "total_deletions": 0,
-      "total_additions": 7
-    },
-    {
-      "filename": "integrations/vscode/src/types.ts",
-      "before": "",
-      "after": "export interface PromptFile {\n    attention?: string[];\n    [key: string]: any;  // Allow additional properties\n}",
-      "total_deletions": 0,
-      "total_additions": 4
-    },
-    {
-      "filename": "integrations/vscode/src/updateAttentionSection.ts",
-      "before": "",
-      "after": "import { filterAttentionExcludes } from './filterAttentionExcludes';\n\nexport const updateAttentionSection = (currentWindows: string[], excludeList: string[], rootFolder: string) => {\n    return filterAttentionExcludes(currentWindows, excludeList, rootFolder);\n};",
-      "total_deletions": 0,
-      "total_additions": 5
-    },
-    {
-      "filename": "integrations/vscode/src/writeAttention.ts",
-      "before": "import * as vscode from 'vscode';\nimport * as fs from 'fs';\nimport * as path from 'path';\nimport * as yaml from 'js-yaml';\nimport { filterAttentionExcludes } from './filterAttentionExcludes';\n\nexport const writeAttention = async () => {\n    const workspaceFolders = vscode.workspace.workspaceFolders;\n    if (workspaceFolders === undefined) {\n        return;\n    }\n    \n    const rootFolder = workspaceFolders[0].uri.fsPath;\n    const promptFilePath = path.join(rootFolder, 'prompt.yaml');\n    const excludeList = vscode.workspace.getConfiguration('junior').get('attentionExcludeList', []);\n    try {\n        if (fs.existsSync(promptFilePath)) {\n            const currentWindows = vscode.workspace.textDocuments.map(doc => path.relative(rootFolder, doc.fileName));\n            const filteredWindows = filterAttentionExcludes(currentWindows, excludeList, rootFolder);\n            const promptFile: any = yaml.load(fs.readFileSync(promptFilePath, 'utf8'));\n            promptFile.attention = filteredWindows;\n            fs.writeFileSync(promptFilePath, yaml.dump(promptFile), 'utf8');\n            vscode.window.showInformationMessage('Prompt file updated successfully!');\n        } else {\n            vscode.window.showErrorMessage('No prompt.yaml file found in the project root!');",
-      "after": "import * as vscode from 'vscode';\nimport { getRootWorkspace } from './getRootWorkspace';\nimport { getPromptFilePath } from './getPromptFilePath';\nimport { getCurrentOpenDocuments } from './getCurrentOpenDocuments';\nimport { readPromptFile } from './readPromptFile';\nimport { writePromptFile } from './writePromptFile';\nimport { updateAttentionSection } from './updateAttentionSection';\nimport { PromptFile } from './types';\n\nexport const writeAttention = async () => {\n    const rootFolder = getRootWorkspace();\n    if (!rootFolder) {\n        return;\n    }\n\n    const promptFilePath = getPromptFilePath(rootFolder);\n    const excludeList = vscode.workspace.getConfiguration('junior').get('attentionExcludeList', []);\n    try {\n        if (promptFilePath) {\n            const currentWindows = getCurrentOpenDocuments(rootFolder);\n            const attentionSection = updateAttentionSection(currentWindows, excludeList, rootFolder);\n            const promptFile: PromptFile = readPromptFile(promptFilePath);\n            promptFile.attention = attentionSection;\n            writePromptFile(promptFilePath, promptFile);\n            vscode.window.showInformationMessage('Prompt file updated successfully!');\n        } else {\n            vscode.window.showErrorMessage('No prompt.yaml file found in the project root!');",
-      "total_deletions": 15,
-      "total_additions": 17
-    },
-    {
-      "filename": "integrations/vscode/src/writePromptFile.ts",
-      "before": "",
-      "after": "import * as fs from 'fs';\nimport * as yaml from 'js-yaml';\n\nexport const writePromptFile = (filePath: string, data: any) => {\n    fs.writeFileSync(filePath, yaml.dump(data), 'utf8');\n};",
-      "total_deletions": 0,
-      "total_additions": 6
-    },
-    {
-      "filename": "prompt.md",
-      "before": "\n# Working set\n\nsrc/prompt/createPrompt.js:\n```\nimport { readAttention } from \"../attention/readAttention.js\"\nimport yaml from 'js-yaml';\nimport { getSystemPromptIfNeeded } from './getSystemPromptIfNeeded.js';\nimport { resolveTemplateVariables } from './resolveTemplateVariables.js';\nimport { extractTemplateVars } from './extractTemplateVars.js';\nimport { loadPromptDescriptor } from './loadPromptDescriptor.js';\nimport { loadTaskTemplate } from './loadTaskTemplate.js';\nimport { loadFormatTemplate } from './loadFormatTemplate.js';\nimport promptDescriptorDefaults from './promptDescriptorDefaults.js';\n\nconst createPrompt = async (userInput, forceSystemPrompt) => {\n  let promptDescriptor = yaml.load(await loadPromptDescriptor());\n  let promptDescriptorDefaultsData = await promptDescriptorDefaults();\n\n  promptDescriptor = { ...promptDescriptorDefaultsData, ...promptDescriptor };\n\n  let templateVars = extractTemplateVars(promptDescriptor);\n  templateVars = await resolveTemplateVariables(templateVars);\n\n  const attention = await readAttention(promptDescriptor.attention);\n  const task = await loadTaskTemplate(promptDescriptor.task, templateVars);\n\n  const format = await loadFormatTemplate(promptDescriptor.format, templateVars);\n  const system = await getSystemPromptIfNeeded(forceSystemPrompt);\n  const saveto = promptDescriptor.saveto;\n  return {\n    prompt: `${system}# Working set\\n\\n${attention.join(\"\\n\")}\\n\\n# Task\\n\\n${task}\\n\\n# Output Format\\n\\n${format}\\n\\n${userInput ? userInput : \"\"}`,\n    saveto\n  };\n}\n\nexport { createPrompt };\n\n```\n\nsrc/prompt/resolveTemplateVariables.js:\n```\nimport fs from 'fs';\nimport util from 'util';\nimport path from 'path';\nconst readFile = util.promisify(fs.readFile);\n\nasync function resolveTemplateVariables(vars) {\n  for (const key in vars) {\n    if (typeof vars[key] === 'string' && fs.existsSync(vars[key]) && fs.lstatSync(vars[key]).isFile()) {\n      vars[key] = await readFile(path.resolve(vars[key]), 'utf-8');\n    }\n  }\n  return vars;\n}\n\nexport { resolveTemplateVariables };\n\n```\n\nsrc/prompt/extractTemplateVars.js:\n```\n// Extracts template variables from the prompt descriptor.\nfunction extractTemplateVars(promptDescriptor) {\n  return Object.keys(promptDescriptor)\n    .filter(key => ['task', 'format', 'attention', 'saveto'].indexOf(key) < 0)\n    .reduce((obj, key) => {\n      obj[key] = promptDescriptor[key];\n      return obj;\n    }, {});\n}\n\nexport { extractTemplateVars };\n\n```\n\nsrc/prompt/loadTaskTemplate.js:\n```\nimport { loadPromptFile } from './loadPromptFile.js';\n\nconst loadTaskTemplate = async (taskTemplatePath, templateVars) => {\n  return await loadPromptFile(taskTemplatePath, templateVars);\n};\n\nexport { loadTaskTemplate };\n\n```\n\nsrc/prompt/loadPromptFile.js:\n```\nimport fs from 'fs';\nimport path from 'path';\nimport ejs from 'ejs';\nimport { fileURLToPath } from 'url';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\n\nconst loadPromptFile = async (filePath, templateVars) => {\n  try {\n    // Try to read the file relative to the current directory\n    return await ejs.renderFile(filePath, templateVars, {async: true});\n  } catch (err) {\n    // If the file doesn't exist, try reading it from the project root directory\n    const rootPath = path.resolve(__dirname, '../../', filePath);\n    return await ejs.renderFile(rootPath, templateVars, {async: true});\n  }\n};\n\nexport { loadPromptFile };\n\n```\n\n\n# Task\n\nFix the following issue!\n\nExtra html encoding appears on injected variables int the generated prompt.\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx file accordingly!\n\n\n# Output Format",
-      "after": "\n# Working set\n\nintegrations/vscode/src/writeAttention.ts:\n```\nimport * as vscode from 'vscode';\nimport * as fs from 'fs';\nimport * as path from 'path';\nimport * as yaml from 'js-yaml';\nimport { filterAttentionExcludes } from './filterAttentionExcludes';\n\nexport const writeAttention = async () => {\n    const workspaceFolders = vscode.workspace.workspaceFolders;\n    if (workspaceFolders === undefined) {\n        return;\n    }\n    \n    const rootFolder = workspaceFolders[0].uri.fsPath;\n    const promptFilePath = path.join(rootFolder, 'prompt.yaml');\n    const excludeList = vscode.workspace.getConfiguration('junior').get('attentionExcludeList', []);\n    try {\n        if (fs.existsSync(promptFilePath)) {\n            const currentWindows = vscode.workspace.textDocuments.map(doc => path.relative(rootFolder, doc.fileName));\n            const filteredWindows = filterAttentionExcludes(currentWindows, excludeList, rootFolder);\n            const promptFile: any = yaml.load(fs.readFileSync(promptFilePath, 'utf8'));\n            promptFile.attention = filteredWindows;\n            fs.writeFileSync(promptFilePath, yaml.dump(promptFile), 'utf8');\n            vscode.window.showInformationMessage('Prompt file updated successfully!');\n        } else {\n            vscode.window.showErrorMessage('No prompt.yaml file found in the project root!');\n        }\n    } catch (error) {\n        vscode.window.showErrorMessage('Error updating the prompt.yaml file!');\n    }\n};\n\n```\n\n\n# Task\n\n## Refactor by split\n\nA file is too big. We need to split it into parts.\nIdentify the possible parts and refactor the code in separate files!\n\ngetRootWorkspace(): Returns the root of the current VSCode workspace.\ngetPromptFilePath(rootFolder: string): Takes the root folder and returns the path to the prompt.yaml file.\ngetCurrentOpenDocuments(rootFolder: string): Returns a list of currently open text documents relative to the root workspace.\nreadPromptFile(filePath: string): Reads and parses the prompt.yaml file, returning its content.\nwritePromptFile(filePath: string, data: any): Writes the updated data back to the prompt.yaml file.\nupdateAttentionSection(currentWindows: string[], excludeList: string[], rootFolder: string): Takes in the list of open documents, the exclusion list, and the root folder, then filters and returns the updated \"attention\" list.\n\n\n\n# Output Format",
-      "total_deletions": 111,
-      "total_additions": 38
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/prompt/createPrompt.js\n  - src/prompt/resolveTemplateVariables.js\n  - src/prompt/extractTemplateVars.js\n  - src/prompt/loadTaskTemplate.js\n  - src/prompt/loadPromptFile.js\nrequirements: Extra html encoding appears on injected variables int the generated prompt.\nos: OSX",
-      "after": "task: prompt/task/refactor/split.md\nattention:\n  - integrations/vscode/src/writeAttention.ts\nrequirements: >\n  getRootWorkspace(): Returns the root of the current VSCode workspace.\n\n  getPromptFilePath(rootFolder: string): Takes the root folder and returns the\n  path to the prompt.yaml file.\n\n  getCurrentOpenDocuments(rootFolder: string): Returns a list of currently open\n  text documents relative to the root workspace.\n\n  readPromptFile(filePath: string): Reads and parses the prompt.yaml file,\n  returning its content.\n\n  writePromptFile(filePath: string, data: any): Writes the updated data back to\n  the prompt.yaml file.\n\n  updateAttentionSection(currentWindows: string[], excludeList: string[],\n  rootFolder: string): Takes in the list of open documents, the exclusion list,\n  and the root folder, then filters and returns the updated \"attention\" list.\nos: OSX",
-      "total_deletions": 7,
-      "total_additions": 20
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

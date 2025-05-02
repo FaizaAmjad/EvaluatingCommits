@@ -152,34 +152,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "game.js",
-      "before": "function startPlaying() {\n    var rikishi = $('#rikishi').val();\n    var message = \"You selected: \" + rikishi;\n    return message;\n}\n\nmodule.exports = { startPlaying };\n",
-      "after": "function startPlaying() {\n    var rikishi = document.querySelector('#rikishi').value;\n    var user = getUser();\n    var picks = getPicks(user);\n    var message = \"You selected: \" + rikishi + \"\\nPrevious Picks: \" + JSON.stringify(picks);\n    updatePicks(user, rikishi); // Update the picks with the new selection\n    return message;\n}\n\nfunction getUser() {\n    // get user from local storage\n    var user = localStorage.getItem('user');\n    if (!user) {\n        user = 'admin';\n        localStorage.setItem('user', user);\n    }\n    return user;\n}\n\nfunction getPicks(user) {\n    var picks = JSON.parse(localStorage.getItem(user));\n    if (!picks) {\n        picks = {};\n    }\n    return picks;\n}\n\nfunction updatePicks(user, rikishi) {\n    var picks = getPicks(user);\n    var currentContest = new Date().getMonth();\n    if ([0, 2, 4, 6, 8, 10].includes(currentContest)) {\n        var contestName = new Date().toLocaleString('default', { month: 'long' }) + ' ' + new Date().getFullYear();\n        picks[contestName] = rikishi;\n        localStorage.setItem(user, JSON.stringify(picks));\n    }\n}\n\nfunction switchUser() {\n    var newUser = document.querySelector('#userSwitch').value;\n    localStorage.setItem('user', newUser);\n    document.querySelector('#user').textContent = 'Current user: ' + newUser;;\n}\n\nfunction backfillResults() {\n    var user = getUser();\n    var contestName = document.querySelector('#backfillContest').value;\n    var rikishi = document.querySelector('#backfillRikishi').value;\n    var picks = getPicks(user);\n    picks[contestName] = rikishi;\n    localStorage.setItem(user, JSON.stringify(picks));\n}\n\nfunction initialize() {\n    var user = getUser();\n    var userElement = document.querySelector('#user');\n    if (userElement) {\n        userElement.textContent = 'Current user: ' + user;\n    }\n}\n\ninitialize();\n\nmodule.exports = { startPlaying, switchUser, backfillResults, initialize };",
-      "total_deletions": 3,
-      "total_additions": 59
-    },
-    {
-      "filename": "game.test.js",
-      "before": "global.$ = jest.fn(() => ({\n    val: jest.fn(() => '1')\n}));\n\nconst { startPlaying } = require('./game');\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    const result = startPlaying()\n    expect(result).toBe(\"You selected: 1\");\n});\n",
-      "after": "const jsdom = require('jsdom');\nconst { JSDOM } = jsdom;\n\nconst dom = new JSDOM('<!doctype html><html><body></body></html>', {\n    url: \"http://localhost/\",\n    resources: \"usable\",\n    runScripts: \"dangerously\",\n});\n\nglobal.window = dom.window;\nglobal.document = dom.window.document;\nglobal.localStorage = dom.window.localStorage;\n\nconst { startPlaying, switchUser, backfillResults, initialize } = require('./game');\n\nbeforeEach(() => {\n    localStorage.clear(); // clear localStorage before each test\n    // Reset the HTML body before each test\n    document.body.innerHTML = `\n        <p id=\"user\"></p>\n        <select id=\"rikishi\">\n            <option value=\"1\">Rikishi 1</option>\n            <option value=\"2\">Rikishi 2</option>\n        </select>\n        <input id=\"userSwitch\" type=\"text\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n    `;\n    initialize();\n});\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    localStorage.setItem('user', 'testUser');\n    localStorage.setItem('testUser', JSON.stringify({ 'July 2023': '1' })); // Assume a previous pick\n    document.querySelector('#rikishi').value = '1';\n    const result = startPlaying();\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n\n// More tests for switchUser() and backfillResults()...",
-      "total_deletions": 6,
-      "total_additions": 36
-    },
-    {
-      "filename": "index.html",
-      "before": "</head>\n<body>\n    <h1>Welcome to Banzuke Surfing Game!</h1>\n    <p>Select your Rikishi and start playing!</p>\n    <select id=\"rikishi\">\n        <option value=\"1\">Rikishi 1</option>\n        <option value=\"2\">Rikishi 2</option>\n        <!-- more options here -->\n    </select>\n    <button onclick=\"startPlaying()\">Start Playing</button>\n    <!-- Link to the external JavaScript file -->\n    <script src=\"game.js\"></script>\n</body>",
-      "after": "</head>\n<body>\n    <h1>Welcome to Banzuke Surfing Game!</h1>\n    <p id=\"user\"></p>\n    <p>Select your Rikishi and start playing!</p>\n    <select id=\"rikishi\">\n        <option value=\"1\">Rikishi 1</option>\n        <option value=\"2\">Rikishi 2</option>\n        <!-- more options here -->\n    </select>\n    <button onclick=\"startPlaying()\">Start Playing</button>\n    <hr>\n    <h2>Admin Panel</h2>\n    <p>Switch user:</p>\n    <input id=\"userSwitch\" type=\"text\">\n    <button onclick=\"switchUser()\">Switch User</button>\n    <p>Backfill contest results:</p>\n    <input id=\"backfillContest\" type=\"text\" placeholder=\"Enter contest name\">\n    <input id=\"backfillRikishi\" type=\"text\" placeholder=\"Enter rikishi selection\">\n    <button onclick=\"backfillResults()\">Backfill Results</button>\n    <!-- Link to the external JavaScript file -->\n    <script src=\"game.js\"></script>\n</body>",
-      "total_deletions": 0,
-      "total_additions": 10
-    },
-    {
-      "filename": "package.json",
-      "before": "  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"jest\": \"^29.5.0\",\n    \"jsdom\": \"^22.1.0\"\n  }\n}",
-      "after": "  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"jest\": \"^29.5.0\",\n    \"jest-localstorage-mock\": \"^2.4.26\",\n    \"jsdom\": \"^22.1.0\"\n  }\n}",
-      "total_deletions": 0,
-      "total_additions": 1
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

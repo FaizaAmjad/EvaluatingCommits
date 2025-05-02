@@ -1,0 +1,57 @@
+{
+  "sha": "72aa012692b42d427c31d76767d719264db3f7df",
+  "url": "https://github.com/tisztamo/Junior/commit/72aa012692b42d427c31d76767d719264db3f7df",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Refactor file routes and handlers https://chat.openai.com/share/ec91467c-fb1a-4d9e-a8df-c07510bce29b",
+  "authorAt": "2023-09-12T11:33:06.000+02:00",
+  "commitAt": "2023-09-12T11:33:06.000+02:00",
+  "chatgpt_sharing": {
+    "title": "I am ChatGPT, a language model trained by OpenAI. How can I assist you today?",
+    "url": "https://chat.openai.com/share/ec91467c-fb1a-4d9e-a8df-c07510bce29b",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/72aa012692b42d427c31d76767d719264db3f7df",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor file routes and handlers https://chat.openai.com/share/ec91467c-fb1a-4d9e-a8df-c07510bce29b"
+    },
+    "status": 200,
+    "dateOfConversation": "September 12, 2023",
+    "dateOfAccess": "2023-09-14 08:16:36.282396",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 722,
+    "tokensOfAnswers": 1403,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "72aa012692b42d427c31d76767d719264db3f7df_s1_p1",
+        "prompt": "You are AI Junior, you code like Donald Knuth.\n# Working set\n\n./src/backend/handlers/fileListHandler.js:\n```\nimport readFileList from '../fileutils/readFileList.js';\n\nexport async function fileListHandler(req, res) {\n  try {\n    const filesList = await readFileList(\"./\");\n    res.json(filesList);\n  } catch (error) {\n    res.status(500).json({ error: 'Failed to list files' });\n  }\n}\n\n```\n\n./src/backend/handlers/fileReadHandler.js:\n```\nimport fs from 'fs';\nimport { promisify } from 'util';\n\nconst readFileAsync = promisify(fs.readFile);\n\nexport async function fileReadHandler(req, res) {\n  const { filepath } = req.params;\n\n  if (!filepath) {\n    return res.status(400).send({ error: 'File path is required' });\n  }\n\n  try {\n    const fileContent = await readFileAsync(filepath, 'utf8');\n    res.send(fileContent);\n  } catch (error) {\n    res.status(500).send({ error: 'Unable to read file' });\n  }\n}\n\n```\n\n./src/backend/setupRoutes.js:\n```\nimport { setupGitRoutes } from './routes/setupGitRoutes.js';\nimport { setupPromptRoutes } from './routes/setupPromptRoutes.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport { configHandler } from './handlers/configHandler.js';\nimport { fileListHandler } from './handlers/fileListHandler.js';\nimport { fileReadHandler } from './handlers/fileReadHandler.js';  // Added this line\n\nexport function setupRoutes(app) {\n  setupPromptRoutes(app);\n  setupGitRoutes(app);\n  app.post('/execute', executeHandler);\n  app.get('/config', configHandler);\n  app.get('/files/list/', fileListHandler);\n  app.get('/files/read/:filepath', fileReadHandler); // Added this line\n}\n\n```\n\n\n# Task\n\nRefactor!\n\nMove files-prefixed routes to setupFilesRoutes.js\nMove the related handlers to handlers/files/ \nCreate the dir.\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Refactor file routes and handlers\"\necho \"Plan:\"\necho \"1. Create handlers/files directory\"\necho \"2. Move files-related handlers to handlers/files/\"\necho \"3. Create setupFilesRoutes.js to house files routes\"\necho \"4. Update setupRoutes.js to import setupFilesRoutes.js\"\necho \"5. Verify refactoring by listing changes\"\n\n# Step 1: Create handlers/files directory\nmkdir -p ./src/backend/handlers/files\n\n# Step 2: Move files-related handlers to handlers/files/\ncat > ./src/backend/handlers/files/fileListHandler.js << 'EOF'\nimport readFileList from '../../fileutils/readFileList.js';\n\nexport async function fileListHandler(req, res) {\n  try {\n    const filesList = await readFileList(\"./\");\n    res.json(filesList);\n  } catch (error) {\n    res.status(500).json({ error: 'Failed to list files' });\n  }\n}\nEOF\n\ncat > ./src/backend/handlers/files/fileReadHandler.js << 'EOF'\nimport fs from 'fs';\nimport { promisify } from 'util';\n\nconst readFileAsync = promisify(fs.readFile);\n\nexport async function fileReadHandler(req, res) {\n  const { filepath } = req.params;\n\n  if (!filepath) {\n    return res.status(400).send({ error: 'File path is required' });\n  }\n\n  try {\n    const fileContent = await readFileAsync(filepath, 'utf8');\n    res.send(fileContent);\n  } catch (error) {\n    res.status(500).send({ error: 'Unable to read file' });\n  }\n}\nEOF\n\n# Step 3: Create setupFilesRoutes.js\ncat > ./src/backend/routes/setupFilesRoutes.js << 'EOF'\nimport { fileListHandler } from '../handlers/files/fileListHandler.js';\nimport { fileReadHandler } from '../handlers/files/fileReadHandler.js';\n\nexport function setupFilesRoutes(app) {\n  app.get('/files/list/', fileListHandler);\n  app.get('/files/read/:filepath', fileReadHandler);\n}\nEOF\n\n# Step 4: Update setupRoutes.js\ncat > ./src/backend/setupRoutes.js << 'EOF'\nimport { setupGitRoutes } from './routes/setupGitRoutes.js';\nimport { setupPromptRoutes } from './routes/setupPromptRoutes.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport { configHandler } from './handlers/configHandler.js';\nimport { setupFilesRoutes } from './routes/setupFilesRoutes.js';  // Added this line\n\nexport function setupRoutes(app) {\n  setupPromptRoutes(app);\n  setupGitRoutes(app);\n  setupFilesRoutes(app);  // Added this line\n  app.post('/execute', executeHandler);\n  app.get('/config', configHandler);\n}\nEOF\n\n# Step 5: List changes to verify refactoring\necho \"\\nChanges made:\"\necho \"- Created handlers/files directory\"\necho \"- Moved files-related handlers to handlers/files/\"\necho \"- Created setupFilesRoutes.js for files routes\"\necho \"- Updated setupRoutes.js to import and use setupFilesRoutes.js\"\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "72aa012692b42d427c31d76767d719264db3f7df_s1_p2",
+        "prompt": "Seems like the files aren't moved, just new ones created.",
+        "answer": "Apologies for the oversight. I'll correct that by moving the original handlers to the new location and subsequently deleting the old ones. Here's the adjusted script:[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Refactor file routes and handlers\"\necho \"Plan:\"\necho \"1. Create handlers/files directory\"\necho \"2. Move and refactor files-related handlers to handlers/files/\"\necho \"3. Create setupFilesRoutes.js to house files routes\"\necho \"4. Update setupRoutes.js to import setupFilesRoutes.js\"\necho \"5. Verify refactoring by listing changes\"\n\n# Step 1: Create handlers/files directory\nmkdir -p ./src/backend/handlers/files\n\n# Step 2: Move and refactor files-related handlers to handlers/files/\nmv ./src/backend/handlers/fileListHandler.js ./src/backend/handlers/files/fileListHandler.js\nmv ./src/backend/handlers/fileReadHandler.js ./src/backend/handlers/files/fileReadHandler.js\n\n# Adjust imports in the moved files\ncat > ./src/backend/handlers/files/fileListHandler.js << 'EOF'\nimport readFileList from '../../fileutils/readFileList.js';\n\nexport async function fileListHandler(req, res) {\n  try {\n    const filesList = await readFileList(\"./\");\n    res.json(filesList);\n  } catch (error) {\n    res.status(500).json({ error: 'Failed to list files' });\n  }\n}\nEOF\n\ncat > ./src/backend/handlers/files/fileReadHandler.js << 'EOF'\nimport fs from 'fs';\nimport { promisify } from 'util';\n\nconst readFileAsync = promisify(fs.readFile);\n\nexport async function fileReadHandler(req, res) {\n  const { filepath } = req.params;\n\n  if (!filepath) {\n    return res.status(400).send({ error: 'File path is required' });\n  }\n\n  try {\n    const fileContent = await readFileAsync(filepath, 'utf8');\n    res.send(fileContent);\n  } catch (error) {\n    res.status(500).send({ error: 'Unable to read file' });\n  }\n}\nEOF\n\n# Step 3: Create setupFilesRoutes.js\ncat > ./src/backend/routes/setupFilesRoutes.js << 'EOF'\nimport { fileListHandler } from '../handlers/files/fileListHandler.js';\nimport { fileReadHandler } from '../handlers/files/fileReadHandler.js';\n\nexport function setupFilesRoutes(app) {\n  app.get('/files/list/', fileListHandler);\n  app.get('/files/read/:filepath', fileReadHandler);\n}\nEOF\n\n# Step 4: Update setupRoutes.js\ncat > ./src/backend/setupRoutes.js << 'EOF'\nimport { setupGitRoutes } from './routes/setupGitRoutes.js';\nimport { setupPromptRoutes } from './routes/setupPromptRoutes.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport { configHandler } from './handlers/configHandler.js';\nimport { setupFilesRoutes } from './routes/setupFilesRoutes.js';  // Added this line\n\nexport function setupRoutes(app) {\n  setupPromptRoutes(app);\n  setupGitRoutes(app);\n  setupFilesRoutes(app);  // Added this line\n  app.post('/execute', executeHandler);\n  app.get('/config', configHandler);\n}\nEOF\n\n# Step 5: List changes to verify refactoring\necho \"\\nChanges made:\"\necho \"- Created handlers/files directory\"\necho \"- Moved files-related handlers to handlers/files/ and adjusted imports\"\necho \"- Created setupFilesRoutes.js for files routes\"\necho \"- Updated setupRoutes.js to import and use setupFilesRoutes.js\"\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

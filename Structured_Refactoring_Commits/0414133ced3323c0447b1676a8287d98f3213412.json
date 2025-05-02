@@ -1,0 +1,45 @@
+{
+  "sha": "0414133ced3323c0447b1676a8287d98f3213412",
+  "url": "https://github.com/tisztamo/Junior/commit/0414133ced3323c0447b1676a8287d98f3213412",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Move and update files https://chat.openai.com/share/7b2db235-c8e7-4df8-9f07-353e29126e55",
+  "authorAt": "2023-09-05T13:50:00.000+02:00",
+  "commitAt": "2023-09-05T13:50:00.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Move & Update Files",
+    "url": "https://chat.openai.com/share/7b2db235-c8e7-4df8-9f07-353e29126e55",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/0414133ced3323c0447b1676a8287d98f3213412",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Move and update files https://chat.openai.com/share/7b2db235-c8e7-4df8-9f07-353e29126e55"
+    },
+    "status": 200,
+    "dateOfConversation": "September 5, 2023",
+    "dateOfAccess": "2023-09-14 08:17:15.750865",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 638,
+    "tokensOfAnswers": 430,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "0414133ced3323c0447b1676a8287d98f3213412_s1_p1",
+        "prompt": "You are AI Junior, you code like Donald Knuth.\n# Working set\n\nsrc/frontend/generatePrompt.js:\n```\nimport { getBaseUrl } from './getBaseUrl';\n\nconst generatePrompt = async (notes) => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/generate`, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ notes, systemPrompt: true })\n  });\n\n  const data = await response.json();\n\n  if (response.status >= 400) {\n    throw new Error(data.error);\n  }\n\n  return data;\n};\n\nexport { generatePrompt };\n\n```\n\nsrc/frontend/service/handleGeneratePrompt.js:\n```\nimport { generatePrompt } from '../generatePrompt';\nimport { marked } from 'marked';\nimport { setPrompt } from '../model/prompt';\nimport postDescriptor from '../service/postDescriptor';\nimport { requirements } from '../model/requirements';\n\nconst handleGeneratePrompt = async () => {\n  try {\n    await postDescriptor({ requirements: requirements() });\n\n    const response = await generatePrompt();\n\n    navigator.clipboard.writeText(response.prompt)\n      .then(() => {\n        console.log('Prompt copied to clipboard!');\n      })\n      .catch(err => {\n        console.error('Failed to copy prompt: ', err);\n      });\n\n    const htmlPrompt = marked(response.prompt);\n    setPrompt(htmlPrompt);\n  } catch (error) {\n    alert(error.message);\n  }\n};\n\nexport default handleGeneratePrompt;\n\n```\n\n\n# Task\n\nMove the following files to the specified target dirs!\n\nIf no target dir is specified, find out the best target dir based on available info!\n\nIMPORTANT: Edit the moved files to update imports with relative paths if needed!\n\nYou need to follow dependencies to maintain coherence. Update imports!\n\nMove generatePrompt to service/\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\nBefore starting, check if you need more files to solve the task.\nDo not edit any file not provided in the working set!\nIf you need more files, do not try to solve the task, ask for the missing files instead!\n\nEXAMPLE START\n\n`filepath1` is needed to solve the task but is not in the working set.\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Move and update files\"\necho \"Plan:\"\necho \"1. Move generatePrompt.js to service directory\"\necho \"2. Update the imports in the moved generatePrompt.js\"\necho \"3. Update imports in handleGeneratePrompt.js\"\n\n# Step 1: Move generatePrompt.js to service directory\nmv src/frontend/generatePrompt.js src/frontend/service/generatePrompt.js\n\n# Step 2: Update the imports in the moved generatePrompt.js\ncat > src/frontend/service/generatePrompt.js << 'EOF'\nimport { getBaseUrl } from '../getBaseUrl';\n\nconst generatePrompt = async (notes) => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/generate`, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ notes, systemPrompt: true })\n  });\n\n  const data = await response.json();\n\n  if (response.status >= 400) {\n    throw new Error(data.error);\n  }\n\n  return data;\n};\n\nexport { generatePrompt };\nEOF\n\n# Step 3: Update imports in handleGeneratePrompt.js\ncat > src/frontend/service/handleGeneratePrompt.js << 'EOF'\nimport { generatePrompt } from './generatePrompt';\nimport { marked } from 'marked';\nimport { setPrompt } from '../model/prompt';\nimport postDescriptor from './postDescriptor';\nimport { requirements } from '../model/requirements';\n\nconst handleGeneratePrompt = async () => {\n  try {\n    await postDescriptor({ requirements: requirements() });\n\n    const response = await generatePrompt();\n\n    navigator.clipboard.writeText(response.prompt)\n      .then(() => {\n        console.log('Prompt copied to clipboard!');\n      })\n      .catch(err => {\n        console.error('Failed to copy prompt: ', err);\n      });\n\n    const htmlPrompt = marked(response.prompt);\n    setPrompt(htmlPrompt);\n  } catch (error) {\n    alert(error.message);\n  }\n};\n\nexport default handleGeneratePrompt;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

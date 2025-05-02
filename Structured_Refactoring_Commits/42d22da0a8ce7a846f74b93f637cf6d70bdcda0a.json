@@ -43,13 +43,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": ".github/workflows/node.js.yml",
-      "before": "",
-      "after": "# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node\n# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs\n\nname: Node.js CI\n\non:\n  push:\n    branches: [ \"main\" ]\n  pull_request:\n    branches: [ \"main\" ]\n\njobs:\n  build:\n\n    runs-on: ubuntu-latest\n\n    strategy:\n      matrix:\n        node-version: [14.x, 16.x, 18.x]\n        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/\n\n    steps:\n    - uses: actions/checkout@v3\n    - name: Use Node.js ${{ matrix.node-version }}\n      uses: actions/setup-node@v3\n      with:\n        node-version: ${{ matrix.node-version }}\n        cache: 'npm'\n    - run: npm ci\n    - run: npm run build --if-present\n    - run: npm test",
-      "total_deletions": 0,
-      "total_additions": 31
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

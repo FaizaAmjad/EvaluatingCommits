@@ -1,0 +1,45 @@
+{
+  "sha": "13465c434fd2e2bb83949906c1df9c0e963d191f",
+  "url": "https://github.com/tisztamo/Junior/commit/13465c434fd2e2bb83949906c1df9c0e963d191f",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Implement frontend modifications https://chat.openai.com/share/077b8522-35f5-4aef-8d92-957f0b7e7a0f",
+  "authorAt": "2023-08-15T19:10:17.000+02:00",
+  "commitAt": "2023-08-15T19:10:17.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Update Frontend UI.",
+    "url": "https://chat.openai.com/share/077b8522-35f5-4aef-8d92-957f0b7e7a0f",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/13465c434fd2e2bb83949906c1df9c0e963d191f",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Implement frontend modifications https://chat.openai.com/share/077b8522-35f5-4aef-8d92-957f0b7e7a0f"
+    },
+    "status": 200,
+    "dateOfConversation": "August 15, 2023",
+    "dateOfAccess": "2023-08-17 13:08:28.379701",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 686,
+    "tokensOfAnswers": 413,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "13465c434fd2e2bb83949906c1df9c0e963d191f_s1_p1",
+        "prompt": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\nsrc/frontend/App.jsx:\n```\nimport useKeyBindings from './service/useKeyBindings';\nimport keyBindings from './config/keyBindings';\nimport NavBar from './components/NavBar';\nimport PromptCreation from './components/PromptCreation';\nimport ChangeExecution from './components/ChangeExecution';\nimport ChangeInspection from './components/ChangeInspection';\nimport ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  // Define key bindings\n  const bindings = keyBindings();\n\n  // Use key bindings\n  useKeyBindings(bindings);\n\n  return (\n    <div id=\"app\" class=\"p-2 sm:p-4 xs:p-4\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />\n        <ChangeInspection />\n        <ChangeFinalization />\n      </div>\n    </div>\n  );\n};\n\nexport default App;\n\n```\n\nsrc/frontend/index.html:\n```\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n  <link rel=\"icon\" href=\"/assets/favicon.ico\" type=\"image/x-icon\">\n  <title>Junior</title>\n</head>\n<body>\n  <div id=\"app\"></div>\n  <script type=\"module\" src=\"/index.jsx\"></script>\n</body>\n</html>\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nAdd bg-emphasize class to the &#34;app&#34; div in index.html\nAdd bg-main to the inner div in App.jsx.\nRemove the id attribute from outer (id=&#34;app&#34;) in App.jsx, as the real app div is in the html.\nMove the p-2 class from the outer to the inner div.\nRemove unnecessary comments.\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Implement frontend modifications\"\necho \"Plan:\"\necho \"1. Modify src/frontend/App.jsx based on requirements\"\necho \"2. Modify src/frontend/index.html to update the 'app' div\"\n\n# Modify src/frontend/App.jsx\ncat > src/frontend/App.jsx << 'EOF'\nimport useKeyBindings from './service/useKeyBindings';\nimport keyBindings from './config/keyBindings';\nimport NavBar from './components/NavBar';\nimport PromptCreation from './components/PromptCreation';\nimport ChangeExecution from './components/ChangeExecution';\nimport ChangeInspection from './components/ChangeInspection';\nimport ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  const bindings = keyBindings();\n  useKeyBindings(bindings);\n\n  return (\n    <div class=\"p-2 sm:p-4 xs:p-4\">\n      <div class=\"bg-main max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />\n        <ChangeInspection />\n        <ChangeFinalization />\n      </div>\n    </div>\n  );\n};\n\nexport default App;\nEOF\n\n# Modify src/frontend/index.html\ncat > src/frontend/index.html << 'EOF'\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n  <link rel=\"icon\" href=\"/assets/favicon.ico\" type=\"image/x-icon\">\n  <title>Junior</title>\n</head>\n<body>\n  <div id=\"app\" class=\"bg-emphasize\"></div>\n  <script type=\"module\" src=\"/index.jsx\"></script>\n</body>\n</html>\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

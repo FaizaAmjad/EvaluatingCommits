@@ -1,0 +1,45 @@
+{
+  "sha": "a753ff2dbead777da54399f5e98fd5faf333f521",
+  "url": "https://github.com/tisztamo/Junior/commit/a753ff2dbead777da54399f5e98fd5faf333f521",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Update roadmap and .gitignore https://chat.openai.com/share/8ecca4a1-a44b-4016-9c8a-14febf30c5d3",
+  "authorAt": "2023-09-29T08:39:25.000+02:00",
+  "commitAt": "2023-09-29T08:39:25.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Update Roadmap and .gitignore",
+    "url": "https://chat.openai.com/share/8ecca4a1-a44b-4016-9c8a-14febf30c5d3",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/a753ff2dbead777da54399f5e98fd5faf333f521",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update roadmap and .gitignore https://chat.openai.com/share/8ecca4a1-a44b-4016-9c8a-14febf30c5d3"
+    },
+    "status": 200,
+    "dateOfConversation": "September 29, 2023",
+    "dateOfAccess": "2023-10-12 23:54:59.317287",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 743,
+    "tokensOfAnswers": 580,
+    "model": "GPT-4",
+    "conversations": [
+      {
+        "prompt_id": "a753ff2dbead777da54399f5e98fd5faf333f521_s1_p1",
+        "prompt": "You are AI Junior, you code like Donald Knuth.\n\n# Working set\n\n./docs/roadmap.md:\n```\n# Roadmap\n\n## Usability & fixes\n`v0.2 (Released: Aug 2023)`\n- \u2705 Done: Implement the four buttons\n- \u2705 Done: Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n`v0.3 (Expected: Q4 2023)`\n- \ud83d\udea7 Develop a file browser to allow the user to select attention files from mobile\n- Allow secure hosting\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Plugin system\n`v0.4 (Expected: Q4 2023)`\n- Allow writing any of the current components as a plugin\n\n## Auto-attention\n`v0.5 (Expected: Q1 2024)`\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in a vector database\n\n## Prompt herds\n`v0.6 (Expected: Q2 2024)`\n- Scan and transform (refactor) the codebase gradually\n\n```\n./.gitignore:\n```\n/secret.sh\n/node_modules/\n/tmp/\n/prompt.yaml\n/prompt.md\n/change.sh\n\nnode_modules\n# Backup patterns for .md files\n*.md.backup\n*.md.bak\n*.md~\n*.md.tmp\n*.md.old\n*.md.orig\n*.md.save\n\n```\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\n1. Update the roadmap status:\n- Secure hosting is ready\n- \"file browser\" and playground tests are ongoing\n- Do not create backup files\n2. gitignore *_backup.md files\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*! eg.: in createGitRepo.js: export function createGitRepo ( ....\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\nWrite concise, self-documenting and idiomatic code!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nBefore your solution, write a short, very concise readme about the working set, your task, and most importantly its challanges, if any.\n\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n\n",
+        "answer": "ChatGPTREADMEWorking Set:./docs/roadmap.md: Contains the roadmap with version details and tasks../.gitignore: Contains patterns of files and directories to be ignored by git.Task:Update the roadmap in ./docs/roadmap.md.Update ./.gitignore to ignore *_backup.md files.Challenges:The roadmap needs to be updated based on the provided requirements, which requires careful reading and understanding.A new shell script ./change.sh needs to be generated to automate the task. It should avoid using sed and use heredocs to update whole files instead.[CODE_BLOCK_0]Please note: The shell script ./change.sh has been provided. You should run this script in your environment to effect the necessary changes to the ./docs/roadmap.md and ./.gitignore files.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Update roadmap and .gitignore\"\necho \"Plan:\"\necho \"1. Update the roadmap.md with the given requirements.\"\necho \"2. Update .gitignore to ignore *_backup.md files.\"\n\n# Updating the roadmap.md file\ncat > ./docs/roadmap.md << 'EOF'\n# Roadmap\n\n## Usability & fixes\n`v0.2 (Released: Aug 2023)`\n- \u2705 Done: Implement the four buttons\n- \u2705 Done: Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n`v0.3 (Expected: Q4 2023)`\n- \ud83d\udea7 Develop a file browser to allow the user to select attention files from mobile (Ongoing)\n- \u2705 Done: Allow secure hosting\n- Create an app by wrapping the frontend\n- \ud83d\udea7 Test it by developing at the local Playground and while commuting (Ongoing)\n\n## Plugin system\n`v0.4 (Expected: Q4 2023)`\n- Allow writing any of the current components as a plugin\n\n## Auto-attention\n`v0.5 (Expected: Q1 2024)`\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in a vector database\n\n## Prompt herds\n`v0.6 (Expected: Q2 2024)`\n- Scan and transform (refactor) the codebase gradually\nEOF\n\n# Updating the .gitignore file\ncat > ./.gitignore << 'EOF'\n/secret.sh\n/node_modules/\n/tmp/\n/prompt.yaml\n/prompt.md\n/change.sh\n\nnode_modules\n\n# Ignore backup .md files\n*_backup.md\n\n# Backup patterns for .md files\n*.md.backup\n*.md.bak\n*.md~\n*.md.tmp\n*.md.old\n*.md.orig\n*.md.save\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

@@ -50,13 +50,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "dashboard.md",
-      "before": "\n## Charts\n\n### Headcount per Ministry\n\n![Headcount per Ministry](https://daigr.am/c6e79c14.svg)",
-      "after": "\n## Charts\n\n### Swedish Government Members' Performance\n\nThe stacked bar chart provides a comparative view of the performance of each minister in the Swedish government. The metrics used for comparison include the number of days in position, government experience, party experience, parliament experience, income, and spending.\n\n![Swedish Government Members' Performance](https://daigr.am/1e59ff22.svg)\n\nFor instance, you can observe that Ulf Kristersson (M), the Prime Minister, has the highest combined experience in government, party, and parliament. On the other hand, ministers like Romina Pourmokhtari (L), Peter Kullgren (KD), and Andreas Carlson (KD) have held their positions for fewer days and have less experience in government, party, and parliament.\n\nThe chart also provides insights into the financial aspects of each department, showing the income and spending for each minister's department. This can be useful for understanding the financial management and budget allocation within the Swedish government.\n\n\n### Headcount per Ministry\n\n![Headcount per Ministry](https://daigr.am/c6e79c14.svg)",
-      "total_deletions": 0,
-      "total_additions": 11
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

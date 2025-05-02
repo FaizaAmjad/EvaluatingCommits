@@ -38,41 +38,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\nset -e\ngoal=\"Refactor ExecuteButton by factoring changeInput\"\necho \"Plan:\"\necho \"1. Create a new file in model directory to handle changeInput\"\necho \"2. Update ExecuteButton.jsx to import changeInput from the new file\"\n\n# Step 1: Create a new file in model directory to handle changeInput\ncat > src/frontend/model/changeInput.js << 'EOF'\nimport { createSignal } from 'solid-js';\n\nconst [changeInput, setChangeInput] = createSignal('');\n\nexport { changeInput, setChangeInput };\nEOF\n\n# Step 2: Update ExecuteButton.jsx to import changeInput from the new file\ncat > src/frontend/components/ExecuteButton.jsx << 'EOF'\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\nimport { changeInput, setChangeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handleExecuteChange = async () => {\n    const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();\n    const response = await executeChange(change);\n    setChange(change);\n    setExecutionResult(response.output);\n    console.log(response.output);\n  };\n\n  const handlePaste = async (e) => {\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor ExecuteButton by moving handleExecuteChange\"\necho \"Plan:\"\necho \"1. Create a new file in the model directory to contain the handleExecuteChange function\"\necho \"2. Modify ExecuteButton.jsx to import the handleExecuteChange function from the new file\"\n\n# Step 1: Create a new file for handleExecuteChange in the model directory\ncat > src/frontend/model/handleExecuteChange.js << 'EOF'\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from './executionResult';\nimport { setChange } from './change';\nimport { changeInput } from './changeInput';\n\nconst handleExecuteChange = async () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n  const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();\n  const response = await executeChange(change);\n  setChange(change);\n  setExecutionResult(response.output);\n  console.log(response.output);\n};\n\nexport default handleExecuteChange;\nEOF\n\n# Step 2: Modify ExecuteButton.jsx to import handleExecuteChange from the new file\ncat > src/frontend/components/ExecuteButton.jsx << 'EOF'\nimport handleExecuteChange from '../model/handleExecuteChange';\nimport { setChangeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handlePaste = async (e) => {\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);",
-      "total_deletions": 21,
-      "total_additions": 21
-    },
-    {
-      "filename": "prompt.md",
-      "before": "\nsrc/frontend/components/ExecuteButton.jsx:\n```\nimport { createSignal } from 'solid-js';\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n  const [changeInput, setChangeInput] = createSignal('');\n\n  const handleExecuteChange = async () => {\n    const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();\n\n```\n\nsrc/frontend/model/commitMessage.js:\n```\nimport { createSignal } from 'solid-js';\n\nconst [commitMessage, setCommitMessage] = createSignal('');\n\nexport { commitMessage, setCommitMessage };\n\n```\n\nsrc/frontend/service/handleGeneratePrompt.js:\n```\nimport { generatePrompt } from '../generatePrompt';\nRefactor!\n\nRefactor ExecuteButton!\n- Factor changeInput to its own file in model!\n\n\n",
-      "after": "\nsrc/frontend/components/ExecuteButton.jsx:\n```\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\nimport { changeInput, setChangeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handleExecuteChange = async () => {\n    const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();\n\n```\n\nsrc/frontend/service/handleGeneratePrompt.js:\n```\nimport { generatePrompt } from '../generatePrompt';\nRefactor!\n\nRefactor ExecuteButton!\n- Factor handleExecuteChange to its own file in model!\n\n\n",
-      "total_deletions": 13,
-      "total_additions": 2
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/model/commitMessage.js\n  - src/frontend/service/handleGeneratePrompt.js\nrequirements: |\n  Refactor ExecuteButton!\n  - Factor changeInput to its own file in model!\n",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/service/handleGeneratePrompt.js\nrequirements: |\n  Refactor ExecuteButton!\n  - Factor handleExecuteChange to its own file in model!",
-      "total_deletions": 2,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/frontend/components/ExecuteButton.jsx",
-      "before": "import { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\nimport { changeInput, setChangeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handleExecuteChange = async () => {\n    const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();\n    const response = await executeChange(change);\n    setChange(change);\n    setExecutionResult(response.output);\n    console.log(response.output);\n  };\n\n  const handlePaste = async (e) => {\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);",
-      "after": "import handleExecuteChange from '../model/handleExecuteChange';\nimport { setChangeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handlePaste = async (e) => {\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);",
-      "total_deletions": 12,
-      "total_additions": 2
-    },
-    {
-      "filename": "src/frontend/model/handleExecuteChange.js",
-      "before": "",
-      "after": "import { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from './executionResult';\nimport { setChange } from './change';\nimport { changeInput } from './changeInput';\n\nconst handleExecuteChange = async () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n  const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();\n  const response = await executeChange(change);\n  setChange(change);\n  setExecutionResult(response.output);\n  console.log(response.output);\n};\n\nexport default handleExecuteChange;",
-      "total_deletions": 0,
-      "total_additions": 15
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

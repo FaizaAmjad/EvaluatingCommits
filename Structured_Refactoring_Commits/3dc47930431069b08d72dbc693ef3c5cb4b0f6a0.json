@@ -1,0 +1,45 @@
+{
+  "sha": "3dc47930431069b08d72dbc693ef3c5cb4b0f6a0",
+  "url": "https://github.com/tisztamo/Junior/commit/3dc47930431069b08d72dbc693ef3c5cb4b0f6a0",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Move useKeyBindings to src/frontend/service/ https://chat.openai.com/share/5fcc9e45-d90b-4d3d-b372-2d9252eb72ef",
+  "authorAt": "2023-08-09T21:44:42.000+02:00",
+  "commitAt": "2023-08-09T21:44:42.000+02:00",
+  "chatgpt_sharing": {
+    "title": "New chat",
+    "url": "https://chat.openai.com/share/5fcc9e45-d90b-4d3d-b372-2d9252eb72ef",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/3dc47930431069b08d72dbc693ef3c5cb4b0f6a0",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Move useKeyBindings to src/frontend/service/ https://chat.openai.com/share/5fcc9e45-d90b-4d3d-b372-2d9252eb72ef"
+    },
+    "status": 200,
+    "dateOfConversation": "August 9, 2023",
+    "dateOfAccess": "2023-08-17 13:08:50.578380",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 610,
+    "tokensOfAnswers": 338,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "3dc47930431069b08d72dbc693ef3c5cb4b0f6a0_s1_p1",
+        "prompt": "You are Junior, an AI system aiding developers. You are working with a part of a large program called the \"Working Set.\" Ask for contents of subdirectories if needed. Some files are printed in the working set. Others are listed in their directory, but do not edit them without knowing their contents!\n\n# Working set\n\nsrc/frontend/useKeyBindings.js:\n```\nconst useKeyBindings = (bindings) => {\n  const handler = (e) => {\n    // Ignore bindings if target is input or textarea\n    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {\n      return;\n    }\n    const action = bindings[e.key.toUpperCase()];\n    if (action) {\n      action(e);\n    }\n  };\n\n  window.addEventListener('keydown', handler);\n\n  return () => {\n    window.removeEventListener('keydown', handler);\n  };\n};\n\nexport default useKeyBindings;\n\n```\n\nsrc/frontend/App.jsx:\n```\nimport useKeyBindings from './useKeyBindings';\nimport keyBindings from './config/keyBindings';\nimport NavBar from './components/NavBar';\nimport PromptCreation from './components/PromptCreation';\nimport ChangeExecution from './components/ChangeExecution';\nimport ChangeInspection from './components/ChangeInspection';\nimport ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  // Define key bindings\n  const bindings = keyBindings();\n\n  // Use key bindings\n  useKeyBindings(bindings);\n\n  return (\n    <div id=\"app\" class=\"p-2\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />\n        <ChangeInspection />\n        <ChangeFinalization />\n      </div>\n    </div>\n  );\n};\n\nexport default App;\n\n```\n\n\n# Task\n\nMove the following files to the specified target dirs!\n\nFind out the best target dir if it is not specified!\n\nYou need to follow dependencies to maintain coherence.\n\nBefore executing, write a concise plan! The plan should show:\n - How do you avoid breaking other parts of the code.\n - If you had to choose, your way of thinking.\n\nMove useKeyBindings to src/frontend/service/\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: Debian\n\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Move useKeyBindings to src/frontend/service/\"\necho \"Plan:\"\necho \"1. Move the useKeyBindings.js file to the src/frontend/service/ directory.\"\necho \"2. Update the import path of useKeyBindings in the App.jsx file to reflect the new location.\"\n\n# Move the file useKeyBindings.js to the target directory\nmv src/frontend/useKeyBindings.js src/frontend/service/useKeyBindings.js\n\n# Heredoc-ing the App.jsx with the updated import path\ncat << 'EOF' > src/frontend/App.jsx\nimport useKeyBindings from './service/useKeyBindings';\nimport keyBindings from './config/keyBindings';\nimport NavBar from './components/NavBar';\nimport PromptCreation from './components/PromptCreation';\nimport ChangeExecution from './components/ChangeExecution';\nimport ChangeInspection from './components/ChangeInspection';\nimport ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  // Define key bindings\n  const bindings = keyBindings();\n\n  // Use key bindings\n  useKeyBindings(bindings);\n\n  return (\n    <div id=\"app\" class=\"p-2\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />\n        <ChangeInspection />\n        <ChangeFinalization />\n      </div>\n    </div>\n  );\n};\n\nexport default App;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

@@ -38,34 +38,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\nset -e\ngoal=\"Refactor code to fetch git status after commit\"\necho \"Plan:\"\necho \"1. Update CommitButton.jsx to include fetchGitStatus call\"\necho \"2. Update CommitMessageInput.jsx with the correct class attribute name in SolidJS\"\n\n# Updating CommitButton.jsx to include the new functionality\ncat << 'EOF' > src/frontend/components/CommitButton.jsx\nimport { postCommit } from '../service/postCommit';\nimport { commitMessage } from '../stores/commitMessage';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n    const status = await fetchGitStatus();\n    console.log(status);\n  };\n\n  return (\nexport default CommitButton;\nEOF\n\n# Updating CommitMessageInput.jsx to use correct attribute name className\ncat << 'EOF' > src/frontend/components/CommitMessageInput.jsx\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\n\nconst CommitMessageInput = (props) => {\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" className=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor code to clear execution result after commit\"\necho \"Plan:\"\necho \"1. Import the setExecutionResult function from the executionResult store.\"\necho \"2. Modify the handleCommit function in CommitButton.jsx to clear execution result after a successful commit.\"\n\n# CommitButton.jsx modification\ncat << 'EOF' > src/frontend/components/CommitButton.jsx\nimport { postCommit } from '../service/postCommit';\nimport { commitMessage } from '../stores/commitMessage';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\nimport { setExecutionResult } from '../stores/executionResult'; // Importing the necessary function to clear execution result\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n    const status = await fetchGitStatus();\n    console.log(status);\n    setExecutionResult(''); // Clearing the execution result after commit\n  };\n\n  return (\nexport default CommitButton;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "total_deletions": 21,
-      "total_additions": 6
-    },
-    {
-      "filename": "prompt.md",
-      "before": "```\nimport { postCommit } from '../service/postCommit';\nimport { commitMessage } from '../stores/commitMessage';\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n  );\n};\n\n  };\n\n  return (\n    <input type=\"text\" class=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\n\n```\n\n\n# Task\n\nRefactor!\n\nAfter commit, fetch git status \n\n\n",
-      "after": "```\nimport { postCommit } from '../service/postCommit';\nimport { commitMessage } from '../stores/commitMessage';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n    const status = await fetchGitStatus();\n    console.log(status);\n  };\n\n  return (\n    <button className=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n  );\n};\n\n  };\n\n  return (\n    <input type=\"text\" className=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\n\n```\n\nsrc/frontend/components/ExecutionResultDisplay.jsx:\n```\nimport { createEffect, createSignal } from 'solid-js';\nimport { executionResult } from '../stores/executionResult';\nimport ansiToHtml from '../../execute/ansiToHtml';\n\nconst ExecutionResultDisplay = () => {\n  let container;\n  const [copyText, setCopyText] = createSignal('copy');\n\n  const copyToClipboard = async (e) => {\n    e.preventDefault(); // Prevent page load on click\n    try {\n      await navigator.clipboard.writeText(executionResult());\n      setCopyText('copied');\n      setTimeout(() => setCopyText('copy'), 2000);\n    } catch (err) {\n      alert(\"Failed to copy text!\");\n      console.warn(\"Copy operation failed:\", err);\n    }\n  };\n\n  createEffect(() => {\n    if (container && executionResult() !== '') {\n      const convertedHtml = ansiToHtml(executionResult());\n      container.innerHTML = convertedHtml;\n    }\n  });\n\n  return (\n    <div class={`relative bg-gray-900 text-white p-4 rounded ${executionResult() !== '' ? 'block' : 'hidden'}`}>\n      <a href=\"#\" class=\"underline absolute top-0 right-0 m-4\" onClick={copyToClipboard}>{copyText()}</a>\n      <div class=\"font-mono text-sm\">\n        <div ref={container} class=\"rounded overflow-auto max-w-full p-2\" />\n      </div>\n    </div>\n  );\n};\n\nexport default ExecutionResultDisplay;\n\n```\n\n\n# Task\n\nRefactor!\n\nAfter commit, clear execution result.\n\n\n",
-      "total_deletions": 3,
-      "total_additions": 49
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "attention:\n  - src/frontend/components/CommitButton.jsx\n  - src/frontend/components/CommitMessageInput.jsx\nrequirements: >\n  After commit, fetch git status \nos: OSX",
-      "after": "attention:\n  - src/frontend/components/CommitButton.jsx\n  - src/frontend/components/CommitMessageInput.jsx\n  - src/frontend/components/ExecutionResultDisplay.jsx\nrequirements: |\n  After commit, clear execution result.\nos: OSX",
-      "total_deletions": 2,
-      "total_additions": 3
-    },
-    {
-      "filename": "src/frontend/components/CommitButton.jsx",
-      "before": "import { postCommit } from '../service/postCommit';\nimport { commitMessage } from '../stores/commitMessage';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n    const status = await fetchGitStatus();\n    console.log(status);\n  };\n\n  return (",
-      "after": "import { postCommit } from '../service/postCommit';\nimport { commitMessage } from '../stores/commitMessage';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\nimport { setExecutionResult } from '../stores/executionResult'; // Importing the necessary function to clear execution result\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n    const status = await fetchGitStatus();\n    console.log(status);\n    setExecutionResult(''); // Clearing the execution result after commit\n  };\n\n  return (",
-      "total_deletions": 0,
-      "total_additions": 2
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

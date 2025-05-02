@@ -38,34 +38,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\nset -e\ngoal=\"Implement clipboard reading fallback with input box\"\necho \"Plan:\"\necho \"1. Modify ExecuteButton.jsx to include a check for navigator.clipboard.readText availability.\"\necho \"2. If unavailable, render an input box inside the button with placeholder.\"\necho \"3. Execute the change when text is pasted into the input box.\"\n\ncat > src/frontend/components/ExecuteButton.jsx << 'EOF'\nimport { createEffect, createSignal } from 'solid-js';\n      {inputAvailable() ? (\n        'Paste & Execute Change'\n      ) : (\n        <input\n          type=\"text\"\n          class=\"w-full px-2 py-2 bg-white text-black\"\n          placeholder=\"Paste the change here to execute\"\n          value={changeInput()}\n          onInput={(e) => setChangeInput(e.currentTarget.value)}",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Replace text input with textarea in ExecuteButton\"\necho \"Plan:\"\necho \"1. Modify the ExecuteButton.jsx file to replace the input field with a single-row textarea.\"\n\ncat > src/frontend/components/ExecuteButton.jsx << 'EOF'\nimport { createEffect, createSignal } from 'solid-js';\n      {inputAvailable() ? (\n        'Paste & Execute Change'\n      ) : (\n        <textarea\n          rows=\"1\"\n          class=\"w-full px-2 py-2 bg-white text-black resize-none\"\n          placeholder=\"Paste the change here to execute\"\n          value={changeInput()}\n          onInput={(e) => setChangeInput(e.currentTarget.value)}",
-      "total_deletions": 7,
-      "total_additions": 5
-    },
-    {
-      "filename": "prompt.md",
-      "before": "\nRequirements:\n\nWhen navigator.clipboard.readText is unavailable,\nthen display an input box inside the button instead of the normal text.\nThe placeholder of the input is: &#34;Paste the change here to execute&#34;.\nWhen the user pastes a text into the input, execute it just like the pasted text at button click.\n\n\n",
-      "after": "\nRequirements:\n\nUse a textarea instead of the text input to prevent losing newline characters. Make it looking single-row.\n\n\n",
-      "total_deletions": 4,
-      "total_additions": 1
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "attention:\n  - src/frontend/components/ExecuteButton.jsx\nrequirements: >\n  When navigator.clipboard.readText is unavailable,\n\n  then display an input box inside the button instead of the normal text.\n\n  The placeholder of the input is: \"Paste the change here to execute\".\n\n  When the user pastes a text into the input, execute it just like the pasted\n  text at button click.\nos: OSX",
-      "after": "attention:\n  - src/frontend/components/ExecuteButton.jsx\nrequirements: >\n  Use a textarea instead of the text input to prevent losing newline characters.\n  Make it looking single-row.\nos: OSX",
-      "total_deletions": 8,
-      "total_additions": 2
-    },
-    {
-      "filename": "src/frontend/components/ExecuteButton.jsx",
-      "before": "      {inputAvailable() ? (\n        'Paste & Execute Change'\n      ) : (\n        <input\n          type=\"text\"\n          class=\"w-full px-2 py-2 bg-white text-black\"\n          placeholder=\"Paste the change here to execute\"\n          value={changeInput()}\n          onInput={(e) => setChangeInput(e.currentTarget.value)}",
-      "after": "      {inputAvailable() ? (\n        'Paste & Execute Change'\n      ) : (\n        <textarea\n          rows=\"1\"\n          class=\"w-full px-2 py-2 bg-white text-black resize-none\"\n          placeholder=\"Paste the change here to execute\"\n          value={changeInput()}\n          onInput={(e) => setChangeInput(e.currentTarget.value)}",
-      "total_deletions": 3,
-      "total_additions": 3
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

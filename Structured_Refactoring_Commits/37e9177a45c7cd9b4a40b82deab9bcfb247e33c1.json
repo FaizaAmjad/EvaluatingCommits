@@ -1,0 +1,45 @@
+{
+  "sha": "37e9177a45c7cd9b4a40b82deab9bcfb247e33c1",
+  "url": "https://github.com/tisztamo/Junior/commit/37e9177a45c7cd9b4a40b82deab9bcfb247e33c1",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Rename and update imports https://chat.openai.com/share/b1da6f1f-a5e5-4d54-9ec4-5e8e5ba45f2e",
+  "authorAt": "2023-09-07T15:46:24.000+02:00",
+  "commitAt": "2023-09-07T15:46:24.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Renaming and Updating Imports",
+    "url": "https://chat.openai.com/share/b1da6f1f-a5e5-4d54-9ec4-5e8e5ba45f2e",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/37e9177a45c7cd9b4a40b82deab9bcfb247e33c1",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Rename and update imports https://chat.openai.com/share/b1da6f1f-a5e5-4d54-9ec4-5e8e5ba45f2e"
+    },
+    "status": 200,
+    "dateOfConversation": "September 7, 2023",
+    "dateOfAccess": "2023-09-14 08:16:58.476045",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 746,
+    "tokensOfAnswers": 543,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "37e9177a45c7cd9b4a40b82deab9bcfb247e33c1_s1_p1",
+        "prompt": "You are AI Junior, you code like Donald Knuth.\n# Working set\n\nsrc/frontend/components/MultiSelect/FilteredListItem.jsx:\n```\nimport { createEffect } from \"solid-js\";\n\nconst FilteredListItem = (props) => {\n  let pathRef;\n\n  const handleClick = () => {\n    if (typeof props.onItemClick === 'function') {\n      props.onItemClick(props.item);\n    }\n  };\n\n  createEffect(() => {\n    if (pathRef) {\n      pathRef.scrollLeft = pathRef.scrollWidth;\n    }\n  });\n\n  // Split the path into filename and directory\n  const [filename, ...pathParts] = props.item.split('/').reverse();\n  const directory = pathParts.reverse().join('/');\n\n  return (\n    <div onClick={handleClick} class=\"flex justify-between items-center w-full font-mono cursor-pointer\">\n      <span class=\"text-base bg-main rounded p-1\">{filename}</span>\n      <span ref={pathRef} class=\"overflow-x-auto whitespace-no-wrap break-keep scrollbar-hidden ml-4 py-2 text-sm\">{directory}</span>\n    </div>\n  );\n};\n\nexport default FilteredListItem;\n\n```\n\nsrc/frontend/components/MultiSelect/ResultSet.jsx:\n```\nconst ResultSet = (props) => {\n  return (\n    <ul class=\"list-inside\">\n      {props.items.map(item => <li key={item}>{item}</li>)}\n    </ul>\n  );\n};\n\nexport default ResultSet;\n\n```\n\nsrc/frontend/components/MultiSelect/FilteredList.jsx:\n```\nimport FilteredListItem from \"./FilteredListItem\";\n\nconst FilteredList = (props) => {\n  return (\n    <ul class=\"list-inside\">\n      {props.items.map((item, idx) => <FilteredListItem key={item} item={item} idx={idx + 1} onItemClick={props.onItemClick} />)}\n    </ul>\n  );\n};\n\nexport default FilteredList;\n\n```\n\n\n# Task\n\nMove the following files to the specified target dirs!\n\nIf no target dir is specified, find out the best target dir based on available info!\n\nIMPORTANT: Edit the moved files to update imports with relative paths if needed!\n\nYou need to follow dependencies to maintain coherence. Update imports!\n\n1. Rename FilteredlListItem to ListItem (also the file)\n2. Use ListItem when rendering the result set.\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\nBefore starting, check if you need more files to solve the task.\nDo not edit any file not provided in the working set!\nIf you need more files, do not try to solve the task, ask for the missing files instead!\n\nEXAMPLE START\n\n`filepath1` is needed to solve the task but is not in the working set.\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Rename and update imports\"\necho \"Plan:\"\necho \"1. Rename FilteredListItem.jsx to ListItem.jsx.\"\necho \"2. Update FilteredListItem component to ListItem.\"\necho \"3. Update ResultSet to use ListItem.\"\necho \"4. Update imports in FilteredList and ResultSet.\"\n\n# 1. Rename FilteredListItem.jsx to ListItem.jsx\nmv src/frontend/components/MultiSelect/FilteredListItem.jsx src/frontend/components/MultiSelect/ListItem.jsx\n\n# 2. Update FilteredListItem component to ListItem\ncat << 'EOF' > src/frontend/components/MultiSelect/ListItem.jsx\nimport { createEffect } from \"solid-js\";\n\nconst ListItem = (props) => {\n  let pathRef;\n\n  const handleClick = () => {\n    if (typeof props.onItemClick === 'function') {\n      props.onItemClick(props.item);\n    }\n  };\n\n  createEffect(() => {\n    if (pathRef) {\n      pathRef.scrollLeft = pathRef.scrollWidth;\n    }\n  });\n\n  // Split the path into filename and directory\n  const [filename, ...pathParts] = props.item.split('/').reverse();\n  const directory = pathParts.reverse().join('/');\n\n  return (\n    <div onClick={handleClick} class=\"flex justify-between items-center w-full font-mono cursor-pointer\">\n      <span class=\"text-base bg-main rounded p-1\">{filename}</span>\n      <span ref={pathRef} class=\"overflow-x-auto whitespace-no-wrap break-keep scrollbar-hidden ml-4 py-2 text-sm\">{directory}</span>\n    </div>\n  );\n};\n\nexport default ListItem;\nEOF\n\n# 3. Update ResultSet to use ListItem\ncat << 'EOF' > src/frontend/components/MultiSelect/ResultSet.jsx\nimport ListItem from \"./ListItem\";\n\nconst ResultSet = (props) => {\n  return (\n    <ul class=\"list-inside\">\n      {props.items.map(item => <ListItem key={item} item={item} />)}\n    </ul>\n  );\n};\n\nexport default ResultSet;\nEOF\n\n# 4. Update imports in FilteredList\ncat << 'EOF' > src/frontend/components/MultiSelect/FilteredList.jsx\nimport ListItem from \"./ListItem\";\n\nconst FilteredList = (props) => {\n  return (\n    <ul class=\"list-inside\">\n      {props.items.map((item, idx) => <ListItem key={item} item={item} idx={idx + 1} onItemClick={props.onItemClick} />)}\n    </ul>\n  );\n};\n\nexport default FilteredList;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

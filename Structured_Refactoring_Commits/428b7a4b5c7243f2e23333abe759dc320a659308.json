@@ -38,41 +38,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "docs/_coverpage.md",
-      "before": "# <span class=\"cover-color-1\">You are the Pro,</span> <span class=\"cover-color-2\">Junior</span> <span class=\"cover-color-3\">codes</span>\n\nWelcome to **Junior**, your AI-first IDE.\n\n![](assets/logo.svg)\n",
-      "after": "# <span class=\"cover-color-blue\">You are the Pro,</span> <span class=\"cover-color-orange\">Junior&nbsp;codes</span>\n\nWelcome to **Junior**, your AI-first IDE.\n\n![](assets/logo.svg)\n",
-      "total_deletions": 1,
-      "total_additions": 2
-    },
-    {
-      "filename": "docs/assets/styles.css",
-      "before": "}\n\n/* Adding logo colors to cover page */\n.cover-color-1 {\n  color: rgb(59, 130, 246);\n}\n\n.cover-color-2 {\n  color: rgb(253, 186, 116);\n}\n\n.cover-color-3 {\n  color: rgb(185, 28, 28);\n}",
-      "after": "}\n\n/* Adding logo colors to cover page */\n.cover-color-blue {\n  color: rgb(59, 130, 246) !important;\n}\n\n.cover-color-orange {\n  color: rgb(253, 186, 116) !important;\n}\n\n.cover-color-red {\n  color: rgb(185, 28, 28) !important;\n}\n.cover-color-green {\n  color: rgb(21, 128, 61) !important;\n}",
-      "total_deletions": 6,
-      "total_additions": 9
-    },
-    {
-      "filename": "prompt/history/2023/08/30/11:51_Improve the documentation/change.sh",
-      "before": "",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Improve the documentation\"\necho \"Plan:\"\necho \"1. Rename the cover-color classes in styles.css and _coverpage.md.\"\necho \"2. Add a class for the missing green color in styles.css.\"\necho \"3. Make the colors in the cover classes !important in styles.css.\"\necho \"4. Merge 'codes' with 'Junior' and set its color to orange in _coverpage.md.\"\n\n# Step 1: Rename the cover-color classes in styles.css and _coverpage.md.\ncat > docs/assets/styles.css << 'EOF'\n.app-name-link img {\n  max-width: 70px;\n}\n\niframe {\n  margin: 16px;\n}\n\n/* Adding logo colors to cover page */\n.cover-color-blue {\n  color: rgb(59, 130, 246) !important;\n}\n\n.cover-color-orange {\n  color: rgb(253, 186, 116) !important;\n}\n\n.cover-color-red {\n  color: rgb(185, 28, 28) !important;\n}\nEOF\n\ncat > docs/_coverpage.md << 'EOF'\n# <span class=\"cover-color-blue\">You are the Pro,</span> <span class=\"cover-color-orange\">Junior&nbsp;codes</span>\n\nWelcome to **Junior**, your AI-first IDE.\n\n![](assets/logo.svg)\n\nEOF\n\n# Step 2: Add a class for the missing green color in styles.css.\necho \".cover-color-green {\" >> docs/assets/styles.css\necho \"  color: rgb(21, 128, 61) !important;\" >> docs/assets/styles.css\necho \"}\" >> docs/assets/styles.css\n\n# Steps 3 and 4 are already addressed in previous commands.\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "total_deletions": 0,
-      "total_additions": 50
-    },
-    {
-      "filename": "prompt/history/2023/08/30/11:51_Improve the documentation/prompt.md",
-      "before": "",
-      "after": "You are Junior, an AI system aiding developers.\nYou are working with a part of a large program called the \"Working Set.\"\nBefore starting, check if you need more files to solve the task.\nDo not edit files without knowing their contents!\nAsk for them in normal conversational format instead.\n\n# Working set\n\ndocs/_coverpage.md:\n```\n# <span class=\"cover-color-1\">You are the Pro,</span> <span class=\"cover-color-2\">Junior</span> <span class=\"cover-color-3\">codes</span>\n\nWelcome to **Junior**, your AI-first IDE.\n\n![](assets/logo.svg)\n\n```\n\ndocs/index.html:\n```\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Document</title>\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />\n  <meta name=\"description\" content=\"Description\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=1.0\">\n  <link rel=\"icon\" href=\"assets/favicon.ico\" type=\"image/x-icon\">\n  <link rel=\"stylesheet\" href=\"//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css\">\n  <link rel=\"stylesheet\" href=\"assets/styles.css\">\n</head>\n<body>\n  <div id=\"app\"></div>\n  <script src=\"docsifyConfig.js\"></script>\n  <!-- Docsify v4 -->\n  <script src=\"//cdn.jsdelivr.net/npm/docsify@4\"></script>\n</body>\n</html>\n\n```\n\ndocs/assets/styles.css:\n```\n.app-name-link img {\n  max-width: 70px;\n}\n\niframe {\n  margin: 16px;\n}\n\n/* Adding logo colors to cover page */\n.cover-color-1 {\n  color: rgb(59, 130, 246);\n}\n\n.cover-color-2 {\n  color: rgb(253, 186, 116);\n}\n\n.cover-color-3 {\n  color: rgb(185, 28, 28);\n}\n\n```\n\ndocs/assets/logo.svg:\n```\n<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\">\n    <rect x=\"0\" y=\"0\" rx=\"10\" ry=\"10\" width=\"100\" height=\"30\" style=\"fill:rgb(59 130 246);\" />\n    <rect x=\"0\" y=\"33\" rx=\"10\" ry=\"10\" width=\"100\" height=\"30\" style=\"fill:rgb(253, 186, 116);\" />\n    <rect x=\"0\" y=\"66\" rx=\"10\" ry=\"10\" width=\"48\" height=\"34\" style=\"fill:rgb(185, 28, 28);\" />\n    <rect x=\"52\" y=\"66\" rx=\"10\" ry=\"10\" width=\"48\" height=\"34\" style=\"fill:rgb(21, 128, 61);\" />\n</svg>\n\n```\n\n\n# Task\n\nImprove the documentation!\n\n1. Rename the cover-color classes to cover-color-red, -orange and -blue.\n2. Add a class for the missing green color.\n3. Make the colors in the cover classes !important.\n4. Make \"codes\" orange by merging with the previous \"Junior\". Also disallow line breaks between these two words.\n\n\nDo not create backup files.\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n",
-      "total_deletions": 0,
-      "total_additions": 117
-    },
-    {
-      "filename": "prompt/history/2023/08/30/11:51_Improve the documentation/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/_coverpage.md\n  - docs/index.html\n  - docs/assets/styles.css\n  - docs/assets/logo.svg\nrequirements: >\n  1. Rename the cover-color classes to cover-color-red, -orange and -blue.\n\n  2. Add a class for the missing green color.\n\n  3. Make the colors in the cover classes !important.\n\n  4. Make \"codes\" orange by merging with the previous \"Junior\". Also disallow\n  line breaks between these two words.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 16
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

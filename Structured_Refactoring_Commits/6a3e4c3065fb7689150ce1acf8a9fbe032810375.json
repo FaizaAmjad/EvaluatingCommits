@@ -1,0 +1,73 @@
+{
+  "sha": "6a3e4c3065fb7689150ce1acf8a9fbe032810375",
+  "url": "https://github.com/dbt-labs/docs.getdbt.com/commit/6a3e4c3065fb7689150ce1acf8a9fbe032810375",
+  "author": "mirnawong1",
+  "repoName": "dbt-labs/docs.getdbt.com",
+  "repoLanguage": "CSS",
+  "message": "update labeler to add label and not remove it (#4158)\n\nupdate gha workflow to ensure 'new contributor' label isn't removed.\r\nthis gha wofklow adds a 'new contributor' label to new first time\r\ncontributors that open a pr.\r\n\r\nused\r\n[chatgpt](https://chat.openai.com/share/fb8500b8-a672-454d-b599-52ce87ad1e9a)\r\nto help corrct gha",
+  "authorAt": "2023-09-29T17:10:10.000+01:00",
+  "commitAt": "2023-09-29T17:10:10.000+01:00",
+  "chatgpt_sharing": {
+    "title": "GitHub Action Label Handling",
+    "url": "https://chat.openai.com/share/fb8500b8-a672-454d-b599-52ce87ad1e9a",
+    "mention": {
+      "mentioned_url": "https://github.com/dbt-labs/docs.getdbt.com/commit/6a3e4c3065fb7689150ce1acf8a9fbe032810375",
+      "mentioned_property": "message",
+      "mentioned_author": "mirnawong1",
+      "mentioned_text": "update labeler to add label and not remove it (#4158)\n\nupdate gha workflow to ensure 'new contributor' label isn't removed.\r\nthis gha wofklow adds a 'new contributor' label to new first time\r\ncontributors that open a pr.\r\n\r\nused\r\n[chatgpt](https://chat.openai.com/share/fb8500b8-a672-454d-b599-52ce87ad1e9a)\r\nto help corrct gha"
+    },
+    "status": 200,
+    "dateOfConversation": "September 29, 2023",
+    "dateOfAccess": "2023-10-13 00:07:22.159663",
+    "numberOfPrompts": 4,
+    "tokensOfPrompts": 824,
+    "tokensOfAnswers": 982,
+    "model": "Default (GPT-3.5)",
+    "conversations": [
+      {
+        "prompt_id": "6a3e4c3065fb7689150ce1acf8a9fbe032810375_s1_p1",
+        "prompt": "this github action is adding a new contributor label and but then it removes that label from the first-time new contributor. why is this happening? if the person is opening up a pr is in fact a first-time contributor, how can i make sure it adds the new contributor label and doesn't remove it?\n\nname: Add/Remove Labels\n\non:\n  pull_request_target:\n    types: [ opened ]\n    \njobs:\n  add_new_contributor_label:\n    if: github.event.action == 'opened'\n    permissions:\n      contents: read\n      pull-requests: write\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/github-script@v6\n        with:\n          script: |\n            const creator = context.payload.sender.login\n            const opts = github.rest.issues.listForRepo.endpoint.merge({\n              ...context.issue,\n              creator,\n              state: 'all'\n            })\n            const issues = await github.paginate(opts)\n            for (const issue of issues) {\n              if (issue.number === context.issue.number) {\n                continue\n              }\n              if (issue.pull_request) {\n                return // creator is already a contributor\n              }\n            }\n            await github.rest.issues.addLabels({\n              issue_number: context.issue.number,\n              owner: context.repo.owner,\n              repo: context.repo.repo,\n              labels: ['new contributor']\n            })\n",
+        "answer": "ChatGPTThe GitHub Action you provided is intended to add the \"new contributor\" label to a pull request when it is opened, but it contains a logic error that is causing it to remove the label from the first-time new contributor.Here's the issue:[CODE_BLOCK_0]In this code, it's looping through issues in the repository, and when it encounters an issue that is a pull request (as indicated by issue.pull_request being truthy), it immediately returns from the function. This means that as soon as the script finds a pull request created by the user (the sender of the current pull request), it stops processing and doesn't add the \"new contributor\" label.To ensure that the \"new contributor\" label is added and not removed for first-time contributors, you should rework this logic to check if the current pull request's creator is a first-time contributor based on whether they have opened any pull requests in the past. Here's a modified version of your code:[CODE_BLOCK_1]With this code, it checks if the current pull request's creator has already opened a pull request in the repository. If they haven't, it adds the \"new contributor\" label. Otherwise, it doesn't add the label, ensuring that first-time contributors receive the label.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "javascript",
+            "Content": "for (const issue of issues) {\n  if (issue.number === context.issue.number) {\n    continue\n  }\n  if (issue.pull_request) {\n    return // creator is already a contributor\n  }\n}\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "javascript",
+            "Content": "const creator = context.payload.sender.login;\n\nconst opts = github.rest.issues.listForRepo.endpoint.merge({\n  ...context.issue,\n  creator,\n  state: 'all',\n});\n\nconst issues = await github.paginate(opts);\n\nlet isAlreadyContributor = false;\n\nfor (const issue of issues) {\n  if (issue.number === context.issue.number) {\n    continue;\n  }\n  if (issue.pull_request && issue.user.login === creator) {\n    isAlreadyContributor = true;\n    break;\n  }\n}\n\nif (!isAlreadyContributor) {\n  await github.rest.issues.addLabels({\n    issue_number: context.issue.number,\n    owner: context.repo.owner,\n    repo: context.repo.repo,\n    labels: ['new contributor'],\n  });\n}\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "6a3e4c3065fb7689150ce1acf8a9fbe032810375_s1_p2",
+        "prompt": "ok thank you - can you explain the above code in very simple terms ",
+        "answer": "ChatGPTCertainly! Let me explain the code in simpler terms:We start by identifying who opened the current pull request and store their username in a variable called creator.Then, we retrieve all the issues and pull requests in the repository, including those that are closed or still open. We store these issues and pull requests in a variable called issues.We set up a variable called isAlreadyContributor and initially assume the person who opened the current pull request is not a contributor.We go through each issue and pull request in the repository, one by one. For each of them, we do the following:We skip (continue) the current issue if it is the same as the pull request we're currently looking at (we don't want to count the current pull request).If we find a pull request (a contribution) in the list where the creator of that pull request matches the person who opened the current pull request (the creator), we set isAlreadyContributor to true. This means we found evidence that the person has contributed before.After going through all the issues and pull requests, we check whether isAlreadyContributor is still false. If it's false, that means we didn't find any previous contributions by the person who opened the current pull request.If isAlreadyContributor is still false, we add the \"new contributor\" label to the current pull request. This label is given to people who are contributing to the project for the first time.So, in simple terms, the code checks if the person opening the pull request has contributed to the project before. If they haven't, it adds the \"new contributor\" label to welcome them as a first-time contributor. If they have contributed before, it doesn't add the label to avoid removing it from them.",
+        "list_of_code": []
+      },
+      {
+        "prompt_id": "6a3e4c3065fb7689150ce1acf8a9fbe032810375_s1_p3",
+        "prompt": "ok thank you! so is the following code correct based on your suggestions:\n\nname: Add/Remove Labels\n\non:\n  pull_request_target:\n    types: [ opened, closed ]\n    \njobs:\n  add_new_contributor_label:\n    if: github.event.action == 'opened'\n    permissions:\n      contents: read\n      pull-requests: write\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/github-script@v6\n        with:\n          script: |\n            const creator = context.payload.sender.login;\n            const opts = github.rest.issues.listForRepo.endpoint.merge({\n              ...context.issue,\n              creator,\n              state: 'all',\n            });\n            \n            const issues = await github.paginate(opts);\n            \n            let isAlreadyContributor = false;\n            \n            for (const issue of issues) {\n              if (issue.number === context.issue.number) {\n                continue;\n              }\n              if (issue.pull_request && issue.user.login === creator) {\n                isAlreadyContributor = true;\n                break;\n              }\n            }\n            \n            if (!isAlreadyContributor) {\n              await github.rest.issues.addLabels({\n                issue_number: context.issue.number,\n                owner: context.repo.owner,\n                repo: context.repo.repo,\n                labels: ['new contributor'],\n              });\n            }\n",
+        "answer": "ChatGPTThe code you provided appears to be mostly correct, but there's one small improvement to consider.In your workflow configuration, you have specified that the workflow should trigger not only on \"opened\" pull requests but also on \"closed\" pull requests:[CODE_BLOCK_0]However, based on your original requirement, you only wanted to add the \"new contributor\" label when a pull request is opened by a first-time contributor. If you want to ensure that the label is only added when a pull request is opened and not when it's closed, you should adjust the event type to only include \"opened\":[CODE_BLOCK_1]With this change, the workflow will only run when a new pull request is opened, which aligns with your original intention. Other than that, the code logic itself looks good and should work as expected.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "yaml",
+            "Content": "on:\n  pull_request_target:\n    types: [ opened, closed ]\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "yaml",
+            "Content": "on:\n  pull_request_target:\n    types: [opened]\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

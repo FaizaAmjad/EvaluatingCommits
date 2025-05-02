@@ -1,0 +1,45 @@
+{
+  "sha": "122d96589a50bc142f9dc085c707ee8ab779abd3",
+  "url": "https://github.com/damus-io/nostrdb/commit/122d96589a50bc142f9dc085c707ee8ab779abd3",
+  "author": "jb55",
+  "repoName": "damus-io/nostrdb",
+  "repoLanguage": "C",
+  "message": "push chunks at a time when unescaping json\n\nSuggested-by: GPT4\nLink: https://chat.openai.com/share/c17b726f-0096-4389-96ad-d9cf62810e6e",
+  "authorAt": "2023-07-22T10:36:52.000-07:00",
+  "commitAt": "2023-07-22T10:41:54.000-07:00",
+  "chatgpt_sharing": {
+    "title": "Chunked JSON Unescape Function",
+    "url": "https://chat.openai.com/share/c17b726f-0096-4389-96ad-d9cf62810e6e",
+    "mention": {
+      "mentioned_url": "https://github.com/damus-io/nostrdb/commit/122d96589a50bc142f9dc085c707ee8ab779abd3",
+      "mentioned_property": "message",
+      "mentioned_author": "jb55",
+      "mentioned_text": "push chunks at a time when unescaping json\n\nSuggested-by: GPT4\nLink: https://chat.openai.com/share/c17b726f-0096-4389-96ad-d9cf62810e6e"
+    },
+    "status": 200,
+    "dateOfConversation": "July 22, 2023",
+    "dateOfAccess": "2023-07-27 13:32:30.599217",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 557,
+    "tokensOfAnswers": 715,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "122d96589a50bc142f9dc085c707ee8ab779abd3_s1_p1",
+        "prompt": "I want to update this function, I added a comment `chatgpt:` which describes what I want to do. can you help?\n\n/// Unescape and push json strings\nstatic int ndb_builder_push_json_str(struct ndb_builder *builder,\n\t\t\t\t     const char *str, int len,\n\t\t\t\t     union packed_str *pstr)\n{\n\t// let's not care about de-duping these. we should just unescape\n\t// in-place directly into the strings table. \n\t\n\t// TODO: we still want single-char packed strings\n\n\n\tconst char *p, *end, *start;\n\n\tend = str + len;\n\n\t*pstr = ndb_offset_str(builder->strings.p - builder->strings.start);\n\n\tfor (p = str; p < end; p++) {\n\t\tif (*p == '\\\\' && p+1 < end) {\n\t\t\tswitch (*(p+1)) {\n\t\t\tcase 't':\n\t\t\t\tif (!cursor_push_byte(&builder->strings, '\\t'))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\tcase 'n':\n\t\t\t\tif (!cursor_push_byte(&builder->strings, '\\n'))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\tcase 'r':\n\t\t\t\tif (!cursor_push_byte(&builder->strings, '\\r'))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\tcase 'b':\n\t\t\t\tif (!cursor_push_byte(&builder->strings, '\\b'))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\tcase 'f':\n\t\t\t\tif (!cursor_push_byte(&builder->strings, '\\f'))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\tcase '\\\\':\n\t\t\t\tif (!cursor_push_byte(&builder->strings, '\\\\'))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\tcase '\"':\n\t\t\t\tif (!cursor_push_byte(&builder->strings, '\"'))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\t// Optionally handle Unicode escape sequences (\\uXXXX) if needed.\n\t\t\tcase 'u':\n\t\t\t\t// these aren't handled yet\n\t\t\t\treturn 0;\n\t\t\tdefault:\n\t\t\t\t// Possibly handle an error here or just push the backslash and the character.\n\t\t\t\tif (!cursor_push_byte(&builder->strings, *p) ||\n\t\t\t\t    !cursor_push_byte(&builder->strings, *(p+1)))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\t}\n\n\t\t\tp++;\n\t\t} else {\n\t\t\t// chatgpt: instead of this I want something like\n\t\t\t// cursor_push(&builder->strings, start, p - start)\n\t\t\t// which will push chunks all at once inbetween escape\n\t\t\t// sequences\n\t\t\tif (!cursor_push_byte(&builder->strings, *p))\n\t\t\t\treturn 0;\n\t\t}\n\t}\n\n\treturn cursor_push_byte(&builder->strings, '\\0');\n}\n",
+        "answer": "The comment you added suggests that you want to handle non-escaped sequences in chunks, rather than one byte at a time. This could potentially improve performance if there are large unescaped sequences in the JSON string. Here's how you can achieve that:Maintain a start pointer that points to the beginning of an unescaped sequence.Whenever you encounter an escape sequence (or reach the end of the string), use your cursor_push function to push the entire unescaped sequence at once.Update the start pointer to point just after the last processed escape sequence.Here's an updated version of your function with the desired changes:[CODE_BLOCK_0]This revised function now uses cursor_push to efficiently handle chunks of unescaped characters, as you specified. Make sure that the cursor_push function is properly implemented and compatible with the expected arguments and the rest of your codebase.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "c",
+            "Content": "/// Unescape and push json strings\nstatic int ndb_builder_push_json_str(struct ndb_builder *builder,\n\t\t\t\t     const char *str, int len,\n\t\t\t\t     union packed_str *pstr)\n{\n\t// let's not care about de-duping these. we should just unescape\n\t// in-place directly into the strings table. \n\t\n\t// TODO: we still want single-char packed strings\n\n\tconst char *p, *end, *start;\n\n\tend = str + len;\n\tstart = str; // Initialize start to the beginning of the string\n\n\t*pstr = ndb_offset_str(builder->strings.p - builder->strings.start);\n\n\tfor (p = str; p < end; p++) {\n\t\tif (*p == '\\\\' && p+1 < end) {\n\t\t\t// Push the chunk of unescaped characters before this escape sequence\n\t\t\tif (start < p && !cursor_push(&builder->strings, start, p - start))\n\t\t\t\treturn 0;\n\n\t\t\tswitch (*(p+1)) {\n\t\t\tcase 't':\n\t\t\t\tif (!cursor_push_byte(&builder->strings, '\\t'))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\tcase 'n':\n\t\t\t\tif (!cursor_push_byte(&builder->strings, '\\n'))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\tcase 'r':\n\t\t\t\tif (!cursor_push_byte(&builder->strings, '\\r'))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\tcase 'b':\n\t\t\t\tif (!cursor_push_byte(&builder->strings, '\\b'))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\tcase 'f':\n\t\t\t\tif (!cursor_push_byte(&builder->strings, '\\f'))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\tcase '\\\\':\n\t\t\t\tif (!cursor_push_byte(&builder->strings, '\\\\'))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\tcase '\"':\n\t\t\t\tif (!cursor_push_byte(&builder->strings, '\"'))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\tcase 'u':\n\t\t\t\t// these aren't handled yet\n\t\t\t\treturn 0;\n\t\t\tdefault:\n\t\t\t\tif (!cursor_push_byte(&builder->strings, *p) ||\n\t\t\t\t    !cursor_push_byte(&builder->strings, *(p+1)))\n\t\t\t\t\treturn 0;\n\t\t\t\tbreak;\n\t\t\t}\n\n\t\t\tp++; // Skip the character following the backslash\n\t\t\tstart = p + 1; // Update the start pointer to the next character\n\t\t}\n\t}\n\n\t// Handle the last chunk after the last escape sequence (or if there are no escape sequences at all)\n\tif (start < p && !cursor_push(&builder->strings, start, p - start))\n\t\treturn 0;\n\n\treturn cursor_push_byte(&builder->strings, '\\0');\n}\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}
