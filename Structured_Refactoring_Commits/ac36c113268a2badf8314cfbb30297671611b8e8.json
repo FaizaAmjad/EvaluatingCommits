@@ -25,7 +25,7 @@
     "model": "Default",
     "conversations": [
       {
-        "prompt_id": "ac36c113268a2badf8314cfbb30297671611b8e8_s1_p1",
+        "prompt_id": "p1",
         "prompt": "# Working set\n\n./package.json:\n```\n{\n  \"name\": \"@aijunior/dev\",\n  \"version\": \"0.0.1\",\n  \"description\": \"Your AI Contributor\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"junior\": \"src/main.js\",\n    \"junior-web\": \"src/web.js\"\n  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"build:docs\": \"node ./src/doc/buildDoc.js\"\n  },\n  \"keywords\": [\n    \"cli\",\n    \"uppercase\"\n  ],\n  \"author\": \"\",\n  \"license\": \"GPL\",\n  \"dependencies\": {\n    \"chatgpt\": \"^5.2.4\",\n    \"clipboard-copy\": \"^4.0.1\",\n    \"cors\": \"^2.8.5\",\n    \"ejs\": \"^3.1.9\",\n    \"express\": \"^4.18.2\",\n    \"js-yaml\": \"^4.1.0\",\n    \"marked\": \"^5.1.0\",\n    \"postcss-nested\": \"^6.0.1\",\n    \"simple-git\": \"^3.19.1\",\n    \"solid-js\": \"^1.7.7\",\n    \"vite\": \"^4.3.9\",\n    \"vite-plugin-solid\": \"^2.7.0\",\n    \"ws\": \"^8.13.0\"\n  },\n  \"directories\": {\n    \"doc\": \"doc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/tisztamo/Junior.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/Junior/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/Junior#readme\",\n  \"devDependencies\": {\n    \"@types/js-yaml\": \"^4.0.5\",\n    \"autoprefixer\": \"^10.4.14\",\n    \"babel-preset-solid\": \"^1.7.7\",\n    \"highlight.js\": \"^11.8.0\",\n    \"markdown-it\": \"^13.0.1\",\n    \"postcss\": \"^8.4.26\",\n    \"tailwindcss\": \"^3.3.3\"\n  }\n}\n\n```\n\n\n# Task\n\nFix the following issue!\n\nRename build:docs to build:doc\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files without substitution.\nAssume OSX.\nnpm and jq are installed.\nDo NOT write any text outside the script (the plan goes into it)!\n\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\n# Goal: [Task description, max 7 words]\n# Plan:\n# 1. [...]\n\n[Commands solving the task]\n```\n\nEXAMPLE END\n\n",
         "answer": "[CODE_BLOCK_0]This script uses the jq command-line utility to process JSON data. The del function is used to remove the build:docs property from the scripts object. Then it uses the += operator to add a new build:doc property with the same value as the removed build:docs. The > operator is used to write the output to a temporary file, and then the mv command is used to replace the original package.json with the modified version.",
         "list_of_code": [
@@ -37,7 +37,7 @@
         ]
       },
       {
-        "prompt_id": "ac36c113268a2badf8314cfbb30297671611b8e8_s1_p2",
+        "prompt_id": "p2",
         "prompt": "It destroyed package.json, this is the content now:\n\n{\n  \"cli\": \"node src/main.js\",\n  \"start\": \"node src/web.js\",\n  \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n  \"scripts\": {\n    \"build:doc\": \"node ./src/doc/buildDoc.js\"\n  }\n}\n",
         "answer": "I apologize for the confusion. I see where the mistake happened. The script failed to preserve the other properties of the package.json file. It only preserved the scripts object, causing the rest of the package.json properties to be deleted.Here is a corrected script:[CODE_BLOCK_0]The with_entries function allows us to transform each entry in the object (which are key-value pairs). Inside with_entries, we use an if condition to check if the key equals \"build:docs\". If it does, we change the key to \"build:doc\". Otherwise, we leave the entry unchanged. This way, we only rename the desired property while leaving the rest of the package.json file intact.",
         "list_of_code": [
@@ -50,34 +50,8 @@
       }
     ]
   },
-  "code": [
-    {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\n# Goal: Fix relative imports by adding .js\n# Plan:\n# 1. Modify the src/doc/buildDoc.js file to correct the relative imports by adding '.js'\n# 2. Modify the src/doc/convertDirectory.js file to correct the relative imports by adding '.js'\n\ncat > src/doc/buildDoc.js << 'EOF'\nimport convertDirectory from './convertDirectory.js';\nimport createMarkdownRenderer from './createMarkdownRenderer.js';\n\nconst md = createMarkdownRenderer();\nconvertDirectory('./doc', md);\nEOF\n\ncat > src/doc/convertDirectory.js << 'EOF'\nimport { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';\nimport { join, extname } from 'path';\nimport createMarkdownRenderer from './createMarkdownRenderer.js';\n\nexport default function convertDirectory(dir, md = createMarkdownRenderer()) {\n    const files = readdirSync(dir);\n    files.forEach(file => {\n        const filePath = join(dir, file);\n        const stats = statSync(filePath);\n        if (stats.isDirectory()) {\n            convertDirectory(filePath, md);\n        } else if (extname(file) === '.md') {\n            const markdown = readFileSync(filePath, 'utf8');\n            const html = md.render(markdown);\n            writeFileSync(filePath.replace('.md', '.html'), html);\n        }\n    });\n}\nEOF\n\n",
-      "after": "#!/bin/sh\n# Goal: Rename build:docs to build:doc in package.json\n# Plan:\n# 1. Use jq to rename the \"build:docs\" property to \"build:doc\" in the \"scripts\" object of the package.json file.\n# 2. Save the modified JSON back to package.json.\n\njq '.scripts |= with_entries(if .key == \"build:docs\" then .key = \"build:doc\" else . end)' ./package.json > temp.json && mv temp.json package.json",
-      "total_deletions": 32,
-      "total_additions": 4
-    },
-    {
-      "filename": "package.json",
-      "before": "    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"build:docs\": \"node ./src/doc/buildDoc.js\"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "after": "    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"build:doc\": \"node ./src/doc/buildDoc.js\"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "prompt.md",
-      "before": "# Working set\n\nsrc/doc/buildDoc.js:\n```\nimport convertDirectory from './convertDirectory';\nimport createMarkdownRenderer from './createMarkdownRenderer';\n\nconst md = createMarkdownRenderer();\nconvertDirectory('./doc', md);\n\n```\n\nsrc/doc/convertDirectory.js:\n```\nimport { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';\nimport { join, extname } from 'path';\nimport createMarkdownRenderer from './createMarkdownRenderer';\n\nexport default function convertDirectory(dir, md = createMarkdownRenderer()) {\n    const files = readdirSync(dir);\n    files.forEach(file => {\n        const filePath = join(dir, file);\n        const stats = statSync(filePath);\n        if (stats.isDirectory()) {\n            convertDirectory(filePath, md);\n        } else if (extname(file) === '.md') {\n            const markdown = readFileSync(filePath, 'utf8');\n            const html = md.render(markdown);\n            writeFileSync(filePath.replace('.md', '.html'), html);\n        }\n    });\n}\n\n```\n\nFix the following issue!\n\nFix relative imports by adding .js to the end of the path.\n\n\n# Output Format",
-      "after": "# Working set\n\n./package.json:\n```\n{\n  \"name\": \"@aijunior/dev\",\n  \"version\": \"0.0.1\",\n  \"description\": \"Your AI Contributor\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"junior\": \"src/main.js\",\n    \"junior-web\": \"src/web.js\"\n  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"build:docs\": \"node ./src/doc/buildDoc.js\"\n  },\n  \"keywords\": [\n    \"cli\",\n    \"uppercase\"\n  ],\n  \"author\": \"\",\n  \"license\": \"GPL\",\n  \"dependencies\": {\n    \"chatgpt\": \"^5.2.4\",\n    \"clipboard-copy\": \"^4.0.1\",\n    \"cors\": \"^2.8.5\",\n    \"ejs\": \"^3.1.9\",\n    \"express\": \"^4.18.2\",\n    \"js-yaml\": \"^4.1.0\",\n    \"marked\": \"^5.1.0\",\n    \"postcss-nested\": \"^6.0.1\",\n    \"simple-git\": \"^3.19.1\",\n    \"solid-js\": \"^1.7.7\",\n    \"vite\": \"^4.3.9\",\n    \"vite-plugin-solid\": \"^2.7.0\",\n    \"ws\": \"^8.13.0\"\n  },\n  \"directories\": {\n    \"doc\": \"doc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/tisztamo/Junior.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/Junior/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/Junior#readme\",\n  \"devDependencies\": {\n    \"@types/js-yaml\": \"^4.0.5\",\n    \"autoprefixer\": \"^10.4.14\",\n    \"babel-preset-solid\": \"^1.7.7\",\n    \"highlight.js\": \"^11.8.0\",\n    \"markdown-it\": \"^13.0.1\",\n    \"postcss\": \"^8.4.26\",\n    \"tailwindcss\": \"^3.3.3\"\n  }\n}\n\n```\n\nFix the following issue!\n\nRename build:docs to build:doc\n\n\n# Output Format",
-      "total_deletions": 29,
-      "total_additions": 59
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/doc/buildDoc.js\n  - src/doc/convertDirectory.js\nrequirements: |\n  Fix relative imports by adding .js to the end of the path.\n",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - ./package.json\nrequirements: |\n  Rename build:docs to build:doc",
-      "total_deletions": 3,
-      "total_additions": 2
-    }
-  ]
+  "code": {
+    "before": "",
+    "after": ""
+  }
 }

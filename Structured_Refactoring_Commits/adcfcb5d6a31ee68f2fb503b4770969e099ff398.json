@@ -1,0 +1,45 @@
+{
+  "sha": "adcfcb5d6a31ee68f2fb503b4770969e099ff398",
+  "url": "https://github.com/tisztamo/Junior/commit/adcfcb5d6a31ee68f2fb503b4770969e099ff398",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Update ignore list with new entries for top languages/tools https://chat.openai.com/share/1e191aa6-48f6-4808-bd24-a67e9dddc2d5",
+  "authorAt": "2023-09-17T22:07:51.000+02:00",
+  "commitAt": "2023-09-17T22:07:51.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Add New Default Ignores",
+    "url": "https://chat.openai.com/share/1e191aa6-48f6-4808-bd24-a67e9dddc2d5",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/adcfcb5d6a31ee68f2fb503b4770969e099ff398",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update ignore list with new entries for top languages/tools https://chat.openai.com/share/1e191aa6-48f6-4808-bd24-a67e9dddc2d5"
+    },
+    "status": 200,
+    "dateOfConversation": "September 17, 2023",
+    "dateOfAccess": "2023-10-13 00:03:06.886011",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 585,
+    "tokensOfAnswers": 543,
+    "model": "GPT-4",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "You are AI Junior, you code like Donald Knuth.\n# Working set\n\n./src/backend/fileutils/getIgnoreList.js:\n```\nfunction getIgnoreList() {\n  const DEFAULT_IGNORE = ['.git', 'node_modules', './prompt'];\n\n  const cliArgs = process.argv.slice(2);\n  const cliIgnore = cliArgs\n    .filter(arg => arg.startsWith('--ignore='))\n    .map(arg => arg.replace('--ignore=', '').split(','))\n    .flat();\n\n  const envIgnore = process.env.JUNIOR_IGNORE ? process.env.JUNIOR_IGNORE.split(',') : [];\n\n  const totalIgnore = [...DEFAULT_IGNORE, ...cliIgnore, ...envIgnore];\n\n  const nameIgnore = totalIgnore.filter(item => !item.startsWith('./'));\n  const pathIgnore = totalIgnore.filter(item => item.startsWith('./')).map(item => item.slice(2));\n\n  return { nameIgnore, pathIgnore };\n}\n\nexport default getIgnoreList;\n\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nAdd \"dist\", \"build\", \"tmp\", \"temp\" and at least 5 but up to 100 reasonable entries to the ignore list!\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal, as default*! eg.: in createGitRepo.js: export default function createGitRepo ( ....\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nBefore your solution, write a concise readme about the working set, your task, and most importantly its challanges, if any.\n\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n\n\n",
+        "answer": "ChatGPTREADMEWorking SetThe working set includes a single JavaScript file:./src/backend/fileutils/getIgnoreList.js: Contains a function that returns an ignore list. This list is constructed from three sources: a default ignore list, a command line argument (CLI) based ignore list, and an environment variable based ignore list. The function then categorizes them into name-based ignore and path-based ignore.TaskThe task involves augmenting the default ignore list to include additional directory names: \"dist\", \"build\", \"tmp\", \"temp\" and 5 to 100 other reasonable entries.ChallengesThe working set includes only a single file, hence we need to determine the most reasonable entries for ignore based on general project patterns.The challenge explicitly asks for a shell script as output. This shell script should create or modify the necessary files to achieve the desired task.Need to ensure that the ES6 and project-specific constraints are adhered to.Solution PlanModify getIgnoreList.js to add the new entries to the default ignore list.Create the shell script change.sh to accomplish this modification.[CODE_BLOCK_0]The above script will modify the existing file to include the new default ignore entries: \"dist\", \"build\", \"tmp\", \"temp\", \".vscode\", \".idea\", \"coverage\", \".env\", \".DS_Store\", and \"logs\".",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Update ignore list with new entries\"\necho \"Plan:\"\necho \"1. Modify getIgnoreList.js to include new default ignore entries.\"\ncat > ./src/backend/fileutils/getIgnoreList.js << 'EOF'\nfunction getIgnoreList() {\n  const DEFAULT_IGNORE = [\n    '.git',\n    'node_modules',\n    './prompt',\n    'dist',\n    'build',\n    'tmp',\n    'temp',\n    '.vscode',\n    '.idea',\n    'coverage',\n    '.env',\n    '.DS_Store',\n    'logs'\n  ];\n\n  const cliArgs = process.argv.slice(2);\n  const cliIgnore = cliArgs\n    .filter(arg => arg.startsWith('--ignore='))\n    .map(arg => arg.replace('--ignore=', '').split(','))\n    .flat();\n\n  const envIgnore = process.env.JUNIOR_IGNORE ? process.env.JUNIOR_IGNORE.split(',') : [];\n\n  const totalIgnore = [...DEFAULT_IGNORE, ...cliIgnore, ...envIgnore];\n\n  const nameIgnore = totalIgnore.filter(item => !item.startsWith('./'));\n  const pathIgnore = totalIgnore.filter(item => item.startsWith('./')).map(item => item.slice(2));\n\n  return { nameIgnore, pathIgnore };\n}\n\nexport default getIgnoreList;\nEOF\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

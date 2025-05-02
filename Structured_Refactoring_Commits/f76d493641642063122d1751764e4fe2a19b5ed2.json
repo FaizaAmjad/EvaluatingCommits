@@ -1,0 +1,45 @@
+{
+  "sha": "f76d493641642063122d1751764e4fe2a19b5ed2",
+  "url": "https://github.com/tisztamo/Junior/commit/f76d493641642063122d1751764e4fe2a19b5ed2",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Move fetchGitStatus call to the handler https://chat.openai.com/share/e1f03f45-7d06-4d61-b32c-53b303831320",
+  "authorAt": "2023-08-10T13:57:05.000+02:00",
+  "commitAt": "2023-08-10T13:57:05.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Move fetchGitStatus in handler",
+    "url": "https://chat.openai.com/share/e1f03f45-7d06-4d61-b32c-53b303831320",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/f76d493641642063122d1751764e4fe2a19b5ed2",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Move fetchGitStatus call to the handler https://chat.openai.com/share/e1f03f45-7d06-4d61-b32c-53b303831320"
+    },
+    "status": 200,
+    "dateOfConversation": "August 10, 2023",
+    "dateOfAccess": "2023-08-17 13:08:43.395327",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 527,
+    "tokensOfAnswers": 373,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "You are Junior, an AI system aiding developers. You are working with a part of a large program called the \"Working Set.\" Ask for contents of subdirectories if needed. Some files are printed in the working set. Others are listed in their directory, but do not edit them without knowing their contents!\n\n# Working set\n\nsrc/frontend/service/handleExecuteChange.js:\n```\nimport { executeChange } from './executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\nimport { changeInput } from '../model/changeInput';\n\nconst handleExecuteChange = async () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n  const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();\n  const response = await executeChange(change);\n  setChange(change);\n  setExecutionResult(response.output);\n  console.log(response.output);\n};\n\nexport default handleExecuteChange;\n\n```\n\nsrc/frontend/service/executeChange.js:\n```\nimport { getBaseUrl } from '../getBaseUrl';\nimport { fetchGitStatus } from './fetchGitStatus';\n\nconst executeChange = async (change) => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/execute`, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ change })\n  });\n\n  const data = await response.json();\n\n  // Fetch git status after code execution\n  fetchGitStatus();\n\n  return data;\n};\n\nexport { executeChange };\n\n```\n\n\n# Task\n\nRefactor!\n\nMove the fetchGitStatus call to the handler!\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Move fetchGitStatus call to the handler\"\necho \"Plan:\"\necho \"1. Move the fetchGitStatus call from executeChange.js to handleExecuteChange.js\"\necho \"2. Update exports to ensure each file exports a single function\"\n\n# Step 1: Modify executeChange.js, removing the fetchGitStatus call\ncat > src/frontend/service/executeChange.js << 'EOF'\nimport { getBaseUrl } from '../getBaseUrl';\n\nconst executeChange = async (change) => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/execute`, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ change })\n  });\n\n  const data = await response.json();\n\n  return data;\n};\n\nexport default executeChange;\nEOF\n\n# Step 2: Modify handleExecuteChange.js, adding the fetchGitStatus call\ncat > src/frontend/service/handleExecuteChange.js << 'EOF'\nimport executeChange from './executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\nimport { changeInput } from '../model/changeInput';\nimport { fetchGitStatus } from './fetchGitStatus';\n\nconst handleExecuteChange = async () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n  const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();\n  const response = await executeChange(change);\n  setChange(change);\n  setExecutionResult(response.output);\n  console.log(response.output);\n\n  // Fetch git status after code execution\n  fetchGitStatus();\n};\n\nexport default handleExecuteChange;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

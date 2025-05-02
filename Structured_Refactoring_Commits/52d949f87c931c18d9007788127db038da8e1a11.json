@@ -1,0 +1,45 @@
+{
+  "sha": "52d949f87c931c18d9007788127db038da8e1a11",
+  "url": "https://github.com/tisztamo/Junior/commit/52d949f87c931c18d9007788127db038da8e1a11",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Move git to src and create route to resetGit https://chat.openai.com/share/b9b519fd-4fca-44a8-b15e-19b3102f58dd",
+  "authorAt": "2023-07-21T15:30:48.000+02:00",
+  "commitAt": "2023-07-21T15:30:48.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Git Move & Route",
+    "url": "https://chat.openai.com/share/b9b519fd-4fca-44a8-b15e-19b3102f58dd",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/52d949f87c931c18d9007788127db038da8e1a11",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Move git to src and create route to resetGit https://chat.openai.com/share/b9b519fd-4fca-44a8-b15e-19b3102f58dd"
+    },
+    "status": 200,
+    "dateOfConversation": "July 21, 2023",
+    "dateOfAccess": "2023-07-27 13:33:25.171709",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 566,
+    "tokensOfAnswers": 575,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 babel.config.js\n\u251c\u2500\u2500 change.sh\n\u251c\u2500\u2500 doc/...\n\u251c\u2500\u2500 git/...\n\u251c\u2500\u2500 integrations/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 postcss.config.js\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 secret.sh\n\u251c\u2500\u2500 src/...\n\u251c\u2500\u2500 tailwind.config.js\n\n```\nsrc: err!\n\nsrc/backend: err!\n\nsrc/backend/setupRoutes.js:\n```\nimport { generateHandler } from './handlers/generateHandler.js';\nimport { servePromptDescriptor } from './handlers/servePromptDescriptor.js';\nimport { updateTaskHandler } from './handlers/updateTaskHandler.js';\nimport { listTasks } from './handlers/listTasks.js';\nimport { executeHandler } from './handlers/executeHandler.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', updateTaskHandler);\napp.post('/execute', executeHandler);\n}\n\n```\n\ngit/resetGit.js:\n```\nimport git from 'simple-git';\n\nexport default async function resetGit() {\n  const gitInstance = git();\n\n  // Stash changes in prompt.yaml\n  await gitInstance.add('./prompt.yaml');\n  await gitInstance.stash();\n\n  // Clean the repository and reset to the latest commit\n  await gitInstance.clean('f', ['-d']);\n  await gitInstance.reset('hard');\n\n  // Apply stashed changes to prompt.yaml\n  await gitInstance.stash(['pop']);\n}\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n- Every js file should only export a single function!\n- Use ES6 imports!\n\nRequirements:\n\nMove the git directory to src/ !\nThen create a new route that calls resetGit\n\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files without substitution.\nAssume OSX.\nnpm and jq are installed.\nDo NOT write any text outside the script (the plan goes into it)!\n\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\n# Goal: [Task description, max 7 words]\n# Plan:\n# 1. [...]\n\n[Commands solving the task]\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]This script accomplishes the task by first moving the git directory to the src directory. It then updates the file paths in resetGit.js to reflect the move. Afterward, it creates a new handler for the reset Git functionality in a new file resetGitHandler.js, which will be in the src/backend/handlers directory. Finally, it updates setupRoutes.js to include the new route '/reset', which calls the newly created resetGitHandler.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\n# Goal: Move git to src and create route to resetGit\n# Plan:\n# 1. Move the git directory to the src directory.\n# 2. Update the file paths in resetGit.js to reflect this change.\n# 3. In setupRoutes.js, create a new route '/reset' that calls resetGit.\n# 4. Create a new file resetGitHandler.js in src/backend/handlers which exports a function that calls resetGit.\n\nmv ./git ./src/git\n\ncat > ./src/git/resetGit.js <<- 'EOF'\nimport git from 'simple-git';\n\nexport default async function resetGit() {\n  const gitInstance = git();\n\n  // Stash changes in prompt.yaml\n  await gitInstance.add('./src/prompt.yaml');\n  await gitInstance.stash();\n\n  // Clean the repository and reset to the latest commit\n  await gitInstance.clean('f', ['-d']);\n  await gitInstance.reset('hard');\n\n  // Apply stashed changes to prompt.yaml\n  await gitInstance.stash(['pop']);\n}\nEOF\n\ncat > ./src/backend/handlers/resetGitHandler.js <<- 'EOF'\nimport resetGit from '../../git/resetGit.js';\n\nexport default async function resetGitHandler(req, res) {\n  try {\n    await resetGit();\n    res.status(200).send({ message: 'Git successfully reset' });\n  } catch (error) {\n    res.status(500).send({ message: 'Error in resetting Git', error });\n  }\n}\nEOF\n\ncat > ./src/backend/setupRoutes.js <<- 'EOF'\nimport { generateHandler } from './handlers/generateHandler.js';\nimport { servePromptDescriptor } from './handlers/servePromptDescriptor.js';\nimport { updateTaskHandler } from './handlers/updateTaskHandler.js';\nimport { listTasks } from './handlers/listTasks.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport resetGitHandler from './handlers/resetGitHandler.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', updateTaskHandler);\n  app.post('/execute', executeHandler);\n  app.post('/reset', resetGitHandler);\n}\nEOF\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

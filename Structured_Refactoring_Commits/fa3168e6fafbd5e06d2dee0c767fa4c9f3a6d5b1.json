@@ -1,0 +1,50 @@
+{
+  "sha": "fa3168e6fafbd5e06d2dee0c767fa4c9f3a6d5b1",
+  "url": "https://github.com/TurboWarp/extensions/commit/fa3168e6fafbd5e06d2dee0c767fa4c9f3a6d5b1",
+  "author": "GarboMuffin",
+  "repoName": "TurboWarp/extensions",
+  "repoLanguage": "EJS",
+  "message": "Policy on AI (ChatGPT, Bard, etc.) (#1035)\n\nExample of why you shouldn't use ChatGPT:\r\nhttps://chat.openai.com/share/245724e7-0a3c-4001-9fef-fb72c4a4acc6\r\n\r\nEverything except the last code block is hallucinated garbage, and even\r\nthe code block is still worse than useless as it uses ScratchX so it can\r\nnever be accepted here.",
+  "authorAt": "2023-09-22T09:31:09.000-05:00",
+  "commitAt": "2023-09-22T09:31:09.000-05:00",
+  "chatgpt_sharing": {
+    "title": "Stop using ChatGPT to write extensions",
+    "url": "https://chat.openai.com/share/245724e7-0a3c-4001-9fef-fb72c4a4acc6",
+    "mention": {
+      "mentioned_url": "https://github.com/TurboWarp/extensions/commit/fa3168e6fafbd5e06d2dee0c767fa4c9f3a6d5b1",
+      "mentioned_property": "message",
+      "mentioned_author": "GarboMuffin",
+      "mentioned_text": "Policy on AI (ChatGPT, Bard, etc.) (#1035)\n\nExample of why you shouldn't use ChatGPT:\r\nhttps://chat.openai.com/share/245724e7-0a3c-4001-9fef-fb72c4a4acc6\r\n\r\nEverything except the last code block is hallucinated garbage, and even\r\nthe code block is still worse than useless as it uses ScratchX so it can\r\nnever be accepted here."
+    },
+    "status": 200,
+    "dateOfConversation": "September 14, 2023",
+    "dateOfAccess": "2023-10-13 00:07:23.165302",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 8,
+    "tokensOfAnswers": 619,
+    "model": "Default (GPT-3.5)",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "Write a Scratch extension that adds bitwise operators",
+        "answer": "ChatGPTCreating a Scratch extension that adds bitwise operators involves writing custom JavaScript code to extend Scratch's functionality. Here's a basic example of how you can create a Scratch extension that includes bitwise operators like AND, OR, XOR, and NOT.Create a new Scratch Extension:Go to the ScratchX extension builder.Click on \"I understand, continue\" to enter the extension builder.Design the User Interface:Click on the \"New Extension\" button.Give your extension a name and an image (optional).Add blocks for your bitwise operators. You can use the following XML code as a template:[CODE_BLOCK_0]Define JavaScript Functions:Click on the \"Open Extension URL\" button to open the JavaScript editor.Add JavaScript code to define the behavior of your extension. Here's a sample code that includes bitwise operators:[CODE_BLOCK_1]Test Your Extension:Save your extension by clicking the \"Save\" button.Click on \"Load Extension\" in the ScratchX editor, and select your extension.Use the blocks you defined to perform bitwise operations in Scratch.Share Your Extension:If you're satisfied with your extension, you can share it with others by clicking the \"Share\" button in the ScratchX extension builder.Remember that this is a simple example, and you can expand upon it to add more features and error handling as needed. Additionally, make sure to refer to the ScratchX documentation for more details on creating extensions: ScratchX Documentation.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "xml",
+            "Content": "<blocks>\n  <block type=\"bitwise_and\">\n    <value name=\"A\">\n      <shadow type=\"math_number\">\n        <field name=\"NUM\">0</field>\n      </shadow>\n    </value>\n    <value name=\"B\">\n      <shadow type=\"math_number\">\n        <field name=\"NUM\">0</field>\n      </shadow>\n    </value>\n  </block>\n  <!-- Add similar blocks for OR, XOR, and NOT -->\n</blocks>\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "javascript",
+            "Content": "(function() {\n  var ext = {};\n\n  // Bitwise AND operator\n  ext.bitwise_and = function(a, b) {\n    return a & b;\n  };\n\n  // Bitwise OR operator\n  ext.bitwise_or = function(a, b) {\n    return a | b;\n  };\n\n  // Bitwise XOR operator\n  ext.bitwise_xor = function(a, b) {\n    return a ^ b;\n  };\n\n  // Bitwise NOT operator\n  ext.bitwise_not = function(a) {\n    return ~a;\n  };\n\n  // Block and block menu descriptions\n  var descriptor = {\n    blocks: [\n      ['r', 'bitwise AND %n %n', 'bitwise_and', 0, 0],\n      ['r', 'bitwise OR %n %n', 'bitwise_or', 0, 0],\n      ['r', 'bitwise XOR %n %n', 'bitwise_xor', 0, 0],\n      ['r', 'bitwise NOT %n', 'bitwise_not', 0],\n    ],\n  };\n\n  // Register the extension\n  ScratchExtensions.register('Bitwise Operators', descriptor, ext);\n})();\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}

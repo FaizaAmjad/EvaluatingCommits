@@ -1,0 +1,45 @@
+{
+  "sha": "3257f2294d5373b832fe8b0ea3f71c43dd142dc9",
+  "url": "https://github.com/tisztamo/Junior/commit/3257f2294d5373b832fe8b0ea3f71c43dd142dc9",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Move terminal to ChangeInspection https://chat.openai.com/share/a05fee36-09eb-4c94-8004-c3c33f0e89f5",
+  "authorAt": "2023-09-25T15:59:28.000+02:00",
+  "commitAt": "2023-09-25T15:59:28.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Mover Terminal a ChangeInspection",
+    "url": "https://chat.openai.com/share/a05fee36-09eb-4c94-8004-c3c33f0e89f5",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/3257f2294d5373b832fe8b0ea3f71c43dd142dc9",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Move terminal to ChangeInspection https://chat.openai.com/share/a05fee36-09eb-4c94-8004-c3c33f0e89f5"
+    },
+    "status": 200,
+    "dateOfConversation": "September 25, 2023",
+    "dateOfAccess": "2023-10-12 23:55:18.208944",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 1014,
+    "tokensOfAnswers": 517,
+    "model": "GPT-4",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "You are AI Junior, you code like Donald Knuth.\n\n# Working set\n\n./src/frontend/components/ChangeInspection.jsx:\n```\nimport GitStatusDisplay from './GitStatusDisplay';\n\nconst ChangeInspection = () => {\n  return (\n    <GitStatusDisplay />\n  );\n};\n\nexport default ChangeInspection;\n\n```\n./src/frontend/components/terminal/TerminalComponent.jsx:\n```\nimport { onCleanup, onMount } from 'solid-js';\nimport 'xterm/css/xterm.css';\nimport terminalConnection from '../../service/terminal/terminalConnection';\nimport { setupXTerm } from '../../service/terminal/setupXTerm';\nimport { sendTerminalResizeNotification } from '../../service/terminal/sendTerminalResizeNotification';\nimport DetailsComponent from '../DetailsComponent';\n\nconst TerminalComponent = () => {\n  let container;\n  const { term, fitAddon } = setupXTerm();\n  \n  onMount(() => {\n    term.open(container);\n    fitAddon.fit();\n\n    const { rows, cols } = term;\n    sendTerminalResizeNotification(rows, cols);\n\n    terminalConnection.setOnDataReceived((data) => {\n      term.write(data);\n    });\n\n    term.onData((data) => {\n      terminalConnection.sendDataToTerminal(JSON.stringify({ type: 'input', data }));\n    });\n\n    term.onResize(({ newRows, newCols }) => {\n      sendTerminalResizeNotification(newRows, newCols);\n    });\n  });\n  \n  // Ensure terminal instance gets destroyed and WebSocket connection gets closed on component cleanup\n  onCleanup(() => {\n    term.dispose();\n    terminalConnection.closeConnection();\n  });\n\n  return (\n    <DetailsComponent \n      defaultState=\"closed\"\n      localStorageKey=\"terminalState\"\n      generateHeader={() => \"Terminal\"}\n      classes=\"rounded border p-2 w-full border-border bg-emphasize\"\n    >\n      <div ref={container}>\n        {/* The terminal will be rendered inside this div */}\n      </div>\n    </DetailsComponent>\n  );\n};\n\nexport default TerminalComponent;\n\n```\n./src/frontend/App.jsx:\n```\nimport { onCleanup } from 'solid-js';\nimport useKeyBindings from './service/useKeyBindings';\nimport keyBindings from './config/keyBindings';\nimport NavBar from './components/NavBar';\nimport PromptCreation from './components/PromptCreation';\nimport ChangeExecution from './components/ChangeExecution';\nimport ChangeInspection from './components/ChangeInspection';\nimport ChangeFinalization from './components/ChangeFinalization';\nimport TerminalComponent from './components/terminal/TerminalComponent'; // Updated import path and name\n\nconst App = () => {\n  const bindings = keyBindings();\n  const unregister = useKeyBindings(bindings);\n\n  onCleanup(unregister); \n\n  return (\n    <div class=\"bg-main min-h-screen max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 px-2 sm:px-4 xs:px-4 pb-8\">\n      <NavBar />\n      <PromptCreation />\n      <ChangeExecution />\n      <ChangeInspection />\n      <ChangeFinalization />\n      <TerminalComponent /> {/* Updated component name */}\n    </div>\n  );\n};\n\nexport default App;\n\n```\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nMove the terminal component from the app to the change inspection.\nPut it after the git status.\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*! eg.: in createGitRepo.js: export function createGitRepo ( ....\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nBefore your solution, write a short, very concise readme about the working set, your task, and most importantly its challanges, if any.\n\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n\n",
+        "answer": "ChatGPTShort ReadmeWorking Set:ChangeInspection.jsx: Displays the GitStatus.TerminalComponent.jsx: Sets up and renders an XTerm terminal.App.jsx: Main application setup, contains high-level structure and components.Task:Move the TerminalComponent from App.jsx to ChangeInspection.jsx, and render it after the GitStatus.Challenges:Ensuring the terminal is placed correctly within ChangeInspection.jsx and rendered after GitStatusDisplay.Abiding by project specifics such as each file exporting only a single function or signal, using ES6 imports, and working within the SolidJS and Tailwind framework.Creating a shell script to reflect these changes without altering files outside of the working set.[CODE_BLOCK_0]This script moves the TerminalComponent from App.jsx to ChangeInspection.jsx and renders it after the GitStatusDisplay.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Move terminal to ChangeInspection\"\necho \"Plan:\"\necho \"1. Update ChangeInspection.jsx to include TerminalComponent.\"\necho \"2. Remove TerminalComponent from App.jsx.\"\ncat > ./src/frontend/components/ChangeInspection.jsx << 'EOF'\nimport GitStatusDisplay from './GitStatusDisplay';\nimport TerminalComponent from './terminal/TerminalComponent';\n\nconst ChangeInspection = () => {\n  return (\n    <>\n      <GitStatusDisplay />\n      <TerminalComponent />\n    </>\n  );\n};\n\nexport default ChangeInspection;\nEOF\n\ncat > ./src/frontend/App.jsx << 'EOF'\nimport { onCleanup } from 'solid-js';\nimport useKeyBindings from './service/useKeyBindings';\nimport keyBindings from './config/keyBindings';\nimport NavBar from './components/NavBar';\nimport PromptCreation from './components/PromptCreation';\nimport ChangeExecution from './components/ChangeExecution';\nimport ChangeInspection from './components/ChangeInspection';\nimport ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  const bindings = keyBindings();\n  const unregister = useKeyBindings(bindings);\n\n  onCleanup(unregister); \n\n  return (\n    <div class=\"bg-main min-h-screen max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 px-2 sm:px-4 xs:px-4 pb-8\">\n      <NavBar />\n      <PromptCreation />\n      <ChangeExecution />\n      <ChangeInspection />\n      <ChangeFinalization />\n    </div>\n  );\n};\n\nexport default App;\nEOF\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": {
+    "before": "",
+    "after": ""
+  }
+}
