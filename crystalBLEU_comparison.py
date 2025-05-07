@@ -6,6 +6,42 @@ import glob
 from collections import Counter
 from crystalbleu import corpus_bleu, SmoothingFunction
 import fractions
+from difflib import SequenceMatcher
+
+def fuzzy_line_match(line, candidates, threshold=0.9):
+    """Return True if the line is similar to any in candidates above the threshold."""
+    for cand in candidates:
+        if SequenceMatcher(None, line, cand).ratio() >= threshold:
+            return True
+    return False
+
+def score_dev_vs_gpt_changes_fuzzy(before_code, after_code, convo, threshold=0.9):
+    before_lines = set(line.strip() for line in before_code.strip().splitlines() if line.strip())
+    after_lines = set(line.strip() for line in after_code.strip().splitlines() if line.strip())
+    
+    gpt_code = "\n".join(
+        cb.get("Content", "") for cb in convo.get("list_of_code", []) if cb.get("Content")
+    )
+
+    gpt_lines = set(line.strip() for line in gpt_code.strip().splitlines() if line.strip())
+
+    unchanged_lines = before_lines & after_lines
+    added_lines = after_lines - unchanged_lines
+
+    gpt_reused = set()
+    dev_added = set()
+
+    for line in added_lines:
+        if fuzzy_line_match(line, gpt_lines, threshold):
+            gpt_reused.add(line)
+        else:
+            dev_added.add(line)
+
+    total_added = len(added_lines)
+    dev_changed_score = len(dev_added) / total_added if total_added else 0
+    gpt_reused_score = len(gpt_reused) / total_added if total_added else 0
+
+    return dev_changed_score, gpt_reused_score
 
 # Monkey patch to fix crystalBLEU issue with Fraction
 _orig_fraction_new = fractions.Fraction.__new__
@@ -179,7 +215,7 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
 
                 # Calculate dev_changed and gpt_reused_score
                 if best_prompt_convo:
-                    dev_changed, gpt_reused_score = compute_dev_and_gpt_scores(before, after, best_prompt_convo)
+                    dev_changed, gpt_reused_score =  score_dev_vs_gpt_changes_fuzzy(before, after, best_prompt_convo)
 
                 results.append({
                     "sha": sha,
@@ -208,7 +244,7 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
  
 def process_commit_data(input_folder: str, output_csv_path: str, top_k, ngram_range, file_limit):
     # Get all JSON files in the folder
-    json_files = glob.glob(os.path.join(input_folder, "*.json"))
+    json_files = glob.glob(os.path.join(input_folder, "*.json"))[:file_limit]
     if not json_files:
         print("No JSON files found in folder.")
         return
