@@ -84,6 +84,36 @@ def collect_tokens_for_ngram_analysis(file_paths):
     
     return all_tokens
 
+# Get dev_changed: proportion of after lines not found in GPT code
+# Get gpt_reused_score: proportion of GPT lines reused in after_code
+def compute_dev_and_gpt_scores(before_code: str, after_code: str, best_prompt: dict) -> tuple[float, float]:
+    # Return 0.0 if there is no best prompt id or list of code in that conversation object
+    if not best_prompt or "list_of_code" not in best_prompt:
+        return 0.0, 0.0
+
+    gpt_code = "\n".join(
+        cb.get("Content", "") for cb in best_prompt.get("list_of_code", []) if cb.get("Content")
+    )
+
+    # Split in lines
+    before_lines = set(line.strip() for line in before_code.strip().splitlines() if line.strip())
+    after_lines = set(line.strip() for line in after_code.strip().splitlines() if line.strip())
+    gpt_lines = set(line.strip() for line in gpt_code.strip().splitlines() if line.strip())
+
+    if not after_lines:
+        return 0.0, 0.0
+
+    unchanged_lines = before_lines & after_lines
+    added_lines = after_lines - unchanged_lines
+    gpt_reused = gpt_lines & added_lines
+    dev_added = added_lines - gpt_reused
+
+    dev_changed_score = len(dev_added) / len(after_lines) if after_lines else 0.0
+    gpt_reused_score = len(gpt_reused) / len(gpt_lines) if gpt_lines else 0.0
+
+    return dev_changed_score, gpt_reused_score
+
+
 def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
     
     results = []
@@ -117,6 +147,7 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
 
                 best_crystalbleu = 0.0
                 best_prompt_id = None
+                best_prompt_convo = None
 
                 # Compare after vs code snippets from conversations
                 for convo in conversations:
@@ -144,12 +175,19 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
                         if crystalbleu_score > best_crystalbleu:
                             best_crystalbleu = crystalbleu_score
                             best_prompt_id = prompt_id
+                            best_prompt_convo = convo
+
+                # Calculate dev_changed and gpt_reused_score
+                if best_prompt_convo:
+                    dev_changed, gpt_reused_score = compute_dev_and_gpt_scores(before, after, best_prompt_convo)
 
                 results.append({
                     "sha": sha,
                     "file": filename,
                     "best_crystalbleu_after_vs_chatgpt": best_crystalbleu,
-                    "best_prompt_id": best_prompt_id
+                    "best_prompt_id": best_prompt_id, 
+                    "dev_changed": round(dev_changed, 4),
+                    "gpt_reused_score": round(gpt_reused_score, 4)
                 })
 
             except Exception as e:
