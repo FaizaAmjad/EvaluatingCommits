@@ -83,6 +83,17 @@ def collect_tokens_for_ngram_analysis(file_paths):
                 continue
     
     return all_tokens
+# Check lines of exact match between final committed code (after) and ChatGPT code
+def compute_line_exact_match(after_code: str, chatgpt_code: str) -> float:
+    # Normalize and split into lines
+    after_lines = set(line.strip() for line in after_code.strip().splitlines() if line.strip())
+    suggestion_lines = [line.strip() for line in chatgpt_code.strip().splitlines() if line.strip()]
+
+    if not suggestion_lines:
+        return 0.0  # Avoid division by zero
+
+    match_count = sum(1 for line in suggestion_lines if line in after_lines)
+    return match_count / len(suggestion_lines)
 
 def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
     
@@ -105,18 +116,21 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
                 print(f"Skipping malformed file_change in {file_path}: {file_change}")
                 continue
             filename = file_change.get("filename", "")
-            before = file_change.get("before", "")
+            # before = file_change.get("before", "")
             after = file_change.get("after", "")
             print (f"filename {filename}")
             #before = strip_comments(file_change.get("before", ""))
             #after = strip_comments(file_change.get("after", ""))
 
             try:
-                tokens_before = tokenize_code(before)
+                # tokens_before = tokenize_code(before)
                 tokens_after = tokenize_code(after)
 
                 best_crystalbleu = 0.0
                 best_prompt_id = None
+
+                best_line_match = 0.0
+                best_match_prompt_id = None
 
                 # Compare after vs code snippets from conversations
                 for convo in conversations:
@@ -140,16 +154,24 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
                                 smoothing_function=sm_func,
                                 ignoring=trivially_shared
                             )
+                            line_match_score = compute_line_exact_match(after, code_content)
+
 
                         if crystalbleu_score > best_crystalbleu:
                             best_crystalbleu = crystalbleu_score
                             best_prompt_id = prompt_id
 
+                        if line_match_score > best_line_match:
+                            best_line_match = line_match_score
+                            best_match_prompt_id = prompt_id
+
                 results.append({
                     "sha": sha,
                     "file": filename,
-                    "best_crystalbleu_after_vs_chatgpt": best_crystalbleu,
-                    "best_prompt_id": best_prompt_id
+                    "best_crystalbleu_after_vs_chatgpt": round(best_crystalbleu, 4),
+                    "best_prompt_id": best_prompt_id,
+                    "line_exact_match": round(line_match_score, 4),
+                    "line_match_prompt_id": best_match_prompt_id
                 })
 
             except Exception as e:
