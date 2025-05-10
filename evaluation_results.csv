@@ -1,13 +1,13 @@
 sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_match_prompt_id
-0013d944e8aab5856906cc1d5e220d6019e608c7,change.sh,0.4021,p1,0.8333,p1
+0013d944e8aab5856906cc1d5e220d6019e608c7,change.sh,0.4021,p1,1.0,p1
 0013d944e8aab5856906cc1d5e220d6019e608c7,package.json,0.0784,p1,0.0,
-0013d944e8aab5856906cc1d5e220d6019e608c7,prompt.md,0.0286,p1,0.0556,p5
+0013d944e8aab5856906cc1d5e220d6019e608c7,prompt.md,0.0286,p1,0.0909,p5
 0013d944e8aab5856906cc1d5e220d6019e608c7,prompt.yaml,0.0521,p1,0.0,
 0013d944e8aab5856906cc1d5e220d6019e608c7,src/backend/server.js,0.0234,p5,0.0,
-0013d944e8aab5856906cc1d5e220d6019e608c7,src/startVite.js,0.8504,p5,0.4444,p5
+0013d944e8aab5856906cc1d5e220d6019e608c7,src/startVite.js,0.8504,p5,0.7273,p5
 0013d944e8aab5856906cc1d5e220d6019e608c7,src/web.js,0.0371,p1,0.0,
 01cec3e3d17e26f703ce8bf7aa068d3f6b6364d3,api/gpt.js,1.0,p8,1.0,p8
-01cec3e3d17e26f703ce8bf7aa068d3f6b6364d3,api/whisper.js,1.0,p8,0.6111,p8
+01cec3e3d17e26f703ce8bf7aa068d3f6b6364d3,api/whisper.js,1.0,p8,1.0,p8
 02036baf64809d4159f55865b2b90d53a9a6feeb,change.sh,0.8829,p1,0.987,p1
 02036baf64809d4159f55865b2b90d53a9a6feeb,integrations/vscode/LICENSE.txt,0.0,p1,0.0,
 02036baf64809d4159f55865b2b90d53a9a6feeb,integrations/vscode/package.json,0.1382,p1,0.3247,p1
@@ -44,13 +44,13 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 04cc36b84cb0ecf8e5e52127354b08305ae7eeb3,src/frontend/components/terminal/TerminalComponent.jsx,0.1645,p1,0.165,p1
 04cc36b84cb0ecf8e5e52127354b08305ae7eeb3,src/frontend/components/terminal/VirtualButton.jsx,0.0558,p1,0.0777,p1
 04cc36b84cb0ecf8e5e52127354b08305ae7eeb3,src/frontend/config/terminalVirtualKeyBindings.js,0.2297,p1,0.1942,p1
-04d3c7735c12e7bfe91cbcc7f1dbab06d04628df,basho.js,1.0,p5,0.0,p1
-04d3c7735c12e7bfe91cbcc7f1dbab06d04628df,basho.test.js,0.9563,p5,0.2174,p5
-04d3c7735c12e7bfe91cbcc7f1dbab06d04628df,wave.js,1.0,p5,0.0,p3
+04d3c7735c12e7bfe91cbcc7f1dbab06d04628df,basho.js,1.0,p5,1.0,p1
+04d3c7735c12e7bfe91cbcc7f1dbab06d04628df,basho.test.js,0.9563,p5,0.9655,p5
+04d3c7735c12e7bfe91cbcc7f1dbab06d04628df,wave.js,1.0,p5,1.0,p3
 04d3c7735c12e7bfe91cbcc7f1dbab06d04628df,wave.test.js,0.9458,p6,0.913,p6
-05063a936341a3c3de35d2e53dbe8bd2827b5f6d,game.js,1.0,p2,0.0,p2
+05063a936341a3c3de35d2e53dbe8bd2827b5f6d,game.js,1.0,p2,1.0,p2
 05063a936341a3c3de35d2e53dbe8bd2827b5f6d,game.test.js,0.9764,p1,0.875,p1
-05063a936341a3c3de35d2e53dbe8bd2827b5f6d,package.json,0.6817,p1,0.0,p1
+05063a936341a3c3de35d2e53dbe8bd2827b5f6d,package.json,0.6817,p1,0.8,p1
 06782385e0dd647f23d2eb60a9d585fab25dc3cc,change.sh,0.8169,p1,0.913,p1
 06782385e0dd647f23d2eb60a9d585fab25dc3cc,docs/README.md,0.3505,p1,0.2609,p1
 06782385e0dd647f23d2eb60a9d585fab25dc3cc,prompt.md,0.3289,p1,0.3043,p1
@@ -68,7 +68,7 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 0712737304f53c9af8e1328d4382f5feeb38119f,src/git/initRepo.js,0.0361,p1,0.2025,p1
 0712737304f53c9af8e1328d4382f5feeb38119f,src/git/isRepo.js,0.0396,p1,0.2025,p1
 0712737304f53c9af8e1328d4382f5feeb38119f,src/init.js,0.3686,p1,0.3291,p1
-075750d66c6392147b7cccca28f7c225d9fa6545,README.md,0.0,,0.3291,
+075750d66c6392147b7cccca28f7c225d9fa6545,README.md,0.0,,0.0,
 08a348c190e7d7b46e7d4bc739b6b7c86b22033c,change.sh,1.0,p1,1.0,p1
 08a348c190e7d7b46e7d4bc739b6b7c86b22033c,prompt.md,0.1419,p1,0.125,p1
 08a348c190e7d7b46e7d4bc739b6b7c86b22033c,prompt.yaml,0.0266,p1,0.0,
@@ -124,14 +124,14 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 0bc2b1aa11dc11df1adbe530f96e803e91497feb,src/frontend/components/CommitButton.jsx,0.3553,p1,0.4737,p1
 0bc2b1aa11dc11df1adbe530f96e803e91497feb,src/frontend/components/CommitMessageInput.jsx,0.1322,p1,0.2368,p1
 0ca35d2ddef3fce3995fe2621069486abaac4412,change.sh,0.8312,p4,0.8281,p4
-0ca35d2ddef3fce3995fe2621069486abaac4412,prompt.md,0.2538,p1,0.25,p1
+0ca35d2ddef3fce3995fe2621069486abaac4412,prompt.md,0.2538,p1,0.2727,p1
 0ca35d2ddef3fce3995fe2621069486abaac4412,prompt.yaml,0.0453,p1,0.0,
 0ca35d2ddef3fce3995fe2621069486abaac4412,src/frontend/components/ChangeFinalization.jsx,0.0603,p4,0.1406,p4
 0ca35d2ddef3fce3995fe2621069486abaac4412,src/frontend/components/CommitButton.jsx,0.1678,p3,0.2812,p3
 0ca35d2ddef3fce3995fe2621069486abaac4412,src/frontend/components/RollbackButton.jsx,0.0888,p3,0.1875,p3
-0d61a28c97dc8fe17d758871f8c7d92ccf637909,game.js,1.0,p1,0.0,p1
-0d61a28c97dc8fe17d758871f8c7d92ccf637909,game.test.js,1.0,p1,0.0,p1
-0d61a28c97dc8fe17d758871f8c7d92ccf637909,index.html,0.7543,p2,0.7273,p1
+0d61a28c97dc8fe17d758871f8c7d92ccf637909,game.js,1.0,p1,1.0,p1
+0d61a28c97dc8fe17d758871f8c7d92ccf637909,game.test.js,1.0,p1,1.0,p1
+0d61a28c97dc8fe17d758871f8c7d92ccf637909,index.html,0.7543,p2,1.0,p1
 0feb157433a05d9bb03733917afc01628bf20d14,change.sh,0.9173,p1,0.8889,p1
 0feb157433a05d9bb03733917afc01628bf20d14,prompt.md,0.6739,p1,0.5972,p1
 0feb157433a05d9bb03733917afc01628bf20d14,prompt.yaml,0.0363,p1,0.0,
@@ -139,7 +139,7 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 0feb157433a05d9bb03733917afc01628bf20d14,src/frontend/components/ExecuteButton.jsx,0.0369,p1,0.0556,p1
 0feb157433a05d9bb03733917afc01628bf20d14,src/frontend/config/keyBindings.js,0.0336,p1,0.0556,p1
 0feb157433a05d9bb03733917afc01628bf20d14,src/frontend/service/handleExecuteChange.js,0.1119,p1,0.0972,p1
-102ad8b645a373e84443b2f4b3613fc1264712a4,game.js,0.2041,p1,0.0263,p1
+102ad8b645a373e84443b2f4b3613fc1264712a4,game.js,0.2041,p1,0.303,p1
 102ad8b645a373e84443b2f4b3613fc1264712a4,game.test.js,0.1307,p3,0.1053,p3
 102ad8b645a373e84443b2f4b3613fc1264712a4,index.html,0.0254,p3,0.0263,p3
 105dbf633332612c240e2492671ead2301485178,change.sh,0.5979,p1,0.6774,p1
@@ -149,8 +149,8 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 1060f692af522b830f48f79d51e0cc0dbcc2a21c,current_prompt.md,0.1026,p1,1.0,p1
 1060f692af522b830f48f79d51e0cc0dbcc2a21c,current_prompt.yaml,0.0382,p1,0.0,
 1060f692af522b830f48f79d51e0cc0dbcc2a21c,prompt/task/refactor/remove_unused.md,0.0,,0.0,
-1060f692af522b830f48f79d51e0cc0dbcc2a21c,src/attention/filesystem.js,1.0,p1,0.2083,p1
-1060f692af522b830f48f79d51e0cc0dbcc2a21c,src/attention/readAttention.js,0.379,p1,0.1667,p1
+1060f692af522b830f48f79d51e0cc0dbcc2a21c,src/attention/filesystem.js,1.0,p1,1.0,p1
+1060f692af522b830f48f79d51e0cc0dbcc2a21c,src/attention/readAttention.js,0.379,p1,0.5,p1
 110fcd0e277ac80d049918e24dba8967effb5424,change.sh,1.0,p1,1.0,p1
 110fcd0e277ac80d049918e24dba8967effb5424,prompt.md,0.4701,p1,0.2917,p1
 110fcd0e277ac80d049918e24dba8967effb5424,prompt.yaml,0.0354,p1,0.0,
@@ -159,23 +159,23 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 110fcd0e277ac80d049918e24dba8967effb5424,src/backend/setupRoutes.js,0.1203,p1,0.2083,p1
 122d96589a50bc142f9dc085c707ee8ab779abd3,nostrdb.c,0.6001,p1,0.6875,p1
 12a1bf4fbbb51d7de9464b0217f9c869e8b1820d,change.sh,1.0,p5,1.0,p5
-12a1bf4fbbb51d7de9464b0217f9c869e8b1820d,prompt.md,0.4702,p1,0.2903,p2
+12a1bf4fbbb51d7de9464b0217f9c869e8b1820d,prompt.md,0.4702,p1,0.4561,p2
 12a1bf4fbbb51d7de9464b0217f9c869e8b1820d,prompt.yaml,0.0312,p5,0.0,
 12a1bf4fbbb51d7de9464b0217f9c869e8b1820d,prompt/task/repo/vuejs.md,0.0,,0.0,
 12a1bf4fbbb51d7de9464b0217f9c869e8b1820d,src/execute/confirmAndWriteCode.js,0.2517,p3,0.3871,p5
-12a1bf4fbbb51d7de9464b0217f9c869e8b1820d,src/execute/executeAndForwardOutput.js,0.4891,p3,0.4677,p3
+12a1bf4fbbb51d7de9464b0217f9c869e8b1820d,src/execute/executeAndForwardOutput.js,0.4891,p3,0.5778,p3
 12a1bf4fbbb51d7de9464b0217f9c869e8b1820d,src/execute/executeCode.js,0.12,p5,0.2097,p5
 12f5b30dbfa19947af3207beb29a1b2002bcb3d8,index.html,1.0,p2,1.0,p2
 133a3a88697b2b26610bf9248ad79038d3a378ea,change.sh,1.0,p2,1.0,p2
-133a3a88697b2b26610bf9248ad79038d3a378ea,integrations/vscode/src/getCurrentOpenDocuments.ts,0.0635,p1,0.0526,p1
-133a3a88697b2b26610bf9248ad79038d3a378ea,integrations/vscode/src/getPromptFilePath.ts,0.0345,p1,0.0351,p1
-133a3a88697b2b26610bf9248ad79038d3a378ea,integrations/vscode/src/getRootWorkspace.ts,0.0572,p1,0.1404,p1
+133a3a88697b2b26610bf9248ad79038d3a378ea,integrations/vscode/src/getCurrentOpenDocuments.ts,0.0635,p1,0.1505,p1
+133a3a88697b2b26610bf9248ad79038d3a378ea,integrations/vscode/src/getPromptFilePath.ts,0.0345,p1,0.1183,p1
+133a3a88697b2b26610bf9248ad79038d3a378ea,integrations/vscode/src/getRootWorkspace.ts,0.0572,p1,0.2151,p1
 133a3a88697b2b26610bf9248ad79038d3a378ea,integrations/vscode/src/readPromptFile.ts,0.1177,p2,0.1404,p2
 133a3a88697b2b26610bf9248ad79038d3a378ea,integrations/vscode/src/types.ts,0.059,p2,0.1228,p2
-133a3a88697b2b26610bf9248ad79038d3a378ea,integrations/vscode/src/updateAttentionSection.ts,0.0544,p1,0.0351,p1
+133a3a88697b2b26610bf9248ad79038d3a378ea,integrations/vscode/src/updateAttentionSection.ts,0.0544,p1,0.1075,p1
 133a3a88697b2b26610bf9248ad79038d3a378ea,integrations/vscode/src/writeAttention.ts,0.4465,p2,0.5088,p2
-133a3a88697b2b26610bf9248ad79038d3a378ea,integrations/vscode/src/writePromptFile.ts,0.057,p1,0.0702,p1
-133a3a88697b2b26610bf9248ad79038d3a378ea,prompt.md,0.4216,p2,0.3158,p1
+133a3a88697b2b26610bf9248ad79038d3a378ea,integrations/vscode/src/writePromptFile.ts,0.057,p1,0.1398,p1
+133a3a88697b2b26610bf9248ad79038d3a378ea,prompt.md,0.4216,p2,0.3548,p1
 133a3a88697b2b26610bf9248ad79038d3a378ea,prompt.yaml,0.0815,p1,0.0,
 13465c434fd2e2bb83949906c1df9c0e963d191f,change.sh,1.0,p1,1.0,p1
 13465c434fd2e2bb83949906c1df9c0e963d191f,prompt.md,0.7721,p1,0.6735,p1
@@ -187,27 +187,27 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 16be85939343f7c6eb99587219e079793874cdf3,prompt.md,0.7106,p1,0.6087,p1
 16be85939343f7c6eb99587219e079793874cdf3,prompt.yaml,0.0515,p1,0.0,
 16f2f68315fd9a6a9a418a435196df592301509a,change.sh,0.2869,p1,1.0,p1
-16f2f68315fd9a6a9a418a435196df592301509a,docs/usage.md,0.4112,p1,0.3333,p1
-16f2f68315fd9a6a9a418a435196df592301509a,prompt.md,0.3798,p1,0.0,p1
+16f2f68315fd9a6a9a418a435196df592301509a,docs/usage.md,0.4112,p1,0.5,p1
+16f2f68315fd9a6a9a418a435196df592301509a,prompt.md,0.3798,p1,0.25,p1
 16f2f68315fd9a6a9a418a435196df592301509a,prompt.yaml,0.0562,p1,0.0,
-19e07d2ee46a54652c226e89d05cfbb6e179e017,prompt/history/2023/09/04/12:45_Implement RepoInfo in NavBar/change.sh,1.0,p1,0.7778,p1
-19e07d2ee46a54652c226e89d05cfbb6e179e017,prompt/history/2023/09/04/12:45_Implement RepoInfo in NavBar/prompt.md,0.3249,p1,0.3889,p1
+19e07d2ee46a54652c226e89d05cfbb6e179e017,prompt/history/2023/09/04/12:45_Implement RepoInfo in NavBar/change.sh,1.0,p1,1.0,p1
+19e07d2ee46a54652c226e89d05cfbb6e179e017,prompt/history/2023/09/04/12:45_Implement RepoInfo in NavBar/prompt.md,0.3249,p1,0.5854,p1
 19e07d2ee46a54652c226e89d05cfbb6e179e017,prompt/history/2023/09/04/12:45_Implement RepoInfo in NavBar/prompt.yaml,0.0411,p2,0.0,
 19e07d2ee46a54652c226e89d05cfbb6e179e017,prompt/history/2023/09/04/12:47_Refactor RepoInfo for better aesthetics/change.sh,1.0,p2,1.0,p2
-19e07d2ee46a54652c226e89d05cfbb6e179e017,prompt/history/2023/09/04/12:47_Refactor RepoInfo for better aesthetics/prompt.md,0.3249,p1,0.3889,p1
+19e07d2ee46a54652c226e89d05cfbb6e179e017,prompt/history/2023/09/04/12:47_Refactor RepoInfo for better aesthetics/prompt.md,0.3249,p1,0.5854,p1
 19e07d2ee46a54652c226e89d05cfbb6e179e017,prompt/history/2023/09/04/12:47_Refactor RepoInfo for better aesthetics/prompt.yaml,0.0411,p2,0.0,
-19e07d2ee46a54652c226e89d05cfbb6e179e017,src/frontend/components/NavBar.jsx,0.316,p1,0.0556,p1
+19e07d2ee46a54652c226e89d05cfbb6e179e017,src/frontend/components/NavBar.jsx,0.316,p1,0.3415,p1
 19e07d2ee46a54652c226e89d05cfbb6e179e017,src/frontend/components/RepoInfo.jsx,0.4277,p2,0.5,p2
 1ac564600d0d88be448116e7c7aab6177344208a,docs/README.md,0.1404,p1,0.0952,p1
-1ac564600d0d88be448116e7c7aab6177344208a,docs/usage.md,0.1198,p1,0.0476,p1
-1ac564600d0d88be448116e7c7aab6177344208a,prompt/history/2023/10/10/14:56_Improve Junior documentation and fix naming/change.sh,0.4328,p1,0.9524,p1
-1ac564600d0d88be448116e7c7aab6177344208a,prompt/history/2023/10/10/14:56_Improve Junior documentation and fix naming/prompt.md,0.2755,p1,0.6667,p1
+1ac564600d0d88be448116e7c7aab6177344208a,docs/usage.md,0.1198,p1,1.0,p1
+1ac564600d0d88be448116e7c7aab6177344208a,prompt/history/2023/10/10/14:56_Improve Junior documentation and fix naming/change.sh,0.4328,p1,1.0,p1
+1ac564600d0d88be448116e7c7aab6177344208a,prompt/history/2023/10/10/14:56_Improve Junior documentation and fix naming/prompt.md,0.2755,p1,1.0,p1
 1ac564600d0d88be448116e7c7aab6177344208a,prompt/history/2023/10/10/14:56_Improve Junior documentation and fix naming/prompt.yaml,0.0888,p1,0.0,
 1b4492832af806c843e9e8f0029b85f415603638,docs/README.md,0.5822,p1,0.3333,p1
 1b4492832af806c843e9e8f0029b85f415603638,prompt/history/2023/08/22/14:40_Improve documentation as described/change.sh,1.0,p1,1.0,p1
 1b4492832af806c843e9e8f0029b85f415603638,prompt/history/2023/08/22/14:40_Improve documentation as described/prompt.md,0.6074,p1,0.6667,p1
 1b4492832af806c843e9e8f0029b85f415603638,prompt/history/2023/08/22/14:40_Improve documentation as described/prompt.yaml,0.0224,p1,0.0,
-1c7890b599ebaed9f5160c43a7134dc37a4ef9d6,cuemaker2.py,0.9028,p15,0.0,p16
+1c7890b599ebaed9f5160c43a7134dc37a4ef9d6,cuemaker2.py,0.9028,p15,0.9474,p16
 1cf0bcd127466cba5eee8cf8f1af81135d3e1ca6,prompt/history/2023/09/22/16:43_Refactor terminal backend and remove console logs/change.sh,1.0,p1,1.0,p1
 1cf0bcd127466cba5eee8cf8f1af81135d3e1ca6,prompt/history/2023/09/22/16:43_Refactor terminal backend and remove console logs/prompt.md,0.1908,p1,0.7667,p1
 1cf0bcd127466cba5eee8cf8f1af81135d3e1ca6,prompt/history/2023/09/22/16:43_Refactor terminal backend and remove console logs/prompt.yaml,0.0496,p1,0.0,
@@ -220,13 +220,13 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 1eb71d3008938d7410172246c8046632e072ecd8,prompt.yaml,0.0266,p1,0.0,
 1eb71d3008938d7410172246c8046632e072ecd8,src/git/resetGit.js,0.3722,p1,0.375,p1
 1eb71d3008938d7410172246c8046632e072ecd8,src/index.html,0.0003,p1,0.0,
-1fe6f34110a7a545cb00c4c40098c80e599d7a66,docs/config/env_or_cli.md,0.6587,p1,0.0,p1
+1fe6f34110a7a545cb00c4c40098c80e599d7a66,docs/config/env_or_cli.md,0.6587,p1,0.5238,p1
 1fe6f34110a7a545cb00c4c40098c80e599d7a66,prompt/history/2023/09/30/16:47_Improve Junior documentation and delete unused file/change.sh,0.7491,p1,1.0,p1
-1fe6f34110a7a545cb00c4c40098c80e599d7a66,prompt/history/2023/09/30/16:47_Improve Junior documentation and delete unused file/prompt.md,0.1258,p1,0.25,p1
+1fe6f34110a7a545cb00c4c40098c80e599d7a66,prompt/history/2023/09/30/16:47_Improve Junior documentation and delete unused file/prompt.md,0.1258,p1,1.0,p1
 1fe6f34110a7a545cb00c4c40098c80e599d7a66,prompt/history/2023/09/30/16:47_Improve Junior documentation and delete unused file/prompt.yaml,0.0461,p1,0.0,
 1fe6f34110a7a545cb00c4c40098c80e599d7a66,src/prompt/getPromptFlag.js,0.0097,p1,0.0,
 204d1756c97138e3abc470d8d49f954f0cfaeb41,.github/DISCUSSION_TEMPLATE/q-a.yml,0.9766,p3,0.9836,p3
-204d1756c97138e3abc470d8d49f954f0cfaeb41,.github/ISSUE_TEMPLATE/bug_report.md,0.0791,p1,0.0,p1
+204d1756c97138e3abc470d8d49f954f0cfaeb41,.github/ISSUE_TEMPLATE/bug_report.md,0.0791,p1,0.0882,p1
 204d1756c97138e3abc470d8d49f954f0cfaeb41,.github/ISSUE_TEMPLATE/config.yml,0.0817,p1,0.0,
 204d1756c97138e3abc470d8d49f954f0cfaeb41,.github/ISSUE_TEMPLATE/question-and-support.md,0.0425,p1,0.0,
 21f6af5d280ca5f3ab58c26d5373041d4e5e6c37,change.sh,1.0,p1,1.0,p1
@@ -252,7 +252,7 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 2905dd14e219981f91a865ebeba998e6fbcc968d,src/frontend/components/FilteredList.jsx,0.1418,p1,0.1471,p1
 2905dd14e219981f91a865ebeba998e6fbcc968d,src/frontend/components/MultiSelect.jsx,0.1115,p1,0.1176,p1
 2910fcc597f5d8a113927e892129e9d98e3586d5,change.sh,1.0,p4,1.0,p4
-2910fcc597f5d8a113927e892129e9d98e3586d5,prompt.md,0.1095,p2,0.45,p1
+2910fcc597f5d8a113927e892129e9d98e3586d5,prompt.md,0.1095,p2,0.4737,p1
 2910fcc597f5d8a113927e892129e9d98e3586d5,prompt.yaml,0.0797,p1,0.0,
 2910fcc597f5d8a113927e892129e9d98e3586d5,src/frontend/postcss.config.cjs,0.5219,p4,0.55,p4
 2a2135ee1fe5df62dcdd30e78c7b0c5eea7929e7,change.sh,1.0,p1,1.0,p1
@@ -260,8 +260,8 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 2a2135ee1fe5df62dcdd30e78c7b0c5eea7929e7,prompt.md,0.4815,p1,0.3077,p1
 2a2135ee1fe5df62dcdd30e78c7b0c5eea7929e7,prompt.yaml,0.0401,p1,0.0,
 2a98ec95f0558ead57b42857ddfdb65a407c2425,README.md,0.3022,p2,0.6316,p2
-2a98ec95f0558ead57b42857ddfdb65a407c2425,prompt.md,0.2752,p2,0.7368,p1
-2a98ec95f0558ead57b42857ddfdb65a407c2425,prompt.yaml,0.0657,p2,0.1053,p1
+2a98ec95f0558ead57b42857ddfdb65a407c2425,prompt.md,0.2752,p2,0.7778,p1
+2a98ec95f0558ead57b42857ddfdb65a407c2425,prompt.yaml,0.0657,p2,0.1111,p1
 2a98ec95f0558ead57b42857ddfdb65a407c2425,prompt/format/shell.md,0.0,,0.0,
 2a98ec95f0558ead57b42857ddfdb65a407c2425,prompt/task/doc/improve.md,0.0003,p1,0.0,
 2abf61fcdd4ffb47bee4b7264e3f0e677e4b195f,change.sh,1.0,p2,1.0,p2
@@ -277,7 +277,7 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 2b6e699fde05f54169baed61e20858376bb8fbea,prompt.yaml,0.0208,p1,0.0,
 2b6e699fde05f54169baed61e20858376bb8fbea,src/frontend/App.jsx,0.1689,p1,0.2787,p1
 2b6e699fde05f54169baed61e20858376bb8fbea,src/frontend/components/GenerateButton.jsx,0.1056,p1,0.2131,p1
-2c30edb9a0782597880b98ba24af37eae8f5f81d,index.html,0.5279,p2,0.5312,p1
+2c30edb9a0782597880b98ba24af37eae8f5f81d,index.html,0.5279,p2,1.0,p1
 2c896c00345cbc5dc14e6fe7c810baa3c3038efb,prompt/history/2023/09/26/13:33_Update and rename file color function/change.sh,0.9812,p1,0.9583,p1
 2c896c00345cbc5dc14e6fe7c810baa3c3038efb,prompt/history/2023/09/26/13:33_Update and rename file color function/prompt.md,0.4147,p1,0.5625,p1
 2c896c00345cbc5dc14e6fe7c810baa3c3038efb,prompt/history/2023/09/26/13:33_Update and rename file color function/prompt.yaml,0.0216,p1,0.0,
@@ -288,7 +288,7 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 2c8d84013d9809ac20cfbeca9da0aa68992f301e,prompt.md,0.54,p1,0.4348,p1
 2c8d84013d9809ac20cfbeca9da0aa68992f301e,prompt.yaml,0.0355,p1,0.0,
 2c8d84013d9809ac20cfbeca9da0aa68992f301e,src/frontend/components/CommitMessageInput.jsx,0.5303,p1,0.4783,p1
-2cd7782aa9712681f3b17a31f97a3ef5d0dff971,user.js,1.0,p2,0.0,p2
+2cd7782aa9712681f3b17a31f97a3ef5d0dff971,user.js,1.0,p2,1.0,p2
 2cd7782aa9712681f3b17a31f97a3ef5d0dff971,user.test.js,1.0,p3,1.0,p3
 2dc9459f86f214a0922c8e18628d429a116390c2,docs/_coverpage.md,0.1501,p1,0.1333,p1
 2dc9459f86f214a0922c8e18628d429a116390c2,prompt/history/2023/08/29/20:52_Improve the documentation/change.sh,1.0,p1,1.0,p1
@@ -296,9 +296,9 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 2dc9459f86f214a0922c8e18628d429a116390c2,prompt/history/2023/08/29/20:52_Improve the documentation/prompt.yaml,0.1987,p1,0.0,
 2ffde98feb98fdb6f08a745a53cc48904b2c3197,change.sh,0.9415,p3,0.8987,p3
 2ffde98feb98fdb6f08a745a53cc48904b2c3197,prompt.yaml,0.0432,p1,0.0,
-2ffde98feb98fdb6f08a745a53cc48904b2c3197,src/frontend/index.html,0.0536,p1,0.1392,p1
+2ffde98feb98fdb6f08a745a53cc48904b2c3197,src/frontend/index.html,0.0536,p1,0.1447,p1
 2ffde98feb98fdb6f08a745a53cc48904b2c3197,src/frontend/startVite.js,0.1477,p1,0.0886,p3
-2ffde98feb98fdb6f08a745a53cc48904b2c3197,src/web.js,0.0493,p1,0.0633,p1
+2ffde98feb98fdb6f08a745a53cc48904b2c3197,src/web.js,0.0493,p1,0.0658,p1
 30508a73f384bfe4bdfe970188e8d75bf8d8cccd,change.sh,0.9501,p1,0.9231,p1
 30508a73f384bfe4bdfe970188e8d75bf8d8cccd,prompt.md,0.4226,p1,0.4872,p1
 30508a73f384bfe4bdfe970188e8d75bf8d8cccd,prompt.yaml,0.0639,p1,0.0,
@@ -321,17 +321,17 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 32f6ba56bf17102f0d323836cfcc8abc039a796d,prompt.md,0.0457,p1,0.3913,p1
 32f6ba56bf17102f0d323836cfcc8abc039a796d,prompt.yaml,0.1462,p1,0.0,
 32f6ba56bf17102f0d323836cfcc8abc039a796d,src/vite.config.js,0.2144,p1,0.3478,p1
-3392d08a67168c4c078d4c98e0878b3f92bbd14e,game.js,0.0172,p2,0.0,p1
-3392d08a67168c4c078d4c98e0878b3f92bbd14e,index.html,0.29,p5,0.25,p3
-33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/Button/Button.js,1.0,p3,0.2,p3
-33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/Container/Container.js,1.0,p4,0.1,p4
-33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/GallerySlider/GallerySlider.js,1.0,p6,0.2,p6
-33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/Hamburger/Hamburger.js,1.0,p5,0.3,p5
-33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/Map/Map.js,0.9232,p7,0.1667,p7
-33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/SalaryRange/SalaryRange.js,1.0,p8,0.3667,p8
+3392d08a67168c4c078d4c98e0878b3f92bbd14e,game.js,0.0172,p2,0.3333,p1
+3392d08a67168c4c078d4c98e0878b3f92bbd14e,index.html,0.29,p5,0.3333,p3
+33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/Button/Button.js,1.0,p3,1.0,p3
+33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/Container/Container.js,1.0,p4,1.0,p4
+33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/GallerySlider/GallerySlider.js,1.0,p6,1.0,p6
+33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/Hamburger/Hamburger.js,1.0,p5,1.0,p5
+33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/Map/Map.js,0.9232,p7,0.9091,p7
+33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/SalaryRange/SalaryRange.js,1.0,p8,1.0,p8
 33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/SearchStatistics/SearchStatistics.js,1.0,p9,1.0,p9
 33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/TechnologySlider/TechnologySlider.js,0.0004,p5,0.0,
-33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/TopNav/style.module.scss,0.589,p2,0.0667,p2
+33c241f0f85d5a83a9b9f05a75054a96ce4e1e1e,src/common/TopNav/style.module.scss,0.589,p2,0.7228,p2
 33d1ee51c2faf6e25cc90407f2bd05c82587d7ed,prompt/history/2023/09/04/20:56_Implement required UI changes/change.sh,1.0,p3,1.0,p3
 33d1ee51c2faf6e25cc90407f2bd05c82587d7ed,prompt/history/2023/09/04/20:56_Implement required UI changes/prompt.md,0.5226,p3,0.6988,p1
 33d1ee51c2faf6e25cc90407f2bd05c82587d7ed,prompt/history/2023/09/04/20:56_Implement required UI changes/prompt.yaml,0.0352,p3,0.0,
@@ -339,7 +339,7 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 33d1ee51c2faf6e25cc90407f2bd05c82587d7ed,src/frontend/components/MultiSelect/MultiSelect.jsx,0.1723,p3,0.241,p3
 33d1ee51c2faf6e25cc90407f2bd05c82587d7ed,src/frontend/components/MultiSelect/ResultSet.jsx,0.0773,p3,0.1807,p3
 33d1ee51c2faf6e25cc90407f2bd05c82587d7ed,src/frontend/components/MultiSelect/SearchBar.jsx,0.0944,p3,0.2048,p3
-34141e6499264b1a405556b2901b44d73dba0456,deploy.js,1.0,p3,0.1667,p2
+34141e6499264b1a405556b2901b44d73dba0456,deploy.js,1.0,p3,1.0,p2
 34141e6499264b1a405556b2901b44d73dba0456,package.json,0.076,p3,0.6667,p3
 36b5917db8b5687fb6417d04b173fbf82c354c65,prompt/history/2023/09/04/22:36_Remove selected items from filtered list/change.sh,1.0,p1,1.0,p1
 36b5917db8b5687fb6417d04b173fbf82c354c65,prompt/history/2023/09/04/22:36_Remove selected items from filtered list/prompt.md,0.5107,p1,0.7333,p1
@@ -375,9 +375,9 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 39a464406086132c2ecf6d59369f8c44d5876f5d,src/frontend/App.jsx,0.0205,p1,0.0435,p1
 39a464406086132c2ecf6d59369f8c44d5876f5d,src/frontend/components/NavBar.jsx,0.3274,p1,0.4783,p1
 39a464406086132c2ecf6d59369f8c44d5876f5d,src/frontend/components/TitleDisplay.jsx,0.3274,p1,0.4783,p1
-3a146ae4776e0bd10549989bd3f696dcde2bd5d9,ToDo.txt,0.0,,0.4783,
-3a146ae4776e0bd10549989bd3f696dcde2bd5d9,data/computercraft/lua/rom/modules/ccwp/enterprise/eobj_mobj_host.lua,0.0,,0.4783,
-3a146ae4776e0bd10549989bd3f696dcde2bd5d9,data/computercraft/lua/rom/modules/ccwp/enterprise/test/t_eobj_mobj_host.lua,0.0,,0.4783,
+3a146ae4776e0bd10549989bd3f696dcde2bd5d9,ToDo.txt,0.0,,0.0,
+3a146ae4776e0bd10549989bd3f696dcde2bd5d9,data/computercraft/lua/rom/modules/ccwp/enterprise/eobj_mobj_host.lua,0.0,,0.0,
+3a146ae4776e0bd10549989bd3f696dcde2bd5d9,data/computercraft/lua/rom/modules/ccwp/enterprise/test/t_eobj_mobj_host.lua,0.0,,0.0,
 3a72c9cd84137dcdeb157757c3dfa8dd2cc88326,change.sh,1.0,p1,1.0,p1
 3a72c9cd84137dcdeb157757c3dfa8dd2cc88326,prompt.md,0.7601,p1,0.7143,p1
 3a72c9cd84137dcdeb157757c3dfa8dd2cc88326,prompt.yaml,0.0446,p1,0.0,
@@ -416,7 +416,7 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 3eb0acc34870d921b644401b588ce999d9a72b26,prompt/history/2023/09/16/17:59_Update git status display/prompt.yaml,0.0463,p1,0.0,
 3eb0acc34870d921b644401b588ce999d9a72b26,src/backend/handlers/git/gitStatusHandler.js,0.1582,p1,0.1207,p1
 3eb0acc34870d921b644401b588ce999d9a72b26,src/frontend/components/GitStatusDisplay.jsx,0.3676,p2,0.3621,p2
-3f84389921c7963e1100802462a214dcb576f2dc,docs/descriptor.md,0.0578,p1,0.0,p1
+3f84389921c7963e1100802462a214dcb576f2dc,docs/descriptor.md,0.0578,p1,0.3333,p1
 3fd1dfbc8cf43ec94f582d521060f13c464a87b2,change.sh,1.0,p2,1.0,p2
 3fd1dfbc8cf43ec94f582d521060f13c464a87b2,prompt.md,0.5039,p1,0.5439,p2
 3fd1dfbc8cf43ec94f582d521060f13c464a87b2,prompt.yaml,0.0434,p2,0.0,
@@ -445,13 +445,13 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 428b7a4b5c7243f2e23333abe759dc320a659308,prompt/history/2023/08/30/11:51_Improve the documentation/change.sh,1.0,p1,1.0,p1
 428b7a4b5c7243f2e23333abe759dc320a659308,prompt/history/2023/08/30/11:51_Improve the documentation/prompt.md,0.133,p1,0.4211,p1
 428b7a4b5c7243f2e23333abe759dc320a659308,prompt/history/2023/08/30/11:51_Improve the documentation/prompt.yaml,0.1226,p1,0.0,
-42d22da0a8ce7a846f74b93f637cf6d70bdcda0a,.github/workflows/node.js.yml,0.2451,p1,0.0,p1
-42dd0dbe56a7902bff947777a448d3cc1409ecdd,change.sh,0.9482,p5,0.9474,p3
-42dd0dbe56a7902bff947777a448d3cc1409ecdd,prompt.md,0.3382,p1,0.2982,p1
+42d22da0a8ce7a846f74b93f637cf6d70bdcda0a,.github/workflows/node.js.yml,0.2451,p1,0.75,p1
+42dd0dbe56a7902bff947777a448d3cc1409ecdd,change.sh,0.9482,p5,1.0,p3
+42dd0dbe56a7902bff947777a448d3cc1409ecdd,prompt.md,0.3382,p1,0.3286,p1
 42dd0dbe56a7902bff947777a448d3cc1409ecdd,prompt.yaml,0.042,p2,0.0,
-42dd0dbe56a7902bff947777a448d3cc1409ecdd,src/frontend/App.jsx,0.1779,p4,0.2632,p3
-42dd0dbe56a7902bff947777a448d3cc1409ecdd,src/frontend/components/CommitButton.jsx,0.1417,p2,0.193,p1
-43567a7a474928efd26c3bc9647087a7bba0e3f2,src/common/Hero.js,1.0,p2,0.0,p2
+42dd0dbe56a7902bff947777a448d3cc1409ecdd,src/frontend/App.jsx,0.1779,p4,0.8571,p3
+42dd0dbe56a7902bff947777a448d3cc1409ecdd,src/frontend/components/CommitButton.jsx,0.1417,p2,0.2143,p1
+43567a7a474928efd26c3bc9647087a7bba0e3f2,src/common/Hero.js,1.0,p2,1.0,p2
 436e96942c2ac842765256c8219979a523f5beb7,prompt/history/2023/09/05/13:44_Refactor code structure and update imports/change.sh,1.0,p1,1.0,p1
 436e96942c2ac842765256c8219979a523f5beb7,prompt/history/2023/09/05/13:44_Refactor code structure and update imports/prompt.md,0.4392,p1,0.6038,p1
 436e96942c2ac842765256c8219979a523f5beb7,prompt/history/2023/09/05/13:44_Refactor code structure and update imports/prompt.yaml,0.0074,p1,0.0,
@@ -468,7 +468,7 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 44950874c2a56693d9436fa3b148721417ea3de6,src/interactiveSession/startInteractiveSession.js,0.0822,p1,0.1455,p1
 44950874c2a56693d9436fa3b148721417ea3de6,src/prompt/processPrompt.js,0.1446,p1,0.1636,p1
 45111653f1a2634b5bd0fd387826b3f002abb440,prompt/history/2023/09/08/12:12_Refactor handleResultSetItem out/change.sh,1.0,p2,1.0,p2
-45111653f1a2634b5bd0fd387826b3f002abb440,prompt/history/2023/09/08/12:12_Refactor handleResultSetItem out/prompt.md,0.6366,p1,0.7419,p1
+45111653f1a2634b5bd0fd387826b3f002abb440,prompt/history/2023/09/08/12:12_Refactor handleResultSetItem out/prompt.md,0.6366,p1,0.7581,p1
 45111653f1a2634b5bd0fd387826b3f002abb440,prompt/history/2023/09/08/12:12_Refactor handleResultSetItem out/prompt.yaml,0.0141,p1,0.0,
 45111653f1a2634b5bd0fd387826b3f002abb440,prompt/task/refactor/split.md,0.0,,0.0,
 45111653f1a2634b5bd0fd387826b3f002abb440,src/frontend/components/MultiSelect/MultiSelect.jsx,0.2982,p1,0.3548,p1
@@ -519,20 +519,20 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 4fe5180776358979f4afb44a8ab9ee3553e5dd1d,prompt/history/2023/09/04/21:59_Enhance FilteredListItem styling and behavior/prompt.yaml,0.1124,p1,0.0,
 4fe5180776358979f4afb44a8ab9ee3553e5dd1d,src/frontend/components/MultiSelect/FilteredListItem.jsx,0.3815,p1,0.28,p1
 5123d0604602fcda1054a03602e039ccb5621c0d,prompt/history/2023/10/02/12:14_Refine TerminalSummary: Improved cleaning of control sequences/change.sh,0.6593,p3,0.7742,p3
-5123d0604602fcda1054a03602e039ccb5621c0d,prompt/history/2023/10/02/12:14_Refine TerminalSummary: Improved cleaning of control sequences/prompt.md,0.202,p1,0.3548,p2
+5123d0604602fcda1054a03602e039ccb5621c0d,prompt/history/2023/10/02/12:14_Refine TerminalSummary: Improved cleaning of control sequences/prompt.md,0.202,p1,0.4333,p2
 5123d0604602fcda1054a03602e039ccb5621c0d,prompt/history/2023/10/02/12:14_Refine TerminalSummary: Improved cleaning of control sequences/prompt.yaml,0.0329,p2,0.0,
 5123d0604602fcda1054a03602e039ccb5621c0d,src/frontend/components/terminal/TerminalSummary.jsx,0.2613,p3,0.3871,p3
-5123d0604602fcda1054a03602e039ccb5621c0d,src/frontend/components/terminal/prependAndExtractLastLine.js,0.215,p2,0.1935,p2
+5123d0604602fcda1054a03602e039ccb5621c0d,src/frontend/components/terminal/prependAndExtractLastLine.js,0.215,p2,0.2,p2
 52d949f87c931c18d9007788127db038da8e1a11,change.sh,0.922,p1,0.9388,p1
 52d949f87c931c18d9007788127db038da8e1a11,prompt.md,0.524,p1,0.5102,p1
 52d949f87c931c18d9007788127db038da8e1a11,prompt.yaml,0.0414,p1,0.0,
 52d949f87c931c18d9007788127db038da8e1a11,src/backend/handlers/resetGitHandler.js,0.1706,p1,0.2245,p1
 52d949f87c931c18d9007788127db038da8e1a11,src/backend/setupRoutes.js,0.2545,p1,0.3061,p1
 52d949f87c931c18d9007788127db038da8e1a11,src/git/resetGit.js,0.0898,p1,0.102,p1
-531b37c9fa3bb915cef5d7acc9934a66cd8e2cd7,.devcontainer/devcontainer.json,0.1295,p1,0.2857,p1
+531b37c9fa3bb915cef5d7acc9934a66cd8e2cd7,.devcontainer/devcontainer.json,0.1295,p1,0.2941,p1
 5353acb1c37970d83ad083c86e7f6ffef56a7b87,change.sh,0.8224,p2,0.7917,p2
 5353acb1c37970d83ad083c86e7f6ffef56a7b87,integrations/vscode/src/updateAttentionSection.ts,0.8224,p1,0.7917,p1
-5353acb1c37970d83ad083c86e7f6ffef56a7b87,integrations/vscode/src/updateEditorContents.ts,0.2116,p1,0.0417,p1
+5353acb1c37970d83ad083c86e7f6ffef56a7b87,integrations/vscode/src/updateEditorContents.ts,0.2116,p1,0.1852,p1
 5353acb1c37970d83ad083c86e7f6ffef56a7b87,integrations/vscode/src/writeAttention.ts,0.4571,p2,0.4792,p2
 5353acb1c37970d83ad083c86e7f6ffef56a7b87,prompt.md,0.4364,p1,0.5833,p2
 5353acb1c37970d83ad083c86e7f6ffef56a7b87,prompt.yaml,0.0394,p2,0.0,
@@ -547,14 +547,14 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 557cd982e5790b1a93ad15f6dc5f975fa8c2a18f,prompt/history/2023/09/11/14:24_Enhance ExecuteButton component/prompt.md,0.3995,p1,0.6667,p1
 557cd982e5790b1a93ad15f6dc5f975fa8c2a18f,prompt/history/2023/09/11/14:24_Enhance ExecuteButton component/prompt.yaml,0.0236,p1,0.0,
 557cd982e5790b1a93ad15f6dc5f975fa8c2a18f,src/frontend/components/ExecuteButton.jsx,0.6468,p1,0.6,p1
-558c7cb1b891c964cf78fbd6aa026f40f4e72754,src/common/SliderInput.js,0.0863,p2,0.0,p1
+558c7cb1b891c964cf78fbd6aa026f40f4e72754,src/common/SliderInput.js,0.0863,p2,0.5,p1
 55b85b4577236e2c65c7febfd1cec075d89acbaa,change.sh,0.7033,p1,0.7667,p1
 55b85b4577236e2c65c7febfd1cec075d89acbaa,doc/web.html,0.3967,p1,0.0,
 55b85b4577236e2c65c7febfd1cec075d89acbaa,doc/web.md,0.4482,p1,0.2667,p1
 55b85b4577236e2c65c7febfd1cec075d89acbaa,prompt.md,0.5516,p1,0.3333,p1
 55b85b4577236e2c65c7febfd1cec075d89acbaa,prompt.yaml,0.0844,p1,0.0,
 5b0232d4ff43c58e22f4bed6b9a4b2fe3c175a39,change.sh,1.0,p2,1.0,p2
-5b0232d4ff43c58e22f4bed6b9a4b2fe3c175a39,prompt.md,0.6838,p1,0.7353,p1
+5b0232d4ff43c58e22f4bed6b9a4b2fe3c175a39,prompt.md,0.6838,p1,0.7647,p1
 5b0232d4ff43c58e22f4bed6b9a4b2fe3c175a39,prompt.yaml,0.0657,p1,0.0,
 5b0232d4ff43c58e22f4bed6b9a4b2fe3c175a39,src/frontend/styles/colors.css,0.1547,p1,0.1765,p2
 5b0232d4ff43c58e22f4bed6b9a4b2fe3c175a39,src/frontend/tailwind.config.cjs,0.1378,p1,0.2647,p1
@@ -585,13 +585,13 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 5e0d8d5d921752bc737fa45e7ba9db0dba638ffc,prompt/history/2023/09/08/10:36_Refactor handleItemClick from ResultSet to MultiSelect/prompt.yaml,0.0342,p1,0.0,
 5e0d8d5d921752bc737fa45e7ba9db0dba638ffc,src/frontend/components/MultiSelect/MultiSelect.jsx,0.2883,p1,0.3889,p1
 5e0d8d5d921752bc737fa45e7ba9db0dba638ffc,src/frontend/components/MultiSelect/ResultSet.jsx,0.1557,p1,0.1944,p1
-5f9836bf81cd7062d6ddef43d06469b3f57b94c4,src/static/Pricing.js,0.0428,p2,0.0,p1
-5fb188378fa37b2ae762cf09eb0047109022ed84,change.sh,0.5505,p2,0.6875,p1
+5f9836bf81cd7062d6ddef43d06469b3f57b94c4,src/static/Pricing.js,0.0428,p2,0.4,p1
+5fb188378fa37b2ae762cf09eb0047109022ed84,change.sh,0.5505,p2,1.0,p1
 5fb188378fa37b2ae762cf09eb0047109022ed84,prompt.md,0.4237,p2,0.5,p5
 5fb188378fa37b2ae762cf09eb0047109022ed84,prompt.yaml,0.023,p4,0.0,
-5fb188378fa37b2ae762cf09eb0047109022ed84,src/backend/handlers.js,0.1097,p2,0.0625,p2
-5fb188378fa37b2ae762cf09eb0047109022ed84,src/backend/server.js,0.2176,p2,0.0,p2
-5fb188378fa37b2ae762cf09eb0047109022ed84,src/frontend/components/TasksList.jsx,0.9267,p1,0.5833,p1
+5fb188378fa37b2ae762cf09eb0047109022ed84,src/backend/handlers.js,0.1097,p2,0.1579,p2
+5fb188378fa37b2ae762cf09eb0047109022ed84,src/backend/server.js,0.2176,p2,0.1754,p2
+5fb188378fa37b2ae762cf09eb0047109022ed84,src/frontend/components/TasksList.jsx,0.9267,p1,0.8864,p1
 5fe3a671a376f269eb479c251f8577b691f6bdee,change.sh,0.9355,p2,0.9524,p2
 5fe3a671a376f269eb479c251f8577b691f6bdee,prompt.md,0.6364,p2,0.381,p1
 5fe3a671a376f269eb479c251f8577b691f6bdee,prompt.yaml,0.2368,p2,0.0,
@@ -602,10 +602,10 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 60271b3e8e1f7aeda9daedf7b9e0f96c79afbcb8,router/plugins.js,0.0814,p1,0.1852,p1
 60271b3e8e1f7aeda9daedf7b9e0f96c79afbcb8,views/create-plugin.ejs,0.0258,p1,0.0,
 60271b3e8e1f7aeda9daedf7b9e0f96c79afbcb8,views/plugins.ejs,0.0037,p1,0.0,
-608b38415f0f1e8fcc2c9c9e54b00349b6393d56,src/common/AddMoreButton/AddMoreButton.js,0.1525,p1,0.0506,p1
-608b38415f0f1e8fcc2c9c9e54b00349b6393d56,src/common/TechnologySlider/TechnologySlider.js,0.1852,p4,0.1772,p3
+608b38415f0f1e8fcc2c9c9e54b00349b6393d56,src/common/AddMoreButton/AddMoreButton.js,0.1525,p1,0.2727,p1
+608b38415f0f1e8fcc2c9c9e54b00349b6393d56,src/common/TechnologySlider/TechnologySlider.js,0.1852,p4,0.3,p3
 608b38415f0f1e8fcc2c9c9e54b00349b6393d56,src/jobs/JobHeader/JobHeader.js,0.9854,p4,0.9873,p4
-608b38415f0f1e8fcc2c9c9e54b00349b6393d56,src/jobs/ZeroJobs/ZeroJobs.js,0.0356,p2,0.0633,p2
+608b38415f0f1e8fcc2c9c9e54b00349b6393d56,src/jobs/ZeroJobs/ZeroJobs.js,0.0356,p2,0.1429,p2
 62f0d11004b160af9d837dcc0de5c5c019f73683,README.md,0.0667,p1,0.025,p1
 62f0d11004b160af9d837dcc0de5c5c019f73683,change.sh,0.2187,p1,0.275,p1
 62f0d11004b160af9d837dcc0de5c5c019f73683,prompt.md,0.3297,p1,0.25,p1
@@ -619,10 +619,10 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 636e2624447b2c0d2bc7b4b60696a7fd249eea1f,prompt.yaml,0.0135,p1,0.0,
 636e2624447b2c0d2bc7b4b60696a7fd249eea1f,src/frontend/components/ExecuteButton.jsx,0.1823,p1,0.1538,p1
 636e2624447b2c0d2bc7b4b60696a7fd249eea1f,src/frontend/model/handleExecuteChange.js,0.2558,p1,0.3077,p1
-63b2ab90b0b138e509e87efad59fd72b414d0133,game.js,0.9209,p3,0.0,p3
-63b2ab90b0b138e509e87efad59fd72b414d0133,game.test.js,0.9409,p4,0.3333,p4
-63b2ab90b0b138e509e87efad59fd72b414d0133,index.html,0.7095,p2,0.0,p2
-63b2ab90b0b138e509e87efad59fd72b414d0133,package.json,0.021,p1,0.0,p8
+63b2ab90b0b138e509e87efad59fd72b414d0133,game.js,0.9209,p3,0.8824,p3
+63b2ab90b0b138e509e87efad59fd72b414d0133,game.test.js,0.9409,p4,0.931,p4
+63b2ab90b0b138e509e87efad59fd72b414d0133,index.html,0.7095,p2,0.7188,p2
+63b2ab90b0b138e509e87efad59fd72b414d0133,package.json,0.021,p1,0.2,p8
 63fdcb6264f2f97254f1ea6018e832c4b11d9244,change.sh,1.0,p1,1.0,p1
 63fdcb6264f2f97254f1ea6018e832c4b11d9244,docs/assets/logo.svg,0.7589,p1,0.375,p1
 63fdcb6264f2f97254f1ea6018e832c4b11d9244,prompt.md,0.1167,p1,0.125,p1
@@ -643,11 +643,11 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 67ba34733d76d16c6a0becca25c44239d1d1214d,src/frontend/components/MultiSelect/FilteredList.jsx,0.1919,p1,0.3571,p1
 67ba34733d76d16c6a0becca25c44239d1d1214d,src/frontend/components/MultiSelect/ResultSet.jsx,0.1538,p1,0.3429,p1
 67ba34733d76d16c6a0becca25c44239d1d1214d,src/frontend/components/files/FileViewer.jsx,0.0939,p1,0.2,p1
-6a3e4c3065fb7689150ce1acf8a9fbe032810375,.github/workflows/label.yml,0.9136,p1,0.0,p1
+6a3e4c3065fb7689150ce1acf8a9fbe032810375,.github/workflows/label.yml,0.9136,p1,1.0,p1
 6d454ee9b01535bb252bcbdf2e0abf13b6bcda59,README.md,0.0,p3,1.0,p3
 6e6a1f57b5a678faba63f271a93110abc482f53f,.gitignore,0.412,p2,0.5,p2
 6e6a1f57b5a678faba63f271a93110abc482f53f,prompt/history/2023/09/15/11:50_Update .gitignore with more .md backup patterns/change.sh,0.9333,p2,0.9375,p2
-6e6a1f57b5a678faba63f271a93110abc482f53f,prompt/history/2023/09/15/11:50_Update .gitignore with more .md backup patterns/prompt.md,0.0317,p2,0.25,p1
+6e6a1f57b5a678faba63f271a93110abc482f53f,prompt/history/2023/09/15/11:50_Update .gitignore with more .md backup patterns/prompt.md,0.0317,p2,0.3333,p1
 6e6a1f57b5a678faba63f271a93110abc482f53f,prompt/history/2023/09/15/11:50_Update .gitignore with more .md backup patterns/prompt.yaml,0.1516,p1,0.0,
 6ed655be1ac60eacb05b3c947cb89c49a13026e9,change.sh,1.0,p1,1.0,p1
 6ed655be1ac60eacb05b3c947cb89c49a13026e9,prompt.md,0.7438,p1,0.6,p1
@@ -663,10 +663,10 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 6f411731d6d2445f7c91bd2cedd481e67f5ce135,src/init.js,0.3752,p2,0.3696,p2
 6f411731d6d2445f7c91bd2cedd481e67f5ce135,src/prompt/createProjectSpecifics.js,0.0946,p2,0.1739,p2
 6f411731d6d2445f7c91bd2cedd481e67f5ce135,src/prompt/createPromptYaml.js,0.1261,p2,0.2391,p2
-6fe93fc0697565c3c74ac23839004a41dbf2d5e8,docs/config/env_or_cli.md,0.1206,p1,0.0,p1
+6fe93fc0697565c3c74ac23839004a41dbf2d5e8,docs/config/env_or_cli.md,0.1206,p1,1.0,p1
 6fe93fc0697565c3c74ac23839004a41dbf2d5e8,docs/web.md,0.1308,p1,0.12,p1
-6fe93fc0697565c3c74ac23839004a41dbf2d5e8,prompt/history/2023/10/10/15:05_Improve Junior documentation per specified alterations/change.sh,0.3597,p1,0.76,p1
-6fe93fc0697565c3c74ac23839004a41dbf2d5e8,prompt/history/2023/10/10/15:05_Improve Junior documentation per specified alterations/prompt.md,0.2507,p1,0.8,p1
+6fe93fc0697565c3c74ac23839004a41dbf2d5e8,prompt/history/2023/10/10/15:05_Improve Junior documentation per specified alterations/change.sh,0.3597,p1,1.0,p1
+6fe93fc0697565c3c74ac23839004a41dbf2d5e8,prompt/history/2023/10/10/15:05_Improve Junior documentation per specified alterations/prompt.md,0.2507,p1,1.0,p1
 6fe93fc0697565c3c74ac23839004a41dbf2d5e8,prompt/history/2023/10/10/15:05_Improve Junior documentation per specified alterations/prompt.yaml,0.0294,p1,0.0,
 701444e1037e8be431f67c0eca5873e03c4ef375,change.sh,1.0,p1,1.0,p1
 701444e1037e8be431f67c0eca5873e03c4ef375,prompt.md,0.4978,p1,0.525,p1
@@ -681,11 +681,11 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 70abda553d1e37f6a54aa04d92feb1d266fdbd80,src/frontend/components/CommitButton.jsx,0.1053,p1,0.1136,p1
 70abda553d1e37f6a54aa04d92feb1d266fdbd80,src/frontend/service/postDescriptor.js,0.1018,p1,0.1591,p1
 72aa012692b42d427c31d76767d719264db3f7df,prompt/history/2023/09/12/11:32_Refactor file routes and handlers/change.sh,1.0,p2,1.0,p2
-72aa012692b42d427c31d76767d719264db3f7df,prompt/history/2023/09/12/11:32_Refactor file routes and handlers/prompt.md,0.5748,p1,0.527,p1
+72aa012692b42d427c31d76767d719264db3f7df,prompt/history/2023/09/12/11:32_Refactor file routes and handlers/prompt.md,0.5748,p1,0.5493,p1
 72aa012692b42d427c31d76767d719264db3f7df,prompt/history/2023/09/12/11:32_Refactor file routes and handlers/prompt.yaml,0.0472,p1,0.0,
-72aa012692b42d427c31d76767d719264db3f7df,src/backend/handlers/files/fileListHandler.js,0.0378,p1,0.0541,p1
-72aa012692b42d427c31d76767d719264db3f7df,src/backend/routes/setupFilesRoutes.js,0.0933,p1,0.1622,p1
-72aa012692b42d427c31d76767d719264db3f7df,src/backend/setupRoutes.js,0.1461,p1,0.2297,p1
+72aa012692b42d427c31d76767d719264db3f7df,src/backend/handlers/files/fileListHandler.js,0.0378,p1,0.0563,p1
+72aa012692b42d427c31d76767d719264db3f7df,src/backend/routes/setupFilesRoutes.js,0.0933,p1,0.169,p1
+72aa012692b42d427c31d76767d719264db3f7df,src/backend/setupRoutes.js,0.1461,p1,0.2394,p1
 735ae381e1de7d8c9d8126b6b64b67aa29e02c6a,change.sh,1.0,p1,1.0,p1
 735ae381e1de7d8c9d8126b6b64b67aa29e02c6a,prompt.md,0.6894,p1,0.7111,p1
 735ae381e1de7d8c9d8126b6b64b67aa29e02c6a,prompt.yaml,0.0153,p1,0.0,
@@ -709,8 +709,8 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 76af1d0b8695e97c89661f4a8ee85572b6b36ceb,prompt.yaml,0.0526,p1,0.0,
 76af1d0b8695e97c89661f4a8ee85572b6b36ceb,src/frontend/components/CommitMessageInput.jsx,0.1599,p1,0.1522,p1
 76af1d0b8695e97c89661f4a8ee85572b6b36ceb,src/frontend/stores/monitorChange.js,0.2105,p1,0.2826,p1
-771dce83870cb2e6ab6e99b1c96682de5658c210,evals/registry/data/viewport_to_grid_size/samples.jsonl,0.0,,0.2826,
-771dce83870cb2e6ab6e99b1c96682de5658c210,evals/registry/evals/viewport_to_grid_size.yaml,0.0,,0.2826,
+771dce83870cb2e6ab6e99b1c96682de5658c210,evals/registry/data/viewport_to_grid_size/samples.jsonl,0.0,,0.0,
+771dce83870cb2e6ab6e99b1c96682de5658c210,evals/registry/evals/viewport_to_grid_size.yaml,0.0,,0.0,
 7856a79a6b6c80633fb9b07fd32c9501043f2615,"prompt/history/2023/09/16/20:55_Refactor GitStatusDisplay, eliminate refs and innerText/change.sh",0.7397,p1,0.75,p1
 7856a79a6b6c80633fb9b07fd32c9501043f2615,"prompt/history/2023/09/16/20:55_Refactor GitStatusDisplay, eliminate refs and innerText/prompt.md",0.4233,p1,0.5769,p1
 7856a79a6b6c80633fb9b07fd32c9501043f2615,"prompt/history/2023/09/16/20:55_Refactor GitStatusDisplay, eliminate refs and innerText/prompt.yaml",0.0146,p1,0.0,
@@ -718,10 +718,10 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 7856a79a6b6c80633fb9b07fd32c9501043f2615,src/frontend/components/GitStatusRow.jsx,0.2627,p1,0.3077,p1
 78b0b353646463d5e1e252fcbdcb53a182b974cb,change.sh,1.0,p4,1.0,p3
 78b0b353646463d5e1e252fcbdcb53a182b974cb,doc/roadmap.html,0.3932,p4,0.0,
-78b0b353646463d5e1e252fcbdcb53a182b974cb,doc/roadmap.md,0.6919,p3,0.5769,p3
-78b0b353646463d5e1e252fcbdcb53a182b974cb,prompt.md,0.0212,p1,0.1538,p1
+78b0b353646463d5e1e252fcbdcb53a182b974cb,doc/roadmap.md,0.6919,p3,0.625,p3
+78b0b353646463d5e1e252fcbdcb53a182b974cb,prompt.md,0.0212,p1,0.2222,p1
 78b0b353646463d5e1e252fcbdcb53a182b974cb,prompt.yaml,0.631,p2,0.0,
-78c5256c170e22394f28c3425e6ff7c6cc0c81aa,src/app/layout.tsx,0.456,p2,0.5,p2
+78c5256c170e22394f28c3425e6ff7c6cc0c81aa,src/app/layout.tsx,0.456,p2,0.7143,p2
 79c5cb879192c0a3969d5a0441e447416e9df244,change.sh,0.8676,p1,0.8696,p1
 79c5cb879192c0a3969d5a0441e447416e9df244,prompt.md,0.313,p1,0.2464,p1
 79c5cb879192c0a3969d5a0441e447416e9df244,prompt.yaml,0.0232,p1,0.0,
@@ -731,12 +731,12 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 7a511d60c23cbde0e5f655381846ed979f053b0b,prompt/history/2023/09/11/14:46_Remove unwanted '/' from path/prompt.md,0.2073,p1,0.65,p1
 7a511d60c23cbde0e5f655381846ed979f053b0b,prompt/history/2023/09/11/14:46_Remove unwanted '/' from path/prompt.yaml,0.0372,p1,0.0,
 7a511d60c23cbde0e5f655381846ed979f053b0b,src/frontend/service/helpers/flattenPaths.js,0.6073,p1,0.55,p1
-7a530c145937869e97f5869857419ba6bc6727a1,.babelrc,1.0,p7,0.0,p7
-7a530c145937869e97f5869857419ba6bc6727a1,game.js,0.8423,p3,0.0,p3
-7a530c145937869e97f5869857419ba6bc6727a1,game.test.js,0.5327,p12,0.75,p8
-7a530c145937869e97f5869857419ba6bc6727a1,jest.config.js,0.4715,p7,0.0,p7
-7a530c145937869e97f5869857419ba6bc6727a1,jest.setup.js,0.6977,p10,0.125,p8
-7a530c145937869e97f5869857419ba6bc6727a1,package.json,0.0338,p11,0.0,p16
+7a530c145937869e97f5869857419ba6bc6727a1,.babelrc,1.0,p7,1.0,p7
+7a530c145937869e97f5869857419ba6bc6727a1,game.js,0.8423,p3,0.8889,p3
+7a530c145937869e97f5869857419ba6bc6727a1,game.test.js,0.5327,p12,1.0,p8
+7a530c145937869e97f5869857419ba6bc6727a1,jest.config.js,0.4715,p7,1.0,p7
+7a530c145937869e97f5869857419ba6bc6727a1,jest.setup.js,0.6977,p10,1.0,p8
+7a530c145937869e97f5869857419ba6bc6727a1,package.json,0.0338,p11,0.3333,p16
 7b8639cb17b0da8317152148c1376851cf0832ee,dashboard.md,0.832,p3,0.5714,p3
 7d2f3d3182f25143030a05d0b841d28850f8589e,change.sh,0.8604,p1,0.7907,p1
 7d2f3d3182f25143030a05d0b841d28850f8589e,prompt.md,0.5667,p1,0.5116,p1
@@ -794,38 +794,38 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 8ba2f3d4ee07003a2c2a9b4096c09fbeef8fd389,docs/roadmap.md,0.2891,p1,0.2609,p1
 8ba2f3d4ee07003a2c2a9b4096c09fbeef8fd389,prompt.md,0.2152,p1,0.1739,p1
 8ba2f3d4ee07003a2c2a9b4096c09fbeef8fd389,prompt.yaml,0.0637,p1,0.0,
-8cfe6bda11dbfcf68b63f0f8fecd69b5c50c71d7,user.js,0.0802,p2,0.1053,p2
+8cfe6bda11dbfcf68b63f0f8fecd69b5c50c71d7,user.js,0.0802,p2,0.2449,p2
 8cfe6bda11dbfcf68b63f0f8fecd69b5c50c71d7,user.test.js,0.1922,p3,0.1842,p3
 8e20ea93e93c3a03b88dc0e07a8b654bb9a5a155,change.sh,0.824,p2,0.8861,p2
-8e20ea93e93c3a03b88dc0e07a8b654bb9a5a155,prompt.md,0.4527,p1,0.4684,p1
+8e20ea93e93c3a03b88dc0e07a8b654bb9a5a155,prompt.md,0.4527,p1,0.5,p1
 8e20ea93e93c3a03b88dc0e07a8b654bb9a5a155,prompt.yaml,0.032,p1,0.0,
-8e20ea93e93c3a03b88dc0e07a8b654bb9a5a155,src/frontend/components/RollbackButton.jsx,0.1407,p1,0.2405,p1
+8e20ea93e93c3a03b88dc0e07a8b654bb9a5a155,src/frontend/components/RollbackButton.jsx,0.1407,p1,0.2436,p1
 8e20ea93e93c3a03b88dc0e07a8b654bb9a5a155,src/frontend/components/RollbackConfirmationDialog.jsx,0.3212,p2,0.3418,p2
 8e266c7e0a247c81be8468eff8dbcff5c69b626f,change.sh,1.0,p1,1.0,p1
 8e266c7e0a247c81be8468eff8dbcff5c69b626f,prompt.md,0.0815,p1,0.3913,p1
 8e266c7e0a247c81be8468eff8dbcff5c69b626f,prompt.yaml,0.0155,p1,0.0,
 8e266c7e0a247c81be8468eff8dbcff5c69b626f,src/frontend/components/NavBar.jsx,0.2123,p1,0.2609,p1
 8e266c7e0a247c81be8468eff8dbcff5c69b626f,src/frontend/components/SubTitle.jsx,0.2932,p1,0.3696,p1
-8ed0af819605a5c74b38fcb21653e6c90daa1b45,change.sh,0.8763,p2,0.0,p3
-8ed0af819605a5c74b38fcb21653e6c90daa1b45,docs/descriptor.md,0.6124,p2,0.0,p3
-8ed0af819605a5c74b38fcb21653e6c90daa1b45,prompt.md,0.5943,p1,0.0,p3
-8ed0af819605a5c74b38fcb21653e6c90daa1b45,prompt.yaml,0.2407,p3,0.0,p3
+8ed0af819605a5c74b38fcb21653e6c90daa1b45,change.sh,0.8763,p2,1.0,p3
+8ed0af819605a5c74b38fcb21653e6c90daa1b45,docs/descriptor.md,0.6124,p2,1.0,p3
+8ed0af819605a5c74b38fcb21653e6c90daa1b45,prompt.md,0.5943,p1,1.0,p3
+8ed0af819605a5c74b38fcb21653e6c90daa1b45,prompt.yaml,0.2407,p3,0.0952,p3
 8f51dc9c5d723078b5ba6df11c6279b3783cd9ed,change.sh,1.0,p2,1.0,p2
-8f51dc9c5d723078b5ba6df11c6279b3783cd9ed,prompt.md,0.3794,p1,0.3077,p1
+8f51dc9c5d723078b5ba6df11c6279b3783cd9ed,prompt.md,0.3794,p1,0.3333,p1
 8f51dc9c5d723078b5ba6df11c6279b3783cd9ed,prompt.yaml,0.0428,p1,0.0,
 8f51dc9c5d723078b5ba6df11c6279b3783cd9ed,prompt/format/descriptive.md,0.038,p1,0.0,
 8f51dc9c5d723078b5ba6df11c6279b3783cd9ed,prompt/format/prose.md,0.0,,0.0,
 8f51dc9c5d723078b5ba6df11c6279b3783cd9ed,prompt/task/question/answer.md,0.0,,0.0,
-8f51dc9c5d723078b5ba6df11c6279b3783cd9ed,src/backend/fileutils/readDirRecursively.js,0.3037,p1,0.4103,p1
-8f51dc9c5d723078b5ba6df11c6279b3783cd9ed,src/backend/listTasks.js,0.3185,p1,0.2564,p1
+8f51dc9c5d723078b5ba6df11c6279b3783cd9ed,src/backend/fileutils/readDirRecursively.js,0.3037,p1,0.4444,p1
+8f51dc9c5d723078b5ba6df11c6279b3783cd9ed,src/backend/listTasks.js,0.3185,p1,0.2778,p1
 8f5a32f08d6e44bb3b36f66b3cbf8779d13a5cb9,change.sh,1.0,p1,1.0,p1
 8f5a32f08d6e44bb3b36f66b3cbf8779d13a5cb9,prompt.md,0.6687,p1,0.5741,p1
 8f5a32f08d6e44bb3b36f66b3cbf8779d13a5cb9,prompt.yaml,0.0526,p1,0.0,
 8f5a32f08d6e44bb3b36f66b3cbf8779d13a5cb9,src/backend/handlers/updateRequirementsHandler.js,0.288,p1,0.3333,p1
 8f5a32f08d6e44bb3b36f66b3cbf8779d13a5cb9,src/backend/setupRoutes.js,0.3443,p1,0.3333,p1
 8f780f95eaacde2d7f58ff98700b8254e99c1702,change.sh,0.863,p4,0.88,p4
-8f780f95eaacde2d7f58ff98700b8254e99c1702,prompt.md,0.5292,p1,0.42,p1
-8f780f95eaacde2d7f58ff98700b8254e99c1702,prompt.yaml,0.0396,p1,0.02,p1
+8f780f95eaacde2d7f58ff98700b8254e99c1702,prompt.md,0.5292,p1,0.4898,p1
+8f780f95eaacde2d7f58ff98700b8254e99c1702,prompt.yaml,0.0396,p1,0.0204,p1
 8f780f95eaacde2d7f58ff98700b8254e99c1702,src/git/createGitignore.js,0.3142,p4,0.38,p4
 8f780f95eaacde2d7f58ff98700b8254e99c1702,src/init.js,0.2256,p4,0.22,p3
 8ff9f1a01cdf755ad3918e58b59234029924beb7,change.sh,1.0,p1,1.0,p1
@@ -833,27 +833,27 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 8ff9f1a01cdf755ad3918e58b59234029924beb7,doc/web.md,0.3394,p1,0.3103,p1
 8ff9f1a01cdf755ad3918e58b59234029924beb7,prompt.md,0.3228,p1,0.2069,p1
 8ff9f1a01cdf755ad3918e58b59234029924beb7,prompt.yaml,0.0487,p1,0.0,
-90e1d68ddc8d3a2caa076ee4d423484bf0a742f3,game.js,0.961,p2,0.0,p2
+90e1d68ddc8d3a2caa076ee4d423484bf0a742f3,game.js,0.961,p2,0.9524,p2
 90e1d68ddc8d3a2caa076ee4d423484bf0a742f3,game.test.js,0.5287,p7,0.48,p7
 91468b3b5c9240fdbd7b831954ee7136aefdd074,docs/roadmap.md,0.2403,p1,0.2609,p1
 91468b3b5c9240fdbd7b831954ee7136aefdd074,prompt/history/2023/08/21/22:18_Improve documentation/change.sh,1.0,p1,1.0,p1
 91468b3b5c9240fdbd7b831954ee7136aefdd074,prompt/history/2023/08/21/22:18_Improve documentation/prompt.md,0.3719,p1,0.7826,p1
 91468b3b5c9240fdbd7b831954ee7136aefdd074,prompt/history/2023/08/21/22:18_Improve documentation/prompt.yaml,0.0246,p1,0.0,
-91ff33634444341b77697193f1cc1cb7bf628210,current_prompt.md,0.0453,p1,0.0,p3
+91ff33634444341b77697193f1cc1cb7bf628210,current_prompt.md,0.0453,p1,0.7368,p3
 91ff33634444341b77697193f1cc1cb7bf628210,current_prompt.yaml,0.0198,p3,0.0,
-91ff33634444341b77697193f1cc1cb7bf628210,package-lock.json,0.0003,p1,0.0,p2
+91ff33634444341b77697193f1cc1cb7bf628210,package-lock.json,0.0003,p1,0.05,p2
 91ff33634444341b77697193f1cc1cb7bf628210,package.json,0.0005,p3,0.0,
-91ff33634444341b77697193f1cc1cb7bf628210,src/frontend.jsx,0.0015,p3,0.0,p1
-91ff33634444341b77697193f1cc1cb7bf628210,src/interactiveSession/saveAndSendPrompt.js,0.6671,p2,0.0,p2
-91ff33634444341b77697193f1cc1cb7bf628210,src/interactiveSession/startInteractiveSession.js,0.1846,p2,0.0,p1
-91ff33634444341b77697193f1cc1cb7bf628210,src/prompt/promptProcessing.js,0.1468,p1,0.0,p1
-91ff33634444341b77697193f1cc1cb7bf628210,src/server.js,0.7768,p3,0.0,p3
+91ff33634444341b77697193f1cc1cb7bf628210,src/frontend.jsx,0.0015,p3,0.0167,p1
+91ff33634444341b77697193f1cc1cb7bf628210,src/interactiveSession/saveAndSendPrompt.js,0.6671,p2,0.5,p2
+91ff33634444341b77697193f1cc1cb7bf628210,src/interactiveSession/startInteractiveSession.js,0.1846,p2,0.15,p1
+91ff33634444341b77697193f1cc1cb7bf628210,src/prompt/promptProcessing.js,0.1468,p1,0.1333,p1
+91ff33634444341b77697193f1cc1cb7bf628210,src/server.js,0.7768,p3,0.6842,p3
 933b4858d3f5edf4bd9899a266d2e8ef854a4cd2,change.sh,0.2951,p1,1.0,p1
-933b4858d3f5edf4bd9899a266d2e8ef854a4cd2,docs/usage.md,0.4616,p1,0.3333,p1
-933b4858d3f5edf4bd9899a266d2e8ef854a4cd2,prompt.md,0.0879,p1,0.3333,p1
+933b4858d3f5edf4bd9899a266d2e8ef854a4cd2,docs/usage.md,0.4616,p1,1.0,p1
+933b4858d3f5edf4bd9899a266d2e8ef854a4cd2,prompt.md,0.0879,p1,1.0,p1
 933b4858d3f5edf4bd9899a266d2e8ef854a4cd2,prompt.yaml,0.2183,p1,0.0,
 93823592c73fb2f4c7f7195273a7c5fafa79068f,change.sh,0.7738,p2,0.6061,p2
-93823592c73fb2f4c7f7195273a7c5fafa79068f,prompt.md,0.4974,p1,0.2424,p1
+93823592c73fb2f4c7f7195273a7c5fafa79068f,prompt.md,0.4974,p1,0.303,p1
 93823592c73fb2f4c7f7195273a7c5fafa79068f,prompt.yaml,0.0325,p2,0.0,
 93823592c73fb2f4c7f7195273a7c5fafa79068f,src/frontend/App.jsx,0.3714,p2,0.2121,p2
 93ea016267585ec344a097d4ac2ddc29361c1c5f,change.sh,1.0,p1,1.0,p1
@@ -898,8 +898,8 @@ sha,file,best_crystalbleu_after_vs_chatgpt,best_prompt_id,line_exact_match,line_
 9d749f9d2c8cce023765869a9ebbce0cdadbcdc3,prompt.md,0.7214,p1,0.7317,p1
 9d749f9d2c8cce023765869a9ebbce0cdadbcdc3,prompt.yaml,0.0632,p1,0.0,
 9d749f9d2c8cce023765869a9ebbce0cdadbcdc3,src/frontend/App.jsx,0.2902,p1,0.1463,p1
-9dac0b6b6797fb6d62cf41369227d0138f4397a5,docs/descriptor.md,0.1988,p1,0.0,p1
-9f062666b6f44dcb4d9835ad74808625c2a65237,src/common/SideNav.js,0.0644,p2,0.0,p1
+9dac0b6b6797fb6d62cf41369227d0138f4397a5,docs/descriptor.md,0.1988,p1,0.25,p1
+9f062666b6f44dcb4d9835ad74808625c2a65237,src/common/SideNav.js,0.0644,p2,0.3,p1
 9f062666b6f44dcb4d9835ad74808625c2a65237,src/routes.js,0.0002,p6,0.0,
 a01bea4ad67215bf7d81b7175841a10c8478b6f1,change.sh,0.5456,p1,0.6066,p1
 a01bea4ad67215bf7d81b7175841a10c8478b6f1,prompt.md,0.431,p1,0.459,p1
@@ -930,7 +930,7 @@ a28c2cb4ee54fba2e6e6d4301847987f9f0be77b,src/startServer.js,0.1633,p1,0.3404,p1
 a28c2cb4ee54fba2e6e6d4301847987f9f0be77b,src/web.js,0.0133,p1,0.0,
 a2c6540945da0a1a4e2c1c14f1014b9b7ea4ecde,.vscode/launch.json,0.0,,0.1549,p4
 a2c6540945da0a1a4e2c1c14f1014b9b7ea4ecde,change.sh,1.0,p4,1.0,p4
-a2c6540945da0a1a4e2c1c14f1014b9b7ea4ecde,prompt.md,0.4922,p1,0.4366,p1
+a2c6540945da0a1a4e2c1c14f1014b9b7ea4ecde,prompt.md,0.4922,p1,0.5312,p1
 a2c6540945da0a1a4e2c1c14f1014b9b7ea4ecde,prompt.yaml,0.0335,p1,0.0,
 a2c6540945da0a1a4e2c1c14f1014b9b7ea4ecde,src/config.js,0.3472,p4,0.4507,p4
 a2c6540945da0a1a4e2c1c14f1014b9b7ea4ecde,src/llm/openai/createApi.js,0.34,p4,0.507,p4
@@ -994,23 +994,23 @@ ac5fcd44073dae51d3c5ff27e69bc27267fdc85a,change.sh,1.0,p2,1.0,p2
 ac5fcd44073dae51d3c5ff27e69bc27267fdc85a,prompt.md,0.6223,p2,0.5,p1
 ac5fcd44073dae51d3c5ff27e69bc27267fdc85a,prompt.yaml,0.0355,p1,0.0,
 ac5fcd44073dae51d3c5ff27e69bc27267fdc85a,prompt/system.md,0.1594,p2,0.0714,p2
-ac5fcd44073dae51d3c5ff27e69bc27267fdc85a,src/index.html,0.2403,p1,0.25,p1
+ac5fcd44073dae51d3c5ff27e69bc27267fdc85a,src/index.html,0.2403,p1,0.35,p1
 ac5fcd44073dae51d3c5ff27e69bc27267fdc85a,src/main.js,0.0,,0.0,
 adcfcb5d6a31ee68f2fb503b4770969e099ff398,prompt/history/2023/09/17/22:06_Update ignore list with new entries for top languages/tools/change.sh,0.5003,p1,0.9167,p1
 adcfcb5d6a31ee68f2fb503b4770969e099ff398,prompt/history/2023/09/17/22:06_Update ignore list with new entries for top languages/tools/prompt.md,0.3329,p1,0.4722,p1
 adcfcb5d6a31ee68f2fb503b4770969e099ff398,prompt/history/2023/09/17/22:06_Update ignore list with new entries for top languages/tools/prompt.yaml,0.0413,p1,0.0,
 adcfcb5d6a31ee68f2fb503b4770969e099ff398,src/backend/fileutils/getIgnoreList.js,0.2667,p1,0.5278,p1
 add1a7171cc0b5688d2038f98990027afc3a954a,change.sh,0.7393,p6,1.0,p8
-add1a7171cc0b5688d2038f98990027afc3a954a,prompt.md,0.3543,p4,0.1304,p6
+add1a7171cc0b5688d2038f98990027afc3a954a,prompt.md,0.3543,p4,0.4932,p6
 add1a7171cc0b5688d2038f98990027afc3a954a,prompt.yaml,0.0182,p2,0.0,
 add1a7171cc0b5688d2038f98990027afc3a954a,prompt/task/refactor/general.md,0.0003,p3,0.0,
 add1a7171cc0b5688d2038f98990027afc3a954a,src/frontend/App.jsx,0.2938,p8,0.2174,p8
-add1a7171cc0b5688d2038f98990027afc3a954a,src/frontend/components/PromptDescriptorViewer.jsx,0.1087,p4,0.0,p6
-add1a7171cc0b5688d2038f98990027afc3a954a,src/frontend/components/TasksList.jsx,0.3122,p4,0.0435,p6
-add1a7171cc0b5688d2038f98990027afc3a954a,src/frontend/service/fetchDescriptor.js,0.0731,p2,0.0435,p2
-add1a7171cc0b5688d2038f98990027afc3a954a,src/frontend/service/handleTaskChange.js,0.2361,p4,0.0435,p6
+add1a7171cc0b5688d2038f98990027afc3a954a,src/frontend/components/PromptDescriptorViewer.jsx,0.1087,p4,0.2055,p6
+add1a7171cc0b5688d2038f98990027afc3a954a,src/frontend/components/TasksList.jsx,0.3122,p4,0.3699,p6
+add1a7171cc0b5688d2038f98990027afc3a954a,src/frontend/service/fetchDescriptor.js,0.0731,p2,0.1493,p2
+add1a7171cc0b5688d2038f98990027afc3a954a,src/frontend/service/handleTaskChange.js,0.2361,p4,0.3288,p6
 af1dade93920abaadbb81e28e6652b7c27bc476e,change.sh,0.7333,p3,0.6863,p3
-af1dade93920abaadbb81e28e6652b7c27bc476e,prompt.md,0.1874,p2,0.1373,p2
+af1dade93920abaadbb81e28e6652b7c27bc476e,prompt.md,0.1874,p2,0.16,p2
 af1dade93920abaadbb81e28e6652b7c27bc476e,prompt.yaml,0.0163,p2,0.0,
 af1dade93920abaadbb81e28e6652b7c27bc476e,src/frontend/components/ExecuteButton.jsx,0.5034,p2,0.5098,p3
 aff299aa248ecc3122984000df0bb9852db381e3,prompt/history/2023/09/04/10:45_Reorganize components for MultiSelect/change.sh,1.0,p1,1.0,p1
@@ -1025,16 +1025,16 @@ b048220e676c929580df2bf9ac54f2d310b7280c,prompt/history/2023/09/22/17:03_Refacto
 b048220e676c929580df2bf9ac54f2d310b7280c,src/frontend/components/terminal/TerminalComponent.jsx,0.2058,p1,0.1852,p1
 b048220e676c929580df2bf9ac54f2d310b7280c,src/frontend/service/terminal/setupXTerm.js,0.1102,p1,0.1111,p1
 b07d341d598e763357a965c4c579894665855267,index.js,0.9059,p1,0.7778,p1
-b0c2cc2faf4e0f64d242b35c52050aaac288176b,docs/index.md,0.4929,p8,0.3396,p3
+b0c2cc2faf4e0f64d242b35c52050aaac288176b,docs/index.md,0.4929,p8,0.8235,p3
 b0c2cc2faf4e0f64d242b35c52050aaac288176b,docs/resources/component.md,0.4369,p5,1.0,p9
-b0c2cc2faf4e0f64d242b35c52050aaac288176b,docs/resources/component_group.md,0.7255,p8,0.2642,p8
+b0c2cc2faf4e0f64d242b35c52050aaac288176b,docs/resources/component_group.md,0.7255,p8,0.7895,p8
 b0c2cc2faf4e0f64d242b35c52050aaac288176b,examples/resources/storyblok_component/resource.tf,0.7962,p9,1.0,p9
-b0c2cc2faf4e0f64d242b35c52050aaac288176b,examples/resources/storyblok_component_group/resource.tf,0.7215,p8,0.2642,p8
-b1549c6602abe76fdcc18bf47ed81bd446ebcf1e,src/index.js,0.8569,p9,0.5882,p9
-b1549c6602abe76fdcc18bf47ed81bd446ebcf1e,src/utils/setupFacebookProvider.js,1.0,p4,0.1176,p4
-b1549c6602abe76fdcc18bf47ed81bd446ebcf1e,src/utils/setupFontAwesome.js,1.0,p5,0.0588,p5
+b0c2cc2faf4e0f64d242b35c52050aaac288176b,examples/resources/storyblok_component_group/resource.tf,0.7215,p8,0.7895,p8
+b1549c6602abe76fdcc18bf47ed81bd446ebcf1e,src/index.js,0.8569,p9,0.7742,p9
+b1549c6602abe76fdcc18bf47ed81bd446ebcf1e,src/utils/setupFacebookProvider.js,1.0,p4,1.0,p4
+b1549c6602abe76fdcc18bf47ed81bd446ebcf1e,src/utils/setupFontAwesome.js,1.0,p5,1.0,p5
 b34b156251999e95ed5c0b2db79f50c7e154a83f,change.sh,1.0,p2,1.0,p2
-b34b156251999e95ed5c0b2db79f50c7e154a83f,prompt.md,0.535,p1,0.6122,p1
+b34b156251999e95ed5c0b2db79f50c7e154a83f,prompt.md,0.535,p1,0.6327,p1
 b34b156251999e95ed5c0b2db79f50c7e154a83f,prompt.yaml,0.0918,p2,0.102,p1
 b34b156251999e95ed5c0b2db79f50c7e154a83f,prompt/task/feature/design.md,0.0918,p1,0.102,p1
 b34b156251999e95ed5c0b2db79f50c7e154a83f,prompt/task/refactor/remove_unused.md,0.0918,p1,0.102,p1
@@ -1042,35 +1042,35 @@ b34b156251999e95ed5c0b2db79f50c7e154a83f,prompt/task/refactor/rename_file.md,0.0
 b34b156251999e95ed5c0b2db79f50c7e154a83f,src/backend/handlers/gitStatusHandler.js,0.2949,p1,0.2857,p1
 b34b156251999e95ed5c0b2db79f50c7e154a83f,src/frontend/components/GitStatusDisplay.jsx,0.2902,p2,0.4082,p2
 b36185a4ac8ef14bbb7df7244c97c9e041d1e087,change.sh,0.3281,p1,1.0,p1
-b36185a4ac8ef14bbb7df7244c97c9e041d1e087,prompt.md,0.6358,p1,0.5556,p1
+b36185a4ac8ef14bbb7df7244c97c9e041d1e087,prompt.md,0.6358,p1,0.5979,p1
 b36185a4ac8ef14bbb7df7244c97c9e041d1e087,prompt.yaml,0.0352,p1,0.0,
 b36185a4ac8ef14bbb7df7244c97c9e041d1e087,prompt/task/repo/vuejs.md,0.0006,p1,0.0,
-b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/config.js,0.0783,p1,0.0556,p1
-b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/main.js,0.1917,p2,0.0,p2
-b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/prompt/createPrompt.js,0.3092,p3,0.1111,p3
-b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/prompt/getSystemPrompt.js,0.0509,p1,0.0556,p1
-b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/prompt/getSystemPromptIfNeeded.js,0.0569,p1,0.0,p1
-b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/prompt/loadFormatTemplate.js,0.0535,p4,0.0556,p1
+b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/config.js,0.0783,p1,0.1546,p1
+b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/main.js,0.1917,p2,0.1429,p2
+b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/prompt/createPrompt.js,0.3092,p3,0.2667,p3
+b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/prompt/getSystemPrompt.js,0.0509,p1,0.1546,p1
+b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/prompt/getSystemPromptIfNeeded.js,0.0569,p1,0.0309,p1
+b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/prompt/loadFormatTemplate.js,0.0535,p4,0.0928,p1
 b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/prompt/loadPromptFile.js,0.9385,p4,0.8889,p4
-b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/prompt/loadTaskTemplate.js,0.0535,p4,0.0556,p1
+b36185a4ac8ef14bbb7df7244c97c9e041d1e087,src/prompt/loadTaskTemplate.js,0.0535,p4,0.0928,p1
 b41dead62ea57e614b3c04c9a827b26bef61c28d,README.md,0.0909,p1,0.1091,p1
 b41dead62ea57e614b3c04c9a827b26bef61c28d,docs/README.md,0.0296,p1,0.0364,p1
 b41dead62ea57e614b3c04c9a827b26bef61c28d,prompt/history/2023/08/29/18:47_Improve the documentation/change.sh,1.0,p1,1.0,p1
 b41dead62ea57e614b3c04c9a827b26bef61c28d,prompt/history/2023/08/29/18:47_Improve the documentation/prompt.md,0.8045,p1,0.8182,p1
 b41dead62ea57e614b3c04c9a827b26bef61c28d,prompt/history/2023/08/29/18:47_Improve the documentation/prompt.yaml,0.0035,p1,0.0,
 b44659ebcb7dd3303b02f825c2d2e584fe93b4ab,README.md,0.4736,p2,0.6923,p2
-b44659ebcb7dd3303b02f825c2d2e584fe93b4ab,prompt.md,0.1975,p2,0.2692,p1
-b44659ebcb7dd3303b02f825c2d2e584fe93b4ab,prompt.yaml,0.1186,p1,0.1154,p1
+b44659ebcb7dd3303b02f825c2d2e584fe93b4ab,prompt.md,0.1975,p2,0.2917,p1
+b44659ebcb7dd3303b02f825c2d2e584fe93b4ab,prompt.yaml,0.1186,p1,0.125,p1
 b44659ebcb7dd3303b02f825c2d2e584fe93b4ab,prompt/task/doc/improve.md,0.0003,p1,0.0,
 b5578a233117093be6b1faa1334ec644416af32f,change.sh,0.9759,p1,0.9697,p1
 b5578a233117093be6b1faa1334ec644416af32f,prompt.md,0.5366,p1,0.5455,p1
 b5578a233117093be6b1faa1334ec644416af32f,prompt.yaml,0.0712,p1,0.0,
 b5578a233117093be6b1faa1334ec644416af32f,src/frontend/components/GenerateButton.jsx,0.2246,p1,0.2121,p1
 b5578a233117093be6b1faa1334ec644416af32f,src/frontend/config/keyBindings.js,0.1099,p1,0.303,p1
-b6469eefe3f8fdaf82fce7e25fb8b94bc3d9977b,change.sh,0.4915,p1,0.0,p1
+b6469eefe3f8fdaf82fce7e25fb8b94bc3d9977b,change.sh,0.4915,p1,0.4737,p1
 b6469eefe3f8fdaf82fce7e25fb8b94bc3d9977b,docs/descriptor.md,0.0502,p1,0.0,
 b6469eefe3f8fdaf82fce7e25fb8b94bc3d9977b,prompt.md,0.1065,p1,1.0,p1
-b6469eefe3f8fdaf82fce7e25fb8b94bc3d9977b,prompt.yaml,0.1291,p1,0.0,p1
+b6469eefe3f8fdaf82fce7e25fb8b94bc3d9977b,prompt.yaml,0.1291,p1,0.0526,p1
 b6596bcf8234c8f18fe7c2f2ec42c6b80ce34337,docs/_sidebar.md,0.0886,p1,0.1379,p1
 b6596bcf8234c8f18fe7c2f2ec42c6b80ce34337,docs/open_jobs.md,0.3088,p1,0.1379,p1
 b6596bcf8234c8f18fe7c2f2ec42c6b80ce34337,prompt/history/2023/08/29/15:40_Improve documentation and link jobs/change.sh,1.0,p1,1.0,p1
@@ -1109,8 +1109,8 @@ c0086debe36058eb88f6ab16f87488ecc63c637d,prompt/history/2023/09/26/11:43_Rename 
 c0086debe36058eb88f6ab16f87488ecc63c637d,prompt/history/2023/09/26/11:43_Rename VirtualButton to VirtualKey and adjust padding/prompt.yaml,0.0249,p1,0.0,
 c0086debe36058eb88f6ab16f87488ecc63c637d,src/frontend/components/terminal/TerminalComponent.jsx,0.176,p1,0.1548,p1
 c0086debe36058eb88f6ab16f87488ecc63c637d,src/frontend/components/terminal/VirtualKey.jsx,0.1206,p1,0.2381,p1
-c02f0ffc5fcb621accd0afc8a1a2da97ac8d0e16,src/common/FilterButton/FilterButton.js,0.9767,p1,0.7222,p1
-c02f0ffc5fcb621accd0afc8a1a2da97ac8d0e16,src/common/ThemeSwitcher.js,1.0,p2,0.2222,p2
+c02f0ffc5fcb621accd0afc8a1a2da97ac8d0e16,src/common/FilterButton/FilterButton.js,0.9767,p1,0.9787,p1
+c02f0ffc5fcb621accd0afc8a1a2da97ac8d0e16,src/common/ThemeSwitcher.js,1.0,p2,1.0,p2
 c191dddc719e18134647b1439fe1d1df375a6a81,prompt/history/2023/09/19/17:20_Update multiselect on each keystroke/change.sh,1.0,p1,1.0,p1
 c191dddc719e18134647b1439fe1d1df375a6a81,prompt/history/2023/09/19/17:20_Update multiselect on each keystroke/prompt.md,0.2,p1,0.8302,p1
 c191dddc719e18134647b1439fe1d1df375a6a81,prompt/history/2023/09/19/17:20_Update multiselect on each keystroke/prompt.yaml,0.0228,p1,0.0,
@@ -1131,13 +1131,13 @@ c37b1619f3e9851a508729891b307b7f93cda11e,change.sh,1.0,p2,1.0,p1
 c37b1619f3e9851a508729891b307b7f93cda11e,package.json,0.0194,p1,0.0,
 c37b1619f3e9851a508729891b307b7f93cda11e,prompt.md,0.035,p2,0.0,
 c37b1619f3e9851a508729891b307b7f93cda11e,prompt.yaml,0.04,p1,0.0,
-c37b1619f3e9851a508729891b307b7f93cda11e,src/backend/handlers.js,0.2128,p1,0.1837,p1
+c37b1619f3e9851a508729891b307b7f93cda11e,src/backend/handlers.js,0.2128,p1,0.2286,p1
 c37b1619f3e9851a508729891b307b7f93cda11e,src/backend/servePromptDescriptor.js,0.1253,p2,0.1224,p2
-c37b1619f3e9851a508729891b307b7f93cda11e,src/backend/server.js,0.3094,p1,0.2245,p1
+c37b1619f3e9851a508729891b307b7f93cda11e,src/backend/server.js,0.3094,p1,0.3143,p1
 c37b1619f3e9851a508729891b307b7f93cda11e,src/server.js,0.2186,p1,0.2245,p1
 c37cdffc968666c1e4fcb9642d9153f759cffcee,docs/README.md,0.5846,p2,0.3636,p2
 c37cdffc968666c1e4fcb9642d9153f759cffcee,prompt/history/2023/08/22/14:30_Improve Junior documentation/change.sh,1.0,p2,1.0,p2
-c37cdffc968666c1e4fcb9642d9153f759cffcee,prompt/history/2023/08/22/14:30_Improve Junior documentation/prompt.md,0.524,p1,0.6364,p1
+c37cdffc968666c1e4fcb9642d9153f759cffcee,prompt/history/2023/08/22/14:30_Improve Junior documentation/prompt.md,0.524,p1,0.75,p1
 c37cdffc968666c1e4fcb9642d9153f759cffcee,prompt/history/2023/08/22/14:30_Improve Junior documentation/prompt.yaml,0.0205,p1,0.0,
 c37cdffc968666c1e4fcb9642d9153f759cffcee,prompt/history/2023/08/22/14:36_Improve Junior documentation/change.sh,1.0,p2,1.0,p2
 c37cdffc968666c1e4fcb9642d9153f759cffcee,prompt/history/2023/08/22/14:36_Improve Junior documentation/prompt.md,0.6176,p2,0.8182,p2
@@ -1152,10 +1152,10 @@ c487e8d878c5a3035167cb7f1deee9bdda493171,src/interactiveSession/handleApiRespons
 c487e8d878c5a3035167cb7f1deee9bdda493171,src/interactiveSession/saveAndSendPrompt.js,0.1175,p1,0.1789,p1
 c487e8d878c5a3035167cb7f1deee9bdda493171,src/interactiveSession/startInteractiveSession.js,0.1576,p1,0.2842,p1
 c487e8d878c5a3035167cb7f1deee9bdda493171,src/main.js,0.0231,p1,0.0316,p1
-c4c1c589da9229f9946dfb52d7f732d454ffe7ca,README.md,0.5443,p1,0.0,p1
-c4c1c589da9229f9946dfb52d7f732d454ffe7ca,change.sh,0.9257,p2,0.0,p3
-c4c1c589da9229f9946dfb52d7f732d454ffe7ca,prompt.md,0.8027,p2,0.0,p3
-c4c1c589da9229f9946dfb52d7f732d454ffe7ca,prompt.yaml,0.1063,p1,0.0,p3
+c4c1c589da9229f9946dfb52d7f732d454ffe7ca,README.md,0.5443,p1,0.3333,p1
+c4c1c589da9229f9946dfb52d7f732d454ffe7ca,change.sh,0.9257,p2,1.0,p3
+c4c1c589da9229f9946dfb52d7f732d454ffe7ca,prompt.md,0.8027,p2,0.7179,p3
+c4c1c589da9229f9946dfb52d7f732d454ffe7ca,prompt.yaml,0.1063,p1,0.0513,p3
 c5f7ece348470d82db37c7315a70773a34d215e0,prompt/history/2023/09/12/16:49_Remove sample code viewer from prompt creation/change.sh,1.0,p1,1.0,p1
 c5f7ece348470d82db37c7315a70773a34d215e0,prompt/history/2023/09/12/16:49_Remove sample code viewer from prompt creation/prompt.md,0.1751,p1,0.8214,p1
 c5f7ece348470d82db37c7315a70773a34d215e0,prompt/history/2023/09/12/16:49_Remove sample code viewer from prompt creation/prompt.yaml,0.0727,p1,0.0,
@@ -1194,11 +1194,11 @@ c94e84b5fd5e95639b83eb4fdb313fdbb32e17e9,change.sh,0.8695,p2,0.8814,p2
 c94e84b5fd5e95639b83eb4fdb313fdbb32e17e9,integrations/vscode/src/updateEditorContents.ts,0.8695,p1,0.8814,p1
 c94e84b5fd5e95639b83eb4fdb313fdbb32e17e9,integrations/vscode/src/writeAttention.ts,0.2234,p2,0.3559,p2
 c94e84b5fd5e95639b83eb4fdb313fdbb32e17e9,integrations/vscode/src/writePromptFile.ts,0.2872,p2,0.3559,p2
-c94e84b5fd5e95639b83eb4fdb313fdbb32e17e9,prompt.md,0.3195,p2,0.322,p1
+c94e84b5fd5e95639b83eb4fdb313fdbb32e17e9,prompt.md,0.3195,p2,0.3279,p1
 c94e84b5fd5e95639b83eb4fdb313fdbb32e17e9,prompt.yaml,0.0503,p2,0.0,
 ca10f0ffc77b1d6a4e370302c0a131adb14fa48a,README.md,0.0006,p1,0.0,
 ca10f0ffc77b1d6a4e370302c0a131adb14fa48a,intent-i18n/intent-de_DE.json,0.997,p1,0.9959,p1
-ca10f0ffc77b1d6a4e370302c0a131adb14fa48a,intent-i18n/intent-en_US.json,0.9969,p1,0.7805,p1
+ca10f0ffc77b1d6a4e370302c0a131adb14fa48a,intent-i18n/intent-en_US.json,0.9969,p1,0.9959,p1
 cae5a2cb201923acd47e2c139456f09ed0b7287e,prompt/history/2023/09/16/21:23_Refactor GitStatusRow component/change.sh,1.0,p1,1.0,p1
 cae5a2cb201923acd47e2c139456f09ed0b7287e,prompt/history/2023/09/16/21:23_Refactor GitStatusRow component/prompt.md,0.2282,p1,0.4667,p1
 cae5a2cb201923acd47e2c139456f09ed0b7287e,prompt/history/2023/09/16/21:23_Refactor GitStatusRow component/prompt.yaml,0.052,p1,0.0,
@@ -1208,24 +1208,24 @@ cd67da359d2f9beb950d3b8c469122f1500ef3c0,prompt.md,0.598,p1,0.5,p1
 cd67da359d2f9beb950d3b8c469122f1500ef3c0,prompt.yaml,0.0272,p1,0.0,
 cd67da359d2f9beb950d3b8c469122f1500ef3c0,src/backend/setupRoutes.js,0.7616,p1,0.7143,p1
 cd787fc8cbbc66ecc025462de8b5d7d7baaa41fd,change.sh,0.9697,p3,0.9706,p3
-cd787fc8cbbc66ecc025462de8b5d7d7baaa41fd,prompt.md,0.3098,p1,0.2451,p1
+cd787fc8cbbc66ecc025462de8b5d7d7baaa41fd,prompt.md,0.3098,p1,0.3171,p1
 cd787fc8cbbc66ecc025462de8b5d7d7baaa41fd,prompt.yaml,0.0298,p2,0.0,
-cd787fc8cbbc66ecc025462de8b5d7d7baaa41fd,src/frontend/App.jsx,0.1381,p2,0.1765,p2
-cd787fc8cbbc66ecc025462de8b5d7d7baaa41fd,src/frontend/components/PromptDescriptor.jsx,0.1908,p2,0.3529,p1
-cd787fc8cbbc66ecc025462de8b5d7d7baaa41fd,src/frontend/components/TasksList.jsx,0.2239,p2,0.3039,p2
+cd787fc8cbbc66ecc025462de8b5d7d7baaa41fd,src/frontend/App.jsx,0.1381,p2,0.2125,p2
+cd787fc8cbbc66ecc025462de8b5d7d7baaa41fd,src/frontend/components/PromptDescriptor.jsx,0.1908,p2,0.3902,p1
+cd787fc8cbbc66ecc025462de8b5d7d7baaa41fd,src/frontend/components/TasksList.jsx,0.2239,p2,0.3625,p2
 cd787fc8cbbc66ecc025462de8b5d7d7baaa41fd,src/frontend/components/TasksList.jsx.bak,0.1715,p1,0.3039,p1
 cd787fc8cbbc66ecc025462de8b5d7d7baaa41fd,src/frontend/service/handleTaskChange.js,0.0614,p3,0.0588,p3
-cda0c320071a976cbb2de470cd9f9980e818a2c4,server/package.json,0.0004,p1,0.0,p1
-cda0c320071a976cbb2de470cd9f9980e818a2c4,server/server.js,0.9847,p1,0.0,p1
+cda0c320071a976cbb2de470cd9f9980e818a2c4,server/package.json,0.0004,p1,0.0455,p1
+cda0c320071a976cbb2de470cd9f9980e818a2c4,server/server.js,0.9847,p1,1.0,p1
 cda0c320071a976cbb2de470cd9f9980e818a2c4,server/yarn.lock,0.0,p2,0.0,
-cfb4dc480558f97f890159271237cec86874678f,README.md,0.7037,p11,0.8846,p1
+cfb4dc480558f97f890159271237cec86874678f,README.md,0.7037,p11,1.0,p1
 cfe81593e46efa860aa8ab4cc9f1b421317b07af,change.sh,1.0,p2,1.0,p2
 cfe81593e46efa860aa8ab4cc9f1b421317b07af,prompt.md,0.1064,p2,0.0,
 cfe81593e46efa860aa8ab4cc9f1b421317b07af,prompt.yaml,0.1129,p1,0.0,
 cfe81593e46efa860aa8ab4cc9f1b421317b07af,src/frontend/service/monitorChangeSignal.js,0.4791,p2,0.5926,p2
-d0a54935a6e665bfaaa858adb6afc42b231707fe,game.js,0.4621,p1,0.0,p1
-d0a54935a6e665bfaaa858adb6afc42b231707fe,game.test.js,0.4734,p3,0.5,p1
-d0a54935a6e665bfaaa858adb6afc42b231707fe,index.html,0.3659,p4,0.3333,p1
+d0a54935a6e665bfaaa858adb6afc42b231707fe,game.js,0.4621,p1,1.0,p1
+d0a54935a6e665bfaaa858adb6afc42b231707fe,game.test.js,0.4734,p3,1.0,p1
+d0a54935a6e665bfaaa858adb6afc42b231707fe,index.html,0.3659,p4,1.0,p1
 d2d3a27471f41c33f0622c6c62d23561e2c178e9,change.sh,0.7429,p1,0.6667,p1
 d2d3a27471f41c33f0622c6c62d23561e2c178e9,prompt.md,0.41,p1,0.1667,p1
 d2d3a27471f41c33f0622c6c62d23561e2c178e9,prompt.yaml,0.0592,p1,0.0,
@@ -1264,7 +1264,7 @@ d8f0303d004826d34aeed4eed2838285713fef01,prompt/history/2023/09/18/21:25_Enhance
 d8f0303d004826d34aeed4eed2838285713fef01,prompt/history/2023/09/18/21:25_Enhance WebSocket creation with optional path/prompt.yaml,0.0527,p1,0.0,
 d8f0303d004826d34aeed4eed2838285713fef01,src/frontend/service/createWebSocket.js,0.1803,p1,0.2619,p1
 d8f0303d004826d34aeed4eed2838285713fef01,src/frontend/service/terminal/terminalConnection.js,0.1188,p1,0.0952,p1
-dd5bdf1f6eed4f7fd6d386c7458c680cdee9d54e,docs/descriptor.md,0.4113,p2,0.2537,p1
+dd5bdf1f6eed4f7fd6d386c7458c680cdee9d54e,docs/descriptor.md,0.4113,p2,1.0,p1
 dd86842931542190931fab2a332db371697810a7,change.sh,0.3991,p1,0.3333,p1
 dd86842931542190931fab2a332db371697810a7,prompt.md,0.0036,p1,0.0,
 dd86842931542190931fab2a332db371697810a7,prompt.yaml,0.0185,p1,0.0,
@@ -1277,7 +1277,7 @@ de1f24d1f17dc754037d062d619a9554c71eb54e,docs/_coverpage.md,0.3452,p1,0.2308,p1
 de1f24d1f17dc754037d062d619a9554c71eb54e,prompt/history/2023/08/30/16:50_Improve documentation colors/change.sh,1.0,p1,1.0,p1
 de1f24d1f17dc754037d062d619a9554c71eb54e,prompt/history/2023/08/30/16:50_Improve documentation colors/prompt.md,0.0427,p1,0.5385,p1
 de1f24d1f17dc754037d062d619a9554c71eb54e,prompt/history/2023/08/30/16:50_Improve documentation colors/prompt.yaml,0.072,p1,0.0,
-de2f3119e770c37a4968d65c0bb5324702357155,src/backend/updateTaskHandler.js,0.4412,p2,0.0625,p2
+de2f3119e770c37a4968d65c0bb5324702357155,src/backend/updateTaskHandler.js,0.4412,p2,0.4211,p2
 df23f0605d281e684d7fe626d7a94409f9d3078b,docs/index.html,0.1089,p1,0.1395,p1
 df23f0605d281e684d7fe626d7a94409f9d3078b,prompt/history/2023/08/21/21:52_Move script from sidebar to index.html/change.sh,1.0,p1,1.0,p1
 df23f0605d281e684d7fe626d7a94409f9d3078b,prompt/history/2023/08/21/21:52_Move script from sidebar to index.html/prompt.md,0.6827,p1,0.7674,p1
@@ -1303,7 +1303,7 @@ e487f867051b579aac02d53ec77eb169359df9aa,src/frontend/components/MultiSelect/Mul
 e487f867051b579aac02d53ec77eb169359df9aa,src/frontend/components/MultiSelect/SearchBar.jsx,0.1786,p1,0.2982,p1
 e4cb7efdd6fde19e8e2fa0c253f985d690317213,prompt/ask_for_missing_files.md,0.001,p1,0.0,
 e4cb7efdd6fde19e8e2fa0c253f985d690317213,prompt/format/shell.md,0.0314,p2,0.0294,p2
-e4cb7efdd6fde19e8e2fa0c253f985d690317213,prompt/history/2023/08/30/14:36_Refactor clear-branches with simple-git/change.sh,1.0,p1,0.8824,p1
+e4cb7efdd6fde19e8e2fa0c253f985d690317213,prompt/history/2023/08/30/14:36_Refactor clear-branches with simple-git/change.sh,1.0,p1,1.0,p1
 e4cb7efdd6fde19e8e2fa0c253f985d690317213,prompt/history/2023/08/30/14:36_Refactor clear-branches with simple-git/prompt.md,0.0415,p1,0.4706,p2
 e4cb7efdd6fde19e8e2fa0c253f985d690317213,prompt/history/2023/08/30/14:36_Refactor clear-branches with simple-git/prompt.yaml,0.0385,p1,0.0,
 e4cb7efdd6fde19e8e2fa0c253f985d690317213,prompt/history/2023/08/30/14:40_Refactor clear-branches with better error handling/change.sh,1.0,p2,1.0,p2
@@ -1311,18 +1311,18 @@ e4cb7efdd6fde19e8e2fa0c253f985d690317213,prompt/history/2023/08/30/14:40_Refacto
 e4cb7efdd6fde19e8e2fa0c253f985d690317213,prompt/history/2023/08/30/14:40_Refactor clear-branches with better error handling/prompt.yaml,0.0385,p1,0.0,
 e4cb7efdd6fde19e8e2fa0c253f985d690317213,prompt/system.md,0.0,,0.0,
 e4cb7efdd6fde19e8e2fa0c253f985d690317213,src/git/clearBranches.js,0.7339,p2,0.7353,p2
-e4fd1a4d88cee75de06d5a563fdd12415185afea,src/sitemap.js,0.1076,p1,0.0,p1
+e4fd1a4d88cee75de06d5a563fdd12415185afea,src/sitemap.js,0.1076,p1,0.0758,p1
 e61a8ed6e52c9ef5b626c680de638b3a8584416b,change.sh,1.0,p2,1.0,p2
 e61a8ed6e52c9ef5b626c680de638b3a8584416b,doc/build.js,1.0,p1,1.0,p1
 e61a8ed6e52c9ef5b626c680de638b3a8584416b,doc/buildDoc.js,0.0621,p2,0.0893,p2
 e61a8ed6e52c9ef5b626c680de638b3a8584416b,doc/convertDirectory.js,0.3573,p1,0.3929,p2
-e61a8ed6e52c9ef5b626c680de638b3a8584416b,doc/createMarkdownRenderer.js,0.2501,p1,0.3571,p1
-e61a8ed6e52c9ef5b626c680de638b3a8584416b,prompt.md,0.6131,p1,0.5179,p1
+e61a8ed6e52c9ef5b626c680de638b3a8584416b,doc/createMarkdownRenderer.js,0.2501,p1,0.3704,p1
+e61a8ed6e52c9ef5b626c680de638b3a8584416b,prompt.md,0.6131,p1,0.5741,p1
 e61a8ed6e52c9ef5b626c680de638b3a8584416b,prompt.yaml,0.0339,p1,0.0,
 e737d6b6eeb7e508d1e56ae632ff71db485ed336,change.sh,1.0,p3,1.0,p3
-e737d6b6eeb7e508d1e56ae632ff71db485ed336,package-lock.json,0.0014,p3,0.0286,p1
+e737d6b6eeb7e508d1e56ae632ff71db485ed336,package-lock.json,0.0014,p3,0.0323,p1
 e737d6b6eeb7e508d1e56ae632ff71db485ed336,package.json,0.0004,p1,0.0,
-e737d6b6eeb7e508d1e56ae632ff71db485ed336,prompt.md,0.391,p1,0.4,p1
+e737d6b6eeb7e508d1e56ae632ff71db485ed336,prompt.md,0.391,p1,0.4516,p1
 e737d6b6eeb7e508d1e56ae632ff71db485ed336,prompt.yaml,0.0583,p1,0.0,
 e737d6b6eeb7e508d1e56ae632ff71db485ed336,prompt/task/refactor/custom.md,0.0004,p1,0.0,
 e737d6b6eeb7e508d1e56ae632ff71db485ed336,src/frontend/components/ExecutionResultDisplay.jsx,0.3409,p3,0.3429,p3
@@ -1339,16 +1339,16 @@ e9ac497b81a962d19c04797415461833ea27a65c,src/frontend/components/terminal/Virtua
 ea20a56a3ac44d1ed2f520a39e8d55c0d132a60e,prompt.md,0.3534,p1,0.6452,p1
 ea20a56a3ac44d1ed2f520a39e8d55c0d132a60e,prompt.yaml,0.0404,p1,0.0,
 ea20a56a3ac44d1ed2f520a39e8d55c0d132a60e,src/frontend/components/ExecutionResultDisplay.jsx,0.2578,p1,0.3226,p1
-ecf317837969cf830c58f3ec340cf45ec494787c,frontend/src/Pages/GoalSetPage.tsx,0.0,,0.3226,
-ecf317837969cf830c58f3ec340cf45ec494787c,frontend/src/routes/routes.ts,0.0,,0.3226,
+ecf317837969cf830c58f3ec340cf45ec494787c,frontend/src/Pages/GoalSetPage.tsx,0.0,,0.0,
+ecf317837969cf830c58f3ec340cf45ec494787c,frontend/src/routes/routes.ts,0.0,,0.0,
 ed2c1780ea1e8080d79d73a3de8dcdb73cb191c8,prompt/history/2023/10/02/12:29_Enhance line extraction functionality/change.sh,1.0,p1,1.0,p1
 ed2c1780ea1e8080d79d73a3de8dcdb73cb191c8,prompt/history/2023/10/02/12:29_Enhance line extraction functionality/prompt.md,0.219,p1,0.44,p1
 ed2c1780ea1e8080d79d73a3de8dcdb73cb191c8,prompt/history/2023/10/02/12:29_Enhance line extraction functionality/prompt.yaml,0.0343,p1,0.0,
 ed2c1780ea1e8080d79d73a3de8dcdb73cb191c8,src/frontend/components/terminal/prependAndExtractLastLine.js,0.7103,p1,0.6,p1
-ed97ada1122ea1dee13ad3469b24c4cafb851f6c,README.md,0.4795,p1,0.0,p1
-ed97ada1122ea1dee13ad3469b24c4cafb851f6c,change.sh,0.5864,p1,0.0,p1
-ed97ada1122ea1dee13ad3469b24c4cafb851f6c,prompt.md,0.5225,p1,0.0,p1
-ed97ada1122ea1dee13ad3469b24c4cafb851f6c,prompt.yaml,0.0626,p1,0.0,p1
+ed97ada1122ea1dee13ad3469b24c4cafb851f6c,README.md,0.4795,p1,0.3158,p1
+ed97ada1122ea1dee13ad3469b24c4cafb851f6c,change.sh,0.5864,p1,1.0,p1
+ed97ada1122ea1dee13ad3469b24c4cafb851f6c,prompt.md,0.5225,p1,0.7105,p1
+ed97ada1122ea1dee13ad3469b24c4cafb851f6c,prompt.yaml,0.0626,p1,0.0526,p1
 ed97ada1122ea1dee13ad3469b24c4cafb851f6c,prompt/format/shell.md,0.0049,p1,0.0,
 ee8354e4326113dd3113082fdc41e71bd4223861,change.sh,1.0,p1,1.0,p1
 ee8354e4326113dd3113082fdc41e71bd4223861,prompt.md,0.0591,p1,0.4333,p1
@@ -1378,7 +1378,7 @@ f1bb9a49a369f15be3f1979971124dc338845ca3,src/frontend/components/PromptDisplay.j
 f1bb9a49a369f15be3f1979971124dc338845ca3,src/frontend/components/StartButton.jsx,0.243,p1,0.3667,p1
 f1bb9a49a369f15be3f1979971124dc338845ca3,src/frontend/components/TasksList.jsx,0.1133,p1,0.2889,p1
 f2bfc705f523846a6f21e32393b15820ce263f21,docs/roadmap.md,0.807,p2,0.7419,p2
-f2bfc705f523846a6f21e32393b15820ce263f21,prompt/history/2023/08/24/14:13_Improve documentation with versioning/change.sh,1.0,p1,0.6129,p1
+f2bfc705f523846a6f21e32393b15820ce263f21,prompt/history/2023/08/24/14:13_Improve documentation with versioning/change.sh,1.0,p1,1.0,p1
 f2bfc705f523846a6f21e32393b15820ce263f21,prompt/history/2023/08/24/14:13_Improve documentation with versioning/prompt.md,0.3197,p1,0.5806,p2
 f2bfc705f523846a6f21e32393b15820ce263f21,prompt/history/2023/08/24/14:13_Improve documentation with versioning/prompt.yaml,0.0891,p2,0.0,
 f2bfc705f523846a6f21e32393b15820ce263f21,prompt/history/2023/08/24/14:15_Reformat documentation headers/change.sh,1.0,p2,1.0,p2
@@ -1396,12 +1396,12 @@ f31a28cc1976d4bbe0ced316f39c0b185aa3d4bf,package.json,0.1883,p1,0.2658,p1
 f31a28cc1976d4bbe0ced316f39c0b185aa3d4bf,prompt.md,0.5918,p1,0.6456,p1
 f31a28cc1976d4bbe0ced316f39c0b185aa3d4bf,prompt.yaml,0.0366,p1,0.0,
 f31f45940f48e913738b1ad743c9c5329f30af07,change.sh,0.9097,p2,0.8485,p2
-f31f45940f48e913738b1ad743c9c5329f30af07,prompt.md,0.5938,p1,0.5455,p1
+f31f45940f48e913738b1ad743c9c5329f30af07,prompt.md,0.5938,p1,0.6471,p1
 f31f45940f48e913738b1ad743c9c5329f30af07,prompt.yaml,0.0362,p1,0.0,
 f31f45940f48e913738b1ad743c9c5329f30af07,src/frontend/components/GitStatusDisplay.jsx,0.4447,p2,0.5152,p2
-f34f3965095ce9b3b9303e95bbb10bbe241c2ca3,src/common/Timeline.js,1.0,p1,0.0,p1
+f34f3965095ce9b3b9303e95bbb10bbe241c2ca3,src/common/Timeline.js,1.0,p1,1.0,p1
 f48bf65be1a494848707abbdddf99ea70871d379,prompt/history/2023/08/24/10:51_Refactor frontend service directories/change.sh,1.0,p4,1.0,p4
-f48bf65be1a494848707abbdddf99ea70871d379,prompt/history/2023/08/24/10:51_Refactor frontend service directories/prompt.md,0.5703,p4,0.6543,p1
+f48bf65be1a494848707abbdddf99ea70871d379,prompt/history/2023/08/24/10:51_Refactor frontend service directories/prompt.md,0.5703,p4,0.6667,p1
 f48bf65be1a494848707abbdddf99ea70871d379,prompt/history/2023/08/24/10:51_Refactor frontend service directories/prompt.yaml,0.021,p1,0.0,
 f48bf65be1a494848707abbdddf99ea70871d379,src/frontend/components/RequirementsEditor.jsx,0.0788,p4,0.0741,p1
 f48bf65be1a494848707abbdddf99ea70871d379,src/frontend/service/config/cliArgs.js,0.1172,p4,0.1852,p3
@@ -1539,12 +1539,12 @@ febd35e22f88a6ff3a86a13b60c3da35b90fcd01,prompt/history/2023/09/26/13:41_Refacto
 febd35e22f88a6ff3a86a13b60c3da35b90fcd01,src/frontend/components/GitStatusRow.jsx,0.4407,p1,0.3478,p1
 febd35e22f88a6ff3a86a13b60c3da35b90fcd01,src/frontend/components/getStyleForFileStatus.jsx,0.2095,p1,0.1957,p1
 ff2c296cbceaed9b085acf8efa3233f700003f38,package.json,0.0372,p5,0.0,
-ff2c296cbceaed9b085acf8efa3233f700003f38,src/common/MobileTopNav.js,0.7151,p3,0.2609,p3
+ff2c296cbceaed9b085acf8efa3233f700003f38,src/common/MobileTopNav.js,0.7151,p3,0.7922,p3
 ff2c296cbceaed9b085acf8efa3233f700003f38,src/jobs/Scroller/Scroller.js,0.1909,p1,0.2609,p1
 ff2c296cbceaed9b085acf8efa3233f700003f38,src/jobs/ZeroJobs/ZeroJobs.js,0.9092,p5,0.8913,p5
-ff3f0687ca8a5ae6d5eba6eb5b1021421efdd2c6,change.sh,0.3873,p1,0.0,p1
-ff3f0687ca8a5ae6d5eba6eb5b1021421efdd2c6,docs/usage.md,0.3577,p1,0.0,p1
-ff3f0687ca8a5ae6d5eba6eb5b1021421efdd2c6,prompt.md,0.0009,p1,0.3333,p1
+ff3f0687ca8a5ae6d5eba6eb5b1021421efdd2c6,change.sh,0.3873,p1,0.6154,p1
+ff3f0687ca8a5ae6d5eba6eb5b1021421efdd2c6,docs/usage.md,0.3577,p1,0.375,p1
+ff3f0687ca8a5ae6d5eba6eb5b1021421efdd2c6,prompt.md,0.0009,p1,1.0,p1
 ff3f0687ca8a5ae6d5eba6eb5b1021421efdd2c6,prompt.yaml,0.0302,p1,0.0,
 ff91368695d60c09ed6caf981dcabd88bb41fd51,change.sh,1.0,p1,1.0,p1
 ff91368695d60c09ed6caf981dcabd88bb41fd51,prompt.md,0.6839,p1,0.746,p1

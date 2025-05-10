@@ -6,6 +6,10 @@ import glob
 from collections import Counter
 from crystalbleu import corpus_bleu, SmoothingFunction
 import fractions
+import time
+
+### Global Variables ###
+DEBUG_OUTPUT = True
 
 # Monkey patch to fix crystalBLEU issue with Fraction
 _orig_fraction_new = fractions.Fraction.__new__
@@ -90,7 +94,7 @@ def compute_line_exact_match(after_code: str, chatgpt_code: str) -> float:
     suggestion_lines = [line.strip() for line in chatgpt_code.strip().splitlines() if line.strip()]
 
     if not suggestion_lines:
-        return 0.0  # Avoid division by zero
+        raise ZeroDivisionError  # Avoid division by zero
 
     match_count = sum(1 for line in suggestion_lines if line in after_lines)
     return match_count / len(suggestion_lines)
@@ -98,7 +102,19 @@ def compute_line_exact_match(after_code: str, chatgpt_code: str) -> float:
 def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
     
     results = []
-    
+    samples_folder = "samples"
+    disallowed_exts = {'.sh', '.exe', '.bat', '.md', '.yaml'}
+
+    # make directory for the samples, if folder exists raise error
+    folder_creation_success = True
+    try:
+        os.makedirs(samples_folder, exist_ok=False)
+    except:
+        print("ERROR! Delete \"samples\" folder to create a new one.")
+        folder_creation_success = False
+        time.sleep(3)
+
+    i = 0
     for file_path in file_paths:
         with open(file_path, 'r', encoding='utf-8') as f:
             try:
@@ -108,6 +124,7 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
                 continue
 
         sha = commit.get("sha", "unknown")
+        link_to_github_commit = commit.get("url", "")
         files_changed = commit.get("code", [])
         conversations = commit.get("chatgpt_sharing", {}).get("conversations", [])
 
@@ -154,7 +171,11 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
                                 smoothing_function=sm_func,
                                 ignoring=trivially_shared
                             )
-                            line_match_score = compute_line_exact_match(after, code_content)
+                            try:
+                                line_match_score = compute_line_exact_match(after, code_content)
+                            except ZeroDivisionError:
+                                print("compute_line_exact_match() failed")
+                                line_match_score = 0.0
 
 
                         if crystalbleu_score > best_crystalbleu:
@@ -174,6 +195,16 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
                     "line_match_prompt_id": best_match_prompt_id
                 })
 
+                # add all code files to the "samples" folder
+                if DEBUG_OUTPUT and folder_creation_success:
+                    if any(filename.endswith(ext) for ext in disallowed_exts): #checks if filename ends with an extension that implies the file is not code, eg.  .md  .exe  .sh  etc.
+                        continue  # Skip this file
+                    else:
+                        best_crystalbleu = round(best_crystalbleu, 4)
+                        best_line_match = round(best_line_match, 4)
+                        create_sample(filename, i, sha, best_line_match, link_to_github_commit, best_crystalbleu, developer_written_lines="test", chatGPT_written_lines="test", exact_match_lines="test", chatGPT_code_with_match_greater_than_half=[])
+                        i = i+1
+
             except Exception as e:
                 print(f"Skipping CrystalBLEU evaluation for {filename} due to error: {e}")
                 continue
@@ -188,6 +219,76 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
         print(f"\n✅ CrystalBLEU evaluation complete. Results saved to {output_csv_path}")
     else:
         print("⚠️ No valid results found. Check your input data or logic.")
+
+def create_sample(filename, number, sha, rate_of_exact_match, link_to_github, crystalBLEU_result, developer_written_lines, chatGPT_written_lines, exact_match_lines, chatGPT_code_with_match_greater_than_half : list):
+
+    samples_folder = "samples"
+    # make directory (folder) with name being the enumerated number ie. 0, 1, 2, ...
+    try:
+        folder = os.path.join(samples_folder, f"{number}")
+        os.makedirs(folder, exist_ok=False)
+    except OSError:
+        print(f"OSError for sha: {sha}, sample number: {number}")
+        return
+    
+    # make directory (folder) with name "chatGPT_code_with_high_similarity"
+    try:
+        folder_2 = os.path.join(folder, "chatGPT_code_with_high_similarity")
+        os.makedirs(folder_2, exist_ok=False)
+    except OSError:
+        print(f"OSError for sha: {sha}, sample number: {number}")
+        return
+        
+    #set paths for all the files in the folder
+    info_path = os.path.join(folder, "info.json")
+    exact_match_path = os.path.join(folder, "exact_match")
+    developer_written_lines_path = os.path.join(folder, "developer_written_lines")
+    chatGPT_written_lines_path = os.path.join(folder, "chatGPT_written_lines")
+    
+
+    try:
+        # Write metadata to info.json
+        metadata = {
+            "number": number,
+            "sha": sha,
+            "crystalBLEU_result": crystalBLEU_result,
+            "rate_of_exact_match": rate_of_exact_match,
+            "link_to_github": link_to_github,
+            "filename": filename
+        }
+        with open(info_path, 'w', encoding='utf-8') as ip:
+            json.dump(metadata, ip, indent=6)
+
+        with open(exact_match_path, 'w', encoding='utf-8') as emp:
+            json.dump("placeholder", emp, indent=6)
+
+        with open(developer_written_lines_path, 'w', encoding='utf-8') as dwlp:
+            json.dump("placeholder", dwlp, indent=6)
+
+        with open(chatGPT_written_lines_path, 'w', encoding='utf-8') as cwlp:
+            json.dump("placeholder", cwlp, indent=6)
+
+        i = 0
+        for code in chatGPT_code_with_match_greater_than_half:
+            #set path for the file
+            extra_code_path = os.path.join(folder_2, f"{i}")
+            with open(extra_code_path, 'w', encoding='utf-8') as ecp:
+                json.dump("placeholder", ecp, indent=6)
+            i=i+1
+        
+        print(f"✅ Sampled and saved: {filename}")
+    except Exception as write_err:
+        try:
+            #clean up after os.makedirs() if needed
+            os.rmdir(os.path.join(folder_2))
+            os.rmdir(os.path.join(folder))
+        except FileNotFoundError:
+            pass 
+        except OSError:
+            pass
+        except Exception as write_err_2:
+            print(f"⚠️ Failed to cleanup after attempting to sample {filename}: {write_err} \n AND\n {write_err_2}")
+
 
  
 def process_commit_data(input_folder: str, output_csv_path: str, top_k, ngram_range, file_limit):
@@ -207,4 +308,4 @@ def process_commit_data(input_folder: str, output_csv_path: str, top_k, ngram_ra
     evaluate_crystalbleu_scores(json_files, trivially_shared, output_csv_path)
 
 if __name__ == "__main__":
-    process_commit_data("structured_Refactoring_Commits", "evaluation_results.csv", top_k=500, ngram_range=(1, 4), file_limit=5)
+    process_commit_data("Structured_Refactoring_Commits", "evaluation_results.csv", top_k=500, ngram_range=(1, 4), file_limit=5)
