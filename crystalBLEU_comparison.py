@@ -170,7 +170,7 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
                     "file": filename,
                     "best_crystalbleu_after_vs_chatgpt": round(best_crystalbleu, 4),
                     "best_prompt_id": best_prompt_id,
-                    "line_exact_match": round(line_match_score, 4),
+                    "line_exact_match": round(best_line_match, 4),
                     "line_match_prompt_id": best_match_prompt_id
                 })
 
