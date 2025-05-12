@@ -7,6 +7,7 @@ from utils.tokenization import tokenize_code
 from utils.ngrams_analysis import collect_tokens_for_ngram_analysis, get_trivially_shared_ngrams
 from evaluate_crystalbleu import find_prompt_with_highest_crystalbleu_score
 from evaluate_line_match import evaluate_lines
+from evaluate_dev_gpt_score import score_dev_vs_gpt_changes
 
 def process_commits(input_folder: str, output_csv_path: str, top_k: int, ngram_range: tuple, file_limit: int = None):
     json_files = glob.glob(os.path.join(input_folder, "*.json"))
@@ -40,14 +41,17 @@ def process_commits(input_folder: str, output_csv_path: str, top_k: int, ngram_r
 
             try:
                 best_crystalbleu_score, best_prompt_id, best_gpt_code = find_prompt_with_highest_crystalbleu_score(after, conversations, trivially_shared)
-                exact_match_score= evaluate_lines(after, best_gpt_code)
+                line_match_score= evaluate_lines(after, best_gpt_code)
+                dev_changed_score, gpt_reused_score =  score_dev_vs_gpt_changes(before, after, best_gpt_code)
 
                 results.append({
                     "sha": sha,
                     "file": filename,
-                    "best_crystalbleu_after_vs_chatgpt": round(best_crystalbleu_score, 4),
                     "best_prompt_id": best_prompt_id,
-                    "rate_of_exact_match": round(exact_match_score, 4)
+                    "best_crystalbleu_after_vs_chatgpt": round(best_crystalbleu_score, 4),
+                    "line_match": round(line_match_score, 4),
+                    "dev_changed_score": round(dev_changed_score, 4),
+                    "gpt_reused_score": round(gpt_reused_score, 4)
                 })
 
             except Exception as e:
@@ -70,5 +74,5 @@ if __name__ == "__main__":
         output_csv_path="evaluation_results.csv",
         top_k=500,
         ngram_range=(1, 4),
-        file_limit= 5 # Or use an integer like 5 for testing
+        file_limit=None # Or use an integer like 5 for testing
     )

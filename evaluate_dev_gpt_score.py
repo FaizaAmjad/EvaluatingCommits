@@ -7,14 +7,9 @@ def line_match(line, candidates, threshold=0.9):
             return True
     return False
 
-def score_dev_vs_gpt_changes(before_code, after_code, convo, threshold=0.9):
+def score_dev_vs_gpt_changes(before_code, after_code, gpt_code, threshold=0.9):
     before_lines = set(line.strip() for line in before_code.strip().splitlines() if line.strip())
     after_lines = set(line.strip() for line in after_code.strip().splitlines() if line.strip())
-    
-    gpt_code = "\n".join(
-        cb.get("Content", "") for cb in convo.get("list_of_code", []) if cb.get("Content")
-    )
-
     gpt_lines = set(line.strip() for line in gpt_code.strip().splitlines() if line.strip())
 
     unchanged_lines = before_lines & after_lines
