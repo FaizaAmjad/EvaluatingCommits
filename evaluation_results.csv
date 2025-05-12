@@ -1,4 +1,4 @@
-sha,file,best_prompt_id,best_crystalbleu_after_vs_chatgpt,line_match,dev_changed_score,gpt_reused_score
+sha,file,prompt_id,crystalbleu_after_vs_chatgpt,line_match_after_vs_chatgpt,dev_changed_lines_score,gpt_reused_lines_score
 0013d944e8aab5856906cc1d5e220d6019e608c7,change.sh,p1,0.4021,0.4615,0.4118,0.5882
 0013d944e8aab5856906cc1d5e220d6019e608c7,package.json,p1,0.0808,0.0,1.0,0.0
 0013d944e8aab5856906cc1d5e220d6019e608c7,prompt.md,p1,0.0289,0.0,1.0,0.0
