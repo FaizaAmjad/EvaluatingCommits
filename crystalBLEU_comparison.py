@@ -6,42 +6,7 @@ import glob
 from collections import Counter
 from crystalbleu import corpus_bleu, SmoothingFunction
 import fractions
-from difflib import SequenceMatcher
-
-def fuzzy_line_match(line, candidates, threshold=0.9):
-    """Return True if the line is similar to any in candidates above the threshold."""
-    for cand in candidates:
-        if SequenceMatcher(None, line, cand).ratio() >= threshold:
-            return True
-    return False
-
-def score_dev_vs_gpt_changes_fuzzy(before_code, after_code, convo, threshold=0.9):
-    before_lines = set(line.strip() for line in before_code.strip().splitlines() if line.strip())
-    after_lines = set(line.strip() for line in after_code.strip().splitlines() if line.strip())
-    
-    gpt_code = "\n".join(
-        cb.get("Content", "") for cb in convo.get("list_of_code", []) if cb.get("Content")
-    )
-
-    gpt_lines = set(line.strip() for line in gpt_code.strip().splitlines() if line.strip())
-
-    unchanged_lines = before_lines & after_lines
-    added_lines = after_lines - unchanged_lines
-
-    gpt_reused = set()
-    dev_added = set()
-
-    for line in added_lines:
-        if fuzzy_line_match(line, gpt_lines, threshold):
-            gpt_reused.add(line)
-        else:
-            dev_added.add(line)
-
-    total_added = len(added_lines)
-    dev_changed_score = len(dev_added) / total_added if total_added else 0
-    gpt_reused_score = len(gpt_reused) / total_added if total_added else 0
-
-    return dev_changed_score, gpt_reused_score
+from evaluate_dev_gpt_score import score_dev_vs_gpt_changes
 
 # Monkey patch to fix crystalBLEU issue with Fraction
 _orig_fraction_new = fractions.Fraction.__new__
@@ -119,36 +84,17 @@ def collect_tokens_for_ngram_analysis(file_paths):
                 continue
     
     return all_tokens
-
-# Get dev_changed: proportion of after lines not found in GPT code
-# Get gpt_reused_score: proportion of GPT lines reused in after_code
-def compute_dev_and_gpt_scores(before_code: str, after_code: str, best_prompt: dict) -> tuple[float, float]:
-    # Return 0.0 if there is no best prompt id or list of code in that conversation object
-    if not best_prompt or "list_of_code" not in best_prompt:
-        return 0.0, 0.0
-
-    gpt_code = "\n".join(
-        cb.get("Content", "") for cb in best_prompt.get("list_of_code", []) if cb.get("Content")
-    )
-
-    # Split in lines
-    before_lines = set(line.strip() for line in before_code.strip().splitlines() if line.strip())
+# Check lines of exact match between final committed code (after) and ChatGPT code
+def compute_line_exact_match(after_code: str, chatgpt_code: str) -> float:
+    # Normalize and split into lines
     after_lines = set(line.strip() for line in after_code.strip().splitlines() if line.strip())
-    gpt_lines = set(line.strip() for line in gpt_code.strip().splitlines() if line.strip())
+    suggestion_lines = [line.strip() for line in chatgpt_code.strip().splitlines() if line.strip()]
 
-    if not after_lines:
-        return 0.0, 0.0
+    if not suggestion_lines:
+        return 0.0  # Avoid division by zero
 
-    unchanged_lines = before_lines & after_lines
-    added_lines = after_lines - unchanged_lines
-    gpt_reused = gpt_lines & added_lines
-    dev_added = added_lines - gpt_reused
-
-    dev_changed_score = len(dev_added) / len(after_lines) if after_lines else 0.0
-    gpt_reused_score = len(gpt_reused) / len(gpt_lines) if gpt_lines else 0.0
-
-    return dev_changed_score, gpt_reused_score
-
+    match_count = sum(1 for line in suggestion_lines if line in after_lines)
+    return match_count / len(suggestion_lines)
 
 def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
     
@@ -178,11 +124,14 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
             #after = strip_comments(file_change.get("after", ""))
 
             try:
-                tokens_before = tokenize_code(before)
+                # tokens_before = tokenize_code(before)
                 tokens_after = tokenize_code(after)
 
                 best_crystalbleu = 0.0
                 best_prompt_id = None
+
+                best_line_match = 0.0
+                best_match_prompt_id = None
                 best_prompt_convo = None
 
                 # Compare after vs code snippets from conversations
@@ -207,22 +156,34 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
                                 smoothing_function=sm_func,
                                 ignoring=trivially_shared
                             )
+                            line_match_score = compute_line_exact_match(after, code_content)
+
 
                         if crystalbleu_score > best_crystalbleu:
                             best_crystalbleu = crystalbleu_score
                             best_prompt_id = prompt_id
                             best_prompt_convo = convo
 
+                        if line_match_score > best_line_match:
+                            best_line_match = line_match_score
+                            best_match_prompt_id = prompt_id
+                            
+                
+                dev_changed_score = 0.0
+                gpt_reused_score = 0.0
+
                 # Calculate dev_changed and gpt_reused_score
                 if best_prompt_convo:
-                    dev_changed, gpt_reused_score =  score_dev_vs_gpt_changes_fuzzy(before, after, best_prompt_convo)
+                    dev_changed_score, gpt_reused_score =  score_dev_vs_gpt_changes(before, after, best_prompt_convo)
 
                 results.append({
                     "sha": sha,
                     "file": filename,
-                    "best_crystalbleu_after_vs_chatgpt": best_crystalbleu,
-                    "best_prompt_id": best_prompt_id, 
-                    "dev_changed": round(dev_changed, 4),
+                    "best_crystalbleu_after_vs_chatgpt": round(best_crystalbleu, 4),
+                    "best_prompt_id": best_prompt_id,
+                    "line_exact_match": round(line_match_score, 4),
+                    "line_match_prompt_id": best_match_prompt_id,
+                    "dev_changed_score": round(dev_changed_score, 4),
                     "gpt_reused_score": round(gpt_reused_score, 4)
                 })
 
