@@ -47,11 +47,11 @@ def process_commits(input_folder: str, output_csv_path: str, top_k: int, ngram_r
                 results.append({
                     "sha": sha,
                     "file": filename,
-                    "best_prompt_id": best_prompt_id,
-                    "best_crystalbleu_after_vs_chatgpt": round(best_crystalbleu_score, 4),
-                    "line_match": round(line_match_score, 4),
-                    "dev_changed_score": round(dev_changed_score, 4),
-                    "gpt_reused_score": round(gpt_reused_score, 4)
+                    "prompt_id": best_prompt_id,
+                    "crystalbleu_after_vs_chatgpt": round(best_crystalbleu_score, 4),
+                    "line_match_after_vs_chatgpt": round(line_match_score, 4),
+                    "dev_changed_lines_score": round(dev_changed_score, 4),
+                    "gpt_reused_lines_score": round(gpt_reused_score, 4)
                 })
 
             except Exception as e:
