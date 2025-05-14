@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import re
 import warnings
 import datetime
+import time
 
 #######################################################################
 # Global Variables
@@ -141,6 +142,15 @@ def main():
 
             try:
                 response = requests.get(url=newURL, headers=headers)
+                # Check for rate limit error
+                if response.status_code == 429:
+                    reset_time = int(response.headers.get('X-RateLimit-Reset', 0))
+                    current_time = int(datetime.datetime.now().timestamp())
+                    wait_time = reset_time - current_time + 1  # Add buffer time
+                    print(f"Rate limit exceeded. Waiting for {wait_time} seconds.")
+                    time.sleep(wait_time)  # Wait before retrying
+                    continue  # Retry the request
+
                 if response.status_code == 200:
                     data = response.json()
                 elif response.status_code == 404:
