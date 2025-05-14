@@ -161,6 +161,9 @@ def main():
                 continue # Don't proceed with invalid data
 
             files = data.get("files", [])
+            if not files:
+             print(f"No files found for commit SHA: {SHA}")
+             continue
             code_diffs = []
 
                 # List of path patterns to exclude
@@ -171,8 +174,17 @@ def main():
                 "packages/", "bin/", "obj/", ".nuget/", "_build/", "deps/",                ".stack-work/", "dist-newstyle/", ".build/", ".deno/", "Package.resolved"
             ]
 
+            # List of file extensions to exclude
+            excluded_files = [".gitignore", ".xml", ".md"]
+
             def is_excluded_path(path):
-                return any(part in path for part in excluded_dirs)
+             # Check if the path includes any excluded directories
+             if any(part in path for part in excluded_dirs):
+                 return True
+             # Check if the file has an excluded extension
+             if any(path.endswith(ext) for ext in excluded_files):
+                 return True
+             return False
 
             j = 0
             for file in files:
