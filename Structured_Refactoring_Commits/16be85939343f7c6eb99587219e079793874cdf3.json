@@ -1,0 +1,57 @@
+{
+  "sha": "16be85939343f7c6eb99587219e079793874cdf3",
+  "url": "https://github.com/tisztamo/Junior/commit/16be85939343f7c6eb99587219e079793874cdf3",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Update roadmap with completion marker https://chat.openai.com/share/f8029200-a2eb-44f0-b42c-7dd10873855a",
+  "authorAt": "2023-08-07T15:54:23.000+02:00",
+  "commitAt": "2023-08-07T15:54:23.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Update Roadmap: Completed Task",
+    "url": "https://chat.openai.com/share/f8029200-a2eb-44f0-b42c-7dd10873855a",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/16be85939343f7c6eb99587219e079793874cdf3",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update roadmap with completion marker https://chat.openai.com/share/f8029200-a2eb-44f0-b42c-7dd10873855a"
+    },
+    "status": 200,
+    "dateOfConversation": "August 7, 2023",
+    "dateOfAccess": "2023-08-17 13:09:18.826574",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 320,
+    "tokensOfAnswers": 215,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "# Working set\n\ndocs/roadmap.md:\n```\n# Roadmap\n## Usability & fixes\n- Implement the four buttons\n- Fix every major bug\n- Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Auto-attention\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in an (embedded) vector database\n\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually\n\n```\n\n\n# Task\n\nImprove the documentation!\n\n&#34;Implement the four buttons&#34; is done. Add a nice unicode character and a single word to show this.\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Update roadmap with completion marker\"\necho \"Plan:\"\necho \"1. Add a unicode character and a word to signify the completion of 'Implement the four buttons' in the roadmap.\"\ncat > docs/roadmap.md << 'EOF'\n# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Auto-attention\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in an (embedded) vector database\n\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually\nEOF\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Update application start command in docs\"\necho \"Plan:\"\necho \"1. Change the command to run the application from 'npm start' to 'npx junior-web' or 'npm start' from Junior itself.\"\n\ncat << 'EOF' > docs/web.md\n# Web Interface\n\nJunior's web interface was designed for use with ChatGPT Pro and doesn't require an API key.\n\n## Architecture\n\nThe web interface is composed of two different servers: a frontend and a backend. The frontend server runs on port 5173, and the backend server runs on port 10101.\n\n## Starting the Web Interface\n\nRun the application with `npx junior-web` from your project or with `npm start` from Junior itself. A web browser window will automatically open at `http://localhost:5173`, which is where you can access the web interface.\n\n## Workflow\n\nThe typical workflow begins with editing the `prompt.yaml` file in your code editor of choice (we recommend Visual Studio Code with the Junior plugin for an optimal experience). Once you're satisfied with your task setup, you proceed to the web interface for execution and monitoring.\n\n## Usage\n\nThe web interface has a few interactive components:\n\n![Web Interface](./screenshot.png)\n\n- **Generate & Copy Prompt button (Blue)**: Click this to generate a task prompt based on your `prompt.yaml` file and copy it to your clipboard. The copied prompt should be pasted to ChatGPT 4 or similar for execution.\n\n- **Paste & Execute Change button (Orange)**: Paste the response from the AI model (a shell script) into the input field and click this button to execute the changes.\n\n- **Roll Back to Last Commit button (Red)**: If you made a mistake or aren't happy with the changes, click this button to revert to the last commit. Please note, the rollback operation preserves the `prompt.yaml` file, but drops every change since the last commit, including new files created in the meantime, even if they were not created by Junior.\n\n- **Terminal**: Displays the output of your command execution. It's a simple console that shows the progress of the task.\n\nFor a more detailed guide on using the web interface, refer to our video tutorial [here](https://youtu.be/W_iwry8uT7E).\n\nRemember, you can always refer to your `prompt.yaml` file to modify the task details or attention mechanism.\n\nAt the end of your development, make sure to run `npm run build:doc` to regenerate the web.html document reflecting the latest changes.\n\nHappy developing with your AI contributor!\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Update roadmap with completion marker\"\necho \"Plan:\"\necho \"1. Add a unicode character and a word to signify the completion of 'Implement the four buttons' in the roadmap.\"\ncat > docs/roadmap.md << 'EOF'\n# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Auto-attention\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in an (embedded) vector database\n\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually\nEOF\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 42,
+      "total_additions": 21
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "task: prompt/task/doc/improve.md\nattention:\n  - docs/web.md\nrequirements: >\n  Update the info:\n  Run the application with `npx junior-web` from your project or with `npm start` from Junior itself.\nos: OSX",
+      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/roadmap.md\nrequirements: >\n  \"Implement the four buttons\" is done. Add a nice unicode character and a single word to show this.\nos: OSX",
+      "total_deletions": 3,
+      "total_additions": 2
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "sha": "79c5cb879192c0a3969d5a0441e447416e9df244",
+  "url": "https://github.com/tisztamo/Junior/commit/79c5cb879192c0a3969d5a0441e447416e9df244",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Fix theme switcher to reflect changes on screen https://chat.openai.com/share/4569660b-6acf-4590-affc-ac4f80907b00",
+  "authorAt": "2023-08-03T16:28:42.000+02:00",
+  "commitAt": "2023-08-03T16:28:42.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Fix theme switcher styling.",
+    "url": "https://chat.openai.com/share/4569660b-6acf-4590-affc-ac4f80907b00",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/79c5cb879192c0a3969d5a0441e447416e9df244",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Fix theme switcher to reflect changes on screen https://chat.openai.com/share/4569660b-6acf-4590-affc-ac4f80907b00"
+    },
+    "status": 200,
+    "dateOfConversation": "August 3, 2023",
+    "dateOfAccess": "2023-08-10 12:45:43.311447",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 577,
+    "tokensOfAnswers": 567,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "# Working set\n\nsrc/frontend/tailwind.config.cjs:\n```\nmodule.exports = {\n  content: [__dirname + '/**/*.html', __dirname + '/**/*.jsx'],\n  theme: {\n    screens: {\n      'xs': '320px',\n      'sm': '640px',\n      'md': '768px',\n      'lg': '1024px',\n      'xl': '1280px',\n      '2xl': '1536px',\n    },\n    extend: {\n      // Extend the spacing for larger gaps\n      spacing: {\n        '72': '18rem',\n        '84': '21rem',\n        '96': '24rem',\n        '128': '32rem',\n      },\n      // Extend the button styles for larger buttons\n      fontSize: {\n        'btn': '1.5rem',\n      },\n      padding: {\n        'btn': '1.5rem',\n      },\n      // Extend the maxWidth for desktop container\n      maxWidth: {\n        'desktop': '640px',\n      },\n    },\n  },\n  variants: {\n    extend: {},\n  },\n  plugins: [],\n}\n\n```\n\nsrc/frontend/components/ThemeSwitcher.jsx:\n```\nimport { createEffect, createSignal } from 'solid-js';\n\nconst ThemeSwitcher = () => {\n  const [theme, setTheme] = createSignal(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n\n  createEffect(() => {\n    const currentTheme = theme();\n    document.body.className = currentTheme;\n    localStorage.setItem('theme', currentTheme);\n  });\n\n  const toggleTheme = () => {\n    setTheme(theme() === 'dark' ? 'light' : 'dark');\n  };\n\n  return (\n    <button onClick={toggleTheme} class=\"text-xl underline cursor-pointer\">\n      {theme() === 'dark' ? 'Light Mode' : 'Dark Mode'}\n    </button>\n  );\n};\n\nexport default ThemeSwitcher;\n\n```\n\n\n# Task\n\nFix the following issue!\n\nThe theme switcher switches classes on the body, but nothing happens on the screen.\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Fix theme switcher to reflect changes on screen\"\necho \"Plan:\"\necho \"1. Add dark theme styling in Tailwind configuration.\"\necho \"2. Modify the ThemeSwitcher component to use the correct class.\"\n\n# Step 1: Adding dark theme styling in Tailwind configuration\ncat << 'EOF' > src/frontend/tailwind.config.cjs\nmodule.exports = {\n  darkMode: 'class', // Add this line\n  content: [__dirname + '/**/*.html', __dirname + '/**/*.jsx'],\n  theme: {\n    screens: {\n      'xs': '320px',\n      'sm': '640px',\n      'md': '768px',\n      'lg': '1024px',\n      'xl': '1280px',\n      '2xl': '1536px',\n    },\n    extend: {\n      // Extend the spacing for larger gaps\n      spacing: {\n        '72': '18rem',\n        '84': '21rem',\n        '96': '24rem',\n        '128': '32rem',\n      },\n      // Extend the button styles for larger buttons\n      fontSize: {\n        'btn': '1.5rem',\n      },\n      padding: {\n        'btn': '1.5rem',\n      },\n      // Extend the maxWidth for desktop container\n      maxWidth: {\n        'desktop': '640px',\n      },\n    },\n  },\n  variants: {\n    extend: {},\n  },\n  plugins: [],\n}\nEOF\n\n# Step 2: Modify the ThemeSwitcher component to use the correct class\ncat << 'EOF' > src/frontend/components/ThemeSwitcher.jsx\nimport { createEffect, createSignal } from 'solid-js';\n\nconst ThemeSwitcher = () => {\n  const [theme, setTheme] = createSignal(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n\n  createEffect(() => {\n    const currentTheme = theme();\n    document.body.className = currentTheme === 'dark' ? 'dark' : ''; // Change this line\n    localStorage.setItem('theme', currentTheme);\n  });\n\n  const toggleTheme = () => {\n    setTheme(theme() === 'dark' ? 'light' : 'dark');\n  };\n\n  return (\n    <button onClick={toggleTheme} class=\"text-xl underline cursor-pointer\">\n      {theme() === 'dark' ? 'Light Mode' : 'Dark Mode'}\n    </button>\n  );\n};\n\nexport default ThemeSwitcher;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p2",
+        "prompt": "Thanks!",
+        "answer": "You're welcome! If you have any more questions or need further assistance, feel free to ask. Happy coding!",
+        "list_of_code": []
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Implement theme switcher in navbar\"\necho \"Plan:\"\necho \"1. Create ThemeSwitcher.jsx, implementing the theme switching functionality.\"\necho \"2. Modify NavBar.jsx to include the theme switcher on the top right.\"\n\n# Step 1: Create ThemeSwitcher.jsx\ncat > src/frontend/components/ThemeSwitcher.jsx << 'EOF'\nimport { createEffect, createSignal } from 'solid-js';\n\nconst ThemeSwitcher = () => {\n  const [theme, setTheme] = createSignal(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n\n  createEffect(() => {\n    const currentTheme = theme();\n    document.body.className = currentTheme;\n    localStorage.setItem('theme', currentTheme);\n  });\n\nexport default ThemeSwitcher;\nEOF\n\n# Step 2: Modify NavBar.jsx\ncat > src/frontend/components/NavBar.jsx << 'EOF'\nimport { createSignal } from 'solid-js';\nimport ThemeSwitcher from './ThemeSwitcher';\n\nconst NavBar = () => {\n  const title = 'Junior';\n\n  return (\n    <div class=\"relative\">\n      <div class=\"absolute top-0 right-0 m-4\">\n        <ThemeSwitcher />\n      </div>\n      <h1 class=\"text-center text-3xl mt-6\">{title}</h1>\n      <a href=\"https://github.com/tisztamo/Junior\" class=\"text-center text-xl underline cursor-pointer\">Your AI contributor</a>\n    </div>\n  );\n};\n\nexport default NavBar;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Fix theme switcher to reflect changes on screen\"\necho \"Plan:\"\necho \"1. Add dark theme styling in Tailwind configuration.\"\necho \"2. Modify the ThemeSwitcher component to use the correct class.\"\n\n# Step 1: Adding dark theme styling in Tailwind configuration\ncat << 'EOF' > src/frontend/tailwind.config.cjs\nmodule.exports = {\n  darkMode: 'class', // Add this line\n  content: [__dirname + '/**/*.html', __dirname + '/**/*.jsx'],\n  theme: {\n    screens: {\n      'xs': '320px',\n      'sm': '640px',\n      'md': '768px',\n      'lg': '1024px',\n      'xl': '1280px',\n      '2xl': '1536px',\n    },\n    extend: {\n      // Extend the spacing for larger gaps\n      spacing: {\n        '72': '18rem',\n        '84': '21rem',\n        '96': '24rem',\n        '128': '32rem',\n      },\n      // Extend the button styles for larger buttons\n      fontSize: {\n        'btn': '1.5rem',\n      },\n      padding: {\n        'btn': '1.5rem',\n      },\n      // Extend the maxWidth for desktop container\n      maxWidth: {\n        'desktop': '640px',\n      },\n    },\n  },\n  variants: {\n    extend: {},\n  },\n  plugins: [],\n}\nEOF\n\n# Step 2: Modify the ThemeSwitcher component to use the correct class\ncat << 'EOF' > src/frontend/components/ThemeSwitcher.jsx\nimport { createEffect, createSignal } from 'solid-js';\n\nconst ThemeSwitcher = () => {\n  const [theme, setTheme] = createSignal(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');\n\n  createEffect(() => {\n    const currentTheme = theme();\n    document.body.className = currentTheme === 'dark' ? 'dark' : ''; // Change this line\n    localStorage.setItem('theme', currentTheme);\n  });\n\nexport default ThemeSwitcher;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 28,
+      "total_additions": 48
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/tailwind.config.cjs\n  - src/frontend/components/NavBar.jsx\nrequirements: >\n  Create a theme switcher component (default from the OS, or dark if not\n  available) Put it to the top right of the navbar.\nos: OSX",
+      "after": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/tailwind.config.cjs\n  - src/frontend/components/ThemeSwitcher.jsx\nrequirements: >\n  The theme switcher switches classes on the body, but nothing happens on the\n  screen.\nos: OSX",
+      "total_deletions": 4,
+      "total_additions": 4
+    },
+    {
+      "filename": "src/frontend/components/ThemeSwitcher.jsx",
+      "before": "\n  createEffect(() => {\n    const currentTheme = theme();\n    document.body.className = currentTheme;\n    localStorage.setItem('theme', currentTheme);\n  });\n",
+      "after": "\n  createEffect(() => {\n    const currentTheme = theme();\n    document.body.className = currentTheme === 'dark' ? 'dark' : ''; // Change this line\n    localStorage.setItem('theme', currentTheme);\n  });\n",
+      "total_deletions": 1,
+      "total_additions": 1
+    },
+    {
+      "filename": "src/frontend/tailwind.config.cjs",
+      "before": "module.exports = {\n  content: [__dirname + '/**/*.html', __dirname + '/**/*.jsx'],\n  theme: {\n    screens: {",
+      "after": "module.exports = {\n  darkMode: 'class', // Add this line\n  content: [__dirname + '/**/*.html', __dirname + '/**/*.jsx'],\n  theme: {\n    screens: {",
+      "total_deletions": 0,
+      "total_additions": 1
+    }
+  ]
+}

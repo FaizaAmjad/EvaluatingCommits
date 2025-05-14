@@ -1,0 +1,64 @@
+{
+  "sha": "9d749f9d2c8cce023765869a9ebbce0cdadbcdc3",
+  "url": "https://github.com/tisztamo/Junior/commit/9d749f9d2c8cce023765869a9ebbce0cdadbcdc3",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Update div styling in App.jsx https://chat.openai.com/share/00b111a5-00b5-4689-9b0f-2a47408621c6",
+  "authorAt": "2023-08-04T10:07:52.000+02:00",
+  "commitAt": "2023-08-04T10:07:52.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Update div styling App.jsx.",
+    "url": "https://chat.openai.com/share/00b111a5-00b5-4689-9b0f-2a47408621c6",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/9d749f9d2c8cce023765869a9ebbce0cdadbcdc3",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Update div styling in App.jsx https://chat.openai.com/share/00b111a5-00b5-4689-9b0f-2a47408621c6"
+    },
+    "status": 200,
+    "dateOfConversation": "August 4, 2023",
+    "dateOfAccess": "2023-08-17 13:09:43.411676",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 516,
+    "tokensOfAnswers": 358,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "# Working set\n\nsrc/frontend/App.jsx:\n```\nimport GenerateButton from './components/GenerateButton';\nimport ExecuteButton from './components/ExecuteButton';\nimport RollbackButton from './components/RollbackButton';\nimport CommitButton from './components/CommitButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\nimport NavBar from './components/NavBar';\nimport ExecutionResultDisplay from './components/ExecutionResultDisplay';\nimport GitStatusDisplay from './components/GitStatusDisplay';\nimport CommitMessageInput from './components/CommitMessageInput';\n\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"m-2 bg-maindark:bg-dark-background bg-light-background dark:text-dark-text text-light-text\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />\n        <PromptDescriptor />\n        <GenerateButton />\n        <PromptDisplay />\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <GitStatusDisplay />\n        <CommitMessageInput />\n        <CommitButton />\n        <RollbackButton />\n      </div>\n    </div>\n  );\n};\n\nexport default App;\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nRemove every bg and text coloring classes from the app div and add bg-main!\nAlso replace m-2 with p-2 there!\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Update div styling in App.jsx\"\necho \"Plan:\"\necho \"1. Remove specific bg and text coloring classes from the app div in App.jsx\"\necho \"2. Replace m-2 with p-2 in the app div in App.jsx\"\necho \"3. Add bg-main class to the app div in App.jsx\"\n\ncat > src/frontend/App.jsx << 'EOF'\nimport GenerateButton from './components/GenerateButton';\nimport ExecuteButton from './components/ExecuteButton';\nimport RollbackButton from './components/RollbackButton';\nimport CommitButton from './components/CommitButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\nimport NavBar from './components/NavBar';\nimport ExecutionResultDisplay from './components/ExecutionResultDisplay';\nimport GitStatusDisplay from './components/GitStatusDisplay';\nimport CommitMessageInput from './components/CommitMessageInput';\n\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2 bg-main\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />\n        <PromptDescriptor />\n        <GenerateButton />\n        <PromptDisplay />\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <GitStatusDisplay />\n        <CommitMessageInput />\n        <CommitButton />\n        <RollbackButton />\n      </div>\n    </div>\n  );\n};\n\nexport default App;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Implement new styles and color configuration\"\necho \"Plan:\"\necho \"1. Create a new file styles/colors.css to define the CSS variables for text, background, and emphasize colors.\"\necho \"2. Modify src/frontend/styles/styles.css to import the new styles/colors.css.\"\necho \"3. Update src/frontend/tailwind.config.cjs to use the defined CSS variables for colors, remove unnecessary configurations, and introduce backgroundColor usage.\"\n\n# Step 1: Create a new file styles/colors.css\ncat << 'EOF' > src/frontend/styles/colors.css\n:root {\n  --text-color: #1a202c;\n  --background-color: #f7fafc;\n  --emphasize-color: #e2e8f0;\n}\n\n.dark {\n  --text-color: #f7fafc;\n  --background-color: #1a202c;\n  --emphasize-color: #2d3748;\n}\nEOF\necho \"Created styles/colors.css.\"\n\n# Step 2: Modify src/frontend/styles/styles.css to import the new styles/colors.css\ncat << 'EOF' > src/frontend/styles/styles.css\n@import 'tailwindcss/base';\n@import 'tailwindcss/components';\n@import 'tailwindcss/utilities';\n@import './colors.css';\n@import './markdown.css';\nEOF\necho \"Modified src/frontend/styles/styles.css.\"\n\n# Step 3: Update src/frontend/tailwind.config.cjs\ncat << 'EOF' > src/frontend/tailwind.config.cjs\nmodule.exports = {\n  darkMode: 'class',\n  content: [__dirname + '/**/*.html', __dirname + '/**/*.jsx'],\n  theme: {\n    screens: {\n      'xs': '320px',\n      'sm': '640px',\n      'md': '768px',\n      'lg': '1024px',\n      'xl': '1280px',\n      '2xl': '1536px',\n    },\n    extend: {\n      spacing: {\n        '72': '18rem',\n        '84': '21rem',\n        '96': '24rem',\n        '128': '32rem',\n      },\n      fontSize: {\n        'btn': '1.5rem',\n      },\n      padding: {\n        'btn': '1.5rem',\n      },\n      maxWidth: {\n        'desktop': '640px',\n      },\n      colors: {\n        text: \"var(--text-color)\",\n        emphasize: \"var(--emphasize-color)\",\n      },\n      backgroundColor: {\n        main: \"var(--background-color)\",\n      },\n    },\n  },\n  variants: {\n    extend: {},\n  },\n  plugins: [],\n}\nEOF\necho \"Updated src/frontend/tailwind.config.cjs.\"\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Update div styling in App.jsx\"\necho \"Plan:\"\necho \"1. Remove specific bg and text coloring classes from the app div in App.jsx\"\necho \"2. Replace m-2 with p-2 in the app div in App.jsx\"\necho \"3. Add bg-main class to the app div in App.jsx\"\n\ncat > src/frontend/App.jsx << 'EOF'\nimport GenerateButton from './components/GenerateButton';\nimport ExecuteButton from './components/ExecuteButton';\nimport RollbackButton from './components/RollbackButton';\nimport CommitButton from './components/CommitButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\nimport NavBar from './components/NavBar';\nimport ExecutionResultDisplay from './components/ExecutionResultDisplay';\nimport GitStatusDisplay from './components/GitStatusDisplay';\nimport CommitMessageInput from './components/CommitMessageInput';\n\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2 bg-main\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />\n        <PromptDescriptor />\n        <GenerateButton />\n        <PromptDisplay />\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <GitStatusDisplay />\n        <CommitMessageInput />\n        <CommitButton />\n        <RollbackButton />\n      </div>\n    </div>\n  );\n};\n\nexport default App;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 73,
+      "total_additions": 36
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/styles/styles.css\n  - src/frontend/tailwind.config.cjs\nrequirements: |\n  Create styles/colors.css and import it from styles.css\n  Define CSS variables for the colors text, background and emphasize, with separate values for :root and for .dark\n  In tailwind config, use those variables instead of the constants, eliminate \"light\" and \"dark\" colors there and introduce the use of backgroundColor!\n  An example from the tailwind config of another project just to see what I mean:\n\n  colors: {\n    primary: \"var(--primary-color)\",\n    line: \"var(--line-color)\",\n    main: \"var(--text-color)\",\n    ln2: \"var(--main-bg-2)\",\n    emphasize: \"var(--emphasize-color)\"\n  },\n  backgroundColor: {\n    main: \"var(--main-bg)\",\n    main2: \"var(--main-bg-2)\",\n    chart: \"var(--chart-bg)\",\n    line: \"var(--line-color)\",\n  },\nos: OSX",
+      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\nrequirements: |\n  Remove every bg and text coloring classes from the app div and add bg-main!\n  Also replace m-2 with p-2 there!\nos: OSX",
+      "total_deletions": 20,
+      "total_additions": 3
+    },
+    {
+      "filename": "src/frontend/App.jsx",
+      "before": "\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"m-2 bg-maindark:bg-dark-background bg-light-background dark:text-dark-text text-light-text\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />",
+      "after": "\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2 bg-main\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />",
+      "total_deletions": 1,
+      "total_additions": 1
+    }
+  ]
+}

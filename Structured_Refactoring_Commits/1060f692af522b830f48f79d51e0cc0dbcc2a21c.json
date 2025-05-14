@@ -1,0 +1,79 @@
+{
+  "sha": "1060f692af522b830f48f79d51e0cc0dbcc2a21c",
+  "url": "https://github.com/tisztamo/Junior/commit/1060f692af522b830f48f79d51e0cc0dbcc2a21c",
+  "author": "Sch\u00e4ffer Kriszti\u00e1n",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Remove unused code https://chat.openai.com/share/1cf88305-1cde-484e-88d4-786789c08f1d",
+  "authorAt": "2023-06-30T13:46:23.000+02:00",
+  "commitAt": "2023-06-30T13:46:23.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Clean Up Code",
+    "url": "https://chat.openai.com/share/1cf88305-1cde-484e-88d4-786789c08f1d",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/1060f692af522b830f48f79d51e0cc0dbcc2a21c",
+      "mentioned_property": "message",
+      "mentioned_author": "Sch\u00e4ffer Kriszti\u00e1n",
+      "mentioned_text": "Remove unused code https://chat.openai.com/share/1cf88305-1cde-484e-88d4-786789c08f1d"
+    },
+    "status": 200,
+    "dateOfConversation": "June 30, 2023",
+    "dateOfAccess": "2023-07-27 13:32:32.286265",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 1094,
+    "tokensOfAnswers": 680,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "You're the 'Contributor', an AI system aiding authors.\n\nYou are working on the source of a program, too large for your memory, so only part of it, the \"Working Set\" is provided here.\n\nYou will see a partial directory structure. Ask for the contents of subdirs marked with /... if needed.\n\nSome files are printed in the working set.\n\nOther files are only listed in their dir, so you know they exists, ask for the contents if needed.\n\n# Working set\n\nsrc/attention/\n\u251c\u2500\u2500 filesystem.js\n\u251c\u2500\u2500 printFolderStructure.js\n\u251c\u2500\u2500 processInterfaceSection.js\n\u251c\u2500\u2500 readAttention.js\n\nsrc/attention/readAttention.js:\nimport { processPath } from './filesystem.js';\nimport { processInterfaceSection } from './processInterfaceSection.js';\nimport { printFolderStructure } from './printFolderStructure.js';\n\nexport const readAttention = async (attentionArray = [], attentionRootDir = '.') => {\n  try {\n    const processedLines = await Promise.all(attentionArray.map(line => {\n      const trimmedLine = line.trim();\n      if (trimmedLine.endsWith(' iface')) {\n        const filePath = trimmedLine.slice(0, -6).trim();\n        return processInterfaceSection(attentionRootDir, filePath);\n      } else if (trimmedLine.endsWith('/')) {\n        return printFolderStructure(attentionRootDir, trimmedLine.slice(0, -1).trim());\n      } else {\n        return processPath(attentionRootDir, trimmedLine);\n      }\n    }));\n    return processedLines;\n  } catch (error) {\n    console.warn(error);\n    throw new Error(\"Error processing attention lines!\");\n  }\n};\n\n\nsrc/attention/filesystem.js:\n// filesystem - Provides utility functions to process paths in a filesystem.\n// It has two main functionalities:\n// - If a path points to a file, the module reads and displays the content of the file.\n// - If a path points to a directory, the module lists the files and subdirectories contained in that directory.\n// If a problem occurs while processing a particular file or directory, the module prints its name followed by \": err!\".\n\nimport fs from 'fs'\nimport path from 'path'\nimport util from 'util'\n\nconst readdir = util.promisify(fs.readdir)\nconst readFile = util.promisify(fs.readFile)\nconst stat = util.promisify(fs.stat)\n\nexport const processPath = async (root, p) => {\n  const fullPath = path.join(root, p)\n  try {\n    const stats = await stat(fullPath)\n    return stats.isDirectory() ? await processDirectory(fullPath) : await processFile(fullPath)\n  } catch (error) {\n    return `${p}: err!`\n  }\n}\n\nconst processFile = async (p) => {\n  try {\n    const content = await readFile(p, \"utf8\")\n    return `${p}:\\n${content}\\n`\n  } catch (error) {\n    return `${p}: err!\\n`\n  }\n}\n\nconst processDirectory = async (p) => {\n  try {\n    const content = await readdir(p)\n    return `${p}:\\n${content.join(', ')}\\n`\n  } catch (error) {\n    return `${p}: err!\\n`\n  }\n}\n\n\nsrc/attention/processInterfaceSection.js:\nimport fs from 'fs';\nimport path from 'path';\nimport util from 'util';\n\nconst readFile = util.promisify(fs.readFile);\n\nexport async function processInterfaceSection(attentionRootDir, filePath) {\n  const fullPath = path.join(attentionRootDir, filePath);\n  const fileData = await readFile(fullPath, \"utf8\");\n  const sections = fileData.split(\"##\");\n  const interfaceSection = sections.find(section => section.toLowerCase().includes(\"interface\"));\n\n  if (interfaceSection) {\n    return `${filePath} iface:\\n${interfaceSection.trim().substring(10)}`;\n  } else {\n    return fileData;\n  }\n}\n\n\nsrc/attention/printFolderStructure.js:\nimport fs from 'fs';\nimport path from 'path';\nimport util from 'util';\n\nconst readdir = util.promisify(fs.readdir);\nconst stat = util.promisify(fs.stat);\n\nexport const printFolderStructure = async (rootDir, dir) => {\n  let structure = dir + '/\\n';\n  try {\n    const entries = await readdir(path.join(rootDir, dir));\n    for (let i = 0; i < entries.length; i++) {\n      const entry = entries[i];\n      const entryStat = await stat(path.join(rootDir, dir, entry));\n      if (entryStat.isDirectory()) {\n        structure += '\u251c\u2500\u2500 ' + entry + '/...\\n';\n      } else {\n        structure += '\u251c\u2500\u2500 ' + entry + '\\n';\n      }\n    }\n    return structure;\n  } catch (error) {\n    console.warn(error);\n    throw new Error(\"Error processing directory structure!\");\n  }\n};\n\n\n\n# Task\n\nClean the code by removing unused imports, functions, variables, files, etc!\n\n\n# Output Format\n\nProvide the new file(s) as code blocks, each prefixed with its path and a colon.\nAvoid any explanatory text, as your output will be programmatically processed!\n\nDirectories are now handled by printing them out. processPath is older code, but now it should not process directories, only files, so it may be possible to completely eliminate it.",
+        "answer": "New Working Setsrc/attention/\n\u251c\u2500\u2500 filesystem.js\n\u251c\u2500\u2500 printFolderStructure.js\n\u251c\u2500\u2500 processInterfaceSection.js\n\u251c\u2500\u2500 readAttention.jssrc/attention/readAttention.js:[CODE_BLOCK_0]src/attention/filesystem.js:[CODE_BLOCK_1]src/attention/processInterfaceSection.js:[CODE_BLOCK_2]src/attention/printFolderStructure.js:[CODE_BLOCK_3]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "javascript",
+            "Content": "import { processFile } from './filesystem.js';\nimport { processInterfaceSection } from './processInterfaceSection.js';\nimport { printFolderStructure } from './printFolderStructure.js';\n\nexport const readAttention = async (attentionArray = [], attentionRootDir = '.') => {\n  try {\n    const processedLines = await Promise.all(attentionArray.map(line => {\n      const trimmedLine = line.trim();\n      if (trimmedLine.endsWith(' iface')) {\n        const filePath = trimmedLine.slice(0, -6).trim();\n        return processInterfaceSection(attentionRootDir, filePath);\n      } else if (trimmedLine.endsWith('/')) {\n        return printFolderStructure(attentionRootDir, trimmedLine.slice(0, -1).trim());\n      } else {\n        return processFile(attentionRootDir, trimmedLine);\n      }\n    }));\n    return processedLines;\n  } catch (error) {\n    console.warn(error);\n    throw new Error(\"Error processing attention lines!\");\n  }\n};\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "javascript",
+            "Content": "import fs from 'fs'\nimport path from 'path'\nimport util from 'util'\n\nconst readFile = util.promisify(fs.readFile)\n\nexport const processFile = async (root, p) => {\n  const fullPath = path.join(root, p)\n  try {\n    const content = await readFile(fullPath, \"utf8\")\n    return `${p}:\\n${content}\\n`\n  } catch (error) {\n    return `${p}: err!\\n`\n  }\n}\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_2]",
+            "Type": "javascript",
+            "Content": "import fs from 'fs';\nimport path from 'path';\nimport util from 'util';\n\nconst readFile = util.promisify(fs.readFile);\n\nexport async function processInterfaceSection(attentionRootDir, filePath) {\n  const fullPath = path.join(attentionRootDir, filePath);\n  const fileData = await readFile(fullPath, \"utf8\");\n  const sections = fileData.split(\"##\");\n  const interfaceSection = sections.find(section => section.toLowerCase().includes(\"interface\"));\n\n  if (interfaceSection) {\n    return `${filePath} iface:\\n${interfaceSection.trim().substring(10)}`;\n  } else {\n    return fileData;\n  }\n}\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_3]",
+            "Type": "javascript",
+            "Content": "import fs from 'fs';\nimport path from 'path';\nimport util from 'util';\n\nconst readdir = util.promisify(fs.readdir);\nconst stat = util.promisify(fs.stat);\n\nexport const printFolderStructure = async (rootDir, dir) => {\n  let structure = dir + '/\\n';\n  try {\n    const entries = await readdir(path.join(rootDir, dir));\n    for (let i = 0; i < entries.length; i++) {\n      const entry = entries[i];\n      const entryStat = await stat(path.join(rootDir, dir, entry));\n      if (entryStat.isDirectory()) {\n        structure += '\u251c\u2500\u2500 ' + entry + '/...\\n';\n      } else {\n        structure += '\u251c\u2500\u2500 ' + entry + '\\n';\n      }\n    }\n    return structure;\n  } catch (error) {\n    console.warn(error);\n    throw new Error(\"Error processing directory structure!\");\n  }\n};\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "current_prompt.yaml",
+      "before": "task: prompt/task/feature/implement.md\nformat: prompt/format/new_file_version.md\nattention:\n  - ./\n  - ./src/\n  - ./src/prompt/createPrompt.js\n  - ./src/attention/readAttention.js\nsaveto: current_prompt.md",
+      "after": "task: prompt/task/refactor/remove_unused.md\nformat: prompt/format/new_file_version.md\nattention:\n  - src/attention/\n  - src/attention/readAttention.js\n  - src/attention/filesystem.js\n  - src/attention/processInterfaceSection.js\n  - src/attention/printFolderStructure.js\nsaveto: current_prompt.md",
+      "total_deletions": 5,
+      "total_additions": 6
+    },
+    {
+      "filename": "src/attention/filesystem.js",
+      "before": "// filesystem - Provides utility functions to process paths in a filesystem.\n// It has two main functionalities:\n// - If a path points to a file, the module reads and displays the content of the file.\n// - If a path points to a directory, the module lists the files and subdirectories contained in that directory.\n// If a problem occurs while processing a particular file or directory, the module prints its name followed by \": err!\".\n\nimport fs from 'fs'\nimport path from 'path'\nimport util from 'util'\n\nconst readdir = util.promisify(fs.readdir)\nconst readFile = util.promisify(fs.readFile)\nconst stat = util.promisify(fs.stat)\n\nexport const processPath = async (root, p) => {\n  const fullPath = path.join(root, p)\n  try {\n    const stats = await stat(fullPath)\n    return stats.isDirectory() ? await processDirectory(fullPath) : await processFile(fullPath)\n  } catch (error) {\n    return `${p}: err!`\n  }\n}\n\nconst processFile = async (p) => {\n  try {\n    const content = await readFile(p, \"utf8\")\n    return `${p}:\\n${content}\\n`\n  } catch (error) {\n    return `${p}: err!\\n`\n  }\n}\n\nconst processDirectory = async (p) => {\n  try {\n    const content = await readdir(p)\n    return `${p}:\\n${content.join(', ')}\\n`\n  } catch (error) {\n    return `${p}: err!\\n`\n  }\n}",
+      "after": "import fs from 'fs'\nimport path from 'path'\nimport util from 'util'\n\nconst readFile = util.promisify(fs.readFile)\n\nexport const processFile = async (root, p) => {\n  const fullPath = path.join(root, p)\n  try {\n    const content = await readFile(fullPath, \"utf8\")\n    return `${p}:\\n${content}\\n`\n  } catch (error) {\n    return `${p}: err!\\n`\n  }\n}\n",
+      "total_deletions": 28,
+      "total_additions": 2
+    },
+    {
+      "filename": "src/attention/readAttention.js",
+      "before": "import { processPath } from './filesystem.js';\nimport { processInterfaceSection } from './processInterfaceSection.js';\nimport { printFolderStructure } from './printFolderStructure.js';\n\n      } else if (trimmedLine.endsWith('/')) {\n        return printFolderStructure(attentionRootDir, trimmedLine.slice(0, -1).trim());\n      } else {\n        return processPath(attentionRootDir, trimmedLine);\n      }\n    }));\n    return processedLines;",
+      "after": "import { processFile } from './filesystem.js';\nimport { processInterfaceSection } from './processInterfaceSection.js';\nimport { printFolderStructure } from './printFolderStructure.js';\n\n      } else if (trimmedLine.endsWith('/')) {\n        return printFolderStructure(attentionRootDir, trimmedLine.slice(0, -1).trim());\n      } else {\n        return processFile(attentionRootDir, trimmedLine);\n      }\n    }));\n    return processedLines;",
+      "total_deletions": 2,
+      "total_additions": 2
+    }
+  ]
+}

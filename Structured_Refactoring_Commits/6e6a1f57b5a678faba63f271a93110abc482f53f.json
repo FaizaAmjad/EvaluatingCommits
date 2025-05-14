@@ -1,0 +1,69 @@
+{
+  "sha": "6e6a1f57b5a678faba63f271a93110abc482f53f",
+  "url": "https://github.com/tisztamo/Junior/commit/6e6a1f57b5a678faba63f271a93110abc482f53f",
+  "author": "sidlo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Update .gitignore with more .md backup patterns https://chat.openai.com/share/feaccf91-031b-4fac-872e-ec9b2cf30716",
+  "authorAt": "2023-09-15T11:52:05.000+02:00",
+  "commitAt": "2023-09-15T11:52:05.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Update .gitignore for .md backups",
+    "url": "https://chat.openai.com/share/feaccf91-031b-4fac-872e-ec9b2cf30716",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/6e6a1f57b5a678faba63f271a93110abc482f53f",
+      "mentioned_property": "message",
+      "mentioned_author": "sidlo",
+      "mentioned_text": "Update .gitignore with more .md backup patterns https://chat.openai.com/share/feaccf91-031b-4fac-872e-ec9b2cf30716"
+    },
+    "status": 200,
+    "dateOfConversation": "September 15, 2023",
+    "dateOfAccess": "2023-10-13 00:03:16.509446",
+    "numberOfPrompts": 3,
+    "tokensOfPrompts": 416,
+    "tokensOfAnswers": 201,
+    "model": "GPT-4",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "You are AI Junior, you code like Donald Knuth.\n# Working set\n\n./.gitignore:\n```\n/secret.sh\n/node_modules/\n/tmp/\n/prompt.yaml\n/prompt.md\n/change.sh\n\nnode_modules\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nWhen updating .md files, backup files might be created with the old content. We need to gitignore them: add usual patterns to .gitignore, like .md.backup, .md.bak etc. \n\n\n## Project Specifics\n\n\n\n# Sample, remove this line. Keep this short and clean. Note that Junior does not like large files!\n\n\n- Every js file should *only export a single function*!\n- Prefer *async/await* over promises!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: Debian\n\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n\n\n",
+        "answer": "ChatGPT[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Update .gitignore for .md backup files\"\necho \"Plan:\"\necho \"1. Append .md backup patterns to .gitignore file.\"\n\ncat >> ./.gitignore << 'EOF'\n# Backup patterns for .md files\n*.md.backup\n*.md.bak\n*.md~ \nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p2",
+        "prompt": "please add some more common backup patterns. ",
+        "answer": "ChatGPT[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Update .gitignore with more .md backup patterns\"\necho \"Plan:\"\necho \"1. Append various .md backup patterns to .gitignore file.\"\n\ncat >> ./.gitignore << 'EOF'\n# Backup patterns for .md files\n*.md.backup\n*.md.bak\n*.md~\n*.md.tmp\n*.md.old\n*.md.orig\n*.md.save\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "prompt/history/2023/09/15/11:50_Update .gitignore with more .md backup patterns/change.sh",
+      "before": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Update .gitignore with more .md backup patterns\"\necho \"Plan:\"\necho \"1. Append various .md backup patterns to .gitignore file, starting with a new line.\"\n\ncat >> ./.gitignore << 'EOF'\n\n# Backup patterns for .md files\n*.md.backup\n*.md.bak\n*.md~\n*.md.tmp\n*.md.old\n*.md.orig\n*.md.save\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 0,
+      "total_additions": 19
+    },
+    {
+      "filename": "prompt/history/2023/09/15/11:50_Update .gitignore with more .md backup patterns/prompt.yaml",
+      "before": "",
+      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./.gitignore\nrequirements: >-\n  When updating .md files, backup files might be created with the old content.\n  We need to gitignore them: add usual patterns to .gitignore, like .md.backup,\n  .md.bak etc. ",
+      "total_deletions": 0,
+      "total_additions": 7
+    }
+  ]
+}

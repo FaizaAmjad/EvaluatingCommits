@@ -1,0 +1,71 @@
+{
+  "sha": "701444e1037e8be431f67c0eca5873e03c4ef375",
+  "url": "https://github.com/tisztamo/Junior/commit/701444e1037e8be431f67c0eca5873e03c4ef375",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Factor out commit message to separate component https://chat.openai.com/share/ee1d8b9f-99df-42fe-8c11-831c76f65754",
+  "authorAt": "2023-08-02T15:45:08.000+02:00",
+  "commitAt": "2023-08-02T15:45:08.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Commit Message Refactoring.",
+    "url": "https://chat.openai.com/share/ee1d8b9f-99df-42fe-8c11-831c76f65754",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/701444e1037e8be431f67c0eca5873e03c4ef375",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Factor out commit message to separate component https://chat.openai.com/share/ee1d8b9f-99df-42fe-8c11-831c76f65754"
+    },
+    "status": 200,
+    "dateOfConversation": "August 2, 2023",
+    "dateOfAccess": "2023-08-03 09:51:13.355228",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 633,
+    "tokensOfAnswers": 369,
+    "model": "",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "# Working set\n\nsrc/frontend/App.jsx:\n```\nimport GenerateButton from './components/GenerateButton';\nimport ExecuteButton from './components/ExecuteButton';\nimport RollbackButton from './components/RollbackButton';\nimport CommitButton from './components/CommitButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\nimport NavBar from './components/NavBar';\nimport ExecutionResultDisplay from './components/ExecutionResultDisplay';\nimport GitStatusDisplay from './components/GitStatusDisplay';\n\nconst App = () => {\n  return (\n    <div class=\"m-2\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />\n        <PromptDescriptor />\n        <GenerateButton />\n        <PromptDisplay />\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <GitStatusDisplay />\n        <CommitButton />\n        <RollbackButton />\n      </div>\n    </div>\n  );\n};\n\nexport default App;\n\n```\n\nsrc/frontend/components/CommitButton.jsx:\n```\nimport { postCommit } from '../service/postCommit';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n  };\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <div>\n      <input type=\"text\" class=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" onInput={handleChange} />\n      <button class=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n    </div>\n  );\n};\n\nexport default CommitButton;\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nFactor out the commit message to a separate component!\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Factor out commit message to separate component\"\necho \"Plan:\"\necho \"1. Create a new file CommitMessageInput.jsx that will contain the input logic for the commit message.\"\necho \"2. Update CommitButton.jsx to import and utilize the new CommitMessageInput component.\"\necho \"3. Update App.jsx to include the new component if necessary.\"\n\n# Step 1: Creating new CommitMessageInput.jsx component\ncat > src/frontend/components/CommitMessageInput.jsx << 'EOF'\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\n\nconst CommitMessageInput = (props) => {\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" class=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\nEOF\n\n# Step 2: Updating CommitButton.jsx to include new component\ncat > src/frontend/components/CommitButton.jsx << 'EOF'\nimport { postCommit } from '../service/postCommit';\nimport CommitMessageInput from './CommitMessageInput';\nimport { commitMessage } from '../stores/commitMessage';\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n  };\n\n  return (\n    <div>\n      <CommitMessageInput />\n      <button class=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n    </div>\n  );\n};\n\nexport default CommitButton;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Implement Commit button feature\"\necho \"Plan:\"\necho \"1. Create a new signal in the stores for the commit message.\"\necho \"2. Create a new service function to make a POST request to the commit/ endpoint.\"\necho \"3. Create a new CommitButton component that includes an input field for the commit message and a button to trigger the commit.\"\necho \"4. Modify App.jsx to include the new CommitButton component above the RollbackButton component.\"\n\n# Step 1: Create a new signal in the stores for the commit message\ncat <<EOF >src/frontend/stores/commitMessage.js\nimport { createSignal } from 'solid-js';\n\nconst [commitMessage, setCommitMessage] = createSignal('');\n\nexport { commitMessage, setCommitMessage };\nEOF\n\n# Step 2: Create a new service function to make a POST request to the commit/ endpoint\ncat <<EOF >src/frontend/service/postCommit.js\nimport { getBaseUrl } from '../getBaseUrl';\n\nconst postCommit = async (message) => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(\\`\\${baseUrl}/commit\\`, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ message }),\n  });\n\n  const data = await response.json();\n\n  return data;\n};\n\nexport { postCommit };\nEOF\n\n# Step 3: Create a new CommitButton component\ncat <<EOF >src/frontend/components/CommitButton.jsx\nimport { postCommit } from '../service/postCommit';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n  };\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <div>\n      <input type=\"text\" class=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" onInput={handleChange} />\n      <button class=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n    </div>\n  );\nexport default CommitButton;\nEOF\n\n# Step 4: Modify App.jsx to include the new CommitButton component\ncat <<EOF >src/frontend/App.jsx\nimport GenerateButton from './components/GenerateButton';\nimport ExecuteButton from './components/ExecuteButton';\nimport RollbackButton from './components/RollbackButton';\nimport CommitButton from './components/CommitButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\nimport NavBar from './components/NavBar';\nimport ExecutionResultDisplay from './components/ExecutionResultDisplay';\nimport GitStatusDisplay from './components/GitStatusDisplay';\n\nconst App = () => {\n  return (\n    <div class=\"m-2\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />\n        <PromptDescriptor />\n        <GenerateButton />\n        <PromptDisplay />\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <GitStatusDisplay />\n        <CommitButton />\n        <RollbackButton />\n      </div>\n    </div>\n  );\n};\n\nexport default App;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Factor out commit message to separate component\"\necho \"Plan:\"\necho \"1. Create a new file CommitMessageInput.jsx that will contain the input logic for the commit message.\"\necho \"2. Update CommitButton.jsx to import and utilize the new CommitMessageInput component.\"\necho \"3. Update App.jsx to include the new component if necessary.\"\n\n# Step 1: Creating new CommitMessageInput.jsx component\ncat > src/frontend/components/CommitMessageInput.jsx << 'EOF'\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\n\nconst CommitMessageInput = (props) => {\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" class=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\nEOF\n\n# Step 2: Updating CommitButton.jsx to include new component\ncat > src/frontend/components/CommitButton.jsx << 'EOF'\nimport { postCommit } from '../service/postCommit';\nimport CommitMessageInput from './CommitMessageInput';\nimport { commitMessage } from '../stores/commitMessage';\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n  };\n\n  return (\n    <div>\n      <CommitMessageInput />\n      <button class=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n    </div>\n  );\nexport default CommitButton;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 71,
+      "total_additions": 20
+    },
+    {
+      "filename": "prompt.yaml",
+      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/\n  - src/frontend/stores/\n  - src/frontend/components/RollbackButton.jsx\n  - src/frontend/App.jsx\n  - src/frontend/service/resetGit.js\n  - src/frontend/stores/gitStatus.js\nrequirements: >\n  Create a green Commit button over the rollback that posts to the commit/\n  endpoint.\n\n  Commit message goes to the message field and is stored in a new signal in\n  stores/\nos: OSX",
+      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/CommitButton.jsx\nrequirements: >\n  Factor out the commit message to a separate component!\nos: OSX",
+      "total_deletions": 10,
+      "total_additions": 2
+    },
+    {
+      "filename": "src/frontend/components/CommitButton.jsx",
+      "before": "import { postCommit } from '../service/postCommit';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n  };\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <div>\n      <input type=\"text\" class=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" onInput={handleChange} />\n      <button class=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n    </div>\n  );",
+      "after": "import { postCommit } from '../service/postCommit';\nimport CommitMessageInput from './CommitMessageInput';\nimport { commitMessage } from '../stores/commitMessage';\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n  };\n\n  return (\n    <div>\n      <CommitMessageInput />\n      <button class=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n    </div>\n  );",
+      "total_deletions": 6,
+      "total_additions": 3
+    },
+    {
+      "filename": "src/frontend/components/CommitMessageInput.jsx",
+      "before": "",
+      "after": "import { commitMessage, setCommitMessage } from '../stores/commitMessage';\n\nconst CommitMessageInput = (props) => {\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" class=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;",
+      "total_deletions": 0,
+      "total_additions": 13
+    }
+  ]
+}

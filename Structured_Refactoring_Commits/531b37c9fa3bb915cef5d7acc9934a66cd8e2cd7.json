@@ -1,0 +1,55 @@
+{
+  "sha": "531b37c9fa3bb915cef5d7acc9934a66cd8e2cd7",
+  "url": "https://github.com/chaos-jetzt/website_pelican/commit/531b37c9fa3bb915cef5d7acc9934a66cd8e2cd7",
+  "author": "rugk",
+  "repoName": "chaos-jetzt/website_pelican",
+  "repoLanguage": "CSS",
+  "message": "feat: Add .devcontainer file to ease working with GitHub codespaces or similar\n\nSee https://containers.dev/\nThis is e.g. used by GitHub: https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/introduction-to-dev-containers\n\nYou can use it in GitHub Codespaces, just go to github.dev (change the URL from GitHub.com to GitHub.dev) and it should bring up such a cloud development environment with everything preinstalled.\n\nI used this for https://github.com/chaos-jetzt/website_pelican/pull/37 and it worked glad.\n\nCreated with credits to [ChatGPT](https://chat.openai.com/share/4404c038-ff14-446b-a081-b2c33e187486) as I had no real experience with that.\nI also tried other thing slike creating a `launch.json` for VSCode there, which failed.\nAnyway, you hardly need to debug your Python script hehe.",
+  "authorAt": "2023-08-24T18:04:51.000Z",
+  "commitAt": "2023-08-24T18:04:51.000Z",
+  "chatgpt_sharing": {
+    "title": "Python Pelican Dev Setup",
+    "url": "https://chat.openai.com/share/4404c038-ff14-446b-a081-b2c33e187486",
+    "mention": {
+      "mentioned_url": "https://github.com/chaos-jetzt/website_pelican/commit/531b37c9fa3bb915cef5d7acc9934a66cd8e2cd7",
+      "mentioned_property": "message",
+      "mentioned_author": "rugk",
+      "mentioned_text": "feat: Add .devcontainer file to ease working with GitHub codespaces or similar\n\nSee https://containers.dev/\nThis is e.g. used by GitHub: https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/adding-a-dev-container-configuration/introduction-to-dev-containers\n\nYou can use it in GitHub Codespaces, just go to github.dev (change the URL from GitHub.com to GitHub.dev) and it should bring up such a cloud development environment with everything preinstalled.\n\nI used this for https://github.com/chaos-jetzt/website_pelican/pull/37 and it worked glad.\n\nCreated with credits to [ChatGPT](https://chat.openai.com/share/4404c038-ff14-446b-a081-b2c33e187486) as I had no real experience with that.\nI also tried other thing slike creating a `launch.json` for VSCode there, which failed.\nAnyway, you hardly need to debug your Python script hehe."
+    },
+    "status": 200,
+    "dateOfConversation": "August 24, 2023",
+    "dateOfAccess": "2023-10-13 00:07:53.501109",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 21,
+    "tokensOfAnswers": 386,
+    "model": "Default (GPT-3.5)",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "In general, what would be a laucnhjson or .devcontainer for Python pelican projects?",
+        "answer": "ChatGPTFor a Python Pelican project, you can set up a launch.json file and a .devcontainer configuration to streamline your development process. Here's a concise guide to help you get started:launch.json:[CODE_BLOCK_0].devcontainer/devcontainer.json:[CODE_BLOCK_1]These configurations assume that you have a Pelican project set up with a pelicanconf.py configuration file. The launch.json file is configured for debugging your Pelican project, while .devcontainer/devcontainer.json sets up a development environment using a Docker container.Remember to adapt paths and specific settings to match your project's structure and requirements. This setup should help you efficiently work on your Python Pelican projects. If you have any further questions or need clarifications on specific aspects, feel free to ask.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "json",
+            "Content": "{\n  \"version\": \"0.2.0\",\n  \"configurations\": [\n    {\n      \"name\": \"Python Pelican Debug\",\n      \"type\": \"python\",\n      \"request\": \"launch\",\n      \"program\": \"${workspaceFolder}/path/to/pelican\",\n      \"args\": [\"-s\", \"path/to/pelicanconf.py\"],\n      \"cwd\": \"${workspaceFolder}\",\n      \"stopOnEntry\": false,\n      \"console\": \"integratedTerminal\",\n      \"justMyCode\": false,\n      \"debugOptions\": [\"RedirectOutput\"]\n    }\n  ]\n}\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "json",
+            "Content": "{\n  \"name\": \"Python Pelican Dev Container\",\n  \"image\": \"python:3.x\", // Choose an appropriate Python version\n  \"settings\": {\n    \"terminal.integrated.shell.linux\": \"/bin/bash\"\n  },\n  \"extensions\": [\n    // List any VS Code extensions you need for Pelican development\n  ],\n  \"forwardPorts\": [\n    // Specify any ports to forward if your Pelican project uses a local server\n  ],\n  \"postCreateCommand\": \"pip install pelican\" // Install Pelican after container creation\n}\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": ".devcontainer/devcontainer.json",
+      "before": "",
+      "after": "{\n  \"name\": \"Pelican Development\",\n  \"customizations\": {\n    \"vscode\": {\n      \"extensions\": [\n        \"ms-python.python\",\n        \"ms-python.pylint\",\n        \"ms-vscode.makefile-tools\",\n        \"github.codespaces\"\n      ]\n    }\n  },\n  \"updateContentCommand\": \"pip install -r requirements.txt\",\n  \"postStartCommand\": \"make devserver\",\n  \"forwardPorts\": [8000],\n  \"containerEnv\": {\n    \"LOCALE\": \"de_DE\"\n  }\n}",
+      "total_deletions": 0,
+      "total_additions": 19
+    }
+  ]
+}
