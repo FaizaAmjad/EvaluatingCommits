@@ -184,6 +184,9 @@ def main():
              # Check if the file has an excluded extension
              if any(path.endswith(ext) for ext in excluded_files):
                  return True
+             # Check if the filename starts with a dot (hidden files)
+             if os.path.basename(path).startswith('.'):
+                 return True
              return False
 
             j = 0
