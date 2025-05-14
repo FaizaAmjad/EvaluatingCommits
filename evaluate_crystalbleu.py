@@ -1,5 +1,14 @@
 from utils.tokenization import tokenize_code
 from crystalbleu import corpus_bleu, SmoothingFunction
+import fractions
+
+# Monkey patch to fix crystalBLEU issue with Fraction
+_orig_fraction_new = fractions.Fraction.__new__
+def _fixed_fraction_new(cls, *args, **kwargs):
+    kwargs.pop('_normalize', None)
+    return _orig_fraction_new(cls, *args, **kwargs)
+
+fractions.Fraction.__new__ = staticmethod(_fixed_fraction_new) 
 
 
 def evaluate_crystalbleu(tokens_after, tokens_code, trivially_shared):

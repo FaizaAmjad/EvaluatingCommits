@@ -6,6 +6,7 @@ import glob
 from collections import Counter
 from crystalbleu import corpus_bleu, SmoothingFunction
 import fractions
+from evaluate_dev_gpt_score import score_dev_vs_gpt_changes
 
 # Monkey patch to fix crystalBLEU issue with Fraction
 _orig_fraction_new = fractions.Fraction.__new__
@@ -116,7 +117,7 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
                 print(f"Skipping malformed file_change in {file_path}: {file_change}")
                 continue
             filename = file_change.get("filename", "")
-            # before = file_change.get("before", "")
+            before = file_change.get("before", "")
             after = file_change.get("after", "")
             print (f"filename {filename}")
             #before = strip_comments(file_change.get("before", ""))
@@ -131,6 +132,7 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
 
                 best_line_match = 0.0
                 best_match_prompt_id = None
+                best_prompt_convo = None
 
                 # Compare after vs code snippets from conversations
                 for convo in conversations:
@@ -160,10 +162,19 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
                         if crystalbleu_score > best_crystalbleu:
                             best_crystalbleu = crystalbleu_score
                             best_prompt_id = prompt_id
+                            best_prompt_convo = convo
 
                         if line_match_score > best_line_match:
                             best_line_match = line_match_score
                             best_match_prompt_id = prompt_id
+                            
+                
+                dev_changed_score = 0.0
+                gpt_reused_score = 0.0
+
+                # Calculate dev_changed and gpt_reused_score
+                if best_prompt_convo:
+                    dev_changed_score, gpt_reused_score =  score_dev_vs_gpt_changes(before, after, best_prompt_convo)
 
                 results.append({
                     "sha": sha,
@@ -171,7 +182,9 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
                     "best_crystalbleu_after_vs_chatgpt": round(best_crystalbleu, 4),
                     "best_prompt_id": best_prompt_id,
                     "line_exact_match": round(line_match_score, 4),
-                    "line_match_prompt_id": best_match_prompt_id
+                    "line_match_prompt_id": best_match_prompt_id,
+                    "dev_changed_score": round(dev_changed_score, 4),
+                    "gpt_reused_score": round(gpt_reused_score, 4)
                 })
 
             except Exception as e:
@@ -192,7 +205,7 @@ def evaluate_crystalbleu_scores(file_paths, trivially_shared, output_csv_path):
  
 def process_commit_data(input_folder: str, output_csv_path: str, top_k, ngram_range, file_limit):
     # Get all JSON files in the folder
-    json_files = glob.glob(os.path.join(input_folder, "*.json"))
+    json_files = glob.glob(os.path.join(input_folder, "*.json"))[:file_limit]
     if not json_files:
         print("No JSON files found in folder.")
         return
