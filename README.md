@@ -16,6 +16,8 @@ This folder (`DevGPT_Commits_Dataset/`) contains commit history data from the [D
 
 
 - `DevGPT_Commit_Dataset/`: Raw commit data in JSON format
+- `keyword_analysis.py`: Extracts, cleans,and analyzes commit messages from JSON files to find and save frequent improtant words.
+- `final_keywords_extraction.py`: Combines keywords from commits and literature, checks matches, fills in missing ones using word frequency, and saves the final list.
 - `Structured_Refactoring_Commits/`: Restructured data of filtered refactoring commits (each file named by its SHA key)
 - `filtered_commits.json` : Filtered commit objects containing refactoring keywords
 - `extract_refactoring_commits.py`: Script to extract unique commit objects with refactoring-related terms
@@ -24,7 +26,16 @@ This folder (`DevGPT_Commits_Dataset/`) contains commit history data from the [D
     - Changed files'name
     - Number of additions and deletions
     - Code before and after changes
-
+- `utils/`:  contains helper modules for analyzing code using n-grams and for tokenizing source code.
+- `ngrams_analysis.py`:It collects frequently repeated n-grams (word patterns) from the dataset.
+- `tokenization.py`:Preprocesses code by stripping comments, tokenizing, and extracting n-grams.
+- `bad_urls.json`: It lists broken or inaccessible GitHub commit URLs to exclude from analysis.
+- `evaluate_crystalbleu.py`: Finds which AI-generated code is most similar to the final code by comparing words and skipping common ones.
+- `evaluate_dev_gpt_score.py`: This code checks how much of the new code written by the developer is similar to the AI’s suggestion. It compares lines from the final version with both the original and AI-generated versions. It calculates two scores, one for how much the developer changed on their own and how much the developer reused from the AI’s code.
+- `evaluate_line_match.py`: This code compares lines between AI code and commited code and returns the percentage of exact matches.
+- `crystalBLEU_comparison.py`: This script calculates BLEU scores and line matches between developer and GPT code, processing JSON commit files and saving the results in a CSV.
+- `evaluation_results.csv`: It shows evaluation results.
+- `process_commits.py`: It processes commit data from JSON files, calculates CrystalBLEU, line match scores, and developer-GPT change scores, then saves the results to a CSV file.
 - `remove_htmlcontent.py`: Removes HTML content from raw data
 - `structure_commits.py`: Structures refactoring commit data into a new format for data analysis
 
@@ -54,6 +65,9 @@ Run the following script in order:
 6. Filter a collection of refactoring commits using the refactoring terms ``` python extract_refactoring_commits.py```
 7. Structure Filtered Commits ``` python structure_commits.py```
 8. Fetch code changes for all commits ``` python Github_Fetch.py```
+9. INSTRUCTUÍON FOR CRYSTAL BLEU ETC AND NEXT STEPS ADD-PLACEHOLDER
+10. PLACEHOLDER
+11. PLACEHOLDER
 
 ## GitHub Token
 
@@ -70,6 +84,7 @@ Our analysis showed that:
 ATTACH SCREENSHOTS
 
 ## Future Work
+These are potential areas that future work and studies can be based upon. Our research provides a strong basis for further studies in several areas- some of them are listed below:
 - Use other LLMs to analyse these interactions
 - Extend analysis to non-refactoring tasks (e.g., bug fixes or feature additions)
 
