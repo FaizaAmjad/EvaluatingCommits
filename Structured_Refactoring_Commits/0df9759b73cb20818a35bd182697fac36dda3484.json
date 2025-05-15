@@ -218,8 +218,13 @@
       }
     ]
   },
-  "code": {
-    "before": "",
-    "after": ""
-  }
+  "code": [
+    {
+      "filename": "",
+      "before": "",
+      "after": "",
+      "total_deletions": 0,
+      "total_additions": 0
+    }
+  ]
 }
