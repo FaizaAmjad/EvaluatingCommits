@@ -59,13 +59,6 @@
       "after": "{\n  \"name\": \"@aijunior/dev\",\n  \"version\": \"0.0.3\",\n  \"description\": \"Your AI Contributor which codes itself\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"vite\": \"^4.3.9\",\n    \"vite-plugin-solid\": \"^2.7.0\",\n    \"ws\": \"^8.13.0\",\n    \"xterm\": \"^5.2.1\",\n    \"@types/js-yaml\": \"^4.0.5\",\n    \"autoprefixer\": \"^10.4.14\",\n    \"highlight.js\": \"^11.8.0\",\n    \"markdown-it\": \"^13.0.1\",\n    \"postcss\": \"^8.4.26\",\n    \"tailwindcss\": \"^3.3.3\"\n  },\n  \"directories\": {\n    \"doc\": \"doc\"\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/Junior/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/Junior#readme\"\n}",
       "total_deletions": 13,
       "total_additions": 10
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/doc/improve.md\nattention:\n  - src/frontend/startVite.js\nrequirements: >\n  Rewrite startVite to use the js api!\n  Here is a sample from the vite docs for your help:\n\n  import { fileURLToPath } from 'url'\n  import { createServer } from 'vite'\n\n  const __dirname = fileURLToPath(new URL('.', import.meta.url))\n\n  ;(async () => {\n    const server = await createServer({\n      root: __dirname,\n      server: {\n        port: 1337,\n      },\n    })\n    await server.listen()\n\n    server.printUrls()\n  })()\n\n\n  default port is ok, but be sure to open the browser and start from the dir found in the current version of startVite.js\nos: OSX",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - package.json\nrequirements: |\n  Uninstall babel-preset-solid!\n  Move every other items from devDependencies to dependencies\n  Set description to \"Your AI Contributor which codes itself\"\nos: OSX",
-      "total_deletions": 25,
-      "total_additions": 6
     }
   ]
 }

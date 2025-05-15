@@ -47,13 +47,6 @@
       "total_additions": 23
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/\n  - src/frontend/service/\n  - src/frontend/App.jsx\n  - src/frontend/components/StartButton.jsx\n  - src/frontend/generatePrompt.js\nrequirements: >\n  Add a secondary button: \"Paste & Execute change\"\n\n  When clicked, it should paste the change from the clipboard and\n\n  send it to the backend for execution.\n\n  Create src/frontend/service/executeChange.js for sending the change to the\n  backend.\n",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/backend/\n  - src/backend/setupRoutes.js\n  - src/backend/generateHandler.js\nrequirements: |\n  Create a new directory for handlers and move generateHandler to it.",
-      "total_deletions": 15,
-      "total_additions": 6
-    },
-    {
       "filename": "src/backend/handlers/generateHandler.js",
       "before": "import processPrompt from '../prompt/promptProcessing.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;",
       "after": "import processPrompt from '../../prompt/promptProcessing.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;",

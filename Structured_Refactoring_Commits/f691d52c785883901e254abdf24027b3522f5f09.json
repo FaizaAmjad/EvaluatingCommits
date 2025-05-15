@@ -47,13 +47,6 @@
       "total_additions": 12
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\nrequirements: |\n  No need for the outer div, remove it.\n  Add min-h-screen to the other one.\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/getBaseUrl.js\nrequirements: |\n  The default baseurl should be not on localhost but on the same protocol and host as the frontend.\n  Port should remain 10101\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 3
-    },
-    {
       "filename": "src/frontend/getBaseUrl.js",
       "before": "    const urlParams = new URLSearchParams(queryString);\n    const baseUrl = urlParams.get('baseUrl');\n\n    return baseUrl || 'http://localhost:10101';\n};",
       "after": "    const urlParams = new URLSearchParams(queryString);\n    const baseUrl = urlParams.get('baseUrl');\n\n    // Use the current protocol and host for the default baseUrl\n    const defaultBaseUrl = `${window.location.protocol}//${window.location.hostname}:10101`;\n    return baseUrl || defaultBaseUrl;\n};",

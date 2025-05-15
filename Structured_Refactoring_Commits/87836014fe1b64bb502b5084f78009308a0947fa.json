@@ -47,13 +47,6 @@
       "total_additions": 34
     },
     {
-      "filename": "prompt/history/2023/08/28/15:57_Simplify git reset function/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/git/resetGit.js\nrequirements: >-\n  The current git reset method tries to retain the prompt files.\n\n  But we recently gitignored them so no need to handle them anymore.\n\n\n  resetGit should do the following:\n\n  - Delete every new files and dirs that are not gitignored\n\n  - Undo every modifications since the last commit\n\n  - And nothing else. Maybe the stash creation and dropping is also not needed\n  anymore:\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 18
-    },
-    {
       "filename": "src/git/resetGit.js",
       "before": "\nexport default async function resetGit() {\n  try {\n    await executeCommand('git stash -u');\n\n    await executeCommand('git clean -f -d && git reset --hard');\n\n    await executeCommand('git checkout stash@{0} -- prompt.yaml', true);\n    await executeCommand('git checkout stash@{0} -- prompt.md', true);\n\n    await executeCommand('git stash drop');\n  } catch (err) {\n    console.error(`An error occurred: ${err}`);\n  }\n}\n\nasync function executeCommand(command, ignoreErrors = false) {\n  try {\n    console.log(`Running command: ${command}`);\n    const { stdout } = await exec(command);\n    console.log(`stdout: ${stdout}`);\n  } catch (err) {\n    if (!ignoreErrors) {\n      throw err;\n    }\n    console.warn(`An error occurred while executing the command: ${command}. Continuing...`);\n  }\n}",
       "after": "\nexport default async function resetGit() {\n  try {\n    await executeCommand('git clean -f -d');\n    await executeCommand('git reset --hard');\n  } catch (err) {\n    console.error(`An error occurred: ${err}`);\n  }\n}\n\nasync function executeCommand(command) {\n  try {\n    console.log(`Running command: ${command}`);\n    const { stdout } = await exec(command);\n    console.log(`stdout: ${stdout}`);\n  } catch (err) {\n    console.error(`An error occurred while executing the command: ${command}. Error: ${err}`);\n  }\n}",

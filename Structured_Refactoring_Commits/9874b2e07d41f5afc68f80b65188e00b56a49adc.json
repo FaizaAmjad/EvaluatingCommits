@@ -47,13 +47,6 @@
       "total_additions": 50
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/components/ExecutionResultDisplay.jsx\nrequirements: |\n  Do not display the terminal when the execution result is empty.\n\n",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/frontend/components/ResetButton.jsx\n  - src/frontend/App.jsx\nrequirements: >\n  Rename the reset git button to RollbackButton with label \"Roll Back to Last\n  Commit\".",
-      "total_deletions": 5,
-      "total_additions": 6
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "import GenerateButton from './components/GenerateButton';\nimport ExecuteButton from './components/ExecuteButton';\nimport ResetButton from './components/ResetButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\n        <PromptDisplay />\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <ResetButton />\n      </div>\n    </div>\n  );",
       "after": "import GenerateButton from './components/GenerateButton';\nimport ExecuteButton from './components/ExecuteButton';\nimport RollbackButton from './components/RollbackButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\n        <PromptDisplay />\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <RollbackButton />\n      </div>\n    </div>\n  );",

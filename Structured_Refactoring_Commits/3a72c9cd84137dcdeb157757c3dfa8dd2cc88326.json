@@ -47,13 +47,6 @@
       "total_additions": 21
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - scripts/updateLogo.js\nrequirements: |\n  file:///Users/ko/projects-new/Junior/scripts/updateLogo.js:15\n      const faviconBuffer = await sharp(inputSVGPath).resize(16, 16).ico().toBuffer();\n                                                                    ^\n\n  TypeError: sharp(...).resize(...).ico is not a function\n      at updateLogo (file:///Users/ko/projects-new/Junior/scripts/updateLogo.js:15:68)\n\n  Node.js v18.5.0\nos: OSX",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - src/attention/readAttention.js\nrequirements: |\n  Remove the try-catch, allow errors out!\nos: OSX",
-      "total_deletions": 9,
-      "total_additions": 2
-    },
-    {
       "filename": "src/attention/readAttention.js",
       "before": "import { printFolderStructure } from './printFolderStructure.js';\n\nexport const readAttention = async (attentionArray = [], attentionRootDir = '.') => {\n  try {\n    if (!attentionArray) {\n      return [];\n    }\n    const processedLines = await Promise.all(attentionArray.map(line => {\n      const trimmedLine = line.trim();\n      if (trimmedLine.endsWith(' iface')) {\n        const filePath = trimmedLine.slice(0, -6).trim();\n        return processInterfaceSection(attentionRootDir, filePath);\n      } else if (trimmedLine.endsWith('/')) {\n        return printFolderStructure(attentionRootDir, trimmedLine.slice(0, -1).trim());\n      } else {\n        return processFile(attentionRootDir, trimmedLine);\n      }\n    }));\n    return processedLines;\n  } catch (error) {\n    console.warn(error);\n    throw new Error(\"Error processing attention lines!\");\n  }\n};",
       "after": "import { printFolderStructure } from './printFolderStructure.js';\n\nexport const readAttention = async (attentionArray = [], attentionRootDir = '.') => {\n  if (!attentionArray) {\n    return [];\n  }\n  const processedLines = await Promise.all(attentionArray.map(line => {\n    const trimmedLine = line.trim();\n    if (trimmedLine.endsWith(' iface')) {\n      const filePath = trimmedLine.slice(0, -6).trim();\n      return processInterfaceSection(attentionRootDir, filePath);\n    } else if (trimmedLine.endsWith('/')) {\n      return printFolderStructure(attentionRootDir, trimmedLine.slice(0, -1).trim());\n    } else {\n      return processFile(attentionRootDir, trimmedLine);\n    }\n  }));\n  return processedLines;\n};",

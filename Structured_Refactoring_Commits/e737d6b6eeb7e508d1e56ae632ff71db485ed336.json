@@ -85,13 +85,6 @@
       "total_additions": 2
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/custom.md\nattention:\n  - ./\n  - src/frontend/components/GenerateButton.jsx\nrequirements: |\n  Uninstall clipboard-copy and use the html5 api directly!\nos: OSX",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/ExecutionResultDisplay.jsx\nrequirements: |\n  No interaction is needed, so xterm.js is too heavyweight.\n  Uninstall it and rewrite ExecutionResultDisplay to use a div\n  but still handle ansi color codes!\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/components/ExecutionResultDisplay.jsx",
       "before": "import { onMount, createEffect, onCleanup } from 'solid-js';\nimport { Terminal } from 'xterm';\nimport 'xterm/css/xterm.css';\nimport { executionResult } from '../stores/executionResult';\n\nconst ExecutionResultDisplay = () => {\n  let container;\n  let term;\n\n  onMount(() => {\n    term = new Terminal({ convertEol: true, rows: 7 });\n    term.open(container);\n  });\n\n  createEffect(() => {\n    if (term && executionResult() !== '') {\n      term.write(executionResult());\n    }\n  });\n\n  onCleanup(() => {\n    if (term) {\n      term.dispose();\n    }\n  });\n",
       "after": "import { createEffect } from 'solid-js';\nimport { executionResult } from '../stores/executionResult';\nimport ansi_up from 'ansi_up';\n\nconst ExecutionResultDisplay = () => {\n  let container;\n\n  createEffect(() => {\n    if (container && executionResult() !== '') {\n      const ansi_up_instance = new ansi_up();\n      const convertedHtml = ansi_up_instance.ansi_to_html(executionResult()).replace(/\\n/g, '<br />');\n      container.innerHTML = convertedHtml;\n    }\n  });\n",

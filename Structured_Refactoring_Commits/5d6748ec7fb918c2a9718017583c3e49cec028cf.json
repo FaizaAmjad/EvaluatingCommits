@@ -47,13 +47,6 @@
       "total_additions": 75
     },
     {
-      "filename": "prompt/history/2023/09/24/11:57_Refactor code as per requirements/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - ./src/backend/handlers/generateHandler.js\n  - ./src/interactiveSession/startInteractiveSession.js\n  - ./src/prompt/processPrompt.js\nrequirements: |-\n  - Rename processPrompt to generatePrompt (both filename and fn)\n  - In startInteractivesession, rename the task variable to notes\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 9
-    },
-    {
       "filename": "src/backend/handlers/generateHandler.js",
       "before": "import processPrompt from '../../prompt/processPrompt.js';\nimport isRepoClean from '../../git/isRepoClean.js';\n\nexport const generateHandler = async (req, res) => {\n    }\n\n    const { notes, systemPrompt } = req.body;\n    const { prompt } = await processPrompt(notes, systemPrompt);\n    res.json({ prompt: prompt });\n  } catch (error) {\n    console.warn(error);",
       "after": "import generatePrompt from '../../prompt/generatePrompt.js';\nimport isRepoClean from '../../git/isRepoClean.js';\n\nexport const generateHandler = async (req, res) => {\n    }\n\n    const { notes, systemPrompt } = req.body;\n    const { prompt } = await generatePrompt(notes, systemPrompt);\n    res.json({ prompt: prompt });\n  } catch (error) {\n    console.warn(error);",

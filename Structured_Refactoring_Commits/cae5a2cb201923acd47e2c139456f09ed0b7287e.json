@@ -47,13 +47,6 @@
       "total_additions": 36
     },
     {
-      "filename": "prompt/history/2023/09/16/21:23_Refactor GitStatusRow component/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/GitStatusRow.jsx\nrequirements: >-\n  Render index and working_dir fields concatenated in the first column. Cut the\n  filename from path and print it in the second column, and render the remaining\n  base dir in the third.\n\n  If text does not fit in any of the columns, scroll in the cell, not in the\n  row.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 11
-    },
-    {
       "filename": "src/frontend/components/GitStatusRow.jsx",
       "before": "\nconst GitStatusRow = (props) => {\n  const { index, path, working_dir } = props.entry;\n  const bgColor = getBackgroundColorForFile(index, path);\n  return (\n    <div class={`flex ${bgColor ? 'bg-' + bgColor : ''}`}>\n      <span class=\"w-50px\">{index}</span>\n      <span class=\"flex-grow w-60%\">{path}</span>\n      <span class=\"flex-shrink\">{working_dir}</span>\n    </div>\n  );\n};",
       "after": "\nconst GitStatusRow = (props) => {\n  const { index, path, working_dir } = props.entry;\n\n  // Split the path to get filename and base directory\n  const splitPath = path.split('/');\n  const fileName = splitPath.pop();\n  const baseDir = splitPath.join('/');\n\n  const bgColor = getBackgroundColorForFile(index, path);\n  return (\n    <div class={`flex ${bgColor ? 'bg-' + bgColor : ''}`}>\n      <span class=\"w-50px overflow-x-auto\">{index + ' ' + working_dir}</span>\n      <span class=\"flex-grow w-60% overflow-x-auto\">{fileName}</span>\n      <span class=\"flex-shrink overflow-x-auto\">{baseDir}</span>\n    </div>\n  );\n};",

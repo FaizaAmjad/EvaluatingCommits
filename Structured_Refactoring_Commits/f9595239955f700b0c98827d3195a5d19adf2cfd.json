@@ -57,13 +57,6 @@
       "after": "",
       "total_deletions": 46,
       "total_additions": 0
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/service/useKeyBindings.js\nrequirements: Unregister the key event listener when the app is unmounted\nos: OSX",
-      "after": "",
-      "total_deletions": 6,
-      "total_additions": 0
     }
   ]
 }

@@ -76,13 +76,6 @@
       "after": "  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/tisztamo/Junior.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/Junior/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/Junior#readme\",\n  \"devDependencies\": {\n    \"babel-preset-solid\": \"^1.7.7\"\n  }",
       "total_deletions": 3,
       "total_additions": 3
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "attention:\n  - ./\n  - ./package.json\n  - ./src/\nrequirements: >\n  Rename the project to @aijunior/dev\nformat: prompt/format/shell.md",
-      "after": "attention:\n  - ./\n  - ./package.json\n  - ./README.md\n  - ./src/\nrequirements: >\n  The project was renamed to Junior (github: tisztamo/Junior) (npm: @aijunior/dev).\n  Update the package.json, README.md and all the sources!\nformat: prompt/format/shell.md",
-      "total_deletions": 1,
-      "total_additions": 3
     }
   ]
 }

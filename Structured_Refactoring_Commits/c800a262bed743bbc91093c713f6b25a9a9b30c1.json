@@ -47,13 +47,6 @@
       "total_additions": 13
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - scripts/\n  - src/git/deleteBranches.js\n  - package.json\nrequirements: |\n  Create a command for this function!\n  Pass arguments!\nos: OSX",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - package.json\n  - src/git/deleteBranchesCommand.js\n  - src/git/deleteBranches.js\nrequirements: |\n  rename deleteBranches to clearBranches\nos: OSX",
-      "total_deletions": 6,
-      "total_additions": 4
-    },
-    {
       "filename": "src/git/deleteBranchesCommand.js",
       "before": "import deleteBranches from './deleteBranches';\n\nconst exceptions = process.argv.slice(2);\n\nasync function run() {\n  try {\n    await deleteBranches(exceptions);\n    console.log('Branches deleted successfully.');\n  } catch (err) {\n    console.error(`An error occurred while deleting branches: ${err}`);\n}\n\nrun();\n",
       "after": "import clearBranches from './clearBranches';\n\nconst exceptions = process.argv.slice(2);\n\nasync function run() {\n  try {\n    await clearBranches(exceptions);\n    console.log('Branches deleted successfully.');\n  } catch (err) {\n    console.error(`An error occurred while deleting branches: ${err}`);\n}\n\nrun();\n",

@@ -55,13 +55,6 @@
   },
   "code": [
     {
-      "filename": "current_prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nformat: prompt/format/new_file_version.md\nattention:\n  - ./\n  - ./src/\n  - ./src/prompt/createPrompt.js\n  - ./src/attention/readAttention.js\nsaveto: current_prompt.md",
-      "after": "task: prompt/task/refactor/remove_unused.md\nformat: prompt/format/new_file_version.md\nattention:\n  - src/attention/\n  - src/attention/readAttention.js\n  - src/attention/filesystem.js\n  - src/attention/processInterfaceSection.js\n  - src/attention/printFolderStructure.js\nsaveto: current_prompt.md",
-      "total_deletions": 5,
-      "total_additions": 6
-    },
-    {
       "filename": "src/attention/filesystem.js",
       "before": "// filesystem - Provides utility functions to process paths in a filesystem.\n// It has two main functionalities:\n// - If a path points to a file, the module reads and displays the content of the file.\n// - If a path points to a directory, the module lists the files and subdirectories contained in that directory.\n// If a problem occurs while processing a particular file or directory, the module prints its name followed by \": err!\".\n\nimport fs from 'fs'\nimport path from 'path'\nimport util from 'util'\n\nconst readdir = util.promisify(fs.readdir)\nconst readFile = util.promisify(fs.readFile)\nconst stat = util.promisify(fs.stat)\n\nexport const processPath = async (root, p) => {\n  const fullPath = path.join(root, p)\n  try {\n    const stats = await stat(fullPath)\n    return stats.isDirectory() ? await processDirectory(fullPath) : await processFile(fullPath)\n  } catch (error) {\n    return `${p}: err!`\n  }\n}\n\nconst processFile = async (p) => {\n  try {\n    const content = await readFile(p, \"utf8\")\n    return `${p}:\\n${content}\\n`\n  } catch (error) {\n    return `${p}: err!\\n`\n  }\n}\n\nconst processDirectory = async (p) => {\n  try {\n    const content = await readdir(p)\n    return `${p}:\\n${content.join(', ')}\\n`\n  } catch (error) {\n    return `${p}: err!\\n`\n  }\n}",
       "after": "import fs from 'fs'\nimport path from 'path'\nimport util from 'util'\n\nconst readFile = util.promisify(fs.readFile)\n\nexport const processFile = async (root, p) => {\n  const fullPath = path.join(root, p)\n  try {\n    const content = await readFile(fullPath, \"utf8\")\n    return `${p}:\\n${content}\\n`\n  } catch (error) {\n    return `${p}: err!\\n`\n  }\n}\n",

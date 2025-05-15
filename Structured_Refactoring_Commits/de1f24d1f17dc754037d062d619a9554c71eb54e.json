@@ -45,13 +45,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Improve documentation colors\"\necho \"Plan:\"\necho \"1. Update 'docs/_coverpage.md' to apply the red and green colors.\"\n\n# Update the 'docs/_coverpage.md' with the required changes\ncat > docs/_coverpage.md << 'EOF'\n# <span class=\"cover-color-blue\">**You are the Pro,**</span> <span class=\"cover-color-orange\">**Junior&nbsp;codes**</span>\n\nKraft code with the **Junior AI IDE**\n\n<span class=\"cover-color-red\">Works on large codebases,</span> <span class=\"cover-color-green\">soon on your mobile phone.</span>\n\n![](assets/logo.svg)\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
       "total_additions": 18
-    },
-    {
-      "filename": "prompt/history/2023/08/30/16:50_Improve documentation colors/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/assets/styles.css\n  - docs/index.html\n  - docs/_coverpage.md\nrequirements: Make Works on large codebases red, soon on your mobile phone green.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 7
     }
   ]
 }

@@ -47,13 +47,6 @@
       "total_additions": 42
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/components/GitStatusDisplay.jsx\n  - src/frontend/stores/gitStatus.js\n  - src/frontend/service/fetchGitStatus.js\nrequirements: |\n  Fetch should not return the result but write it to the store\nos: OSX",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/service/executeChange.js\n  - src/frontend/components/PromptDescriptor.jsx\n  - src/frontend/service/fetchGitStatus.js\nrequirements: >\n  fetch git status after code execution and when an update event is coming on\n  websocket.\nos: OSX",
-      "total_deletions": 4,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/components/PromptDescriptor.jsx",
       "before": "import { onMount, onCleanup } from 'solid-js';\nimport { fetchDescriptor } from '../service/fetchDescriptor';\nimport { useWebsocket } from '../service/useWebsocket';\nimport { promptDescriptor, setPromptDescriptor } from '../stores/promptDescriptor';\n\n    if (e.data === 'update') {\n      const text = await fetchDescriptor();\n      setPromptDescriptor(text);\n    }\n  });\n",
       "after": "import { onMount, onCleanup } from 'solid-js';\nimport { fetchDescriptor } from '../service/fetchDescriptor';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\nimport { useWebsocket } from '../service/useWebsocket';\nimport { promptDescriptor, setPromptDescriptor } from '../stores/promptDescriptor';\n\n    if (e.data === 'update') {\n      const text = await fetchDescriptor();\n      setPromptDescriptor(text);\n      // Fetch git status when an update event is received\n      fetchGitStatus();\n    }\n  });\n",

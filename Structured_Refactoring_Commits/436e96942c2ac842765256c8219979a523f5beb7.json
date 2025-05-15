@@ -47,13 +47,6 @@
       "total_additions": 63
     },
     {
-      "filename": "prompt/history/2023/09/05/13:44_Refactor code structure and update imports/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/frontend/components/AttentionFileList.jsx\nrequirements: ''\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/components/AttentionFileList.jsx",
       "before": "import { fileList, setFileList } from '../model/fileList';\nimport fetchFileList from '../service/fetchFileList';\nimport MultiSelect from './MultiSelect/MultiSelect';\nimport getComparison from '../services/helpers/getComparison';\n\nconst AttentionFileList = () => {\n  createEffect(async () => {\n    setFileList(flattenedPaths);\n  });\n\n  const flattenPaths = (node, path) => {\n    if (node.type === 'file') {\n      return [path + '/' + node.name];\n    }\n    if (!Array.isArray(node.children)) {\n      return [];\n    }\n    return node.children.reduce((acc, child) => {\n      return acc.concat(flattenPaths(child, path + '/' + node.name));\n    }, []);\n  };\n\n  return (\n    <div class=\"w-full\">\n      <MultiSelect availableItems={fileList()} selectedItems={[]} compare={getComparison()} itemCount={5} />",
       "after": "import { fileList, setFileList } from '../model/fileList';\nimport fetchFileList from '../service/fetchFileList';\nimport MultiSelect from './MultiSelect/MultiSelect';\nimport getComparison from '../service/helpers/getComparison';\nimport flattenPaths from '../service/helpers/flattenPaths';\n\nconst AttentionFileList = () => {\n  createEffect(async () => {\n    setFileList(flattenedPaths);\n  });\n\n  return (\n    <div class=\"w-full\">\n      <MultiSelect availableItems={fileList()} selectedItems={[]} compare={getComparison()} itemCount={5} />",

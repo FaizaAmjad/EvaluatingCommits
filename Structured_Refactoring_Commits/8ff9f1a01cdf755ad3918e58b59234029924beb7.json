@@ -52,13 +52,6 @@
       "after": "<h1>Web Interface</h1>\n<p>The Contributor project provides a web interface to automate making changes with the help of the Language Learning Model (LLM). It\u2019s designed for use with ChatGPT Pro and doesn\u2019t require an API key.</p>\n<h2>Architecture</h2>\n<p>The web interface is composed of two different servers: a frontend and a backend. The frontend server runs on port 5173, and the backend server runs on port 10101.</p>\n<h2>Starting the Web Interface</h2>\n<p>Run the application with <code>npm start</code> to start both servers. A web browser window will automatically open at <code>http://localhost:5173</code>, which is where you can access the web interface.</p>\n<h2>Workflow</h2>\n<p>The typical workflow begins with editing the <code>prompt.yaml</code> file in your code editor of choice (we recommend Visual Studio Code with the Junior plugin for an optimal experience). Once you\u2019re satisfied with your task setup, you proceed to the web interface for execution and monitoring.</p>\n<h2>Usage</h2>\n</ul>\n<p>For a more detailed guide on using the web interface, refer to our video tutorial <a href=\"https://youtu.be/W_iwry8uT7E\">here</a>.</p>\n<p>Remember, you can always refer to your <code>prompt.yaml</code> file to modify the task details or attention mechanism.</p>\n<p>At the end of your development, make sure to run <code>npm run build:doc</code> to regenerate the web.html document reflecting the latest changes.</p>\n<p>Happy developing with your AI contributor!</p>",
       "total_deletions": 1,
       "total_additions": 4
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/doc/improve.md\nattention:\n  - doc/web.md\nrequirements: |\n  npm run build:doc at the end!\n  The copy button is blue.\n  \"to guide the AI model\" is more like \"to automate making changes with the help of the LLM\" (reword if needed)  \nos: OSX",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - doc/\n  - doc/web.md\nrequirements: |\n  Incorporate the followings:\n\n  - The web interface has a frontend and a backend, two different servers.\n  - Backend runs on port 10101 frontend on 5173, browser is started automatically on http://localhost:5173/\n\n  You need to run \"npm run build:doc\" at the end of the script to regenerate web.html!\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 7
     }
   ]
 }

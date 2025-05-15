@@ -59,13 +59,6 @@
       "total_additions": 52
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/prompt/getPromptDirectories.js\nrequirements:\n  use import.meta to get the dir of the source file.\n  One directory is relative to the working dir, the other relative to the project root.\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/init.js\nrequirements: >-\n  - Factor out prompt.yaml creation to src/prompt/createPromptYaml.js! - Also\n  create and call src/prompt/createProjectSpecifics.js which creates\n  ./prompt/projectSpecifics.md with the content \"## Project Specifics\\n\"!\nos: OSX",
-      "total_deletions": 5,
-      "total_additions": 6
-    },
-    {
       "filename": "src/init.js",
       "before": "#!/usr/bin/env node\nimport { execSync } from 'child_process';\nimport { writeFileSync } from 'fs';\nimport { join } from 'path';\nimport { createGitignore } from './git/createGitignore.js';\n\nfunction juniorInit() {\n  execSync('git init', { stdio: 'inherit' });\n\n  createGitignore();\n\n  execSync('git add .gitignore', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });\n\n  const yamlContent = `task: prompt/task/feature/implement.md\nattention:\n  - ./\nrequirements: Create a Hello World in Node.js`;\n\n  writeFileSync('prompt.yaml', yamlContent);\n\n  console.log('\\x1b[32mRepo initialized for Junior development\\x1b[0m');\n}",
       "after": "#!/usr/bin/env node\nimport { execSync } from 'child_process';\nimport { join } from 'path';\nimport { createPromptYaml } from './prompt/createPromptYaml.js';\nimport { createProjectSpecifics } from './prompt/createProjectSpecifics.js';\nimport { createGitignore } from './git/createGitignore.js';\n\nasync function juniorInit() {\n  execSync('git init', { stdio: 'inherit' });\n\n  createGitignore();\n\n  execSync('git add .gitignore', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });\n\n  createPromptYaml();\n  createProjectSpecifics();\n\n  console.log('\\x1b[32mRepo initialized for Junior development\\x1b[0m');\n}",

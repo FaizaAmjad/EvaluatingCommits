@@ -47,13 +47,6 @@
       "total_additions": 37
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/doc/improve.md\nattention:\n  - ./\n  - src/\nrequirements: >\n  We are on a github pr branch.\n  Some files in the src/frontend/ directory were unintentionally modified and the committed to this branch somewhere in the past.\n  I need a shell script that reverts the changes of src/frontend/ to where it was at the branch creation.\nos: OSX",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - src/execute/executeAndForwardOutput.js\n  - src/backend/handlers/executeHandler.js\n  - src/execute/makeExecutable.js\nrequirements: |\n  Do not promisify makeExecutable, just await it.\nos: OSX",
-      "total_deletions": 7,
-      "total_additions": 6
-    },
-    {
       "filename": "src/execute/executeAndForwardOutput.js",
       "before": "import { writeFile } from 'fs/promises';\nimport { spawn } from 'child_process';\nimport { makeExecutable } from './makeExecutable.js';\nimport {promisify} from 'util';\n\nconst writeFileAsync = promisify(writeFile);\nconst makeExecutableAsync = promisify(makeExecutable)\n\nasync function executeAndForwardOutput(code, next) {\n  try {\n    if (!code.startsWith('#!')) {\n      throw new Error('Code does not start with a shebang');\n    }\n    await writeFileAsync('./change.sh', code);\n    await makeExecutableAsync('./change.sh');\n    \n    const child = spawn('./change.sh', [], { shell: true });\n    let commandOutput = '';",
       "after": "import { writeFile } from 'fs/promises';\nimport { spawn } from 'child_process';\nimport { makeExecutable } from './makeExecutable.js';\n\nasync function executeAndForwardOutput(code, next) {\n  try {\n    if (!code.startsWith('#!')) {\n      throw new Error('Code does not start with a shebang');\n    }\n    await writeFile('./change.sh', code);\n    await makeExecutable('./change.sh');\n    \n    const child = spawn('./change.sh', [], { shell: true });\n    let commandOutput = '';",

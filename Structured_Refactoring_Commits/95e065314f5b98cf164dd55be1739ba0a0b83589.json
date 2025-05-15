@@ -59,13 +59,6 @@
       "total_additions": 9
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/CommitButton.jsx\n  - src/frontend/stores/commitMessage.js\n  - src/frontend/stores/prompt.js\nrequirements: |\n  After commit, clear the prompt  and the commit message to ''\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/CommitMessageInput.jsx\n  - src/frontend/stores/commitMessage.js\nrequirements: |\n  When I set the commit message, the input should be updated.\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 2
-    },
-    {
       "filename": "src/frontend/components/CommitMessageInput.jsx",
       "before": "  };\n\n  return (\n    <input type=\"text\" className=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" onInput={handleChange} />\n  );\n};\n",
       "after": "  };\n\n  return (\n    <input type=\"text\" className=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" value={commitMessage()} onInput={handleChange} />\n  );\n};\n",

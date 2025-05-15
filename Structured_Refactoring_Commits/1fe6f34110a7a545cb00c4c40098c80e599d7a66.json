@@ -57,13 +57,6 @@
       "total_additions": 70
     },
     {
-      "filename": "prompt/history/2023/09/30/16:47_Improve Junior documentation and delete unused file/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - ./docs/config/env_or_cli.md\n  - ./src/backend/fileutils/getIgnoreList.js\n  - ./src/prompt/getPromptFlag.js\nrequirements: >-\n  Add more info:\n\n\n  1. --ignore accepts a comma-separated list of paths to be ignored from the\n  attention scan. List the defaults and describe how the different sources are\n  merged.\n\n\n  2. the --prompt flag is not used, remove from the docs and delete\n  getPromptFlag.js\n\n\n  3. -s and -d and their long variants are only used in the cli. Spearate them\n  and add a note that the cli is not fully functional at the time.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 21
-    },
-    {
       "filename": "src/prompt/getPromptFlag.js",
       "before": "function getPromptFlag() {\n  const promptFlag = process.argv.find(arg => arg.startsWith(\"--prompt=\"));\n  if (promptFlag) {\n    return promptFlag.split(\"=\")[1];\n  }\n}\n\nexport { getPromptFlag };",
       "after": "",

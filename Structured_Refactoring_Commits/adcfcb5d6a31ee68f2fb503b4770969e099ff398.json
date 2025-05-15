@@ -47,13 +47,6 @@
       "total_additions": 79
     },
     {
-      "filename": "prompt/history/2023/09/17/22:06_Update ignore list with new entries for top languages/tools/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/backend/fileutils/getIgnoreList.js\nrequirements: >-\n  Add \"dist\", \"build\", \"tmp\", \"temp\" and at least 5 but up to 100 reasonable\n  entries to the ignore list!\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 7
-    },
-    {
       "filename": "src/backend/fileutils/getIgnoreList.js",
       "before": "function getIgnoreList() {\n  const DEFAULT_IGNORE = ['.git', 'node_modules', './prompt'];\n\n  const cliArgs = process.argv.slice(2);\n  const cliIgnore = cliArgs\n}\n\nexport default getIgnoreList;\n",
       "after": "function getIgnoreList() {\n  const DEFAULT_IGNORE = [\n    '.git',\n    'node_modules',\n    './prompt',\n    'dist',\n    'build',\n    'tmp',\n    'temp',\n    '.vscode',\n    '.idea',\n    'coverage',\n    '.env',\n    '.DS_Store',\n    'logs',\n    'package-lock.json',\n    'yarn.lock',\n    '*.pyc',\n    '__pycache__',\n    '.venv',\n    'venv',\n    'target',\n    '*.class',\n    '*.exe',\n    '*.test',\n    'vendor/',\n    '*.gem',\n    '.bundle',\n    'Gemfile.lock',\n    'Cargo.lock',\n    'bin/',\n    'obj/',\n    '*.suo',\n    '*.user',\n    '*.xcodeproj',\n    '*.xcworkspace',\n    'Pods/',\n    'pubspec.lock',\n    '.dart_tool/',\n    'out/',\n    '*.tsbuildinfo',\n    '*.Rproj.user',\n    '*.Rhistory',\n    '*.pl~',\n    'cpanfile.snapshot',\n    'project/',\n    'dist/',\n    '*.hi',\n    '_build/',\n    'deps/',\n    '*.log',\n    '*.asv'\n  ];\n\n  const cliArgs = process.argv.slice(2);\n  const cliIgnore = cliArgs\n}\n\nexport default getIgnoreList;\n",

@@ -59,13 +59,6 @@
       "total_additions": 89
     },
     {
-      "filename": "prompt/history/2023/09/12/11:32_Refactor file routes and handlers/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - ./src/backend/handlers/fileListHandler.js\n  - ./src/backend/handlers/fileReadHandler.js\n  - ./src/backend/setupRoutes.js\nrequirements: |-\n  Move files-prefixed routes to setupFilesRoutes.js\n  Move the related handlers to handlers/files/ \n  Create the dir.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 10
-    },
-    {
       "filename": "src/backend/handlers/files/fileListHandler.js",
       "before": "import readFileList from '../fileutils/readFileList.js';\n\nexport async function fileListHandler(req, res) {\n  try {",
       "after": "import readFileList from '../../fileutils/readFileList.js';\n\nexport async function fileListHandler(req, res) {\n  try {",

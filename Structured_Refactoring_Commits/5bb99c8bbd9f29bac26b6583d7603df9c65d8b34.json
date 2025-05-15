@@ -47,13 +47,6 @@
       "total_additions": 58
     },
     {
-      "filename": "prompt/history/2023/08/23/13:23_Move and modify files accordingly/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/frontend/components/TasksList.jsx\n  - src/frontend/service/parseYamlAndGetTask.js\nrequirements: >\n  rename parseYamlAndGetTask.js to getYamlEntry.js\n  Add an argument for the entry\n  Also move the prefix removal to the task list component\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 9
-    },
-    {
       "filename": "src/frontend/components/TasksList.jsx",
       "before": "import { handleTaskChange } from '../service/handleTaskChange';\nimport { selectedTask, setSelectedTask } from '../model/selectedTask';\nimport { promptDescriptor } from '../model/promptDescriptor';\nimport { parseYamlAndGetTask } from '../service/parseYamlAndGetTask';\n\nconst TasksList = () => {\n  const tasks = fetchTasks();\n\n  createEffect(() => {\n    const descriptor = promptDescriptor();\n    if (descriptor !== '') {\n      const task = parseYamlAndGetTask(descriptor);\n      setSelectedTask(task);\n    }\n  });",
       "after": "import { handleTaskChange } from '../service/handleTaskChange';\nimport { selectedTask, setSelectedTask } from '../model/selectedTask';\nimport { promptDescriptor } from '../model/promptDescriptor';\nimport { getYamlEntry } from '../service/getYamlEntry';\n\nconst TasksList = () => {\n  const tasks = fetchTasks();\n\n  createEffect(() => {\n    const descriptor = promptDescriptor();\n    if (descriptor !== '') {\n      const taskWithPath = getYamlEntry(descriptor, 'task');\n      // Remove 'prompt/task/' prefix here\n      const task = taskWithPath.replace('prompt/task/', '');\n      setSelectedTask(task);\n    }\n  });",

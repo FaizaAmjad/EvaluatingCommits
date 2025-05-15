@@ -83,13 +83,6 @@
       "total_additions": 29
     },
     {
-      "filename": "prompt.yaml",
-      "before": "  - src/frontend/components/RollbackButton.jsx\n  - src/frontend/components/CommitButton.jsx\nrequirements: >\n  Make the commit and rollback buttons width smaller.\n  Make the rollback same-height as the commit.\n  Have some space between them.\n  Change the rollback label to \"Roll Back\"\nos: OSX",
-      "after": "  - src/frontend/components/RollbackButton.jsx\n  - src/frontend/components/CommitButton.jsx\nrequirements: >\n  Change the layout so that the commit and rollback buttons\n  fill the available space, but do not overflow horizontally.\nos: OSX",
-      "total_deletions": 4,
-      "total_additions": 2
-    },
-    {
       "filename": "src/frontend/components/ChangeFinalization.jsx",
       "before": "  return (\n    <>\n      <CommitMessageInput />\n      <div className=\"flex justify-between mt-2 space-x-4\">\n        <CommitButton />\n        <RollbackButton />\n      </div>",
       "after": "  return (\n    <>\n      <CommitMessageInput />\n      <div className=\"flex w-full mt-2 space-x-4\">\n        <CommitButton />\n        <RollbackButton />\n      </div>",

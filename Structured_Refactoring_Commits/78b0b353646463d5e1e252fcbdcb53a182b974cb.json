@@ -88,13 +88,6 @@
       "after": "<h1>Roadmap</h1>\n<h2>Usability &amp; fixes</h2>\n<ul>\n<li>Implement the four buttons</li>\n<li>Fix every major bug</li>\n<li>Write docs to allow using Junior for developing external projects</li>\n</ul>\n<h2>Programming on mobile</h2>\n<ul>\n<li>Develop a file browser to allow the user to select attention files from mobile</li>\n<li>Create an app by wrapping the frontend</li>\n<li>Test it by developing at the local Playground and while commuting</li>\n</ul>\n<h2>Auto-attention</h2>\n<ul>\n<li>Propose an attention based on the requirements and task the user selected</li>\n<li>Embed every file in the project</li>\n<li>Store the embeddings in an (embedded) vector database</li>\n</ul>\n<h2>Prompt herds</h2>\n<ul>\n<li>Scan and transform (refactor) the codebase gradually</li>\n</ul>",
       "total_deletions": 5,
       "total_additions": 11
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - doc/\n  - doc/index.html\nrequirements: |\n  - Create roadmap.md with sections \"Usability &\u00a0fixes\", \"Programming on mobile\", \"Auto-attention\", \"Prompt-herd refactors\"\n  - Link roadmap.html from index.html\n  - Fix index.html by moving the ill-placed link to the web guide into the body.\n  - Mention the project name \"Junior\" in index.html text and title\n  - Delete introduction.* and unlink from index.html\n  - npm run build:doc for generating html from md\nos: OSX",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - doc/roadmap.md\n  - README.md\nrequirements: >\n  Improve the roadmap!\n\n  Usability & fixes details: We will implement the four buttons and fix every\n  major bug and write docs to allow using Junior for developing external\n  projects.\n\n  Programming on mobile: We need a file browser to allow the user to select\n  attention files from mobile. Then we will create an app by wrapping the\n  frontend and test it by developing at the local Playground and while\n  commuting.\n\n  Auto-attention: Based on the requirements and task the user selected, we will\n  propose an attention. We need to embed every file in the project and store the\n  embeddings in an (embedded) vector database\n\n  Prompt-herds (rename it!): Prompt herds will scan and transform (refactor) the\n  codebase gradually\n\n  Do not change the readme, just read it!\nos: OSX",
-      "total_deletions": 11,
-      "total_additions": 23
     }
   ]
 }

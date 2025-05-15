@@ -61,13 +61,6 @@
       "total_additions": 7
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/custom.md\nattention:\n  - package.json\nrequirements: |\n  Uninstall babel-preset-solid!\n  Move every other items from devDependencies to dependencies\n  Set description to \"Your AI Contributor which codes itself\"\nos: OSX",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - ./\n  - src/frontend/components/GenerateButton.jsx\nrequirements: |\n  Uninstall clipboard-copy and use the html5 api directly!\nos: OSX",
-      "total_deletions": 4,
-      "total_additions": 3
-    },
-    {
       "filename": "src/frontend/components/GenerateButton.jsx",
       "before": "import { generatePrompt } from '../generatePrompt';\nimport { marked } from 'marked';\nimport copy from 'clipboard-copy';\nimport { setPrompt } from '../stores/prompt';\n\nconst GenerateButton = () => {\n  const handleGeneratePrompt = async () => {\n    const response = await generatePrompt();\n\n    copy(response.prompt)\n      .then(() => {\n        console.log('Prompt copied to clipboard!');\n      })\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-blue-500 text-white rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt</button>\n  );\n};\n",
       "after": "import { generatePrompt } from '../generatePrompt';\nimport { marked } from 'marked';\nimport { setPrompt } from '../stores/prompt';\n\nconst GenerateButton = () => {\n  const handleGeneratePrompt = async () => {\n    const response = await generatePrompt();\n\n    navigator.clipboard.writeText(response.prompt)\n      .then(() => {\n        console.log('Prompt copied to clipboard!');\n      })\n  };\n\n  return (\n    <button className=\"w-64 px-4 py-4 bg-blue-500 text-white rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt</button>\n  );\n};\n",

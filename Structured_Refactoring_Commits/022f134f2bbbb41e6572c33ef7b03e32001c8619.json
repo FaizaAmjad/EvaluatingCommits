@@ -47,13 +47,6 @@
       "total_additions": 6
     },
     {
-      "filename": "prompt.yaml",
-      "before": "attention:\n  - src/frontend/components/CommitButton.jsx\n  - src/frontend/components/CommitMessageInput.jsx\nrequirements: >\n  After commit, fetch git status \nos: OSX",
-      "after": "attention:\n  - src/frontend/components/CommitButton.jsx\n  - src/frontend/components/CommitMessageInput.jsx\n  - src/frontend/components/ExecutionResultDisplay.jsx\nrequirements: |\n  After commit, clear execution result.\nos: OSX",
-      "total_deletions": 2,
-      "total_additions": 3
-    },
-    {
       "filename": "src/frontend/components/CommitButton.jsx",
       "before": "import { postCommit } from '../service/postCommit';\nimport { commitMessage } from '../stores/commitMessage';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n    const status = await fetchGitStatus();\n    console.log(status);\n  };\n\n  return (",
       "after": "import { postCommit } from '../service/postCommit';\nimport { commitMessage } from '../stores/commitMessage';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\nimport { setExecutionResult } from '../stores/executionResult'; // Importing the necessary function to clear execution result\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n    const status = await fetchGitStatus();\n    console.log(status);\n    setExecutionResult(''); // Clearing the execution result after commit\n  };\n\n  return (",

@@ -45,13 +45,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Update roadmap with completion marker\"\necho \"Plan:\"\necho \"1. Add a unicode character and a word to signify the completion of 'Implement the four buttons' in the roadmap.\"\ncat > docs/roadmap.md << 'EOF'\n# Roadmap\n## Usability & fixes\n- \u2705 Done: Implement the four buttons\n- Fix every major bug\n- Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Auto-attention\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in an (embedded) vector database\n\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually\nEOF\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 42,
       "total_additions": 21
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/doc/improve.md\nattention:\n  - docs/web.md\nrequirements: >\n  Update the info:\n  Run the application with `npx junior-web` from your project or with `npm start` from Junior itself.\nos: OSX",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/roadmap.md\nrequirements: >\n  \"Implement the four buttons\" is done. Add a nice unicode character and a single word to show this.\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 2
     }
   ]
 }

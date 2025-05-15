@@ -59,13 +59,6 @@
       "total_additions": 48
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/prompt/promptDescriptorDefaults.js\nrequirements: Handle the case silently when a prompt folder does not exests.\nos: OSX",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/components/GitStatusDisplay.jsx\n  - src/backend/handlers/gitStatusHandler.js\nrequirements: >\n  1. Move the git status result from the status field of the response to the\n  message field.\n\n  2. When the endpoint reports an error in the error field similar to this\n  (check stderr for \"Not a git repository\"):\n\n  {\n    \"message\": \"Error in getting Git status\",\n    \"error\": {\n      \"code\": 128,\n      \"killed\": false,\n      \"signal\": null,\n      \"cmd\": \"git status --porcelain=v1\",\n      \"stdout\": \"\",\n      \"stderr\": \"fatal: Not a git repository (or any of the parent directories): .git\\n\"\n    }\n  }\n\n  then display \"Not a git repo. Run 'npx junior-init' to initialize!\".\nos: OSX",
-      "total_deletions": 2,
-      "total_additions": 22
-    },
-    {
       "filename": "src/backend/handlers/gitStatusHandler.js",
       "before": "export default async function gitStatusHandler(req, res) {\n  try {\n    const status = await gitStatus();\n    res.status(200).send({ status });\n  } catch (error) {\n    res.status(500).send({ message: 'Error in getting Git status', error });\n  }\n}",
       "after": "export default async function gitStatusHandler(req, res) {\n  try {\n    const status = await gitStatus();\n    res.status(200).send({ message: status });\n  } catch (error) {\n    let errorMessage = 'Error in getting Git status';\n    if (error.stderr && error.stderr.includes('Not a git repository')) {\n      errorMessage = 'Not a git repo. Run \\'npx junior-init\\' to initialize!';\n    }\n    res.status(500).send({ message: errorMessage, error });\n  }\n}",

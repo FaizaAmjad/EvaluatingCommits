@@ -66,13 +66,6 @@
       "total_additions": 1
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/move_files.md\nattention:\n  - package.json\n  - src/git/deleteBranchesCommand.js\n  - src/git/deleteBranches.js\nrequirements: |\n  rename deleteBranchesCommand to clearBranchesCommand\nos: OSX",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - package.json\n  - src/git/clearBranches.js\nrequirements: |\n  rename delete-branches to clear-branches\n  rename deleteBranches to clearBranches\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 3
-    },
-    {
       "filename": "src/git/clearBranches.js",
       "before": "\nconst exec = promisify(execCb);\n\nexport default async function deleteBranches(exceptions = []) {\n  try {\n    const { stdout: currentBranch } = await exec('git rev-parse --abbrev-ref HEAD');\n    const { stdout: allBranches } = await exec('git for-each-ref --format=\"%(refname:short)\" refs/heads');",
       "after": "\nconst exec = promisify(execCb);\n\nexport default async function clearBranches(exceptions = []) {\n  try {\n    const { stdout: currentBranch } = await exec('git rev-parse --abbrev-ref HEAD');\n    const { stdout: allBranches } = await exec('git for-each-ref --format=\"%(refname:short)\" refs/heads');",

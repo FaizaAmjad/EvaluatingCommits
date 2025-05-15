@@ -59,13 +59,6 @@
       "total_additions": 53
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/CommitMessageInput.jsx\n  - src/frontend/stores/commitMessage.js\nrequirements: |\n  When I set the commit message, the input should be updated.\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/stores/executionResult.js\n  - src/frontend/components/CommitButton.jsx\nrequirements: |\n  - Create a signal in src/frontend/stores/change.js\n  - Save the pasted change after it was executed.\n  - Clear the change after commit.\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 7
-    },
-    {
       "filename": "src/frontend/components/CommitButton.jsx",
       "before": "import { postCommit } from '../service/postCommit';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\nimport { setExecutionResult } from '../stores/executionResult'; // Importing the necessary function to clear execution result\nimport { setPrompt } from '../stores/prompt'; // Importing setPrompt to clear the prompt\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n    const status = await fetchGitStatus();\n    console.log(status);\n    setExecutionResult(''); // Clearing the execution result after commit\n    setCommitMessage(''); // Clearing the commit message after commit\n    setPrompt(''); // Clearing the prompt after commit\n  };\n\n  return (",
       "after": "import { postCommit } from '../service/postCommit';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\nimport { setExecutionResult } from '../stores/executionResult';\nimport { setPrompt } from '../stores/prompt';\nimport { setChange } from '../stores/change'; // Importing setChange to clear the change\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n    const status = await fetchGitStatus();\n    console.log(status);\n    setChange(''); // Clearing the change after commit\n    setExecutionResult('');\n    setCommitMessage('');\n    setPrompt('');\n  };\n\n  return (",

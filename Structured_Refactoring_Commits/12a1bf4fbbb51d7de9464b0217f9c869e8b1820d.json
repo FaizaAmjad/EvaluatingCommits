@@ -95,13 +95,6 @@
       "total_additions": 63
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - package.json\n  - src/main.js\n  - src/web.js\n  - src/startServer.js\n  - src/backend/server.js\nrequirements: >\n  \"npx junior-web\" from dependent projects should work, starting web.js.\nformat: prompt/format/shell.md",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - src/\n  - src/execute/\n  - src/execute/extractCode.js\n  - src/execute/executeCode.js\nrequirements: >\n  1. The executed code should be written to ./change.sh before executing.\n  2. While executing the code, I do not see output in the terminal. Forward it!\n  3. executeCode.js is too big. We need to split in two logically.\nformat: prompt/format/shell.md",
-      "total_deletions": 6,
-      "total_additions": 7
-    },
-    {
       "filename": "src/execute/confirmAndWriteCode.js",
       "before": "",
       "after": "import { writeFile } from 'fs';\nimport { executeAndForwardOutput } from './executeAndForwardOutput.js';\n\nfunction confirmAndWriteCode(code, rl, execute) {\n  rl.question('\\x1b[1mEXECUTE? [y/n]\\x1b[0m ', (answer) => {\n    console.log(\"\");\n    if (answer.toLowerCase() === 'y' || answer === \"\") {\n      writeFile('./change.sh', code, (err) => {\n        if (err) {\n          console.error(err.message);\n          return;\n        }\n        execute();\n      });\n    }\n  });\n}\n\nexport { confirmAndWriteCode };",

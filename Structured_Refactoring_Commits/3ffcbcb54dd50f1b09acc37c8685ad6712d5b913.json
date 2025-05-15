@@ -52,13 +52,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Improve the documentation\"\necho \"Plan:\"\necho \"1. Remove the twitter script and blockquote from index.html\"\necho \"2. Remove the twitter blockquote from _sidebar.md\"\n\n# 1. Remove the twitter script and blockquote from index.html\ncat > docs/index.html << 'EOF'\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Document</title>\n  <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\" />\n  <meta name=\"description\" content=\"Description\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=1.0\">\n  <link rel=\"icon\" href=\"assets/favicon.ico\" type=\"image/x-icon\">\n  <link rel=\"stylesheet\" href=\"//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css\">\n  <link rel=\"stylesheet\" href=\"assets/styles.css\">\n</head>\n<body>\n  <div id=\"app\"></div>\n  <script src=\"docsifyConfig.js\"></script>\n  <!-- Docsify v4 -->\n  <script src=\"//cdn.jsdelivr.net/npm/docsify@4\"></script>\n</body>\n</html>\nEOF\n\n# 2. Remove the twitter blockquote from _sidebar.md\ncat > docs/_sidebar.md << 'EOF'\n* [Junior Docs](./README.md)\n* [Usage](./usage.md)\n* [Web](./web.md)\n* [Prompt Descriptor](./descriptor.md)\n* [Roadmap](./roadmap.md)\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
       "total_additions": 40
-    },
-    {
-      "filename": "prompt/history/2023/08/22/12:04_Improve the documentation/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/index.html\n  - docs/_sidebar.md\nrequirements: |\n  Remove the twitter script and the blockquote",
-      "total_deletions": 0,
-      "total_additions": 6
     }
   ]
 }

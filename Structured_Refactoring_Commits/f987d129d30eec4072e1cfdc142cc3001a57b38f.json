@@ -47,13 +47,6 @@
       "total_additions": 39
     },
     {
-      "filename": "prompt/history/2023/09/12/12:57_Update SourceFileDisplay styling/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/files/SourceFileDisplay.jsx\nrequirements: 'In source display: Remove p-4 from the div and add m-0 to the pre'\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/components/files/SourceFileDisplay.jsx",
       "before": "  const language = getLanguageFromPath(props.path);\n\n  return (\n    <div class=\"rounded border p-4 w-full overflow-x-auto\">\n      <pre><code class={`language-${language}`}>{fileContent()}</code></pre>\n    </div>\n  );\n};",
       "after": "  const language = getLanguageFromPath(props.path);\n\n  return (\n    <div class=\"rounded border w-full overflow-x-auto\">\n      <pre class=\"m-0\"><code class={`language-${language}`}>{fileContent()}</code></pre>\n    </div>\n  );\n};",

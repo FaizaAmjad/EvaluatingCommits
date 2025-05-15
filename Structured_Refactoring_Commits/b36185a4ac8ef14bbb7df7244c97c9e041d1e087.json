@@ -83,13 +83,6 @@
       "total_additions": 225
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - ./package.json\nrequirements: |\n  Rename the contrib bin command to junior, and add another one, \"junior-web\"\n  which does the same as \"npm start\"\nformat: prompt/format/shell.md",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - ./src/prompt/loadFormatTemplate.js\n  - ./src/prompt/loadTaskTemplate.js\n  - ./src/config.js\n  - src/prompt/getSystemPromptIfNeeded.js\nrequirements: >\n  When running from another dir, I get [Error: ENOENT: no such file or\n  directory, open 'prompt/system.md']\n\n  The system prompt should be loaded using the same logic that is used for the\n  format prompt.\n\n  Refactor the code so that 1. this logic is extracted to\n  src/prompt/loadPromptFile.js and 2. getSystemPrompt is extracted to\n  src/prompt/\nformat: prompt/format/shell.md",
-      "total_deletions": 4,
-      "total_additions": 14
-    },
-    {
       "filename": "src/config.js",
       "before": "import fs from 'fs/promises';\nimport readline from 'readline';\nimport { ChatGPTAPI } from 'chatgpt';\n\n// test if -d or --dry-run cli arg is present\nfunction isDryRun() {\n  return \"gpt-4\";\n}\n\nasync function getSystemPrompt() {\n  return (await fs.readFile(\"prompt/system.md\", \"utf8\")).toString()\n}\nexport { api, rl, get_model, getSystemPrompt};\n",
       "after": "import readline from 'readline';\nimport { ChatGPTAPI } from 'chatgpt';\nimport { getSystemPrompt } from \"./prompt/getSystemPrompt.js\";\n\n// test if -d or --dry-run cli arg is present\nfunction isDryRun() {\n  return \"gpt-4\";\n}\n\nexport { api, rl, get_model };",

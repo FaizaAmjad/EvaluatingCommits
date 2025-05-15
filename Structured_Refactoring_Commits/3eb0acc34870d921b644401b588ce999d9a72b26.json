@@ -59,13 +59,6 @@
       "total_additions": 67
     },
     {
-      "filename": "prompt/history/2023/09/16/17:59_Update git status display/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/GitStatusDisplay.jsx\n  - ./src/backend/handlers/git/gitStatusHandler.js\nrequirements: >-\n  The git status endpoint now returns the json output of simple-git.\n\n  Update the backend to return the value in the data field, not message.\n\n  Update the frontend to render the json similar to porcelain output in three\n  columns: status marker, filename, basedir.  Allow to separately style the\n  cells of this table.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 13
-    },
-    {
       "filename": "src/backend/handlers/git/gitStatusHandler.js",
       "before": "export default async function gitStatusHandler(req, res) {\n  try {\n    const status = await gitStatus();\n    res.status(200).send({ message: status });\n  } catch (error) {\n    let errorMessage = 'Error in getting Git status';\n    if (error.stderr && error.stderr.includes('Not a git repository')) {",
       "after": "export default async function gitStatusHandler(req, res) {\n  try {\n    const status = await gitStatus();\n    res.status(200).send({ data: status });\n  } catch (error) {\n    let errorMessage = 'Error in getting Git status';\n    if (error.stderr && error.stderr.includes('Not a git repository')) {",

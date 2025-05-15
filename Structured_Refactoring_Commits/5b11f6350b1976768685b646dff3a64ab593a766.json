@@ -66,13 +66,6 @@
       "total_additions": 1
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - ./\n  - ./doc\n  - ./doc/build.js\nrequirements: |\n  Rename build.js dor buildDoc.js\n  Factor the md = new MarkdownIt creation to createMarkdownRenderer.js\n  Similarly create convertDirectory.js\n\n\n\n\n\n\n\n",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - ./\n  - ./doc/\n  - ./src/\n  - doc/buildDoc.js\n  - doc/convertDirectory.js\n  - doc/createMarkdownRenderer.js\nrequirements: |\n  Move every .js file from doc to src/doc\n  update the line\n  \"build:docs\": \"node ./doc/build.js\" \n  in package.json accordingly",
-      "total_deletions": 13,
-      "total_additions": 10
-    },
-    {
       "filename": "src/doc/buildDoc.js",
       "before": "import createMarkdownRenderer from './createMarkdownRenderer';\nimport convertDirectory from './convertDirectory';\n\nconst md = createMarkdownRenderer();\nconvertDirectory('./doc', md);",
       "after": "import convertDirectory from './convertDirectory';\nimport createMarkdownRenderer from './createMarkdownRenderer';\n\nconst md = createMarkdownRenderer();\nconvertDirectory('./doc', md);",

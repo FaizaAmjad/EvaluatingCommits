@@ -47,13 +47,6 @@
       "total_additions": 42
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/CommitMessageInput.jsx\nrequirements: >\n  Add \"border-border\" class.\n  Remove comment and props.\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/index.html\nrequirements: |\n  Add bg-emphasize class to the \"app\" div in index.html\n  Add bg-main to the inner div in App.jsx.\n  Remove the id attribute from outer (id=\"app\") in App.jsx, as the real app div is in the html.\n  Move the p-2 class from the outer to the inner div.\n  Remove unnecessary comments.\nos: OSX",
-      "total_deletions": 4,
-      "total_additions": 8
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "import ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  // Define key bindings\n  const bindings = keyBindings();\n\n  // Use key bindings\n  useKeyBindings(bindings);\n\n  return (\n    <div id=\"app\" class=\"p-2 sm:p-4 xs:p-4\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />",
       "after": "import ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  const bindings = keyBindings();\n  useKeyBindings(bindings);\n\n  return (\n    <div class=\"p-2 sm:p-4 xs:p-4\">\n      <div class=\"bg-main max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />",

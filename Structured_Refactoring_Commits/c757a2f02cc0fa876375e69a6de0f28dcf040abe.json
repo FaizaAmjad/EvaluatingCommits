@@ -45,13 +45,6 @@
       "after": "#!/bin/sh\n# Goal: Remove all .nojekyll files\n# Plan:\n# 1. Use the find command to search for files named .nojekyll in the current directory and all subdirectories.\n# 2. Use the -delete option of find command to remove these files.\n\nfind . -name \".nojekyll\" -type f -delete",
       "total_deletions": 4,
       "total_additions": 4
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - ./package.json\nrequirements: |\n  Rename build:docs to build:doc",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - ./\n  - doc/\nrequirements: |\n  Remove .nojekyll files",
-      "total_deletions": 2,
-      "total_additions": 3
     }
   ]
 }

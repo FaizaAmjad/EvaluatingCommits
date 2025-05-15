@@ -64,13 +64,6 @@
       "after": "    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"build:doc\": \"node ./src/doc/buildDoc.js\"\n  },\n  \"keywords\": [\n    \"cli\",",
       "total_deletions": 1,
       "total_additions": 1
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/doc/buildDoc.js\n  - src/doc/convertDirectory.js\nrequirements: |\n  Fix relative imports by adding .js to the end of the path.\n",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - ./package.json\nrequirements: |\n  Rename build:docs to build:doc",
-      "total_deletions": 3,
-      "total_additions": 2
     }
   ]
 }

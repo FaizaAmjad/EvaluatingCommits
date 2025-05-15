@@ -47,13 +47,6 @@
       "total_additions": 32
     },
     {
-      "filename": "prompt/history/2023/10/02/12:29_Enhance line extraction functionality/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/terminal/prependAndExtractLastLine.js\nrequirements: >-\n  - Also split at \\r\n\n  - When the last line, after trimming, ends with \"$\" or \"%\", or is empty, use\n  the previous one. Go back to the first that does not match this criteria.\n  Return empty string if no line found.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 10
-    },
-    {
       "filename": "src/frontend/components/terminal/prependAndExtractLastLine.js",
       "before": "  const combinedData = `${lastLine}${currentData}`;\n  // Remove ANSI escape codes\n  const cleanedData = combinedData.replace(/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?/g, '');\n  const lines = cleanedData.split('\\n');\n  return lines[lines.length - 1];\n}",
       "after": "  const combinedData = `${lastLine}${currentData}`;\n  // Remove ANSI escape codes\n  const cleanedData = combinedData.replace(/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?/g, '');\n\n  // Split on both \\r and \\n but not on \\r\\n\n  const lines = cleanedData.split(/\\r(?!\\n)|\\n/);\n\n  return getValidLastLine(lines);\n}\n\nfunction getValidLastLine(lines) {\n  if (lines.length === 0) return '';\n\n  const lastLine = lines[lines.length - 1].trim();\n  if (lastLine === '' || lastLine.endsWith('$') || lastLine.endsWith('%')) {\n    return getValidLastLine(lines.slice(0, -1));  // recursive call with all but the last line\n  }\n  \n  return lastLine;\n}",

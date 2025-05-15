@@ -78,13 +78,6 @@
       "after": "import * as fs from 'fs';\nimport * as path from 'path';\nimport * as yaml from 'js-yaml';\nimport * as glob from 'glob';\n\nexport const writeAttention = async () => {\n    const workspaceFolders = vscode.workspace.workspaceFolders;\n    \n    const rootFolder = workspaceFolders[0].uri.fsPath;\n    const promptFilePath = path.join(rootFolder, 'prompt.yaml');\n    const excludeList = vscode.workspace.getConfiguration('junior').get('attentionExcludeList', []);\n    try {\n        if (fs.existsSync(promptFilePath)) {\n            const currentWindows = vscode.workspace.textDocuments.map(doc => path.relative(rootFolder, doc.fileName));\n            const filteredWindows = currentWindows.filter(windowPath => {\n                return !windowPath.endsWith('.git') && windowPath !== 'prompt.yaml' && windowPath !== 'prompt.md' && !excludeList.some((pattern: string) => glob.sync(pattern, { cwd: rootFolder }).includes(windowPath)) && fs.existsSync(path.join(rootFolder, windowPath));\n            });\n            const promptFile = yaml.load(fs.readFileSync(promptFilePath, 'utf8'));\n            promptFile.attention = filteredWindows;\n            fs.writeFileSync(promptFilePath, yaml.dump(promptFile), 'utf8');",
       "total_deletions": 1,
       "total_additions": 5
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - integrations/vscode/src/writeAttention.ts\nrequirements: >\n  Extra .git elements appear in the list for every opened file, e.g.: -\n  src/backend/servePromptDescriptor.js -\n  src/backend/servePromptDescriptor.js.git\nformat: prompt/format/shell.md",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - integrations/vscode/src/writeAttention.ts\n  - integrations/vscode/src/extension.ts\n  - integrations/vscode/package.json\nrequirements: >\n  - Instead of excluding .git - ending elements, only include existing files in\n  the attention. - Also exclude prompt.yaml and prompt.md - Plus allow an\n  attention exclude list (list of globs) as a configuration - Remove the\n  helloworld command\nformat: prompt/format/shell.md",
-      "total_deletions": 4,
-      "total_additions": 7
     }
   ]
 }

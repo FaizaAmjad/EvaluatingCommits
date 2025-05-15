@@ -81,13 +81,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Improve documentation and embed video\"\necho \"Plan:\"\necho \"1. Create a doc/assets directory.\"\necho \"2. Download video cover image with curl.\"\necho \"3. Compress the image to be less than 30K.\"\necho \"4. Add a markdown link to the README.md that points to the Youtube video.\"\necho \"5. Add a caption to the image.\"\n\nmkdir -p doc/assets\n\ncurl -o doc/assets/video_cover.jpg \"https://img.youtube.com/vi/W_iwry8uT7E/maxresdefault.jpg\"\n\n# Compress the image using ffmpeg\nffmpeg -i doc/assets/video_cover.jpg -vf \"scale=iw*0.5:ih*0.5\" -compression_level 9 doc/assets/compressed_video_cover.jpg\n\nmv doc/assets/compressed_video_cover.jpg doc/assets/video_cover.jpg\n\nsed -i '' '/# Junior - Your AI contributor which writes itself./a\\\n\\\n[![Video: Junior codes itself](doc/assets/video_cover.jpg)](https://www.youtube.com/watch?v=W_iwry8uT7E)\\\n*\"Video: Junior codes itself\"*' README.md\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 71,
       "total_additions": 15
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/doc/improve.md\nattention:\n  - README.md\nrequirements: >\n  The project is called simply \"Junior\", without \"the\". It was renamed from \"Contributor\" Fix the name in every occurrence!\nos: OSX",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - ./\n  - doc/\n  - README.md\nrequirements: >\n  \"Embed\" this video https://www.youtube.com/watch?v=W_iwry8uT7E for displaying on github just after the main heading.\n  Download the cover image with curl and store it in doc/assets/ folder. (Create it)\n  When the user clicks the image, open the video (in a new tab if possible).\n  Also add a caption to the image: \"Video: Junior codes itself\"\nos: OSX",
-      "total_deletions": 1,
-      "total_additions": 6
     }
   ]
 }

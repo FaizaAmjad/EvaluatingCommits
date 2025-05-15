@@ -95,13 +95,6 @@
       "total_additions": 104
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/split.md\nattention:\n  - ./\n  - src/\n  - src/frontend/\n  - src/frontend/App.jsx\nrequirements: >\n  App.jsx is the file. We also need to stop the growth of it!\nformat: prompt/format/shell.md",
-      "after": "task: refactor/general.md\nattention:\n  - ./\n  - src/\n  - src/frontend/PromptDescriptorViewer.jsx\n  - src/frontend/components/TasksList.jsx\nrequirements: >\nformat: prompt/format/shell.md",
-      "total_deletions": 4,
-      "total_additions": 3
-    },
-    {
       "filename": "src/backend/handlers.js",
       "before": "import processPrompt from '../prompt/promptProcessing.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n};\n\nexport const descriptorHandler = servePromptDescriptor;\n",
       "after": "import processPrompt from '../prompt/promptProcessing.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\nimport { updateTaskHandler } from './updateTaskHandler.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n};\n\nexport const descriptorHandler = servePromptDescriptor;\nexport const taskUpdateHandler = updateTaskHandler;",

@@ -71,13 +71,6 @@
       "total_additions": 98
     },
     {
-      "filename": "prompt/history/2023/09/04/20:56_Implement required UI changes/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/MultiSelect/MultiSelect.jsx\n  - src/frontend/components/MultiSelect/ResultSet.jsx\n  - src/frontend/components/MultiSelect/SearchBar.jsx\nrequirements: |\n  1. Add vertical margin to the search bar, and make its border less emphasized.\n  2. Hide the discs both in resultset and filteredlist\n  3. Make the multiselect padding smaller\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 10
-    },
-    {
       "filename": "src/frontend/components/MultiSelect/FilteredList.jsx",
       "before": "const FilteredList = (props) => {\n  const comparisonFunction = props.compare || ((item, filter) => item.includes(filter) ? filter.length : 0);\n  \n  return (\n    <ul class=\"w-full list-disc pl-5\">\n      {props.items.map(item => <li key={item}>{item}</li>)}\n    </ul>\n  );",
       "after": "const FilteredList = (props) => {\n  return (\n    <ul class=\"list-decimal pl-5 list-inside\">\n      {props.items.map(item => <li key={item}>{item}</li>)}\n    </ul>\n  );",

@@ -47,13 +47,6 @@
       "total_additions": 78
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - src/\n  - src/execute/\n  - src/execute/extractCode.js\n  - src/execute/executeCode.js\nrequirements: >\n  1. The executed code should be written to ./change.sh before executing.\n  2. While executing the code, I do not see output in the terminal. Forward it!\n  3. executeCode.js is too big. We need to split in two logically.\nformat: prompt/format/shell.md",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - src/main.js\n  - src/interactiveSession/\n  - src/interactiveSession/startInteractiveSession.js\n  - src/interactiveSession/saveAndSendPrompt.js\n  - src/interactiveSession/handleApiResponse.js\n  - src/execute/executeCode.js\n  - src/execute/executeAndForwardOutput.js\nrequirements: >\n  We do not need to send the result of previous command and the last message id to the api,\n  so last_command_result and parent_message_id should be eliminated from function signatures.\nformat: prompt/format/shell.md",
-      "total_deletions": 6,
-      "total_additions": 8
-    },
-    {
       "filename": "src/execute/executeAndForwardOutput.js",
       "before": "import { spawn } from 'child_process';\nimport { startInteractiveSession } from \"../interactiveSession/startInteractiveSession.js\";\n\nfunction executeAndForwardOutput(code, last_command_result, parent_message_id, rl) {\n  const child = spawn(code, { shell: true });\n\n  child.stdout.on('data', (data) => {\n    console.log(`${data}`);\n    } else {\n      last_command_result = \"Command executed. Output:\\n\" + last_command_result;\n    }\n    startInteractiveSession(last_command_result, parent_message_id, rl)\n  });\n}\n",
       "after": "import { spawn } from 'child_process';\nimport { startInteractiveSession } from \"../interactiveSession/startInteractiveSession.js\";\n\nfunction executeAndForwardOutput(code, rl, api) {\n  const child = spawn(code, { shell: true });\n  let last_command_result = '';\n\n  child.stdout.on('data', (data) => {\n    console.log(`${data}`);\n    } else {\n      last_command_result = \"Command executed. Output:\\n\" + last_command_result;\n    }\n    startInteractiveSession(rl, api)\n  });\n}\n",

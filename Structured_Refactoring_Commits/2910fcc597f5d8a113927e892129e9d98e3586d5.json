@@ -83,13 +83,6 @@
       "total_additions": 15
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/git/gitStatus.js\nrequirements: Add --porcelain=v1 when calling git status\nos: OSX",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - ./\n  - ./src/\n  - ./src/frontend/\n  - src/frontend/postcss.config.cjs\nrequirements: The tailwind config path should be relative to the postcss config file, not the working dir. Also remove unused imports!\nos: OSX",
-      "total_deletions": 2,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/postcss.config.cjs",
       "before": "const tailwindcss = require('tailwindcss');\nconst autoprefixer = require('autoprefixer');\nconst postcssImport = require('postcss-import');\nconst postcssNested = require('postcss-nested');\n\nmodule.exports = {\n  plugins: {\n    'postcss-import': {},\n    'tailwindcss/nesting': postcssNested,\n    tailwindcss: { config: './src/frontend/tailwind.config.cjs' },\n    autoprefixer: autoprefixer,\n  },\n};",
       "after": "const path = require('path');\nconst tailwindcss = require('tailwindcss');\nconst autoprefixer = require('autoprefixer');\nconst postcssNested = require('postcss-nested');\n\nmodule.exports = {\n  plugins: {\n    'tailwindcss/nesting': postcssNested,\n    tailwindcss: { config: path.join(__dirname, 'tailwind.config.cjs') },\n    autoprefixer: autoprefixer,\n  },\n};",

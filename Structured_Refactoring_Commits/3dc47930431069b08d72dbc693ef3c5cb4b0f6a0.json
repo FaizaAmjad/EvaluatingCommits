@@ -47,13 +47,6 @@
       "total_additions": 27
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/components/ExecutionResultDisplay.jsx\n  - src/execute/ansiToHtml.js\nrequirements: >\n  Uncaught (in promise) TypeError: Cannot read properties of undefined (reading\n  'replace')\n    at ansiToHtml (ansiToHtml.js:13:45)\n    at Object.fn (ExecutionResultDisplay.jsx:31:29)\n",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/frontend/useKeyBindings.js\n  - src/frontend/App.jsx\nrequirements: Move useKeyBindings to src/frontend/service/",
-      "total_deletions": 8,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "import useKeyBindings from './useKeyBindings';\nimport keyBindings from './config/keyBindings';\nimport NavBar from './components/NavBar';\nimport PromptCreation from './components/PromptCreation';",
       "after": "import useKeyBindings from './service/useKeyBindings';\nimport keyBindings from './config/keyBindings';\nimport NavBar from './components/NavBar';\nimport PromptCreation from './components/PromptCreation';",

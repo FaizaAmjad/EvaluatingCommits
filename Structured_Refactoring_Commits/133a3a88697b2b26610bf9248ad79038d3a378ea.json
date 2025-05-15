@@ -113,13 +113,6 @@
       "after": "import * as fs from 'fs';\nimport * as yaml from 'js-yaml';\n\nexport const writePromptFile = (filePath: string, data: any) => {\n    fs.writeFileSync(filePath, yaml.dump(data), 'utf8');\n};",
       "total_deletions": 0,
       "total_additions": 6
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/prompt/createPrompt.js\n  - src/prompt/resolveTemplateVariables.js\n  - src/prompt/extractTemplateVars.js\n  - src/prompt/loadTaskTemplate.js\n  - src/prompt/loadPromptFile.js\nrequirements: Extra html encoding appears on injected variables int the generated prompt.\nos: OSX",
-      "after": "task: prompt/task/refactor/split.md\nattention:\n  - integrations/vscode/src/writeAttention.ts\nrequirements: >\n  getRootWorkspace(): Returns the root of the current VSCode workspace.\n\n  getPromptFilePath(rootFolder: string): Takes the root folder and returns the\n  path to the prompt.yaml file.\n\n  getCurrentOpenDocuments(rootFolder: string): Returns a list of currently open\n  text documents relative to the root workspace.\n\n  readPromptFile(filePath: string): Reads and parses the prompt.yaml file,\n  returning its content.\n\n  writePromptFile(filePath: string, data: any): Writes the updated data back to\n  the prompt.yaml file.\n\n  updateAttentionSection(currentWindows: string[], excludeList: string[],\n  rootFolder: string): Takes in the list of open documents, the exclusion list,\n  and the root folder, then filters and returns the updated \"attention\" list.\nos: OSX",
-      "total_deletions": 7,
-      "total_additions": 20
     }
   ]
 }

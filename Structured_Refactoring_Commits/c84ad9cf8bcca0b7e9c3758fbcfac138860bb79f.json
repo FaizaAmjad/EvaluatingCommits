@@ -47,13 +47,6 @@
       "total_additions": 65
     },
     {
-      "filename": "prompt/history/2023/08/31/11:22_Refactor readFileList.js with ignore logic/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/backend/fileutils/readFileList.js\nrequirements: >-\n  A single if should be enough for ignoring. Store the ignored dirs in an array\n  that is filled\n\n  - from a const containing the current ones\n\n  - extended from --ignore=dir1,dir2 style cli argument if exists\n\n  - and extended from JUNIOR_IGNORE env variable if exists\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 13
-    },
-    {
       "filename": "src/backend/fileutils/getIgnoreList.js",
       "before": "",
       "after": "function getIgnoreList() {\n  const DEFAULT_IGNORE = ['.git', 'node_modules', 'prompt'];\n\n  const cliArgs = process.argv.slice(2);\n  const cliIgnore = cliArgs\n    .filter(arg => arg.startsWith('--ignore='))\n    .map(arg => arg.replace('--ignore=', '').split(','))\n    .flat();\n\n  const envIgnore = process.env.JUNIOR_IGNORE ? process.env.JUNIOR_IGNORE.split(',') : [];\n\n  return [...DEFAULT_IGNORE, ...cliIgnore, ...envIgnore];\n}\n\nexport default getIgnoreList;",

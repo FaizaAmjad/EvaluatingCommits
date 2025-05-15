@@ -47,13 +47,6 @@
       "total_additions": 37
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/frontend/useKeyBindings.js\n  - src/frontend/App.jsx\nrequirements: Move useKeyBindings to src/frontend/service/\n",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/ExecuteButton.jsx\nrequirements: Make inputAvailable a boolean const! Name it clipboardAvailable!",
-      "total_deletions": 4,
-      "total_additions": 3
-    },
-    {
       "filename": "src/frontend/components/ExecuteButton.jsx",
       "before": "import { createEffect, createSignal } from 'solid-js';\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\n\nconst ExecuteButton = () => {\n  const [inputAvailable, setInputAvailable] = createSignal(true);\n  const [changeInput, setChangeInput] = createSignal('');\n\n  const handleExecuteChange = async () => {\n    const change = inputAvailable() ? await navigator.clipboard.readText() : changeInput();\n    const response = await executeChange(change);\n    setChange(change);\n    setExecutionResult(response.output);\n    handleExecuteChange();\n  };\n\n  // Check if clipboard reading is available\n  createEffect(() => {\n    if (!navigator.clipboard || !navigator.clipboard.readText) {\n      setInputAvailable(false);\n    }\n  });\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-orange-300 text-white rounded\" onClick={handleExecuteChange}>\n      {inputAvailable() ? (\n        'Paste & Execute Change'\n      ) : (\n        <textarea",
       "after": "import { createSignal } from 'solid-js';\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n  const [changeInput, setChangeInput] = createSignal('');\n\n  const handleExecuteChange = async () => {\n    const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();\n    const response = await executeChange(change);\n    setChange(change);\n    setExecutionResult(response.output);\n    handleExecuteChange();\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-orange-300 text-white rounded\" onClick={handleExecuteChange}>\n      {clipboardAvailable ? (\n        'Paste & Execute Change'\n      ) : (\n        <textarea",

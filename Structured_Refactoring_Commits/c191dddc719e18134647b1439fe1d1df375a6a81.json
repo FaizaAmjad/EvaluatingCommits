@@ -47,13 +47,6 @@
       "total_additions": 61
     },
     {
-      "filename": "prompt/history/2023/09/19/17:20_Update multiselect on each keystroke/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - ./src/frontend/components/RequirementsEditor.jsx\n  - ./src/frontend/model/requirements.js\n  - ./src/frontend/components/MultiSelect/FilteredList.jsx\n  - ./src/frontend/components/AutoGrowingTextarea.jsx\nrequirements: While editing requirements, update the multiselect after every keystroke.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 8
-    },
-    {
       "filename": "src/frontend/components/RequirementsEditor.jsx",
       "before": "import { createSignal, createEffect } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\nimport { promptDescriptor, setPromptDescriptor } from '../model/promptDescriptor'; \nimport { requirements, setRequirements } from '../model/requirements';  // Make sure to import setRequirements\nimport { getYamlEntry } from '../service/getYamlEntry';\nimport jsyaml from 'js-yaml'; \nimport AutoGrowingTextarea from './AutoGrowingTextarea';\n    parsed.requirements = e.target.value; \n    const updatedDescriptor = jsyaml.dump(parsed);\n    setPromptDescriptor(updatedDescriptor);\n  };\n\n  const handleChange = async (e) => {\n};\n\nexport default RequirementsEditor;\n",
       "after": "import { createSignal, createEffect } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\nimport { promptDescriptor, setPromptDescriptor } from '../model/promptDescriptor'; \nimport { requirements, setRequirements } from '../model/requirements';\nimport { getYamlEntry } from '../service/getYamlEntry';\nimport jsyaml from 'js-yaml'; \nimport AutoGrowingTextarea from './AutoGrowingTextarea';\n    parsed.requirements = e.target.value; \n    const updatedDescriptor = jsyaml.dump(parsed);\n    setPromptDescriptor(updatedDescriptor);\n\n    // After setting the updated descriptor, trigger an update on the multiselect component\n    // Assumption: The multiselect component listens to changes on the requirements signal and updates itself accordingly.\n    setRequirements(e.target.value);\n  };\n\n  const handleChange = async (e) => {\n};\n\nexport default RequirementsEditor;\n",

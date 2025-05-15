@@ -47,13 +47,6 @@
       "total_additions": 33
     },
     {
-      "filename": "prompt/history/2023/08/21/17:03_Refine .gitignore behavior/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/init.js\n  - src/git/createGitignore.js\nrequirements: |\n  Only gitignore prompt files and change.sh in the root folder, not in subdirs",
-      "total_deletions": 0,
-      "total_additions": 6
-    },
-    {
       "filename": "src/git/createGitignore.js",
       "before": "import { appendFileSync, writeFileSync, existsSync, readFileSync } from 'fs';\nimport { join } from 'path';\n\nfunction createGitignore() {\n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['prompt.yaml', 'prompt.md', 'change.sh', 'node_modules'];\n\n  let existingIgnores = [];\n",
       "after": "import { appendFileSync, existsSync, readFileSync } from 'fs';\nimport { join } from 'path';\n\nfunction createGitignore() {\n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['/prompt.yaml', '/prompt.md', '/change.sh', 'node_modules'];\n\n  let existingIgnores = [];\n",

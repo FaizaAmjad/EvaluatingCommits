@@ -59,13 +59,6 @@
       "total_additions": 25
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/stores/executionResult.js\n  - src/frontend/components/CommitButton.jsx\nrequirements: |\n  - Create a signal in src/frontend/stores/change.js\n  - Save the pasted change after it was executed.\n  - Clear the change after commit.\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/\n  - src/frontend/service/\n  - src/frontend/stores/change.js\n  - src/frontend/stores/commitMessage.js\nrequirements: |\n  Create a function in the servitce directory, which, when called, starts to\n  monitor the change signal, parses its content, which should be a shells script,\n  for a line:\n  goal=\"Some goal description\"\n  and if found, sets the commit message to the value of this goal variable\nos: OSX",
-      "total_deletions": 7,
-      "total_additions": 9
-    },
-    {
       "filename": "src/frontend/service/monitorChangeSignal.js",
       "before": "",
       "after": "import { createEffect } from 'solid-js';\nimport { change } from '../stores/change';\nimport { setCommitMessage } from '../stores/commitMessage';\n\nconst monitorChangeSignal = () => {\n  createEffect(() => {\n    const newChangeContent = change();\n    // Check if the new content has the goal variable\n    const goalLineMatch = newChangeContent.match(/goal=\"(.+?)\"/);\n    \n    if (goalLineMatch) {\n      const goalValue = goalLineMatch[1];\n      \n      // Set the commit message to the value of the goal variable\n      setCommitMessage(goalValue);\n    }\n  });\n};\n\nexport default monitorChangeSignal;",

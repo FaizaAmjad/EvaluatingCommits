@@ -87,13 +87,6 @@
       "after": "  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\"\n  },\n  \"keywords\": [\n    \"cli\",\n    \"tailwindcss\": \"^3.3.3\",\n    \"vite\": \"^4.3.9\",\n    \"vite-plugin-solid\": \"^2.7.0\",\n    \"ws\": \"^8.13.0\",\n    \"docsify-cli\": \"^4.4.7\"\n  },\n  \"directories\": {\n    \"doc\": \"docs\"\n  },\n  \"repository\": {\n    \"type\": \"git\",",
       "total_deletions": 4,
       "total_additions": 4
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/components/RollbackButton.jsx\n  - src/frontend/components/CommitButton.jsx\nrequirements: |\n  Make CommitButton look exactly the same as rollback, except color!\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - ./doc/\n  - package.json\nrequirements: |\n  - Install docsify-cli locally\n  - npx run docsify init ./docs\n  - Move md and png files and assets dir from doc to docs\n  - Delete doc/\n  - Delete the docs build command from package.json\nos: OSX",
-      "total_deletions": 4,
-      "total_additions": 9
     }
   ]
 }

@@ -59,13 +59,6 @@
       "total_additions": 50
     },
     {
-      "filename": "prompt/history/2023/08/23/13:53_Refactor RequirementsEditor for clarity/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/components/TasksList.jsx\n  - src/frontend/components/RequirementsEditor.jsx\n  - src/frontend/model/selectedTask.js\nrequirements: >-\n  Requirements are not populated when the descriptor changes. Fix reactivity by\n  introducing a signal in the model!\n  Check the task list for example!\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 10
-    },
-    {
       "filename": "src/frontend/components/RequirementsEditor.jsx",
       "before": "import { createEffect } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\nimport { promptDescriptor } from '../model/promptDescriptor';\n\nconst RequirementsEditor = () => {\n  let requirements = promptDescriptor().requirements || '';\n\n  const handleRequirementsChange = async (e) => {\n    requirements = e.target.value;\n    await postDescriptor({ requirements: requirements });\n  };\n\n  createEffect(() => {\n    requirements = promptDescriptor().requirements || '';\n  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded border border-border mt-4\">\n      <textarea\n        class=\"w-full bg-emphasize text-emphasize text-lg\"\n        placeholder=\"Enter your requirements...\"\n        value={requirements}\n        onInput={e => handleRequirementsChange(e)}\n      />\n    </div>",
       "after": "import { createEffect } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\nimport { promptDescriptor } from '../model/promptDescriptor';\nimport { requirements, setRequirements } from '../model/requirements';\n\nconst RequirementsEditor = () => {\n  const handleRequirementsChange = async (e) => {\n    setRequirements(e.target.value);\n    await postDescriptor({ requirements: e.target.value });\n  };\n\n  createEffect(() => {\n    const currentRequirements = promptDescriptor().requirements || '';\n    if (currentRequirements !== requirements()) {\n      setRequirements(currentRequirements);\n    }\n  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded border border-border mt-4\">\n      <textarea\n        class=\"w-full bg-emphasize text-emphasize text-lg\"\n        placeholder=\"Enter your requirements...\"\n        value={requirements()}\n        onInput={e => handleRequirementsChange(e)}\n      />\n    </div>",

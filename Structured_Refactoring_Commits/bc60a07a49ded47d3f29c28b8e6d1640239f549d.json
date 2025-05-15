@@ -59,13 +59,6 @@
       "total_additions": 18
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/move_files.md\nattention:\n  - package.json\n  - src/git/clearBranches.js\nrequirements: |\n  rename delete-branches to clear-branches\n  rename deleteBranches to clearBranches\nos: OSX",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - ./\n  - ./scripts/\n  - src/git/clearBranches.js\n  - src/git/clearBranchesCommand.js\nrequirements: |\n  Move clearBranchesCommand.js to scripts/\n  Delete scripts/deleteBranchesCommand.js\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 5
-    },
-    {
       "filename": "scripts/clearBranchesCommand.js",
       "before": "import clearBranches from './clearBranches';\n\nconst exceptions = process.argv.slice(2);\n\n}\n\nrun();\n",
       "after": "import clearBranches from '../src/git/clearBranches';\n\nconst exceptions = process.argv.slice(2);\n\n}\n\nrun();\n",

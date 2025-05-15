@@ -52,13 +52,6 @@
       "after": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\">\n    <rect x=\"0\" y=\"0\" rx=\"10\" ry=\"10\" width=\"100\" height=\"30\" style=\"fill:rgb(59 130 246);\" />\n    <rect x=\"0\" y=\"33\" rx=\"10\" ry=\"10\" width=\"100\" height=\"30\" style=\"fill:rgb(253, 186, 116);\" />\n    <rect x=\"0\" y=\"66\" rx=\"10\" ry=\"10\" width=\"48\" height=\"34\" style=\"fill:rgb(185, 28, 28);\" />\n    <rect x=\"52\" y=\"66\" rx=\"10\" ry=\"10\" width=\"48\" height=\"34\" style=\"fill:rgb(21, 128, 61);\" />\n</svg>",
       "total_deletions": 4,
       "total_additions": 4
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/components/RollbackButton.jsx\n  - src/frontend/components/CommitButton.jsx\n  - src/frontend/components/GenerateButton.jsx\nrequirements: |\n  Add font-semibold to every button\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - docs/assets/logo.svg\n  - package.json\nrequirements: |\n  blue -> rgb(59 130 246)\n  orange -> rgb(253, 186, 116)\n  red -> rgb(185, 28, 28)\n  green -> rgb(21, 128, 61)\n  Then call the update script!\nos: OSX",
-      "total_deletions": 5,
-      "total_additions": 7
     }
   ]
 }

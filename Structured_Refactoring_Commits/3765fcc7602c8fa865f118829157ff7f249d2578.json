@@ -64,13 +64,6 @@
       "after": "{\n  \"name\": \"@aijunior/dev\",\n  \"version\": \"0.0.1\",\n  \"description\": \"Your AI Contributor\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {",
       "total_deletions": 2,
       "total_additions": 2
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - ./prompt/\n  - ./src/\n  - ./src/prompt/\n  - ./src/prompt/loadPromptDescriptor.js\n  - ./src/prompt/createPrompt.js\nrequirements: >\n  When loading the task, try to load it relative to the current directory,\n  but if not found, load the file relative to the project root (calculated from the source file location).\nformat: prompt/format/shell.md",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - ./package.json\n  - ./src/\nrequirements: >\n  Rename the project to @aijunior/dev\nformat: prompt/format/shell.md",
-      "total_deletions": 6,
-      "total_additions": 2
     }
   ]
 }

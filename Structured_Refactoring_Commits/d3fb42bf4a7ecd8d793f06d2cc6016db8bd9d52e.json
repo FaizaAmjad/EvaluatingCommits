@@ -47,13 +47,6 @@
       "total_additions": 51
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/config.js\nrequirements: |\n  When no OPENAI_API_KEY env var presents, try to open ./secret.sh\n  and parse it to get the key.\n  Move this logic and the \"new ChatGPTAPI\" call to a function in src/llm/openai/createApi.js (create the dir).",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/\n  - ./src/llm/\n  - ./src/llm/openai/\n  - src/config.js  - src/llm/openai/createApi.js\nrequirements: >\n  Factor out the dry-run fake api creation from config.js to llm/fake/createFakeApi.js (create dir)\n  In openai/createApi.js, when the api key not found for openai, console.warn and return a fake api instance.\nos: OSX",
-      "total_deletions": 4,
-      "total_additions": 8
-    },
-    {
       "filename": "src/config.js",
       "before": "import readline from 'readline';\nimport createApi from './llm/openai/createApi.js';\n\nfunction isDryRun() {\n  return process.argv.includes(\"-d\") || process.argv.includes(\"--dry-run\");\n\nasync function getApi() {\n  if (isDryRun()) {\n    return {\n      sendMessage: () => { return {id: 42, text: \"DRY RUN, NOT SENT\"}}\n    };\n  } else {\n    return await createApi(get_model());\n  }",
       "after": "import readline from 'readline';\nimport createApi from './llm/openai/createApi.js';\nimport createFakeApi from './llm/fake/createFakeApi.js';\n\nfunction isDryRun() {\n  return process.argv.includes(\"-d\") || process.argv.includes(\"--dry-run\");\n\nasync function getApi() {\n  if (isDryRun()) {\n    return createFakeApi();\n  } else {\n    return await createApi(get_model());\n  }",

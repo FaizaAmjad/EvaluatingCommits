@@ -47,13 +47,6 @@
       "total_additions": 86
     },
     {
-      "filename": "prompt/history/2023/09/04/10:45_Reorganize components for MultiSelect/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/frontend/components/MultiSelect.jsx\n  - src/frontend/components/SearchBar.jsx\n  - src/frontend/components/ResultSet.jsx\n  - src/frontend/components/FilteredList.jsx\n  - src/frontend/components/AttentionFileList.jsx\nrequirements: >-\n  Create components/MultiSelect/ and move MultiSelect, its subcomponents and\n  computeFilteredList there.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 11
-    },
-    {
       "filename": "src/frontend/components/AttentionFileList.jsx",
       "before": "import { createEffect } from 'solid-js';\nimport { fileList, setFileList } from '../model/fileList';\nimport fetchFileList from '../service/fetchFileList';\nimport MultiSelect from './MultiSelect';\nimport getComparison from '../services/helpers/getComparison';\n\nconst AttentionFileList = () => {",
       "after": "import { createEffect } from 'solid-js';\nimport { fileList, setFileList } from '../model/fileList';\nimport fetchFileList from '../service/fetchFileList';\nimport MultiSelect from './MultiSelect/MultiSelect';\nimport getComparison from '../services/helpers/getComparison';\n\nconst AttentionFileList = () => {",

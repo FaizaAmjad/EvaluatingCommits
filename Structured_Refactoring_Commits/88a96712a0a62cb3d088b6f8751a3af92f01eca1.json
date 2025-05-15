@@ -45,13 +45,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Improve documentation\"\necho \"Plan:\"\necho \"1. Modify design philosophy in README.md\"\n\ncat > docs/README.md << 'EOF'\nWarn: This README is AI generated, just like all the source files of this project.\n\nJunior is an **AI-first IDE** designed to utilize the capabilities of language models. Much like how Linus Torvalds oversees Linux Kernel development, Junior provides a space for developers to collaborate directly with AI throughout the development process.\n\nEmbracing a design philosophy of being simple, configurable and auditable, Junior aims to join the ranks of influential tools such as git and LISP in terms of its contribution to software development.\n\nWith a structured task descriptor and by spotlighting relevant parts of your project, you can delegate tasks such as code implementation, documentation, testing, and more, to Junior.\n",
       "total_deletions": 3,
       "total_additions": 2
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "attention:\n  - docs/README.md\nrequirements: >\n  Make Getting Started and Contributing and Support a bit less hyping.\n\n  Change the note at the end to say we test with that model only, but you can\n  try out similarly capable models and report your success. It will not work\n  with 3.5 (reword if needed)\nos: OSX",
-      "after": "attention:\n  - docs/README.md\nrequirements: >\n  Reword \"design philosophy of simplicity and configurability\"\n  to \n  \"design philosophy of being simple, configurable and auditable\"\nos: OSX",
-      "total_deletions": 5,
-      "total_additions": 3
     }
   ]
 }

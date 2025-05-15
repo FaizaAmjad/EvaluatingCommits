@@ -47,13 +47,6 @@
       "total_additions": 17
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\nrequirements: |\n  Legyen a k\u00e9perny\u0151 tetej\u00e9n egy felirat: \"Junior\"\n\n  Do not use jq, write out the whole the file!\n  It is a solidjs project\n",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/TitleDisplay.jsx\nrequirements: >\n  Rename TitleDisplay to NavBar!\n\n  Eliminate the signal, use a constant instead.\n\n  Add a subtitle: \"Your AI contributor\".\n\n  The subtitle should be visibly clickable and link to\n  https://github.com/tisztamo/Junior",
-      "total_deletions": 4,
-      "total_additions": 9
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "import PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\nimport TitleDisplay from './components/TitleDisplay';\nimport { notes, setNotes } from './stores/notes';\nimport { setPrompt } from './stores/prompt';\n\nconst App = () => {\n  return (\n    <div class=\"lg:m-8 m-4 flex flex-col items-center space-y-8 sm:p-0 lg:max-w-desktop mx-auto\">\n      <TitleDisplay />\n      <TasksList />\n      <PromptDescriptor />\n      <NotesInput notes={notes} setNotes={setNotes} />",
       "after": "import PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\nimport NavBar from './components/NavBar';\nimport { notes, setNotes } from './stores/notes';\nimport { setPrompt } from './stores/prompt';\n\nconst App = () => {\n  return (\n    <div class=\"lg:m-8 m-4 flex flex-col items-center space-y-8 sm:p-0 lg:max-w-desktop mx-auto\">\n      <NavBar />\n      <TasksList />\n      <PromptDescriptor />\n      <NotesInput notes={notes} setNotes={setNotes} />",

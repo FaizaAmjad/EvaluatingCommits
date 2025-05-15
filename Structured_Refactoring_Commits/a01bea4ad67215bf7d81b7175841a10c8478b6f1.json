@@ -47,13 +47,6 @@
       "total_additions": 16
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - ./src/\n  - ./src/prompt/\n  - src/prompt/promptDescriptorDefaults.js\n  - src/prompt/createPrompt.js\nrequirements: >\n  1. Rename the loadDefaults function to promptDescriptorDefaults\n  2. Instead of the constant array read the .md files from prompt/ directories\n  to generate the list of defaults. Load both the prompt/ dir relative to the working dir\n  and relative to the project root and merge them.\n  Note that __dirname is not automatically available in es6 modules.\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/prompt/promptDescriptorDefaults.js\n  - src/prompt/createPrompt.js\nrequirements: >\n  Optimize the code so that when a file exists in both prompt dir, we should only load it once.\n  I think it would be nice to create the list of unique filenames first.\nos: OSX",
-      "total_deletions": 8,
-      "total_additions": 2
-    },
-    {
       "filename": "src/prompt/promptDescriptorDefaults.js",
       "before": "  let promptDescriptorDefaults = {};\n  \n  const promptDirs = getPromptDirectories();\n\n  for(let dir of promptDirs) {\n    const files = fs.readdirSync(dir).filter(file => file.endsWith('.md'));\n\n    for (let file of files) {\n      const fileNameWithoutExtension = path.basename(file, '.md');\n      promptDescriptorDefaults[fileNameWithoutExtension] = await loadPromptFile(`prompt/${file}`);\n    }\n  }\n  return promptDescriptorDefaults;\n}\n",
       "after": "  let promptDescriptorDefaults = {};\n  \n  const promptDirs = getPromptDirectories();\n  let uniqueFiles = new Set();\n\n  // Store all unique file names\n  for(let dir of promptDirs) {\n    const files = fs.readdirSync(dir).filter(file => file.endsWith('.md'));\n    files.forEach(file => uniqueFiles.add(file));\n  }\n\n  // Load only unique files\n  for (let file of uniqueFiles) {\n    const fileNameWithoutExtension = path.basename(file, '.md');\n    promptDescriptorDefaults[fileNameWithoutExtension] = await loadPromptFile(`prompt/${file}`);\n  }\n  \n  return promptDescriptorDefaults;\n}\n",

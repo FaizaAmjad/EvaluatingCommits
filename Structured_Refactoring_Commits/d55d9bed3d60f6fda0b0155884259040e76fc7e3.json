@@ -57,13 +57,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Replace Getting Started details with link\"\necho \"Plan:\"\necho \"1. Replace the 'Getting Started' section with a link to usage.md in README.md.\"\n\n# Step 1: Replace the 'Getting Started' section with a link to usage.md in README.md\ncat > docs/README.md << 'EOF'\nWarn: This README is AI generated, just like all the source files of this project.\n\n# Junior - Your AI contributor which codes itself.\n\n[![Video: Junior codes itself](/assets/video_cover.jpg)](https://www.youtube.com/watch?v=W_iwry8uT7E)\n\n*\"Video: Junior codes itself\"*\n## Description\n\nJunior is an exploratory project aimed at revolutionizing the way programmers interact with the development process. Just like how Linus Torvalds oversees the Linux Kernel development without coding himself, this project allows developers to communicate with the AI and supervise the development process.\n\nIsn't that already possible with ChatGPT? No, LLMs have very limited \"working memory\", so it is not possible to directly work with them on large codebases.\n\nBy providing specific task details in a prompt descriptor and highlighting the relevant parts of your project, you can delegate code implementation, documentation, testing, and more to your AI Junior.\n\n## Getting Started\n\nFor more details on getting started, please refer to [usage.md](usage.md).\n\n## Contributing and Support\n\nContributions are welcome! Remember, we eat our own dog food in this project. Junior is designed to write itself. Your main role will be to oversee the work, provide detailed prompts, and review the outcomes.\n\nFor support, please create an issue in the GitHub repository.\n\n**Note:** For meaningful results, it's recommended to use the GPT-4 model or a more recent version.\nEOF\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 40,
       "total_additions": 19
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - docs/usage.md\nrequirements: >\n  - Add the sentence \"Additionally, you can install the \"Junior\" vscode extension from the\n  vscode extension marketplace.\" to the installation section.\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - docs/README.md\nrequirements: >\n  - Remove every detail and subsection from \"## Getting Started\"\n  - Instead add a link to usage.md \"usage\", in short call-to-action sentence. The file already exists, do not edit.\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 3
     }
   ]
 }

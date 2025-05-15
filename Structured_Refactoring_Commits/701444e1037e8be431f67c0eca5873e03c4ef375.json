@@ -47,13 +47,6 @@
       "total_additions": 20
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/\n  - src/frontend/stores/\n  - src/frontend/components/RollbackButton.jsx\n  - src/frontend/App.jsx\n  - src/frontend/service/resetGit.js\n  - src/frontend/stores/gitStatus.js\nrequirements: >\n  Create a green Commit button over the rollback that posts to the commit/\n  endpoint.\n\n  Commit message goes to the message field and is stored in a new signal in\n  stores/\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/CommitButton.jsx\nrequirements: >\n  Factor out the commit message to a separate component!\nos: OSX",
-      "total_deletions": 10,
-      "total_additions": 2
-    },
-    {
       "filename": "src/frontend/components/CommitButton.jsx",
       "before": "import { postCommit } from '../service/postCommit';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n  };\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <div>\n      <input type=\"text\" class=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" onInput={handleChange} />\n      <button class=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n    </div>\n  );",
       "after": "import { postCommit } from '../service/postCommit';\nimport CommitMessageInput from './CommitMessageInput';\nimport { commitMessage } from '../stores/commitMessage';\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n  };\n\n  return (\n    <div>\n      <CommitMessageInput />\n      <button class=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n    </div>\n  );",

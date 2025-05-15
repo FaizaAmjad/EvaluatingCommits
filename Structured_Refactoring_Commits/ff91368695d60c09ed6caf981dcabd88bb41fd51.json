@@ -47,13 +47,6 @@
       "total_additions": 67
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/styles/colors.css\n  - src/frontend/styles/markdown.css\nrequirements: >\n  Use the --emphasize-color and --background-emphasize-color variables for code blocks.\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/index.html\n  - src/frontend/App.jsx\n  - src/frontend/components/ThemeSwitcher.jsx\nrequirements: >\n  Move bg-main text-text to the body! Preserve existing classes on the body when\n  switching theme!\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2 bg-main text-text\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />",
       "after": "\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />",

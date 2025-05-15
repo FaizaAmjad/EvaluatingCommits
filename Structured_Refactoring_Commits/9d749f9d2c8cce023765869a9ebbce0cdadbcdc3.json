@@ -47,13 +47,6 @@
       "total_additions": 36
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/styles/styles.css\n  - src/frontend/tailwind.config.cjs\nrequirements: |\n  Create styles/colors.css and import it from styles.css\n  Define CSS variables for the colors text, background and emphasize, with separate values for :root and for .dark\n  In tailwind config, use those variables instead of the constants, eliminate \"light\" and \"dark\" colors there and introduce the use of backgroundColor!\n  An example from the tailwind config of another project just to see what I mean:\n\n  colors: {\n    primary: \"var(--primary-color)\",\n    line: \"var(--line-color)\",\n    main: \"var(--text-color)\",\n    ln2: \"var(--main-bg-2)\",\n    emphasize: \"var(--emphasize-color)\"\n  },\n  backgroundColor: {\n    main: \"var(--main-bg)\",\n    main2: \"var(--main-bg-2)\",\n    chart: \"var(--chart-bg)\",\n    line: \"var(--line-color)\",\n  },\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\nrequirements: |\n  Remove every bg and text coloring classes from the app div and add bg-main!\n  Also replace m-2 with p-2 there!\nos: OSX",
-      "total_deletions": 20,
-      "total_additions": 3
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"m-2 bg-maindark:bg-dark-background bg-light-background dark:text-dark-text text-light-text\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />",
       "after": "\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2 bg-main\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />",

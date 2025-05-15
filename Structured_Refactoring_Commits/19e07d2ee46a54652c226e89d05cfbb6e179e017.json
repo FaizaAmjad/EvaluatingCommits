@@ -59,25 +59,11 @@
       "total_additions": 51
     },
     {
-      "filename": "prompt/history/2023/09/04/12:45_Implement RepoInfo in NavBar/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/NavBar.jsx\nrequirements: |\n  Create a new component <RepoInfo> which displays\n  \"@aijunior/dev main\" with small mono font and emphasized\n  background with some paddig, rounded, no border.\n  Add it at as a new line of NavBar\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 9
-    },
-    {
       "filename": "prompt/history/2023/09/04/12:47_Refactor RepoInfo for better aesthetics/change.sh",
       "before": "",
       "after": "#!/bin/sh\nset -e\ngoal=\"Refactor RepoInfo for better aesthetics\"\necho \"Plan:\"\necho \"1. Update the RepoInfo.jsx component to use less padding, add some margin-top, and make the background adaptable for dark mode.\"\n\n# Step 1: Update RepoInfo.jsx component\n\ncat > src/frontend/components/RepoInfo.jsx << 'EOF'\nimport { createSignal } from 'solid-js';\n\nconst RepoInfo = () => {\n  return (\n    <span class=\"text-sm font-mono bg-gray-200 dark:bg-gray-700 px-1 py-0.5 mt-2 rounded\">\n      @aijunior/dev main\n    </span>\n  );\n};\n\nexport default RepoInfo;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
       "total_additions": 23
-    },
-    {
-      "filename": "prompt/history/2023/09/04/12:47_Refactor RepoInfo for better aesthetics/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/NavBar.jsx\nrequirements: |\n  Create a new component <RepoInfo> which displays\n  \"@aijunior/dev main\" with small mono font and emphasized\n  background with some paddig, rounded, no border.\n  Add it at as a new line of NavBar\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 9
     },
     {
       "filename": "src/frontend/components/NavBar.jsx",

@@ -77,13 +77,6 @@
       "total_additions": 99
     },
     {
-      "filename": "prompt/history/2023/08/24/10:51_Refactor frontend service directories/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/frontend/components/RequirementsEditor.jsx\n  - src/frontend/service/cliArgsService.js\nrequirements: >\n  Create service/config/ and move cliArgsService.js to it,\n\n  renaming it to cliArgs. It shpuld expose a same-name fn which returns the cli\n  args as it got from the serve.\n\n  Make isBetaEnabled a separate service in this new dir.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 12
-    },
-    {
       "filename": "src/frontend/components/RequirementsEditor.jsx",
       "before": "import { promptDescriptor, setPromptDescriptor } from '../model/promptDescriptor'; \nimport { requirements, setRequirements } from '../model/requirements';\nimport { getYamlEntry } from '../service/getYamlEntry';\nimport { isBetaEnabled } from '../service/cliArgsService'; \nimport jsyaml from 'js-yaml'; \nimport AutoGrowingTextarea from './AutoGrowingTextarea';\n",
       "after": "import { promptDescriptor, setPromptDescriptor } from '../model/promptDescriptor'; \nimport { requirements, setRequirements } from '../model/requirements';\nimport { getYamlEntry } from '../service/getYamlEntry';\nimport isBetaEnabled from '../service/config/isBetaEnabled'; \nimport jsyaml from 'js-yaml'; \nimport AutoGrowingTextarea from './AutoGrowingTextarea';\n",

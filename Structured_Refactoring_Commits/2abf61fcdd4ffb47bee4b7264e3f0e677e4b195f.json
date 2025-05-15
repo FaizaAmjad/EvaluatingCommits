@@ -59,13 +59,6 @@
       "total_additions": 16
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - prompt/system.md\nrequirements: >\n  Rewrite the system prompt in system.md to be concise but easy to \"understand\" for a language model.\n  Start it with \"You are Junior, an AI system aiding developers\"\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/execute/extractCode.js\n  - src/backend/handlers/executeHandler.js\nrequirements: >\n  Extract the code from the change before executing!\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 3
-    },
-    {
       "filename": "src/backend/handlers/executeHandler.js",
       "before": "import { executeAndForwardOutput } from '../../execute/executeAndForwardOutput.js';\n\nfunction executeHandler(req, res) {\n  executeAndForwardOutput(req.body.change, (result, output) => {\n    res.json({ result, output });\n  });\n}",
       "after": "import { executeAndForwardOutput } from '../../execute/executeAndForwardOutput.js';\nimport { extractCode } from '../../execute/extractCode.js';\n\nfunction executeHandler(req, res) {\n  const code = extractCode(req.body.change);\n  executeAndForwardOutput(code, (result, output) => {\n    res.json({ result, output });\n  });\n}",

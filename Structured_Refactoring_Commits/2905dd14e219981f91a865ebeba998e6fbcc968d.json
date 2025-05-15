@@ -47,13 +47,6 @@
       "total_additions": 79
     },
     {
-      "filename": "prompt/history/2023/09/01/17:13_Refactor frontend components/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/general.md\nattention:\n  - src/frontend/components/MultiSelect.jsx\n  - src/frontend/components/AttentionFileList.jsx\n  - src/frontend/components/FilteredList.jsx\nrequirements: |\n  - Remove the extra div in multiselect.\n  - Make all the components w-full.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 9
-    },
-    {
       "filename": "src/frontend/components/AttentionFileList.jsx",
       "before": "  };\n\n  return (\n    <div>\n      <MultiSelect availableItems={fileList()} selectedItems={[]} itemCount={5} />\n    </div>\n  );",
       "after": "  };\n\n  return (\n    <div class=\"w-full\">\n      <MultiSelect availableItems={fileList()} selectedItems={[]} itemCount={5} />\n    </div>\n  );",

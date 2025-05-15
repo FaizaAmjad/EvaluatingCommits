@@ -85,13 +85,6 @@
       "after": "import MarkdownIt from 'markdown-it';\nimport hljs from 'highlight.js';\n\nexport default function createMarkdownRenderer() {\n    return new MarkdownIt({\n        html: true,\n        linkify: true,\n        typographer: true,\n        highlight: function (str, lang) {\n            if (lang && hljs.getLanguage(lang)) {\n                try {\n                    return hljs.highlight(str, { language: lang }).value;\n                } catch (__) {}\n            }\n            return ''; \n        }\n    });\n}",
       "total_deletions": 0,
       "total_additions": 18
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - ./\n  - ./package.json\n  - ./src/\nrequirements: |\n  Remove everything from the doc directory, we restart our documentation\n  This is a monorepo, everything we ever write as documentation of this project, will go here\n  So we need a hierarchy of directories. Create it!\n\n  We want to write the docs in markdown, and generate html now and later other formats.\n\n  We will use some documentation tools, so we need to select and install them.\n\n  It would be great to host it on github pages, so we need to configure it.\n\n\n",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - ./\n  - ./doc\n  - ./doc/build.js\nrequirements: |\n  Rename build.js dor buildDoc.js\n  Factor the md = new MarkdownIt creation to createMarkdownRenderer.js\n  Similarly create convertDirectory.js\n\n\n",
-      "total_deletions": 11,
-      "total_additions": 5
     }
   ]
 }

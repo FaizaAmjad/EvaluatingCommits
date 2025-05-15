@@ -47,13 +47,6 @@
       "total_additions": 66
     },
     {
-      "filename": "prompt/history/2023/09/12/13:47_Implement source display popup modifications/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/MultiSelect/FullScreenPopup.jsx\n  - ./src/frontend/components/files/SourceFileDisplay.jsx\nrequirements: >-\n  1. Make the source display popup w-full mx-2 (it should remain h-3/4)\n\n  2. Remove the \"close\" label, it should just close on any click.\n\n  3. Prism is not running on newly created source viewers. Do we need to call\n  something on mount? (Prism is loaded from a cdn in the html)\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 12
-    },
-    {
       "filename": "src/frontend/components/MultiSelect/FullScreenPopup.jsx",
       "before": "    <div class=\"fixed top-0 left-0 w-full h-full z-50\" onClick={props.onClose}>\n      <div class=\"absolute inset-0 bg-black opacity-50\"></div>\n      <div class=\"absolute inset-0 flex justify-center items-center\">\n        <div class=\"bg-white w-3/4 h-3/4 rounded-lg overflow-y-auto\">\n          <button class=\"absolute top-4 right-4\" onClick={props.onClose}>Close</button>\n          <SourceFileDisplay path={props.path} />\n        </div>\n      </div>",
       "after": "    <div class=\"fixed top-0 left-0 w-full h-full z-50\" onClick={props.onClose}>\n      <div class=\"absolute inset-0 bg-black opacity-50\"></div>\n      <div class=\"absolute inset-0 flex justify-center items-center\">\n        <div class=\"bg-white w-full mx-2 h-3/4 rounded-lg overflow-y-auto\">\n          <div class=\"absolute top-4 right-4\" onClick={props.onClose}></div>\n          <SourceFileDisplay path={props.path} />\n        </div>\n      </div>",

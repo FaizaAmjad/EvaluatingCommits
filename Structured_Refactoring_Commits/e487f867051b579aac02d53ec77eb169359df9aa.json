@@ -47,13 +47,6 @@
       "total_additions": 67
     },
     {
-      "filename": "prompt/history/2023/09/05/14:52_Refactor MultiSelect components/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/MultiSelect/MultiSelect.jsx\n  - src/frontend/components/MultiSelect/SearchBar.jsx\nrequirements: >-\n  The prop addFirstFilteredItem should be named onKeyPress. Move the if to\n  multiselect\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 8
-    },
-    {
       "filename": "src/frontend/components/MultiSelect/MultiSelect.jsx",
       "before": "    setFilteredList(computeFilteredList(currentQuery, props.availableItems, props.compare, props.itemCount, selectedItems()));\n  });\n\n  const addFirstFilteredItem = () => {\n    const updatedItems = [filteredList()[0], ...selectedItems()];\n    setSelectedItems(updatedItems);\n  };\n\n  return (\n    <div class=\"w-full bg-emphasize text-emphasize p-2 rounded border border-border\">\n      <ResultSet items={selectedItems()} />\n      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} addFirstFilteredItem={addFirstFilteredItem} />\n      <FilteredList items={filteredList()} />\n    </div>\n  );",
       "after": "    setFilteredList(computeFilteredList(currentQuery, props.availableItems, props.compare, props.itemCount, selectedItems()));\n  });\n\n  const handleKeyPress = (e) => {\n    if (e.key === 'Enter') {\n      const updatedItems = [filteredList()[0], ...selectedItems()];\n      setSelectedItems(updatedItems);\n    }\n  };\n\n  return (\n    <div class=\"w-full bg-emphasize text-emphasize p-2 rounded border border-border\">\n      <ResultSet items={selectedItems()} />\n      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} onKeyPress={handleKeyPress} />\n      <FilteredList items={filteredList()} />\n    </div>\n  );",

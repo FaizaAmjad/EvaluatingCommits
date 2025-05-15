@@ -47,13 +47,6 @@
       "total_additions": 28
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/frontend/model/handleExecuteChange.js\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/config/keyBindings.js\nrequirements: Move handleExecuteChange to src/frontend/service/\nos: OSX",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/service/handleExecuteChange.js\n  - src/frontend/service/executeChange.js\nrequirements: Move the fetchGitStatus call to the handler!\nos: OSX",
-      "total_deletions": 5,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/service/executeChange.js",
       "before": "import { getBaseUrl } from '../getBaseUrl';\nimport { fetchGitStatus } from './fetchGitStatus';\n\nconst executeChange = async (change) => {\n  const baseUrl = getBaseUrl();\n\n  const data = await response.json();\n\n  // Fetch git status after code execution\n  fetchGitStatus();\n\n  return data;\n};\n\nexport { executeChange };\n",
       "after": "import { getBaseUrl } from '../getBaseUrl';\n\nconst executeChange = async (change) => {\n  const baseUrl = getBaseUrl();\n\n  const data = await response.json();\n\n  return data;\n};\n\nexport default executeChange;",

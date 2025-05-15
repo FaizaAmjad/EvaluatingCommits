@@ -47,13 +47,6 @@
       "total_additions": 52
     },
     {
-      "filename": "prompt/history/2023/09/25/15:59_Move terminal to ChangeInspection/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/ChangeInspection.jsx\n  - ./src/frontend/App.jsx\n  - ./src/frontend/components/GitStatusDisplay.jsx\nrequirements: |-\n  Move the terminal component from the app to the change inspection.\n  Put it after the git status.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 9
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "import ChangeExecution from './components/ChangeExecution';\nimport ChangeInspection from './components/ChangeInspection';\nimport ChangeFinalization from './components/ChangeFinalization';\nimport TerminalComponent from './components/terminal/TerminalComponent'; // Updated import path and name\n\nconst App = () => {\n  const bindings = keyBindings();\n      <ChangeExecution />\n      <ChangeInspection />\n      <ChangeFinalization />\n      <TerminalComponent /> {/* Updated component name */}\n    </div>\n  );\n};",
       "after": "import ChangeExecution from './components/ChangeExecution';\nimport ChangeInspection from './components/ChangeInspection';\nimport ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  const bindings = keyBindings();\n      <ChangeExecution />\n      <ChangeInspection />\n      <ChangeFinalization />\n    </div>\n  );\n};",

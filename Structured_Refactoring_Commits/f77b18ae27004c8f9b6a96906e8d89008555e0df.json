@@ -47,13 +47,6 @@
       "total_additions": 40
     },
     {
-      "filename": "prompt/history/2023/08/23/13:42_Refactor requirements editor component/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/service/postDescriptor.js\n  - src/frontend/components/TasksList.jsx\n  - src/frontend/components/RequirementsEditor.jsx\n  - src/frontend/model/promptDescriptor.js\nrequirements: |\n  Eliminate the signal from the requirements editor component\n  and fill it from the promptDescriptor signals requirements section,\n  similarly to how TasksList works.\n  Also remove the label and use \"Enter your requirements...\" placeholder instead\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 12
-    },
-    {
       "filename": "src/frontend/components/RequirementsEditor.jsx",
       "before": "import { createSignal } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\n\nconst RequirementsEditor = () => {\n  const [requirements, setRequirements] = createSignal('');\n\n  const handleRequirementsChange = async (e) => {\n    setRequirements(e.target.value);\n    await postDescriptor({ requirements: e.target.value });\n  };\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded border border-border mt-4\">\n      <label class=\"text-lg mr-2\">Requirements:</label>\n      <textarea\n        class=\"w-full bg-emphasize text-emphasize text-lg\"\n        value={requirements()}\n        onInput={e => handleRequirementsChange(e)}\n      />\n    </div>",
       "after": "import { createEffect } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\nimport { promptDescriptor } from '../model/promptDescriptor';\n\nconst RequirementsEditor = () => {\n  let requirements = promptDescriptor().requirements || '';\n\n  const handleRequirementsChange = async (e) => {\n    requirements = e.target.value;\n    await postDescriptor({ requirements: requirements });\n  };\n\n  createEffect(() => {\n    requirements = promptDescriptor().requirements || '';\n  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded border border-border mt-4\">\n      <textarea\n        class=\"w-full bg-emphasize text-emphasize text-lg\"\n        placeholder=\"Enter your requirements...\"\n        value={requirements}\n        onInput={e => handleRequirementsChange(e)}\n      />\n    </div>",

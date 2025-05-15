@@ -117,13 +117,6 @@
       "after": "version https://git-lfs.github.com/spec/v1\noid sha256:69bf79df9fb37c115464e1956c770dd2d284e32258590af9bbd611857935b88e\nsize 105171",
       "total_deletions": 0,
       "total_additions": 3
-    },
-    {
-      "filename": "evals/registry/evals/viewport_to_grid_size.yaml",
-      "before": "",
-      "after": "viewport_to_grid_size:  \n  id: viewport_to_grid_size.dev.v3\n  description: Evaluates a models ability to determine the size of an obscured grid using information only from initial constraints and a visible viewport.\n  metrics: [accuracy]\n\nviewport_to_grid_size.dev.v3:\n  class: evals.elsuite.basic.includes:Includes\n  args:\n    samples_jsonl: viewport_to_grid_size/samples.jsonl",
-      "total_deletions": 0,
-      "total_additions": 9
     }
   ]
 }

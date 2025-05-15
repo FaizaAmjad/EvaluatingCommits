@@ -59,13 +59,6 @@
       "total_additions": 6
     },
     {
-      "filename": "prompt.yaml",
-      "before": "  - src/frontend/App.jsx\n  - src/frontend/index.html\nrequirements: |\n  Add bg-emphasize class to the \"app\" div in index.html\n  Add bg-main to the inner div in App.jsx.\n  Remove the id attribute from outer (id=\"app\") in App.jsx, as the real app div is in the html.\n  Move the p-2 class from the outer to the inner div.\n  Remove unnecessary comments.\nos: OSX",
-      "after": "  - src/frontend/App.jsx\n  - src/frontend/index.html\nrequirements: |\n  There is a margin around the content which should be removed.\n  A horizontal padding should be added instead.\nos: OSX",
-      "total_deletions": 5,
-      "total_additions": 2
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "  useKeyBindings(bindings);\n\n  return (\n    <div class=\"p-2 sm:p-4 xs:p-4\">\n      <div class=\"bg-main max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />",
       "after": "  useKeyBindings(bindings);\n\n  return (\n    <div>\n      <div class=\"bg-main max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 px-2 sm:px-4 xs:px-4\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />",

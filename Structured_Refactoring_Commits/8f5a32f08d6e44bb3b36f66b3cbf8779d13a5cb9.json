@@ -47,13 +47,6 @@
       "total_additions": 53
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/service/resetGit.js\nrequirements: |\n  Export it as named!\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/backend/setupRoutes.js\n  - src/backend/handlers/updateTaskHandler.js\nrequirements: |\n  Crete a new endpoint for updating the requirements section of the prompt descriptor.\n  Also group git routes together for readability.\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 5
-    },
-    {
       "filename": "src/backend/handlers/updateRequirementsHandler.js",
       "before": "",
       "after": "import yaml from 'js-yaml';\nimport { loadPromptDescriptor } from \"../../prompt/loadPromptDescriptor.js\";\nimport { savePromptDescriptor } from \"../../prompt/savePromptDescriptor.js\";\n\nexport const updateRequirementsHandler = async (req, res) => {\n  const requirements = req.body.requirements;\n  \n  try {\n    const fileContent = await loadPromptDescriptor();\n    const document = yaml.load(fileContent);\n    document.requirements = requirements;\n    \n    const newYamlStr = yaml.dump(document);\n    await savePromptDescriptor(newYamlStr);\n    \n    res.status(200).json({ message: \"Requirements updated successfully\" });\n  } catch (error) {\n    console.log(error);\n    res.status(500).json({ message: \"Internal server error\" });\n  }\n};",

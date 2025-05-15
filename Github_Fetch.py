@@ -185,7 +185,7 @@ def main():
             ]
 
             # List of file extensions to exclude
-            excluded_files = [".gitignore", ".xml", ".md"]
+            excluded_files = [".gitignore", ".xml", ".md",".yaml" ]
 
             def is_excluded_path(path):
              # Check if the path includes any excluded directories

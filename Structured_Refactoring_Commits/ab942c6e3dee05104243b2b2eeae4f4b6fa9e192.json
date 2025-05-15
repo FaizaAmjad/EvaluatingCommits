@@ -47,13 +47,6 @@
       "total_additions": 107
     },
     {
-      "filename": "prompt/history/2023/09/26/10:45_Refocus terminal and update button style/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/terminal/TerminalComponent.jsx\n  - ./src/frontend/components/terminal/VirtualButton.jsx\nrequirements: >-\n  1. After clicking a virtual key, focus should go the terminal. Call focus on\n  the xterm terminal instance for this.\n\n  2. Remove text-white from the virtual button\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 10
-    },
-    {
       "filename": "src/frontend/components/terminal/TerminalComponent.jsx",
       "before": "\n  const sendVirtualKey = (key) => {\n    terminalConnection.sendDataToTerminal(JSON.stringify({ type: 'input', data: key }));\n  };\n\n  onMount(() => {",
       "after": "\n  const sendVirtualKey = (key) => {\n    terminalConnection.sendDataToTerminal(JSON.stringify({ type: 'input', data: key }));\n    term.focus();\n  };\n\n  onMount(() => {",

@@ -47,13 +47,6 @@
       "total_additions": 64
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - integrations/vscode/\n  - integrations/vscode/package.json\nrequirements: |\n  Set JuniorOpenSourceProject as the publisher\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/backend/setupRoutes.js\n  - src/backend/handlers/resetGitHandler.js\n  - src/git/resetGit.js\nrequirements: |\n  Create the commit/ endpoint which commits all new files and changes!\n  Commit message comes in the message field.\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 5
-    },
-    {
       "filename": "src/backend/handlers/commitGitHandler.js",
       "before": "",
       "after": "import commitGit from '../../git/commitGit.js';\n\nexport default async function commitGitHandler(req, res) {\n  try {\n    const message = req.body.message;\n    if (!message) {\n      res.status(400).send({ message: 'Commit message is required' });\n      return;\n    }\n    await commitGit(message);\n    res.status(200).send({ message: `Successfully committed with message: ${message}` });\n  } catch (error) {\n    res.status(500).send({ message: 'Error in committing changes', error });\n  }\n}",

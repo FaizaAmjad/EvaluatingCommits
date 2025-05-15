@@ -47,13 +47,6 @@
       "total_additions": 7
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/RollbackButton.jsx\nrequirements: |\n  Ask the user if really want to rollback: it will reset the repo to the last commit and delete new files even if they were not created by Junior.\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/RollbackButton.jsx\n  - src/frontend/components/ConfirmationDialog.jsx\nrequirements: >\n  - Make the confirmation question a bit more visible and separated from the rest of the text.\n  - Fade the ui outside of the dialog while it is opened\nos: OSX",
-      "total_deletions": 2,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/components/ConfirmationDialog.jsx",
       "before": "    <div className={visible() ? \"block\" : \"hidden\"}>\n      <div className=\"fixed inset-0 flex items-center justify-center z-50\">\n        <div className=\"bg-white p-8 rounded shadow-lg\">\n          <p>Are you sure you want to roll back? This will reset the repo to the last commit and delete new files.</p>\n          <button className=\"bg-red-700 text-white px-4 py-2 rounded mr-4\" onClick={props.onConfirm}>Confirm</button>\n          <button className=\"bg-gray-400 text-white px-4 py-2 rounded\" onClick={props.onCancel}>Cancel</button>\n        </div>\n      </div>\n    </div>\n  );\n};",
       "after": "    <div className={visible() ? \"block\" : \"hidden\"}>\n      <div className=\"fixed inset-0 flex items-center justify-center z-50\">\n        <div className=\"bg-white p-8 rounded shadow-lg\">\n          <h3 className=\"text-xl mb-4\">Are you sure you want to roll back?</h3>\n          <p>This will reset the repo to the last commit and delete new files.</p>\n          <button className=\"bg-red-700 text-white px-4 py-2 rounded mr-4\" onClick={props.onConfirm}>Confirm</button>\n          <button className=\"bg-gray-400 text-white px-4 py-2 rounded\" onClick={props.onCancel}>Cancel</button>\n        </div>\n      </div>\n      <div className={visible() ? \"fixed inset-0 bg-black opacity-50\" : \"hidden\"}></div>\n    </div>\n  );\n};",

@@ -47,13 +47,6 @@
       "total_additions": 37
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - ./\n  - ./prompt/\n  - src/init.js\n  - package.json\nrequirements: >\n  When junior-init is executed on a newly created repo, prompt files have to be\n  correctly located. They are in the installed version of Junior, and inside\n  there in prompt/defaults/.\nos: OSX",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - ./\n  - src/\n  - src/init.js\nrequirements: >\n  Create src/command/init/copyDefaults.js\n  and factor\n  the generalized (src, dst) recursive defaults copying\n  out.\n\n  Rewrite the copy implementation to\n  use nodejs fs, not exec.\nos: OSX",
-      "total_deletions": 6,
-      "total_additions": 9
-    },
-    {
       "filename": "src/command/init/copyDefaults.js",
       "before": "",
       "after": "import fs from 'fs';\nimport path from 'path';\n\nasync function copyDefaults(src, dst) {\n  if (!fs.existsSync(dst)) {\n    fs.mkdirSync(dst, { recursive: true });\n  }\n\n  fs.readdirSync(src).forEach(async (file) => {\n    const srcPath = path.join(src, file);\n    const dstPath = path.join(dst, file);\n    \n    if (fs.lstatSync(srcPath).isDirectory()) {\n      await copyDefaults(srcPath, dstPath);\n    } else {\n      fs.copyFileSync(srcPath, dstPath);\n    }\n  });\n}\n\nexport default copyDefaults;",

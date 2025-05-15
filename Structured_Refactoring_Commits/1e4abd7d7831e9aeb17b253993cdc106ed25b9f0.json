@@ -47,13 +47,6 @@
       "total_additions": 43
     },
     {
-      "filename": "prompt/history/2023/09/07/13:42_Implement multi-select list item modifications/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/MultiSelect/FilteredListItem.jsx\nrequirements: >-\n  In multiselect list item:\n\n  - Numbers should be shown on the left. Also adjust the separating border\n  accordingly.\n\n  - Item text should be displayed in two separate parts: Assume it is a path,\n  the filename should be on the left with larger font, followed by the directory\n  path.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 13
-    },
-    {
       "filename": "src/frontend/components/MultiSelect/FilteredListItem.jsx",
       "before": "    }\n  });\n\n  return (\n    <div onClick={handleClick} class=\"flex justify-between items-center w-full font-mono cursor-pointer\">\n      <span ref={itemRef} class=\"overflow-x-auto whitespace-no-wrap break-keep scrollbar-hidden mr-4 py-2\">{props.item}</span>\n      <span class=\"border-l border-border pl-2 pr-2\">{props.idx}</span>\n    </div>\n  );\n};",
       "after": "    }\n  });\n\n  // Split the path into filename and directory\n  const [filename, ...pathParts] = props.item.split('/').reverse();\n  const directory = pathParts.reverse().join('/');\n\n  return (\n    <div onClick={handleClick} class=\"flex justify-between items-center w-full font-mono cursor-pointer\">\n      <span class=\"border-r border-border pl-2 pr-2\">{props.idx}</span>\n      <span ref={itemRef} class=\"overflow-x-auto whitespace-no-wrap break-keep scrollbar-hidden ml-4 py-2 text-xl\">{filename}</span>\n      <span class=\"ml-2\">{directory}</span>\n    </div>\n  );\n};",

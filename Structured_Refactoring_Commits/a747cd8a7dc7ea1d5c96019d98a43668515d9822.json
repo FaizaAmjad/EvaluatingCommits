@@ -47,13 +47,6 @@
       "total_additions": 93
     },
     {
-      "filename": "prompt/history/2023/09/25/15:04_Notify shell of terminal size changes and wrap all data in JSON/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/service/terminal/setupXTerm.js\n  - ./src/frontend/components/terminal/TerminalComponent.jsx\n  - ./src/backend/terminal/setupTerminalServer.js\n  - ./src/frontend/service/terminal/terminalConnection.js\nrequirements: >-\n  We set the terminal size to fit the width of the container element. However,\n  the shell running inside is not notified. How to do it?",
-      "total_deletions": 0,
-      "total_additions": 9
-    },
-    {
       "filename": "src/backend/terminal/setupTerminalServer.js",
       "before": "  });\n\n  socket.on('message', (data) => {\n    terminal.write(data);\n  });\n\n  terminal.on('data', (data) => {",
       "after": "  });\n\n  socket.on('message', (data) => {\n    const parsedData = JSON.parse(data);\n\n    if (parsedData.type === 'resize') {\n      terminal.resize(parsedData.cols, parsedData.rows);\n    } else if (parsedData.type === 'input') {\n      terminal.write(parsedData.data);\n    }\n  });\n\n  terminal.on('data', (data) => {",

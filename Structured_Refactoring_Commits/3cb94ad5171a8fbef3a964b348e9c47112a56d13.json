@@ -59,13 +59,6 @@
       "total_additions": 8
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/CommitMessageInput.jsx\n  - src/frontend/stores/monitorChange.js\nrequirements: >\n  Rename monitorChangeSignal to monitorChange and add a short descriptive\n  comment about the function to the very beginning of the file Remove onCleanup\n  import from CommitMessageInput\nos: OSX",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/frontend/\n  - src/frontend/stores/\nrequirements: |\n  Rename src/frontend/stores to src/frontend/model\nos: OSX",
-      "total_deletions": 7,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/components/CommitButton.jsx",
       "before": "import { postCommit } from '../service/postCommit';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\nimport { setExecutionResult } from '../stores/executionResult';\nimport { setPrompt } from '../stores/prompt';\nimport { setChange } from '../stores/change'; // Importing setChange to clear the change\n\nconst CommitButton = () => {\n  const handleCommit = async () => {",
       "after": "import { postCommit } from '../service/postCommit';\nimport { commitMessage, setCommitMessage } from '../model/commitMessage';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setPrompt } from '../model/prompt';\nimport { setChange } from '../model/change'; // Importing setChange to clear the change\n\nconst CommitButton = () => {\n  const handleCommit = async () => {",

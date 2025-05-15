@@ -52,13 +52,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Update Cypress config for v10\"\necho \"Plan:\"\necho \"1. Update e2e.testFiles to e2e.specPattern in cypress.config.js\"\n\ncat << 'EOF' > cypress.config.js\nimport { defineConfig } from \"cypress\";\n\nexport default defineConfig({\n  e2e: {\n    setupNodeEvents(on, config) {\n      // implement node event listeners here\n    },\n    specPattern: \"cypress/e2e/**/*.cy.{js,jsx,ts,tsx}\",\n  },\n});\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
       "total_additions": 20
-    },
-    {
-      "filename": "prompt/history/2023/08/28/21:03_Update Cypress config for v10/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/vite.config.js\n  - cypress.config.js\nrequirements: >\n  The e2e.testFiles configuration option is now invalid when set on the config\n  object in Cypress version 10.0.0.\n\n\n  It is now renamed to specPattern and configured separately as a testing type\n  property: e2e.specPattern\n\n\n  {\n    e2e: {\n      specPattern: '...',\n    },\n  }\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 19
     }
   ]
 }

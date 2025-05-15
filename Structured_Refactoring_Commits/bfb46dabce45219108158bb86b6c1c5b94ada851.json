@@ -59,13 +59,6 @@
       "total_additions": 102
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/vite.config.js\n  - postcss.config.js\nrequirements: >\n  warn - The `content` option in your Tailwind CSS configuration is missing or\n  empty. warn - Configure your content sources or your generated CSS will be\n  missing styles. warn - https://tailwindcss.com/docs/content-configuration\nformat: prompt/format/shell.md",
-      "after": "task: prompt/task/refactor/general.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/TasksList.jsx\nrequirements: >\n  Create a dir \"src/frontend/stores\" and move all the signals and stores there.\n  Create separate files for each signal and store.\nformat: prompt/format/shell.md",
-      "total_deletions": 6,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "import { createSignal } from 'solid-js';\nimport NotesInput from './components/NotesInput';\nimport StartButton from './components/StartButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\n\nconst App = () => {\n  const [notes, setNotes] = createSignal('');\n  const [prompt, setPrompt] = createSignal('');\n\n  return (\n    <>\n      <NotesInput notes={notes} setNotes={setNotes} />",
       "after": "import NotesInput from './components/NotesInput';\nimport StartButton from './components/StartButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport { notes, setNotes } from './stores/notes';\nimport { prompt, setPrompt } from './stores/prompt';\n\nconst App = () => {\n  return (\n    <>\n      <NotesInput notes={notes} setNotes={setNotes} />",

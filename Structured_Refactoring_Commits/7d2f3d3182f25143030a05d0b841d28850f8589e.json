@@ -47,13 +47,6 @@
       "total_additions": 60
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\nrequirements: |\n  Remove every bg and text coloring classes from the app div and add bg-main!\n  Also replace m-2 with p-2 there!\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/CommitMessageInput.jsx\n  - src/frontend/components/TasksList.jsx\nrequirements: |\n  Add \"text-text\" class to the app div\n  Remove every coloring classes from CommitMessageInput and TasksList, and replace them with \"bg-emphasize text-emphasize\"\nos: OSX",
-      "total_deletions": 2,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2 bg-main\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />",
       "after": "\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2 bg-main text-text\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />",

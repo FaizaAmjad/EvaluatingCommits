@@ -95,13 +95,6 @@
       "total_additions": 14
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - src/frontend/\n  - src/frontend/App.jsx\n  - src/frontend/index.jsx\n  - src/vite.config.js\n  - babel.config.js\n  - package.json\nrequirements: >\n  We want to use tailwindcss in our project. When configuring PostCSS plugin,\n  the configuration expects an array, not an object.\n  The project is configured to use es6 module imports without extension.\n  Every js file is a module and uses .js extension. No need to install esm, node handles it.\n  Remember: Always use ES6 exports and imports!\nformat: prompt/format/shell.md",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - src/vite.config.js\n  - postcss.config.js\nrequirements: >\n  warn - The `content` option in your Tailwind CSS configuration is missing or\n  empty. warn - Configure your content sources or your generated CSS will be\n  missing styles. warn - https://tailwindcss.com/docs/content-configuration\nformat: prompt/format/shell.md",
-      "total_deletions": 12,
-      "total_additions": 5
-    },
-    {
       "filename": "tailwind.config.js",
       "before": "",
       "after": "export default {\n  content: ['./src/**/*.html', './src/**/*.js', './src/**/*.jsx', './src/**/*.tsx', './src/**/*.ts'],\n  theme: {\n    extend: {},\n  },\n  variants: {\n    extend: {},\n  },\n  plugins: [],\n}",

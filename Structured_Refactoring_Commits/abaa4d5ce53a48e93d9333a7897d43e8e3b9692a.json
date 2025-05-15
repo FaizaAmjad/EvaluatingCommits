@@ -54,13 +54,6 @@
       "total_additions": 45
     },
     {
-      "filename": "prompt/history/2023/08/22/12:15_Improve the documentation/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/\n  - src/\n  - docs/index.html\n  - docs/_sidebar.md\n  - docs/README.md\nrequirements: |\n  remove files: docs/*backup*\n  remove dir: src/doc/\n  In readme, instead of writing about lisp and git,\n  write that Junior targets craftmans, aka professional programmers who like to tweak their tools. (Reword this)",
-      "total_deletions": 0,
-      "total_additions": 12
-    },
-    {
       "filename": "src/doc/buildDoc.js",
       "before": "import convertDirectory from './convertDirectory.js';\nimport createMarkdownRenderer from './createMarkdownRenderer.js';\n\nconst md = createMarkdownRenderer();\nconvertDirectory('./doc', md);",
       "after": "",

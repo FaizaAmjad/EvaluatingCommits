@@ -59,13 +59,6 @@
       "total_additions": 43
     },
     {
-      "filename": "prompt/history/2023/09/07/13:53_Implement requested changes for FilteredListItem/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/MultiSelect/FilteredListItem.jsx\nrequirements: >\n  1. Remove the numbering.\n\n  2. When there is not enough horizontal space, shrink the path first, not the\n  filename.\n\n  3. Allow scrolling the path and scroll that (instead of the filename) to the\n  right at load.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 12
-    },
-    {
       "filename": "src/frontend/components/MultiSelect/FilteredListItem.jsx",
       "before": "import { createEffect } from \"solid-js\";\n\nconst FilteredListItem = (props) => {\n  let itemRef;\n\n  const handleClick = () => {\n    if (typeof props.onItemClick === 'function') {\n  };\n\n  createEffect(() => {\n    if (itemRef) {\n      itemRef.scrollLeft = itemRef.scrollWidth;\n    }\n  });\n\n\n  return (\n    <div onClick={handleClick} class=\"flex justify-between items-center w-full font-mono cursor-pointer\">\n      <span class=\"border-r border-border pl-2 pr-2\">{props.idx}</span>\n      <span ref={itemRef} class=\"overflow-x-auto whitespace-no-wrap break-keep scrollbar-hidden ml-4 py-2 text-xl\">{filename}</span>\n      <span class=\"ml-2\">{directory}</span>\n    </div>\n  );\n};",
       "after": "import { createEffect } from \"solid-js\";\n\nconst FilteredListItem = (props) => {\n  let pathRef;\n\n  const handleClick = () => {\n    if (typeof props.onItemClick === 'function') {\n  };\n\n  createEffect(() => {\n    if (pathRef) {\n      pathRef.scrollLeft = pathRef.scrollWidth;\n    }\n  });\n\n\n  return (\n    <div onClick={handleClick} class=\"flex justify-between items-center w-full font-mono cursor-pointer\">\n      <span class=\"text-xl\">{filename}</span>\n      <span ref={pathRef} class=\"overflow-x-auto whitespace-no-wrap break-keep scrollbar-hidden ml-4 py-2\">{directory}</span>\n    </div>\n  );\n};",

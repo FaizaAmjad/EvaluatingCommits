@@ -47,13 +47,6 @@
       "total_additions": 26
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/ChangeFinalization.jsx\nrequirements: >\n  Switch the two buttons\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/ChangeFinalization.jsx\n  - src/frontend/components/RollbackButton.jsx\n  - src/frontend/components/CommitMessageInput.jsx\nrequirements: |\n  Reduce the vertical space between the input and the buttons\nos: OSX",
-      "total_deletions": 2,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/components/ChangeFinalization.jsx",
       "before": "  return (\n    <>\n      <CommitMessageInput />\n      <div className=\"flex w-full mt-2 space-x-4\">\n        <RollbackButton />\n        <CommitButton />\n      </div>\n};\n\nexport default ChangeFinalization;\n",
       "after": "  return (\n    <>\n      <CommitMessageInput />\n      <div className=\"flex w-full mt-1 space-x-4\">\n        <RollbackButton />\n        <CommitButton />\n      </div>\n};\n\nexport default ChangeFinalization;\n",

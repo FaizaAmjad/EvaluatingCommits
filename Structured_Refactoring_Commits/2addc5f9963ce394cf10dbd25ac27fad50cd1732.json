@@ -57,13 +57,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Rewrite system prompt in system.md to be concise\"\necho \"Plan:\"\necho \"1. Rewrite the system prompt in system.md to be more concise.\"\necho \"2. Verify that the new content is correct.\"\n\n# Step 1: Rewrite the system prompt in system.md to be more concise\ncat > prompt/system.md << 'EOF'\nYou are Junior, an AI system aiding developers. You are working with a part of a large program called the \"Working Set.\" Ask for contents of subdirectories if needed. Some files are printed in the working set. Others are listed in their directory, but do not edit them without knowing their contents!\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 99,
       "total_additions": 6
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/backend/handlers/generateHandler.js\n  - src/prompt/processPrompt.js\n  - src/prompt/createPrompt.js\n  - src/prompt/getSystemPromptIfNeeded.js\n  - src/frontend/generatePrompt.js\nrequirements: >\n  When generating the prompt from the web, send \"systemPrompt\": true with the\n  request. Add a force=false argument to getSystemPromptIfNeeded Make sure the\n  handler forwards the systemPrompt value to processPrompt. Create a new argument \"forceSystemPrompt = false\" for processPrompt as its _second_\n  argument. Also update createPrompt to forward the value.\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - prompt/system.md\nrequirements: >\n  Rewrite the system prompt in system.md to be concise but easy to \"understand\" for a language model.\n  Start it with \"You are Junior, an AI system aiding developers\"\nos: OSX",
-      "total_deletions": 9,
-      "total_additions": 3
     }
   ]
 }

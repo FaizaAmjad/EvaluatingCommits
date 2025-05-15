@@ -59,13 +59,6 @@
       "total_additions": 10
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/service/\n  - src/frontend/App.jsx\n  - src/frontend/components/ExecutionResultDisplay.jsx\n  - src/frontend/service/executeChange.js\nrequirements: >\n  Create a component for displaying git status information retrieved from\n  \"/status\". Use a pre tag, not a terminal. Show it after ExecutionResultDisplay.\n  Also add a store and service for fetching.\nos: OSX",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/components/GitStatusDisplay.jsx\nrequirements: |\n  gitStatus returns an object with status field.\nos: OSX",
-      "total_deletions": 9,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/components/GitStatusDisplay.jsx",
       "before": "import { onMount, createEffect, onCleanup } from 'solid-js';\nimport { gitStatus, setGitStatus } from '../stores/gitStatus';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\n\n  });\n\n  createEffect(() => {\n    if (gitStatus() !== '') {\n      statusContainer.innerText = gitStatus();\n    }\n  });\n\n  onCleanup(() => {\n    setGitStatus('');\n  });\n\n  return (\n    <pre\n      ref={statusContainer}\n      class={`rounded overflow-auto max-w-full ${gitStatus() !== '' ? 'block' : 'hidden'}`}\n    />\n  );\n};",
       "after": "import { onMount, createEffect } from 'solid-js';\nimport { gitStatus, setGitStatus } from '../stores/gitStatus';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\n\n  });\n\n  createEffect(() => {\n    const gitStatusValue = gitStatus();\n    if (gitStatusValue && gitStatusValue.status && gitStatusValue.status !== '') {\n      statusContainer.innerText = gitStatusValue.status;\n    }\n  });\n\n  return (\n    <pre\n      ref={statusContainer}\n      class={`rounded overflow-auto max-w-full ${gitStatus() && gitStatus().status && gitStatus().status !== '' ? 'block' : 'hidden'}`}\n    />\n  );\n};",

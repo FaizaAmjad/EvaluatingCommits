@@ -47,13 +47,6 @@
       "total_additions": 86
     },
     {
-      "filename": "prompt/history/2023/08/31/11:11_Refactor file list handler/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - src/backend/setupRoutes.js\n  - src/backend/fileutils/readFileList.js\nrequirements: |\n  Create a handler file and move the file list handler function to there.\n  Also handle errors.\n  Also ignore .git\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 10
-    },
-    {
       "filename": "src/backend/fileutils/readFileList.js",
       "before": "  const items = await fs.promises.readdir(dir);\n  const itemDetails = await Promise.all(\n    items.map(async item => {\n      const fullPath = path.join(dir, item);\n      const stats = await fs.promises.stat(fullPath);\n      if (stats.isDirectory()) {",
       "after": "  const items = await fs.promises.readdir(dir);\n  const itemDetails = await Promise.all(\n    items.map(async item => {\n      if (item === \".git\") return; // Ignore .git directory\n      const fullPath = path.join(dir, item);\n      const stats = await fs.promises.stat(fullPath);\n      if (stats.isDirectory()) {",

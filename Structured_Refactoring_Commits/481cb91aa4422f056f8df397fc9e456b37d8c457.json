@@ -47,13 +47,6 @@
       "total_additions": 47
     },
     {
-      "filename": "prompt/history/2023/09/22/17:30_Change terminal wrapper div padding to p-2/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/terminal/TerminalComponent.jsx\nrequirements: Change the padding of the terminal wrapper div to p-2\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/components/terminal/TerminalComponent.jsx",
       "before": "  });\n\n  return (\n    <div class=\"rounded border p-4 w-full\" ref={container}>\n      {/* The terminal will be rendered inside this div */}\n    </div>\n  );",
       "after": "  });\n\n  return (\n    <div class=\"rounded border p-2 w-full\" ref={container}>\n      {/* The terminal will be rendered inside this div */}\n    </div>\n  );",

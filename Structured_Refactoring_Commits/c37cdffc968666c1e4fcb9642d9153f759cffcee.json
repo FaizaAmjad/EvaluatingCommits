@@ -59,25 +59,11 @@
       "total_additions": 38
     },
     {
-      "filename": "prompt/history/2023/08/22/14:30_Improve Junior documentation/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/README.md\nrequirements: >\n  Set target group better: \"...targeting professional programmers who enjoy...\"\n\n  Add a note that Junior is written without manual coding since the very\n  beginnings, well before the four buttons were all implemented. ( Reword this\n  note to be brave but not what Hungarians call p\u00f6ffeszked\u0151 )",
-      "total_deletions": 0,
-      "total_additions": 9
-    },
-    {
       "filename": "prompt/history/2023/08/22/14:36_Improve Junior documentation/change.sh",
       "before": "",
       "after": "#!/bin/sh\nset -e\ngoal=\"Improve Junior documentation\"\necho \"Plan:\"\necho \"1. Update the README.md file by splitting the section under the video into 4-5 paragraphs, with target group improvements and the note about Junior's inception.\"\n\ncat > docs/README.md << 'EOF'\nWarn: This README is AI generated, just like all the source files of this project.\n\n# Junior - Your AI-first IDE \n\n[![Video: Junior codes itself](/assets/video_cover.jpg)](https://youtu.be/NL4uFJSvfW0)\n\n*\"Video: Junior codes itself\"*\n\nJunior is an **AI-first IDE** designed specifically for professional programmers who have a penchant for customizing and fine-tuning their tools. \n\nIn a bold move, Junior has been crafted exclusively with AI-powered coding right from its early days, way before its core functionalities were in place. This demonstrates Junior's pioneering approach to harnessing the potential of artificial intelligence in software development.\n\nAt its core, Junior embraces a design philosophy that prioritizes simplicity, configurability, and auditability. This ensures that the platform remains both accessible to its users and adaptable to a variety of use-cases.\n\nWith Junior, developers get a unique space where they can work hand-in-hand with AI throughout the development process. By using structured task descriptors and spotlighting relevant parts of a project, tasks like code implementation, documentation, and testing can be seamlessly delegated to Junior.\n\n## Getting Started\n\nFor guidance on using Junior, please refer to [usage.md](usage.md).\n\n## Contributing and Support\n\nYour contributions make a difference! At Junior, we value the collaboration of the community. Your role as a contributor is to monitor the development, provide detailed prompts, and thoroughly review the generated outcomes.\n\nFor questions or assistance, please raise an issue in our GitHub repository.\n\n**Note:** We've tested Junior primarily with the GPT-4 model. However, you're welcome to experiment with similarly capable models and share your findings. It's not compatible with GPT-3.5.\n\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
       "total_additions": 38
-    },
-    {
-      "filename": "prompt/history/2023/08/22/14:36_Improve Junior documentation/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/README.md\nrequirements: |\n  Find a simpler word instead of penchant\n  Remove \"In a bold move\"\n  Reorder:\n    - Junior is \n    - With Junior\n    - At its core...\n    - Junior has been..",
-      "total_deletions": 0,
-      "total_additions": 11
     }
   ]
 }

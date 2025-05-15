@@ -47,13 +47,6 @@
       "total_additions": 59
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/TitleDisplay.jsx\nrequirements: >\n  Rename TitleDisplay to NavBar!\n\n  Eliminate the signal, use a constant instead.\n\n  Add a subtitle: \"Your AI contributor\".\n\n  The subtitle should be visibly clickable and link to\n  https://github.com/tisztamo/Junior\n",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - tailwind.config.js\n  - src/frontend/index.jsx\n  - src/index.html\nrequirements: >\n  On desktop, center the content on the screen (currently it is on the left)\n  and change max width to 640px.",
-      "total_deletions": 9,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "\nconst App = () => {\n  return (\n    <div class=\"lg:m-8 m-4 flex flex-col items-center space-y-8 sm:p-0 lg:max-w-desktop mx-auto\">\n      <NavBar />\n      <TasksList />\n      <PromptDescriptor />",
       "after": "\nconst App = () => {\n  return (\n    <div class=\"lg:mx-auto lg:w-desktop m-4 flex flex-col items-center space-y-8 sm:p-0\">\n      <NavBar />\n      <TasksList />\n      <PromptDescriptor />",

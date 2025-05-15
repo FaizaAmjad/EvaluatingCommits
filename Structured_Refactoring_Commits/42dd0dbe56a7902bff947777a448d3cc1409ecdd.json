@@ -95,13 +95,6 @@
       "total_additions": 36
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/CommitButton.jsx\nrequirements: >\n  Factor out the commit message to a separate component!\nos: OSX",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/CommitButton.jsx\n  - src/frontend/components/CommitMessageInput.jsx\nrequirements: >\n  Move the commit message from CommitButton.jsx to App.jsx. No need for the\n  wrapper div in CommitButton\nos: OSX",
-      "total_deletions": 2,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "import NavBar from './components/NavBar';\nimport ExecutionResultDisplay from './components/ExecutionResultDisplay';\nimport GitStatusDisplay from './components/GitStatusDisplay';\n\nconst App = () => {\n  return (\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <GitStatusDisplay />\n        <CommitButton />\n        <RollbackButton />\n      </div>",
       "after": "import NavBar from './components/NavBar';\nimport ExecutionResultDisplay from './components/ExecutionResultDisplay';\nimport GitStatusDisplay from './components/GitStatusDisplay';\nimport CommitMessageInput from './components/CommitMessageInput';\n\nconst App = () => {\n  return (\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <GitStatusDisplay />\n        <CommitMessageInput />\n        <CommitButton />\n        <RollbackButton />\n      </div>",

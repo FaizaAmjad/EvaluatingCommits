@@ -45,13 +45,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Update roadmap and .gitignore\"\necho \"Plan:\"\necho \"1. Update the roadmap.md with the given requirements.\"\necho \"2. Place the *_backup.md ignore pattern in the existing backup patterns section of .gitignore.\"\n\n# Updating the roadmap.md file\ncat > ./docs/roadmap.md << 'EOF'\n# Roadmap\n\n## Usability & fixes\n`v0.2 (Released: Aug 2023)`\n- \u2705 Done: Implement the four buttons\n- \u2705 Done: Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n`v0.3 (Expected: Q4 2023)`\n- \ud83d\udea7 Develop a file browser to allow the user to select attention files from mobile (Ongoing)\n- \u2705 Done: Allow secure hosting\n- Create an app by wrapping the frontend\n- \ud83d\udea7 Test it by developing at the local Playground and while commuting (Ongoing)\n\n## Plugin system\n`v0.4 (Expected: Q4 2023)`\n- Allow writing any of the current components as a plugin\n\n## Auto-attention\n`v0.5 (Expected: Q1 2024)`\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in a vector database\n\n## Prompt herds\n`v0.6 (Expected: Q2 2024)`\n- Scan and transform (refactor) the codebase gradually\nEOF\n\n# Updating the .gitignore file with the backup pattern in the appropriate section\ncat > ./.gitignore << 'EOF'\n/secret.sh\n/node_modules/\n/tmp/\n/prompt.yaml\n/prompt.md\n/change.sh\n\nnode_modules\n\n# Backup patterns for .md files\n*.md.backup\n*.md.bak\n*_backup.md\n*.md~\n*.md.tmp\n*.md.old\n*.md.orig\n*.md.save\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
       "total_additions": 62
-    },
-    {
-      "filename": "prompt/history/2023/09/29/08:39_Update roadmap and .gitignore/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./docs/roadmap.md\n  - ./.gitignore\nrequirements: |-\n  1. Update the roadmap status:\n  - Secure hosting is ready\n  - \"file browser\" and playground tests are ongoing\n  - Do not create backup files\n  2. gitignore *_backup.md files\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 11
     }
   ]
 }

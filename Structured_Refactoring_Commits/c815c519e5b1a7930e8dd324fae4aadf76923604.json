@@ -45,13 +45,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Improve documentation\"\necho \"Plan:\"\necho \"1. Update the _coverpage.md for the specified improvements\"\necho \"2. No further steps required as all changes are contained in _coverpage.md\"\n\ncat << 'EOF' > docs/_coverpage.md\n# <span class=\"cover-color-blue\">**You are the Pro,**</span> <span class=\"cover-color-orange\">**Junior&nbsp;codes**</span>\n\nKraft code with the **Junior AI IDE**\n\nWorks on large codebases, soon on your mobile phone.\n\n![](assets/logo.svg)\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
       "total_additions": 18
-    },
-    {
-      "filename": "prompt/history/2023/08/30/12:16_Improve documentation/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/_coverpage.md\n  - docs/index.html\n  - docs/assets/styles.css\n  - docs/assets/logo.svg\nrequirements: >-\n  1. Make \"You are the Pro, Junior codes\" bold\n\n  2. Rewrite the welcome sentence to \"Kraft code with the **Junior AI IDE**\"\n\n  3. Add a paragraph after it: \"Works on large codebases, soon on Mobile\"\n  (reword \"on Mobile\" if needed: I want to say that the user can develop\n  software using only their mobile phone, no desktop needed)\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 15
     }
   ]
 }

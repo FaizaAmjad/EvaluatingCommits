@@ -47,13 +47,6 @@
       "total_additions": 23
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/service/executeChange.js\n  - src/backend/handlers/executeHandler.js\n  - src/execute/executeAndForwardOutput.js\nrequirements: |\n  The execute api fails to return anything. It should return  { result: 0, output: 'output'}\n  Do not append extra text to last_command_result, and rename it to commandOutput\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/ExecuteButton.jsx\nrequirements: >\n  The field to use is called output, not message\nos: OSX",
-      "total_deletions": 6,
-      "total_additions": 3
-    },
-    {
       "filename": "src/frontend/components/ExecuteButton.jsx",
       "before": "  const handleExecuteChange = async () => {\n    const change = await navigator.clipboard.readText();\n    const response = await executeChange(change);\n    setExecutionResult(response.message);\n    console.log(response.message);\n  };\n\n  return (",
       "after": "  const handleExecuteChange = async () => {\n    const change = await navigator.clipboard.readText();\n    const response = await executeChange(change);\n    setExecutionResult(response.output);\n    console.log(response.output);\n  };\n\n  return (",

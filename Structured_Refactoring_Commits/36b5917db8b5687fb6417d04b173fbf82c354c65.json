@@ -47,13 +47,6 @@
       "total_additions": 53
     },
     {
-      "filename": "prompt/history/2023/09/04/22:36_Remove selected items from filtered list/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/MultiSelect/MultiSelect.jsx\n  - src/frontend/components/MultiSelect/computeFilteredList.js\nrequirements: |\n  Selected items should be removed from the filtered list.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 7
-    },
-    {
       "filename": "src/frontend/components/MultiSelect/MultiSelect.jsx",
       "before": "  const [selectedItems, setSelectedItems] = createSignal([...props.selectedItems]);\n\n  createEffect(() => {\n    setFilteredList(computeFilteredList(searchValue(), props.availableItems, props.compare, props.itemCount));\n  });\n\n  const addFirstFilteredItem = () => {",
       "after": "  const [selectedItems, setSelectedItems] = createSignal([...props.selectedItems]);\n\n  createEffect(() => {\n    setFilteredList(computeFilteredList(searchValue(), props.availableItems, props.compare, props.itemCount, selectedItems()));\n  });\n\n  const addFirstFilteredItem = () => {",

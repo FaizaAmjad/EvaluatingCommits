@@ -57,13 +57,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Update docs/open_jobs.md with project details\"\necho \"Plan:\"\necho \"1. Modify and fill docs/open_jobs.md with new specifications.\"\n\ncat > docs/open_jobs.md << 'EOF'\n# Open Positions at Junior AI IDE\n\nWe're in the early stages of building an exciting startup based on our open source project, Junior AI IDE. Our primary goal right now is to find the right leadership to steer the ship and take our vision to the next level. Discover more about us at [aijunior.dev](https://aijunior.dev).\n\n## Co-founder CEO\n\n**Qualifications:**\n- Proven experience in marketing within a freemium user/product-led growth environment, especially from similar tools companies.\n- Strong networking abilities.\n- Strong leadership qualities, with the ability to motivate, inspire, and build a team.\n\n**Advice from Experts:**\nJared Schrieber suggested looking for a \"marketing person at a similar freemium user/product-led growth tools company.\" We're taking his advice to heart and would love to connect with professionals who align with this vision.\n\nInterested candidates or those who can connect us to potential candidates are encouraged to reach out. Together, we can make Junior AI IDE a groundbreaking success.\n\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
       "total_additions": 26
-    },
-    {
-      "filename": "prompt/history/2023/08/29/14:57_Update docs/open_jobs.md with project details/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/README.md\nrequirements: |\n  Create docs/open_jobs.md and fill it based on the following:\n\n  I want to create a startup based on my open source project.\n\n  The first step is to find a co-founder CEO.\n\n  I got the advice from Jared Schrieber to look for the following:\n\n  \"marketing person at a similar freemium user/product-led growth tools company\"\n\n  Based on this info write a text that I can forward to the headhunter!\n\n  Name Jared and quote his advice!\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 18
     }
   ]
 }

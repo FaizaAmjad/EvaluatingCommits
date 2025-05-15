@@ -47,13 +47,6 @@
       "total_additions": 86
     },
     {
-      "filename": "prompt/history/2023/09/08/10:36_Refactor handleItemClick from ResultSet to MultiSelect/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/MultiSelect/ResultSet.jsx\n  - src/frontend/components/MultiSelect/MultiSelect.jsx\n  - src/frontend/components/MultiSelect/ListItem.jsx\n  - src/frontend/components/MultiSelect/handleUnselectItem.jsx\nrequirements: >-\n  Move handleItemClick from ResultSet to MultiSelect. Rename the one already\n  there to handleFilterListItemCLick and this one to handleResultSetItemClick\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 10
-    },
-    {
       "filename": "src/frontend/components/MultiSelect/MultiSelect.jsx",
       "before": "import ResultSet from './ResultSet';\nimport FilteredList from './FilteredList';\nimport computeFilteredList from './computeFilteredList';\n\nconst MultiSelect = (props) => {\n  const [searchValue, setSearchValue] = createSignal('');\n    }\n  };\n\n  const handleItemClick = (item) => {\n    const updatedItems = [item, ...selectedItems()];\n    setSelectedItems(updatedItems);\n  };\n\n  return (\n    <div class=\"w-full bg-emphasize text-emphasize p-2 rounded border border-border\">\n      <ResultSet items={selectedItems()} emptyMessage=\"Attention is empty.\" />\n      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} onKeyPress={handleKeyPress} />\n      <FilteredList items={filteredList()} onItemClick={handleItemClick} />\n    </div>\n  );\n};",
       "after": "import ResultSet from './ResultSet';\nimport FilteredList from './FilteredList';\nimport computeFilteredList from './computeFilteredList';\nimport handleUnselectItem from \"./handleUnselectItem\";\n\nconst MultiSelect = (props) => {\n  const [searchValue, setSearchValue] = createSignal('');\n    }\n  };\n\n  const handleFilterListItemClick = (item) => {\n    const updatedItems = [item, ...selectedItems()];\n    setSelectedItems(updatedItems);\n  };\n\n  const handleResultSetItemClick = (item) => {\n    handleUnselectItem(item, setSelectedItems, selectedItems);\n  };\n\n  return (\n    <div class=\"w-full bg-emphasize text-emphasize p-2 rounded border border-border\">\n      <ResultSet items={selectedItems()} onItemClick={handleResultSetItemClick} emptyMessage=\"Attention is empty.\" />\n      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} onKeyPress={handleKeyPress} />\n      <FilteredList items={filteredList()} onItemClick={handleFilterListItemClick} />\n    </div>\n  );\n};",

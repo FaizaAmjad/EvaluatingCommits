@@ -71,13 +71,6 @@
       "total_additions": 61
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/backend/\n  - src/backend/setupRoutes.js\n  - src/backend/servePromptDescriptor.js\n  - src/backend/updateTaskHandler.js\n  - src/backend/listTasks.js\nrequirements: |\n  Move the files except setupRoutes to the handlers dir!\n",
-      "after": "task: prompt/task/refactor/general.md\nattention:\n  - src/execute/executeCode.js\n  - src/execute/executeAndForwardOutput.js\n  - src/execute/confirmAndWriteCode.js\nrequirements: |\n  1. Rename confirmAndWriteCode.js to confirmExecution.js\n  Maintain dependencies and imports!\n  2. executeAndForwardOutput should not import startInteractiveSession,\n  give it a \"next\" continuation instead.",
-      "total_deletions": 7,
-      "total_additions": 8
-    },
-    {
       "filename": "src/execute/confirmExecution.js",
       "before": "import { rl } from '../config.js';\n\nfunction confirmAndWriteCode(code, next) {\n  rl.question('\\x1b[1mEXECUTE? [y/n]\\x1b[0m ', (answer) => {\n    if (answer.toLowerCase() === 'y') {\n      console.log(\"\\x1b[33mExecuting...\\x1b[0m\");\n  });\n}\n\nexport { confirmAndWriteCode };\n",
       "after": "import { rl } from '../config.js';\n\nfunction confirmExecution(code, next) {\n  rl.question('\\x1b[1mEXECUTE? [y/n]\\x1b[0m ', (answer) => {\n    if (answer.toLowerCase() === 'y') {\n      console.log(\"\\x1b[33mExecuting...\\x1b[0m\");\n  });\n}\n\nexport { confirmExecution };",

@@ -47,13 +47,6 @@
       "total_additions": 42
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/components/NavBar.jsx\nrequirements: |\n  Factor out the subtitle to a separate component\n  and make the text random:",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/NavBar.jsx\n  - README.md\nrequirements: |\n  Factor out the subtitle to a separate component\n  and make the text random:",
-      "total_deletions": 1,
-      "total_additions": 2
-    },
-    {
       "filename": "src/frontend/components/NavBar.jsx",
       "before": "import { createSignal } from 'solid-js';\nimport ThemeSwitcher from './ThemeSwitcher';\n\nconst NavBar = () => {\n  const title = 'Junior';\n      </div>\n      <div class=\"flex flex-col items-center justify-center\">\n        <a href=\"https://github.com/tisztamo/Junior\" class=\"text-center text-3xl mt-6 no-underline\">{title}</a>\n        <a href=\"https://github.com/tisztamo/Junior\" class=\"text-center text-xl no-underline cursor-pointer\">Your AI contributor</a>\n      </div>\n    </div>\n  );",
       "after": "import ThemeSwitcher from './ThemeSwitcher';\nimport SubTitle from './SubTitle';\n\nconst NavBar = () => {\n  const title = 'Junior';\n      </div>\n      <div class=\"flex flex-col items-center justify-center\">\n        <a href=\"https://github.com/tisztamo/Junior\" class=\"text-center text-3xl mt-6 no-underline\">{title}</a>\n        <SubTitle />\n      </div>\n    </div>\n  );",

@@ -47,13 +47,6 @@
       "total_additions": 84
     },
     {
-      "filename": "prompt/history/2023/09/26/12:55_Refactor FullScreenPopup to FileViewer and move it/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - ./src/frontend/components/MultiSelect/FullScreenPopup.jsx\n  - ./src/frontend/components/MultiSelect/ResultSet.jsx\n  - ./src/frontend/components/MultiSelect/FilteredList.jsx\nrequirements: >\n  Rename FullScreenPopup to FileViewer (both filename and component), and move\n  it to components/files\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 9
-    },
-    {
       "filename": "src/frontend/components/MultiSelect/FilteredList.jsx",
       "before": "import ListItem from \"./ListItem\";\nimport FullScreenPopup from \"./FullScreenPopup\";\nimport handleLongTap from './handleLongTap';\n\nconst FilteredList = (props) => {\n      <ul class=\"list-inside select-none\">\n        {props.items.map((item, idx) => <ListItem key={item} item={item} idx={idx + 1} onItemClick={props.onItemClick} onLongTap={invoke} />)}\n      </ul>\n      { showPopup() && <FullScreenPopup path={popupPath()} onClose={() => setShowPopup(false)} /> }\n    </div>\n  );\n};",
       "after": "import ListItem from \"./ListItem\";\nimport FileViewer from \"../files/FileViewer\";\nimport handleLongTap from './handleLongTap';\n\nconst FilteredList = (props) => {\n      <ul class=\"list-inside select-none\">\n        {props.items.map((item, idx) => <ListItem key={item} item={item} idx={idx + 1} onItemClick={props.onItemClick} onLongTap={invoke} />)}\n      </ul>\n      { showPopup() && <FileViewer path={popupPath()} onClose={() => setShowPopup(false)} /> }\n    </div>\n  );\n};",

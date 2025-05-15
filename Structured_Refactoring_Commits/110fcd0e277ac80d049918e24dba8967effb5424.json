@@ -47,13 +47,6 @@
       "total_additions": 42
     },
     {
-      "filename": "prompt.yaml",
-      "before": "attention:\n  - src/backend/setupRoutes.js\nrequirements: |\n  Route the new endpoint on \"/requirements\"\n  Remove comments.\n  Move updatetask to the end\nos: OSX",
-      "after": "attention:\n  - src/backend/setupRoutes.js\nrequirements: |\n  Factor out git related routes to routes/setupGitRoutes.js (create dir)\n  generate, tasks, updatetask, descriptor and requirements to routes/setupPromptRoutes.js\n  leave execute where it is.\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 3
-    },
-    {
       "filename": "src/backend/routes/setupGitRoutes.js",
       "before": "",
       "after": "import gitStatusHandler from '../handlers/git/gitStatusHandler.js';\nimport commitGitHandler from '../handlers/git/commitGitHandler.js';\nimport resetGitHandler from '../handlers/git/resetGitHandler.js';\n\nexport function setupGitRoutes(app) {\n  app.get('/git/status', gitStatusHandler);\n  app.post('/git/reset', resetGitHandler);\n  app.post('/git/commit', commitGitHandler);\n}",

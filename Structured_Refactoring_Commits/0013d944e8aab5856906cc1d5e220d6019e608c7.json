@@ -107,13 +107,6 @@
       "total_additions": 1
     },
     {
-      "filename": "prompt.yaml",
-      "before": "attention:\n  - ./\n  - package.json\n  - src/backend/server.js\nrequirements: >\n  A single js file called web.js is needed that starts both the server and vite,\n  so that the \"start\" script can look like \"start\": \"node src/web.js\".\n  Both the server and vite runs indefinitely, their output needs to be forwarded to the console of the \"node web.js\" process and they should be stopped when that process stops.\n  Separate the start of them to files startServer.js and startVite.js.\nformat: prompt/format/shell.md",
-      "after": "attention:\n  - ./\n  - package.json\n  - src/main.js\n  - src/web.js\n  - src/startServer.js\n  - src/backend/server.js\nrequirements: >\n  \"npx junior-web\" from dependent projects should work, starting web.js.\nformat: prompt/format/shell.md",
-      "total_deletions": 4,
-      "total_additions": 4
-    },
-    {
       "filename": "src/backend/server.js",
       "before": "import { listTasks } from './listTasks.js';\n\nexport function startServer() {\n  const app = express();\n\n  app.use(cors());",
       "after": "import { listTasks } from './listTasks.js';\n\nexport function startServer() {\n  console.log(process.cwd())\n  const app = express();\n\n  app.use(cors());",

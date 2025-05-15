@@ -45,13 +45,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Update video link and project description\"\necho \"Plan:\"\necho \"1. Modify README.md to update video link.\"\necho \"2. Modify README.md to update the project description.\"\n\n# Update video link and project description in README.md\ncat << 'EOF' > README.md\n[![Docs: Junior Documentation](https://img.shields.io/badge/docs-Junior-blue)](https://tisztamo.github.io/Junior/#/)\nWarn: This README is AI generated, just like all the source files of this project.\n\n\n#### Web Interface\nRun the application with `npm start` to start a local server, where you can generate a prompt and automatically copy it to paste into ChatGPT. The web interface is designed for use with ChatGPT Pro and doesn't",
       "total_deletions": 44,
       "total_additions": 6
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "  - README.md\nrequirements: |\n  Update video link to https://youtu.be/NL4uFJSvfW0\n  Re-download docs/assets/video_cover.jpg from the new video.\n  Instead of the sentence \"Junior is an exploratory project...\" write about Junior being an AI-first IDE designed from the ground up to leverage language models.\nos: OSX",
-      "after": "  - README.md\nrequirements: |\n  Update video link to https://youtu.be/NL4uFJSvfW0\n  Instead of the sentence \"Junior is an exploratory project...\" write about Junior being an AI-first IDE designed from the ground up to leverage language models.\nos: OSX",
-      "total_deletions": 1,
-      "total_additions": 0
     }
   ]
 }

@@ -47,13 +47,6 @@
       "total_additions": 23
     },
     {
-      "filename": "prompt/history/2023/09/11/14:46_Remove unwanted '/' from path/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/service/helpers/flattenPaths.js\nrequirements: >-\n  The current flattening method adds \"/./\" to the beginning of every path.\n  Eliminate it.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 7
-    },
-    {
       "filename": "src/frontend/service/helpers/flattenPaths.js",
       "before": "const flattenPaths = (node, path) => {\n  if (node.type === 'file') {\n    return [path + '/' + node.name];\n  }\n  if (!Array.isArray(node.children)) {\n    return [];\n  }\n  return node.children.reduce((acc, child) => {\n    return acc.concat(flattenPaths(child, path + '/' + node.name));\n  }, []);\n};\n",
       "after": "const flattenPaths = (node, path = '') => {\n  if (node.type === 'file') {\n    return [path ? `${path}/${node.name}` : node.name];\n  }\n  if (!Array.isArray(node.children)) {\n    return [];\n  }\n  return node.children.reduce((acc, child) => {\n    return acc.concat(flattenPaths(child, path ? `${path}/${node.name}` : node.name));\n  }, []);\n};\n",

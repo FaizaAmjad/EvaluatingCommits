@@ -47,13 +47,6 @@
       "total_additions": 43
     },
     {
-      "filename": "prompt/history/2023/09/26/13:49_Integrate CSS color variables into JSX inline styles/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/getStyleForFileStatus.jsx\n  - ./src/frontend/styles/colors.css\n  - ./docs/assets/styles.css\nrequirements: >\n  1. Create variables color-blue, color-orange. color-red, color-green in\n  colors.css based on the colors in the docs styles\n\n  2. Use the variables in the styles returned for file status\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 11
-    },
-    {
       "filename": "src/frontend/components/getStyleForFileStatus.jsx",
       "before": "export default function getStyleForFileStatus(working_dir, path) {\n  if (working_dir === 'M') {\n    return { color: 'rgb(34, 197, 94)' };\n  } else if (working_dir === 'A' && !path.includes('prompt/history')) {\n    return { color: 'rgb(253, 186, 116)' };\n  }\n  return {}; // Default no text color style\n}",
       "after": "export default function getStyleForFileStatus(working_dir, path) {\n  if (working_dir === 'M') {\n    return { color: 'var(--color-green)' };\n  } else if (working_dir === 'A' && !path.includes('prompt/history')) {\n    return { color: 'var(--color-orange)' };\n  }\n  return {}; // Default no text color style\n}",

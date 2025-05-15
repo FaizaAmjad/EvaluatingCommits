@@ -45,13 +45,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Rename Home to Junior Docs in sidebar\"\necho \"Plan:\"\necho \"1. Rename the 'Home' link to 'Junior Docs' in docs/_sidebar.md file.\"\ncat > docs/_sidebar.md << 'EOF'\n* [Junior Docs](./README.md)\n* [Roadmap](./roadmap.md)\n* [Web](./web.md)\n* [Usage](./usage.md)\n* [Prompt Descriptor](./descriptor.md)\nEOF\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 33,
       "total_additions": 8
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - docs/assets/\n  - docs/index.html\nrequirements: |\n  Generate favicon from logo\n  Add favicon to html\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - docs/_sidebar.md\nrequirements: |\n  Rename \"Home\" to \"Junior Docs\"\nos: OSX",
-      "total_deletions": 4,
-      "total_additions": 2
     }
   ]
 }

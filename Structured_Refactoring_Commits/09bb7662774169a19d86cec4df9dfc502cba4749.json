@@ -47,13 +47,6 @@
       "total_additions": 36
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/backend/server.js\nrequirements: >\n  file:///Users/ko/projects-new/Junior/src/backend/server.js:17\n  const wss = new WebSocket.Server({ server });\n              ^\n  TypeError: WebSocket.Server is not a constructor\n\n  The api is correctly called like follows:\n\n  import { WebSocketServer } from 'ws';\n  ...\n  const wss = new WebSocketServer({ server });\n\nformat: prompt/format/shell.md",
-      "after": "task: prompt/task/refactor/split.md\nattention:\n  - src/backend/server.js\n  - src/backend/handlers.js\nrequirements: |\n  routing should be separated to setupRoutes.js\n  handlers.js should be deleted\n  generateHandler -> separate file.\nformat: prompt/format/shell.md",
-      "total_deletions": 13,
-      "total_additions": 6
-    },
-    {
       "filename": "src/backend/generateHandler.js",
       "before": "",
       "after": "import processPrompt from '../prompt/promptProcessing.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n  const { prompt } = await processPrompt(notes);\n  res.json({ prompt: prompt });\n};",

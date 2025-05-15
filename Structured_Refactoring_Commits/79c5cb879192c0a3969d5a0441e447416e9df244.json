@@ -53,13 +53,6 @@
       "total_additions": 48
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/tailwind.config.cjs\n  - src/frontend/components/NavBar.jsx\nrequirements: >\n  Create a theme switcher component (default from the OS, or dark if not\n  available) Put it to the top right of the navbar.\nos: OSX",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/tailwind.config.cjs\n  - src/frontend/components/ThemeSwitcher.jsx\nrequirements: >\n  The theme switcher switches classes on the body, but nothing happens on the\n  screen.\nos: OSX",
-      "total_deletions": 4,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/components/ThemeSwitcher.jsx",
       "before": "\n  createEffect(() => {\n    const currentTheme = theme();\n    document.body.className = currentTheme;\n    localStorage.setItem('theme', currentTheme);\n  });\n",
       "after": "\n  createEffect(() => {\n    const currentTheme = theme();\n    document.body.className = currentTheme === 'dark' ? 'dark' : ''; // Change this line\n    localStorage.setItem('theme', currentTheme);\n  });\n",

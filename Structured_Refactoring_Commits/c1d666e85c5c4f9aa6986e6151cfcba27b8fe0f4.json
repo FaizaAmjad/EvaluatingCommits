@@ -59,13 +59,6 @@
       "total_additions": 95
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/ExecuteButton.jsx\nrequirements: >\n  When the user pastes something to the textarea, also save its content and execute the change.\nos: OSX",
-      "after": "task: prompt/task/refactor/split.md\nattention:\n  - src/frontend/App.jsx\nrequirements: >\n  Create components for\n    - Prompt Creation (TaskList...PromptDisplay)\n    - Change Execution\n    - Change Inspection (GitStatusDisplay)\n    - Change Finalization\n  And move the corresponding items from App to them.\nos: OSX\n ",
-      "total_deletions": 3,
-      "total_additions": 9
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "import GenerateButton from './components/GenerateButton';\nimport ExecuteButton from './components/ExecuteButton';\nimport RollbackButton from './components/RollbackButton';\nimport CommitButton from './components/CommitButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\nimport NavBar from './components/NavBar';\nimport ExecutionResultDisplay from './components/ExecutionResultDisplay';\nimport GitStatusDisplay from './components/GitStatusDisplay';\nimport CommitMessageInput from './components/CommitMessageInput';\n\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />\n        <PromptDescriptor />\n        <GenerateButton />\n        <PromptDisplay />\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <GitStatusDisplay />\n        <CommitMessageInput />\n        <CommitButton />\n        <RollbackButton />\n      </div>\n    </div>\n  );",
       "after": "import NavBar from './components/NavBar';\nimport PromptCreation from './components/PromptCreation';\nimport ChangeExecution from './components/ChangeExecution';\nimport ChangeInspection from './components/ChangeInspection';\nimport ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  return (\n    <div id=\"app\" class=\"p-2\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />\n        <ChangeInspection />\n        <ChangeFinalization />\n      </div>\n    </div>\n  );",

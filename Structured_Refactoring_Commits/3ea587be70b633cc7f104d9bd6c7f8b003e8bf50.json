@@ -71,13 +71,6 @@
       "total_additions": 28
     },
     {
-      "filename": "prompt/history/2023/10/02/13:21_Remove bracketed paste control chars from terminal/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/terminal/TerminalSummary.jsx\n  - ./src/frontend/components/terminal/prependAndExtractLastLine.js\nrequirements: >-\n  Also remove bracketed paste control characters from the terminal summary,\n  e.g.  ^[[2004h and ^[[2004l \nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 8
-    },
-    {
       "filename": "src/frontend/components/terminal/prependAndExtractLastLine.js",
       "before": "export function prependAndExtractLastLine(lastLine, currentData) {\n  const combinedData = `${lastLine}${currentData}`;\n  const cleanedData = combinedData.replace(/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?/g, '');\n\n  const lines = cleanedData.split(/\\r(?!\\n)|\\n/);\n",
       "after": "export function prependAndExtractLastLine(lastLine, currentData) {\n  const combinedData = `${lastLine}${currentData}`;\n  const cleanedData = combinedData\n    .replace(/\\x1B(\\[\\?2004[h|l]|\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?)/g, '');\n\n  const lines = cleanedData.split(/\\r(?!\\n)|\\n/);\n",

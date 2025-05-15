@@ -47,13 +47,6 @@
       "total_additions": 33
     },
     {
-      "filename": "prompt/history/2023/09/12/16:49_Remove sample code viewer from prompt creation/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/PromptCreation.jsx\nrequirements: Remove the sample code viewer from prompt creation\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/components/PromptCreation.jsx",
       "before": "import GenerateButton from './GenerateButton';\nimport PromptDisplay from './PromptDisplay';\nimport RequirementsEditor from './RequirementsEditor';\nimport SourceFileDisplay from './files/SourceFileDisplay';\n\nconst PromptCreation = () => {\n  return (\n      <PromptDescriptor />\n      <GenerateButton />\n      <PromptDisplay />\n      <SourceFileDisplay path=\"package.json\" />\n    </>\n  );\n};\n\nexport default PromptCreation;\n",
       "after": "import GenerateButton from './GenerateButton';\nimport PromptDisplay from './PromptDisplay';\nimport RequirementsEditor from './RequirementsEditor';\n\nconst PromptCreation = () => {\n  return (\n      <PromptDescriptor />\n      <GenerateButton />\n      <PromptDisplay />\n    </>\n  );\n};\n\nexport default PromptCreation;\n",

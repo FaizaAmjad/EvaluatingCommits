@@ -40,13 +40,6 @@
   },
   "code": [
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/components/ExecutionResultDisplay.jsx\n  - src/frontend/stores/executionResult.js\nrequirements: >\n  Install and use xterm.js in ExecutionResultDisplay to display the execution\n  result.\n\n  This is a Solidjs project.\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/ExecutionResultDisplay.jsx\n  - src/frontend/components/PromptDescriptor.jsx\nrequirements: >\n  Style the terminal using tailwind to have the same width as the prompt descriptor\n  Remove its fixed width setting\nos: OSX",
-      "total_deletions": 7,
-      "total_additions": 3
-    },
-    {
       "filename": "src/frontend/components/ExecutionResultDisplay.jsx",
       "before": "\n  createEffect(() => {\n    if (term) {\n      term.write(executionResult());\n    }\n  });\n\n  return (\n    <div ref={container} class=\"w-64 px-4 py-4 bg-gray-300 text-black rounded\"></div>\n  );\n};\n",
       "after": "\n  createEffect(() => {\n    if (term) {\n term.write(executionResult());\n    }\n  });\n\n  return (\n    <div ref={container} class=\"px-4 py-4 bg-gray-300 text-black rounded overflow-auto max-w-full\"></div>\n  );\n};\n",

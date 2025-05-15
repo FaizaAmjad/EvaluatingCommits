@@ -47,13 +47,6 @@
       "total_additions": 52
     },
     {
-      "filename": "prompt/history/2023/09/11/14:24_Enhance ExecuteButton component/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/ExecuteButton.jsx\nrequirements: >-\n  Executebutton: the input inside should have similar but a bit darker bg than\n  the button.\n\n  Also empty its content after exec.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 9
-    },
-    {
       "filename": "src/frontend/components/ExecuteButton.jsx",
       "before": "import handleExecuteChange from '../service/handleExecuteChange';\nimport { setChangeInput, changeInput } from '../model/changeInput';\n\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);\n    handleExecuteChange();\n  };\n\n  return (\n    <button className=\"w-full px-4 py-4 pb-3 bg-orange-300 text-lg text-bg font-semibold rounded\" onClick={handleExecuteChange}>\n      {clipboardAvailable ? (\n        'Paste & Execute Change [X]'\n      ) : (\n        <textarea\n          rows=\"1\"\n          className=\"w-full px-2 py-2 bg-white text-lg text-bg font-semibold resize-none\"\n          placeholder=\"Paste here to execute\"\n          value={changeInput()}\n          onPaste={handlePaste}",
       "after": "import { createEffect } from 'solid-js';\nimport handleExecuteChange from '../service/handleExecuteChange';\nimport { setChangeInput, changeInput } from '../model/changeInput';\n\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);\n    handleExecuteChange();\n    setChangeInput(''); // To clear the input after execution\n  };\n\n  // To clear the input content after execution\n  createEffect(() => {\n    if (changeInput()) {\n      handleExecuteChange();\n      setChangeInput('');\n    }\n  });\n\n  return (\n    <button className=\"w-full px-4 py-4 pb-3 bg-orange-300 text-lg text-bg font-semibold rounded\" onClick={handleExecuteChange}>\n      {clipboardAvailable ? (\n        'Paste & Execute Change [X]'\n      ) : (\n        <textarea\n          rows=\"1\"\n          className=\"w-full px-2 py-2 bg-orange-500 text-lg text-bg font-semibold resize-none\"  // Darker background than the button\n          placeholder=\"Paste here to execute\"\n          value={changeInput()}\n          onPaste={handlePaste}",

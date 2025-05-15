@@ -47,13 +47,6 @@
       "total_additions": 9
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/index.html\nrequirements: |\n  There is a margin around the content which should be removed.\n  A horizontal padding should be added instead.\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\nrequirements: |\n  No need for the outer div, remove it.\n  Add min-h-screen to the other one.\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 2
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "  useKeyBindings(bindings);\n\n  return (\n    <div>\n      <div class=\"bg-main max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 px-2 sm:px-4 xs:px-4\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />\n        <ChangeInspection />\n        <ChangeFinalization />\n      </div>\n    </div>\n  );\n};",
       "after": "  useKeyBindings(bindings);\n\n  return (\n    <div class=\"bg-main min-h-screen max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 px-2 sm:px-4 xs:px-4\">\n      <NavBar />\n      <PromptCreation />\n      <ChangeExecution />\n      <ChangeInspection />\n      <ChangeFinalization />\n    </div>\n  );\n};",

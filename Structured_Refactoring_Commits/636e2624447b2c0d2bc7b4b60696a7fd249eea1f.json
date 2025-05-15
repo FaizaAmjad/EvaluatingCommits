@@ -47,13 +47,6 @@
       "total_additions": 21
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/model/commitMessage.js\n  - src/frontend/service/handleGeneratePrompt.js\nrequirements: |\n  Refactor ExecuteButton!\n  - Factor changeInput to its own file in model!\n",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/service/handleGeneratePrompt.js\nrequirements: |\n  Refactor ExecuteButton!\n  - Factor handleExecuteChange to its own file in model!",
-      "total_deletions": 2,
-      "total_additions": 1
-    },
-    {
       "filename": "src/frontend/components/ExecuteButton.jsx",
       "before": "import { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\nimport { changeInput, setChangeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handleExecuteChange = async () => {\n    const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();\n    const response = await executeChange(change);\n    setChange(change);\n    setExecutionResult(response.output);\n    console.log(response.output);\n  };\n\n  const handlePaste = async (e) => {\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);",
       "after": "import handleExecuteChange from '../model/handleExecuteChange';\nimport { setChangeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handlePaste = async (e) => {\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);",

@@ -47,13 +47,6 @@
       "total_additions": 56
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/doc/improve.md\nattention:\n  - README.md\nrequirements: |\n  Add a badge linking to the docs: https://tisztamo.github.io/Junior/#/\nos: OSX",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/prompt/promptProcessing.js\n  - src/backend/handlers/generateHandler.js\n  - src/interactiveSession/startInteractiveSession.js\nrequirements: |\n  - Rename promptProcessing to processPrompt.js\n  - Eliminate last_command_result\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 6
-    },
-    {
       "filename": "src/backend/handlers/generateHandler.js",
       "before": "import processPrompt from '../../prompt/promptProcessing.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;",
       "after": "import processPrompt from '../../prompt/processPrompt.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;",

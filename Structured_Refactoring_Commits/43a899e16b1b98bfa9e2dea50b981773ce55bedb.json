@@ -47,13 +47,6 @@
       "total_additions": 57
     },
     {
-      "filename": "prompt/history/2023/09/25/14:00_Extract project name from Git URL if package.json missing/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/git/getRepoInfo.js\nrequirements: >-\n  When package.json is not found, get the name of the project from the git repo\n  url",
-      "total_deletions": 0,
-      "total_additions": 6
-    },
-    {
       "filename": "src/git/getRepoInfo.js",
       "before": "\nconst git = simpleGit();\n\nconst getRepoInfo = async () => {\n    const remote = await git.getRemotes(true);\n    const currentBranch = await git.revparse(['--abbrev-ref', 'HEAD']);\n    const rootDir = await git.revparse(['--show-toplevel']);\n    const packagePath = path.resolve(rootDir, 'package.json');\n\n    let packageJSON = {};\n    try {\n        packageJSON = JSON.parse(fs.readFileSync(packagePath, 'utf8'));\n    } catch (err) {\n        // In case of error, packageJSON remains an empty object.\n    }\n    \n    const tags = await git.tags();\n    const workingDir = process.cwd();  // Fixed the working directory to use the current working directory\n\n    return {\n        url: remote[0]?.refs?.fetch || '',\n        branch: currentBranch,\n        name: packageJSON.name || '',\n        description: packageJSON.description || '',\n        tags: tags.all,\n        workingDir: workingDir",
       "after": "\nconst git = simpleGit();\n\nconst extractProjectNameFromURL = (url) => {\n    const match = /\\/([^/]+)\\.git$/.exec(url);\n    return match ? match[1] : '';\n};\n\nconst getRepoInfo = async () => {\n    const remote = await git.getRemotes(true);\n    const currentBranch = await git.revparse(['--abbrev-ref', 'HEAD']);\n    const rootDir = await git.revparse(['--show-toplevel']);\n    const packagePath = path.resolve(rootDir, 'package.json');\n\n    let packageJSON = {};\n    let projectName = '';\n\n    try {\n        packageJSON = JSON.parse(fs.readFileSync(packagePath, 'utf8'));\n        projectName = packageJSON.name || '';\n    } catch (err) {\n        // In case of error (e.g., package.json not found), get the project name from the Git URL\n        projectName = extractProjectNameFromURL(remote[0]?.refs?.fetch || '');\n    }\n    \n    const tags = await git.tags();\n    const workingDir = process.cwd();\n\n    return {\n        url: remote[0]?.refs?.fetch || '',\n        branch: currentBranch,\n        name: projectName,\n        description: packageJSON.description || '',\n        tags: tags.all,\n        workingDir: workingDir",

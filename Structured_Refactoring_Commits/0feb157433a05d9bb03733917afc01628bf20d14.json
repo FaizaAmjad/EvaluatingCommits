@@ -47,13 +47,6 @@
       "total_additions": 58
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/config/keyBindings.js\n  - src/frontend/components/GenerateButton.jsx\nrequirements: |\n  - Add [G] to the button label on the right with some space inbetween\n  - Remove unneded console.logs\nos: OSX",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/frontend/model/handleExecuteChange.js\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/config/keyBindings.js\nrequirements: Move handleExecuteChange to src/frontend/service/\nos: OSX",
-      "total_deletions": 5,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/components/ExecuteButton.jsx",
       "before": "import handleExecuteChange from '../model/handleExecuteChange';\nimport { setChangeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {",
       "after": "import handleExecuteChange from '../service/handleExecuteChange';\nimport { setChangeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {",

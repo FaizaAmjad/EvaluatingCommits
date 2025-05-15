@@ -95,13 +95,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Improve documentation with cover page\"\necho \"Plan:\"\necho \"1. Create a new cover.md file to serve as the cover page for the documentation.\"\necho \"2. Update docsifyConfig.js to enable the cover page feature.\"\necho \"3. Update styles.css to include styles corresponding to the logo colors for the cover page.\"\necho \"4. Use the new classes in the cover.md file.\"\n\n# Step 1: Create cover.md file with the main message.\ncat > ./docs/cover.md << 'EOF'\n# <span class=\"cover-color-1\">You are the Pro,</span> <span class=\"cover-color-2\">Junior</span> <span class=\"cover-color-3\">codes</span>\n\nWelcome to **Junior**, your AI-first IDE.\n\nEOF\n\n# Step 2: Update docsifyConfig.js to enable the cover page feature.\ncat > ./docs/docsifyConfig.js << 'EOF'\nwindow.$docsify = {\n  name: 'Junior',\n  repo: 'https://github.com/tisztamo/Junior',\n  loadSidebar: true,\n  autoHeader: true,\n  logo: \"assets/logo.svg\",\n  nameLink: 'https://github.com/tisztamo/Junior',\n  coverpage: true\n}\nEOF\n\n# Step 3: Update styles.css to use logo colors extensively for the cover page\ncat > ./docs/assets/styles.css << 'EOF'\n.app-name-link img {\n  max-width: 70px;\n}\n\niframe {\n  margin: 16px;\n}\n\n/* Adding logo colors to cover page */\n.cover-color-1 {\n  color: rgb(59, 130, 246);\n}\n\n.cover-color-2 {\n  color: rgb(253, 186, 116);\n}\n\n.cover-color-3 {\n  color: rgb(185, 28, 28);\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
       "total_additions": 55
-    },
-    {
-      "filename": "prompt/history/2023/08/29/20:31_Improve documentation with cover page/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - ./\n  - docs/\n  - docs/README.md\n  - docs/index.html\n  - docs/docsifyConfig.js\n  - docs/assets/styles.css\n  - docs/assets/logo.svg\nrequirements: >\n  Create a cover page for the docs, with \"You are the Pro, Junior codes\" as the\n  main message. Use the logo colors extensively.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 13
     }
   ]
 }

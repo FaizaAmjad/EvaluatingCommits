@@ -59,13 +59,6 @@
       "total_additions": 62
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/CommitMessageInput.jsx\n  - src/frontend/components/TasksList.jsx\nrequirements: |\n  Add \"text-text\" class to the app div\n  Remove every coloring classes from CommitMessageInput and TasksList, and replace them with \"bg-emphasize text-emphasize\"\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/tailwind.config.cjs\n  - src/frontend/styles/colors.css\nrequirements: >\n  Add --background-emphasize-color variable to colors.css and ue it as \"emphasize\" backgroundColor in tailwind\nos: OSX",
-      "total_deletions": 6,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/styles/colors.css",
       "before": "  --text-color: #1a202c;\n  --background-color: #f7fafc;\n  --emphasize-color: #e2e8f0;\n}\n\n.dark {\n  --text-color: #f7fafc;\n  --background-color: #1a202c;\n  --emphasize-color: #2d3748;\n}",
       "after": "  --text-color: #1a202c;\n  --background-color: #f7fafc;\n  --emphasize-color: #e2e8f0;\n  --background-emphasize-color: #e5e7eb;\n}\n\n.dark {\n  --text-color: #f7fafc;\n  --background-color: #1a202c;\n  --emphasize-color: #2d3748;\n  --background-emphasize-color: #2c2f33;\n}",

@@ -78,13 +78,6 @@
       "total_additions": 1
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/doc/improve.md\nattention:\n  - ./\n  - ./src/\n  - convert-svg-to-png.cjs\n  - package.json\nrequirements: |\n  Find a place for this .cjs, move it there, and\n  Create a new npm run command for the logo updating workflow.\nos: OSX",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - scripts/convert-svg-to-png.cjs\n  - package.json\nrequirements: |\n  Rename the .cjs to updateLogo.js.\nos: OSX",
-      "total_deletions": 6,
-      "total_additions": 3
-    },
-    {
       "filename": "scripts/convert-svg-to-png.cjs",
       "before": "const sharp = require('sharp');\nconst fs = require('fs');\n\nconst inputSVGPath = 'docs/assets/logo.svg';\nconst outputPNGPath = 'docs/assets/logo.png';\n\nsharp(inputSVGPath)\n  .png()\n  .toBuffer((err, buffer) => {\n    if (err) throw err;\n    fs.writeFileSync(outputPNGPath, buffer);\n  });",
       "after": "",

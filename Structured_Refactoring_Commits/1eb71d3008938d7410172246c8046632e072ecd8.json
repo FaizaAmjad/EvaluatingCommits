@@ -47,13 +47,6 @@
       "total_additions": 8
     },
     {
-      "filename": "prompt.yaml",
-      "before": "  - src/git/resetGit.js\nrequirements: |\n  Resetgit correctly deletes every new files,\n  and correctly leaves prompt.yaml untouched,\n  but it fails to reset other modified files.",
-      "after": "  - src/git/resetGit.js\nrequirements: |\n  Resetgit correctly deletes every new files,\n  and correctly leavddes prompt.yaml untouched,\n  but it fails to reset other modified files.",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
       "filename": "src/git/resetGit.js",
       "before": "export default async function resetGit() {\n  const gitInstance = git();\n\n  // Stash all changes\n  await gitInstance.add('./*');\n  await gitInstance.stash();\n\n  // Clean the repository and reset to the latest commit\n  await gitInstance.clean('f', ['-d']);\n  await gitInstance.reset('hard');\n\n  // Checkout only prompt.yaml from stash\n  await gitInstance.stash(['apply']);\n  await gitInstance.checkout('stash@{0} -- prompt.yaml');\n\n  // Remove stash\n  await gitInstance.stash(['drop']);\n}",
       "after": "export default async function resetGit() {\n  const gitInstance = git();\n\n  // Stash all changes including untracked files\n  await gitInstance.stash(['-u']);\n\n  // Clean the repository and reset to the latest commit\n  await gitInstance.clean('f', ['-d']);\n  await gitInstance.reset('hard');\n\n  // Checkout only prompt.yaml from stash\n  await gitInstance.checkout('stash@{0} -- prompt.yaml');\n\n  // Drop the stash\n  await gitInstance.stash(['drop']);\n}",

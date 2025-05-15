@@ -47,13 +47,6 @@
       "total_additions": 39
     },
     {
-      "filename": "prompt/history/2023/09/25/17:09_Modify keyword scoring in default query/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/MultiSelect/MultiSelect.jsx\n  - ./src/frontend/components/MultiSelect/computeFilteredList.js\n  - ./src/frontend/components/AttentionFileList.jsx\n  - ./src/frontend/service/helpers/extractQuery.js\n  - ./src/frontend/service/helpers/getComparison.js\nrequirements: >-\n  Words of the default query should be scored as follows:\n\n  - The first one is 1.0\n\n  - Next is 12.5% lower\n\n  - And so on\n\n  - But stop going down at 0.25\n\n  Put the constants to an object and return the object from a function in a\n  separated file.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 21
-    },
-    {
       "filename": "src/frontend/service/helpers/extractQuery.js",
       "before": "const ignoreList = ['and', 'or', 'the'];\n\nexport default function extractQuery(requirements) {\n  return requirements.split(/\\W+/)\n    .filter(word => word.length > 2 && !ignoreList.includes(word.toLowerCase()))\n    .map(word => ({ keyword: word.toLowerCase(), weight: 1.0 }));\n}",
       "after": "import { getDecreasingScore } from './scoringConstants';\n\nconst ignoreList = ['and', 'or', 'the'];\n\nexport default function extractQuery(requirements) {\n    return requirements.split(/\\W+/)\n        .filter(word => word.length > 2 && !ignoreList.includes(word.toLowerCase()))\n        .map((word, index) => ({ keyword: word.toLowerCase(), weight: getDecreasingScore(index) }));\n}",

@@ -47,13 +47,6 @@
       "total_additions": 14
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/ExecuteButton.jsx\nrequirements: Make inputAvailable a boolean const! Name it clipboardAvailable!\n",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/model/commitMessage.js\n  - src/frontend/service/handleGeneratePrompt.js\nrequirements: |\n  Refactor ExecuteButton!\n  - Factor changeInput to its own file in model!",
-      "total_deletions": 1,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/components/ExecuteButton.jsx",
       "before": "import { createSignal } from 'solid-js';\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n  const [changeInput, setChangeInput] = createSignal('');\n\n  const handleExecuteChange = async () => {\n    const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();",
       "after": "import { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change';\nimport { changeInput, setChangeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handleExecuteChange = async () => {\n    const change = clipboardAvailable ? await navigator.clipboard.readText() : changeInput();",

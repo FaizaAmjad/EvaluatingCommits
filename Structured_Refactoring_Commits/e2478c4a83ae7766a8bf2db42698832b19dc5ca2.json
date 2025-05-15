@@ -76,13 +76,6 @@
       "after": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\">\n    <rect x=\"0\" y=\"0\" rx=\"10\" ry=\"10\" width=\"100\" height=\"30\" style=\"fill:blue;\" />\n    <rect x=\"0\" y=\"33\" rx=\"10\" ry=\"10\" width=\"100\" height=\"30\" style=\"fill:orange;\" />\n    <rect x=\"0\" y=\"66\" rx=\"10\" ry=\"10\" width=\"48\" height=\"34\" style=\"fill:red;\" />\n    <rect x=\"52\" y=\"66\" rx=\"10\" ry=\"10\" width=\"48\" height=\"34\" style=\"fill:green;\" />\n</svg>",
       "total_deletions": 0,
       "total_additions": 6
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - ./README.md\nrequirements: |\n  doc/ was renamed to docs/\n  Update references accordingly!\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - ./docs/assets/\nrequirements: |\n  Create a new 1:1 logo and save it as logo.svg! Then convert to png and overwrite the old one!\n  The logo consists of three same-height row stacked on each other with some space inbetween.\n  The first row is filled by a blue rounded rectangle\n  The second one is filled by an orange rounded rectangle\n  The last one contains two rounded rectangles: On the left a red one and on the right a green one. The two fill the row fully and there is some space between them\n  convert is installed\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 8
     }
   ]
 }

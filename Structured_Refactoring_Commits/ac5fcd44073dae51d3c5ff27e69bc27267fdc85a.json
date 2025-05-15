@@ -59,13 +59,6 @@
       "total_additions": 30
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/getBaseUrl.js\n  - src/frontend/service/createWebSocket.js\nrequirements: |\n  Use getBaseUrl instead of hardcoding the URL.\n  Derive the correct ws protocol from the base url!\nformat: prompt/format/shell.md",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - src/index.html\n  - src/main.js\n  - prompt/system.md\nrequirements: |\n  The project was renamed to Junior.\nformat: prompt/format/shell.md",
-      "total_deletions": 5,
-      "total_additions": 5
-    },
-    {
       "filename": "src/index.html",
       "before": "<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Contributor</title>\n</head>\n<body>\n  <div id=\"app\"></div>",
       "after": "<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Junior</title>\n</head>\n<body>\n  <div id=\"app\"></div>",

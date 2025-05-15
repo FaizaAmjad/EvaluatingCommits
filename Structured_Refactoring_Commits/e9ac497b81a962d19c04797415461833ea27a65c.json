@@ -47,13 +47,6 @@
       "total_additions": 105
     },
     {
-      "filename": "prompt/history/2023/09/26/10:35_Refactor TerminalComponent for direct virtual key sends/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/terminal/TerminalComponent.jsx\n  - ./src/frontend/components/terminal/VirtualButton.jsx\nrequirements: >-\n  1. The terminal component should send virtual key  codes to the terminal\n  connection, not to xterm.js.\n\n  2. Add text-text class to the virtual buttons\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 10
-    },
-    {
       "filename": "src/frontend/components/terminal/TerminalComponent.jsx",
       "before": "const TerminalComponent = () => {\n  let container;\n  const { term, fitAddon } = setupXTerm();\n  \n  const sendVirtualKey = (key) => {\n    term.write(key);\n  };\n\n  onMount(() => {",
       "after": "const TerminalComponent = () => {\n  let container;\n  const { term, fitAddon } = setupXTerm();\n\n  const sendVirtualKey = (key) => {\n    terminalConnection.sendDataToTerminal(JSON.stringify({ type: 'input', data: key }));\n  };\n\n  onMount(() => {",

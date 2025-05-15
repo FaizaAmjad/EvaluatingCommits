@@ -61,13 +61,6 @@
       "total_additions": 67
     },
     {
-      "filename": "prompt/history/2023/09/22/17:03_Refactor TerminalComponent and implement xterm-addon-fit/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/terminal/TerminalComponent.jsx\nrequirements: >\n  - Factor out xterm.js initialization to setupXTerm.js\n\n  - Install and use xterm-addon-fit\n\n\n  docs for your reference:\n\n\n  Addons / fit\n\n  The fit addon provides the fit method that lets you adjust the size and\n  geometry (columns \ud835\uddd1 rows) of the terminal to fit the size of the parent\n  element.\n\n\n  import { Terminal } from 'xterm';\n\n  import { FitAddon } from 'xterm-addon-fit';\n\n\n  const term = new Terminal();\n\n  const fitAddon = new FitAddon();\n\n  term.loadAddon(fitAddon);\n\n\n  // Open the terminal in #terminal-container\n\n  term.open(document.getElementById('terminal-container'));\n\n\n  // Make the terminal's size and geometry fit the size of #terminal-container\n\n  fitAddon.fit();\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 40
-    },
-    {
       "filename": "src/frontend/components/terminal/TerminalComponent.jsx",
       "before": "import { onCleanup, onMount } from 'solid-js';\nimport { Terminal } from 'xterm';\nimport 'xterm/css/xterm.css';\nimport terminalConnection from '../../service/terminal/terminalConnection';\n\nconst TerminalComponent = () => {\n  let container;\n  const term = new Terminal();\n  \n  onMount(() => {\n    term.open(container);\n\n    terminalConnection.setOnDataReceived((data) => {\n      term.write(data);",
       "after": "import { onCleanup, onMount } from 'solid-js';\nimport 'xterm/css/xterm.css';\nimport terminalConnection from '../../service/terminal/terminalConnection';\nimport { initializeXTerm } from '../../service/terminal/setupXTerm';\n\nconst TerminalComponent = () => {\n  let container;\n  const { term, fitAddon } = initializeXTerm();\n  \n  onMount(() => {\n    term.open(container);\n    fitAddon.fit();\n\n    terminalConnection.setOnDataReceived((data) => {\n      term.write(data);",

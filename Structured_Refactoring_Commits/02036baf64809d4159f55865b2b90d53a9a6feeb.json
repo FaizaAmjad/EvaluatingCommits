@@ -59,13 +59,6 @@
       "after": "    \"commands\": [\n      {\n        \"command\": \"junior.writeAttention\",\n        \"title\": \"Junior: Write Attention\"\n      }\n    ],\n    \"configuration\": {\n    \"js-yaml\": \"^4.1.0\",\n    \"glob\": \"^8.1.0\",\n    \"@types/glob\": \"^8.1.0\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/tisztamo/Junior.git\"\n  }\n}",
       "total_deletions": 1,
       "total_additions": 5
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/doc/improve.md\nattention:\n  - doc/roadmap.md\n  - README.md\nrequirements: >\n  Improve the roadmap!\n\n  Usability & fixes details: We will implement the four buttons and fix every\n  major bug and write docs to allow using Junior for developing external\n  projects.\n\n  Programming on mobile: We need a file browser to allow the user to select\n  attention files from mobile. Then we will create an app by wrapping the\n  frontend and test it by developing at the local Playground and while\n  commuting.\n\n  Auto-attention: Based on the requirements and task the user selected, we will\n  propose an attention. We need to embed every file in the project and store the\n  embeddings in an (embedded) vector database\n\n  Prompt-herds (rename it!): Prompt herds will scan and transform (refactor) the\n  codebase gradually\n\n  Do not change the readme, just read it!\nos: OSX",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - integrations/vscode/\n  - integrations/vscode/README.md\n  - integrations/vscode/package.json\nrequirements: |\n  - Rename the write attention command to \"Junior: Write Attention\"\n  - Fill in the repository field with git+https://github.com/tisztamo/Junior.git\n  - License is GPLv3, download its text with curl to integrations/vscode/LICENSE.txt\nos: OSX",
-      "total_deletions": 22,
-      "total_additions": 7
     }
   ]
 }

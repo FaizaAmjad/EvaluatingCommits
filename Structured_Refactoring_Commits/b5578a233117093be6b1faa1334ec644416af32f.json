@@ -47,13 +47,6 @@
       "total_additions": 17
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/config/keyBindings.js\n  - src/frontend/components/ExecuteButton.jsx\n  - src/frontend/model/handleExecuteChange.js\nrequirements: |\n  - Bind \"X\" to handleExecuteChange\n  - Add [X] to the button label on the right with some space inbetween\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/config/keyBindings.js\n  - src/frontend/components/GenerateButton.jsx\nrequirements: |\n  - Add [G] to the button label on the right with some space inbetween\n  - Remove unneded console.logs\nos: OSX",
-      "total_deletions": 4,
-      "total_additions": 3
-    },
-    {
       "filename": "src/frontend/components/GenerateButton.jsx",
       "before": "\nconst GenerateButton = () => {\n  return (\n    <button className=\"w-64 px-4 py-4 bg-blue-500 text-white rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt</button>\n  );\n};\n",
       "after": "\nconst GenerateButton = () => {\n  return (\n    <button className=\"w-64 px-4 py-4 bg-blue-500 text-white rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt [G]</button>\n  );\n};\n",

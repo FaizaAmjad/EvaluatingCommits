@@ -47,13 +47,6 @@
       "total_additions": 52
     },
     {
-      "filename": "prompt/history/2023/09/18/21:25_Enhance WebSocket creation with optional path/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/service/terminal/terminalConnection.js\n  - ./src/frontend/service/createWebSocket.js\nrequirements: >-\n  - Allow createwebsocket to handle optional path (default \"/\" ) for the\n  connection\n\n  - Connect to /terminal as the terminal connection.\n\n  - Do not change existing exports even if they are non-conformant.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 12
-    },
-    {
       "filename": "src/frontend/service/createWebSocket.js",
       "before": "import { getBaseUrl } from '../getBaseUrl.js';\n\nexport const createWebSocket = () => {\n  const baseUrl = getBaseUrl();\n  const wsUrl = baseUrl.replace(/^http/, 'ws');\n  const ws = new WebSocket(wsUrl);\n  return ws;\n};",
       "after": "import { getBaseUrl } from '../getBaseUrl.js';\n\nexport const createWebSocket = (path = '/') => {\n  const baseUrl = getBaseUrl();\n  const wsUrl = baseUrl.replace(/^http/, 'ws') + path;\n  const ws = new WebSocket(wsUrl);\n  return ws;\n};",

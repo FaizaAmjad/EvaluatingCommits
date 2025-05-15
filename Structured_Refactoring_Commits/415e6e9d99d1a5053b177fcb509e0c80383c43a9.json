@@ -47,13 +47,6 @@
       "total_additions": 31
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/service/monitorChangeSignal.js\n  - src/frontend/components/CommitMessageInput.jsx\nrequirements: >\n  Start monitoring when mounting CommitMessageInput\n  monitorChangeSignal should do nothing when the monitoring already runs\nos: OSX",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/frontend/components/CommitMessageInput.jsx\n  - src/frontend/service/monitorChangeSignal.js\nrequirements: >\n  Move monitorChangeSignal.js to src/frontend/stores/ and rename it to\n  monitorChange.js\nos: OSX",
-      "total_deletions": 4,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/components/CommitMessageInput.jsx",
       "before": "import { onCleanup } from 'solid-js';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChangeSignal from '../service/monitorChangeSignal';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting",
       "after": "import { onCleanup } from 'solid-js';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChangeSignal from '../stores/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting",

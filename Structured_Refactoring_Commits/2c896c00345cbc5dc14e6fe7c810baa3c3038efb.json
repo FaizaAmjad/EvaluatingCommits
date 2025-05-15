@@ -47,13 +47,6 @@
       "total_additions": 59
     },
     {
-      "filename": "prompt/history/2023/09/26/13:33_Update and rename file color function/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - ./src/frontend/components/GitStatusRow.jsx\n  - ./src/frontend/components/getBackgroundColorForFile.jsx\nrequirements: >-\n  In git status, file background color values are rgb, set them as background\n  color styles, not classes in git status\n\n  Also rename the file and fn to file getStyleForFileStatus\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 10
-    },
-    {
       "filename": "src/frontend/components/GitStatusRow.jsx",
       "before": "import { createEffect } from \"solid-js\";\nimport getBackgroundColorForFile from './getBackgroundColorForFile';\n\nconst GitStatusRow = (props) => {\n  const { index, path, working_dir } = props.entry;\n  const fileName = splitPath.pop();\n  const baseDir = splitPath.join('/');\n\n  const bgColor = getBackgroundColorForFile(index, path);\n\n  let pathRef;\n\n  });\n\n  return (\n    <div class={`flex ${bgColor ? 'bg-' + bgColor : ''}`} onClick={() => onClick(path)}>\n      <span class=\"w-50px overflow-x-auto p-1\">{index + ' ' + working_dir}</span>\n      <span class=\"text-base bg-main rounded p-1\">{fileName}</span>\n      <span ref={pathRef} class=\"overflow-x-auto whitespace-no-wrap break-keep scrollbar-hidden ml-4 py-2 text-sm\">{baseDir}</span>",
       "after": "import { createEffect } from \"solid-js\";\nimport getStyleForFileStatus from './getStyleForFileStatus';\n\nconst GitStatusRow = (props) => {\n  const { index, path, working_dir } = props.entry;\n  const fileName = splitPath.pop();\n  const baseDir = splitPath.join('/');\n\n  const bgStyle = getStyleForFileStatus(index, path);\n\n  let pathRef;\n\n  });\n\n  return (\n    <div class=\"flex\" style={bgStyle} onClick={() => onClick(path)}>\n      <span class=\"w-50px overflow-x-auto p-1\">{index + ' ' + working_dir}</span>\n      <span class=\"text-base bg-main rounded p-1\">{fileName}</span>\n      <span ref={pathRef} class=\"overflow-x-auto whitespace-no-wrap break-keep scrollbar-hidden ml-4 py-2 text-sm\">{baseDir}</span>",

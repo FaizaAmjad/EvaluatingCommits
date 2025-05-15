@@ -59,25 +59,11 @@
       "total_additions": 33
     },
     {
-      "filename": "prompt/history/2023/08/24/14:13_Improve documentation with versioning/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/roadmap.md\nrequirements: |\n  Incorporate version numbers:\n    \"Usability & fixes\" is 0.2, released aug 2023\n    \"Programming on mobile\" will be 0.3, q4 2023\n      Add a new subitem as the second one: \"Allow secure hosting\" \n    Add a new item \"Plugin system\" 0.4 q4 2023\n      Allow writing any of the current components as a plugin\n    \"Auto-attention\" 0.5 q1 2024\n      Remove \"(embedded)\"\n    \"Prompt herds\" 0.6 q2 2024\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 14
-    },
-    {
       "filename": "prompt/history/2023/08/24/14:15_Reformat documentation headers/change.sh",
       "before": "",
       "after": "#!/bin/sh\nset -e\ngoal=\"Reformat documentation headers\"\necho \"Plan:\"\necho \"1. Reformat docs/roadmap.md with version numbers on separate lines.\"\n\ncat > docs/roadmap.md << 'EOF'\n# Roadmap\n\n## Usability & fixes\nv0.2 (Released: Aug 2023)\n- \u2705 Done: Implement the four buttons\n- \u2705 Done: Fix every major bug\n- \u2705 Done: Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\nv0.3 (Expected: Q4 2023)\n- Develop a file browser to allow the user to select attention files from mobile\n- Allow secure hosting\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Plugin system\nv0.4 (Expected: Q4 2023)\n- Allow writing any of the current components as a plugin\n\n## Auto-attention\nv0.5 (Expected: Q1 2024)\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in a vector database\n\n## Prompt herds\nv0.6 (Expected: Q2 2024)\n- Scan and transform (refactor) the codebase gradually\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
       "total_additions": 38
-    },
-    {
-      "filename": "prompt/history/2023/08/24/14:15_Reformat documentation headers/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - docs/roadmap.md\nrequirements: |\n  Incorporate version numbers:\n    \"Usability & fixes\" is 0.2, released aug 2023\n    \"Programming on mobile\" will be 0.3, q4 2023\n      Add a new subitem as the second one: \"Allow secure hosting\" \n    Add a new item \"Plugin system\" 0.4 q4 2023\n      Allow writing any of the current components as a plugin\n    \"Auto-attention\" 0.5 q1 2024\n      Remove \"(embedded)\"\n    \"Prompt herds\" 0.6 q2 2024\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 14
     }
   ]
 }

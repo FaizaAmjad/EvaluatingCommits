@@ -47,13 +47,6 @@
       "total_additions": 54
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/custom.md\nattention:\n  - src/backend/setupRoutes.js\n  - src/backend/handlers/gitStatusHandler.js\n  - src/backend/handlers/commitGitHandler.js\n  - src/backend/handlers/resetGitHandler.js\nrequirements: |\n  Move git-related routes under /git/\n  Also move the handler files to handlers/git/\n  Do not forget to update relative imports!\nos: OSX",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/service/fetchGitStatus.js\n  - src/frontend/service/resetGit.js\n  - src/frontend/service/postCommit.js\nrequirements: |\n  Git-related routes were moved under /git/\nos: OSX",
-      "total_deletions": 7,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/service/fetchGitStatus.js",
       "before": "\nconst fetchGitStatus = async () => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/status`);\n\n  const data = await response.json();\n\n  setGitStatus(data);\n};\n\nexport { fetchGitStatus };\n",
       "after": "\nconst fetchGitStatus = async () => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/git/status`);\n\n  const data = await response.json();\n\n  setGitStatus(data);\n};\n\nexport default fetchGitStatus;",

@@ -71,13 +71,6 @@
       "total_additions": 38
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/doc/improve.md\nattention:\n  - README.md\nrequirements: >\n  - Fix: The video caption is displayed on the same line as the video. Add an extra newline!\n\n  - Extend the description in readme with the following (put it between the two\n  paragraphs, reword if needed): Isn't that already possible with ChatGPT? No,\n  LLMs have very limited \"working memory\", so it is not possible to directly\n  work with them on large codebases.\n\n  - Remove port info from README and link doc/web.md for more info\n\n  heredoc whole README.md!\nos: OSX",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - ./\n  - doc/assets/\n  - src/frontend/\n  - src/frontend/index.html\nrequirements: >\n  Generate a logo to doc/assets/logo.png\n  The logo is 1:1 consists of 4 rounded rectangles stacked on each other with small gaps inbetween.\n  Colors from up to down: rgb(59, 130, 246), rgb(253, 186, 116), rgb(185, 28, 28) and rgb(28, 185, 28)\n  generate a favicon to src/frontend/assets/ (Create directory)\n  Use the favicon in index.html\n  convert is installed\nos: OSX",
-      "total_deletions": 11,
-      "total_additions": 10
-    },
-    {
       "filename": "src/frontend/index.html",
       "before": "<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n  <title>Junior</title>\n</head>\n<body>",
       "after": "<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n  <link rel=\"icon\" href=\"/assets/favicon.ico\" type=\"image/x-icon\">\n  <title>Junior</title>\n</head>\n<body>",

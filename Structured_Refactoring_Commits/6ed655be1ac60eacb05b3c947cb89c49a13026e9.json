@@ -47,20 +47,6 @@
       "total_additions": 68
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/components/RollbackButton.jsx\n  - src/frontend/components/CommitButton.jsx\nrequirements: |\n  Factor out the state-clearing statements from handleCommit to service/clearState.js!\n  Also call the new function from after rollback.\nos: OSX",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/backend/setupRoutes.js\n  - src/backend/handlers/gitStatusHandler.js\n  - src/backend/handlers/commitGitHandler.js\n  - src/backend/handlers/resetGitHandler.js\nrequirements: |\n  Move git-related routes under /git/\n  Also move the handler files to handlers/git/\n  Do not forget to update relative imports!\nos: OSX",
-      "total_deletions": 5,
-      "total_additions": 8
-    },
-    {
-      "filename": "prompt/defaults/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - \nrequirements: |\n  ",
-      "total_deletions": 0,
-      "total_additions": 5
-    },
-    {
       "filename": "src/backend/handlers/git/commitGitHandler.js",
       "before": "import commitGit from '../../git/commitGit.js';\n\nexport default async function commitGitHandler(req, res) {\n  try {",
       "after": "import commitGit from '../../../git/commitGit.js';\n\nexport default async function commitGitHandler(req, res) {\n  try {",

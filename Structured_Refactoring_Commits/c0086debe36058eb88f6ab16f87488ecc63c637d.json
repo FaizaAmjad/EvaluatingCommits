@@ -47,13 +47,6 @@
       "total_additions": 101
     },
     {
-      "filename": "prompt/history/2023/09/26/11:43_Rename VirtualButton to VirtualKey and adjust padding/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/terminal/VirtualButton.jsx\n  - ./src/frontend/components/terminal/TerminalComponent.jsx\nrequirements: |-\n  Add more padding to the virtual keys\n  Rename the component and the file to VirtualKey\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 8
-    },
-    {
       "filename": "src/frontend/components/terminal/TerminalComponent.jsx",
       "before": "import { setupXTerm } from '../../service/terminal/setupXTerm';\nimport { sendTerminalResizeNotification } from '../../service/terminal/sendTerminalResizeNotification';\nimport DetailsComponent from '../DetailsComponent';\nimport VirtualButton from './VirtualButton';\nimport terminalVirtualKeyBindings from '../../config/terminalVirtualKeyBindings';\n\nconst TerminalComponent = () => {\n      <div ref={container}></div>\n      <div class=\"flex overflow-x-auto whitespace-nowrap\">\n        {terminalVirtualKeyBindings().map(({ label, action }) => (\n          <VirtualButton label={label} action={() => sendVirtualKey(action)} />\n        ))}\n      </div>\n    </DetailsComponent>",
       "after": "import { setupXTerm } from '../../service/terminal/setupXTerm';\nimport { sendTerminalResizeNotification } from '../../service/terminal/sendTerminalResizeNotification';\nimport DetailsComponent from '../DetailsComponent';\nimport VirtualKey from './VirtualKey';\nimport terminalVirtualKeyBindings from '../../config/terminalVirtualKeyBindings';\n\nconst TerminalComponent = () => {\n      <div ref={container}></div>\n      <div class=\"flex overflow-x-auto whitespace-nowrap\">\n        {terminalVirtualKeyBindings().map(({ label, action }) => (\n          <VirtualKey label={label} action={() => sendVirtualKey(action)} />\n        ))}\n      </div>\n    </DetailsComponent>",

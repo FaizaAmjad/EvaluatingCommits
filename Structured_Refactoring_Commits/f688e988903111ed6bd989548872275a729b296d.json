@@ -47,13 +47,6 @@
       "total_additions": 19
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/doc/improve.md\nattention:\n  - ./\n  - doc/assets/\n  - src/frontend/\n  - src/frontend/index.html\nrequirements: >\n  Generate a logo to doc/assets/logo.png\n  The logo is 1:1 consists of 4 rounded rectangles stacked on each other with small gaps inbetween.\n  Colors from up to down: rgb(59, 130, 246), rgb(253, 186, 116), rgb(185, 28, 28) and rgb(28, 185, 28)\n  generate a favicon to src/frontend/assets/ (Create directory)\n  Use the favicon in index.html\n  convert is installed\nos: OSX",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - src/frontend/startVite.js\nrequirements: >\n  Rewrite startVite to use the js api!\n  Here is a sample from the vite docs for your help:\n\n  import { fileURLToPath } from 'url'\n  import { createServer } from 'vite'\n\n  const __dirname = fileURLToPath(new URL('.', import.meta.url))\n\n  ;(async () => {\n    const server = await createServer({\n      root: __dirname,\n      server: {\n        port: 1337,\n      },\n    })\n    await server.listen()\n\n    server.printUrls()\n  })()\n\n\n  default port is ok, but be sure to open the browser and start from the dir found in the current version of startVite.js\nos: OSX",
-      "total_deletions": 10,
-      "total_additions": 23
-    },
-    {
       "filename": "src/frontend/startVite.js",
       "before": "import { exec } from 'child_process';\nimport path from 'path';\nimport { fileURLToPath } from 'url';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\nconst projectRoot = path.resolve(__dirname, '../..');\n\nexport function startVite() {\n  const vite = exec(`${projectRoot}/node_modules/.bin/vite ${projectRoot}/src/frontend --open`);\n  vite.stdout.pipe(process.stdout);\n  vite.stderr.pipe(process.stderr);\n\n  process.on('exit', () => vite.kill());\n}",
       "after": "import path from 'path';\nimport { fileURLToPath } from 'url';\nimport { createServer } from 'vite';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\nconst projectRoot = path.resolve(__dirname, '../..');\n\nexport async function startVite() {\n  const server = await createServer({\n    root: projectRoot + '/src/frontend',\n    server: {\n      open: true,\n    },\n  });\n  await server.listen();\n  server.printUrls();\n}",

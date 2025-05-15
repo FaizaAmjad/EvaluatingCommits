@@ -47,13 +47,6 @@
       "total_additions": 31
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/frontend/components/CommitMessageInput.jsx\n  - src/frontend/service/monitorChangeSignal.js\nrequirements: >\n  Move monitorChangeSignal.js to src/frontend/stores/ and rename it to\n  monitorChange.js\nos: OSX",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/CommitMessageInput.jsx\n  - src/frontend/stores/monitorChange.js\nrequirements: >\n  Rename monitorChangeSignal to monitorChange and add a short descriptive\n  comment about the function to the very beginning of the file Remove onCleanup\n  import from CommitMessageInput\nos: OSX",
-      "total_deletions": 4,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/components/CommitMessageInput.jsx",
       "before": "import { onCleanup } from 'solid-js';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChangeSignal from '../stores/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n  monitorChangeSignal();\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);",
       "after": "import { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChange from '../stores/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n  monitorChange();\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);",

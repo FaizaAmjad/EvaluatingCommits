@@ -47,13 +47,6 @@
       "total_additions": 68
     },
     {
-      "filename": "prompt/history/2023/09/05/13:49_Move and update files/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/frontend/generatePrompt.js\n  - src/frontend/service/handleGeneratePrompt.js\nrequirements: |\n  Move generatePrompt to service/\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 7
-    },
-    {
       "filename": "src/frontend/service/generatePrompt.js",
       "before": "import { getBaseUrl } from './getBaseUrl';\n\nconst generatePrompt = async (notes) => {\n  const baseUrl = getBaseUrl();",
       "after": "import { getBaseUrl } from '../getBaseUrl';\n\nconst generatePrompt = async (notes) => {\n  const baseUrl = getBaseUrl();",

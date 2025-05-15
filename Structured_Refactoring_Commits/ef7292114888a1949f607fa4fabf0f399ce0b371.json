@@ -47,13 +47,6 @@
       "total_additions": 101
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/frontend/\n  - src/frontend/App.jsx\n  - tailwind.config.js\nrequirements: >\n  We need margins on large screens and a responsive layout.\n\n  When looking at the page, after loading (empty prompt, prompt descriptor\n  loaded), the prompt descriptor (A yaml file) should be the first element\n  catching our eyes.\n\n  Under that the notes input, and the start button so that it is easy to click\n  after entering the notes.\n\n  Over the prompt descriptor is the task list (a html select).\n\n  When we click the button, the prompt is generated and displayed. It's a\n  markdown. Display at the bottom.\n",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/StartButton.jsx\n  - src/frontend/App.jsx\n  - src/frontend/components/TasksList.jsx\n  - tailwind.config.js\nrequirements: |\n  In a solid app:\n  The Start button should have the label \"Generate & Copy Prompt\"\n  and should be a bit too large enough to be easily clicked.\n  The tasklist should also be easier to find, and having a bg color.\n  Also align the tasklist to the left, but use the given single-column layout.\n  And add some space between the components.",
-      "total_deletions": 16,
-      "total_additions": 10
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "\nconst App = () => {\n  return (\n    <div class=\"lg:m-8 m-4 flex flex-col items-center\">\n      <TasksList />\n      <PromptDescriptor />\n      <NotesInput notes={notes} setNotes={setNotes} />",
       "after": "\nconst App = () => {\n  return (\n    // Added margins between the components\n    <div class=\"lg:m-8 m-4 flex flex-col items-center space-y-8\">\n      <TasksList />\n      <PromptDescriptor />\n      <NotesInput notes={notes} setNotes={setNotes} />",

@@ -47,13 +47,6 @@
       "total_additions": 40
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - ./src/\n  - ./src/backend/\nrequirements: >\n  Create a function that resets a git repository fully,\n  restoring everything and deleting new unstaged files,\n  except the change of prompt.yaml\n\n  What is a good name for it?\n\n  Create a new dir in our project if you think this functionality\n  needs its own place.",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./  - src\n  - src/backend\n  - src/backend/setupRoutes.js\n  - git/resetGit.js\nrequirements: |\n  Move the git directory to src/ !\n  Then create a new route that calls resetGit",
-      "total_deletions": 11,
-      "total_additions": 7
-    },
-    {
       "filename": "src/backend/handlers/resetGitHandler.js",
       "before": "",
       "after": "import resetGit from '../../git/resetGit.js';\n\nexport default async function resetGitHandler(req, res) {\n  try {\n    await resetGit();\n    res.status(200).send({ message: 'Git successfully reset' });\n  } catch (error) {\n    res.status(500).send({ message: 'Error in resetting Git', error });\n  }\n}",

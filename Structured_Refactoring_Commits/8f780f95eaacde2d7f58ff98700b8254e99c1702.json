@@ -83,13 +83,6 @@
       "total_additions": 37
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - package.json\nrequirements: |\n  Create a new command junior-init in src/init.js that will\n    - initialize a new git repo\n    - .gitignore prompt.yaml, prompt.md and change.sh\n    - If .gitignore already exists, append to it.\n    - commit the changes as \"Junior init\"\n    - create prompt.yaml with the following content:\n      ```yaml\n      task: prompt/task/feature/implement.md\n      attention:\n        - ./\n      requirements: Create a Hello World in Node.js\n      ```\n    - Report a green \"Repo initialized for Junior development\" message when the command is done\nos: OSX",
-      "after": "task: prompt/task/bug/fix.md\nattention:\n  - src/init.js\nrequirements:\n  - Factor out .gitignore creation to a new file in src/git/\n  - Also gitignore node_modules/ if it is not already gitignored.\nos: OSX",
-      "total_deletions": 15,
-      "total_additions": 4
-    },
-    {
       "filename": "src/git/createGitignore.js",
       "before": "",
       "after": "import { appendFileSync, writeFileSync, existsSync, readFileSync } from 'fs';\nimport { join } from 'path';\n\nfunction createGitignore() {\n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['prompt.yaml', 'prompt.md', 'change.sh', 'node_modules'];\n\n  let existingIgnores = [];\n\n  if (existsSync(gitignorePath)) {\n    const gitignoreFileContent = readFileSync(gitignorePath, 'utf-8');\n    existingIgnores = gitignoreFileContent.split('\\n');\n  }\n\n  ignoreContent.forEach((item) => {\n    if (!existingIgnores.includes(item)) {\n      appendFileSync(gitignorePath, `\\n${item}`);\n    }\n  });\n}\n\nexport { createGitignore };",

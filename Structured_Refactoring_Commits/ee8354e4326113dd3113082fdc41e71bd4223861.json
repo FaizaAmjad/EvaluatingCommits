@@ -47,13 +47,6 @@
       "total_additions": 28
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/backend/handlers/executeHandler.js\nrequirements: Respond with a json with output field instead!\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - docs/assets/\n  - src/frontend/assets/\n  - package.json\n  - scripts/updateLogo.js\nrequirements: |\n  When the logo was updated, also update the favicons!\n  Use convert if needed but prefer installed packages.\n  Do not install anything!\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 9
-    },
-    {
       "filename": "scripts/updateLogo.js",
       "before": "\nconst inputSVGPath = 'docs/assets/logo.svg';\nconst outputPNGPath = 'docs/assets/logo.png';\n\nconst updateLogo = async () => {\n  try {\n    const buffer = await sharp(inputSVGPath).png().toBuffer();\n    writeFileSync(outputPNGPath, buffer);\n  } catch (err) {\n    throw err;\n  }",
       "after": "\nconst inputSVGPath = 'docs/assets/logo.svg';\nconst outputPNGPath = 'docs/assets/logo.png';\nconst faviconDocsPath = 'docs/assets/favicon.ico';\nconst faviconFrontendPath = 'src/frontend/assets/favicon.ico';\n\nconst updateLogo = async () => {\n  try {\n    const buffer = await sharp(inputSVGPath).png().toBuffer();\n    writeFileSync(outputPNGPath, buffer);\n\n    // Convert logo to favicon sizes\n    const faviconBuffer = await sharp(inputSVGPath).resize(16, 16).ico().toBuffer();\n    \n    // Update favicon in both the docs and frontend directories\n    writeFileSync(faviconDocsPath, faviconBuffer);\n    writeFileSync(faviconFrontendPath, faviconBuffer);\n  } catch (err) {\n    throw err;\n  }",

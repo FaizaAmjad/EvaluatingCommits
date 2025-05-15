@@ -47,13 +47,6 @@
       "total_additions": 101
     },
     {
-      "filename": "prompt/history/2023/09/15/17:00_Refactor init.js by splitting and reorganizing/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/split.md\nattention:\n  - ./src/init.js\n  - ./src/git/commitGit.js\nrequirements: >-\n  init.js should not use simple-git directly. We have  src/git/ dir, please\n  create new files as needed and factor simple-git out.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 8
-    },
-    {
       "filename": "src/git/commitGit.js",
       "before": "import { exec } from 'child_process';\n\nexport default function commitGit(message) {\n  return new Promise((resolve, reject) => {\n    exec(`git add . && git commit -m \"${message}\"`, (err, stdout, stderr) => {\n      if (err) {\n        console.error(`exec error: ${err}`);\n        reject(err);\n        return;\n      }\n      console.log(`stdout: ${stdout}`);\n      resolve(`Committed with message: ${message}`);\n    });\n  });\n}",
       "after": "import simpleGit from 'simple-git';\n\nconst git = simpleGit();\n\nexport default async function commitGit(message) {\n    await git.add('.');\n    await git.commit(message);\n    console.log(`Committed with message: ${message}`);\n}",
