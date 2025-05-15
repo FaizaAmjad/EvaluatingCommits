@@ -35,7 +35,10 @@ def process_commits(input_folder: str, output_csv_path: str, top_k: int, ngram_r
         conversations = commit.get("chatgpt_sharing", {}).get("conversations", [])
 
         for file_change in commit.get("code", []):
-            filename = file_change.get("filename", "unknown")
+            filename = file_change.get("filename")
+            if not filename:
+             print(f"⚠️ Skipping file with missing filename in {file_path}")
+             continue
             before = file_change.get("before", "")
             after = file_change.get("after", "")
 
