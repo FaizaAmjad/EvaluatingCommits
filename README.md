@@ -35,7 +35,7 @@ This folder (`DevGPT_Commits_Dataset/`) contains commit history data from the [D
 - `evaluate_line_match.py`: This code compares lines between AI code and commited code and returns the percentage of exact matches.
 - `crystalBLEU_comparison.py`: This script calculates BLEU scores and line matches between developer and GPT code, processing JSON commit files and saving the results in a CSV.
 - `evaluation_results.csv`: It shows evaluation results.
-- `process_commits.py`: It processes commit data from JSON files, calculates CrystalBLEU, line match scores, and developer-GPT change scores, then saves the results to a CSV file.
+- `process_commits.py`: It processes commit data from JSON files, calculates CrystalBLEU, line match scores, and developer-GPT change scores, then saves the results to a CSV file- carries out all comparison and evaluation procedures.
 - `remove_htmlcontent.py`: Removes HTML content from raw data
 - `structure_commits.py`: Structures refactoring commit data into a new format for data analysis
 
@@ -45,6 +45,9 @@ This folder (`DevGPT_Commits_Dataset/`) contains commit history data from the [D
 
 ```pip install pandas matplotlib nltk```
 
+#### Install CrystalBLEU packages:
+
+```pip install crystalbleu```
 
 ## Installation
 
@@ -65,9 +68,8 @@ Run the following script in order:
 6. Filter a collection of refactoring commits using the refactoring terms ``` python extract_refactoring_commits.py```
 7. Structure Filtered Commits ``` python structure_commits.py```
 8. Fetch code changes for all commits ``` python Github_Fetch.py```
-9. INSTRUCTUÍON FOR CRYSTAL BLEU ETC AND NEXT STEPS ADD-PLACEHOLDER
-10. PLACEHOLDER
-11. PLACEHOLDER
+9. Run comparisons crystalBLEU, line match and dev_gpt_score and create the evaluation results CSV ``` python process_commits.py```
+10. View results in ``` evaluation_results.csv```
 
 ## GitHub Token
 
