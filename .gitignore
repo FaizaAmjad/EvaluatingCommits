@@ -178,3 +178,4 @@ cython_debug/
 *.tmp
 *.ipynb_checkpoints
 /DevGPT_Commits_Dataset/visualizations/
+/samples
