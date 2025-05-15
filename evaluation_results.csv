@@ -78,7 +78,6 @@ sha,file,prompt_id,crystalbleu_after_vs_chatgpt,line_match_after_vs_chatgpt,dev_
 0d61a28c97dc8fe17d758871f8c7d92ccf637909,game.js,p1,1.0,1.0,0.0,1.0
 0d61a28c97dc8fe17d758871f8c7d92ccf637909,game.test.js,p1,1.0,1.0,0.0,1.0
 0d61a28c97dc8fe17d758871f8c7d92ccf637909,index.html,p2,0.7549,1.0,0.0,1.0
-0df9759b73cb20818a35bd182697fac36dda3484,,p0,0.0,0.0,0,0
 0feb157433a05d9bb03733917afc01628bf20d14,change.sh,p1,0.9382,1.0,0.0,1.0
 0feb157433a05d9bb03733917afc01628bf20d14,src/frontend/components/ExecuteButton.jsx,p1,0.04,1.0,0.0,1.0
 0feb157433a05d9bb03733917afc01628bf20d14,src/frontend/config/keyBindings.js,p1,0.0376,1.0,0.0,1.0
@@ -516,7 +515,6 @@ sha,file,prompt_id,crystalbleu_after_vs_chatgpt,line_match_after_vs_chatgpt,dev_
 9672ec1d13409a5318432589968d79699603f8bc,change.sh,p2,0.9452,1.0,0.0,1.0
 9672ec1d13409a5318432589968d79699603f8bc,src/frontend/postcss.config.cjs,p1,0.1228,0.8571,1.0,0.0
 96c4f63bbdba293001c540f663337a0dec41e71c,Vagrantfile,p2,0.3781,0.4737,0.4444,0.5556
-96c5c231054583e0f7a1fb57d2e7ebeb9b78489c,,p0,0.0,0.0,0,0
 9874b2e07d41f5afc68f80b65188e00b56a49adc,change.sh,p1,1.0,1.0,0.0,1.0
 9874b2e07d41f5afc68f80b65188e00b56a49adc,src/frontend/App.jsx,p1,0.1616,1.0,0.0,1.0
 9874b2e07d41f5afc68f80b65188e00b56a49adc,src/frontend/components/RollbackButton.jsx,p1,0.2211,1.0,0.0,1.0
@@ -768,7 +766,6 @@ e61a8ed6e52c9ef5b626c680de638b3a8584416b,doc/build.js,p0,0.0,0.0,0,0
 e61a8ed6e52c9ef5b626c680de638b3a8584416b,doc/buildDoc.js,p2,0.0635,1.0,0.0,1.0
 e61a8ed6e52c9ef5b626c680de638b3a8584416b,doc/convertDirectory.js,p1,0.362,0.875,0.125,0.875
 e61a8ed6e52c9ef5b626c680de638b3a8584416b,doc/createMarkdownRenderer.js,p1,0.2479,1.0,0.0,1.0
-e6a01ec078e950a277e7caa21affd7c4ae23d244,,p0,0.0,0.0,0,0
 e737d6b6eeb7e508d1e56ae632ff71db485ed336,change.sh,p3,1.0,1.0,0.0,1.0
 e737d6b6eeb7e508d1e56ae632ff71db485ed336,package-lock.json,p3,0.0015,0.0244,1.0,0.0
 e737d6b6eeb7e508d1e56ae632ff71db485ed336,package.json,p1,0.0004,0.0,1.0,0.0
@@ -793,7 +790,6 @@ ef7292114888a1949f607fa4fabf0f399ce0b371,src/frontend/components/TasksList.jsx,p
 ef7292114888a1949f607fa4fabf0f399ce0b371,tailwind.config.js,p1,0.1277,1.0,0.0,1.0
 ef86b680e18b61467f8a461f70ebcfb29f51a1d1,prompt/history/2023/09/11/14:41_Refactor ExecuteButton component/change.sh,p1,1.0,1.0,0.0,1.0
 ef86b680e18b61467f8a461f70ebcfb29f51a1d1,src/frontend/components/ExecuteButton.jsx,p1,0.3656,1.0,0.0,1.0
-f063e7f3380f75d6ed6a40c9869d920b45a1ff6f,,p0,0.0,0.0,0,0
 f0ba7c972cd1effe3be90320bd2e2d4f5195db70,prompt/history/2023/08/24/14:19_Improve documentation formatting/change.sh,p1,1.0,1.0,0.0,1.0
 f1bb9a49a369f15be3f1979971124dc338845ca3,change.sh,p1,0.8427,1.0,0.0,1.0
 f1bb9a49a369f15be3f1979971124dc338845ca3,src/frontend/App.jsx,p1,0.2241,1.0,0.0,1.0
