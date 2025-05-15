@@ -10,6 +10,7 @@ MAX_COMMITS_PER_AUTHOR = 2
 RESEARCHERS = ["r1", "r2", "r3"]
 SAMPLED_OUTPUT = "capped_random_sampled_commits.json"
 ASSIGNMENT_PREFIX = "assigned_shas_"  # Output: assigned_shas_r1.json etc.
+OUTPUT_FOLDER = "Sampling_And_Manual_Inspection"
 
 # === STEP 1: Load All Commits ===
 json_files = []
@@ -46,7 +47,7 @@ for author, commits in commits_by_author.items():
 print(f"\nSelected {len(sampled_commits)} commits from {len(commits_by_author)} authors.")
 
 # === Save Filtered Sampled Commits ===
-with open(SAMPLED_OUTPUT, "w", encoding="utf-8") as f:
+with open(os.path.join(OUTPUT_FOLDER, SAMPLED_OUTPUT), "w", encoding="utf-8") as f:
     json.dump(sampled_commits, f, indent=2, ensure_ascii=False)
 print(f"✅ Saved sampled commits to {SAMPLED_OUTPUT}")
 
@@ -65,7 +66,7 @@ for sha in shas:
 
 # === Save Assignment Lists ===
 for r in RESEARCHERS:
-    path = f"{ASSIGNMENT_PREFIX}{r}.json"
+    path = os.path.join(OUTPUT_FOLDER, f"{ASSIGNMENT_PREFIX}{r}.json")
     with open(path, "w", encoding="utf-8") as f:
         json.dump(sorted(assignments[r]), f, indent=2)
     print(f"✅ Saved {len(assignments[r])} SHAs to {path}")
