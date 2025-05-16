@@ -8,7 +8,6 @@ from tqdm import tqdm
 INPUT_FOLDER = "Structured_Refactoring_Commits"
 MAX_COMMITS_PER_AUTHOR = 2
 RESEARCHERS = ["r1", "r2", "r3"]
-SAMPLED_OUTPUT = "capped_random_sampled_commits.json"
 ASSIGNMENT_PREFIX = "assigned_shas_"  # Output: assigned_shas_r1.json etc.
 OUTPUT_FOLDER = "Sampling_And_Manual_Inspection"
 
@@ -46,10 +45,26 @@ for author, commits in commits_by_author.items():
 
 print(f"\nSelected {len(sampled_commits)} commits from {len(commits_by_author)} authors.")
 
+
+
+
+
 # === Save Filtered Sampled Commits ===
-with open(os.path.join(OUTPUT_FOLDER, SAMPLED_OUTPUT), "w", encoding="utf-8") as f:
-    json.dump(sampled_commits, f, indent=2, ensure_ascii=False)
-print(f"✅ Saved sampled commits to {SAMPLED_OUTPUT}")
+for commit in sampled_commits:
+    sha = commit.get("sha")
+    if not sha:
+        print("Error saving sampled commit")
+        continue
+
+    commit_path = os.path.join(OUTPUT_FOLDER, f"{sha}.json")
+    try:
+        with open(commit_path, "w", encoding="utf-8") as f:
+            json.dump(commit, f, indent=2, ensure_ascii=False)
+        
+    except Exception:
+        print(f"failed to save commit: {sha}")
+    else:
+        print(f"✅ Saved sampled commits to {OUTPUT_FOLDER}")
 
 # === STEP 3: Assign Each SHA to 2 Researchers ===
 shas = [commit["sha"] for commit in sampled_commits if "sha" in commit]
@@ -66,7 +81,7 @@ for sha in shas:
 
 # === Save Assignment Lists ===
 for r in RESEARCHERS:
-    path = os.path.join(OUTPUT_FOLDER, f"{ASSIGNMENT_PREFIX}{r}.json")
+    path = f"{ASSIGNMENT_PREFIX}{r}.json"
     with open(path, "w", encoding="utf-8") as f:
         json.dump(sorted(assignments[r]), f, indent=2)
     print(f"✅ Saved {len(assignments[r])} SHAs to {path}")

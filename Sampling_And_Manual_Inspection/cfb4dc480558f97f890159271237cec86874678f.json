@@ -1,0 +1,315 @@
+{
+  "sha": "cfb4dc480558f97f890159271237cec86874678f",
+  "url": "https://github.com/pbrudny/jobsforit-de/commit/cfb4dc480558f97f890159271237cec86874678f",
+  "author": "pbrudny",
+  "repoName": "pbrudny/jobsforit-de",
+  "repoLanguage": "CSS",
+  "message": "Update readme\n* shared chat: https://chat.openai.com/share/73e56b34-fb0d-4056-bfcc-daf800b5d213",
+  "authorAt": "2023-09-07T21:59:09.000+02:00",
+  "commitAt": "2023-09-07T21:59:09.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Legacy Code Refactoring AI",
+    "url": "https://chat.openai.com/share/73e56b34-fb0d-4056-bfcc-daf800b5d213",
+    "mention": {
+      "mentioned_url": "https://github.com/pbrudny/jobsforit-de/commit/cfb4dc480558f97f890159271237cec86874678f",
+      "mentioned_property": "message",
+      "mentioned_author": "pbrudny",
+      "mentioned_text": "Update readme\n* shared chat: https://chat.openai.com/share/73e56b34-fb0d-4056-bfcc-daf800b5d213"
+    },
+    "status": 200,
+    "dateOfConversation": "September 7, 2023",
+    "dateOfAccess": "2023-09-14 08:15:29.490608",
+    "numberOfPrompts": 11,
+    "tokensOfPrompts": 416,
+    "tokensOfAnswers": 4020,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "I have a repository for Real-world job board app with legacy codebase (React / Contentful / MobX) as a starting point for AI-powered refactoring. Create a readme.md for this project",
+        "answer": "Certainly! Below is a sample README.md for your Real-world Job Board App with a legacy codebase using React, Contentful, and MobX, which will also serve as a starting point for AI-powered refactoring.Real-World Job Board App (Legacy Codebase)Table of ContentsIntroductionFeaturesTech StackGetting StartedContributingAI-powered RefactoringLicenseIntroductionThis repository contains a real-world job board application with a legacy codebase built using React, Contentful, and MobX. The application is a fully functional job listing platform that allows employers to post job offers and job seekers to apply. This project serves as a base for implementing AI-powered refactoring to improve code quality, maintainability, and performance.FeaturesEmployer Dashboard: Add, Edit, Delete job postings.Job Seeker Dashboard: View jobs, apply, and manage applications.Admin Dashboard: Oversee all activities and manage users.Search and Filtering: Locate jobs based on criteria such as skills, location, and salary.Tech StackFrontend: React.jsState Management: MobXBackend: Contentful (Headless CMS)Styling: Custom CSS / SASSTesting: Jest, React Testing LibraryGetting StartedPrerequisitesNode.jsYarn or npmContentful accountInstallationClone the repository[CODE_BLOCK_0]Install dependencies[CODE_BLOCK_1]Setup ContentfulCreate a .env file and add your Contentful credentials.[CODE_BLOCK_2]Start the development server[CODE_BLOCK_3]ContributingSee CONTRIBUTING.md for contribution guidelines.AI-powered RefactoringThis project aims to introduce AI-powered refactoring for the existing legacy codebase. Our focus is on improving:Code qualityPerformanceMaintainabilityWe will use various AI tools and techniques to assist in this endeavor. Feel free to contribute to this exciting initiative.LicenseThis project is licensed under the MIT License. See LICENSE.md for more details.Contributions, issues, and feature requests are welcome. If you find any bugs or have feature requests, please open an issue. Happy coding!",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "bash",
+            "Content": "git clone https://github.com/your-username/job-board-legacy.git\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "bash",
+            "Content": "cd job-board-legacy\nyarn install\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_2]",
+            "Type": "env",
+            "Content": "CONTENTFUL_SPACE_ID=your_space_id\nCONTENTFUL_ACCESS_TOKEN=your_access_token\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_3]",
+            "Type": "bash",
+            "Content": "yarn start\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p2",
+        "prompt": "Create a contributing.md guidelines mentioning that all changes should be done using chatGPT and commits should have links to 'share chat' chatGPT links",
+        "answer": "Certainly! Below is a sample CONTRIBUTING.md for your project. It specifies that all changes should be done using ChatGPT, and that commits should contain links to 'share chat' from ChatGPT sessions to substantiate the changes.Contributing GuidelinesIntroductionThank you for considering contributing to the Real-World Job Board App! We appreciate your effort and look forward to creating a collaborative and engaging development community.This document outlines the guidelines and best practices for contributing to this repository. Please read it carefully before you start working.Pre-requisitesBefore you start contributing, make sure you are familiar with the following technologies:Git and GitHubReact.jsContentfulMobXWorkflowFork the Repository: Fork the main repository to your GitHub account.Clone the Repository: Clone your forked repository to your local machine.[CODE_BLOCK_0]Create a Feature Branch: Create a new branch for the feature or fix you are working on.[CODE_BLOCK_1]ChatGPT Consultation: All code changes should be consulted with ChatGPT. Use the 'share chat' feature in ChatGPT to create a link for the conversation about your changes.Commit Changes: After making changes, commit them to your feature branch. The commit message should describe what was done and must include a link to the ChatGPT 'share chat'.[CODE_BLOCK_2]Push Changes: Push your changes to your fork on GitHub.[CODE_BLOCK_3]Create a Pull Request: Go to the GitHub page of your fork and create a new pull request to the main repository.ChatGPT ConsultationWe are using ChatGPT for AI-powered refactoring and consultations for implementing features or fixes. Therefore, it is mandatory to consult ChatGPT for all changes to the codebase.Engage with ChatGPT: Use ChatGPT to discuss your planned changes and how best to implement them.Share Chat: Once you have a meaningful dialogue, use the 'share chat' feature to generate a link.Commit Link: Include the 'share chat' link in your commit messages as proof of consultation.ReviewAfter submitting a pull request, the maintainers will review your changes. If your changes are approved, they will be merged into the main codebase. If additional adjustments are required, the maintainers will communicate this through the GitHub review process.LicenseBy contributing to this repository, you agree that your contributions will be licensed under the repository's existing license terms.We look forward to your contributions and are excited to see what improvements ChatGPT can suggest for our project!",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "bash",
+            "Content": "git clone https://github.com/your-username/job-board-legacy.git\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "bash",
+            "Content": "git checkout -b feature/my-new-feature\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_2]",
+            "Type": "bash",
+            "Content": "git commit -m \"Implemented feature X as suggested by ChatGPT [ChatGPT-link]\"\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_3]",
+            "Type": "bash",
+            "Content": "git push origin feature/my-new-feature\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p3",
+        "prompt": "Could you rewrite readme.md to use real md formatting like # ",
+        "answer": "Certainly! The original README.md did include Markdown formatting such as the # symbol for headings. Perhaps the formatting wasn't displayed clearly. Here's another version of the README.md with Markdown formatting:[CODE_BLOCK_0]Install dependencies[CODE_BLOCK_1]Setup ContentfulCreate a .env file and add your Contentful credentials.[CODE_BLOCK_2]Start the development server[CODE_BLOCK_3]ContributingSee CONTRIBUTING.md for contribution guidelines.AI-powered RefactoringThis project aims to introduce AI-powered refactoring for the existing legacy codebase. Our focus is on improving:Code qualityPerformanceMaintainabilityWe will use various AI tools and techniques to assist in this endeavor. Feel free to contribute to this exciting initiative.LicenseThis project is licensed under the MIT License. See LICENSE.md for more details.[CODE_BLOCK_4]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "markdown",
+            "Content": "# Real-World Job Board App (Legacy Codebase)\n\n## Table of Contents\n\n1. [Introduction](#introduction)\n2. [Features](#features)\n3. [Tech Stack](#tech-stack)\n4. [Getting Started](#getting-started)\n5. [Contributing](#contributing)\n6. [AI-powered Refactoring](#ai-powered-refactoring)\n7. [License](#license)\n\n## Introduction\n\nThis repository contains a real-world job board application with a legacy codebase built using React, Contentful, and MobX. The application is a fully functional job listing platform that allows employers to post job offers and job seekers to apply. This project serves as a base for implementing AI-powered refactoring to improve code quality, maintainability, and performance.\n\n## Features\n\n- **Employer Dashboard**: Add, Edit, Delete job postings.\n- **Job Seeker Dashboard**: View jobs, apply, and manage applications.\n- **Admin Dashboard**: Oversee all activities and manage users.\n- **Search and Filtering**: Locate jobs based on criteria such as skills, location, and salary.\n\n## Tech Stack\n\n- **Frontend**: React.js\n- **State Management**: MobX\n- **Backend**: Contentful (Headless CMS)\n- **Styling**: Custom CSS / SASS\n- **Testing**: Jest, React Testing Library\n\n## Getting Started\n\n### Prerequisites\n\n1. Node.js\n2. Yarn or npm\n3. Contentful account\n\n### Installation\n\n1. **Clone the repository**\n   ```bash\n   git clone https://github.com/your-username/job-board-legacy.git\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "bash",
+            "Content": "cd job-board-legacy\nyarn install\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_2]",
+            "Type": "env",
+            "Content": "CONTENTFUL_SPACE_ID=your_space_id\nCONTENTFUL_ACCESS_TOKEN=your_access_token\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_3]",
+            "Type": "bash",
+            "Content": "yarn start\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_4]",
+            "Type": "yaml",
+            "Content": "\n---\n\nSimply copy and paste this Markdown content into your `README.md` file, and it should display correctly on GitHub or any platform that supports Markdown.\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p4",
+        "prompt": "here is the real .env file\nREACT_APP_SPACE_ID=f6zwhql64w01\nREACT_APP_ENVIRONMENT=master\nREACT_APP_LANGUAGE=de\nREACT_APP_FB_SITE=https://www.facebook.com/jobsforit.de\nREACT_APP_LINKEDIN=https://www.linkedin.com/company/jobs-for-it\nREACT_APP_ACCESS_TOKEN=00b696c26342aa70ce936b551fe48e6548745fa637b6cd0c62fa72886af5bd78\nREACT_APP_MANAGER_TOKEN=CFPAT-1BFhL_2UiqD7Q2Z-azTipNT5RgZoqjq0U4UpQQuSTi4\nREACT_APP_GTM_ID=GTM-TL25RWB\nREACT_APP_GTAG=UA-150436887-1\nREACT_APP_HOTJAR=CV-TAd7q\nREACT_FB_APP_ID=536292400544593\nREACT_APP_MOBILE_LIMIT=50\nREACT_APP_DESKTOP_LIMIT=1000",
+        "answer": "I'm sorry, but sharing your .env file publicly exposes sensitive information such as your access tokens and other API keys. It is a security risk and against best practices to share these details publicly.If you've shared this information accidentally, you should consider revoking or resetting these keys as soon as possible to prevent unauthorized access. You should then update your environment file locally but never commit the .env file to public repositories. Instead, create a .env.example file without the actual values and commit that, so that others know what environment variables they'll need to set up.For example, your .env.example might look like:[CODE_BLOCK_0]Always ensure you're following best practices when it comes to security and privacy.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "env",
+            "Content": "REACT_APP_SPACE_ID=your_space_id\nREACT_APP_ENVIRONMENT=your_environment\nREACT_APP_LANGUAGE=your_language\nREACT_APP_FB_SITE=your_fb_site\nREACT_APP_LINKEDIN=your_linkedin\nREACT_APP_ACCESS_TOKEN=your_access_token\nREACT_APP_MANAGER_TOKEN=your_manager_token\nREACT_APP_GTM_ID=your_gtm_id\nREACT_APP_GTAG=your_gtag\nREACT_APP_HOTJAR=your_hotjar\nREACT_FB_APP_ID=your_fb_app_id\nREACT_APP_MOBILE_LIMIT=your_mobile_limit\nREACT_APP_DESKTOP_LIMIT=your_desktop_limit\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p5",
+        "prompt": "could you add the installation guidelines and contribution to the readme.md using proper md formatting",
+        "answer": "Certainly! Below is an updated version of the README.md file, including sections on installation guidelines and contribution. This version should provide a complete view of how to set up the project and contribute to it.Real-World Job Board App (Legacy Codebase)Table of ContentsIntroductionFeaturesTech StackGetting StartedInstallation GuidelinesContributingAI-powered RefactoringLicenseIntroductionThis repository contains a real-world job board application with a legacy codebase built using React, Contentful, and MobX. The application is a fully functional job listing platform that allows employers to post job offers and job seekers to apply. This project serves as a base for implementing AI-powered refactoring to improve code quality, maintainability, and performance.FeaturesEmployer Dashboard: Add, Edit, Delete job postings.Job Seeker Dashboard: View jobs, apply, and manage applications.Admin Dashboard: Oversee all activities and manage users.Search and Filtering: Locate jobs based on criteria such as skills, location, and salary.Tech StackFrontend: React.jsState Management: MobXBackend: Contentful (Headless CMS)Styling: Custom CSS / SASSTesting: Jest, React Testing LibraryGetting StartedBefore you start, make sure you have the following prerequisites installed:Node.jsYarn or npmContentful accountInstallation GuidelinesClone the repository[CODE_BLOCK_0]Navigate to the project directory[CODE_BLOCK_1]Install dependencies[CODE_BLOCK_2]Set up environment variablesCopy the .env.example file to a new file named .env and fill in the necessary variables. For example:[CODE_BLOCK_3]Start the development server[CODE_BLOCK_4]ContributingPlease read CONTRIBUTING.md for details on how to contribute to this project, especially since all contributions should be made after consulting with ChatGPT.AI-powered RefactoringThis project aims to introduce AI-powered refactoring for the existing legacy codebase. We focus on:Code qualityPerformanceMaintainabilityWe will use various AI tools and techniques to assist in this endeavor. Feel free to contribute to this exciting initiative.LicenseThis project is licensed under the MIT License. See LICENSE.md for more details.Feel free to copy and paste this content into your README.md file. It should display correctly on GitHub or any platform that supports Markdown formatting.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "bash",
+            "Content": "git clone https://github.com/your-username/job-board-legacy.git\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "bash",
+            "Content": "cd job-board-legacy\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_2]",
+            "Type": "bash",
+            "Content": "yarn install\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_3]",
+            "Type": "env",
+            "Content": "REACT_APP_SPACE_ID=your_space_id\nREACT_APP_ACCESS_TOKEN=your_access_token\n# ...other variables\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_4]",
+            "Type": "bash",
+            "Content": "yarn start\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p6",
+        "prompt": "this content is not written in markdown formatting it should have hashes #",
+        "answer": "I apologize for the misunderstanding. The content is written in Markdown, but it appears that the formatting didn't display as intended. When copied into a Markdown-compatible editor or GitHub, it should render properly with headings, subheadings, and other Markdown elements.However, here it is once again, explicitly using Markdown hash (#) symbols for the headings:[CODE_BLOCK_0]Navigate to the project directory[CODE_BLOCK_1]Install dependencies[CODE_BLOCK_2]Set up environment variables\nCopy the .env.example file to a new file named .env and fill in the necessary variables. For example:[CODE_BLOCK_3]Start the development server[CODE_BLOCK_4]ContributingPlease read CONTRIBUTING.md for details on how to contribute to this project, especially since all contributions should be made after consulting with ChatGPT.AI-powered RefactoringThis project aims to introduce AI-powered refactoring for the existing legacy codebase. We focus on:Code qualityPerformanceMaintainabilityWe will use various AI tools and techniques to assist in this endeavor. Feel free to contribute to this exciting initiative.LicenseThis project is licensed under the MIT License. See LICENSE.md for more details.[CODE_BLOCK_5]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "markdown",
+            "Content": "# Real-World Job Board App (Legacy Codebase)\n\n## Table of Contents\n\n1. [Introduction](#introduction)\n2. [Features](#features)\n3. [Tech Stack](#tech-stack)\n4. [Getting Started](#getting-started)\n5. [Installation Guidelines](#installation-guidelines)\n6. [Contributing](#contributing)\n7. [AI-powered Refactoring](#ai-powered-refactoring)\n8. [License](#license)\n\n## Introduction\n\nThis repository contains a real-world job board application with a legacy codebase built using React, Contentful, and MobX. The application is a fully functional job listing platform that allows employers to post job offers and job seekers to apply. This project serves as a base for implementing AI-powered refactoring to improve code quality, maintainability, and performance.\n\n## Features\n\n- **Employer Dashboard**: Add, Edit, Delete job postings.\n- **Job Seeker Dashboard**: View jobs, apply, and manage applications.\n- **Admin Dashboard**: Oversee all activities and manage users.\n- **Search and Filtering**: Locate jobs based on criteria such as skills, location, and salary.\n\n## Tech Stack\n\n- **Frontend**: React.js\n- **State Management**: MobX\n- **Backend**: Contentful (Headless CMS)\n- **Styling**: Custom CSS / SASS\n- **Testing**: Jest, React Testing Library\n\n## Getting Started\n\nBefore you start, make sure you have the following prerequisites installed:\n\n- Node.js\n- Yarn or npm\n- Contentful account\n\n## Installation Guidelines\n\n1. **Clone the repository**\n   ```bash\n   git clone https://github.com/your-username/job-board-legacy.git\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "bash",
+            "Content": "cd job-board-legacy\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_2]",
+            "Type": "bash",
+            "Content": "yarn install\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_3]",
+            "Type": "env",
+            "Content": "REACT_APP_SPACE_ID=your_space_id\nREACT_APP_ACCESS_TOKEN=your_access_token\n# ...other variables\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_4]",
+            "Type": "bash",
+            "Content": "yarn start\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_5]",
+            "Type": "csharp",
+            "Content": "\nYou can copy this content into your `README.md` file in your repository, and it should display with proper Markdown formatting.\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p7",
+        "prompt": "starting from Navigate to the project directory you lost the proper Markdown",
+        "answer": "I apologize for the oversight. Thank you for pointing it out. Below is the corrected section starting from \"Navigate to the project directory\", with proper Markdown formatting for the sub-points:[CODE_BLOCK_0]Navigate to the project directory[CODE_BLOCK_1]Install dependencies[CODE_BLOCK_2]Set up environment variablesCopy the .env.example file to a new file named .env and fill in the necessary variables. For example:[CODE_BLOCK_3]Start the development server[CODE_BLOCK_4][CODE_BLOCK_5]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "markdown",
+            "Content": "## Installation Guidelines\n\n1. **Clone the repository**\n   ```bash\n   git clone https://github.com/your-username/job-board-legacy.git\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "bash",
+            "Content": "cd job-board-legacy\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_2]",
+            "Type": "bash",
+            "Content": "yarn install\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_3]",
+            "Type": "env",
+            "Content": "REACT_APP_SPACE_ID=your_space_id\nREACT_APP_ACCESS_TOKEN=your_access_token\n# ...other variables\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_4]",
+            "Type": "bash",
+            "Content": "yarn start\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_5]",
+            "Type": "css",
+            "Content": "\nYou can add this corrected section back to your `README.md` file for proper display.\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p8",
+        "prompt": "Again 'Navigate to the project directory' doesn't have hashes # please fix it",
+        "answer": "I apologize for the confusion. The \"Navigate to the project directory\" line was intended to be a sub-point under the \"Installation Guidelines\" heading, not a separate heading itself. However, if you'd prefer to make each step its own heading, you can certainly do so. Here's how the \"Installation Guidelines\" section would look with each step as a subheading:[CODE_BLOCK_0]2. Navigate to the project directory[CODE_BLOCK_1]3. Install dependencies[CODE_BLOCK_2]4. Set up environment variablesCopy the .env.example file to a new file named .env and fill in the necessary variables. For example:[CODE_BLOCK_3]5. Start the development server[CODE_BLOCK_4][CODE_BLOCK_5]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "markdown",
+            "Content": "## Installation Guidelines\n\n### 1. Clone the repository\n```bash\ngit clone https://github.com/your-username/job-board-legacy.git\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "bash",
+            "Content": "cd job-board-legacy\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_2]",
+            "Type": "bash",
+            "Content": "yarn install\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_3]",
+            "Type": "env",
+            "Content": "REACT_APP_SPACE_ID=your_space_id\nREACT_APP_ACCESS_TOKEN=your_access_token\n# ...other variables\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_4]",
+            "Type": "bash",
+            "Content": "yarn start\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_5]",
+            "Type": "vbnet",
+            "Content": "\nFeel free to copy this content into your `README.md` file to have each installation step as a separate subheading with hash (`#`) symbols.\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p9",
+        "prompt": "No. I would expect something like this: \n### 2. Navigate to the project directory",
+        "answer": "I see what you're looking for now. You want each installation step to be a sub-sub-heading under \"Installation Guidelines.\" Here's the corrected Markdown section:[CODE_BLOCK_0]Feel free to use this corrected section in your README.md file. Thank you for your patience, and I apologize for the oversight.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "markdown",
+            "Content": "## Installation Guidelines\n\n1. **Clone the repository**\n    ```bash\n    git clone https://github.com/your-username/job-board-legacy.git\n    ```\n    \n### 2. Navigate to the project directory\n    ```bash\n    cd job-board-legacy\n    ```\n\n### 3. Install dependencies\n    ```bash\n    yarn install\n    ```\n\n### 4. Set up environment variables\n    Copy the `.env.example` file to a new file named `.env` and fill in the necessary variables. For example:\n    ```env\n    REACT_APP_SPACE_ID=your_space_id\n    REACT_APP_ACCESS_TOKEN=your_access_token\n    # ...other variables\n    ```\n\n### 5. Start the development server\n    ```bash\n    yarn start\n    ```\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p10",
+        "prompt": "That is better but actually the markdown should more like this:\n2.  **Navigate to the project directory** ",
+        "answer": "Thank you for clarifying. You're looking to keep the numbering for the installation steps but also emphasize them, without making them separate headings. Here's how that would look:[CODE_BLOCK_0]I hope this better meets your expectations! Feel free to incorporate this into your README.md.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "markdown",
+            "Content": "## Installation Guidelines\n\n1. **Clone the repository**\n    ```bash\n    git clone https://github.com/your-username/job-board-legacy.git\n    ```\n    \n2. **Navigate to the project directory**\n    ```bash\n    cd job-board-legacy\n    ```\n\n3. **Install dependencies**\n    ```bash\n    yarn install\n    ```\n\n4. **Set up environment variables**\n    Copy the `.env.example` file to a new file named `.env` and fill in the necessary variables. For example:\n    ```env\n    REACT_APP_SPACE_ID=your_space_id\n    REACT_APP_ACCESS_TOKEN=your_access_token\n    # ...other variables\n    ```\n\n5. **Start the development server**\n    ```bash\n    yarn start\n    ```\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p11",
+        "prompt": "Could write this Contributing section also using # formatting ",
+        "answer": "Certainly! Here's the \"Contributing\" section formatted with a Markdown heading using the # symbol:[CODE_BLOCK_0]You can include this section in your README.md file to provide detailed information on how one can contribute to the project.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "markdown",
+            "Content": "## Contributing\n\nContributions to this project are highly encouraged! Please follow these guidelines to ensure a smooth contribution process.\n\nBefore making any changes, it's recommended to engage in discussion with the maintainers and the community. The primary platform for this is the project's Issues section on GitHub. Create a new issue to start a conversation.\n\nAll contributions should be made in consultation with ChatGPT. The commit messages should include links to the 'share chat' from ChatGPT where the changes were discussed.\n\n### Steps for Contributing\n\n1. **Fork the Repository**\n    - Fork this repository to your GitHub account.\n\n2. **Clone Your Fork**\n    ```bash\n    git clone https://github.com/your-username/job-board-legacy.git\n    ```\n\n3. **Create a New Branch**\n    ```bash\n    git checkout -b feature/your-feature-name\n    ```\n\n4. **Make Changes**\n    - Consult with ChatGPT and make your changes.\n\n5. **Commit Your Changes**\n    - Make sure to include the 'share chat' link from ChatGPT in the commit message.\n\n6. **Push to Your Fork**\n    ```bash\n    git push origin feature/your-feature-name\n    ```\n\n7. **Create a Pull Request**\n    - Open a pull request from your fork to the original repository.\n\nFor more information, please read the [CONTRIBUTING.md](CONTRIBUTING.md) file.\n\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "README.md",
+      "before": "\nThis repository contains a real-world job board application with a legacy codebase built using React, Contentful, and MobX. The application is a fully functional job listing platform that allows employers to post job offers and job seekers to apply. This project serves as a base for implementing AI-powered refactoring to improve code quality, maintainability, and performance.\n\n## Features\n\n- **Employer Dashboard**: Add, Edit, Delete job postings.\n- **Job Seeker Dashboard**: View jobs, apply, and manage applications.\n- **Admin Dashboard**: Oversee all activities and manage users.\n- **Search and Filtering**: Locate jobs based on criteria such as skills, location, and salary.\n\n## Tech Stack\n\n- **Frontend**: React.js\n    ```bash\n    yarn start\n    ```\n# jobsforit-de\n# jobsforit-de\n",
+      "after": "\nThis repository contains a real-world job board application with a legacy codebase built using React, Contentful, and MobX. The application is a fully functional job listing platform that allows employers to post job offers and job seekers to apply. This project serves as a base for implementing AI-powered refactoring to improve code quality, maintainability, and performance.\n\n## Tech Stack\n\n- **Frontend**: React.js\n    ```bash\n    yarn start\n    ```\n\n## Contributing\n\nContributions to this project are highly encouraged! Please follow these guidelines to ensure a smooth contribution process.\n\nAll contributions should be made in consultation with ChatGPT. The commit messages should include links to the 'share chat' from ChatGPT where the changes were discussed.\n\n### Steps for Contributing\n\n1. **Fork the Repository**\n   - Fork this repository to your GitHub account.\n\n2. **Clone Your Fork**\n    ```bash\n    git clone https://github.com/your-username/jobsforit-de.git\n    ```\n\n3. **Create a New Branch**\n    ```bash\n    git checkout -b feature/your-feature-name\n    ```\n\n4. **Make Changes**\n   - Consult with ChatGPT and make your changes.\n\n5. **Commit Your Changes**\n   - Make sure to include the 'share chat' link from ChatGPT in the commit message.\n\n6. **Push to Your Fork**\n    ```bash\n    git push origin feature/your-feature-name\n    ```\n\n7. **Create a Pull Request**\n   - Open a pull request from your fork to the original repository.\n\n\n",
+      "total_deletions": 9,
+      "total_additions": 38
+    }
+  ]
+}

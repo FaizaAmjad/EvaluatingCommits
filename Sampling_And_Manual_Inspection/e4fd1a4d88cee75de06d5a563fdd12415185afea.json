@@ -1,0 +1,82 @@
+{
+  "sha": "e4fd1a4d88cee75de06d5a563fdd12415185afea",
+  "url": "https://github.com/pbrudny/jobsforit-de/commit/e4fd1a4d88cee75de06d5a563fdd12415185afea",
+  "author": "pbrudny",
+  "repoName": "pbrudny/jobsforit-de",
+  "repoLanguage": "CSS",
+  "message": "Refactored sitemap.js as per suggestions from ChatGPT. Details: https://chat.openai.com/share/186b240c-7246-4719-975c-75c42e23ca90",
+  "authorAt": "2023-09-10T20:47:59.000+02:00",
+  "commitAt": "2023-09-10T20:47:59.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Server.js Refactor: Structured, Async",
+    "url": "https://chat.openai.com/share/186b240c-7246-4719-975c-75c42e23ca90",
+    "mention": {
+      "mentioned_url": "https://github.com/pbrudny/jobsforit-de/commit/e4fd1a4d88cee75de06d5a563fdd12415185afea",
+      "mentioned_property": "message",
+      "mentioned_author": "pbrudny",
+      "mentioned_text": "Refactored sitemap.js as per suggestions from ChatGPT. Details: https://chat.openai.com/share/186b240c-7246-4719-975c-75c42e23ca90"
+    },
+    "status": 200,
+    "dateOfConversation": "September 10, 2023",
+    "dateOfAccess": "2023-09-14 08:15:59.105666",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 1016,
+    "tokensOfAnswers": 1158,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "I have a server.js  please refactor it\n\nconst express = require('express');\nconst app = express();\nconst port = process.env.PORT || 5000;\nconst path = require('path');\nconst fs = require('fs')\nconst contentful = require(\"contentful\");\nconst compression = require('compression');\n\nconst SPACE_ID = process.env.REACT_APP_SPACE_ID;\nconst ACCESS_TOKEN = process.env.REACT_APP_ACCESS_TOKEN;\nconst MANAGER_TOKEN = process.env.REACT_APP_MANAGER_TOKEN;\nconst ENVIRONMENT = process.env.REACT_APP_ENVIRONMENT || \"master\";\n\nconst client = contentful.createClient({\n  space: SPACE_ID,\n  accessToken: ACCESS_TOKEN,\n  environment: ENVIRONMENT\n});\n\nconst getJob = (slug) => client.getEntries({\n  content_type: 'job',\n  'fields.slug': slug,\n  select: 'fields.ogTitle,fields.ogDescription,fields.ogImage,fields.position,fields.company,fields.city',\n  limit: 1,\n});\n\nconst mainTitle = \"IT jobs with salaries - Jobs For IT\";\nconst mainDescription = \"Job offers for software developers, testers, UX designers, DevOps\";\nconst mainImage = \"https://www.jobsforit.de/static/media/wiewior.4979dfde.png\";\n\napp.use(compression());\napp.use(express.static(path.resolve(__dirname, '..', 'build')));\n\nconst filePath = path.resolve(__dirname, '..', 'build', 'index.html');\nconst filePathPolicy = path.resolve(__dirname, '..', 'build', 'privacy-policy.html');\n\napp.get('/jobs/:id', function(request, response) {\n  const id = request.params.id;\n  fs.readFile(filePath, 'utf8', (err,data) => {\n    if (err) {\n      return console.log(err);\n    }\n\n    getJob(id)\n      .then(entries => {\n        const { position, ogTitle, ogDescription, ogImage } = entries.items[0].fields;\n        const { name: company, logo } = entries.items[0].fields.company.fields;\n        const { name: city } = entries.items[0].fields.city.fields;\n        const title = ogTitle || `${position} Job - ${company} - ${city} - Jobs For IT`;\n        const description = ogDescription || `Working in IT: ${company} is looking for ${position}. Job ${city}.`;\n        const image = ogImage ? ogImage.fields.file.url : logo.fields.file.url;\n        data = data.replace(new RegExp(mainTitle,\"g\"), title);\n        data = data.replace(new RegExp(mainDescription,\"g\"), description);\n        data = data.replace(mainImage, \"https:\" + image);\n        response.send(data);\n      }).catch(err => {\n      console.error(err);\n      response.send(data);\n    });\n     });\n});\n\n// fixed client side urls: https://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writing-manually?page=2&tab=active#tab-top\napp.get('/*', function(req, res) {\n  res.sendFile(filePath, function(err) {\n    if (err) {\n      res.status(500).send(err)\n    }\n  })\n})\n\napp.listen(port, () => console.log(`Listening to you on port ${port}`));\n\n\n\n",
+        "answer": "Your server.js file is doing several things, but here's a more modular and structured version of your server setup. This refactored version makes use of async/await, organizes constants together, and separates out middleware and routes for clarity.[CODE_BLOCK_0]Here's a brief rundown of the changes made:Organized constants at the top.Converted the Contentful API call to a simpler async/await pattern.Separated the setup, middleware, routes, and the code to start the server into distinct sections for better readability.Removed the MANAGER_TOKEN variable since it wasn't being used.Made use of async/await for better error handling and readability in the routes.Changed the fs method to use promises to leverage async/await.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "javascript",
+            "Content": "const express = require('express');\nconst path = require('path');\nconst fs = require('fs').promises;\nconst contentful = require('contentful');\nconst compression = require('compression');\n\n// Constants\nconst PORT = process.env.PORT || 5000;\nconst SPACE_ID = process.env.REACT_APP_SPACE_ID;\nconst ACCESS_TOKEN = process.env.REACT_APP_ACCESS_TOKEN;\nconst ENVIRONMENT = process.env.REACT_APP_ENVIRONMENT || 'master';\nconst MAIN_TITLE = \"IT jobs with salaries - Jobs For IT\";\nconst MAIN_DESCRIPTION = \"Job offers for software developers, testers, UX designers, DevOps\";\nconst MAIN_IMAGE = \"https://www.jobsforit.de/static/media/wiewior.4979dfde.png\";\nconst FILE_PATH = path.resolve(__dirname, '..', 'build', 'index.html');\n\n// Contentful client setup\nconst client = contentful.createClient({\n    space: SPACE_ID,\n    accessToken: ACCESS_TOKEN,\n    environment: ENVIRONMENT\n});\n\nconst getJob = slug => client.getEntries({\n    content_type: 'job',\n    'fields.slug': slug,\n    select: 'fields.ogTitle,fields.ogDescription,fields.ogImage,fields.position,fields.company,fields.city',\n    limit: 1,\n});\n\n// Server setup\nconst app = express();\n\n// Middleware\napp.use(compression());\napp.use(express.static(path.resolve(__dirname, '..', 'build')));\n\n// Routes\napp.get('/jobs/:id', async (request, response) => {\n    const id = request.params.id;\n    let data;\n\n    try {\n        data = await fs.readFile(FILE_PATH, 'utf8');\n        const entries = await getJob(id);\n        const { position, ogTitle, ogDescription, ogImage } = entries.items[0].fields;\n        const { name: company, logo } = entries.items[0].fields.company.fields;\n        const { name: city } = entries.items[0].fields.city.fields;\n\n        const title = ogTitle || `${position} Job - ${company} - ${city} - Jobs For IT`;\n        const description = ogDescription || `Working in IT: ${company} is looking for ${position}. Job ${city}.`;\n        const image = ogImage ? ogImage.fields.file.url : logo.fields.file.url;\n\n        data = data.replace(new RegExp(MAIN_TITLE, \"g\"), title);\n        data = data.replace(new RegExp(MAIN_DESCRIPTION, \"g\"), description);\n        data = data.replace(MAIN_IMAGE, \"https:\" + image);\n\n        response.send(data);\n    } catch (err) {\n        console.error(err);\n        if (data) {\n            response.send(data);\n        } else {\n            response.status(500).send('Internal server error');\n        }\n    }\n});\n\napp.get('/*', (req, res) => {\n    res.sendFile(FILE_PATH, function(err) {\n        if (err) {\n            res.status(500).send(err);\n        }\n    });\n});\n\n// Start the server\napp.listen(PORT, () => console.log(`Listening on port ${PORT}`));\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p2",
+        "prompt": "yarn start\nyarn run v1.22.19\nwarning ../../package.json: No license field\n$ node server.js\n/Users/piotrbrudny/jsy/jobsforit-de/server/node_modules/contentful/dist/contentful.node.js:7663\n    throw new TypeError('Expected parameter accessToken');\n    ^\n\nTypeError: Expected parameter accessToken\n    at Module.createClient (/Users/piotrbrudny/jsy/jobsforit-de/server/node_modules/contentful/dist/contentful.node.js:7663:11)\n    at Object.<anonymous> (/Users/piotrbrudny/jsy/jobsforit-de/server/server.js:14:27)\n    at Module._compile (internal/modules/cjs/loader.js:1114:14)\n    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1143:10)\n    at Module.load (internal/modules/cjs/loader.js:979:32)\n    at Function.Module._load (internal/modules/cjs/loader.js:819:12)\n    at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:75:12)\n    at internal/main/run_main_module.js:17:47\nerror Command failed with exit code 1.\ninfo Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.\n➜  server git:(main) ✗ yarn start\nyarn run v1.22.19\nwarning ../../package.json: No license field\n$ node server.js\n/Users/piotrbrudny/jsy/jobsforit-de/server/node_modules/contentful/dist/contentful.node.js:7663\n    throw new TypeError('Expected parameter accessToken');\n    ^\n\nTypeError: Expected parameter accessToken\n",
+        "answer": "The error you're seeing is pretty explicit. It's being raised from the contentful library, specifically indicating that it expected the accessToken parameter when creating a client, but didn't receive it.Here's what you can do to resolve the issue:Environment Variables: Ensure that all environment variables used in your server.js are set properly. It seems process.env.REACT_APP_ACCESS_TOKEN is not available or undefined when the script is run. This is the root cause of the issue you're seeing..env File: If you're trying to use a .env file to load your environment variables (a common approach with Node.js applications), you'll need the dotenv package:[CODE_BLOCK_0]Then, at the very top of your server.js file, you'll need to configure dotenv:[CODE_BLOCK_1]Check .env File: Ensure you have a .env file in the root of your project and it contains the necessary keys:[CODE_BLOCK_2]... and so on.Logging: Add some logging right before creating the Contentful client to see if the values are being picked up:[CODE_BLOCK_3]Hardcoded Fallback: While it's not recommended for production, you can temporarily hardcode the ACCESS_TOKEN (and other values) to see if it works. This way, you'll be sure the issue lies with how the environment variables are loaded.[CODE_BLOCK_4]Lastly, always be cautious about hardcoding or logging sensitive tokens, especially in production or public-facing scenarios. If you ever commit them accidentally, be sure to invalidate the old tokens and generate new ones to prevent potential misuse.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "bash",
+            "Content": "yarn add dotenv\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_1]",
+            "Type": "javascript",
+            "Content": "require('dotenv').config();\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_2]",
+            "Type": "makefile",
+            "Content": "REACT_APP_ACCESS_TOKEN=your_access_token_here\nREACT_APP_SPACE_ID=your_space_id_here\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_3]",
+            "Type": "javascript",
+            "Content": "console.log('SPACE_ID:', SPACE_ID);\nconsole.log('ACCESS_TOKEN:', ACCESS_TOKEN);\n// ... and so on for other environment variables.\n\nconst client = contentful.createClient({\n  space: SPACE_ID,\n  accessToken: ACCESS_TOKEN,\n  environment: ENVIRONMENT\n});\n"
+          },
+          {
+            "ReplaceString": "[CODE_BLOCK_4]",
+            "Type": "javascript",
+            "Content": "const ACCESS_TOKEN = 'your_hardcoded_token_here';\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "src/sitemap.js",
+      "before": "// Dependencies and Libraries\nconst fs = require(\"fs\");\nconst path = require('path');\nconst contentful = require(\"contentful\");\nconst moment = require('moment');\nconst xmlFormatter = require('xml-formatter');\nconst { paramsApplier } = require(\"react-router-sitemap\");\n\n// Configuration Constants\nconst CONTENTFUL_CONFIG = {\n  space: process.env.REACT_APP_SPACE_ID,\n  accessToken: process.env.REACT_APP_ACCESS_TOKEN,\n  environment: process.env.REACT_APP_ENVIRONMENT\n};\nconst client = contentful.createClient(CONTENTFUL_CONFIG);\n\n// Utility Functions\nasync function fetchContentfulEntries(contentType) {\n  try {\n    const entries = await client.getEntries({ content_type: contentType });\n  }\n}\n\n// Sitemap Generation Functions\nfunction generatePathsBasedOnRoute(route) {\n  const config = { [route.path]: [{ ...route.params }] };\n  return paramsApplier([route.path], config);\n  const date = moment().format('YYYY-MM-DD');\n  const host = 'https://jobsforit.de';\n\n  const xml = `<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n      <urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n      ${routes.map(route => `<url><loc>${host + route}</loc><lastmod>${date}</lastmod></url>`).join(\"\")}\n      </urlset>`;\n\n  return xmlFormatter(xml);\n}\n\n// Main Execution\nasync function sitemapGenerator() {\n  try {\n    console.log('Starting sitemap generation...');\n      {\n        path: \"/company\",\n      },\n      {\n        path: \"/brand-room\",\n      },\n      {\n        path: \"/imprint\",\n      },\n      },\n      {\n        path: \"/privacy-policy\",\n      },\n    ];\n\n    const newRoutes = routes.flatMap(generatePathsBasedOnRoute);",
+      "after": "const fs = require(\"fs\");\nconst path = require('path');\nconst contentful = require(\"contentful\");\nconst moment = require('moment');\nconst xmlFormatter = require('xml-formatter');\nconst { paramsApplier } = require(\"react-router-sitemap\");\nrequire('dotenv').config(); // Ensure environment variables are loaded.\n\nconst CONTENTFUL_CONFIG = {\n  space: process.env.REACT_APP_SPACE_ID,\n  accessToken: process.env.REACT_APP_ACCESS_TOKEN,\n  environment: process.env.REACT_APP_ENVIRONMENT || 'master' // added default value 'master'\n};\n\nconst client = contentful.createClient(CONTENTFUL_CONFIG);\n\nasync function fetchContentfulEntries(contentType) {\n  try {\n    const entries = await client.getEntries({ content_type: contentType });\n  }\n}\n\nfunction generatePathsBasedOnRoute(route) {\n  const config = { [route.path]: [{ ...route.params }] };\n  return paramsApplier([route.path], config);\n  const date = moment().format('YYYY-MM-DD');\n  const host = 'https://jobsforit.de';\n\n  const xml = `\n      <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n      <urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n      ${routes.map(route => `\n      <url>\n          <loc>${host + route}</loc>\n          <lastmod>${date}</lastmod>\n      </url>`).join('')}\n      </urlset>\n  `;\n\n  return xmlFormatter(xml);\n}\n\nasync function sitemapGenerator() {\n  try {\n    console.log('Starting sitemap generation...');\n      {\n        path: \"/company\",\n      },\n      {\n        path: \"/imprint\",\n      },\n      },\n      {\n        path: \"/privacy-policy\",\n      }\n    ];\n\n    const newRoutes = routes.flatMap(generatePathsBasedOnRoute);",
+      "total_deletions": 13,
+      "total_additions": 13
+    }
+  ]
+}
