@@ -59,20 +59,6 @@
       "total_additions": 9
     },
     {
-      "filename": "prompt.md",
-      "before": "# Working set\n\nsrc/frontend/components/CommitButton.jsx:\n```\nimport { postCommit } from '../service/postCommit';\nimport { commitMessage } from '../stores/commitMessage';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\nimport { setExecutionResult } from '../stores/executionResult'; // Importing the necessary function to clear execution result\n\nconst CommitButton = () => {\n  const handleCommit = async () => {\n    const response = await postCommit(commitMessage());\n    console.log(response.message);\n    const status = await fetchGitStatus();\n    console.log(status);\n    setExecutionResult(''); // Clearing the execution result after commit\n  };\n\n  return (\n    <button className=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n  );\n};\n\nexport default CommitButton;\n\n```\n\n\n```\n\nsrc/frontend/stores/prompt.js:\n```\nimport { createSignal } from 'solid-js';\n\nexport const [prompt, setPrompt] = createSignal('');\n\n```\n\n\n# Task\n\n\nRequirements:\n\nAfter commit, clear the prompt  and the commit message to &#39;&#39;\n\n\n",
-      "after": "# Working set\n\nsrc/frontend/components/CommitMessageInput.jsx:\n```\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\n\nconst CommitMessageInput = (props) => {\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" className=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\n\n```\n\n\n```\n\n\n# Task\n\n\nRequirements:\n\nWhen I set the commit message, the input should be updated.\n\n\n",
-      "total_deletions": 24,
-      "total_additions": 9
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/CommitButton.jsx\n  - src/frontend/stores/commitMessage.js\n  - src/frontend/stores/prompt.js\nrequirements: |\n  After commit, clear the prompt  and the commit message to ''\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/CommitMessageInput.jsx\n  - src/frontend/stores/commitMessage.js\nrequirements: |\n  When I set the commit message, the input should be updated.\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 2
-    },
-    {
       "filename": "src/frontend/components/CommitMessageInput.jsx",
       "before": "  };\n\n  return (\n    <input type=\"text\" className=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" onInput={handleChange} />\n  );\n};\n",
       "after": "  };\n\n  return (\n    <input type=\"text\" className=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" value={commitMessage()} onInput={handleChange} />\n  );\n};\n",

@@ -47,20 +47,6 @@
       "total_additions": 33
     },
     {
-      "filename": "prompt/history/2023/09/12/16:49_Remove sample code viewer from prompt creation/prompt.md",
-      "before": "",
-      "after": "You are AI Junior, you code like Donald Knuth.\n# Working set\n\n./src/frontend/components/PromptCreation.jsx:\n```\nimport TasksList from './TasksList';\nimport AttentionFileList from './AttentionFileList';\nimport PromptDescriptor from './PromptDescriptor';\nimport GenerateButton from './GenerateButton';\nimport PromptDisplay from './PromptDisplay';\nimport RequirementsEditor from './RequirementsEditor';\nimport SourceFileDisplay from './files/SourceFileDisplay';\n\nconst PromptCreation = () => {\n  return (\n    <>\n      <TasksList />\n      <RequirementsEditor />\n      <AttentionFileList />\n      <PromptDescriptor />\n      <GenerateButton />\n      <PromptDisplay />\n      <SourceFileDisplay path=\"package.json\" />\n    </>\n  );\n};\n\nexport default PromptCreation;\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nRemove the sample code viewer from prompt creation\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n\n",
-      "total_deletions": 0,
-      "total_additions": 93
-    },
-    {
-      "filename": "prompt/history/2023/09/12/16:49_Remove sample code viewer from prompt creation/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./src/frontend/components/PromptCreation.jsx\nrequirements: Remove the sample code viewer from prompt creation\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/components/PromptCreation.jsx",
       "before": "import GenerateButton from './GenerateButton';\nimport PromptDisplay from './PromptDisplay';\nimport RequirementsEditor from './RequirementsEditor';\nimport SourceFileDisplay from './files/SourceFileDisplay';\n\nconst PromptCreation = () => {\n  return (\n      <PromptDescriptor />\n      <GenerateButton />\n      <PromptDisplay />\n      <SourceFileDisplay path=\"package.json\" />\n    </>\n  );\n};\n\nexport default PromptCreation;\n",
       "after": "import GenerateButton from './GenerateButton';\nimport PromptDisplay from './PromptDisplay';\nimport RequirementsEditor from './RequirementsEditor';\n\nconst PromptCreation = () => {\n  return (\n      <PromptDescriptor />\n      <GenerateButton />\n      <PromptDisplay />\n    </>\n  );\n};\n\nexport default PromptCreation;\n",

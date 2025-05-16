@@ -71,25 +71,11 @@
       "total_additions": 62
     },
     {
-      "filename": ".github/ISSUE_TEMPLATE/bug_report.md",
-      "before": "---\nname: Bug report\nabout: Create a report to help us improve\ntitle: ''\nlabels: bug\nassignees: ''\n\n---\n\n<-- Describe the bug: A clear and concise description of what the bug is. -->\n\n## Steps to reproduce",
-      "after": "---\nname: Bug report\nabout: Create a report to help us improve (only for software bugs)\ntitle: ''\nlabels: bug\nassignees: ''\n\n---\n\n<!-- Please make sure to **only** use this template when it is about bugs in the PrivateBin PHO project.\nOtherwise, for help and support issues e.g. for deployment issues, please go back and chose the appropiate category. -->\n\n<-- Describe the bug: A clear and concise description of what the bug is. -->\n\n## Steps to reproduce",
-      "total_deletions": 1,
-      "total_additions": 4
-    },
-    {
       "filename": ".github/ISSUE_TEMPLATE/config.yml",
       "before": "",
       "after": "blank_issues_enabled: false\ncontact_links:\n  - name: Question and support\n    url: https://github.com/orgs/PrivateBin/discussions/new?category=q-a\n    about: Your setup is not working and you need help or you have a question regarding\n  PrivateBin\n  - name: Problem with the container image\n    url: https://github.com/PrivateBin/docker-nginx-fpm-alpine/issues/new\n    about: Please report all problems that apply **only** to the official (Docker) image `docker-nginx-fpm-alpine` here.\n  - name: Security issue\n    url: https://github.com/PrivateBin/PrivateBin/security/policy\n    about: Please report security vulnerabilities and other security issues here.\n",
       "total_deletions": 0,
       "total_additions": 13
-    },
-    {
-      "filename": ".github/ISSUE_TEMPLATE/question-and-support.md",
-      "before": "---\nname: Question and support\nabout: Your setup is not working and you need help or you have a question regarding\n  PrivateBin\ntitle: ''\nlabels: question/support\nassignees: ''\n\n---\n\n<-- Describe the problem/question: A clear and concise description of what the bug is. -->\n\n<!-- Please tick this to confirm, you did it.-->\n* [ ] Yes I have read [the FAQ](https://github.com/PrivateBin/PrivateBin/wiki/FAQ) and I found no solution/answer there.\n\n## What you did\n<!-- Tell us how to reproduce the problem. -->\n1.\n2.\n\n### What happens\n\n\n### What should happen\n\n\n## Additional information\n<!--\nHere you can add screenshots. If the issue is e.g. a client-side issue (= an issue, which happens in your browser) press F12 and copy and paste the console output or add a screenshot.\nIf you have access to the server log files, also copy them here.\n-->\n\n## Basic information\n\n<!-- If you use a public server enter the address of it here. -->\n**Server address**:\n\n<!-- The Operation System of your server -->\n**Server OS:**\n\n<!-- The webserver running on your server, preferably including the version -->\n**Webserver:**\n\n<!-- The version of your browser (when it is a client-side issue) -->\n**Browser:**\n\n<!-- The version of PrivateBin, if you use an unstable version paste the commit hash or the GitHub link to the commit here (you can get it by running `git rev-parse HEAD`) -->\n**PrivateBin version:**\n\nI can reproduce this issue on <https://privatebin.net>: Yes / No",
-      "after": "",
-      "total_deletions": 50,
-      "total_additions": 0
     }
   ]
 }

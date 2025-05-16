@@ -66,20 +66,6 @@
       "total_additions": 1
     },
     {
-      "filename": "prompt.md",
-      "before": "    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"update-logo\": \"node ./scripts/updateLogo.js\",\n    \"delete-branches\": \"node ./scripts/deleteBranchesCommand.js\"\n  },\n  \"keywords\": [\n    \"cli\",\n\n```\n\nsrc/git/deleteBranchesCommand.js:\n```\nimport clearBranches from './clearBranches';\n\nconst exceptions = process.argv.slice(2);\n\nasync function run() {\n  try {\n    await clearBranches(exceptions);\n    console.log('Branches deleted successfully.');\n  } catch (err) {\n    console.error(`An error occurred while deleting branches: ${err}`);\n    process.exit(1);\n  }\n}\n\nrun();\n\n\n```\n\nsrc/git/deleteBranches.js: err!\n\n\n# Task\n\n - How do you avoid breaking other parts of the code.\n - If you had to choose, your way of thinking.\n\nrename deleteBranchesCommand to clearBranchesCommand\n\n\n# Output Format",
-      "after": "    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"update-logo\": \"node ./scripts/updateLogo.js\",\n    \"delete-branches\": \"node ./scripts/clearBranchesCommand.js\"\n  },\n  \"keywords\": [\n    \"cli\",\n\n```\n\nsrc/git/clearBranches.js:\n```\nimport { promisify } from 'util';\nimport { exec as execCb } from 'child_process';\n\nconst exec = promisify(execCb);\n\nexport default async function deleteBranches(exceptions = []) {\n  try {\n    const { stdout: currentBranch } = await exec('git rev-parse --abbrev-ref HEAD');\n    const { stdout: allBranches } = await exec('git for-each-ref --format=\"%(refname:short)\" refs/heads');\n\n    const branches = allBranches.split('\\n').filter(branch => branch !== currentBranch.trim() && !exceptions.includes(branch));\n\n    for (const branch of branches) {\n      await executeCommand(`git branch -d ${branch}`);\n    }\n  } catch (err) {\n    console.error(`An error occurred: ${err}`);\n  }\n}\n\nasync function executeCommand(command) {\n  try {\n    console.log(`Running command: ${command}`);\n    const { stdout } = await exec(command);\n    console.log(`stdout: ${stdout}`);\n  } catch (err) {\n    throw err;\n  }\n}\n\n```\n\n\n# Task\n\n - How do you avoid breaking other parts of the code.\n - If you had to choose, your way of thinking.\n\nrename delete-branches to clear-branches\nrename deleteBranches to clearBranches\n\n\n# Output Format",
-      "total_deletions": 14,
-      "total_additions": 26
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/move_files.md\nattention:\n  - package.json\n  - src/git/deleteBranchesCommand.js\n  - src/git/deleteBranches.js\nrequirements: |\n  rename deleteBranchesCommand to clearBranchesCommand\nos: OSX",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - package.json\n  - src/git/clearBranches.js\nrequirements: |\n  rename delete-branches to clear-branches\n  rename deleteBranches to clearBranches\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 3
-    },
-    {
       "filename": "src/git/clearBranches.js",
       "before": "\nconst exec = promisify(execCb);\n\nexport default async function deleteBranches(exceptions = []) {\n  try {\n    const { stdout: currentBranch } = await exec('git rev-parse --abbrev-ref HEAD');\n    const { stdout: allBranches } = await exec('git for-each-ref --format=\"%(refname:short)\" refs/heads');",
       "after": "\nconst exec = promisify(execCb);\n\nexport default async function clearBranches(exceptions = []) {\n  try {\n    const { stdout: currentBranch } = await exec('git rev-parse --abbrev-ref HEAD');\n    const { stdout: allBranches } = await exec('git for-each-ref --format=\"%(refname:short)\" refs/heads');",

@@ -47,20 +47,6 @@
       "total_additions": 36
     },
     {
-      "filename": "prompt.md",
-      "before": "import express from 'express';\nimport cors from 'cors';\nimport { createServer } from 'http';\nimport WebSocket from 'ws';\nimport { generateHandler, descriptorHandler, taskUpdateHandler } from './handlers.js';\nimport { listTasks } from './listTasks.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\n  app.use(express.json());\n\n  const server = createServer(app);\n  const wss = new WebSocket.Server({ server });\n\n  notifyOnFileChange(wss);\n\n\n```\n\n\n# Task\n\nFix the following issue!\n\nfile:///Users/ko/projects-new/Junior/src/backend/server.js:17 const wss = new WebSocket.Server({ server });\n            ^\nTypeError: WebSocket.Server is not a constructor\nThe api is correctly called like follows:\nimport { WebSocketServer } from &#39;ws&#39;; ... const wss = new WebSocketServer({ server });\n\n\n# Output Format",
-      "after": "import express from 'express';\nimport cors from 'cors';\nimport { createServer } from 'http';\nimport { WebSocketServer } from 'ws';\nimport { generateHandler, descriptorHandler, taskUpdateHandler } from './handlers.js';\nimport { listTasks } from './listTasks.js';\nimport { notifyOnFileChange } from './notifyOnFileChange.js';\n  app.use(express.json());\n\n  const server = createServer(app);\n  const wss = new WebSocketServer({ server });\n\n  notifyOnFileChange(wss);\n\n\n```\n\nsrc/backend/handlers.js:\n```\nimport processPrompt from '../prompt/promptProcessing.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\nimport { updateTaskHandler } from './updateTaskHandler.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n  const { prompt } = await processPrompt(notes);\n  res.json({ prompt: prompt });\n};\n\nexport const descriptorHandler = servePromptDescriptor;\nexport const taskUpdateHandler = updateTaskHandler;\n\n```\n\n\n# Task\n\n## Refactor by split\n\nA file is too big. We need to split it into parts.\nIdentify the possible parts and refactor the code in separate files!\n\nrouting should be separated to setupRoutes.js\nhandlers.js should be deleted\ngenerateHandler -&gt; separate file.\n\n\n\n# Output Format",
-      "total_deletions": 8,
-      "total_additions": 27
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/bug/fix.md\nattention:\n  - src/backend/server.js\nrequirements: >\n  file:///Users/ko/projects-new/Junior/src/backend/server.js:17\n  const wss = new WebSocket.Server({ server });\n              ^\n  TypeError: WebSocket.Server is not a constructor\n\n  The api is correctly called like follows:\n\n  import { WebSocketServer } from 'ws';\n  ...\n  const wss = new WebSocketServer({ server });\n\nformat: prompt/format/shell.md",
-      "after": "task: prompt/task/refactor/split.md\nattention:\n  - src/backend/server.js\n  - src/backend/handlers.js\nrequirements: |\n  routing should be separated to setupRoutes.js\n  handlers.js should be deleted\n  generateHandler -> separate file.\nformat: prompt/format/shell.md",
-      "total_deletions": 13,
-      "total_additions": 6
-    },
-    {
       "filename": "src/backend/generateHandler.js",
       "before": "",
       "after": "import processPrompt from '../prompt/promptProcessing.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n  const { prompt } = await processPrompt(notes);\n  res.json({ prompt: prompt });\n};",

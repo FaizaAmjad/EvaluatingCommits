@@ -47,20 +47,6 @@
       "total_additions": 26
     },
     {
-      "filename": "prompt.md",
-      "before": "    <>\n      <CommitMessageInput />\n      <div className=\"flex w-full mt-2 space-x-4\">\n        <CommitButton />\n        <RollbackButton />\n      </div>\n    </>\n  );\n\n```\n\n\n# Task\n\n\nRequirements:\n\nSwitch the two buttons\n\n\n",
-      "after": "    <>\n      <CommitMessageInput />\n      <div className=\"flex w-full mt-2 space-x-4\">\n        <RollbackButton />\n        <CommitButton />\n      </div>\n    </>\n  );\n\n```\n\nsrc/frontend/components/RollbackButton.jsx:\n```\nimport { resetGit } from '../service/resetGit';\n\nconst RollbackButton = () => {\n  const handleReset = async () => {\n    const response = await resetGit();\n\n    console.log(response.message);\n  };\n\n  return (\n    <button className=\"w-full px-4 py-4 bg-red-700 text-white rounded mt-2\" onClick={handleReset}>Roll Back</button>\n  );\n};\n\nexport default RollbackButton;\n\n```\n\nsrc/frontend/components/CommitMessageInput.jsx:\n```\nimport { commitMessage, setCommitMessage } from '../model/commitMessage';\nimport monitorChange from '../model/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n  monitorChange();\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" className=\"w-full px-4 py-2 border rounded bg-emphasize text-emphasize\" placeholder=\"Commit message...\" value={commitMessage()} onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\n\n```\n\n\n# Task\n\n\nRequirements:\n\nReduce the vertical space between the input and the buttons\n\n\n",
-      "total_deletions": 2,
-      "total_additions": 44
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/ChangeFinalization.jsx\nrequirements: >\n  Switch the two buttons\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/ChangeFinalization.jsx\n  - src/frontend/components/RollbackButton.jsx\n  - src/frontend/components/CommitMessageInput.jsx\nrequirements: |\n  Reduce the vertical space between the input and the buttons\nos: OSX",
-      "total_deletions": 2,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/components/ChangeFinalization.jsx",
       "before": "  return (\n    <>\n      <CommitMessageInput />\n      <div className=\"flex w-full mt-2 space-x-4\">\n        <RollbackButton />\n        <CommitButton />\n      </div>\n};\n\nexport default ChangeFinalization;\n",
       "after": "  return (\n    <>\n      <CommitMessageInput />\n      <div className=\"flex w-full mt-1 space-x-4\">\n        <RollbackButton />\n        <CommitButton />\n      </div>\n};\n\nexport default ChangeFinalization;\n",

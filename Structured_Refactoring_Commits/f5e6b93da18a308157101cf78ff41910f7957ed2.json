@@ -64,13 +64,6 @@
       "after": "import * as vscode from 'vscode';\nimport * as yaml from 'js-yaml';\n\nexport const writePromptFile = async (filePath: string, data: any) => {\n    let openedDocument = vscode.workspace.textDocuments.find(doc => doc.fileName === filePath);\n    if (!openedDocument) {\n        openedDocument = await vscode.workspace.openTextDocument(filePath);\n    }\n    \n    const edit = new vscode.WorkspaceEdit();\n    const range = new vscode.Range(new vscode.Position(0, 0), new vscode.Position(openedDocument.lineCount, 0));\n    edit.replace(openedDocument.uri, range, yaml.dump(data));\n    await vscode.workspace.applyEdit(edit);\n    \n    // Save the document unconditionally.\n    openedDocument.save();\n};",
       "total_deletions": 10,
       "total_additions": 12
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "attention:\n  - integrations/vscode/src/writeAttention.ts\n  - integrations/vscode/src/writePromptFile.ts\n  - integrations/vscode/src/readPromptFile.ts\n  - integrations/vscode/src/types.ts\nrequirements: |\n  If the prompt.yaml is opened in the editor, vscode shows it as changed after saving.\n  We need to fix this: As we write the contents both to the file and the editor buffer,\n  vscode should show it as unchanged.\n  Also remove the information message.\nos: OSX",
-      "after": "attention:\n  - integrations/vscode/src/writeAttention.ts\n  - integrations/vscode/src/writePromptFile.ts\n  - integrations/vscode/src/types.ts\nrequirements: sdfsdf\nos: OSX",
-      "total_deletions": 6,
-      "total_additions": 1
     }
   ]
 }

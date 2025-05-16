@@ -59,20 +59,6 @@
       "total_additions": 89
     },
     {
-      "filename": "prompt/history/2023/09/12/11:32_Refactor file routes and handlers/prompt.md",
-      "before": "",
-      "after": "You are AI Junior, you code like Donald Knuth.\n# Working set\n\n./src/backend/handlers/fileListHandler.js:\n```\nimport readFileList from '../fileutils/readFileList.js';\n\nexport async function fileListHandler(req, res) {\n  try {\n    const filesList = await readFileList(\"./\");\n    res.json(filesList);\n  } catch (error) {\n    res.status(500).json({ error: 'Failed to list files' });\n  }\n}\n\n```\n\n./src/backend/handlers/fileReadHandler.js:\n```\nimport fs from 'fs';\nimport { promisify } from 'util';\n\nconst readFileAsync = promisify(fs.readFile);\n\nexport async function fileReadHandler(req, res) {\n  const { filepath } = req.params;\n\n  if (!filepath) {\n    return res.status(400).send({ error: 'File path is required' });\n  }\n\n  try {\n    const fileContent = await readFileAsync(filepath, 'utf8');\n    res.send(fileContent);\n  } catch (error) {\n    res.status(500).send({ error: 'Unable to read file' });\n  }\n}\n\n```\n\n./src/backend/setupRoutes.js:\n```\nimport { setupGitRoutes } from './routes/setupGitRoutes.js';\nimport { setupPromptRoutes } from './routes/setupPromptRoutes.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport { configHandler } from './handlers/configHandler.js';\nimport { fileListHandler } from './handlers/fileListHandler.js';\nimport { fileReadHandler } from './handlers/fileReadHandler.js';  // Added this line\n\nexport function setupRoutes(app) {\n  setupPromptRoutes(app);\n  setupGitRoutes(app);\n  app.post('/execute', executeHandler);\n  app.get('/config', configHandler);\n  app.get('/files/list/', fileListHandler);\n  app.get('/files/read/:filepath', fileReadHandler); // Added this line\n}\n\n```\n\n\n# Task\n\nRefactor!\n\nMove files-prefixed routes to setupFilesRoutes.js\nMove the related handlers to handlers/files/ \nCreate the dir.\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n\n",
-      "total_deletions": 0,
-      "total_additions": 121
-    },
-    {
-      "filename": "prompt/history/2023/09/12/11:32_Refactor file routes and handlers/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - ./src/backend/handlers/fileListHandler.js\n  - ./src/backend/handlers/fileReadHandler.js\n  - ./src/backend/setupRoutes.js\nrequirements: |-\n  Move files-prefixed routes to setupFilesRoutes.js\n  Move the related handlers to handlers/files/ \n  Create the dir.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 10
-    },
-    {
       "filename": "src/backend/handlers/files/fileListHandler.js",
       "before": "import readFileList from '../fileutils/readFileList.js';\n\nexport async function fileListHandler(req, res) {\n  try {",
       "after": "import readFileList from '../../fileutils/readFileList.js';\n\nexport async function fileListHandler(req, res) {\n  try {",

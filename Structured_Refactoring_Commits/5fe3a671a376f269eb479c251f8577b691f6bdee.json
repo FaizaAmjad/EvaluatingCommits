@@ -59,20 +59,6 @@
       "total_additions": 8
     },
     {
-      "filename": "prompt.md",
-      "before": "# Working set\n\nsrc/frontend/tailwind.config.cjs:\n```\nmodule.exports = {\n  darkMode: 'class',\n  content: [__dirname + '/**/*.html', __dirname + '/**/*.jsx'],\n  theme: {\n    screens: {\n      'xs': '320px',\n      'sm': '640px',\n      'md': '768px',\n      'lg': '1024px',\n      'xl': '1280px',\n      '2xl': '1536px',\n    },\n    extend: {\n      spacing: {\n        '72': '18rem',\n        '84': '21rem',\n        '96': '24rem',\n        '128': '32rem',\n      },\n      fontSize: {\n        'btn': '1.5rem',\n      },\n      padding: {\n        'btn': '1.5rem',\n      },\n      maxWidth: {\n        'desktop': '640px',\n      },\n      colors: {\n        text: \"var(--text-color)\",\n        emphasize: \"var(--emphasize-color)\",\n      },\n      backgroundColor: {\n        main: \"var(--background-color)\",\n      },\n    },\n  },\n  variants: {\n    extend: {},\n  },\n  plugins: [],\n}\n\n```\n\nsrc/frontend/styles/colors.css:\n```\n:root {\n  --text-color: #1a202c;\n  --background-color: #f7fafc;\n  --emphasize-color: #e2e8f0;\n}\n\n.dark {\n  --text-color: #f7fafc;\n  --background-color: #1a202c;\n  --emphasize-color: #2d3748;\n}\n\n```\n\nRequirements:\n\nAdd --background-emphasize-color variable to colors.css and ue it as &#34;emphasize&#34; backgroundColor in tailwind\n\n\n",
-      "after": "# Working set\n\nsrc/frontend/styles/colors.css:\n```\n:root {\n  --text-color: #1a202c;\n  --background-color: #f7fafc;\n  --emphasize-color: #e2e8f0;\n  --background-emphasize-color: #e5e7eb;\n}\n\n.dark {\n  --text-color: #f7fafc;\n  --background-color: #1a202c;\n  --emphasize-color: #2d3748;\n  --background-emphasize-color: #2c2f33;\n}\n\n```\n\nRequirements:\n\nChange --emphasize-color to be close but visibly different from --text-color! Change --background-emphasize-color to be close but visibly different from  to be close but visibly different from background-color!\n\n\n",
-      "total_deletions": 48,
-      "total_additions": 3
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/tailwind.config.cjs\n  - src/frontend/styles/colors.css\nrequirements: >\n  Add --background-emphasize-color variable to colors.css and ue it as \"emphasize\" backgroundColor in tailwind\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/styles/colors.css\nrequirements: >\n  Change --emphasize-color to be close but visibly different from --text-color!\n  Change --background-emphasize-color to be close but visibly different from  to be close but visibly different from background-color!\nos: OSX",
-      "total_deletions": 2,
-      "total_additions": 2
-    },
-    {
       "filename": "src/frontend/styles/colors.css",
       "before": ":root {\n  --text-color: #1a202c;\n  --background-color: #f7fafc;\n  --emphasize-color: #e2e8f0;\n  --background-emphasize-color: #e5e7eb;\n}\n\n.dark {\n  --text-color: #f7fafc;\n  --background-color: #1a202c;\n  --emphasize-color: #2d3748;\n  --background-emphasize-color: #2c2f33;\n}",
       "after": ":root {\n  --text-color: #1a202c;\n  --background-color: #f7fafc;\n  --emphasize-color: #16181f;\n  --background-emphasize-color: #f2f4f6;\n}\n\n.dark {\n  --text-color: #f7fafc;\n  --background-color: #1a202c;\n  --emphasize-color: #f2f4f6;\n  --background-emphasize-color: #141618;\n}",

@@ -37,4 +37,8 @@ def find_prompt_with_highest_crystalbleu_score(after_code, conversations, trivia
                 best_score = score
                 best_prompt_id = prompt_id
                 best_code = gpt_code
+     # If no best prompt found and after_code is empty, mark as p0 (deleted file)
+    if best_prompt_id is None and after_code.strip() == "":
+        best_prompt_id = "p0"
+    
     return best_score, best_prompt_id, best_code

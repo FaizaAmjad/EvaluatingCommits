@@ -59,20 +59,6 @@
       "total_additions": 16
     },
     {
-      "filename": "prompt.md",
-      "before": "You're the 'Junior', an AI system aiding authors.\n\nYou are working on the source of a program, too large for your memory, so only part of it, the \"Working Set\" is provided here.\n\nYou will see a partial directory structure. Ask for the contents of subdirs marked with /... if needed.\n\nSome files are printed in the working set.\n\nOther files are only listed in their dir, so you know they exists. Do not edit files without knowing their current content, ask for their contents instead!\n\n# Working set\n\nprompt/system.md:\n```\nYou're the 'Junior', an AI system aiding authors.\n\nYou are working on the source of a program, too large for your memory, so only part of it, the \"Working Set\" is provided here.\n\nYou will see a partial directory structure. Ask for the contents of subdirs marked with /... if needed.\n\nSome files are printed in the working set.\n\nOther files are only listed in their dir, so you know they exists. Do not edit files without knowing their current content, ask for their contents instead!\n\n```\n\n\nRequirements:\n\nRewrite the system prompt in system.md to be concise but easy to &#34;understand&#34; for a language model. Start it with &#34;You are Junior, an AI system aiding developers&#34;\n\n\n",
-      "after": "You are Junior, an AI system aiding developers. You are working with a part of a large program called the \"Working Set.\" Ask for contents of subdirectories if needed. Some files are printed in the working set. Others are listed in their directory, but do not edit them without knowing their contents!\n\n# Working set\n\nsrc/execute/extractCode.js:\n```\nfunction extractCode(res) {\n  const match = res.match(/```(sh|bash)([\\s\\S]*?)```/);\n  return match ? match[2].trim() : null;\n}\n\nexport { extractCode };\n\n```\n\nsrc/backend/handlers/executeHandler.js:\n```\nimport { executeAndForwardOutput } from '../../execute/executeAndForwardOutput.js';\n\nfunction executeHandler(req, res) {\n  executeAndForwardOutput(req.body.change, (result, output) => {\n    res.json({ result, output });\n  });\n}\n\nexport { executeHandler };\n\n```\n\n\nRequirements:\n\nExtract the code from the change before executing!\n\n\n",
-      "total_deletions": 16,
-      "total_additions": 19
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - prompt/system.md\nrequirements: >\n  Rewrite the system prompt in system.md to be concise but easy to \"understand\" for a language model.\n  Start it with \"You are Junior, an AI system aiding developers\"\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/execute/extractCode.js\n  - src/backend/handlers/executeHandler.js\nrequirements: >\n  Extract the code from the change before executing!\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 3
-    },
-    {
       "filename": "src/backend/handlers/executeHandler.js",
       "before": "import { executeAndForwardOutput } from '../../execute/executeAndForwardOutput.js';\n\nfunction executeHandler(req, res) {\n  executeAndForwardOutput(req.body.change, (result, output) => {\n    res.json({ result, output });\n  });\n}",
       "after": "import { executeAndForwardOutput } from '../../execute/executeAndForwardOutput.js';\nimport { extractCode } from '../../execute/extractCode.js';\n\nfunction executeHandler(req, res) {\n  const code = extractCode(req.body.change);\n  executeAndForwardOutput(code, (result, output) => {\n    res.json({ result, output });\n  });\n}",

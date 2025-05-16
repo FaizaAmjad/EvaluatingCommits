@@ -71,13 +71,6 @@
       "total_additions": 76
     },
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/move_files.md\nattention:\n  - ./\n  - src/\n  - src/frontend/\n  - src/frontend/postcss.config.cjs\n  - src/vite.config.js\n  - tailwind.config.js\nrequirements: >\n  Move the tailwind config to src/frontend/, convert it to .cjs (no es6 imports) and configure the project to use it.\n\n  FYI the tailwind docs says:\n\n  If you\u2019re using Tailwind as a PostCSS plugin, you will need to specify your custom configuration path in your PostCSS configuration:\n\n  postcss.config.js:\n  module.exports = {\n    plugins: {\n      tailwindcss: { config: './tailwindcss-config.js' },\n    },\n  }\nos: OSX",
-      "after": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/\n  - src/frontend/\n  - src/vite.config.js\n  - src/startVite.js\n  - src/web.js\n  - src/index.html\nrequirements: >\n  Move the vite config, startVite.js and index.html from src/ to src/frontend/!\n  Note that vite.config uses paths relative to the project root so no need to update it.\nos: OSX",
-      "total_deletions": 15,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/index.html",
       "before": "</head>\n<body>\n  <div id=\"app\"></div>\n  <script type=\"module\" src=\"/frontend/index.jsx\"></script>\n</body>\n</html>",
       "after": "</head>\n<body>\n  <div id=\"app\"></div>\n  <script type=\"module\" src=\"/index.jsx\"></script>\n</body>\n</html>",

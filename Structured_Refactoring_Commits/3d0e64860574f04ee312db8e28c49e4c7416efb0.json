@@ -47,27 +47,6 @@
       "total_additions": 23
     },
     {
-      "filename": "prompt.md",
-      "before": "# Working set\n\nsrc/frontend/service/executeChange.js:\n```\nimport { getBaseUrl } from '../getBaseUrl';\n\nconst executeChange = async (change) => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/execute`, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ change })\n  });\n\n  const data = await response.json();\n\n  return data;\n};\n\nexport { executeChange };\n\n```\n\nsrc/backend/handlers/executeHandler.js:\n```\nimport { executeAndForwardOutput } from '../../execute/executeAndForwardOutput.js';\n\nfunction executeHandler(req, res) {\n  executeAndForwardOutput(req.body.change, (result) => {\n    res.json({ result });\n  });\n}\n\nexport { executeHandler };\n\n```\n\nsrc/execute/executeAndForwardOutput.js:\n```\nimport { spawn } from 'child_process';\nimport { rl } from '../config.js';\n\nfunction executeAndForwardOutput(code, next) {\n  const child = spawn(code, { shell: true });\n  let last_command_result = '';\n\n  child.stdout.on('data', (data) => {\n    console.log(`${data}`);\n    last_command_result += data;\n  });\n\n  child.stderr.on('data', (data) => {\n    console.error(`${data}`);\n    last_command_result += data;\n  });\n\n  child.on('close', (code) => {\n    if (code !== 0) {\n      console.log(`child process exited with code ${code}`);\n      last_command_result = \"Command failed. Output:\\n\" + last_command_result;\n    } else {\n      last_command_result = \"Command executed. Output:\\n\" + last_command_result;\n    }\n    next();\n  });\n}\n\nexport { executeAndForwardOutput };\n\n```\n\n\nRequirements:\n\nThe execute api fails to return anything. It should return  { result: 0, output: &#39;output&#39;}\nDo not append extra text to last_command_result, and rename it to commandOutput\n\n\n\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\n# Plan:\n# 1. [...]\n# ...\n[Commands solving the task]\necho \"\\033[32mCompleted: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END",
-      "after": "# Working set\n\nsrc/frontend/components/ExecuteButton.jsx:\n```\nimport { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../stores/executionResult';\n\nconst ExecuteButton = () => {\n  const handleExecuteChange = async () => {\n    const change = await navigator.clipboard.readText();\n    const response = await executeChange(change);\n    setExecutionResult(response.message);\n    console.log(response.message);\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-orange-300 text-white rounded\" onClick={handleExecuteChange}>Paste & Execute Change</button>\n  );\n};\n\nexport default ExecuteButton;\n\n```\n\n\nRequirements:\n\nThe field to use is called output, not message\n\n\n\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END",
-      "total_deletions": 69,
-      "total_additions": 20
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/service/executeChange.js\n  - src/backend/handlers/executeHandler.js\n  - src/execute/executeAndForwardOutput.js\nrequirements: |\n  The execute api fails to return anything. It should return  { result: 0, output: 'output'}\n  Do not append extra text to last_command_result, and rename it to commandOutput\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/ExecuteButton.jsx\nrequirements: >\n  The field to use is called output, not message\nos: OSX",
-      "total_deletions": 6,
-      "total_additions": 3
-    },
-    {
-      "filename": "prompt/format/shell.md",
-      "before": "#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\n# Plan:\n# 1. [...]\n# ...\n[Commands solving the task]\necho \"\\033[32mCompleted: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END",
-      "after": "#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END",
-      "total_deletions": 4,
-      "total_additions": 3
-    },
-    {
       "filename": "src/frontend/components/ExecuteButton.jsx",
       "before": "  const handleExecuteChange = async () => {\n    const change = await navigator.clipboard.readText();\n    const response = await executeChange(change);\n    setExecutionResult(response.message);\n    console.log(response.message);\n  };\n\n  return (",
       "after": "  const handleExecuteChange = async () => {\n    const change = await navigator.clipboard.readText();\n    const response = await executeChange(change);\n    setExecutionResult(response.output);\n    console.log(response.output);\n  };\n\n  return (",

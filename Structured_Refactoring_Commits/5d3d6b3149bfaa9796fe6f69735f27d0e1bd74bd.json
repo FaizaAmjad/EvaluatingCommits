@@ -47,20 +47,6 @@
       "total_additions": 25
     },
     {
-      "filename": "prompt.md",
-      "before": "# Working set\n\ndocs/docsifyConfig.js:\n```\nwindow.$docsify = {\n  name: 'Junior',\n  repo: 'https://github.com/tisztamo/Junior',\n  loadSidebar: true\n}\n```\n\n\n# Task\n\nImprove the documentation!\n\nAdd the following configs:\n- autoHeader: true\n- logo: &#34;assets/logo.svg&#34;\n- nameLink: Use the repo url\n\n\n# Output Format",
-      "after": "# Working set\n\nsrc/frontend/components/NavBar.jsx:\n```\nimport { createSignal } from 'solid-js';\nimport ThemeSwitcher from './ThemeSwitcher';\n\nconst NavBar = () => {\n  const title = 'Junior';\n\n  return (\n    <div class=\"relative w-full\">\n      <div class=\"absolute top-0 right-0 m-4\">\n        <ThemeSwitcher />\n      </div>\n      <div class=\"flex flex-col items-center justify-center\">\n        <h1 class=\"text-center text-3xl mt-6\">{title}</h1>\n        <a href=\"https://github.com/tisztamo/Junior\" class=\"text-center text-xl underline cursor-pointer\">Your AI contributor</a>\n      </div>\n    </div>\n  );\n};\n\nexport default NavBar;\n\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\n- Also make a link from the title\n- Do not underline the links\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format",
-      "total_deletions": 11,
-      "total_additions": 39
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/doc/improve.md\nattention:\n  - docs/docsifyConfig.js\nrequirements: |\n  Add the following configs:\n  - autoHeader: true\n  - logo: \"assets/logo.svg\"\n  - nameLink: Use the repo url\nos: OSX",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/components/NavBar.jsx\nrequirements: |\n  - Also make a link from the title\n  - Do not underline the links\nos: OSX",
-      "total_deletions": 6,
-      "total_additions": 4
-    },
-    {
       "filename": "src/frontend/components/NavBar.jsx",
       "before": "        <ThemeSwitcher />\n      </div>\n      <div class=\"flex flex-col items-center justify-center\">\n        <h1 class=\"text-center text-3xl mt-6\">{title}</h1>\n        <a href=\"https://github.com/tisztamo/Junior\" class=\"text-center text-xl underline cursor-pointer\">Your AI contributor</a>\n      </div>\n    </div>\n  );",
       "after": "        <ThemeSwitcher />\n      </div>\n      <div class=\"flex flex-col items-center justify-center\">\n        <a href=\"https://github.com/tisztamo/Junior\" class=\"text-center text-3xl mt-6 no-underline\">{title}</a>\n        <a href=\"https://github.com/tisztamo/Junior\" class=\"text-center text-xl no-underline cursor-pointer\">Your AI contributor</a>\n      </div>\n    </div>\n  );",

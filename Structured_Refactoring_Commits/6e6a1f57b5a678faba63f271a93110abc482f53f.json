@@ -52,32 +52,11 @@
   },
   "code": [
     {
-      "filename": ".gitignore",
-      "before": "/prompt.md\n/change.sh\n\nnode_modules",
-      "after": "/prompt.md\n/change.sh\nnode_modules\n# Backup patterns for .md files\n*.md.backup\n*.md.bak\n*.md~\n*.md.tmp\n*.md.old\n*.md.orig\n*.md.save",
-      "total_deletions": 1,
-      "total_additions": 9
-    },
-    {
       "filename": "prompt/history/2023/09/15/11:50_Update .gitignore with more .md backup patterns/change.sh",
       "before": "",
       "after": "#!/bin/sh\nset -e\ngoal=\"Update .gitignore with more .md backup patterns\"\necho \"Plan:\"\necho \"1. Append various .md backup patterns to .gitignore file, starting with a new line.\"\n\ncat >> ./.gitignore << 'EOF'\n\n# Backup patterns for .md files\n*.md.backup\n*.md.bak\n*.md~\n*.md.tmp\n*.md.old\n*.md.orig\n*.md.save\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
       "total_additions": 19
-    },
-    {
-      "filename": "prompt/history/2023/09/15/11:50_Update .gitignore with more .md backup patterns/prompt.md",
-      "before": "",
-      "after": "You are AI Junior, you code like Donald Knuth.\n# Working set\n\n./.gitignore:\n```\n/secret.sh\n/node_modules/\n/tmp/\n/prompt.yaml\n/prompt.md\n/change.sh\n\nnode_modules\n```\n\n\n# Task\n\nImplement the following feature!\n\n- Create a plan!\n- Create new files when needed!\n\nRequirements:\n\nWhen updating .md files, backup files might be created with the old content. We need to gitignore them: add usual patterns to .gitignore, like .md.backup, .md.bak etc. \n\n\n## Project Specifics\n\n\n\n# Sample, remove this line. Keep this short and clean. Note that Junior does not like large files!\n\n\n- Every js file should *only export a single function*!\n- Prefer *async/await* over promises!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: Debian\n\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n\n",
-      "total_deletions": 0,
-      "total_additions": 81
-    },
-    {
-      "filename": "prompt/history/2023/09/15/11:50_Update .gitignore with more .md backup patterns/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - ./.gitignore\nrequirements: >-\n  When updating .md files, backup files might be created with the old content.\n  We need to gitignore them: add usual patterns to .gitignore, like .md.backup,\n  .md.bak etc. ",
-      "total_deletions": 0,
-      "total_additions": 7
     }
   ]
 }

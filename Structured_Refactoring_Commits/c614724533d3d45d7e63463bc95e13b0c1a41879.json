@@ -78,20 +78,6 @@
       "total_additions": 1
     },
     {
-      "filename": "prompt.md",
-      "before": "# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .github/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 .vscode/...\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 change.sh\n\u251c\u2500\u2500 convert-svg-to-png.cjs\n\u251c\u2500\u2500 docs/...\n\u251c\u2500\u2500 integrations/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 src/...\n\n```\n```\n./src/\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 attention/...\n\u251c\u2500\u2500 backend/...\n\u251c\u2500\u2500 config.js\n\u251c\u2500\u2500 doc/...\n\u251c\u2500\u2500 execute/...\n\u251c\u2500\u2500 frontend/...\n\u251c\u2500\u2500 git/...\n\u251c\u2500\u2500 init.js\n\u251c\u2500\u2500 interactiveSession/...\n\u251c\u2500\u2500 llm/...\n\u251c\u2500\u2500 main.js\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 web.js\n\n```\nconvert-svg-to-png.cjs:\n```\nconst sharp = require('sharp');\nconst fs = require('fs');\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\"\n  },\n  \"keywords\": [\n    \"cli\",\n\n# Task\n\nImprove the documentation!\n\nFind a place for this .cjs, move it there, and\nCreate a new npm run command for the logo updating workflow.\n\n\n# Output Format",
-      "after": "# Working set\n\nscripts/convert-svg-to-png.cjs:\n```\nconst sharp = require('sharp');\nconst fs = require('fs');\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"update-logo\": \"node ./scripts/convert-svg-to-png.cjs\"\n  },\n  \"keywords\": [\n    \"cli\",\n\n# Task\n\nRefactor!\n\nRename the .cjs to updateLogo.js.\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format",
-      "total_deletions": 44,
-      "total_additions": 14
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/doc/improve.md\nattention:\n  - ./\n  - ./src/\n  - convert-svg-to-png.cjs\n  - package.json\nrequirements: |\n  Find a place for this .cjs, move it there, and\n  Create a new npm run command for the logo updating workflow.\nos: OSX",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - scripts/convert-svg-to-png.cjs\n  - package.json\nrequirements: |\n  Rename the .cjs to updateLogo.js.\nos: OSX",
-      "total_deletions": 6,
-      "total_additions": 3
-    },
-    {
       "filename": "scripts/convert-svg-to-png.cjs",
       "before": "const sharp = require('sharp');\nconst fs = require('fs');\n\nconst inputSVGPath = 'docs/assets/logo.svg';\nconst outputPNGPath = 'docs/assets/logo.png';\n\nsharp(inputSVGPath)\n  .png()\n  .toBuffer((err, buffer) => {\n    if (err) throw err;\n    fs.writeFileSync(outputPNGPath, buffer);\n  });",
       "after": "",

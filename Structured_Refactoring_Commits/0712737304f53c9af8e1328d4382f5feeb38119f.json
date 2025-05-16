@@ -47,27 +47,6 @@
       "total_additions": 101
     },
     {
-      "filename": "prompt/history/2023/09/15/17:00_Refactor init.js by splitting and reorganizing/prompt.md",
-      "before": "",
-      "after": "You are AI Junior, you code like Donald Knuth.\n# Working set\n\n./src/init.js:\n```\n#!/usr/bin/env node\nimport simpleGit from 'simple-git';\nimport { fileURLToPath } from 'url';\nimport { createPromptYaml } from './prompt/createPromptYaml.js';\nimport { createGitignore } from './git/createGitignore.js';\nimport { createPromptDir } from './prompt/createPromptDir.js';\nimport copyDefaults from './command/init/copyDefaults.js';\nimport path from 'path';\n\nconst git = simpleGit();\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\n\nasync function juniorInit() {\n  const isRepo = await git.checkIsRepo();\n\n  if (isRepo) {\n    const status = await git.status();\n    if (!status.isClean()) {\n      console.error(\"\\x1b[31mDirectory is not clean. Please commit or stash changes and try again.\\x1b[0m\");\n      process.exit(1);\n    }\n  } else {\n    await git.init();\n  }\n\n  createGitignore();\n  await createPromptDir();\n  createPromptYaml();\n\n  const defaultsPath = path.join(__dirname, '../prompt/defaults');\n  await copyDefaults(defaultsPath, './prompt/');\n\n  await git.add('.');\n  await git.commit(\"Junior init\");\n\n  console.log('\\x1b[32mRepo initialized for Junior development\\x1b[0m');\n}\n\njuniorInit();\n\n```\n\n./src/git/commitGit.js:\n```\nimport { exec } from 'child_process';\n\nexport default function commitGit(message) {\n  return new Promise((resolve, reject) => {\n    exec(`git add . && git commit -m \"${message}\"`, (err, stdout, stderr) => {\n      if (err) {\n        console.error(`exec error: ${err}`);\n        reject(err);\n        return;\n      }\n      console.log(`stdout: ${stdout}`);\n      resolve(`Committed with message: ${message}`);\n    });\n  });\n}\n\n```\n\n\n# Task\n\n## Refactor by split\n\nA file is too big. We need to split it into parts.\nIdentify the possible parts and refactor the code in separate files!\n\ninit.js should not use simple-git directly. We have  src/git/ dir, please create new files as needed and factor simple-git out.\n\n\n## Project Specifics\n\n- Every js file should *only export a single function or signal, as default*! eg.: in createGitRepo.js: export default function createGitRepo ( ....\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, avoid using sed in favor of heredoc-ing full files.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 9 words]\necho \"Plan:\"\necho \"1. [...]\"\ncat > x.js << 'EOF'\n[...]\n'EOF'\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\nEXAMPLE END\n\nBefore starting, check if you need more files or info to solve the task.\n\nIf the task is not clear:\n\nEXAMPLE START\nI need more information to solve the task. [Description of the missing info]\nEXAMPLE END\n\nDo not edit files not provided in the working set!\nIf you need more files:\n\nEXAMPLE START\n`filepath1` is needed to solve the task but is not in the working set.\nEXAMPLE END\n\n",
-      "total_deletions": 0,
-      "total_additions": 128
-    },
-    {
-      "filename": "prompt/history/2023/09/15/17:00_Refactor init.js by splitting and reorganizing/prompt.yaml",
-      "before": "",
-      "after": "task: prompt/task/refactor/split.md\nattention:\n  - ./src/init.js\n  - ./src/git/commitGit.js\nrequirements: >-\n  init.js should not use simple-git directly. We have  src/git/ dir, please\n  create new files as needed and factor simple-git out.\nos: OSX",
-      "total_deletions": 0,
-      "total_additions": 8
-    },
-    {
-      "filename": "prompt/projectSpecifics.md",
-      "before": "\n## Project Specifics\n\n- Every js file should *only export a single function or signal*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!",
-      "after": "\n## Project Specifics\n\n- Every js file should *only export a single function or signal, as default*! eg.: in createGitRepo.js: export default function createGitRepo ( ....\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs* and Tailwind, edit .jsx files accordingly!",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
       "filename": "src/git/commitGit.js",
       "before": "import { exec } from 'child_process';\n\nexport default function commitGit(message) {\n  return new Promise((resolve, reject) => {\n    exec(`git add . && git commit -m \"${message}\"`, (err, stdout, stderr) => {\n      if (err) {\n        console.error(`exec error: ${err}`);\n        reject(err);\n        return;\n      }\n      console.log(`stdout: ${stdout}`);\n      resolve(`Committed with message: ${message}`);\n    });\n  });\n}",
       "after": "import simpleGit from 'simple-git';\n\nconst git = simpleGit();\n\nexport default async function commitGit(message) {\n    await git.add('.');\n    await git.commit(message);\n    console.log(`Committed with message: ${message}`);\n}",

@@ -47,20 +47,6 @@
       "total_additions": 31
     },
     {
-      "filename": "prompt.md",
-      "before": "```\nimport { onCleanup } from 'solid-js';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChangeSignal from '../service/monitorChangeSignal';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n\n```\n\nsrc/frontend/service/monitorChangeSignal.js:\n```\nimport { createEffect } from 'solid-js';\nimport { change } from '../stores/change';\n\n# Task\n\nMove the following files to the specified target dirs!\n\nFind out the best target dir if it is not specified!\n\nYou need to follow dependencies to maintain coherence.\n\nBefore executing, write a concise plan! The plan should show:\n - How do you avoid breaking other parts of the code.\n - If you had to choose, your way of thinking.\n\nMove monitorChangeSignal.js to src/frontend/stores/ and rename it to monitorChange.js\n\n\n# Output Format",
-      "after": "```\nimport { onCleanup } from 'solid-js';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChangeSignal from '../stores/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n\n```\n\nsrc/frontend/stores/monitorChange.js:\n```\nimport { createEffect } from 'solid-js';\nimport { change } from '../stores/change';\n\n# Task\n\nRefactor!\n\nRename monitorChangeSignal to monitorChange and add a short descriptive comment about the function to the very beginning of the file Remove onCleanup import from CommitMessageInput\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format",
-      "total_deletions": 9,
-      "total_additions": 10
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/move_files.md\nattention:\n  - src/frontend/components/CommitMessageInput.jsx\n  - src/frontend/service/monitorChangeSignal.js\nrequirements: >\n  Move monitorChangeSignal.js to src/frontend/stores/ and rename it to\n  monitorChange.js\nos: OSX",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/CommitMessageInput.jsx\n  - src/frontend/stores/monitorChange.js\nrequirements: >\n  Rename monitorChangeSignal to monitorChange and add a short descriptive\n  comment about the function to the very beginning of the file Remove onCleanup\n  import from CommitMessageInput\nos: OSX",
-      "total_deletions": 4,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/components/CommitMessageInput.jsx",
       "before": "import { onCleanup } from 'solid-js';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChangeSignal from '../stores/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n  monitorChangeSignal();\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);",
       "after": "import { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChange from '../stores/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n  monitorChange();\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);",

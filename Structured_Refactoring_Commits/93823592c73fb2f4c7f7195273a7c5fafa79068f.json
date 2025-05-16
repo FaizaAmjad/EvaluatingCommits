@@ -59,20 +59,6 @@
       "total_additions": 6
     },
     {
-      "filename": "prompt.md",
-      "before": "import ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  // Define key bindings\n  const bindings = keyBindings();\n\n  // Use key bindings\n  useKeyBindings(bindings);\n\n  return (\n    <div id=\"app\" class=\"p-2 sm:p-4 xs:p-4\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />\n  <title>Junior</title>\n</head>\n<body>\n  <div id=\"app\"></div>\n  <script type=\"module\" src=\"/index.jsx\"></script>\n</body>\n</html>\n\nRequirements:\n\nAdd bg-emphasize class to the &#34;app&#34; div in index.html\nAdd bg-main to the inner div in App.jsx.\nRemove the id attribute from outer (id=&#34;app&#34;) in App.jsx, as the real app div is in the html.\nMove the p-2 class from the outer to the inner div.\nRemove unnecessary comments.\n\n\n",
-      "after": "import ChangeFinalization from './components/ChangeFinalization';\n\nconst App = () => {\n  const bindings = keyBindings();\n  useKeyBindings(bindings);\n\n  return (\n    <div class=\"px-2 sm:px-4 xs:px-4\">\n      <div class=\"bg-main max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:px-0\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />\n  <title>Junior</title>\n</head>\n<body>\n  <div id=\"app\" class=\"bg-emphasize\"></div>\n  <script type=\"module\" src=\"/index.jsx\"></script>\n</body>\n</html>\n\nRequirements:\n\nThere is a margin around the content which should be removed.\nA horizontal padding should be added instead.\n\n\n",
-      "total_deletions": 11,
-      "total_additions": 5
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "  - src/frontend/App.jsx\n  - src/frontend/index.html\nrequirements: |\n  Add bg-emphasize class to the \"app\" div in index.html\n  Add bg-main to the inner div in App.jsx.\n  Remove the id attribute from outer (id=\"app\") in App.jsx, as the real app div is in the html.\n  Move the p-2 class from the outer to the inner div.\n  Remove unnecessary comments.\nos: OSX",
-      "after": "  - src/frontend/App.jsx\n  - src/frontend/index.html\nrequirements: |\n  There is a margin around the content which should be removed.\n  A horizontal padding should be added instead.\nos: OSX",
-      "total_deletions": 5,
-      "total_additions": 2
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "  useKeyBindings(bindings);\n\n  return (\n    <div class=\"p-2 sm:p-4 xs:p-4\">\n      <div class=\"bg-main max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />",
       "after": "  useKeyBindings(bindings);\n\n  return (\n    <div>\n      <div class=\"bg-main max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 px-2 sm:px-4 xs:px-4\">\n        <NavBar />\n        <PromptCreation />\n        <ChangeExecution />",

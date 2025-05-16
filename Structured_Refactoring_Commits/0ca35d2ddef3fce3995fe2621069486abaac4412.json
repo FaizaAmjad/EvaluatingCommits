@@ -83,20 +83,6 @@
       "total_additions": 29
     },
     {
-      "filename": "prompt.md",
-      "before": "  return (\n    <>\n      <CommitMessageInput />\n      <div className=\"flex justify-between mt-2\">\n        <CommitButton />\n        <RollbackButton />\n      </div>\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-red-700 text-white rounded\" onClick={handleReset}>Roll Back to Last Commit</button>\n  );\n};\n\n  };\n\n  return (\n    <button className=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n  );\n};\n\n\nRequirements:\n\nMake the commit and rollback buttons width smaller. Make the rollback same-height as the commit. Have some space between them. Change the rollback label to &#34;Roll Back&#34;\n\n\n",
-      "after": "  return (\n    <>\n      <CommitMessageInput />\n      <div className=\"flex justify-between mt-2 space-x-4\">\n        <CommitButton />\n        <RollbackButton />\n      </div>\n  };\n\n  return (\n    <button className=\"w-48 px-4 py-4 bg-red-700 text-white rounded mt-2\" onClick={handleReset}>Roll Back</button>\n  );\n};\n\n  };\n\n  return (\n    <button className=\"w-48 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n  );\n};\n\n\nRequirements:\n\nChange the layout so that the commit and rollback buttons fill the available space, but do not overflow horizontally.\n\n\n",
-      "total_deletions": 4,
-      "total_additions": 4
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "  - src/frontend/components/RollbackButton.jsx\n  - src/frontend/components/CommitButton.jsx\nrequirements: >\n  Make the commit and rollback buttons width smaller.\n  Make the rollback same-height as the commit.\n  Have some space between them.\n  Change the rollback label to \"Roll Back\"\nos: OSX",
-      "after": "  - src/frontend/components/RollbackButton.jsx\n  - src/frontend/components/CommitButton.jsx\nrequirements: >\n  Change the layout so that the commit and rollback buttons\n  fill the available space, but do not overflow horizontally.\nos: OSX",
-      "total_deletions": 4,
-      "total_additions": 2
-    },
-    {
       "filename": "src/frontend/components/ChangeFinalization.jsx",
       "before": "  return (\n    <>\n      <CommitMessageInput />\n      <div className=\"flex justify-between mt-2 space-x-4\">\n        <CommitButton />\n        <RollbackButton />\n      </div>",
       "after": "  return (\n    <>\n      <CommitMessageInput />\n      <div className=\"flex w-full mt-2 space-x-4\">\n        <CommitButton />\n        <RollbackButton />\n      </div>",

@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import re
 import warnings
 import datetime
+import time
 
 #######################################################################
 # Global Variables
@@ -141,6 +142,15 @@ def main():
 
             try:
                 response = requests.get(url=newURL, headers=headers)
+                # Check for rate limit error
+                if response.status_code == 429:
+                    reset_time = int(response.headers.get('X-RateLimit-Reset', 0))
+                    current_time = int(datetime.datetime.now().timestamp())
+                    wait_time = reset_time - current_time + 1  # Add buffer time
+                    print(f"Rate limit exceeded. Waiting for {wait_time} seconds.")
+                    time.sleep(wait_time)  # Wait before retrying
+                    continue  # Retry the request
+
                 if response.status_code == 200:
                     data = response.json()
                 elif response.status_code == 404:
@@ -161,6 +171,9 @@ def main():
                 continue # Don't proceed with invalid data
 
             files = data.get("files", [])
+            if not files:
+             print(f"No files found for commit SHA: {SHA}")
+             continue
             code_diffs = []
 
                 # List of path patterns to exclude
@@ -171,8 +184,20 @@ def main():
                 "packages/", "bin/", "obj/", ".nuget/", "_build/", "deps/",                ".stack-work/", "dist-newstyle/", ".build/", ".deno/", "Package.resolved"
             ]
 
+            # List of file extensions to exclude
+            excluded_files = [".gitignore", ".xml", ".md",".yaml", ".yml" ]
+
             def is_excluded_path(path):
-                return any(part in path for part in excluded_dirs)
+             # Check if the path includes any excluded directories
+             if any(part in path for part in excluded_dirs):
+                 return True
+             # Check if the file has an excluded extension
+             if any(path.endswith(ext) for ext in excluded_files):
+                 return True
+             # Check if the filename starts with a dot (hidden files)
+             if os.path.basename(path).startswith('.'):
+                 return True
+             return False
 
             j = 0
             for file in files:

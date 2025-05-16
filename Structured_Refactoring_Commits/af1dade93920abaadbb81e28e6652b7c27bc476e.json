@@ -71,20 +71,6 @@
       "total_additions": 13
     },
     {
-      "filename": "prompt.md",
-      "before": "      {inputAvailable() ? (\n        'Paste & Execute Change'\n      ) : (\n        <input\n          type=\"text\"\n          class=\"w-full px-2 py-2 bg-white text-black\"\n          placeholder=\"Paste the change here to execute\"\n          value={changeInput()}\n          onInput={(e) => setChangeInput(e.currentTarget.value)}\n\nRequirements:\n\nUse a textarea instead of the text input to prevent losing newline characters. Make it looking single-row.\n\n\n",
-      "after": "      {inputAvailable() ? (\n        'Paste & Execute Change'\n      ) : (\n        <textarea\n          rows=\"1\"\n          class=\"w-full px-2 py-2 bg-white text-black resize-none\"\n          placeholder=\"Paste the change here to execute\"\n          value={changeInput()}\n          onInput={(e) => setChangeInput(e.currentTarget.value)}\n\nRequirements:\n\nWhen the user pastes something to the textarea, also save its content and execute the change.\n\n\n",
-      "total_deletions": 4,
-      "total_additions": 4
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "attention:\n  - src/frontend/components/ExecuteButton.jsx\nrequirements: >\n  Use a textarea instead of the text input to prevent losing newline characters.\n  Make it looking single-row.\nos: OSX",
-      "after": "attention:\n  - src/frontend/components/ExecuteButton.jsx\nrequirements: >\n  When the user pastes something to the textarea, also save its content and execute the change.\nos: OSX",
-      "total_deletions": 2,
-      "total_additions": 1
-    },
-    {
       "filename": "src/frontend/components/ExecuteButton.jsx",
       "before": "  const [inputAvailable, setInputAvailable] = createSignal(true);\n  const [changeInput, setChangeInput] = createSignal('');\n\n  const handleExecuteChange = async () => {\n    let change = changeInput();\n    if (inputAvailable() && navigator.clipboard) {\n      change = await navigator.clipboard.readText();\n    }\n    const response = await executeChange(change);\n    setChange(change);\n    setExecutionResult(response.output);\n    console.log(response.output);\n  };\n\n  // Check if clipboard reading is available\n  createEffect(() => {\n    if (!navigator.clipboard || !navigator.clipboard.readText) {\n        <textarea\n          rows=\"1\"\n          class=\"w-full px-2 py-2 bg-white text-black resize-none\"\n          placeholder=\"Paste the change here to execute\"\n          value={changeInput()}\n          onInput={(e) => setChangeInput(e.currentTarget.value)}\n        />\n      )}\n    </button>",
       "after": "  const [inputAvailable, setInputAvailable] = createSignal(true);\n  const [changeInput, setChangeInput] = createSignal('');\n\n  const handleExecuteChange = async (change) => {\n    const response = await executeChange(change);\n    setChange(change);\n    setExecutionResult(response.output);\n    console.log(response.output);\n  };\n\n  const handlePaste = async (e) => {\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);\n    handleExecuteChange(paste);\n  };\n\n  // Check if clipboard reading is available\n  createEffect(() => {\n    if (!navigator.clipboard || !navigator.clipboard.readText) {\n        <textarea\n          rows=\"1\"\n          class=\"w-full px-2 py-2 bg-white text-black resize-none\"\n          placeholder=\"Paste here to execute\"\n          value={changeInput()}\n          onPaste={handlePaste}\n        />\n      )}\n    </button>",

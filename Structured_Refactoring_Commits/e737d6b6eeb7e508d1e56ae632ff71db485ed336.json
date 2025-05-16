@@ -85,27 +85,6 @@
       "total_additions": 2
     },
     {
-      "filename": "prompt.md",
-      "before": "# Working set\n\n```\n./\n\u251c\u2500\u2500 .DS_Store\n\u251c\u2500\u2500 .git/...\n\u251c\u2500\u2500 .github/...\n\u251c\u2500\u2500 .gitignore\n\u251c\u2500\u2500 .vscode/...\n\u251c\u2500\u2500 README.md\n\u251c\u2500\u2500 change.sh\n\u251c\u2500\u2500 doc/...\n\u251c\u2500\u2500 integrations/...\n\u251c\u2500\u2500 node_modules/...\n\u251c\u2500\u2500 package-lock.json\n\u251c\u2500\u2500 package.json\n\u251c\u2500\u2500 prompt/...\n\u251c\u2500\u2500 prompt.md\n\u251c\u2500\u2500 prompt.yaml\n\u251c\u2500\u2500 src/...\n\n```\nsrc/frontend/components/GenerateButton.jsx:\n```\nimport { generatePrompt } from '../generatePrompt';\nimport { marked } from 'marked';\nimport copy from 'clipboard-copy';\nimport { setPrompt } from '../stores/prompt';\n\nconst GenerateButton = () => {\n  const handleGeneratePrompt = async () => {\n    const response = await generatePrompt();\n\n    copy(response.prompt)\n      .then(() => {\n        console.log('Prompt copied to clipboard!');\n      })\n      .catch(err => {\n        console.error('Failed to copy prompt: ', err);\n      });\n\n    const htmlPrompt = marked(response.prompt);\n\n    setPrompt(htmlPrompt);\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-blue-500 text-white rounded\" onClick={handleGeneratePrompt}>Generate & Copy Prompt</button>\n  );\n};\n\nexport default GenerateButton;\n\n```\n\n\nRefactor!\n\nUninstall clipboard-copy and use the html5 api directly!\n\n\n# Output Format",
-      "after": "# Working set\n\nsrc/frontend/components/ExecutionResultDisplay.jsx:\n```\nimport { onMount, createEffect, onCleanup } from 'solid-js';\nimport { Terminal } from 'xterm';\nimport 'xterm/css/xterm.css';\nimport { executionResult } from '../stores/executionResult';\n\nconst ExecutionResultDisplay = () => {\n  let container;\n  let term;\n\n  onMount(() => {\n    term = new Terminal({ convertEol: true, rows: 7 });\n    term.open(container);\n  });\n\n  createEffect(() => {\n    if (term && executionResult() !== '') {\n      term.write(executionResult());\n    }\n  });\n\n  onCleanup(() => {\n    if (term) {\n      term.dispose();\n    }\n  });\n\n  return (\n    <div \n      ref={container} \n      class={`rounded overflow-auto max-w-full ${executionResult() !== '' ? 'block' : 'hidden'}`}\n    />\n  );\n};\n\nexport default ExecutionResultDisplay;\n\n```\n\n\nRefactor!\n\nNo interaction is needed, so xterm.js is too heavyweight.\nUninstall it and rewrite ExecutionResultDisplay to use a div\nbut still handle ansi color codes!\n\n\n\n## Project Specifics\n\n- Every js file should *only export a single function*!\n- Use *ES6 imports*!\n- Prefer *async/await* over promises!\n- The frontend uses *Solidjs*, edit .jsx file accordingly\n\n\n# Output Format",
-      "total_deletions": 45,
-      "total_additions": 43
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/refactor/custom.md\nattention:\n  - ./\n  - src/frontend/components/GenerateButton.jsx\nrequirements: |\n  Uninstall clipboard-copy and use the html5 api directly!\nos: OSX",
-      "after": "task: prompt/task/refactor/custom.md\nattention:\n  - src/frontend/components/ExecutionResultDisplay.jsx\nrequirements: |\n  No interaction is needed, so xterm.js is too heavyweight.\n  Uninstall it and rewrite ExecutionResultDisplay to use a div\n  but still handle ansi color codes!\nos: OSX",
-      "total_deletions": 3,
-      "total_additions": 4
-    },
-    {
-      "filename": "prompt/task/refactor/custom.md",
-      "before": "Refactor!\n\n<%= requirements %>",
-      "after": "Refactor!\n<%= requirements %>\n\n<%= projectSpecifics %>",
-      "total_deletions": 1,
-      "total_additions": 3
-    },
-    {
       "filename": "src/frontend/components/ExecutionResultDisplay.jsx",
       "before": "import { onMount, createEffect, onCleanup } from 'solid-js';\nimport { Terminal } from 'xterm';\nimport 'xterm/css/xterm.css';\nimport { executionResult } from '../stores/executionResult';\n\nconst ExecutionResultDisplay = () => {\n  let container;\n  let term;\n\n  onMount(() => {\n    term = new Terminal({ convertEol: true, rows: 7 });\n    term.open(container);\n  });\n\n  createEffect(() => {\n    if (term && executionResult() !== '') {\n      term.write(executionResult());\n    }\n  });\n\n  onCleanup(() => {\n    if (term) {\n      term.dispose();\n    }\n  });\n",
       "after": "import { createEffect } from 'solid-js';\nimport { executionResult } from '../stores/executionResult';\nimport ansi_up from 'ansi_up';\n\nconst ExecutionResultDisplay = () => {\n  let container;\n\n  createEffect(() => {\n    if (container && executionResult() !== '') {\n      const ansi_up_instance = new ansi_up();\n      const convertedHtml = ansi_up_instance.ansi_to_html(executionResult()).replace(/\\n/g, '<br />');\n      container.innerHTML = convertedHtml;\n    }\n  });\n",

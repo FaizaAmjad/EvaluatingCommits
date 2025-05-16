@@ -47,20 +47,6 @@
       "total_additions": 59
     },
     {
-      "filename": "prompt.md",
-      "before": "\n```\n\nsrc/frontend/components/TitleDisplay.jsx: err!\n\n\n# Task\n\nRequirements:\n\nRename TitleDisplay to NavBar!\nEliminate the signal, use a constant instead.\nAdd a subtitle: &#34;Your AI contributor&#34;.\nThe subtitle should be visibly clickable and link to https://github.com/tisztamo/Junior\n\n\n",
-      "after": "\n```\n\ntailwind.config.js:\n```\nmodule.exports = {\n  content: ['./src/**/*.html', './src/**/*.js', './src/**/*.jsx', './src/**/*.tsx', './src/**/*.ts'],\n  theme: {\n    screens: {\n      'sm': '640px',\n      'md': '768px',\n      'lg': '1024px',\n      'xl': '1280px',\n      '2xl': '1536px',\n    },\n    extend: {\n      // Extend the spacing for larger gaps\n      spacing: {\n        '72': '18rem',\n        '84': '21rem',\n        '96': '24rem',\n        '128': '32rem',\n      },\n      // Extend the button styles for larger buttons\n      fontSize: {\n        'btn': '1.5rem',\n      },\n      padding: {\n        'btn': '1.5rem',\n      },\n      // Extend the maxWidth for desktop container\n      maxWidth: {\n        'desktop': '1000px',\n      },\n    },\n  },\n  variants: {\n    extend: {},\n  },\n  plugins: [],\n}\n\n```\n\nsrc/frontend/index.jsx:\n```\nimport \"./styles/styles.css\";\nimport { render } from 'solid-js/web';\nimport App from './App';\n\nrender(App, document.getElementById('app'));\n\n```\n\nsrc/index.html:\n```\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Junior</title>\n</head>\n<body>\n  <div id=\"app\"></div>\n  <script type=\"module\" src=\"/frontend/index.jsx\"></script>\n</body>\n</html>\n\n```\n\n\n# Task\n\nRequirements:\n\nOn desktop, center the content on the screen (currently it is on the left) and change max width to 640px.\n\n\n",
-      "total_deletions": 5,
-      "total_additions": 67
-    },
-    {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - src/frontend/components/TitleDisplay.jsx\nrequirements: >\n  Rename TitleDisplay to NavBar!\n\n  Eliminate the signal, use a constant instead.\n\n  Add a subtitle: \"Your AI contributor\".\n\n  The subtitle should be visibly clickable and link to\n  https://github.com/tisztamo/Junior\n",
-      "after": "task: prompt/task/feature/implement.md\nattention:\n  - src/frontend/App.jsx\n  - tailwind.config.js\n  - src/frontend/index.jsx\n  - src/index.html\nrequirements: >\n  On desktop, center the content on the screen (currently it is on the left)\n  and change max width to 640px.",
-      "total_deletions": 9,
-      "total_additions": 5
-    },
-    {
       "filename": "src/frontend/App.jsx",
       "before": "\nconst App = () => {\n  return (\n    <div class=\"lg:m-8 m-4 flex flex-col items-center space-y-8 sm:p-0 lg:max-w-desktop mx-auto\">\n      <NavBar />\n      <TasksList />\n      <PromptDescriptor />",
       "after": "\nconst App = () => {\n  return (\n    <div class=\"lg:mx-auto lg:w-desktop m-4 flex flex-col items-center space-y-8 sm:p-0\">\n      <NavBar />\n      <TasksList />\n      <PromptDescriptor />",
