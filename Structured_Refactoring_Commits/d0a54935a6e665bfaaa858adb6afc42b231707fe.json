@@ -111,25 +111,11 @@
   },
   "code": [
     {
-      "filename": "game.js",
-      "before": "        var picks = this.getPicks();\n        picks[contestName] = rikishi;\n        localStorage.setItem(this.user, JSON.stringify(picks));\n    }\n\n    initialize() {\n        var userElement = document.querySelector('#user');\n        if (userElement) {\n            userElement.textContent = 'Current user: ' + this.user;\n        }\n    }\n}\n",
-      "after": "        var picks = this.getPicks();\n        picks[contestName] = rikishi;\n        localStorage.setItem(this.user, JSON.stringify(picks));\n        this.provideFeedback('Backfilled results for ' + contestName + ' with ' + rikishi); // Provide feedback\n        this.displayBackfilledResults(); // Display the updated results\n    }\n\n    displayBackfilledResults() {\n        var picks = this.getPicks();\n        var resultsElement = document.querySelector('#backfilledResults');\n\n        // Clear previous results\n        resultsElement.textContent = '';\n\n        // Display each contest result\n        for (var contest in picks) {\n            var rikishi = picks[contest];\n            var resultText = document.createTextNode(contest + ': ' + rikishi);\n            var resultDiv = document.createElement('div');\n            resultDiv.appendChild(resultText);\n            resultsElement.appendChild(resultDiv);\n        }\n    }\n\n    provideFeedback(message) {\n        document.querySelector('#feedback').textContent = message;\n    }\n\n    initialize() {\n        var userElement = document.querySelector('#user');\n        if (userElement) {\n            userElement.textContent = 'Current user: ' + this.user;\n        }\n        this.displayBackfilledResults(); // Display the initial results\n    }\n}\n",
+      "filename": "",
+      "before": "",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 24
-    },
-    {
-      "filename": "game.test.js",
-      "before": "        <input id=\"userSwitch\" type=\"text\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n    `;\n    game = new Game();\n});\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n\n// More tests for switchUser() and backfillResults()...\n",
-      "after": "        <input id=\"userSwitch\" type=\"text\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n        <div id=\"backfilledResults\"></div>\n        <p id=\"feedback\"></p>\n    `;\n    game = new Game();\n});\n    expect(result).toBe(\"You selected: 1\\nPrevious Picks: {\\\"July 2023\\\":\\\"1\\\"}\");\n});\n\ntest('check if switchUser updates the user in UI', () => {\n    document.querySelector('#userSwitch').value = 'newUser';\n    game.switchUser();\n    expect(document.querySelector('#user').textContent).toBe('Current user: newUser');\n});\n\ntest('check if backfillResults updates the results in UI', () => {\n    document.querySelector('#backfillContest').value = 'May 2023';\n    document.querySelector('#backfillRikishi').value = '2';\n    game.backfillResults();\n    let resultsElement = document.querySelector('#backfilledResults');\n    expect(resultsElement.textContent).toContain('May 2023: 2');\n});",
-      "total_deletions": 1,
-      "total_additions": 15
-    },
-    {
-      "filename": "index.html",
-      "before": "    </select>\n    <button id=\"startPlayingButton\">Start Playing</button>\n    <hr>\n    <h2>Admin Panel</h2>\n    <p>Switch user:</p>\n    <input id=\"userSwitch\" type=\"text\">\n    <input id=\"backfillContest\" type=\"text\" placeholder=\"Enter contest name\">\n    <input id=\"backfillRikishi\" type=\"text\" placeholder=\"Enter rikishi selection\">\n    <button id=\"backfillResultsButton\">Backfill Results</button>\n    <!-- Link to the external JavaScript file -->\n    <script type=\"module\" src=\"game.js\"></script>\n</body>",
-      "after": "    </select>\n    <button id=\"startPlayingButton\">Start Playing</button>\n    <hr>\n    <h2>Backfilled Results:</h2>\n    <div id=\"backfilledResults\"></div>\n    <h2>Admin Panel</h2>\n    <p>Switch user:</p>\n    <input id=\"userSwitch\" type=\"text\">\n    <input id=\"backfillContest\" type=\"text\" placeholder=\"Enter contest name\">\n    <input id=\"backfillRikishi\" type=\"text\" placeholder=\"Enter rikishi selection\">\n    <button id=\"backfillResultsButton\">Backfill Results</button>\n    <p id=\"feedback\"></p>\n    <!-- Link to the external JavaScript file -->\n    <script type=\"module\" src=\"game.js\"></script>\n</body>",
-      "total_deletions": 0,
-      "total_additions": 3
+      "total_additions": 0
     }
   ]
 }

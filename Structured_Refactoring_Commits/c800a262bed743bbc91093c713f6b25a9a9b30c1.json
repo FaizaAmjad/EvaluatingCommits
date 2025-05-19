@@ -40,18 +40,11 @@
   },
   "code": [
     {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\nset -e\ngoal=\"Create a command to delete git branches\"\necho \"Plan:\"\necho \"1. Create a new file deleteBranchesCommand.js in ./scripts/ to encapsulate the deleteBranches function as a command-line utility.\"\necho \"2. Modify package.json to add the new command.\"\n\n# Step 1: Create deleteBranchesCommand.js file in ./scripts/\ncat > ./scripts/deleteBranchesCommand.js << 'EOF'\nimport deleteBranches from '../src/git/deleteBranches.js';\n\nconst exceptions = process.argv.slice(2);\n\nasync function run() {\n  try {\n    await deleteBranches(exceptions);\n    console.log('Branches deleted successfully.');\n  } catch (err) {\n    console.error(`An error occurred while deleting branches: ${err}`);\n    process.exit(1);\n  }\n}\n\nrun();\nEOF\n\n# Step 2: Modify package.json to add the new command\njq '.scripts += {\"delete-branches\": \"node ./scripts/deleteBranchesCommand.js\"}' ./package.json > ./package.json.tmp && mv ./package.json.tmp ./package.json\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Rename deleteBranches to clearBranches and move files\"\necho \"Plan:\"\necho \"1. Rename deleteBranches.js to clearBranches.js and update references.\"\necho \"2. Rename import deleteBranches in deleteBranchesCommand.js to import clearBranches.\"\necho \"3. Update all corresponding references and paths to make sure nothing breaks.\"\n\n# Rename deleteBranches.js to clearBranches.js\nmv src/git/deleteBranches.js src/git/clearBranches.js\n\n# Update the import statement in deleteBranchesCommand.js\ncat > src/git/deleteBranchesCommand.js <<EOF\nimport clearBranches from './clearBranches';\n\nconst exceptions = process.argv.slice(2);\n\nasync function run() {\n  try {\n    await clearBranches(exceptions);\n    console.log('Branches deleted successfully.');\n  } catch (err) {\n    console.error(\\`An error occurred while deleting branches: \\${err}\\`);\n    process.exit(1);\n  }\n}\n\nrun();\n\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "total_deletions": 11,
-      "total_additions": 13
-    },
-    {
-      "filename": "src/git/deleteBranchesCommand.js",
-      "before": "import deleteBranches from './deleteBranches';\n\nconst exceptions = process.argv.slice(2);\n\nasync function run() {\n  try {\n    await deleteBranches(exceptions);\n    console.log('Branches deleted successfully.');\n  } catch (err) {\n    console.error(`An error occurred while deleting branches: ${err}`);\n}\n\nrun();\n",
-      "after": "import clearBranches from './clearBranches';\n\nconst exceptions = process.argv.slice(2);\n\nasync function run() {\n  try {\n    await clearBranches(exceptions);\n    console.log('Branches deleted successfully.');\n  } catch (err) {\n    console.error(`An error occurred while deleting branches: ${err}`);\n}\n\nrun();\n",
-      "total_deletions": 2,
-      "total_additions": 3
+      "filename": "",
+      "before": "",
+      "after": "",
+      "total_deletions": 0,
+      "total_additions": 0
     }
   ]
 }

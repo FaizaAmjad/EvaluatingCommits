@@ -124,18 +124,11 @@
   },
   "code": [
     {
-      "filename": "examples/resources/storyblok_component/resource.tf",
+      "filename": "",
       "before": "",
-      "after": "// simple example\nresource \"storyblok_component\" \"banner\" {\n  name     = \"my-banner\"\n  space_id = \"<my-space-id>\"\n  schema = {\n\n    title = {\n      type     = \"text\"\n      position = 1\n    }\n\n    intro = {\n      type     = \"text\"\n      position = 2\n    }\n\n    image = {\n      type     = \"image\"\n      position = 3\n    }\n  }\n}\n\n\n// advanced example\nresource \"storyblok_component\" \"advanced_component\" {\n  name     = \"advanced-component\"\n  space_id = \"<my-space-id>\"\n  is_root = true\n  is_nestable = false\n\n  schema = {\n    title = {\n      type     = \"text\"\n      position = 1\n      required = true // The field is required. Default is false.\n      max_length = 200 // Set the max length of the input string\n      description = \"Title of the component\" // Description shown in the editor interface\n    }\n\n    introduction = {\n      type     = \"rich_text\"\n      position = 2\n      rich_markdown = true // Enable rich markdown view by default\n      description = \"Introduction text with rich text editor\"\n    }\n\n    image = {\n      type     = \"image\"\n      position = 3\n      asset_folder_id = 1 // Default asset folder numeric id to store uploaded image of that field\n      add_https = true // Prepends https: to stop usage of relative protocol\n      image_crop = true // Activate force crop for images\n    }\n\n    release_date = {\n      type     = \"date\"\n      position = 4\n      disable_time = true // Disables time selection from date picker\n      description = \"Release date of the content\"\n    }\n\n    tags = {\n      type     = \"multi_option\"\n      position = 5\n      datasource_slug = \"tags\" // Define selectable datasources string\n      description = \"Tags for the component\"\n    }\n\n    rating = {\n      type     = \"number\"\n      position = 6\n      description = \"Rating of the content\"\n      default_value = \"3\" // Default value for the field\n    }\n\n    content = {\n      type     = \"bloks\"\n      position = 7\n      component_whitelist = [\"text\", \"image\", \"video\"] // Array of component/content type names\n      maximum = 10 // Maximum amount of added bloks in this blok field\n      description = \"Content blocks\"\n    }\n  }\n}",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 85
-    },
-    {
-      "filename": "examples/resources/storyblok_component_group/resource.tf",
-      "before": "",
-      "after": "resource \"storyblok_component_group\" \"my_component_group\" {\n  space_id = \"<my-space-id>\"\n  name     = \"my-component-group\"\n}\n\nresource \"storyblok_component\" \"component1\" {\n  name     = \"component1\"\n  space_id = storyblok_component_group.my_component_group.space_id\n  component_group_uuid = storyblok_component_group.my_component_group.uuid\n\n  schema = {\n    field1 = {\n      type     = \"text\"\n      position = 1\n    }\n  }\n}\n\nresource \"storyblok_component\" \"component2\" {\n  name     = \"component2\"\n  space_id = storyblok_component_group.my_component_group.space_id\n  component_group_uuid = storyblok_component_group.my_component_group.uuid\n\n  schema = {\n    field1 = {\n      type     = \"image\"\n      position = 1\n    }\n  }\n}",
-      "total_deletions": 0,
-      "total_additions": 30
+      "total_additions": 0
     }
   ]
 }

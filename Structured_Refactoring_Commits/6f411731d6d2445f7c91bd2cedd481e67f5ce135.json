@@ -52,32 +52,11 @@
   },
   "code": [
     {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\nset -e\ngoal=\"Fix getPromptDirectories function\"\necho \"Plan:\"\necho \"1. Edit src/prompt/getPromptDirectories.js to use import.meta to get the directory of the source file\"\necho \"2. Adjust the function to generate directories relative to the project root and the working directory\"\n\ncat << 'EOF' > src/prompt/getPromptDirectories.js\nimport path from 'path';\nimport url from 'url';\n\nconst __filename = url.fileURLToPath(import.meta.url);\nconst __dirname = path.dirname(__filename);\n\nconst getPromptDirectories = () => {\n  const rootDir = path.resolve();\n  const workingDir = process.cwd();\n  \n  return [\n    path.join(path.resolve(__dirname, '../../'), 'prompt'),\n    path.join(workingDir, 'prompt')\n  ];\n}\n\nexport { getPromptDirectories };\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor prompt.yaml creation and create projectSpecifics.md\"\necho \"Plan:\"\necho \"1. Create src/prompt/createPromptYaml.js with its necessary function\"\necho \"2. Create src/prompt/createProjectSpecifics.js with its necessary function\"\necho \"3. Refactor src/init.js to use these new functions\"\n\n# Step 1: Create src/prompt/createPromptYaml.js\ncat << 'EOF' > ./src/prompt/createPromptYaml.js\nimport { writeFileSync } from 'fs';\n\nexport function createPromptYaml() {\n  const yamlContent = `task: prompt/task/feature/implement.md\nattention:\n  - ./\nrequirements: Create a Hello World in Node.js`;\n\n  writeFileSync('prompt.yaml', yamlContent);\n}\nEOF\n\n# Step 2: Create src/prompt/createProjectSpecifics.js\ncat << 'EOF' > ./src/prompt/createProjectSpecifics.js\nimport { writeFileSync } from 'fs';\n\nexport function createProjectSpecifics() {\n  const markdownContent = `## Project Specifics\\n`;\n\n  writeFileSync('./prompt/projectSpecifics.md', markdownContent);\n}\nEOF\n\n# Step 3: Refactor src/init.js to use these new functions\ncat << 'EOF' > ./src/init.js\n#!/usr/bin/env node\nimport { execSync } from 'child_process';\nimport { join } from 'path';\nimport { createPromptYaml } from './prompt/createPromptYaml.js';\nimport { createProjectSpecifics } from './prompt/createProjectSpecifics.js';\nimport { createGitignore } from './git/createGitignore.js';\n\nasync function juniorInit() {\n  execSync('git init', { stdio: 'inherit' });\n\n  createGitignore();\n\n  execSync('git add .gitignore', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });\n\n  createPromptYaml();\n  createProjectSpecifics();\n\n  console.log('\\x1b[32mRepo initialized for Junior development\\x1b[0m');\n}\n\njuniorInit();\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "total_deletions": 20,
-      "total_additions": 52
-    },
-    {
-      "filename": "src/init.js",
-      "before": "#!/usr/bin/env node\nimport { execSync } from 'child_process';\nimport { writeFileSync } from 'fs';\nimport { join } from 'path';\nimport { createGitignore } from './git/createGitignore.js';\n\nfunction juniorInit() {\n  execSync('git init', { stdio: 'inherit' });\n\n  createGitignore();\n\n  execSync('git add .gitignore', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });\n\n  const yamlContent = `task: prompt/task/feature/implement.md\nattention:\n  - ./\nrequirements: Create a Hello World in Node.js`;\n\n  writeFileSync('prompt.yaml', yamlContent);\n\n  console.log('\\x1b[32mRepo initialized for Junior development\\x1b[0m');\n}",
-      "after": "#!/usr/bin/env node\nimport { execSync } from 'child_process';\nimport { join } from 'path';\nimport { createPromptYaml } from './prompt/createPromptYaml.js';\nimport { createProjectSpecifics } from './prompt/createProjectSpecifics.js';\nimport { createGitignore } from './git/createGitignore.js';\n\nasync function juniorInit() {\n  execSync('git init', { stdio: 'inherit' });\n\n  createGitignore();\n\n  execSync('git add .gitignore', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });\n\n  createPromptYaml();\n  createProjectSpecifics();\n\n  console.log('\\x1b[32mRepo initialized for Junior development\\x1b[0m');\n}",
-      "total_deletions": 8,
-      "total_additions": 5
-    },
-    {
-      "filename": "src/prompt/createProjectSpecifics.js",
+      "filename": "",
       "before": "",
-      "after": "import { writeFileSync } from 'fs';\n\nexport function createProjectSpecifics() {\n  const markdownContent = `## Project Specifics\\n`;\n\n  writeFileSync('./prompt/projectSpecifics.md', markdownContent);\n}",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 7
-    },
-    {
-      "filename": "src/prompt/createPromptYaml.js",
-      "before": "",
-      "after": "import { writeFileSync } from 'fs';\n\nexport function createPromptYaml() {\n  const yamlContent = `task: prompt/task/feature/implement.md\nattention:\n  - ./\nrequirements: Create a Hello World in Node.js`;\n\n  writeFileSync('prompt.yaml', yamlContent);\n}",
-      "total_deletions": 0,
-      "total_additions": 10
+      "total_additions": 0
     }
   ]
 }

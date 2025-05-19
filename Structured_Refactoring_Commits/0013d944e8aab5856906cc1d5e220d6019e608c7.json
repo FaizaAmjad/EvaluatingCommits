@@ -93,39 +93,11 @@
   },
   "code": [
     {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\n# Goal: Implement server and vite start as a single script.\n# Plan:\n# 1. Create new js files: startServer.js and startVite.js under the src directory.\n# 2. In startServer.js, move the code from server.js that starts the server.\n# 3. In startVite.js, add a code to start vite.\n# 4. Create a new js file web.js under the src directory, which requires startServer.js and startVite.js, thus starting both processes when run.\n# 5. Update the \"start\" script in package.json to use the new web.js file.\n\n# Step 1: Create startServer.js and startVite.js files under the src directory.\n\ncat << EOF > ./src/startServer.js\nimport { startServer as startBackendServer } from './backend/server.js';\n\nexport function startServer() {\n  startBackendServer();\n}\nEOF\n\ncat << EOF > ./src/startVite.js\nimport { exec } from 'child_process';\n\nexport function startVite() {\n  const vite = exec('vite src --open');\n  vite.stdout.pipe(process.stdout);\n  vite.stderr.pipe(process.stderr);\n\n  process.on('exit', () => vite.kill());\n}\nEOF\n\n# Step 2: Modify server.js to export startServer function.\n\ncat << EOF > ./src/backend/server.js\nimport express from 'express';\nimport cors from 'cors';\nimport { generateHandler, descriptorHandler, taskUpdateHandler } from './handlers.js';\nimport { listTasks } from './listTasks.js';\n\nexport function startServer() {\n  const app = express();\n\n  app.use(cors());\n  app.use(express.json());\n\n  app.get('/descriptor', descriptorHandler);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', taskUpdateHandler);\n\n  app.listen(3000, () => {\n    console.log('Server is running on port 3000');\n  });\n}\nEOF\n\n# Step 3: Create web.js file that starts both the server and vite.\n\ncat << EOF > ./src/web.js\nimport { startServer } from './startServer.js';\nimport { startVite } from './startVite.js';\n\nstartServer();\nstartVite();\nEOF\n\n# Step 4: Update \"start\" script in package.json to use new web.js file.\n\njq '.scripts.start = \"node src/web.js\"' package.json > package.tmp.json && mv package.tmp.json package.json",
-      "after": "#!/bin/sh\n\n# Goal: Make \"npx junior-web\" start web.js\n# Plan:\n# 1. Modify package.json to add \"junior-web\" command to the bin object and change the \"start\" script.\n# 2. Add shebang to web.js.\n# 3. Make web.js executable.\n\n# Step 1: Modify package.json\njq '.bin += {\"junior-web\": \"src/web.js\"} | .scripts.start = \"node src/web.js\"' package.json > package.json.tmp && mv package.json.tmp package.json\n\n# Step 2: Add shebang to web.js\necho '#!/usr/bin/env node' | cat - src/web.js > temp && mv temp src/web.js\n\n# Step 3: Make web.js executable\nchmod +x src/web.js\n\n#!/bin/sh\n\n# Goal: Fix \"vite: command not found\" error when run from another project\n# Plan:\n# 1. Modify the command in startVite.js to use the local version of vite in this project.\n\n# Step 1: Modify startVite.js\ncat << 'EOF' > src/startVite.js\nimport { exec } from 'child_process';\nimport path from 'path';\n\nexport function startVite() {\n  const projectRoot = path.resolve(__dirname, '..');\n  const vite = exec(\\`$${projectRoot}/node_modules/.bin/vite src --open\\`);\n  vite.stdout.pipe(process.stdout);\n  vite.stderr.pipe(process.stderr);\n\n  process.on('exit', () => vite.kill());\n}\nEOF\n",
-      "total_deletions": 55,
-      "total_additions": 22
-    },
-    {
-      "filename": "package.json",
-      "before": "  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"junior\": \"src/main.js\",\n    \"junior-web\": \"npm start\"\n  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",",
-      "after": "  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"junior\": \"src/main.js\",\n    \"junior-web\": \"src/web.js\"\n  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/backend/server.js",
-      "before": "import { listTasks } from './listTasks.js';\n\nexport function startServer() {\n  const app = express();\n\n  app.use(cors());",
-      "after": "import { listTasks } from './listTasks.js';\n\nexport function startServer() {\n  console.log(process.cwd())\n  const app = express();\n\n  app.use(cors());",
+      "filename": "",
+      "before": "",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/startVite.js",
-      "before": "import { exec } from 'child_process';\n\nexport function startVite() {\n  const vite = exec('vite src --open');\n  vite.stdout.pipe(process.stdout);\n  vite.stderr.pipe(process.stderr);\n",
-      "after": "import { exec } from 'child_process';\nimport path from 'path';\nimport { fileURLToPath } from 'url';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\nconst projectRoot = path.resolve(__dirname, '..');\n\nexport function startVite() {\n  const vite = exec(`${projectRoot}/node_modules/.bin/vite ${projectRoot}/src --open`);\n  vite.stdout.pipe(process.stdout);\n  vite.stderr.pipe(process.stderr);\n",
-      "total_deletions": 1,
-      "total_additions": 6
-    },
-    {
-      "filename": "src/web.js",
-      "before": "import { startServer } from './startServer.js';\nimport { startVite } from './startVite.js';\n",
-      "after": "#!/usr/bin/env node\nimport { startServer } from './startServer.js';\nimport { startVite } from './startVite.js';\n",
-      "total_deletions": 0,
-      "total_additions": 1
+      "total_additions": 0
     }
   ]
 }

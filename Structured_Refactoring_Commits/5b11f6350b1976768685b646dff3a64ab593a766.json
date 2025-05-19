@@ -52,25 +52,11 @@
   },
   "code": [
     {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\n# Goal: Refactor build.js into separate files and pass MarkdownIt as an argument\n# Plan:\n# 1. Rename build.js to buildDoc.js\n# 2. Create a new file, createMarkdownRenderer.js, that handles the creation of MarkdownIt\n# 3. Create a new file, convertDirectory.js, that handles directory conversion\n# 4. Modify convertDirectory.js to accept MarkdownIt as an argument\n\n# Step 1\nmv ./doc/build.js ./doc/buildDoc.js\n\n# Step 2\ncat << EOF > ./doc/createMarkdownRenderer.js\nimport MarkdownIt from 'markdown-it';\nimport hljs from 'highlight.js';\n\nexport default function createMarkdownRenderer() {\n    return new MarkdownIt({\n        html: true,\n        linkify: true,\n        typographer: true,\n        highlight: function (str, lang) {\n            if (lang && hljs.getLanguage(lang)) {\n                try {\n                    return hljs.highlight(str, { language: lang }).value;\n                } catch (__) {}\n            }\n            return ''; \n        }\n    });\n}\nEOF\n\n# Step 3\ncat << EOF > ./doc/convertDirectory.js\nimport { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';\nimport { join, extname } from 'path';\nimport createMarkdownRenderer from './createMarkdownRenderer';\n\nexport default function convertDirectory(dir, md = createMarkdownRenderer()) {\n    const files = readdirSync(dir);\n    files.forEach(file => {\n        const filePath = join(dir, file);\n        const stats = statSync(filePath);\n        if (stats.isDirectory()) {\n            convertDirectory(filePath, md);\n        } else if (extname(file) === '.md') {\n            const markdown = readFileSync(filePath, 'utf8');\n            const html = md.render(markdown);\n            writeFileSync(filePath.replace('.md', '.html'), html);\n        }\n    });\n}\nEOF\n\n# Step 4: Update the buildDoc.js\ncat << EOF > ./doc/buildDoc.js\nimport createMarkdownRenderer from './createMarkdownRenderer';\nimport convertDirectory from './convertDirectory';\n\nconst md = createMarkdownRenderer();\nconvertDirectory('./doc', md);\nEOF\n",
-      "after": "#!/bin/sh\n# Goal: Move .js files from doc to src/doc and update package.json accordingly\n# Plan:\n# 1. Create the src/doc directory if it doesn't exist.\n# 2. Move all .js files from doc to src/doc using the mv command. \n# 3. Update the script command in package.json to refer to the new location.\n#    a. Use jq to perform the package.json update. \n# 4. Assumption: there are no name conflicts in src/doc and we do not overwrite existing files.\n\n\n# Create the target directory if it does not exist\nmkdir -p ./src/doc\n\n# Move all JavaScript files\nmv ./doc/*.js ./src/doc/\n\n# Update the \"build:docs\" line in package.json\njq '.scripts[\"build:docs\"] = \"node ./src/doc/buildDoc.js\"' package.json > package.temp.json && mv package.temp.json package.json",
-      "total_deletions": 57,
-      "total_additions": 12
-    },
-    {
-      "filename": "package.json",
-      "before": "    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"build:docs\": \"node ./doc/build.js\"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "after": "    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"build:docs\": \"node ./src/doc/buildDoc.js\"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/doc/buildDoc.js",
-      "before": "import createMarkdownRenderer from './createMarkdownRenderer';\nimport convertDirectory from './convertDirectory';\n\nconst md = createMarkdownRenderer();\nconvertDirectory('./doc', md);",
-      "after": "import convertDirectory from './convertDirectory';\nimport createMarkdownRenderer from './createMarkdownRenderer';\n\nconst md = createMarkdownRenderer();\nconvertDirectory('./doc', md);",
-      "total_deletions": 1,
-      "total_additions": 1
+      "filename": "",
+      "before": "",
+      "after": "",
+      "total_deletions": 0,
+      "total_additions": 0
     }
   ]
 }

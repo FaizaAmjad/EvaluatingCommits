@@ -52,32 +52,11 @@
   },
   "code": [
     {
-      "filename": "operation.sh",
+      "filename": "",
       "before": "",
-      "after": "#!/bin/bash\n\n# Step 1: Rename files\nmv ./current_prompt.yaml ./prompt.yaml\nmv ./current_prompt.md ./prompt.md\n\n# Step 2: Update dependencies\nsed -i '' -e 's/current_prompt\\.yaml/prompt.yaml/g' ./src/prompt/createPrompt.js\nsed -i '' -e 's/current_prompt\\.md/prompt.md/g' ./src/prompt/processPrompt.js\n\necho \"Files renamed and dependencies updated successfully.\"",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 11
-    },
-    {
-      "filename": "package.json",
-      "before": "  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/server.js --prompt=current_prompt.yaml -s & vite src --open \"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "after": "  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/server.js --prompt=prompt.yaml -s & vite src --open \"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/prompt/createPrompt.js",
-      "before": "const readFile = util.promisify(fs.readFile);\n\nconst createPrompt = async (userInput) => {\n  const promptDescriptor = yaml.load(await readFile(getPromptFlag() || \"current_prompt.yaml\", \"utf8\"));\n  let templateVars = extractTemplateVars(promptDescriptor);\n\n  templateVars = await resolveTemplateVariables(templateVars);",
-      "after": "const readFile = util.promisify(fs.readFile);\n\nconst createPrompt = async (userInput) => {\n  const promptDescriptor = yaml.load(await readFile(getPromptFlag() || \"prompt.yaml\", \"utf8\"));\n  let templateVars = extractTemplateVars(promptDescriptor);\n\n  templateVars = await resolveTemplateVariables(templateVars);",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/prompt/promptProcessing.js",
-      "before": "import { createPrompt } from './createPrompt.js';\nimport fs from 'fs/promises';\n\nconst processPrompt = async (task, last_command_result, saveto = 'current_prompt.md', parent_message_id = null) => {\n  const { prompt, saveto: newSaveto } = await createPrompt(task, last_command_result);\n  await fs.writeFile(newSaveto || saveto, prompt);\n  return { prompt, parent_message_id };",
-      "after": "import { createPrompt } from './createPrompt.js';\nimport fs from 'fs/promises';\n\nconst processPrompt = async (task, last_command_result, saveto = 'prompt.md', parent_message_id = null) => {\n  const { prompt, saveto: newSaveto } = await createPrompt(task, last_command_result);\n  await fs.writeFile(newSaveto || saveto, prompt);\n  return { prompt, parent_message_id };",
-      "total_deletions": 1,
-      "total_additions": 1
+      "total_additions": 0
     }
   ]
 }

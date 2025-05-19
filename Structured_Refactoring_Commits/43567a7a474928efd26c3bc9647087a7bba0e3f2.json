@@ -115,11 +115,11 @@
   },
   "code": [
     {
-      "filename": "src/common/Hero.js",
-      "before": "import React from 'react';\nimport Container from \"./Container/Container\";\nimport {ThemeContext} from \"../themeContext\";\nimport Heading from \"./Heading\";\nimport {toJS} from 'mobx';\nimport style from './Hero.module.scss';\n\nclass Hero extends React.Component {\n  render() {\n    const themeContext = this.context;\n\n    const classes = [style.Hero];\n\n    if (themeContext.theme === 'dark') {\n      classes.push(style.Hero_dark);\n    } else {\n      classes.push(style.Hero_light);\n    }\n\n    return (\n      <div className={classes.join(' ')}>\n        <Container>\n          <div className={style.Hero__cols}>\n            <div className={[style.Hero__col, style.Hero__col_content].join(' ')}>\n              <Heading variant='h2' theme={themeContext.theme} className={style.Hero__heading}>\n                {this.props.heading}\n              </Heading>\n              <p className={style.Hero__description}>\n                {this.props.description}\n              </p>\n            </div>\n            <div className={[style.Hero__col, style.Hero__col_img].join(' ')}>\n              <img\n                className={style.Hero__img}\n                 src={this.props.heroImage.fields.url || this.props.heroImage.fields.image.fields.file.url}\n                 alt={this.props.heroImage.fields.name}\n              />\n            </div>\n          </div>\n        </Container>\n      </div>\n    )\n  }\n}\n\nHero.contextType = ThemeContext;\n\nexport default Hero;",
-      "after": "import React, { useContext } from 'react';\nimport Container from \"./Container/Container\";\nimport { ThemeContext } from \"../themeContext\";\nimport Heading from \"./Heading\";\nimport style from './Hero.module.scss';\n\nconst Hero = ({ heading, description, heroImage }) => {\n  const themeContext = useContext(ThemeContext);\n\n  const classes = [style.Hero];\n\n  if (themeContext.theme === 'dark') {\n    classes.push(style.Hero_dark);\n  } else {\n    classes.push(style.Hero_light);\n  }\n\n  const imageUrl = heroImage.fields.url || heroImage.fields.image.fields.file.url;\n  const imageAlt = heroImage.fields.name;\n\n  return (\n    <div className={classes.join(' ')}>\n      <Container>\n        <div className={style.Hero__cols}>\n          <div className={`${style.Hero__col} ${style.Hero__col_content}`}>\n            <Heading variant='h2' theme={themeContext.theme} className={style.Hero__heading}>\n              {heading}\n            </Heading>\n            <p className={style.Hero__description}>\n              {description}\n            </p>\n          </div>\n          <div className={`${style.Hero__col} ${style.Hero__col_img}`}>\n            <img\n              className={style.Hero__img}\n              src={imageUrl}\n              alt={imageAlt}\n            />\n          </div>\n        </div>\n      </Container>\n    </div>\n  );\n};\nexport default Hero;",
-      "total_deletions": 39,
-      "total_additions": 37
+      "filename": "",
+      "before": "",
+      "after": "",
+      "total_deletions": 0,
+      "total_additions": 0
     }
   ]
 }

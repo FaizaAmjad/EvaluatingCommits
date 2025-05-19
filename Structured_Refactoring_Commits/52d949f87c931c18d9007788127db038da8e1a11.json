@@ -40,32 +40,11 @@
   },
   "code": [
     {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\n# Goal: Reset git repository while preserving prompt.yaml\n# Plan:\n# 1. Create a new directory named 'git' to hold git related utility scripts.\n# 2. Install the 'simple-git' npm package to interact with the git commands.\n# 3. In 'git', create a new JavaScript file named 'resetGit.js' that will implement the required function. \n#    This function will make use of the 'simple-git' package to execute git commands.\n#    a. Stash the changes of prompt.yaml file to keep them safe.\n#    b. Clean the repository and reset to the latest commit.\n#    c. Pop the stashed changes to restore the changes made to the prompt.yaml file.\n\nmkdir -p git\n\n# Install the simple-git npm package\nnpm install simple-git\n\ncat << EOF > git/resetGit.js\nimport git from 'simple-git';\n\nexport default async function resetGit() {\n  const gitInstance = git();\n\n  // Stash changes in prompt.yaml\n  await gitInstance.add('./prompt.yaml');\n  await gitInstance.stash();\n\n  // Clean the repository and reset to the latest commit\n  await gitInstance.stash(['pop']);\n}\nEOF\n",
-      "after": "#!/bin/sh\n# Goal: Move git to src and create route to resetGit\n# Plan:\n# 1. Move the git directory to the src directory.\n# 2. Update the file paths in resetGit.js to reflect this change.\n# 3. In setupRoutes.js, create a new route '/reset' that calls resetGit.\n# 4. Create a new file resetGitHandler.js in src/backend/handlers which exports a function that calls resetGit.\n\nmv ./git ./src/git\n\ncat > ./src/git/resetGit.js <<- 'EOF'\nimport git from 'simple-git';\n\nexport default async function resetGit() {\n  const gitInstance = git();\n\n  // Stash changes in prompt.yaml\n  await gitInstance.add('./src/prompt.yaml');\n  await gitInstance.stash();\n\n  // Clean the repository and reset to the latest commit\n  await gitInstance.stash(['pop']);\n}\nEOF\n\ncat > ./src/backend/handlers/resetGitHandler.js <<- 'EOF'\nimport resetGit from '../../git/resetGit.js';\n\nexport default async function resetGitHandler(req, res) {\n  try {\n    await resetGit();\n    res.status(200).send({ message: 'Git successfully reset' });\n  } catch (error) {\n    res.status(500).send({ message: 'Error in resetting Git', error });\n  }\n}\nEOF\n\ncat > ./src/backend/setupRoutes.js <<- 'EOF'\nimport { generateHandler } from './handlers/generateHandler.js';\nimport { servePromptDescriptor } from './handlers/servePromptDescriptor.js';\nimport { updateTaskHandler } from './handlers/updateTaskHandler.js';\nimport { listTasks } from './handlers/listTasks.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport resetGitHandler from './handlers/resetGitHandler.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', updateTaskHandler);\n  app.post('/execute', executeHandler);\n  app.post('/reset', resetGitHandler);\n}\nEOF",
-      "total_deletions": 14,
-      "total_additions": 40
-    },
-    {
-      "filename": "src/backend/handlers/resetGitHandler.js",
+      "filename": "",
       "before": "",
-      "after": "import resetGit from '../../git/resetGit.js';\n\nexport default async function resetGitHandler(req, res) {\n  try {\n    await resetGit();\n    res.status(200).send({ message: 'Git successfully reset' });\n  } catch (error) {\n    res.status(500).send({ message: 'Error in resetting Git', error });\n  }\n}",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 10
-    },
-    {
-      "filename": "src/backend/setupRoutes.js",
-      "before": "import { updateTaskHandler } from './handlers/updateTaskHandler.js';\nimport { listTasks } from './handlers/listTasks.js';\nimport { executeHandler } from './handlers/executeHandler.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', updateTaskHandler);\napp.post('/execute', executeHandler);\n}",
-      "after": "import { updateTaskHandler } from './handlers/updateTaskHandler.js';\nimport { listTasks } from './handlers/listTasks.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport resetGitHandler from './handlers/resetGitHandler.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', updateTaskHandler);\n  app.post('/execute', executeHandler);\n  app.post('/reset', resetGitHandler);\n}",
-      "total_deletions": 1,
-      "total_additions": 3
-    },
-    {
-      "filename": "src/git/resetGit.js",
-      "before": "  const gitInstance = git();\n\n  // Stash changes in prompt.yaml\n  await gitInstance.add('./prompt.yaml');\n  await gitInstance.stash();\n\n  // Clean the repository and reset to the latest commit",
-      "after": "  const gitInstance = git();\n\n  // Stash changes in prompt.yaml\n  await gitInstance.add('./src/prompt.yaml');\n  await gitInstance.stash();\n\n  // Clean the repository and reset to the latest commit",
-      "total_deletions": 1,
-      "total_additions": 1
+      "total_additions": 0
     }
   ]
 }

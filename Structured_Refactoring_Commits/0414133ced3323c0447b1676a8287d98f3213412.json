@@ -40,25 +40,11 @@
   },
   "code": [
     {
-      "filename": "prompt/history/2023/09/05/13:49_Move and update files/change.sh",
+      "filename": "",
       "before": "",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Move and update files\"\necho \"Plan:\"\necho \"1. Move generatePrompt.js to service directory\"\necho \"2. Update the imports in the moved generatePrompt.js\"\necho \"3. Update imports in handleGeneratePrompt.js\"\n\n# Step 1: Move generatePrompt.js to service directory\nmv src/frontend/generatePrompt.js src/frontend/service/generatePrompt.js\n\n# Step 2: Update the imports in the moved generatePrompt.js\ncat > src/frontend/service/generatePrompt.js << 'EOF'\nimport { getBaseUrl } from '../getBaseUrl';\n\nconst generatePrompt = async (notes) => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/generate`, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ notes, systemPrompt: true })\n  });\n\n  const data = await response.json();\n\n  if (response.status >= 400) {\n    throw new Error(data.error);\n  }\n\n  return data;\n};\n\nexport { generatePrompt };\nEOF\n\n# Step 3: Update imports in handleGeneratePrompt.js\ncat > src/frontend/service/handleGeneratePrompt.js << 'EOF'\nimport { generatePrompt } from './generatePrompt';\nimport { marked } from 'marked';\nimport { setPrompt } from '../model/prompt';\nimport postDescriptor from './postDescriptor';\nimport { requirements } from '../model/requirements';\n\nconst handleGeneratePrompt = async () => {\n  try {\n    await postDescriptor({ requirements: requirements() });\n\n    const response = await generatePrompt();\n\n    navigator.clipboard.writeText(response.prompt)\n      .then(() => {\n        console.log('Prompt copied to clipboard!');\n      })\n      .catch(err => {\n        console.error('Failed to copy prompt: ', err);\n      });\n\n    const htmlPrompt = marked(response.prompt);\n    setPrompt(htmlPrompt);\n  } catch (error) {\n    alert(error.message);\n  }\n};\n\nexport default handleGeneratePrompt;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 68
-    },
-    {
-      "filename": "src/frontend/service/generatePrompt.js",
-      "before": "import { getBaseUrl } from './getBaseUrl';\n\nconst generatePrompt = async (notes) => {\n  const baseUrl = getBaseUrl();",
-      "after": "import { getBaseUrl } from '../getBaseUrl';\n\nconst generatePrompt = async (notes) => {\n  const baseUrl = getBaseUrl();",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/frontend/service/handleGeneratePrompt.js",
-      "before": "import { generatePrompt } from '../generatePrompt';\nimport { marked } from 'marked';\nimport { setPrompt } from '../model/prompt';\nimport postDescriptor from '../service/postDescriptor';\nimport { requirements } from '../model/requirements';\n\nconst handleGeneratePrompt = async () => {",
-      "after": "import { generatePrompt } from './generatePrompt';\nimport { marked } from 'marked';\nimport { setPrompt } from '../model/prompt';\nimport postDescriptor from './postDescriptor';\nimport { requirements } from '../model/requirements';\n\nconst handleGeneratePrompt = async () => {",
-      "total_deletions": 2,
-      "total_additions": 2
+      "total_additions": 0
     }
   ]
 }

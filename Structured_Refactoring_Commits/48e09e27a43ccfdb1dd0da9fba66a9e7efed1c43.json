@@ -40,18 +40,11 @@
   },
   "code": [
     {
-      "filename": "src/interactiveSession/saveAndSendPrompt.js",
-      "before": "import { printNewText } from './printNewText.js';\nimport { handleApiResponse } from './handleApiResponse.js';\nimport { api, rl } from '../config.js';\n\nconst saveAndSendPrompt = async (prompt, task) => {\n  let lastTextLength = 0;\n  const res = await api.sendMessage(prompt, { onProgress: printNewText(lastTextLength) });\n  console.log(\"\\x1b[0m\");\n  const msg = res.text.trim();",
-      "after": "import { getApi, rl } from '../config.js';\nimport { printNewText } from './printNewText.js';\nimport { handleApiResponse } from './handleApiResponse.js';\n\nconst saveAndSendPrompt = async (prompt, task) => {\n  let lastTextLength = 0;\n  const api = await getApi();\n  const res = await api.sendMessage(prompt, { onProgress: printNewText(lastTextLength) });\n  console.log(\"\\x1b[0m\");\n  const msg = res.text.trim();",
-      "total_deletions": 1,
-      "total_additions": 2
-    },
-    {
-      "filename": "src/main.js",
-      "before": "#!/usr/bin/env node\n\nimport { startInteractiveSession } from './interactiveSession/startInteractiveSession.js';\nimport { api, get_model, rl } from './config.js';\n\nconsole.log(\"Welcome to Junior. Model: \" + get_model() + \"\\n\");\n\nstartInteractiveSession(rl, api);\n\nexport { startInteractiveSession };",
-      "after": "#!/usr/bin/env node\n\nimport { startInteractiveSession } from './interactiveSession/startInteractiveSession.js';\nimport { getApi, get_model, rl } from './config.js';\n\n(async () => {\n  console.log(\"Welcome to Junior. Model: \" + get_model() + \"\\n\");\n  const api = await getApi();\n  startInteractiveSession(rl, api);\n})();\n\nexport { startInteractiveSession };",
-      "total_deletions": 4,
-      "total_additions": 6
+      "filename": "",
+      "before": "",
+      "after": "",
+      "total_deletions": 0,
+      "total_additions": 0
     }
   ]
 }

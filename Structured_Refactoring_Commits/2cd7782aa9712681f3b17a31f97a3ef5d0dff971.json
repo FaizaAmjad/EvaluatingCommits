@@ -64,18 +64,11 @@
   },
   "code": [
     {
-      "filename": "user.js",
+      "filename": "",
       "before": "",
-      "after": "export default class User {\n    constructor(name) {\n        this.name = name || this.getStoredUser();\n    }\n\n    getStoredUser() {\n        let user = localStorage.getItem('user');\n        if (!user) {\n            user = 'admin';\n            localStorage.setItem('user', user);\n        }\n        return user;\n    }\n\n    getPicks() {\n        const picks = JSON.parse(localStorage.getItem(this.name));\n        return picks || {};\n    }\n\n    updatePicks(rikishi) {\n        const picks = this.getPicks();\n        const currentContest = new Date().getMonth();\n        if ([0, 2, 4, 6, 8, 10].includes(currentContest)) {\n            const contestName = new Date().toLocaleString('default', { month: 'long' }) + ' ' + new Date().getFullYear();\n            picks[contestName] = rikishi;\n            localStorage.setItem(this.name, JSON.stringify(picks));\n        }\n    }\n\n    backfillResults(contestName, rikishi) {\n        const picks = this.getPicks();\n        picks[contestName] = rikishi;\n        localStorage.setItem(this.name, JSON.stringify(picks));\n    }\n\n    switchUser(newUser) {\n        localStorage.setItem('user', newUser);\n        this.name = newUser;\n    }\n\n    displayBackfilledResults() {\n        const picks = this.getPicks();\n        const resultsElement = document.querySelector('#backfilledResults');\n\n        // Clear previous results\n        resultsElement.textContent = '';\n\n        // Display each contest result\n        for (const contest in picks) {\n            const rikishi = picks[contest];\n            const resultText = document.createTextNode(contest + ': ' + rikishi);\n            const resultDiv = document.createElement('div');\n            resultDiv.appendChild(resultText);\n            resultsElement.appendChild(resultDiv);\n        }\n    }\n}",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 57
-    },
-    {
-      "filename": "user.test.js",
-      "before": "",
-      "after": "import 'jest-localstorage-mock';\nimport User from './user.js';\n\nlet user;\n\nbeforeEach(() => {\n    localStorage.clear();\n    // set localStorage values\n    localStorage.setItem('user', 'testUser');\n    localStorage.setItem('testUser', JSON.stringify({ 'July 2023': '1' }));\n\n    document.body.innerHTML = `\n        <p id=\"user\"></p>\n        <select id=\"rikishi\">\n            <option value=\"1\">Rikishi 1</option>\n            <option value=\"2\">Rikishi 2</option>\n        </select>\n        <button id=\"startPlayingButton\">Start Playing</button>\n        <button id=\"switchUserButton\">Switch User</button>\n        <input id=\"userSwitch\" type=\"text\">\n        <input id=\"backfillContest\" type=\"text\">\n        <input id=\"backfillRikishi\" type=\"text\">\n        <button id=\"backfillResultsButton\">Backfill Results</button>\n        <div id=\"backfilledResults\"></div>\n        <p id=\"feedback\"></p>\n    `;\n    user = new User('testUser');\n});\n\ntest('check if user is defined and picks are correct', () => {\n    const picks = user.getPicks();\n    expect(picks).toEqual({ 'July 2023': '1' });\n});\n\ntest('check if switchUser updates the user correctly', () => {\n    user.switchUser('newUser');\n    expect(localStorage.getItem('user')).toBe('newUser');\n});\n\ntest('check if backfillResults updates the results correctly', () => {\n    user.backfillResults('May 2023', '2');\n    let picks = user.getPicks();\n    expect(picks['May 2023']).toBe('2');\n});",
-      "total_deletions": 0,
-      "total_additions": 44
+      "total_additions": 0
     }
   ]
 }

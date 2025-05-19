@@ -40,25 +40,11 @@
   },
   "code": [
     {
-      "filename": "prompt/history/2023/09/25/17:09_Modify keyword scoring in default query/change.sh",
+      "filename": "",
       "before": "",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Modify keyword scoring in default query\"\necho \"Plan:\"\necho \"1. Create a new constants and utility function file for scoring\"\necho \"2. Modify extractQuery.js to incorporate new weighting mechanism\"\necho \"3. Update relevant imports\"\n\n# Step 1: Create a new file with constants and utility function\ncat > ./src/frontend/service/helpers/scoringConstants.js << 'EOF'\nexport const scoringConstants = {\n    START_SCORE: 1.0,\n    DECREMENT: 0.125,\n    MIN_SCORE: 0.25\n};\n\nexport function getDecreasingScore(index) {\n    const { START_SCORE, DECREMENT, MIN_SCORE } = scoringConstants;\n    let score = START_SCORE - (index * DECREMENT);\n    return score < MIN_SCORE ? MIN_SCORE : score;\n}\nEOF\n\n# Step 2: Modify extractQuery.js to use the new weighting mechanism\ncat > ./src/frontend/service/helpers/extractQuery.js << 'EOF'\nimport { getDecreasingScore } from './scoringConstants';\n\nconst ignoreList = ['and', 'or', 'the'];\n\nexport default function extractQuery(requirements) {\n    return requirements.split(/\\W+/)\n        .filter(word => word.length > 2 && !ignoreList.includes(word.toLowerCase()))\n        .map((word, index) => ({ keyword: word.toLowerCase(), weight: getDecreasingScore(index) }));\n}\nEOF\n\n# No imports need to be updated as we only introduced a new import, and no previously existing ones were changed.\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 39
-    },
-    {
-      "filename": "src/frontend/service/helpers/extractQuery.js",
-      "before": "const ignoreList = ['and', 'or', 'the'];\n\nexport default function extractQuery(requirements) {\n  return requirements.split(/\\W+/)\n    .filter(word => word.length > 2 && !ignoreList.includes(word.toLowerCase()))\n    .map(word => ({ keyword: word.toLowerCase(), weight: 1.0 }));\n}",
-      "after": "import { getDecreasingScore } from './scoringConstants';\n\nconst ignoreList = ['and', 'or', 'the'];\n\nexport default function extractQuery(requirements) {\n    return requirements.split(/\\W+/)\n        .filter(word => word.length > 2 && !ignoreList.includes(word.toLowerCase()))\n        .map((word, index) => ({ keyword: word.toLowerCase(), weight: getDecreasingScore(index) }));\n}",
-      "total_deletions": 3,
-      "total_additions": 5
-    },
-    {
-      "filename": "src/frontend/service/helpers/scoringConstants.js",
-      "before": "",
-      "after": "export const scoringConstants = {\n    START_SCORE: 1.0,\n    DECREMENT: 0.125,\n    MIN_SCORE: 0.25\n};\n\nexport function getDecreasingScore(index) {\n    const { START_SCORE, DECREMENT, MIN_SCORE } = scoringConstants;\n    let score = START_SCORE - (index * DECREMENT);\n    return score < MIN_SCORE ? MIN_SCORE : score;\n}",
-      "total_deletions": 0,
-      "total_additions": 11
+      "total_additions": 0
     }
   ]
 }

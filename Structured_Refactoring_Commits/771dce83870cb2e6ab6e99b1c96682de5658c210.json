@@ -112,11 +112,11 @@
   },
   "code": [
     {
-      "filename": "evals/registry/data/viewport_to_grid_size/samples.jsonl",
+      "filename": "",
       "before": "",
-      "after": "version https://git-lfs.github.com/spec/v1\noid sha256:69bf79df9fb37c115464e1956c770dd2d284e32258590af9bbd611857935b88e\nsize 105171",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 3
+      "total_additions": 0
     }
   ]
 }

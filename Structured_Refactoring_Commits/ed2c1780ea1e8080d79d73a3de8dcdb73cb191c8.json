@@ -40,18 +40,11 @@
   },
   "code": [
     {
-      "filename": "prompt/history/2023/10/02/12:29_Enhance line extraction functionality/change.sh",
+      "filename": "",
       "before": "",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Enhance line extraction functionality\"\necho \"Plan:\"\necho \"1. Modify splitting mechanism to consider '\\\\n' and '\\\\r'.\"\necho \"2. Implement recursion to go back through lines.\"\n\ncat > ./src/frontend/components/terminal/prependAndExtractLastLine.js << 'EOF'\nexport function prependAndExtractLastLine(lastLine, currentData) {\n  const combinedData = `${lastLine}${currentData}`;\n  // Remove ANSI escape codes\n  const cleanedData = combinedData.replace(/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?/g, '');\n\n  // Split on both \\r and \\n but not on \\r\\n\n  const lines = cleanedData.split(/\\r(?!\\n)|\\n/);\n\n  return getValidLastLine(lines);\n}\n\nfunction getValidLastLine(lines) {\n  if (lines.length === 0) return '';\n\n  const lastLine = lines[lines.length - 1].trim();\n  if (lastLine === '' || lastLine.endsWith('$') || lastLine.endsWith('%')) {\n    return getValidLastLine(lines.slice(0, -1));  // recursive call with all but the last line\n  }\n  \n  return lastLine;\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 32
-    },
-    {
-      "filename": "src/frontend/components/terminal/prependAndExtractLastLine.js",
-      "before": "  const combinedData = `${lastLine}${currentData}`;\n  // Remove ANSI escape codes\n  const cleanedData = combinedData.replace(/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?/g, '');\n  const lines = cleanedData.split('\\n');\n  return lines[lines.length - 1];\n}",
-      "after": "  const combinedData = `${lastLine}${currentData}`;\n  // Remove ANSI escape codes\n  const cleanedData = combinedData.replace(/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?/g, '');\n\n  // Split on both \\r and \\n but not on \\r\\n\n  const lines = cleanedData.split(/\\r(?!\\n)|\\n/);\n\n  return getValidLastLine(lines);\n}\n\nfunction getValidLastLine(lines) {\n  if (lines.length === 0) return '';\n\n  const lastLine = lines[lines.length - 1].trim();\n  if (lastLine === '' || lastLine.endsWith('$') || lastLine.endsWith('%')) {\n    return getValidLastLine(lines.slice(0, -1));  // recursive call with all but the last line\n  }\n  \n  return lastLine;\n}",
-      "total_deletions": 2,
-      "total_additions": 16
+      "total_additions": 0
     }
   ]
 }

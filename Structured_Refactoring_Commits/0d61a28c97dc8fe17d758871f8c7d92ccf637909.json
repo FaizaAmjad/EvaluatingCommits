@@ -82,25 +82,11 @@
   },
   "code": [
     {
-      "filename": "game.js",
+      "filename": "",
       "before": "",
-      "after": "function startPlaying() {\n    var rikishi = $('#rikishi').val();\n    // This is where you'd connect to your game logic\n    // For example:\n    // sendRikishiToServer(rikishi);\n    alert(\"You selected: \" + rikishi);\n}",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 7
-    },
-    {
-      "filename": "game.test.js",
-      "before": "",
-      "after": "const { startPlaying } = require('./game');\n\ntest('check if startPlaying is defined', () => {\n  expect(startPlaying).toBeDefined();\n});",
-      "total_deletions": 0,
-      "total_additions": 5
-    },
-    {
-      "filename": "index.html",
-      "before": "<head>\n    <title>Banzuke Surfing Game</title>\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n</head>\n<body>\n    <h1>Welcome to Banzuke Surfing Game!</h1>\n        <!-- more options here -->\n    </select>\n    <button onclick=\"startPlaying()\">Start Playing</button>\n    <script>\n        function startPlaying() {\n            var rikishi = $('#rikishi').val();\n            // This is where you'd connect to your game logic\n            // For example:\n            // sendRikishiToServer(rikishi);\n            alert(\"You selected: \" + rikishi);\n        }\n    </script>\n</body>\n</html>",
-      "after": "<head>\n    <title>Banzuke Surfing Game</title>\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n    <!-- Link to the external CSS file -->\n    <!-- Uncomment this if you have styles to include -->\n    <!-- <link rel=\"stylesheet\" href=\"styles.css\"> -->\n</head>\n<body>\n    <h1>Welcome to Banzuke Surfing Game!</h1>\n        <!-- more options here -->\n    </select>\n    <button onclick=\"startPlaying()\">Start Playing</button>\n    <!-- Link to the external JavaScript file -->\n    <script src=\"game.js\"></script>\n</body>\n</html>",
-      "total_deletions": 9,
-      "total_additions": 5
+      "total_additions": 0
     }
   ]
 }

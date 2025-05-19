@@ -40,25 +40,11 @@
   },
   "code": [
     {
-      "filename": "prompt/history/2023/09/05/14:52_Refactor MultiSelect components/change.sh",
+      "filename": "",
       "before": "",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor MultiSelect components\"\necho \"Plan:\"\necho \"1. Refactor SearchBar.jsx to rename addFirstFilteredItem prop and remove the 'Enter' key check\"\necho \"2. Refactor MultiSelect.jsx to handle the 'Enter' key check and use the new prop name\"\n\n# Step 1: Refactor SearchBar.jsx\ncat > src/frontend/components/MultiSelect/SearchBar.jsx << 'EOF'\nconst SearchBar = (props) => {\n  const handleInputChange = (e) => {\n    props.setSearchValue(e.target.value);\n  };\n\n  return (\n    <input \n      type=\"text\"\n      placeholder=\"Enter space-separated search terms!\"\n      value={props.searchValue()}\n      onInput={handleInputChange}\n      onKeyPress={props.onKeyPress}\n      class=\"border border-gray-300 rounded p-2 w-full bg-emphasize text-emphasize my-2\"\n    />\n  );\n};\n\nexport default SearchBar;\nEOF\n\n# Step 2: Refactor MultiSelect.jsx\ncat > src/frontend/components/MultiSelect/MultiSelect.jsx << 'EOF'\nimport { createSignal, createEffect } from 'solid-js';\nimport SearchBar from './SearchBar';\nimport ResultSet from './ResultSet';\nimport FilteredList from './FilteredList';\nimport computeFilteredList from './computeFilteredList';\n\nconst MultiSelect = (props) => {\n  const [searchValue, setSearchValue] = createSignal('');\n  const [filteredList, setFilteredList] = createSignal([]);\n  const [selectedItems, setSelectedItems] = createSignal([...props.selectedItems]);\n\n  createEffect(() => {\n    const currentQuery = searchValue() || props.defaultQuery();\n    setFilteredList(computeFilteredList(currentQuery, props.availableItems, props.compare, props.itemCount, selectedItems()));\n  });\n\n  const handleKeyPress = (e) => {\n    if (e.key === 'Enter') {\n      const updatedItems = [filteredList()[0], ...selectedItems()];\n      setSelectedItems(updatedItems);\n    }\n  };\n\n  return (\n    <div class=\"w-full bg-emphasize text-emphasize p-2 rounded border border-border\">\n      <ResultSet items={selectedItems()} />\n      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} onKeyPress={handleKeyPress} />\n      <FilteredList items={filteredList()} />\n    </div>\n  );\n};\n\nexport default MultiSelect;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 67
-    },
-    {
-      "filename": "src/frontend/components/MultiSelect/MultiSelect.jsx",
-      "before": "    setFilteredList(computeFilteredList(currentQuery, props.availableItems, props.compare, props.itemCount, selectedItems()));\n  });\n\n  const addFirstFilteredItem = () => {\n    const updatedItems = [filteredList()[0], ...selectedItems()];\n    setSelectedItems(updatedItems);\n  };\n\n  return (\n    <div class=\"w-full bg-emphasize text-emphasize p-2 rounded border border-border\">\n      <ResultSet items={selectedItems()} />\n      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} addFirstFilteredItem={addFirstFilteredItem} />\n      <FilteredList items={filteredList()} />\n    </div>\n  );",
-      "after": "    setFilteredList(computeFilteredList(currentQuery, props.availableItems, props.compare, props.itemCount, selectedItems()));\n  });\n\n  const handleKeyPress = (e) => {\n    if (e.key === 'Enter') {\n      const updatedItems = [filteredList()[0], ...selectedItems()];\n      setSelectedItems(updatedItems);\n    }\n  };\n\n  return (\n    <div class=\"w-full bg-emphasize text-emphasize p-2 rounded border border-border\">\n      <ResultSet items={selectedItems()} />\n      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} onKeyPress={handleKeyPress} />\n      <FilteredList items={filteredList()} />\n    </div>\n  );",
-      "total_deletions": 4,
-      "total_additions": 6
-    },
-    {
-      "filename": "src/frontend/components/MultiSelect/SearchBar.jsx",
-      "before": "    props.setSearchValue(e.target.value);\n  };\n\n  const handleKeyPress = (e) => {\n    if (e.key === 'Enter') {\n      props.addFirstFilteredItem();\n    }\n  };\n\n  return (\n    <input \n      type=\"text\"\n      placeholder=\"Enter space-separated search terms!\"\n      value={props.searchValue()}\n      onInput={handleInputChange}\n      onKeyPress={handleKeyPress}\n      class=\"border border-gray-300 rounded p-2 w-full bg-emphasize text-emphasize my-2\"\n    />\n  );",
-      "after": "    props.setSearchValue(e.target.value);\n  };\n\n  return (\n    <input \n      type=\"text\"\n      placeholder=\"Enter space-separated search terms!\"\n      value={props.searchValue()}\n      onInput={handleInputChange}\n      onKeyPress={props.onKeyPress}\n      class=\"border border-gray-300 rounded p-2 w-full bg-emphasize text-emphasize my-2\"\n    />\n  );",
-      "total_deletions": 7,
-      "total_additions": 1
+      "total_additions": 0
     }
   ]
 }

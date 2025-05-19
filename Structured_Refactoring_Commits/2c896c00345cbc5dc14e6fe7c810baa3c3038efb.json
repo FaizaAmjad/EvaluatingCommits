@@ -40,32 +40,11 @@
   },
   "code": [
     {
-      "filename": "prompt/history/2023/09/26/13:33_Update and rename file color function/change.sh",
+      "filename": "",
       "before": "",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Update and rename file color function\"\necho \"Plan:\"\necho \"1. Rename getBackgroundColorForFile.jsx to getStyleForFileStatus.jsx.\"\necho \"2. Modify getStyleForFileStatus.jsx to return proper styling.\"\necho \"3. Update GitStatusRow.jsx to use the new function and inline styles.\"\n\n# 1. Rename getBackgroundColorForFile.jsx to getStyleForFileStatus.jsx\nmv ./src/frontend/components/getBackgroundColorForFile.jsx ./src/frontend/components/getStyleForFileStatus.jsx\n\n# 2. Modify getStyleForFileStatus.jsx\ncat > ./src/frontend/components/getStyleForFileStatus.jsx << 'EOF'\nexport default function getStyleForFileStatus(index, path) {\n  if (index === 'M') {\n    return { backgroundColor: 'rgb(34, 197, 94)' };\n  } else if (index === 'A' && !path.includes('prompt/history')) {\n    return { backgroundColor: 'rgb(253, 186, 116)' };\n  }\n  return {}; // Default no background style\n}\nEOF\n\n# 3. Update GitStatusRow.jsx\ncat > ./src/frontend/components/GitStatusRow.jsx << 'EOF'\nimport { createEffect } from \"solid-js\";\nimport getStyleForFileStatus from './getStyleForFileStatus';\n\nconst GitStatusRow = (props) => {\n  const { index, path, working_dir } = props.entry;\n  const { onClick } = props;\n\n  const splitPath = path.split('/');\n  const fileName = splitPath.pop();\n  const baseDir = splitPath.join('/');\n\n  const bgStyle = getStyleForFileStatus(index, path);\n\n  let pathRef;\n\n  createEffect(() => {\n    if (pathRef) {\n      pathRef.scrollLeft = pathRef.scrollWidth;\n    }\n  });\n\n  return (\n    <div class=\"flex\" style={bgStyle} onClick={() => onClick(path)}>\n      <span class=\"w-50px overflow-x-auto p-1\">{index + ' ' + working_dir}</span>\n      <span class=\"text-base bg-main rounded p-1\">{fileName}</span>\n      <span ref={pathRef} class=\"overflow-x-auto whitespace-no-wrap break-keep scrollbar-hidden ml-4 py-2 text-sm\">{baseDir}</span>\n    </div>\n  );\n};\n\nexport default GitStatusRow;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "total_deletions": 0,
-      "total_additions": 59
-    },
-    {
-      "filename": "src/frontend/components/GitStatusRow.jsx",
-      "before": "import { createEffect } from \"solid-js\";\nimport getBackgroundColorForFile from './getBackgroundColorForFile';\n\nconst GitStatusRow = (props) => {\n  const { index, path, working_dir } = props.entry;\n  const fileName = splitPath.pop();\n  const baseDir = splitPath.join('/');\n\n  const bgColor = getBackgroundColorForFile(index, path);\n\n  let pathRef;\n\n  });\n\n  return (\n    <div class={`flex ${bgColor ? 'bg-' + bgColor : ''}`} onClick={() => onClick(path)}>\n      <span class=\"w-50px overflow-x-auto p-1\">{index + ' ' + working_dir}</span>\n      <span class=\"text-base bg-main rounded p-1\">{fileName}</span>\n      <span ref={pathRef} class=\"overflow-x-auto whitespace-no-wrap break-keep scrollbar-hidden ml-4 py-2 text-sm\">{baseDir}</span>",
-      "after": "import { createEffect } from \"solid-js\";\nimport getStyleForFileStatus from './getStyleForFileStatus';\n\nconst GitStatusRow = (props) => {\n  const { index, path, working_dir } = props.entry;\n  const fileName = splitPath.pop();\n  const baseDir = splitPath.join('/');\n\n  const bgStyle = getStyleForFileStatus(index, path);\n\n  let pathRef;\n\n  });\n\n  return (\n    <div class=\"flex\" style={bgStyle} onClick={() => onClick(path)}>\n      <span class=\"w-50px overflow-x-auto p-1\">{index + ' ' + working_dir}</span>\n      <span class=\"text-base bg-main rounded p-1\">{fileName}</span>\n      <span ref={pathRef} class=\"overflow-x-auto whitespace-no-wrap break-keep scrollbar-hidden ml-4 py-2 text-sm\">{baseDir}</span>",
-      "total_deletions": 3,
-      "total_additions": 3
-    },
-    {
-      "filename": "src/frontend/components/getBackgroundColorForFile.jsx",
-      "before": "export default function getBackgroundColorForFile(index, path) {\n  if (index === 'M') { // Modified files\n    return 'rgb(34 197 94)';\n  } else if (index === 'A' && !path.includes('prompt/history')) { // New files excluding ones with 'prompt/history' in path\n    return 'rgb(253 186 116)';\n  }\n  return ''; // Default no background color\n}",
       "after": "",
-      "total_deletions": 8,
-      "total_additions": 0
-    },
-    {
-      "filename": "src/frontend/components/getStyleForFileStatus.jsx",
-      "before": "",
-      "after": "export default function getStyleForFileStatus(index, path) {\n  if (index === 'M') {\n    return { backgroundColor: 'rgb(34, 197, 94)' };\n  } else if (index === 'A' && !path.includes('prompt/history')) {\n    return { backgroundColor: 'rgb(253, 186, 116)' };\n  }\n  return {}; // Default no background style\n}",
       "total_deletions": 0,
-      "total_additions": 8
+      "total_additions": 0
     }
   ]
 }

@@ -40,32 +40,11 @@
   },
   "code": [
     {
-      "filename": "prompt/history/2023/09/01/17:13_Refactor frontend components/change.sh",
+      "filename": "",
       "before": "",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor frontend components\"\necho \"Plan:\"\necho \"1. Remove unused imports from AttentionFileList.jsx.\"\necho \"2. Modify MultiSelect.jsx to remove extra div and make it w-full.\"\necho \"3. Update FilteredList.jsx to make it w-full.\"\necho \"4. Update AttentionFileList.jsx to make it w-full.\"\n\n# 1. Removing unused imports from AttentionFileList.jsx\ncat > src/frontend/components/AttentionFileList.jsx << 'EOF'\nimport { createEffect } from 'solid-js';\nimport { fileList, setFileList } from '../model/fileList';\nimport fetchFileList from '../service/fetchFileList';\nimport MultiSelect from './MultiSelect';\n\nconst AttentionFileList = () => {\n  createEffect(async () => {\n    const data = await fetchFileList();\n    const flattenedPaths = flattenPaths(data, '');\n    setFileList(flattenedPaths);\n  });\n\n  const flattenPaths = (node, path) => {\n    if (node.type === 'file') {\n      return [path + '/' + node.name];\n    }\n    if (!Array.isArray(node.children)) {\n      return [];\n    }\n    return node.children.reduce((acc, child) => {\n      return acc.concat(flattenPaths(child, path + '/' + node.name));\n    }, []);\n  };\n\n  return (\n    <div class=\"w-full\">\n      <MultiSelect availableItems={fileList()} selectedItems={[]} itemCount={5} />\n    </div>\n  );\n};\n\nexport default AttentionFileList;\nEOF\n\n# 2. Modify MultiSelect.jsx to remove extra div and make it w-full\ncat > src/frontend/components/MultiSelect.jsx << 'EOF'\nimport { searchValue } from '../model/searchBarModel';\nimport SearchBar from './SearchBar';\nimport ResultSet from './ResultSet';\nimport FilteredList from './FilteredList';\n\nconst MultiSelect = (props) => {\n  return (\n    <div class=\"w-full rounded border p-4\">\n      <ResultSet items={props.selectedItems} />\n      <SearchBar />\n      <FilteredList items={props.availableItems} filter={searchValue()} itemCount={props.itemCount} />\n    </div>\n  );\n};\n\nexport default MultiSelect;\nEOF\n\n# 3. Update FilteredList.jsx to make it w-full\ncat > src/frontend/components/FilteredList.jsx << 'EOF'\nconst FilteredList = (props) => {\n  return (\n    <ul class=\"w-full list-disc pl-5\">\n      {props.items.filter(item => item.includes(props.filter)).slice(0, props.itemCount).map(item => <li key={item}>{item}</li>)}\n    </ul>\n  );\n};\n\nexport default FilteredList;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 79
-    },
-    {
-      "filename": "src/frontend/components/AttentionFileList.jsx",
-      "before": "  };\n\n  return (\n    <div>\n      <MultiSelect availableItems={fileList()} selectedItems={[]} itemCount={5} />\n    </div>\n  );",
-      "after": "  };\n\n  return (\n    <div class=\"w-full\">\n      <MultiSelect availableItems={fileList()} selectedItems={[]} itemCount={5} />\n    </div>\n  );",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/frontend/components/FilteredList.jsx",
-      "before": "const FilteredList = (props) => {\n  return (\n    <ul class=\"list-disc pl-5\">\n      {props.items.filter(item => item.includes(props.filter)).slice(0, props.itemCount).map(item => <li key={item}>{item}</li>)}\n    </ul>\n  );",
-      "after": "const FilteredList = (props) => {\n  return (\n    <ul class=\"w-full list-disc pl-5\">\n      {props.items.filter(item => item.includes(props.filter)).slice(0, props.itemCount).map(item => <li key={item}>{item}</li>)}\n    </ul>\n  );",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/frontend/components/MultiSelect.jsx",
-      "before": "\nconst MultiSelect = (props) => {\n  return (\n    <div class=\"rounded border p-4\">\n      <ResultSet items={props.selectedItems} />\n      <SearchBar />\n      <FilteredList items={props.availableItems} filter={searchValue()} itemCount={props.itemCount} />",
-      "after": "\nconst MultiSelect = (props) => {\n  return (\n    <div class=\"w-full rounded border p-4\">\n      <ResultSet items={props.selectedItems} />\n      <SearchBar />\n      <FilteredList items={props.availableItems} filter={searchValue()} itemCount={props.itemCount} />",
-      "total_deletions": 1,
-      "total_additions": 1
+      "total_additions": 0
     }
   ]
 }

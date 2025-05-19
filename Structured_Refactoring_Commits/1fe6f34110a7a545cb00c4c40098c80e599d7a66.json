@@ -50,17 +50,10 @@
   },
   "code": [
     {
-      "filename": "prompt/history/2023/09/30/16:47_Improve Junior documentation and delete unused file/change.sh",
+      "filename": "",
       "before": "",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Improve Junior documentation and delete unused file\"\necho \"Plan:\"\necho \"1. Update env_or_cli.md with improved documentation.\"\necho \"2. Delete the getPromptFlag.js file.\"\n\n# Update env_or_cli.md\ncat > ./docs/config/env_or_cli.md << EOF\n# Junior Configuration\n\nThe Junior process can be started using the following commands:\n- \\`npx junior-web [args]\\`\n- \\`npx junior-cli [args]\\`\n- For self-development from the git repo: \\`npm start -- [args]\\`.\n\n## Configurations\n\n- **--ignore, JUNIOR_IGNORE**\n  - List of items to ignore in a comma-separated format.\n  - Defaults to: .git, node_modules, ./prompt, and many more. Check the getIgnoreList function for the full default list.\n  - The final ignore list is a combination of the default list, command line arguments, and environmental variables.\n  - Example: --ignore=./pathToIgnore\n\n- **--server-port, JUNIOR_SERVER_PORT**\n  - The port for the server.\n  - Default: 10101\n  - Example: --server-port=8080\n\n- **--host**\n  - Host configuration. If provided without a value, it enables the host. Otherwise, specify an IP.\n  - Example: --host or --host=192.168.1.2\n\n- **-d, --dry-run** (CLI Only)\n  - Runs the application in dry run mode. Please note: the CLI is not fully functional at this time.\n\n- **--model**\n  - Specifies the model to be used.\n  - Default: gpt-4\n  - Example: --model=gpt-5\n\n- **--noaudit**\n  - Disables the audit trail.\n\n- **--frontend-port, JUNIOR_FRONTEND_PORT**\n  - The port for the frontend.\n  - Default: 5864\n  - Example: --frontend-port=8081\n\n- **--system-prompt, -s** (CLI Only)\n  - Forces the system prompt. Please note: the CLI is not fully functional at this time.\n\n## Examples\n\n### Hosting on a VPN IP\n\\`\\`\\`\nnpx junior-web --host=192.168.1.2\n\\`\\`\\`\n\n### Ignoring a Directory from Attention Scan\n\\`\\`\\`\nnpx junior-cli --ignore=./myDirectory\n\\`\\`\\`\n\nEOF\n\n# Delete the getPromptFlag.js file\nrm -f ./src/prompt/getPromptFlag.js\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "total_deletions": 0,
-      "total_additions": 70
-    },
-    {
-      "filename": "src/prompt/getPromptFlag.js",
-      "before": "function getPromptFlag() {\n  const promptFlag = process.argv.find(arg => arg.startsWith(\"--prompt=\"));\n  if (promptFlag) {\n    return promptFlag.split(\"=\")[1];\n  }\n}\n\nexport { getPromptFlag };",
       "after": "",
-      "total_deletions": 8,
+      "total_deletions": 0,
       "total_additions": 0
     }
   ]

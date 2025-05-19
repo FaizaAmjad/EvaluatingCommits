@@ -40,31 +40,10 @@
   },
   "code": [
     {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\n# Goal: Add \"Junior\" heading to the top of the screen\n# Plan:\n# 1. Create a new SolidJS component called 'TitleDisplay.jsx' that displays the title \"Junior\" at the top of the screen.\n# 2. Import the 'TitleDisplay' component in 'App.jsx' and include it at the top of the rendered components.\n\n# Step 1: Creating the new TitleDisplay component\ncat > ./src/frontend/components/TitleDisplay.jsx << EOF\nimport { createSignal } from 'solid-js';\n\nconst TitleDisplay = () => {\n  const [title] = createSignal('Junior');\n\n  return (\n    <h1 class=\"text-center text-3xl mt-6\">{title}</h1>\n  );\n};\n\nexport default TitleDisplay;\nEOF\n\n# Step 2: Import the new component in 'App.jsx' and include it in the rendered components\ncat > ./src/frontend/App.jsx << EOF\nimport NotesInput from './components/NotesInput';\nimport StartButton from './components/StartButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\nimport TitleDisplay from './components/TitleDisplay';\nimport { notes, setNotes } from './stores/notes';\nimport { setPrompt } from './stores/prompt';\n\nconst App = () => {\n  return (\n    <div class=\"lg:m-8 m-4 flex flex-col items-center space-y-8 sm:p-0 lg:max-w-desktop mx-auto\">\n      <TitleDisplay />\n      <TasksList />\n      <PromptDescriptor />\n      <NotesInput notes={notes} setNotes={setNotes} />\n      <StartButton notes={notes} setPrompt={setPrompt} />\n      <PromptDisplay />\n    </div>\n  );\n};\n\nexport default App;\nEOF\n",
-      "after": "#!/bin/sh\n# Goal: Refactor TitleDisplay to NavBar, introduce subtitle and clickable link.\n# Plan:\n# 1. Rename TitleDisplay.jsx to NavBar.jsx.\n# 2. Refactor NavBar component to use a constant for the title instead of the solid-js signal.\n# 3. Add a new subtitle \"Your AI contributor\".\n# 4. Make the subtitle clickable and link to https://github.com/tisztamo/Junior.\n# 5. Update App.jsx to import NavBar instead of TitleDisplay.\n\nmv src/frontend/components/TitleDisplay.jsx src/frontend/components/NavBar.jsx\n\ncat <<'EOF' > src/frontend/components/NavBar.jsx\nimport { createSignal } from 'solid-js';\n\nconst NavBar = () => {\n  const title = 'Junior';\n\n  return (\n    <div>\n      <h1 class=\"text-center text-3xl mt-6\">{title}</h1>\n      <a href=\"https://github.com/tisztamo/Junior\" class=\"text-center text-xl underline cursor-pointer\">Your AI contributor</a>\n    </div>\n  );\n};\n\nexport default NavBar;\nEOF\n\nsed -i '' 's/TitleDisplay/NavBar/g' src/frontend/App.jsx",
-      "total_deletions": 35,
-      "total_additions": 17
-    },
-    {
-      "filename": "src/frontend/App.jsx",
-      "before": "import PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\nimport TitleDisplay from './components/TitleDisplay';\nimport { notes, setNotes } from './stores/notes';\nimport { setPrompt } from './stores/prompt';\n\nconst App = () => {\n  return (\n    <div class=\"lg:m-8 m-4 flex flex-col items-center space-y-8 sm:p-0 lg:max-w-desktop mx-auto\">\n      <TitleDisplay />\n      <TasksList />\n      <PromptDescriptor />\n      <NotesInput notes={notes} setNotes={setNotes} />",
-      "after": "import PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\nimport NavBar from './components/NavBar';\nimport { notes, setNotes } from './stores/notes';\nimport { setPrompt } from './stores/prompt';\n\nconst App = () => {\n  return (\n    <div class=\"lg:m-8 m-4 flex flex-col items-center space-y-8 sm:p-0 lg:max-w-desktop mx-auto\">\n      <NavBar />\n      <TasksList />\n      <PromptDescriptor />\n      <NotesInput notes={notes} setNotes={setNotes} />",
-      "total_deletions": 2,
-      "total_additions": 2
-    },
-    {
-      "filename": "src/frontend/components/NavBar.jsx",
+      "filename": "",
       "before": "",
-      "after": "import { createSignal } from 'solid-js';\n\nconst NavBar = () => {\n  const title = 'Junior';\n\n  return (\n    <div>\n      <h1 class=\"text-center text-3xl mt-6\">{title}</h1>\n      <a href=\"https://github.com/tisztamo/Junior\" class=\"text-center text-xl underline cursor-pointer\">Your AI contributor</a>\n    </div>\n  );\n};\n\nexport default NavBar;",
-      "total_deletions": 0,
-      "total_additions": 14
-    },
-    {
-      "filename": "src/frontend/components/TitleDisplay.jsx",
-      "before": "import { createSignal } from 'solid-js';\n\nconst TitleDisplay = () => {\n  const [title] = createSignal('Junior');\n\n  return (\n    <h1 class=\"text-center text-3xl mt-6\">{title}</h1>\n  );\n};\n\nexport default TitleDisplay;",
       "after": "",
-      "total_deletions": 11,
+      "total_deletions": 0,
       "total_additions": 0
     }
   ]

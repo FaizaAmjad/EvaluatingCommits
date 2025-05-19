@@ -82,11 +82,11 @@
   },
   "code": [
     {
-      "filename": "docs/descriptor.md",
-      "before": "- os: (Default: \"Debian\") Specifies the operating system.\n- installedTools: By default, this includes \"npm, jq.\" Allows the user to mention his tools, e.g. when drawing. The user can create prompt/installedTools.md to overwrite.\n\nAdditionally, users can overwrite attributes in prompt.yaml or create prompt/attributeName.md with the content for any attribute, including those not listed here.\n\n## Attributes referencing .md files\n\n\nPrompt parts are markdown template files, and [ejs](https://ejs.co/) runs on them. Attributes from the yaml file are available in the template, e.g., `<%= requirements %>` injects the requirements.\n",
-      "after": "- os: (Default: \"Debian\") Specifies the operating system.\n- installedTools: By default, this includes \"npm, jq.\" Allows the user to mention his tools, e.g. when drawing. The user can create prompt/installedTools.md to overwrite.\n\n### Overwriting Attributes\n\nUsers can overwrite attributes in prompt.yaml or create prompt/attributeName.md with the content for any attribute. If both are present, the value in prompt.yaml has preference.\n\nFor example, to set a default operating system in a separate file:\n\n```markdown\n# prompt/os.md\nDebian\n```\n\nAnd then to overwrite it in the prompt.yaml:\n\n```yaml\nos: Ubuntu\n```\n\n## Attributes referencing .md files\n\n\nPrompt parts are markdown template files, and [ejs](https://ejs.co/) runs on them. Attributes from the yaml file are available in the template, e.g., `<%= requirements %>` injects the requirements.\n\n## Custom Attributes\n\nThe user can also define custom attributes not listed above. These can be stored in a markdown file and can be injected into prompt template files using the ejs syntax.\n\nFor example, to set a new custom attribute called \"documentationRequirements\":\n\n```markdown\n# prompt/documentationRequirements.md\nEnsure that all functions are documented.\n```\n\nAnd then it can be injected into the prompt template:\n\n```\n<%= documentationRequirements %>\n```",
-      "total_deletions": 1,
-      "total_additions": 32
+      "filename": "",
+      "before": "",
+      "after": "",
+      "total_deletions": 0,
+      "total_additions": 0
     }
   ]
 }

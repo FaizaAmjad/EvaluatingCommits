@@ -52,95 +52,11 @@
   },
   "code": [
     {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\nset -e\ngoal=\"Refactor code, rename function, remove import\"\necho \"Plan:\"\necho \"1. Rename monitorChangeSignal to monitorChange and add a comment in src/frontend/stores/monitorChange.js\"\necho \"2. Update the function name in src/frontend/components/CommitMessageInput.jsx and remove unnecessary import\"\necho \"3. Save changes to the corresponding files\"\n\n# Step 1\ncat > src/frontend/stores/monitorChange.js << 'EOF'\nimport { createEffect } from 'solid-js';\nimport { change } from '../stores/change';\nimport { setCommitMessage } from '../stores/commitMessage';\n\n// The monitorChange function starts monitoring the change store,\n// and if a goal is found, it sets the commit message accordingly.\nlet monitoring = false;\n\nconst monitorChange = () => {\n  if (monitoring) return;\n\n  monitoring = true;\n\n  createEffect(() => {\n    const newChangeContent = change();\n    const goalLineMatch = newChangeContent.match(/goal=\"(.+?)\"/);\n    \n    if (goalLineMatch) {\n      const goalValue = goalLineMatch[1];\n      \n      setCommitMessage(goalValue);\n    }\n  });\n};\n\nexport default monitorChange;\nEOF\n\n# Step 2\ncat > src/frontend/components/CommitMessageInput.jsx << 'EOF'\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChange from '../stores/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n  monitorChange();\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" className=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" value={commitMessage()} onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Rename stores to model, maintaining coherence\"\necho \"Plan:\"\necho \"1. Rename src/frontend/stores to src/frontend/model\"\necho \"2. Update any references to the old path in code to prevent breakage\"\n\n# Rename src/frontend/stores to src/frontend/model\nmv src/frontend/stores src/frontend/model\n\n# Find and replace all occurrences of \"stores\" with \"model\" in the src/frontend directory\n# The command now searches all text files, not just .js and .jsx\nfind src/frontend -type f -exec grep -Iq . {} \\; -exec sed -i '' 's/stores/model/g' {} +\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "total_deletions": 53,
-      "total_additions": 8
-    },
-    {
-      "filename": "src/frontend/components/CommitButton.jsx",
-      "before": "import { postCommit } from '../service/postCommit';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\nimport { setExecutionResult } from '../stores/executionResult';\nimport { setPrompt } from '../stores/prompt';\nimport { setChange } from '../stores/change'; // Importing setChange to clear the change\n\nconst CommitButton = () => {\n  const handleCommit = async () => {",
-      "after": "import { postCommit } from '../service/postCommit';\nimport { commitMessage, setCommitMessage } from '../model/commitMessage';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setPrompt } from '../model/prompt';\nimport { setChange } from '../model/change'; // Importing setChange to clear the change\n\nconst CommitButton = () => {\n  const handleCommit = async () => {",
-      "total_deletions": 4,
-      "total_additions": 4
-    },
-    {
-      "filename": "src/frontend/components/CommitMessageInput.jsx",
-      "before": "import { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChange from '../stores/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting",
-      "after": "import { commitMessage, setCommitMessage } from '../model/commitMessage';\nimport monitorChange from '../model/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting",
-      "total_deletions": 2,
-      "total_additions": 2
-    },
-    {
-      "filename": "src/frontend/components/ExecuteButton.jsx",
-      "before": "import { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../stores/executionResult';\nimport { setChange } from '../stores/change'; // Importing the necessary function to set the change\n\nconst ExecuteButton = () => {\n  const handleExecuteChange = async () => {",
-      "after": "import { executeChange } from '../service/executeChange';\nimport { setExecutionResult } from '../model/executionResult';\nimport { setChange } from '../model/change'; // Importing the necessary function to set the change\n\nconst ExecuteButton = () => {\n  const handleExecuteChange = async () => {",
-      "total_deletions": 2,
-      "total_additions": 2
-    },
-    {
-      "filename": "src/frontend/components/ExecutionResultDisplay.jsx",
-      "before": "import { createEffect, createSignal } from 'solid-js';\nimport { executionResult } from '../stores/executionResult';\nimport ansiToHtml from '../../execute/ansiToHtml';\n\nconst ExecutionResultDisplay = () => {",
-      "after": "import { createEffect, createSignal } from 'solid-js';\nimport { executionResult } from '../model/executionResult';\nimport ansiToHtml from '../../execute/ansiToHtml';\n\nconst ExecutionResultDisplay = () => {",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/frontend/components/GenerateButton.jsx",
-      "before": "import { generatePrompt } from '../generatePrompt';\nimport { marked } from 'marked';\nimport { setPrompt } from '../stores/prompt';\n\nconst GenerateButton = () => {\n  const handleGeneratePrompt = async () => {",
-      "after": "import { generatePrompt } from '../generatePrompt';\nimport { marked } from 'marked';\nimport { setPrompt } from '../model/prompt';\n\nconst GenerateButton = () => {\n  const handleGeneratePrompt = async () => {",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/frontend/components/GitStatusDisplay.jsx",
-      "before": "import { onMount, createEffect } from 'solid-js';\nimport { gitStatus } from '../stores/gitStatus';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\n\nconst GitStatusDisplay = () => {",
-      "after": "import { onMount, createEffect } from 'solid-js';\nimport { gitStatus } from '../model/gitStatus';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\n\nconst GitStatusDisplay = () => {",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/frontend/components/PromptDescriptor.jsx",
-      "before": "import { fetchDescriptor } from '../service/fetchDescriptor';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\nimport { useWebsocket } from '../service/useWebsocket';\nimport { promptDescriptor, setPromptDescriptor } from '../stores/promptDescriptor';\n\nconst PromptDescriptor = () => {\n",
-      "after": "import { fetchDescriptor } from '../service/fetchDescriptor';\nimport { fetchGitStatus } from '../service/fetchGitStatus';\nimport { useWebsocket } from '../service/useWebsocket';\nimport { promptDescriptor, setPromptDescriptor } from '../model/promptDescriptor';\n\nconst PromptDescriptor = () => {\n",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/frontend/components/PromptDisplay.jsx",
-      "before": "import { createSignal, onMount, createEffect } from \"solid-js\";\nimport { prompt } from '../stores/prompt';\n\nconst PromptDisplay = () => {\n  let div;",
-      "after": "import { createSignal, onMount, createEffect } from \"solid-js\";\nimport { prompt } from '../model/prompt';\n\nconst PromptDisplay = () => {\n  let div;",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/frontend/components/TasksList.jsx",
-      "before": "import { onMount, createEffect } from 'solid-js';\nimport { fetchTasks } from '../fetchTasks';\nimport { handleTaskChange } from '../service/handleTaskChange';\nimport { selectedTask, setSelectedTask } from '../stores/selectedTask';\nimport { promptDescriptor } from '../stores/promptDescriptor';\nimport { parseYamlAndGetTask } from '../service/parseYamlAndGetTask';\n\nconst TasksList = () => {",
-      "after": "import { onMount, createEffect } from 'solid-js';\nimport { fetchTasks } from '../fetchTasks';\nimport { handleTaskChange } from '../service/handleTaskChange';\nimport { selectedTask, setSelectedTask } from '../model/selectedTask';\nimport { promptDescriptor } from '../model/promptDescriptor';\nimport { parseYamlAndGetTask } from '../service/parseYamlAndGetTask';\n\nconst TasksList = () => {",
-      "total_deletions": 2,
-      "total_additions": 2
-    },
-    {
-      "filename": "src/frontend/model/monitorChange.js",
-      "before": "import { createEffect } from 'solid-js';\nimport { change } from '../stores/change';\nimport { setCommitMessage } from '../stores/commitMessage';\n\n// The monitorChange function starts monitoring the change store,\n// and if a goal is found, it sets the commit message accordingly.",
-      "after": "import { createEffect } from 'solid-js';\nimport { change } from '../model/change';\nimport { setCommitMessage } from '../model/commitMessage';\n\n// The monitorChange function starts monitoring the change store,\n// and if a goal is found, it sets the commit message accordingly.",
-      "total_deletions": 2,
-      "total_additions": 2
-    },
-    {
-      "filename": "src/frontend/service/fetchGitStatus.js",
-      "before": "import { getBaseUrl } from '../getBaseUrl';\nimport { setGitStatus } from '../stores/gitStatus';\n\nconst fetchGitStatus = async () => {\n  const baseUrl = getBaseUrl();",
-      "after": "import { getBaseUrl } from '../getBaseUrl';\nimport { setGitStatus } from '../model/gitStatus';\n\nconst fetchGitStatus = async () => {\n  const baseUrl = getBaseUrl();",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/frontend/service/handleTaskChange.js",
-      "before": "import { getBaseUrl } from '../getBaseUrl';\nimport { fetchDescriptor } from './fetchDescriptor';\nimport { setPromptDescriptor } from '../stores/promptDescriptor';\n\nexport const handleTaskChange = async (e) => {\n  const baseUrl = getBaseUrl();",
-      "after": "import { getBaseUrl } from '../getBaseUrl';\nimport { fetchDescriptor } from './fetchDescriptor';\nimport { setPromptDescriptor } from '../model/promptDescriptor';\n\nexport const handleTaskChange = async (e) => {\n  const baseUrl = getBaseUrl();",
-      "total_deletions": 1,
-      "total_additions": 1
+      "filename": "",
+      "before": "",
+      "after": "",
+      "total_deletions": 0,
+      "total_additions": 0
     }
   ]
 }

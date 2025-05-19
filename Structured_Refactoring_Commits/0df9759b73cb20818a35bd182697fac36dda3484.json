@@ -1,7 +1,7 @@
 {
   "sha": "0df9759b73cb20818a35bd182697fac36dda3484",
   "url": "https://github.com/sqlalchemy/sqlalchemy/commit/0df9759b73cb20818a35bd182697fac36dda3484",
-  "author": "<",
+  "author": "offby1",
   "repoName": "sqlalchemy/sqlalchemy",
   "repoLanguage": "Cython",
   "message": "Revise / rewrite sentences that use the phrase \"referred towards\"\n\nComments by Mike <mike_mp@zzzcomputing.com>:\n\n\"Referred towards\" is not correct English and can be replaced directly\nwith \"referred to\".  However, this then introduces a dangling\npreposition to sentences which I don't think is appropriate for this\nstyle of writing.  So instead, use phrases like \"known as\",\n\"references\", \"to which X refers\".\n\nTo help me identify dangling prepositions I made use of ChatGPT,\nhere's the log of how that transpired:\nhttps://chat.openai.com/share/60d42ff4-c1ac-4232-893a-415c2b6d7320\n\nCo-authored-by: Mike Bayer <mike_mp@zzzcomputing.com>\nCloses: #10210\nPull-request: https://github.com/sqlalchemy/sqlalchemy/pull/10210\nPull-request-sha: 5d30e79c14fe78996d332fefd4bae36d76626ff4\n\nChange-Id: Ib6a98e5be441f5b25d3929a2efb7d873bcfef98e",

@@ -40,25 +40,11 @@
   },
   "code": [
     {
-      "filename": "prompt/history/2023/09/26/10:35_Refactor TerminalComponent for direct virtual key sends/change.sh",
+      "filename": "",
       "before": "",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor TerminalComponent for direct virtual key sends\"\necho \"Plan:\"\necho \"1. Modify the sendVirtualKey function in TerminalComponent.jsx to send key codes using the same format as direct keypresses.\"\necho \"2. Update VirtualButton component to include the 'text-text' class.\"\n\n# Change TerminalComponent.jsx to send virtual keys in the same format as direct keypresses\ncat > ./src/frontend/components/terminal/TerminalComponent.jsx << 'EOF'\nimport { onCleanup, onMount } from 'solid-js';\nimport 'xterm/css/xterm.css';\nimport terminalConnection from '../../service/terminal/terminalConnection';\nimport { setupXTerm } from '../../service/terminal/setupXTerm';\nimport { sendTerminalResizeNotification } from '../../service/terminal/sendTerminalResizeNotification';\nimport DetailsComponent from '../DetailsComponent';\nimport VirtualButton from './VirtualButton';\n\nconst TerminalComponent = () => {\n  let container;\n  const { term, fitAddon } = setupXTerm();\n\n  const sendVirtualKey = (key) => {\n    terminalConnection.sendDataToTerminal(JSON.stringify({ type: 'input', data: key }));\n  };\n\n  onMount(() => {\n    term.open(container);\n    fitAddon.fit();\n\n    const { rows, cols } = term;\n    sendTerminalResizeNotification(rows, cols);\n\n    terminalConnection.setOnDataReceived((data) => {\n      term.write(data);\n    });\n\n    term.onData((data) => {\n      terminalConnection.sendDataToTerminal(JSON.stringify({ type: 'input', data }));\n    });\n\n    term.onResize(({ newRows, newCols }) => {\n      sendTerminalResizeNotification(newRows, newCols);\n    });\n  });\n  \n  onCleanup(() => {\n    term.dispose();\n    terminalConnection.closeConnection();\n  });\n\n  return (\n    <DetailsComponent \n      defaultState=\"closed\"\n      localStorageKey=\"terminalState\"\n      generateHeader={() => \"Terminal\"}\n      classes=\"rounded border p-2 w-full border-border bg-emphasize\"\n    >\n      <div class=\"flex overflow-x-auto whitespace-nowrap\">\n        <VirtualButton label=\"Esc\" action={() => sendVirtualKey('\\x1B')} />\n        <VirtualButton label=\"-\" action={() => sendVirtualKey('-')} />\n        <VirtualButton label=\":\" action={() => sendVirtualKey(':')} />\n        <VirtualButton label=\"Ctrl-Z\" action={() => sendVirtualKey('\\x1A')} />\n        <VirtualButton label=\"Ctrl-Y\" action={() => sendVirtualKey('\\x19')} />\n        <VirtualButton label=\"Ctrl-X\" action={() => sendVirtualKey('\\x18')} />\n        <VirtualButton label=\"Ctrl-V\" action={() => sendVirtualKey('\\x16')} />\n        <VirtualButton label=\"F1\" action={() => sendVirtualKey('\\x1BOP')} />\n        <VirtualButton label=\"F5\" action={() => sendVirtualKey('\\x1B[15~')} />\n        <VirtualButton label=\"F6\" action={() => sendVirtualKey('\\x1B[17~')} />\n        <VirtualButton label=\"F7\" action={() => sendVirtualKey('\\x1B[18~')} />\n      </div>\n      <div ref={container}>\n        {/* The terminal will be rendered inside this div */}\n      </div>\n    </DetailsComponent>\n  );\n};\n\nexport default TerminalComponent;\nEOF\n\n# Update VirtualButton to include the 'text-text' class\ncat > ./src/frontend/components/terminal/VirtualButton.jsx << 'EOF'\nimport { createSignal } from 'solid-js';\n\nconst VirtualButton = (props) => {\n  const sendKey = () => {\n    if (props.action) {\n      props.action();\n    }\n  };\n\n  return (\n    <button\n      className=\"text-text m-1 bg-main hover:bg-blue-700 text-white font-bold py-1 px-2 rounded\"\n      onClick={sendKey}\n    >\n      {props.label}\n    </button>\n  );\n};\n\nexport default VirtualButton;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 105
-    },
-    {
-      "filename": "src/frontend/components/terminal/TerminalComponent.jsx",
-      "before": "const TerminalComponent = () => {\n  let container;\n  const { term, fitAddon } = setupXTerm();\n  \n  const sendVirtualKey = (key) => {\n    term.write(key);\n  };\n\n  onMount(() => {",
-      "after": "const TerminalComponent = () => {\n  let container;\n  const { term, fitAddon } = setupXTerm();\n\n  const sendVirtualKey = (key) => {\n    terminalConnection.sendDataToTerminal(JSON.stringify({ type: 'input', data: key }));\n  };\n\n  onMount(() => {",
-      "total_deletions": 2,
-      "total_additions": 2
-    },
-    {
-      "filename": "src/frontend/components/terminal/VirtualButton.jsx",
-      "before": "\n  return (\n    <button\n      className=\"m-1 bg-main hover:bg-blue-700 text-white font-bold py-1 px-2 rounded\"\n      onClick={sendKey}\n    >\n      {props.label}",
-      "after": "\n  return (\n    <button\n      className=\"text-text m-1 bg-main hover:bg-blue-700 text-white font-bold py-1 px-2 rounded\"\n      onClick={sendKey}\n    >\n      {props.label}",
-      "total_deletions": 1,
-      "total_additions": 1
+      "total_additions": 0
     }
   ]
 }

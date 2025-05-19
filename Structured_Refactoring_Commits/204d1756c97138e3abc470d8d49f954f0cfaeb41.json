@@ -64,18 +64,11 @@
   },
   "code": [
     {
-      "filename": ".github/DISCUSSION_TEMPLATE/q-a.yml",
+      "filename": "",
       "before": "",
-      "after": "title: \"[Question and support] \"\nlabels: [\"question/support\"]\nbody:\n  - type: markdown\n    attributes:\n      value: |\n        Describe the problem/question: A clear and concise description of what the problem/issue or question is.\n  - type: checkboxes\n    attributes:\n      label: Please tick this to confirm\n      options:\n        - label: Yes, I have read [the FAQ](https://github.com/PrivateBin/PrivateBin/wiki/FAQ) and I found no solution/answer there.\n  - type: markdown\n    attributes:\n      value: |\n        ## What you did\n        Tell us how to reproduce the problem.\n\n        1.\n        2.\n  - type: textarea\n    id: what_happens\n    attributes:\n      label: What happens\n  - type: textarea\n    id: what_should_happen\n    attributes:\n      label: What should happen\n  - type: textarea\n    id: additional_info\n    attributes:\n      label: Additional information\n      description: If you have access to the server log files, copy them here.\n  - type: input\n    id: server_address\n    attributes:\n      label: Server address\n  - type: input\n    id: server_os\n    attributes:\n      label: Server OS\n  - type: input\n    id: webserver\n    attributes:\n      label: Webserver\n  - type: input\n    id: browser\n    attributes:\n      label: Browser\n  - type: input\n    id: privatebin_version\n    attributes:\n      label: PrivateBin version\n  - type: radio\n    id: reproduce_issue\n    attributes:\n      label: I can reproduce this issue on [https://privatebin.net](https://privatebin.net)\n      options:\n        - label: Yes\n          value: Yes\n        - label: No\n          value: No",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 62
-    },
-    {
-      "filename": ".github/ISSUE_TEMPLATE/config.yml",
-      "before": "",
-      "after": "blank_issues_enabled: false\ncontact_links:\n  - name: Question and support\n    url: https://github.com/orgs/PrivateBin/discussions/new?category=q-a\n    about: Your setup is not working and you need help or you have a question regarding\n  PrivateBin\n  - name: Problem with the container image\n    url: https://github.com/PrivateBin/docker-nginx-fpm-alpine/issues/new\n    about: Please report all problems that apply **only** to the official (Docker) image `docker-nginx-fpm-alpine` here.\n  - name: Security issue\n    url: https://github.com/PrivateBin/PrivateBin/security/policy\n    about: Please report security vulnerabilities and other security issues here.\n",
-      "total_deletions": 0,
-      "total_additions": 13
+      "total_additions": 0
     }
   ]
 }

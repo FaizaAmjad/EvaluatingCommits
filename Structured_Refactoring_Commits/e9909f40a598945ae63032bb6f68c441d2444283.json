@@ -64,18 +64,11 @@
   },
   "code": [
     {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\n# Goal: Rename the project to @aijunior/dev and change description\n# Plan:\n# 1. Change the name field in package.json to \"@aijunior/dev\".\n# 2. Change the description field in package.json to \"Your AI Contributor\".\n# 3. No new files are needed for this task.\n\n# Updating package.json with new project name and description\njq '.name = \"@aijunior/dev\"' package.json > package_temp.json && mv package_temp.json package.json\njq '.description = \"Your AI Contributor\"' package.json > package_temp.json && mv package_temp.json package.json\n\necho \"Project renamed to @aijunior/dev and description changed to 'Your AI Contributor' successfully\"\n",
-      "after": "#!/bin/sh\n\n# Goal: Rename project to Junior\n# Plan:\n# 1. Update package.json\n# 2. Update README.md\n# 3. Scan the source code files in the ./src directory recursively and replace old package name with the new one where found.\n\n# Step 1: Update package.json\ntmp_package_json=$(mktemp)\njq '.name=\"@aijunior/dev\" | .repository.url=\"git+https://github.com/tisztamo/Junior.git\" | .bugs.url=\"https://github.com/tisztamo/Junior/issues\" | .homepage=\"https://github.com/tisztamo/Junior#readme\"' package.json > \"$tmp_package_json\" && mv \"$tmp_package_json\" package.json\n\n# Step 2: Update README.md\nsed -i '' 's/The Contributor - Your AI contributor which writes itself./The Junior - Your AI Junior which writes itself./g' README.md\n\n# Step 3: Scan source code and replace old package name\nfind ./src -name '*.js' -print0 | while IFS= read -r -d '' file\ndo\n    sed -i '' 's#@aijunior/contributor#@aijunior/dev#g' \"$file\"\ndone",
-      "total_deletions": 8,
-      "total_additions": 16
-    },
-    {
-      "filename": "package.json",
-      "before": "  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/tisztamo/contributor.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/contributor/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/contributor#readme\",\n  \"devDependencies\": {\n    \"babel-preset-solid\": \"^1.7.7\"\n  }",
-      "after": "  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/tisztamo/Junior.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/Junior/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/Junior#readme\",\n  \"devDependencies\": {\n    \"babel-preset-solid\": \"^1.7.7\"\n  }",
-      "total_deletions": 3,
-      "total_additions": 3
+      "filename": "",
+      "before": "",
+      "after": "",
+      "total_deletions": 0,
+      "total_additions": 0
     }
   ]
 }

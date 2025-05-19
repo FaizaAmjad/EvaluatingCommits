@@ -40,11 +40,11 @@
   },
   "code": [
     {
-      "filename": "prompt/history/2023/08/30/12:16_Improve documentation/change.sh",
+      "filename": "",
       "before": "",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Improve documentation\"\necho \"Plan:\"\necho \"1. Update the _coverpage.md for the specified improvements\"\necho \"2. No further steps required as all changes are contained in _coverpage.md\"\n\ncat << 'EOF' > docs/_coverpage.md\n# <span class=\"cover-color-blue\">**You are the Pro,**</span> <span class=\"cover-color-orange\">**Junior&nbsp;codes**</span>\n\nKraft code with the **Junior AI IDE**\n\nWorks on large codebases, soon on your mobile phone.\n\n![](assets/logo.svg)\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 18
+      "total_additions": 0
     }
   ]
 }

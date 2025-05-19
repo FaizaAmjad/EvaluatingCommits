@@ -70,32 +70,11 @@
   },
   "code": [
     {
-      "filename": "prompt/history/2023/08/24/10:51_Refactor frontend service directories/change.sh",
+      "filename": "",
       "before": "",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor frontend service directories\"\necho \"Plan:\"\necho \"1. Create service/config directory\"\necho \"2. Move cliArgsService.js to service/config/cliArgs.js\"\necho \"3. Extract isBetaEnabled to its own service file in service/config\"\necho \"4. Update imports in moved files\"\necho \"5. Update imports in RequirementsEditor.jsx to match new paths\"\n\n# Step 1: Create service/config directory\nmkdir -p src/frontend/service/config\n\n# Step 2: Move cliArgsService.js to service/config/cliArgs.js and refactor\ncat << 'EOF' > src/frontend/service/config/cliArgs.js\nimport { getBaseUrl } from '../../getBaseUrl';\n\nconst cliArgs = async () => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/config`, {\n    method: 'GET',\n    headers: { 'Content-Type': 'application/json' },\n  });\n\n  const data = await response.json();\n\n  return data.cliargs || [];\n};\n\nexport default cliArgs;\nEOF\n\n# Step 3: Extract isBetaEnabled to its own service file in service/config\ncat << 'EOF' > src/frontend/service/config/isBetaEnabled.js\nimport cliArgs from './cliArgs';\n\nconst isBetaEnabled = async () => {\n  const args = await cliArgs();\n  return args.includes('--beta');\n}\n\nexport default isBetaEnabled;\nEOF\n\n# Step 4: Update imports in moved files\n# The only change needed was in cliArgs.js for getBaseUrl.\n\n# Step 5: Update imports in RequirementsEditor.jsx to match new paths\ncat << 'EOF' > src/frontend/components/RequirementsEditor.jsx\nimport { createEffect } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\nimport { promptDescriptor, setPromptDescriptor } from '../model/promptDescriptor'; \nimport { requirements, setRequirements } from '../model/requirements';\nimport { getYamlEntry } from '../service/getYamlEntry';\nimport isBetaEnabled from '../service/config/isBetaEnabled'; \nimport jsyaml from 'js-yaml'; \nimport AutoGrowingTextarea from './AutoGrowingTextarea';\n\nconst RequirementsEditor = () => {\n  const handleRequirementsChange = async (e) => {\n    await postDescriptor({ requirements: e.target.value });\n  };\n\n  const handleInput = (e) => {\n    const descriptor = promptDescriptor();\n    const parsed = jsyaml.load(descriptor);\n    parsed.requirements = e.target.value; \n    const updatedDescriptor = jsyaml.dump(parsed);\n    setPromptDescriptor(updatedDescriptor);\n  };\n\n  createEffect(() => {\n    const descriptor = promptDescriptor();\n    const currentRequirements = getYamlEntry(descriptor, 'requirements') || '';\n    if (currentRequirements !== requirements()) {\n      setRequirements(currentRequirements);\n    }\n  });\n\n  const isBeta = isBetaEnabled();\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-1 rounded border border-border mt-2\">\n      <AutoGrowingTextarea\n        class=\"w-full bg-emphasize text-emphasize text-lg\"\n        placeholder={isBeta ? \"Enter your requirements...\" : \"This is disabled for now. Call with 'npx junior-web -- --beta' to enable.\"}\n        value={requirements()}\n        onInput={e => handleInput(e)}\n        onChange={e => handleRequirementsChange(e)}\n        disabled={!isBeta}\n      />\n    </div>\n  );\n};\n\nexport default RequirementsEditor;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 99
-    },
-    {
-      "filename": "src/frontend/components/RequirementsEditor.jsx",
-      "before": "import { promptDescriptor, setPromptDescriptor } from '../model/promptDescriptor'; \nimport { requirements, setRequirements } from '../model/requirements';\nimport { getYamlEntry } from '../service/getYamlEntry';\nimport { isBetaEnabled } from '../service/cliArgsService'; \nimport jsyaml from 'js-yaml'; \nimport AutoGrowingTextarea from './AutoGrowingTextarea';\n",
-      "after": "import { promptDescriptor, setPromptDescriptor } from '../model/promptDescriptor'; \nimport { requirements, setRequirements } from '../model/requirements';\nimport { getYamlEntry } from '../service/getYamlEntry';\nimport isBetaEnabled from '../service/config/isBetaEnabled'; \nimport jsyaml from 'js-yaml'; \nimport AutoGrowingTextarea from './AutoGrowingTextarea';\n",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
-      "filename": "src/frontend/service/config/cliArgs.js",
-      "before": "",
-      "after": "import { getBaseUrl } from '../../getBaseUrl';\n\nconst cliArgs = async () => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(`${baseUrl}/config`, {\n    method: 'GET',\n    headers: { 'Content-Type': 'application/json' },\n  });\n\n  const data = await response.json();\n\n  return data.cliargs || [];\n};\n\nexport default cliArgs;",
-      "total_deletions": 0,
-      "total_additions": 15
-    },
-    {
-      "filename": "src/frontend/service/config/isBetaEnabled.js",
-      "before": "",
-      "after": "import cliArgs from './cliArgs';\n\nconst isBetaEnabled = async () => {\n  const args = await cliArgs();\n  return args.includes('--beta');\n}\n\nexport default isBetaEnabled;",
-      "total_deletions": 0,
-      "total_additions": 8
+      "total_additions": 0
     }
   ]
 }

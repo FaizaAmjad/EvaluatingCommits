@@ -40,18 +40,11 @@
   },
   "code": [
     {
-      "filename": "change.sh",
-      "before": "#!/bin/sh\nset -e\ngoal=\"Implement monitoring in CommitMessageInput\"\necho \"Plan:\"\necho \"1. Modify monitorChangeSignal.js to add a flag indicating whether monitoring is already running.\"\necho \"2. Modify CommitMessageInput.jsx to start monitoring change signal when mounting, without running it if it is already running.\"\n\n# Step 1: Modify monitorChangeSignal.js to add a flag indicating whether monitoring is already running\ncat << 'EOF' > src/frontend/service/monitorChangeSignal.js\nimport { createEffect } from 'solid-js';\nimport { change } from '../stores/change';\nimport { setCommitMessage } from '../stores/commitMessage';\nexport default monitorChangeSignal;\nEOF\n\n# Step 2: Modify CommitMessageInput.jsx to start monitoring change signal when mounting, without running it if it is already running\ncat << 'EOF' > src/frontend/components/CommitMessageInput.jsx\nimport { onCleanup } from 'solid-js';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChangeSignal from '../service/monitorChangeSignal';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n  monitorChangeSignal();\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" className=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" value={commitMessage()} onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Move and rename monitorChangeSignal.js\"\necho \"Plan:\"\necho \"1. Move monitorChangeSignal.js from src/frontend/service/ to src/frontend/stores/ and rename it to monitorChange.js.\"\necho \"2. Update the import path in CommitMessageInput.jsx to reflect the new location and name of monitorChange.js.\"\necho \"3. Ensure no other parts of the code depend on the old path of monitorChangeSignal.js.\"\n\n# Move and rename monitorChangeSignal.js to monitorChange.js\nmv src/frontend/service/monitorChangeSignal.js src/frontend/stores/monitorChange.js\n\n# Update CommitMessageInput.jsx with the new import path for monitorChange.js\ncat << 'EOF' > src/frontend/components/CommitMessageInput.jsx\nimport { onCleanup } from 'solid-js';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChangeSignal from '../stores/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting\n  monitorChangeSignal();\n\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" className=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" value={commitMessage()} onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\nEOF\n\n# Update monitorChange.js with the new content\ncat << 'EOF' > src/frontend/stores/monitorChange.js\nimport { createEffect } from 'solid-js';\nimport { change } from '../stores/change';\nimport { setCommitMessage } from '../stores/commitMessage';\nexport default monitorChangeSignal;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "total_deletions": 27,
-      "total_additions": 31
-    },
-    {
-      "filename": "src/frontend/components/CommitMessageInput.jsx",
-      "before": "import { onCleanup } from 'solid-js';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChangeSignal from '../service/monitorChangeSignal';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting",
-      "after": "import { onCleanup } from 'solid-js';\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\nimport monitorChangeSignal from '../stores/monitorChange';\n\nconst CommitMessageInput = (props) => {\n  // Start monitoring when mounting",
-      "total_deletions": 1,
-      "total_additions": 1
+      "filename": "",
+      "before": "",
+      "after": "",
+      "total_deletions": 0,
+      "total_additions": 0
     }
   ]
 }

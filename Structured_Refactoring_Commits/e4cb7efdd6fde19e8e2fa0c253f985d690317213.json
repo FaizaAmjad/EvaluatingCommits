@@ -52,25 +52,11 @@
   },
   "code": [
     {
-      "filename": "prompt/history/2023/08/30/14:36_Refactor clear-branches with simple-git/change.sh",
+      "filename": "",
       "before": "",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor clear-branches with simple-git\"\necho \"Plan:\"\necho \"1. Install simple-git package\"\necho \"2. Refactor clearBranches.js to use simple-git and check for merged branches before deleting\"\necho \"3. Refactor clearBranchesCommand.js to handle exceptions and call clearBranches.js\"\n\nnpm install simple-git\n\ncat > src/git/clearBranches.js << 'EOF'\nimport simpleGit from 'simple-git';\n\nconst git = simpleGit();\n\nexport default async function clearBranches(exceptions = []) {\n  try {\n    const currentBranch = await git.revparse(['--abbrev-ref', 'HEAD']);\n    const allBranches = await git.branchLocal();\n\n    const branchesToDelete = allBranches.all.filter(branch => {\n      return branch !== currentBranch && !exceptions.includes(branch);\n    });\n\n    for (const branch of branchesToDelete) {\n      const isMerged = await git.raw(['branch', '--merged', branch]);\n      if (isMerged.includes(branch)) {\n        await git.branch(['-d', branch]);\n      } else {\n        console.log(`Branch ${branch} is not merged, skipping...`);\n      }\n    }\n  } catch (err) {\n    console.error(`An error occurred: ${err}`);\n  }\n}\nEOF\n\ncat > scripts/clearBranchesCommand.js << 'EOF'\nimport clearBranches from '../src/git/clearBranches.js';\n\nconst exceptions = process.argv.slice(2);\nclearBranches(exceptions).catch(err => {\n  console.error(`Failed to clear branches: ${err}`);\n});\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "",
       "total_deletions": 0,
-      "total_additions": 48
-    },
-    {
-      "filename": "prompt/history/2023/08/30/14:40_Refactor clear-branches with better error handling/change.sh",
-      "before": "",
-      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor clear-branches with better error handling\"\necho \"Plan:\"\necho \"1. Refactor clearBranches.js to better handle not fully merged branches\"\necho \"2. Handle the exception during branch deletion and continue with the next branch\"\n\ncat > src/git/clearBranches.js << 'EOF'\nimport simpleGit from 'simple-git';\n\nconst git = simpleGit();\n\nexport default async function clearBranches(exceptions = []) {\n  try {\n    const currentBranch = await git.revparse(['--abbrev-ref', 'HEAD']);\n    const allBranches = await git.branchLocal();\n\n    const branchesToDelete = allBranches.all.filter(branch => {\n      return branch !== currentBranch && !exceptions.includes(branch);\n    });\n\n    for (const branch of branchesToDelete) {\n      try {\n        const isMerged = await git.raw(['branch', '--merged', branch]);\n        if (isMerged.includes(branch)) {\n          await git.branch(['-d', branch]);\n        } else {\n          console.log(`Branch ${branch} is not merged, skipping...`);\n        }\n      } catch (err) {\n        console.log(`Failed to delete branch ${branch}: ${err.message}. Skipping...`);\n      }\n    }\n  } catch (err) {\n    console.error(`An error occurred: ${err}`);\n  }\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
-      "total_deletions": 0,
-      "total_additions": 40
-    },
-    {
-      "filename": "src/git/clearBranches.js",
-      "before": "import { promisify } from 'util';\nimport { exec as execCb } from 'child_process';\n\nconst exec = promisify(execCb);\n\nexport default async function clearBranches(exceptions = []) {\n  try {\n    const { stdout: currentBranch } = await exec('git rev-parse --abbrev-ref HEAD');\n    const { stdout: allBranches } = await exec('git for-each-ref --format=\"%(refname:short)\" refs/heads');\n\n    const branches = allBranches.split('\\n').filter(branch => branch !== currentBranch.trim() && !exceptions.includes(branch) && branch.trim() !== '');\n\n    for (const branch of branches) {\n      await executeCommand(`git branch -d ${branch}`);\n    }\n  } catch (err) {\n    console.error(`An error occurred: ${err}`);\n  }\n}\n\nasync function executeCommand(command) {\n  try {\n    console.log(`Running command: ${command}`);\n    const { stdout } = await exec(command);\n    console.log(`stdout: ${stdout}`);\n  } catch (err) {\n    throw err;\n  }\n}",
-      "after": "import simpleGit from 'simple-git';\n\nconst git = simpleGit();\n\nexport default async function clearBranches(exceptions = []) {\n  try {\n    const currentBranch = await git.revparse(['--abbrev-ref', 'HEAD']);\n    const allBranches = await git.branchLocal();\n\n    const branchesToDelete = allBranches.all.filter(branch => {\n      return branch !== currentBranch && !exceptions.includes(branch);\n    });\n\n    for (const branch of branchesToDelete) {\n      try {\n        const isMerged = await git.raw(['branch', '--merged', branch]);\n        if (isMerged.includes(branch)) {\n          await git.branch(['-d', branch]);\n        } else {\n          console.log(`Branch ${branch} is not merged, skipping...`);\n        }\n      } catch (err) {\n        console.log(`Failed to delete branch ${branch}: ${err.message}. Skipping...`);\n      }\n    }\n  } catch (err) {\n    console.error(`An error occurred: ${err}`);\n  }\n}\n",
-      "total_deletions": 18,
-      "total_additions": 18
+      "total_additions": 0
     }
   ]
 }
