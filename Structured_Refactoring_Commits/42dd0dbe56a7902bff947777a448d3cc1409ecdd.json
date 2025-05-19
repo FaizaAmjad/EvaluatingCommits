@@ -88,11 +88,25 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Factor out commit message to separate component\"\necho \"Plan:\"\necho \"1. Create a new file CommitMessageInput.jsx that will contain the input logic for the commit message.\"\necho \"2. Update CommitButton.jsx to import and utilize the new CommitMessageInput component.\"\necho \"3. Update App.jsx to include the new component if necessary.\"\n\n# Step 1: Creating new CommitMessageInput.jsx component\ncat > src/frontend/components/CommitMessageInput.jsx << 'EOF'\nimport { commitMessage, setCommitMessage } from '../stores/commitMessage';\n\nconst CommitMessageInput = (props) => {\n  const handleChange = (e) => {\n    setCommitMessage(e.target.value);\n  };\n\n  return (\n    <input type=\"text\" class=\"w-64 px-4 py-2 border rounded\" placeholder=\"Commit message...\" onInput={handleChange} />\n  );\n};\n\nexport default CommitMessageInput;\nEOF\n\n# Step 2: Updating CommitButton.jsx to include new component\ncat > src/frontend/components/CommitButton.jsx << 'EOF'\nimport { postCommit } from '../service/postCommit';\nimport CommitMessageInput from './CommitMessageInput';\nimport { commitMessage } from '../stores/commitMessage';\n\nconst CommitButton = () => {\n  };\n\n  return (\n    <div>\n      <CommitMessageInput />\n      <button class=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n    </div>\n  );\n};\n\nexport default CommitButton;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Move commit message input right before the commit button without unnecessary complexity\"\necho \"Plan:\"\necho \"1. Refactor App.jsx to include the CommitMessageInput component just above the CommitButton component.\"\necho \"2. Modify CommitButton.jsx to remove the wrapper div and CommitMessageInput.\"\n\n# Refactoring App.jsx to include the CommitMessageInput component just above the CommitButton\ncat > src/frontend/App.jsx << 'EOF'\nimport GenerateButton from './components/GenerateButton';\nimport ExecuteButton from './components/ExecuteButton';\nimport RollbackButton from './components/RollbackButton';\nimport CommitButton from './components/CommitButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\nimport NavBar from './components/NavBar';\nimport ExecutionResultDisplay from './components/ExecutionResultDisplay';\nimport GitStatusDisplay from './components/GitStatusDisplay';\nimport CommitMessageInput from './components/CommitMessageInput';\n\nconst App = () => {\n  return (\n    <div class=\"m-2\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />\n        <PromptDescriptor />\n        <GenerateButton />\n        <PromptDisplay />\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <GitStatusDisplay />\n        <CommitMessageInput />\n        <CommitButton />\n        <RollbackButton />\n      </div>\n    </div>\n  );\n};\n\nexport default App;\nEOF\n\n# Modifying CommitButton.jsx to remove the wrapper div and CommitMessageInput\ncat > src/frontend/components/CommitButton.jsx << 'EOF'\nimport { postCommit } from '../service/postCommit';\nimport { commitMessage } from '../stores/commitMessage';\n\nconst CommitButton = () => {\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n  );\n};\n\nexport default CommitButton;\nEOF\n\n# CommitMessageInput remains unchanged as it will handle the change event directly\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 20,
+      "total_additions": 36
+    },
+    {
+      "filename": "src/frontend/App.jsx",
+      "before": "import NavBar from './components/NavBar';\nimport ExecutionResultDisplay from './components/ExecutionResultDisplay';\nimport GitStatusDisplay from './components/GitStatusDisplay';\n\nconst App = () => {\n  return (\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <GitStatusDisplay />\n        <CommitButton />\n        <RollbackButton />\n      </div>",
+      "after": "import NavBar from './components/NavBar';\nimport ExecutionResultDisplay from './components/ExecutionResultDisplay';\nimport GitStatusDisplay from './components/GitStatusDisplay';\nimport CommitMessageInput from './components/CommitMessageInput';\n\nconst App = () => {\n  return (\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <GitStatusDisplay />\n        <CommitMessageInput />\n        <CommitButton />\n        <RollbackButton />\n      </div>",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 2
+    },
+    {
+      "filename": "src/frontend/components/CommitButton.jsx",
+      "before": "import { postCommit } from '../service/postCommit';\nimport CommitMessageInput from './CommitMessageInput';\nimport { commitMessage } from '../stores/commitMessage';\n\nconst CommitButton = () => {\n  };\n\n  return (\n    <div>\n      <CommitMessageInput />\n      <button class=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n    </div>\n  );\n};\n",
+      "after": "import { postCommit } from '../service/postCommit';\nimport { commitMessage } from '../stores/commitMessage';\n\nconst CommitButton = () => {\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-green-700 text-white rounded mt-2\" onClick={handleCommit}>Commit</button>\n  );\n};\n",
+      "total_deletions": 5,
+      "total_additions": 1
     }
   ]
 }

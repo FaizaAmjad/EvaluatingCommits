@@ -64,11 +64,32 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
-      "total_deletions": 0,
-      "total_additions": 0
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Move and reconfigure Tailwind config file\"\necho \"Plan:\"\necho \"1. Move the 'tailwind.config.js' file to 'src/frontend' directory.\"\necho \"2. Rename the 'tailwind.config.js' to 'tailwind.config.cjs' since Node.js uses commonJS and not ES6 syntax.\"\necho \"3. Update 'postcss.config.cjs' in 'src/frontend' directory to use the moved tailwind config file with the complete path.\"\necho \"4. Update 'vite.config.js' in 'src' directory to use the updated 'postcss.config.cjs' file.\"\n\n# Move and rename the tailwind config file\nmv ./tailwind.config.js ./src/frontend/tailwind.config.cjs\n\n# Heredoc the new postcss.config.cjs file\ncat <<'EOF' > ./src/frontend/postcss.config.cjs\nconst tailwindcss = require('tailwindcss');\nconst autoprefixer = require('autoprefixer');\nconst postcssImport = require('postcss-import');\nconst postcssNested = require('postcss-nested');\n\nmodule.exports = {\n  plugins: {\n    'postcss-import': {},\n    'tailwindcss/nesting': postcssNested,\n    tailwindcss: { config: './src/frontend/tailwind.config.cjs' },\n    autoprefixer: autoprefixer,\n  },\n};\nEOF\n\n# Heredoc the updated vite.config.js file\ncat <<'EOF' > ./src/vite.config.js\nimport { defineConfig } from 'vite'\nimport solidPlugin from 'vite-plugin-solid'\n\n})\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Move vite config, startVite.js and index.html to src/frontend/\"\necho \"Plan:\"\necho \"1. Move the vite config, startVite.js and index.html files to the src/frontend/ directory.\"\necho \"2. Update the import statements in web.js to point to the new location of startVite.js\"\necho \"3. Update the script source in index.html to keep it working.\"\necho \"4. Update the projectRoot in startVite.js to reflect the new location.\"\necho \"5. Update the path in the exec command in startVite.js to reflect the new file locations.\"\n\n# Step 1: Moving vite config, startVite.js and index.html to src/frontend/\n\ncat << 'EOF' > src/frontend/vite.config.js\nimport { defineConfig } from 'vite'\nimport solidPlugin from 'vite-plugin-solid'\n\n})\nEOF\n\n# Step 4: Updating projectRoot in startVite.js\n\ncat << 'EOF' > src/frontend/startVite.js\nimport { exec } from 'child_process';\nimport path from 'path';\nimport { fileURLToPath } from 'url';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\nconst projectRoot = path.resolve(__dirname, '../..');\n\nexport function startVite() {\n  const vite = exec(`${projectRoot}/node_modules/.bin/vite ${projectRoot}/src/frontend --open`);\n  vite.stdout.pipe(process.stdout);\n  vite.stderr.pipe(process.stderr);\n\n  process.on('exit', () => vite.kill());\n}\nEOF\n\ncat << 'EOF' > src/frontend/index.html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n  <title>Junior</title>\n</head>\n<body>\n  <div id=\"app\"></div>\n  <script type=\"module\" src=\"/frontend/index.jsx\"></script>\n</body>\n</html>\nEOF\n\n# Step 2: Updating web.js\n\ncat << 'EOF' > src/web.js\n#!/usr/bin/env node\nimport { startServer } from './backend/startServer.js';\nimport { startVite } from './frontend/startVite.js';\n\nstartServer();\nstartVite();\nEOF\n\n# Step 3: Updating index.html\n\ncat << 'EOF' > src/frontend/index.html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\">\n  <title>Junior</title>\n</head>\n<body>\n  <div id=\"app\"></div>\n  <script type=\"module\" src=\"/index.jsx\"></script>\n</body>\n</html>\nEOF\n\n# Remove old files\nrm src/vite.config.js\nrm src/startVite.js\nrm src/index.html\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 27,
+      "total_additions": 76
+    },
+    {
+      "filename": "src/frontend/index.html",
+      "before": "</head>\n<body>\n  <div id=\"app\"></div>\n  <script type=\"module\" src=\"/frontend/index.jsx\"></script>\n</body>\n</html>",
+      "after": "</head>\n<body>\n  <div id=\"app\"></div>\n  <script type=\"module\" src=\"/index.jsx\"></script>\n</body>\n</html>",
+      "total_deletions": 1,
+      "total_additions": 1
+    },
+    {
+      "filename": "src/frontend/startVite.js",
+      "before": "import { fileURLToPath } from 'url';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\nconst projectRoot = path.resolve(__dirname, '..');\n\nexport function startVite() {\n  const vite = exec(`${projectRoot}/node_modules/.bin/vite ${projectRoot}/src --open`);\n  vite.stdout.pipe(process.stdout);\n  vite.stderr.pipe(process.stderr);\n",
+      "after": "import { fileURLToPath } from 'url';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\nconst projectRoot = path.resolve(__dirname, '../..');\n\nexport function startVite() {\n  const vite = exec(`${projectRoot}/node_modules/.bin/vite ${projectRoot}/src/frontend --open`);\n  vite.stdout.pipe(process.stdout);\n  vite.stderr.pipe(process.stderr);\n",
+      "total_deletions": 2,
+      "total_additions": 2
+    },
+    {
+      "filename": "src/web.js",
+      "before": "#!/usr/bin/env node\nimport { startServer } from './backend/startServer.js';\nimport { startVite } from './startVite.js';\n\nstartServer();\nstartVite();",
+      "after": "#!/usr/bin/env node\nimport { startServer } from './backend/startServer.js';\nimport { startVite } from './frontend/startVite.js';\n\nstartServer();\nstartVite();",
+      "total_deletions": 1,
+      "total_additions": 1
     }
   ]
 }

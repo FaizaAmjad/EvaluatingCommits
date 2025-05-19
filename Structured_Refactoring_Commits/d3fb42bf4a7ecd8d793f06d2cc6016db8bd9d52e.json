@@ -40,11 +40,32 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Refactor code to handle OPENAI_API_KEY\"\necho \"Plan:\"\necho \"1. Create the directory src/llm/openai\"\necho \"2. Create the file src/llm/openai/createApi.js\"\necho \"3. Move the logic for creating the ChatGPTAPI instance to createApi.js\"\necho \"4. Implement the logic to read the OPENAI_API_KEY from the environment variable or from the secret.sh file\"\necho \"5. Update src/config.js to import and use the createApi function from createApi.js\"\n\nmkdir -p src/llm/openai\n\ncat << 'EOF' > src/llm/openai/createApi.js\nimport fs from 'fs';\nimport { ChatGPTAPI } from 'chatgpt';\nimport { getSystemPrompt } from \"../../prompt/getSystemPrompt.js\";\n\nexport default async function createApi(model) {\n  let apiKey = process.env.OPENAI_API_KEY;\n  }\n\n  if (!apiKey) {\n    throw new Error('OPENAI_API_KEY not found');\n  }\n\n  const systemMessage = await getSystemPrompt();\n}\nEOF\n\ncat << 'EOF' > src/config.js\nimport readline from 'readline';\nimport createApi from './llm/openai/createApi.js';\n\nfunction isDryRun() {\n  return process.argv.includes(\"-d\") || process.argv.includes(\"--dry-run\");\n}\n\nfunction get_model() {\n  const modelArg = process.argv.find(arg => arg.startsWith('--model='));\n  if (modelArg) {\n    return modelArg.split('=')[1];\n  }\n  return \"gpt-4\";\n}\n\nasync function getApi() {\n  if (isDryRun()) {\n    return {\n      sendMessage: () => { return {id: 42, text: \"DRY RUN, NOT SENT\"}}\n    };\n  } else {\n    return await createApi(get_model());\n  }\n}\n\nconst rl = readline.createInterface({\n  input: process.stdin,\n  output: process.stdout\n});\n\nexport { getApi, rl, get_model };\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor dry-run API creation\"\necho \"Plan:\"\necho \"1. Create a new file 'createFakeApi.js' inside './src/llm/fake/'\"\necho \"2. Copy the code related to fake api creation from 'config.js' to 'createFakeApi.js'\"\necho \"3. Modify 'config.js' to import and use the 'createFakeApi.js' function\"\necho \"4. Modify 'openai/createApi.js' to warn and return a fake api instance when OPENAI_API_KEY not found\"\n\nmkdir -p ./src/llm/fake/\n\ncat << 'EOF' > ./src/llm/fake/createFakeApi.js\nexport default function createFakeApi() {\n  return {\n    sendMessage: () => { return {id: 42, text: \"DRY RUN, NOT SENT\"}}\n  };\n}\nEOF\n\ncat << 'EOF' > ./src/config.js\nimport readline from 'readline';\nimport createApi from './llm/openai/createApi.js';\nimport createFakeApi from './llm/fake/createFakeApi.js';\n\nfunction isDryRun() {\n  return process.argv.includes(\"-d\") || process.argv.includes(\"--dry-run\");\n}\n\nfunction get_model() {\n  const modelArg = process.argv.find(arg => arg.startsWith('--model='));\n  if (modelArg) {\n    return modelArg.split('=')[1];\n  }\n  return \"gpt-4\";\n}\n\nasync function getApi() {\n  if (isDryRun()) {\n    return createFakeApi();\n  } else {\n    return await createApi(get_model());\n  }\n}\n\nconst rl = readline.createInterface({\n  input: process.stdin,\n  output: process.stdout\n});\n\nexport { getApi, rl, get_model };\nEOF\n\ncat << 'EOF' > ./src/llm/openai/createApi.js\nimport fs from 'fs';\nimport { ChatGPTAPI } from 'chatgpt';\nimport { getSystemPrompt } from \"../../prompt/getSystemPrompt.js\";\nimport createFakeApi from '../fake/createFakeApi.js';\n\nexport default async function createApi(model) {\n  let apiKey = process.env.OPENAI_API_KEY;\n  }\n\n  if (!apiKey) {\n    console.warn('OPENAI_API_KEY not found, using fake API');\n    return createFakeApi();\n  }\n\n  const systemMessage = await getSystemPrompt();\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 43,
+      "total_additions": 51
+    },
+    {
+      "filename": "src/config.js",
+      "before": "import readline from 'readline';\nimport createApi from './llm/openai/createApi.js';\n\nfunction isDryRun() {\n  return process.argv.includes(\"-d\") || process.argv.includes(\"--dry-run\");\n\nasync function getApi() {\n  if (isDryRun()) {\n    return {\n      sendMessage: () => { return {id: 42, text: \"DRY RUN, NOT SENT\"}}\n    };\n  } else {\n    return await createApi(get_model());\n  }",
+      "after": "import readline from 'readline';\nimport createApi from './llm/openai/createApi.js';\nimport createFakeApi from './llm/fake/createFakeApi.js';\n\nfunction isDryRun() {\n  return process.argv.includes(\"-d\") || process.argv.includes(\"--dry-run\");\n\nasync function getApi() {\n  if (isDryRun()) {\n    return createFakeApi();\n  } else {\n    return await createApi(get_model());\n  }",
+      "total_deletions": 3,
+      "total_additions": 2
+    },
+    {
+      "filename": "src/llm/fake/createFakeApi.js",
       "before": "",
-      "after": "",
+      "after": "export default function createFakeApi() {\n  return {\n    sendMessage: () => { return {id: 42, text: \"DRY RUN, NOT SENT\"}}\n  };\n}",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 5
+    },
+    {
+      "filename": "src/llm/openai/createApi.js",
+      "before": "import fs from 'fs';\nimport { ChatGPTAPI } from 'chatgpt';\nimport { getSystemPrompt } from \"../../prompt/getSystemPrompt.js\";\n\nexport default async function createApi(model) {\n  let apiKey = process.env.OPENAI_API_KEY;\n  }\n\n  if (!apiKey) {\n    throw new Error('OPENAI_API_KEY not found');\n  }\n\n  const systemMessage = await getSystemPrompt();",
+      "after": "import fs from 'fs';\nimport { ChatGPTAPI } from 'chatgpt';\nimport { getSystemPrompt } from \"../../prompt/getSystemPrompt.js\";\nimport createFakeApi from '../fake/createFakeApi.js';\n\nexport default async function createApi(model) {\n  let apiKey = process.env.OPENAI_API_KEY;\n  }\n\n  if (!apiKey) {\n    console.warn('OPENAI_API_KEY not found, using fake API');\n    return createFakeApi();\n  }\n\n  const systemMessage = await getSystemPrompt();",
+      "total_deletions": 1,
+      "total_additions": 3
     }
   ]
 }

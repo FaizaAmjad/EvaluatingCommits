@@ -40,11 +40,11 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/08/29/15:40_Improve documentation and link jobs/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Improve documentation and link jobs\"\necho \"Plan:\"\necho \"1. Remove advisor's name and translate 'helyi nagy\u00e1gy\u00fa'.\"\necho \"2. Link the jobs from the sidebar.\"\n\n# 1. Remove advisor's name and translate 'helyi nagy\u00e1gy\u00fa'.\ncat > docs/open_jobs.md << 'EOF'\n# Open Positions at Junior AI IDE\n\nWe're in the early stages of building an exciting startup based on our open source project, Junior AI IDE. Our primary goal right now is to find the right leadership to steer the ship and take our vision to the next level. Discover more about us at [aijunior.dev](https://aijunior.dev).\n\n## Co-founder CEO\n\n**Qualifications:**\n- Proven experience in marketing within a freemium user/product-led growth environment, especially from similar tools companies.\n- Strong networking abilities.\n- Strong leadership qualities, with the ability to motivate, inspire, and build a team.\n\n**Advice from Experts:**\nA \"local big gun\" (translated from \"helyi nagy\u00e1gy\u00fa\") suggested looking for a \"marketing person at a similar freemium user/product-led growth tools company.\" We're taking this advice to heart and would love to connect with professionals who align with this vision.\n\nInterested candidates or those who can connect us to potential candidates are encouraged to reach out. Together, we can make Junior AI IDE a groundbreaking success.\nEOF\n\n# 2. Link the jobs from the sidebar.\ncat > docs/_sidebar.md << 'EOF'\n* [Junior Docs](./README.md)\n* [Usage](./usage.md)\n* [Web](./web.md)\n* [Prompt Descriptor](./descriptor.md)\n* [Roadmap](./roadmap.md)\n* [Open Jobs](./open_jobs.md)\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 37
     }
   ]
 }

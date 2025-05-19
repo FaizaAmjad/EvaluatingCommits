@@ -40,11 +40,18 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/08/28/15:57_Simplify git reset function/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Simplify git reset function\"\necho \"Plan:\"\necho \"1. Update the resetGit.js to simply delete new files and dirs that are not gitignored\"\necho \"2. Update the resetGit.js to undo all modifications since the last commit\"\n\ncat > src/git/resetGit.js << 'EOF'\nimport { promisify } from 'util';\nimport { exec as execCb } from 'child_process';\n\nconst exec = promisify(execCb);\n\nexport default async function resetGit() {\n  try {\n    await executeCommand('git clean -f -d');\n    await executeCommand('git reset --hard');\n  } catch (err) {\n    console.error(`An error occurred: ${err}`);\n  }\n}\n\nasync function executeCommand(command) {\n  try {\n    console.log(`Running command: ${command}`);\n    const { stdout } = await exec(command);\n    console.log(`stdout: ${stdout}`);\n  } catch (err) {\n    console.error(`An error occurred while executing the command: ${command}. Error: ${err}`);\n  }\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 34
+    },
+    {
+      "filename": "src/git/resetGit.js",
+      "before": "\nexport default async function resetGit() {\n  try {\n    await executeCommand('git stash -u');\n\n    await executeCommand('git clean -f -d && git reset --hard');\n\n    await executeCommand('git checkout stash@{0} -- prompt.yaml', true);\n    await executeCommand('git checkout stash@{0} -- prompt.md', true);\n\n    await executeCommand('git stash drop');\n  } catch (err) {\n    console.error(`An error occurred: ${err}`);\n  }\n}\n\nasync function executeCommand(command, ignoreErrors = false) {\n  try {\n    console.log(`Running command: ${command}`);\n    const { stdout } = await exec(command);\n    console.log(`stdout: ${stdout}`);\n  } catch (err) {\n    if (!ignoreErrors) {\n      throw err;\n    }\n    console.warn(`An error occurred while executing the command: ${command}. Continuing...`);\n  }\n}",
+      "after": "\nexport default async function resetGit() {\n  try {\n    await executeCommand('git clean -f -d');\n    await executeCommand('git reset --hard');\n  } catch (err) {\n    console.error(`An error occurred: ${err}`);\n  }\n}\n\nasync function executeCommand(command) {\n  try {\n    console.log(`Running command: ${command}`);\n    const { stdout } = await exec(command);\n    console.log(`stdout: ${stdout}`);\n  } catch (err) {\n    console.error(`An error occurred while executing the command: ${command}. Error: ${err}`);\n  }\n}",
+      "total_deletions": 13,
+      "total_additions": 4
     }
   ]
 }

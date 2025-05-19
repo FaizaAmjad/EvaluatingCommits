@@ -40,10 +40,17 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/09/22/16:43_Refactor terminal backend and remove console logs/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor terminal backend and remove console logs\"\necho \"Plan:\"\necho \"1. Refactor setupTerminalServer.js by removing console logs.\"\necho \"2. No changes needed for terminalRoutes.js as it has no console logs.\"\necho \"3. Update the files with the refactored content.\"\n\n# Refactor setupTerminalServer.js\ncat > ./src/backend/terminal/setupTerminalServer.js << 'EOF'\nimport os from 'os';\nimport pty from 'node-pty';\n\nexport default function setupTerminalServer(socket) {\n  const defaultShell = process.env.SHELL || '/bin/sh';\n  const shell = os.platform() === 'win32' ? 'powershell.exe' : defaultShell;\n  const terminal = pty.spawn(shell, [], {\n    name: 'xterm-color',\n    env: process.env,\n  });\n\n  socket.on('message', (data) => {\n    terminal.write(data);\n  });\n\n  terminal.on('data', (data) => {\n    socket.send(data);\n  });\n\n  terminal.on('exit', () => {\n    socket.close();\n  });\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
+      "total_additions": 36
+    },
+    {
+      "filename": "src/backend/terminal/setupTerminalServer.js",
+      "before": "import pty from 'node-pty';\n\nexport default function setupTerminalServer(socket) {\n  console.log(\"Setting up terminal server...\");\n\n  const defaultShell = process.env.SHELL || '/bin/sh';\n  const shell = os.platform() === 'win32' ? 'powershell.exe' : defaultShell;\n  const terminal = pty.spawn(shell, [], {\n  });\n\n  socket.on('message', (data) => {\n    console.log(\"Received message:\", data.toString());\n    terminal.write(data);\n  });\n\n  terminal.on('data', (data) => {\n    console.log(\"Shell output:\", data.toString());\n    socket.send(data);\n  });\n\n  terminal.on('exit', () => {\n    console.log(\"Shell exited\");\n    socket.close();\n  });\n}",
+      "after": "import pty from 'node-pty';\n\nexport default function setupTerminalServer(socket) {\n  const defaultShell = process.env.SHELL || '/bin/sh';\n  const shell = os.platform() === 'win32' ? 'powershell.exe' : defaultShell;\n  const terminal = pty.spawn(shell, [], {\n  });\n\n  socket.on('message', (data) => {\n    terminal.write(data);\n  });\n\n  terminal.on('data', (data) => {\n    socket.send(data);\n  });\n\n  terminal.on('exit', () => {\n    socket.close();\n  });\n}",
+      "total_deletions": 5,
       "total_additions": 0
     }
   ]

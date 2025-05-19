@@ -40,11 +40,32 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/08/31/11:11_Refactor file list handler/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor file list handler\"\necho \"Plan:\"\necho \"1. Create a new handler file for the file listing functionality.\"\necho \"2. Move the file list handler function to the new handler file.\"\necho \"3. Add error handling to the new handler.\"\necho \"4. Modify the readFileList function to ignore .git.\"\necho \"5. Update setupRoutes.js to use the new handler.\"\n\n# Step 1: Create new handler file\ncat > ./src/backend/handlers/fileListHandler.js <<EOF\nimport readFileList from '../fileutils/readFileList.js';\n\nexport async function fileListHandler(req, res) {\n  try {\n    const filesList = await readFileList(\"./\");\n    res.json(filesList);\n  } catch (error) {\n    res.status(500).json({ error: 'Failed to list files' });\n  }\n}\nEOF\n# Goal: Created new handler for file listing\n\n# Step 2: Moved handling function to new file\n# No change required as the function was moved during file creation.\n\n# Step 3: Error handling added during file creation.\n\n# Step 4: Modify readFileList function to ignore .git\ncat > ./src/backend/fileutils/readFileList.js <<EOF\nimport fs from 'fs';\nimport path from 'path';\n\nasync function readFileList(dir, relativePath = \"\") {\n  const items = await fs.promises.readdir(dir);\n  const itemDetails = await Promise.all(\n    items.map(async item => {\n      if (item === \".git\") return; // Ignore .git directory\n      const fullPath = path.join(dir, item);\n      const stats = await fs.promises.stat(fullPath);\n      if (stats.isDirectory()) {\n        if (item !== \"node_modules\" && item !== \"prompt\") {\n          return {\n            type: \"dir\",\n            name: item,\n            children: await readFileList(fullPath, path.join(relativePath, item))\n          };\n        }\n      } else {\n        return {\n          type: \"file\",\n          name: item,\n          path: path.join(relativePath, item)\n        };\n      }\n    })\n  );\n\n  return itemDetails.filter(Boolean);\n}\n\nexport default readFileList;\nEOF\n# Goal: Updated readFileList to ignore .git directory\n\n# Step 5: Update setupRoutes.js\ncat > ./src/backend/setupRoutes.js <<EOF\nimport { setupGitRoutes } from './routes/setupGitRoutes.js';\nimport { setupPromptRoutes } from './routes/setupPromptRoutes.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport { configHandler } from './handlers/configHandler.js';\nimport { fileListHandler } from './handlers/fileListHandler.js';\n\nexport function setupRoutes(app) {\n  setupPromptRoutes(app);\n  setupGitRoutes(app);\n  app.post('/execute', executeHandler);\n  app.get('/config', configHandler);\n  app.get('/files/list/', fileListHandler); // Using the new handler function here\n}\nEOF\n# Goal: Updated setupRoutes to use new handler\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 86
+    },
+    {
+      "filename": "src/backend/fileutils/readFileList.js",
+      "before": "  const items = await fs.promises.readdir(dir);\n  const itemDetails = await Promise.all(\n    items.map(async item => {\n      const fullPath = path.join(dir, item);\n      const stats = await fs.promises.stat(fullPath);\n      if (stats.isDirectory()) {",
+      "after": "  const items = await fs.promises.readdir(dir);\n  const itemDetails = await Promise.all(\n    items.map(async item => {\n      if (item === \".git\") return; // Ignore .git directory\n      const fullPath = path.join(dir, item);\n      const stats = await fs.promises.stat(fullPath);\n      if (stats.isDirectory()) {",
+      "total_deletions": 0,
+      "total_additions": 1
+    },
+    {
+      "filename": "src/backend/handlers/fileListHandler.js",
+      "before": "",
+      "after": "import readFileList from '../fileutils/readFileList.js';\n\nexport async function fileListHandler(req, res) {\n  try {\n    const filesList = await readFileList(\"./\");\n    res.json(filesList);\n  } catch (error) {\n    res.status(500).json({ error: 'Failed to list files' });\n  }\n}",
+      "total_deletions": 0,
+      "total_additions": 10
+    },
+    {
+      "filename": "src/backend/setupRoutes.js",
+      "before": "import { setupPromptRoutes } from './routes/setupPromptRoutes.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport { configHandler } from './handlers/configHandler.js';\nimport readFileList from './fileutils/readFileList.js';\n\nexport function setupRoutes(app) {\n  setupPromptRoutes(app);\n  setupGitRoutes(app);\n  app.post('/execute', executeHandler);\n  app.get('/config', configHandler);\n\n  app.get('/files/list/', async (req, res) => {\n    const filesList = await readFileList(\"./\");\n    res.json(filesList);\n  });\n}",
+      "after": "import { setupPromptRoutes } from './routes/setupPromptRoutes.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport { configHandler } from './handlers/configHandler.js';\nimport { fileListHandler } from './handlers/fileListHandler.js';\n\nexport function setupRoutes(app) {\n  setupPromptRoutes(app);\n  setupGitRoutes(app);\n  app.post('/execute', executeHandler);\n  app.get('/config', configHandler);\n  app.get('/files/list/', fileListHandler); // Using the new handler function here\n}",
+      "total_deletions": 6,
+      "total_additions": 2
     }
   ]
 }

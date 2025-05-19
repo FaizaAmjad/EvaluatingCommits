@@ -52,11 +52,39 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
+      "filename": "change.sh",
+      "before": "#!/bin/sh\n# Goal: Setup documentation with GitHub Pages\n# Plan:\n# 1. Remove everything from the doc directory\n# 2. Create a new directory hierarchy for the documentation\n# 3. Install documentation tools\n# 4. Add markdown examples\n# 5. Configure GitHub Pages\n# 6. Run build process to generate HTML from markdown\n\n# Step 1: Remove everything from the doc directory\nrm -rf ./doc/*\n\n# Step 2: Create a new directory hierarchy for the documentation\nmkdir -p ./doc/api ./doc/getting-started ./doc/examples\n\n# Step 3: Install documentation tools\n# We'll use markdown-it for converting markdown to HTML,\n# and highlight.js for code highlighting in the generated HTML\n\nnpm install --save-dev markdown-it highlight.js\n\n# Create a script to convert the markdown files to HTML\ncat << EOF > ./doc/build.js\nimport { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';\nimport { join, extname } from 'path';\nimport MarkdownIt from 'markdown-it';\nimport hljs from 'highlight.js';\n\nconst md = new MarkdownIt({\n  html: true,\n  linkify: true,\n  typographer: true,\n  highlight: function (str, lang) {\n    if (lang && hljs.getLanguage(lang)) {\n      try {\n        return hljs.highlight(str, { language: lang }).value;\n      } catch (__) {}\n    }\n    return ''; \n  }\n});\n\nconst convertDirectory = (dir) => {\n  const files = readdirSync(dir);\n  files.forEach(file => {\n    const filePath = join(dir, file);\n    const stats = statSync(filePath);\n    if (stats.isDirectory()) {\n      convertDirectory(filePath);\n    } else if (extname(file) === '.md') {\n      const markdown = readFileSync(filePath, 'utf8');\n      const html = md.render(markdown);\n      writeFileSync(filePath.replace('.md', '.html'), html);\n    }\n  });\n}\n\nconvertDirectory('./doc');\nEOF\n\n# Add the doc build script to package.json scripts\njq '.scripts += {\"build:docs\": \"node ./doc/build.js\"}' package.json > package.json.temp\nmv package.json.temp package.json\n\n# Step 4: Add markdown examples\n\ncat << EOF > ./doc/introduction.md\n# Introduction\nThis is the introduction to our documentation. Check out our [example](example.html) for more details.\nEOF\n\ncat << EOF > ./doc/example.md\n# Example\nThis is an example of our documentation.\nEOF\n\n# Step 5: Configure GitHub Pages\n# GitHub Pages will serve files from the doc directory on the gh-pages branch\n# We can configure this in the repository settings on GitHub\n\necho \"Please configure GitHub Pages in your repository settings to serve files from the 'doc' directory on the 'gh-pages' branch.\"\n\n# Create an empty .nojekyll file to tell GitHub Pages not to use Jekyll\ntouch ./doc/.nojekyll\n\n# Step 6: Add index.html\ncat << EOF > ./doc/index.html\n<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Documentation</title>\n  </head>\n  <body>\n    <h1>Welcome to our documentation!</h1>\n    <p>Start with the <a href=\"introduction.html\">introduction</a>.</p>\n  </body>\n</html>\nEOF\n\n# Run build process to generate HTML from markdown\nnpm run build:docs",
+      "after": "#!/bin/sh\n# Goal: Refactor build.js into separate files and pass MarkdownIt as an argument\n# Plan:\n# 1. Rename build.js to buildDoc.js\n# 2. Create a new file, createMarkdownRenderer.js, that handles the creation of MarkdownIt\n# 3. Create a new file, convertDirectory.js, that handles directory conversion\n# 4. Modify convertDirectory.js to accept MarkdownIt as an argument\n\n# Step 1\nmv ./doc/build.js ./doc/buildDoc.js\n\n# Step 2\ncat << EOF > ./doc/createMarkdownRenderer.js\nimport MarkdownIt from 'markdown-it';\nimport hljs from 'highlight.js';\n\nexport default function createMarkdownRenderer() {\n    return new MarkdownIt({\n        html: true,\n        linkify: true,\n        typographer: true,\n        highlight: function (str, lang) {\n            if (lang && hljs.getLanguage(lang)) {\n                try {\n                    return hljs.highlight(str, { language: lang }).value;\n                } catch (__) {}\n            }\n            return ''; \n        }\n    });\n}\nEOF\n\n# Step 3\ncat << EOF > ./doc/convertDirectory.js\nimport { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';\nimport { join, extname } from 'path';\nimport createMarkdownRenderer from './createMarkdownRenderer';\n\nexport default function convertDirectory(dir, md = createMarkdownRenderer()) {\n    const files = readdirSync(dir);\n    files.forEach(file => {\n        const filePath = join(dir, file);\n        const stats = statSync(filePath);\n        if (stats.isDirectory()) {\n            convertDirectory(filePath, md);\n        } else if (extname(file) === '.md') {\n            const markdown = readFileSync(filePath, 'utf8');\n            const html = md.render(markdown);\n            writeFileSync(filePath.replace('.md', '.html'), html);\n        }\n    });\n}\nEOF\n\n# Step 4: Update the buildDoc.js\ncat << EOF > ./doc/buildDoc.js\nimport createMarkdownRenderer from './createMarkdownRenderer';\nimport convertDirectory from './convertDirectory';\n\nconst md = createMarkdownRenderer();\nconvertDirectory('./doc', md);\nEOF\n",
+      "total_deletions": 89,
+      "total_additions": 49
+    },
+    {
+      "filename": "doc/build.js",
+      "before": "import { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';\nimport { join, extname } from 'path';\nimport MarkdownIt from 'markdown-it';\nimport hljs from 'highlight.js';\n\nconst md = new MarkdownIt({\n  html: true,\n  linkify: true,\n  typographer: true,\n  highlight: function (str, lang) {\n    if (lang && hljs.getLanguage(lang)) {\n      try {\n        return hljs.highlight(str, { language: lang }).value;\n      } catch (__) {}\n    }\n    return ''; \n  }\n});\n\nconst convertDirectory = (dir) => {\n  const files = readdirSync(dir);\n  files.forEach(file => {\n    const filePath = join(dir, file);\n    const stats = statSync(filePath);\n    if (stats.isDirectory()) {\n      convertDirectory(filePath);\n    } else if (extname(file) === '.md') {\n      const markdown = readFileSync(filePath, 'utf8');\n      const html = md.render(markdown);\n      writeFileSync(filePath.replace('.md', '.html'), html);\n    }\n  });\n}\n\nconvertDirectory('./doc');",
       "after": "",
-      "total_deletions": 0,
+      "total_deletions": 35,
       "total_additions": 0
+    },
+    {
+      "filename": "doc/buildDoc.js",
+      "before": "",
+      "after": "import createMarkdownRenderer from './createMarkdownRenderer';\nimport convertDirectory from './convertDirectory';\n\nconst md = createMarkdownRenderer();\nconvertDirectory('./doc', md);",
+      "total_deletions": 0,
+      "total_additions": 5
+    },
+    {
+      "filename": "doc/convertDirectory.js",
+      "before": "",
+      "after": "import { readFileSync, writeFileSync, readdirSync, statSync } from 'fs';\nimport { join, extname } from 'path';\nimport createMarkdownRenderer from './createMarkdownRenderer';\n\nexport default function convertDirectory(dir, md = createMarkdownRenderer()) {\n    const files = readdirSync(dir);\n    files.forEach(file => {\n        const filePath = join(dir, file);\n        const stats = statSync(filePath);\n        if (stats.isDirectory()) {\n            convertDirectory(filePath, md);\n        } else if (extname(file) === '.md') {\n            const markdown = readFileSync(filePath, 'utf8');\n            const html = md.render(markdown);\n            writeFileSync(filePath.replace('.md', '.html'), html);\n        }\n    });\n}",
+      "total_deletions": 0,
+      "total_additions": 18
+    },
+    {
+      "filename": "doc/createMarkdownRenderer.js",
+      "before": "",
+      "after": "import MarkdownIt from 'markdown-it';\nimport hljs from 'highlight.js';\n\nexport default function createMarkdownRenderer() {\n    return new MarkdownIt({\n        html: true,\n        linkify: true,\n        typographer: true,\n        highlight: function (str, lang) {\n            if (lang && hljs.getLanguage(lang)) {\n                try {\n                    return hljs.highlight(str, { language: lang }).value;\n                } catch (__) {}\n            }\n            return ''; \n        }\n    });\n}",
+      "total_deletions": 0,
+      "total_additions": 18
     }
   ]
 }

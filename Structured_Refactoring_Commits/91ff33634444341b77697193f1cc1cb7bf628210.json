@@ -98,11 +98,53 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
+      "filename": "package-lock.json",
+      "before": "        \"ejs\": \"^3.1.9\",\n        \"express\": \"^4.18.2\",\n        \"js-yaml\": \"^4.1.0\",\n        \"postcss\": \"^8.4.24\",\n        \"solid-js\": \"^1.7.7\",\n        \"tailwindcss\": \"^3.3.2\",\n        \"node\": \">=12\"\n      }\n    },\n    \"node_modules/media-typer\": {\n      \"version\": \"0.3.0\",\n      \"resolved\": \"https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz\",\n        \"@jridgewell/sourcemap-codec\": \"^1.4.13\"\n      }\n    },\n    \"media-typer\": {\n      \"version\": \"0.3.0\",\n      \"resolved\": \"https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz\",",
+      "after": "        \"ejs\": \"^3.1.9\",\n        \"express\": \"^4.18.2\",\n        \"js-yaml\": \"^4.1.0\",\n        \"marked\": \"^5.1.0\",\n        \"postcss\": \"^8.4.24\",\n        \"solid-js\": \"^1.7.7\",\n        \"tailwindcss\": \"^3.3.2\",\n        \"node\": \">=12\"\n      }\n    },\n    \"node_modules/marked\": {\n      \"version\": \"5.1.0\",\n      \"resolved\": \"https://registry.npmjs.org/marked/-/marked-5.1.0.tgz\",\n      \"integrity\": \"sha512-z3/nBe7aTI8JDszlYLk7dDVNpngjw0o1ZJtrA9kIfkkHcIF+xH7mO23aISl4WxP83elU+MFROgahqdpd05lMEQ==\",\n      \"bin\": {\n        \"marked\": \"bin/marked.js\"\n      },\n      \"engines\": {\n        \"node\": \">= 18\"\n      }\n    },\n    \"node_modules/media-typer\": {\n      \"version\": \"0.3.0\",\n      \"resolved\": \"https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz\",\n        \"@jridgewell/sourcemap-codec\": \"^1.4.13\"\n      }\n    },\n    \"marked\": {\n      \"version\": \"5.1.0\",\n      \"resolved\": \"https://registry.npmjs.org/marked/-/marked-5.1.0.tgz\",\n      \"integrity\": \"sha512-z3/nBe7aTI8JDszlYLk7dDVNpngjw0o1ZJtrA9kIfkkHcIF+xH7mO23aISl4WxP83elU+MFROgahqdpd05lMEQ==\"\n    },\n    \"media-typer\": {\n      \"version\": \"0.3.0\",\n      \"resolved\": \"https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz\",",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 17
+    },
+    {
+      "filename": "package.json",
+      "before": "    \"ejs\": \"^3.1.9\",\n    \"express\": \"^4.18.2\",\n    \"js-yaml\": \"^4.1.0\",\n    \"postcss\": \"^8.4.24\",\n    \"solid-js\": \"^1.7.7\",\n    \"tailwindcss\": \"^3.3.2\",",
+      "after": "    \"ejs\": \"^3.1.9\",\n    \"express\": \"^4.18.2\",\n    \"js-yaml\": \"^4.1.0\",\n    \"marked\": \"^5.1.0\",\n    \"postcss\": \"^8.4.24\",\n    \"solid-js\": \"^1.7.7\",\n    \"tailwindcss\": \"^3.3.2\",",
+      "total_deletions": 0,
+      "total_additions": 1
+    },
+    {
+      "filename": "src/frontend.jsx",
+      "before": "    <>\n      <input type=\"text\" value={notes()} onInput={e => setNotes(e.target.value)} />\n      <button onClick={generatePrompt}>Start</button>\n      <p>{prompt()}</p>\n    </>\n  );\n};",
+      "after": "    <>\n      <input type=\"text\" value={notes()} onInput={e => setNotes(e.target.value)} />\n      <button onClick={generatePrompt}>Start</button>\n      <div innerHTML={prompt()}></div>\n    </>\n  );\n};",
+      "total_deletions": 1,
+      "total_additions": 1
+    },
+    {
+      "filename": "src/interactiveSession/saveAndSendPrompt.js",
+      "before": "import fs from 'fs/promises';\nimport { printNewText } from './printNewText.js';\nimport { handleApiResponse } from './handleApiResponse.js';\n\nconst saveAndSendPrompt = async (prompt, saveto, parent_message_id, api, rl, last_command_result) => {\n  let lastTextLength = 0;\n  console.log(\"\\x1b[2m\");\n  console.debug(\"Query:\", prompt);\n  await fs.writeFile(saveto || \"current_prompt.md\", prompt);\n  const res = await api.sendMessage(prompt, { parentMessageId: parent_message_id, onProgress: printNewText(lastTextLength) });\n  parent_message_id = res.id;\n  console.log(\"\\x1b[0m\");",
+      "after": "import { printNewText } from './printNewText.js';\nimport { handleApiResponse } from './handleApiResponse.js';\nimport processPrompt from '../prompt/promptProcessing.js';\n\nconst saveAndSendPrompt = async (task, last_command_result, api, rl, startInteractiveSession) => {\n  let { prompt, parent_message_id } = await processPrompt(task, last_command_result);\n  let lastTextLength = 0;\n  console.log(\"\\x1b[2m\");\n  console.debug(\"Query:\", prompt);\n  const res = await api.sendMessage(prompt, { parentMessageId: parent_message_id, onProgress: printNewText(lastTextLength) });\n  parent_message_id = res.id;\n  console.log(\"\\x1b[0m\");",
+      "total_deletions": 3,
+      "total_additions": 3
+    },
+    {
+      "filename": "src/interactiveSession/startInteractiveSession.js",
+      "before": "import { createPrompt } from '../prompt/createPrompt.js';\nimport { saveAndSendPrompt } from './saveAndSendPrompt.js';\n\nconst startInteractiveSession = async (last_command_result = \"\", parent_message_id = null, rl, api) => {\n  rl.question('$ ', async (task) => {\n    const { prompt, saveto } = await createPrompt(task, last_command_result);\n    await saveAndSendPrompt(prompt, saveto, parent_message_id, api, rl, last_command_result, startInteractiveSession);\n  });\n};\n",
+      "after": "import processPrompt from '../prompt/promptProcessing.js';\nimport { saveAndSendPrompt } from './saveAndSendPrompt.js';\n\nconst startInteractiveSession = async (last_command_result = \"\", parent_message_id = null, rl, api) => {\n  rl.question('$ ', async (task) => {\n    const { prompt, parent_message_id: newParentMessageId } = await processPrompt(task, last_command_result);\n    await saveAndSendPrompt(prompt, newParentMessageId, api, rl, last_command_result, startInteractiveSession);\n  });\n};\n",
+      "total_deletions": 3,
+      "total_additions": 3
+    },
+    {
+      "filename": "src/prompt/promptProcessing.js",
+      "before": "",
+      "after": "import { createPrompt } from './createPrompt.js';\nimport fs from 'fs/promises';\n\nconst processPrompt = async (task, last_command_result, saveto = 'current_prompt.md', parent_message_id = null) => {\n  const { prompt, saveto: newSaveto } = await createPrompt(task, last_command_result);\n  await fs.writeFile(newSaveto || saveto, prompt);\n  return { prompt, parent_message_id };\n}\n\nexport default processPrompt;",
+      "total_deletions": 0,
+      "total_additions": 10
+    },
+    {
+      "filename": "src/server.js",
+      "before": "import express from 'express';\nimport cors from 'cors';\nimport { createPrompt } from './prompt/createPrompt.js';\nimport { saveAndSendPrompt } from './interactiveSession/saveAndSendPrompt.js';\nimport { api } from './config.js'; // Import your api object\n\nconst app = express();\n\n// Enable CORS for all routes\napp.use(cors());\n\napp.use(express.json());\n\napp.post('/generate', async (req, res) => {\n  const { notes } = req.body;\n  const { prompt, saveto } = await createPrompt(notes);\n  const result = await saveAndSendPrompt(prompt, saveto, null, api); // pass the api object here\n  res.json({ prompt: result });\n});\n\napp.listen(3000, () => {",
+      "after": "import express from 'express';\nimport cors from 'cors';\nimport processPrompt from './prompt/promptProcessing.js';\nimport { marked } from 'marked';\n\nconst app = express();\n\napp.use(cors());\napp.use(express.json());\n\napp.post('/generate', async (req, res) => {\n  const { notes } = req.body;\n  const { prompt } = await processPrompt(notes);\n  const htmlPrompt = marked(prompt);  // Convert markdown to HTML\n  res.json({ prompt: htmlPrompt });\n});\n\napp.listen(3000, () => {",
+      "total_deletions": 8,
+      "total_additions": 5
     }
   ]
 }

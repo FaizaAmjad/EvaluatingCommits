@@ -40,11 +40,25 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/09/05/13:44_Refactor code structure and update imports/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor code structure and update imports\"\necho \"Plan:\"\necho \"1. Create service/helpers/ directory\"\necho \"2. Move getComparison to service/helpers/ directory\"\necho \"3. Factor out flattenPaths to service/helpers/\"\necho \"4. Update AttentionFileList.jsx imports accordingly\"\necho \"5. Delete services/ directory\"\n\n# Step 1: Create service/helpers/ directory\nmkdir -p src/frontend/service/helpers/\n\n# Step 2: Move getComparison to service/helpers/ directory\nmv src/frontend/services/helpers/getComparison.js src/frontend/service/helpers/getComparison.js\n\n# Step 3: Factor out flattenPaths to service/helpers/\ncat << EOF > src/frontend/service/helpers/flattenPaths.js\nconst flattenPaths = (node, path) => {\n  if (node.type === 'file') {\n    return [path + '/' + node.name];\n  }\n  if (!Array.isArray(node.children)) {\n    return [];\n  }\n  return node.children.reduce((acc, child) => {\n    return acc.concat(flattenPaths(child, path + '/' + node.name));\n  }, []);\n};\n\nexport default flattenPaths;\nEOF\n\n# Step 4: Update AttentionFileList.jsx imports accordingly\ncat << EOF > src/frontend/components/AttentionFileList.jsx\nimport { createEffect } from 'solid-js';\nimport { fileList, setFileList } from '../model/fileList';\nimport fetchFileList from '../service/fetchFileList';\nimport MultiSelect from './MultiSelect/MultiSelect';\nimport getComparison from '../service/helpers/getComparison';\nimport flattenPaths from '../service/helpers/flattenPaths';\n\nconst AttentionFileList = () => {\n  createEffect(async () => {\n    const data = await fetchFileList();\n    const flattenedPaths = flattenPaths(data, '');\n    setFileList(flattenedPaths);\n  });\n\n  return (\n    <div class=\"w-full\">\n      <MultiSelect availableItems={fileList()} selectedItems={[]} compare={getComparison()} itemCount={5} />\n    </div>\n  );\n};\n\nexport default AttentionFileList;\nEOF\n\n# Step 5: Delete services/ directory\nrm -r src/frontend/services/\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 63
+    },
+    {
+      "filename": "src/frontend/components/AttentionFileList.jsx",
+      "before": "import { fileList, setFileList } from '../model/fileList';\nimport fetchFileList from '../service/fetchFileList';\nimport MultiSelect from './MultiSelect/MultiSelect';\nimport getComparison from '../services/helpers/getComparison';\n\nconst AttentionFileList = () => {\n  createEffect(async () => {\n    setFileList(flattenedPaths);\n  });\n\n  const flattenPaths = (node, path) => {\n    if (node.type === 'file') {\n      return [path + '/' + node.name];\n    }\n    if (!Array.isArray(node.children)) {\n      return [];\n    }\n    return node.children.reduce((acc, child) => {\n      return acc.concat(flattenPaths(child, path + '/' + node.name));\n    }, []);\n  };\n\n  return (\n    <div class=\"w-full\">\n      <MultiSelect availableItems={fileList()} selectedItems={[]} compare={getComparison()} itemCount={5} />",
+      "after": "import { fileList, setFileList } from '../model/fileList';\nimport fetchFileList from '../service/fetchFileList';\nimport MultiSelect from './MultiSelect/MultiSelect';\nimport getComparison from '../service/helpers/getComparison';\nimport flattenPaths from '../service/helpers/flattenPaths';\n\nconst AttentionFileList = () => {\n  createEffect(async () => {\n    setFileList(flattenedPaths);\n  });\n\n  return (\n    <div class=\"w-full\">\n      <MultiSelect availableItems={fileList()} selectedItems={[]} compare={getComparison()} itemCount={5} />",
+      "total_deletions": 13,
+      "total_additions": 2
+    },
+    {
+      "filename": "src/frontend/service/helpers/flattenPaths.js",
+      "before": "",
+      "after": "const flattenPaths = (node, path) => {\n  if (node.type === 'file') {\n    return [path + '/' + node.name];\n  }\n  if (!Array.isArray(node.children)) {\n    return [];\n  }\n  return node.children.reduce((acc, child) => {\n    return acc.concat(flattenPaths(child, path + '/' + node.name));\n  }, []);\n};\n\nexport default flattenPaths;",
+      "total_deletions": 0,
+      "total_additions": 13
     }
   ]
 }

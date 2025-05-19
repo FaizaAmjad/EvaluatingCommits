@@ -76,11 +76,18 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
-      "total_deletions": 0,
-      "total_additions": 0
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Add porcelain=v1 to git status command\"\necho \"Plan:\"\necho \"1. Add --porcelain=v1 option to git status command in gitStatus.js\"\n\n/bin/cat <<EOF >src/git/gitStatus.js\nimport { promisify } from 'util';\nimport { exec } from 'child_process';\n\nconst execAsync = promisify(exec);\n\nexport default async function gitStatus() {\n  try {\n    const { stdout, stderr } = await execAsync('git status --porcelain=v1');\n    return stdout;\n  } catch (error) {\n    console.error(`exec error: ${error}`);\n    throw error;\n  }\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Fix postcss config and remove unused imports\"\necho \"Plan:\"\necho \"1. Remove unused imports from postcss.config.cjs\"\necho \"2. Calculate the relative path using dirname and use it for tailwindcss config path\"\n\ncat >./src/frontend/postcss.config.cjs <<'EOF'\nconst path = require('path');\nconst tailwindcss = require('tailwindcss');\nconst autoprefixer = require('autoprefixer');\nconst postcssNested = require('postcss-nested');\n\nmodule.exports = {\n  plugins: {\n    'tailwindcss/nesting': postcssNested,\n    tailwindcss: { config: path.join(__dirname, 'tailwind.config.cjs') },\n    autoprefixer: autoprefixer,\n  },\n};\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 16,
+      "total_additions": 15
+    },
+    {
+      "filename": "src/frontend/postcss.config.cjs",
+      "before": "const tailwindcss = require('tailwindcss');\nconst autoprefixer = require('autoprefixer');\nconst postcssImport = require('postcss-import');\nconst postcssNested = require('postcss-nested');\n\nmodule.exports = {\n  plugins: {\n    'postcss-import': {},\n    'tailwindcss/nesting': postcssNested,\n    tailwindcss: { config: './src/frontend/tailwind.config.cjs' },\n    autoprefixer: autoprefixer,\n  },\n};",
+      "after": "const path = require('path');\nconst tailwindcss = require('tailwindcss');\nconst autoprefixer = require('autoprefixer');\nconst postcssNested = require('postcss-nested');\n\nmodule.exports = {\n  plugins: {\n    'tailwindcss/nesting': postcssNested,\n    tailwindcss: { config: path.join(__dirname, 'tailwind.config.cjs') },\n    autoprefixer: autoprefixer,\n  },\n};",
+      "total_deletions": 3,
+      "total_additions": 2
     }
   ]
 }

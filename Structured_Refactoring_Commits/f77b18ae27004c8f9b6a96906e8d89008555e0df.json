@@ -40,11 +40,18 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/08/23/13:42_Refactor requirements editor component/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor requirements editor component\"\necho \"Plan:\"\necho \"1. Modify RequirementsEditor.jsx to utilize promptDescriptor and remove signal\"\necho \"2. Adjust placeholder and remove label\"\n\ncat > src/frontend/components/RequirementsEditor.jsx << 'EOF'\nimport { createEffect } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\nimport { promptDescriptor } from '../model/promptDescriptor';\n\nconst RequirementsEditor = () => {\n  let requirements = promptDescriptor().requirements || '';\n\n  const handleRequirementsChange = async (e) => {\n    requirements = e.target.value;\n    await postDescriptor({ requirements: requirements });\n  };\n\n  createEffect(() => {\n    requirements = promptDescriptor().requirements || '';\n  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded border border-border mt-4\">\n      <textarea\n        class=\"w-full bg-emphasize text-emphasize text-lg\"\n        placeholder=\"Enter your requirements...\"\n        value={requirements}\n        onInput={e => handleRequirementsChange(e)}\n      />\n    </div>\n  );\n};\n\nexport default RequirementsEditor;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 40
+    },
+    {
+      "filename": "src/frontend/components/RequirementsEditor.jsx",
+      "before": "import { createSignal } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\n\nconst RequirementsEditor = () => {\n  const [requirements, setRequirements] = createSignal('');\n\n  const handleRequirementsChange = async (e) => {\n    setRequirements(e.target.value);\n    await postDescriptor({ requirements: e.target.value });\n  };\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded border border-border mt-4\">\n      <label class=\"text-lg mr-2\">Requirements:</label>\n      <textarea\n        class=\"w-full bg-emphasize text-emphasize text-lg\"\n        value={requirements()}\n        onInput={e => handleRequirementsChange(e)}\n      />\n    </div>",
+      "after": "import { createEffect } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\nimport { promptDescriptor } from '../model/promptDescriptor';\n\nconst RequirementsEditor = () => {\n  let requirements = promptDescriptor().requirements || '';\n\n  const handleRequirementsChange = async (e) => {\n    requirements = e.target.value;\n    await postDescriptor({ requirements: requirements });\n  };\n\n  createEffect(() => {\n    requirements = promptDescriptor().requirements || '';\n  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded border border-border mt-4\">\n      <textarea\n        class=\"w-full bg-emphasize text-emphasize text-lg\"\n        placeholder=\"Enter your requirements...\"\n        value={requirements}\n        onInput={e => handleRequirementsChange(e)}\n      />\n    </div>",
+      "total_deletions": 6,
+      "total_additions": 11
     }
   ]
 }

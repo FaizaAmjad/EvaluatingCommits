@@ -40,11 +40,18 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/08/21/17:03_Refine .gitignore behavior/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refine .gitignore behavior\"\necho \"Plan:\"\necho \"1. Update createGitignore.js to only gitignore prompt files and change.sh in the root folder\"\necho \"2. Use heredoc to overwrite the content of createGitignore.js with the refined behavior\"\n\ncat > src/git/createGitignore.js << 'EOF'\nimport { appendFileSync, existsSync, readFileSync } from 'fs';\nimport { join } from 'path';\n\nfunction createGitignore() {\n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['/prompt.yaml', '/prompt.md', '/change.sh', 'node_modules'];\n\n  let existingIgnores = [];\n\n  if (existsSync(gitignorePath)) {\n    const gitignoreFileContent = readFileSync(gitignorePath, 'utf-8');\n    existingIgnores = gitignoreFileContent.split('\\n');\n  }\n\n  ignoreContent.forEach((item) => {\n    if (!existingIgnores.includes(item)) {\n      appendFileSync(gitignorePath, `\\n${item}`);\n    }\n  });\n}\n\nexport { createGitignore };\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 33
+    },
+    {
+      "filename": "src/git/createGitignore.js",
+      "before": "import { appendFileSync, writeFileSync, existsSync, readFileSync } from 'fs';\nimport { join } from 'path';\n\nfunction createGitignore() {\n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['prompt.yaml', 'prompt.md', 'change.sh', 'node_modules'];\n\n  let existingIgnores = [];\n",
+      "after": "import { appendFileSync, existsSync, readFileSync } from 'fs';\nimport { join } from 'path';\n\nfunction createGitignore() {\n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['/prompt.yaml', '/prompt.md', '/change.sh', 'node_modules'];\n\n  let existingIgnores = [];\n",
+      "total_deletions": 2,
+      "total_additions": 2
     }
   ]
 }

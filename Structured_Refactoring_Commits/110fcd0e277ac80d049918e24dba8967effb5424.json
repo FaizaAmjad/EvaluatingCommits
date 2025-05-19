@@ -40,11 +40,32 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Refactor setupRoutes.js\"\necho \"Plan:\"\necho \"1. Refactor src/backend/setupRoutes.js by removing comments, reordering routes, and changing endpoint.\"\n\ncat > src/backend/setupRoutes.js << 'EOF'\nimport { generateHandler } from './handlers/generateHandler.js';\nimport { servePromptDescriptor } from './handlers/servePromptDescriptor.js';\nimport { listTasks } from './handlers/listTasks.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport gitStatusHandler from './handlers/git/gitStatusHandler.js';\nimport commitGitHandler from './handlers/git/commitGitHandler.js';\nimport resetGitHandler from './handlers/git/resetGitHandler.js';\nimport updateRequirementsHandler from './handlers/updateRequirementsHandler.js';\nimport { updateTaskHandler } from './handlers/updateTaskHandler.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n  app.post('/generate', generateHandler);\n  app.post('/execute', executeHandler);\n  app.get('/git/status', gitStatusHandler);\n  app.post('/git/reset', resetGitHandler);\n  app.post('/git/commit', commitGitHandler);\n  app.post('/requirements', updateRequirementsHandler);\n  app.post('/updatetask', updateTaskHandler);\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor routes into separate files\"\necho \"Plan:\"\necho \"1. Create routes directory.\"\necho \"2. Create setupGitRoutes.js inside routes for git-related routes.\"\necho \"3. Create setupPromptRoutes.js inside routes for prompt-related routes.\"\necho \"4. Refactor the setupRoutes.js to use the separated routes.\"\n\n# Step 1: Create routes directory.\nmkdir -p src/backend/routes\n\n# Step 2: Create setupGitRoutes.js inside routes for git-related routes.\ncat > src/backend/routes/setupGitRoutes.js << 'EOF'\nimport gitStatusHandler from '../handlers/git/gitStatusHandler.js';\nimport commitGitHandler from '../handlers/git/commitGitHandler.js';\nimport resetGitHandler from '../handlers/git/resetGitHandler.js';\n\nexport function setupGitRoutes(app) {\n  app.get('/git/status', gitStatusHandler);\n  app.post('/git/reset', resetGitHandler);\n  app.post('/git/commit', commitGitHandler);\n}\nEOF\n\n# Step 3: Create setupPromptRoutes.js inside routes for prompt-related routes.\ncat > src/backend/routes/setupPromptRoutes.js << 'EOF'\nimport { generateHandler } from '../handlers/generateHandler.js';\nimport { servePromptDescriptor } from '../handlers/servePromptDescriptor.js';\nimport { listTasks } from '../handlers/listTasks.js';\nimport updateRequirementsHandler from '../handlers/updateRequirementsHandler.js';\nimport { updateTaskHandler } from '../handlers/updateTaskHandler.js';\n\nexport function setupPromptRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n  app.post('/generate', generateHandler);\n  app.post('/requirements', updateRequirementsHandler);\n  app.post('/updatetask', updateTaskHandler);\n}\nEOF\n\n# Step 4: Refactor the setupRoutes.js to use the separated routes.\ncat > src/backend/setupRoutes.js << 'EOF'\nimport { setupGitRoutes } from './routes/setupGitRoutes.js';\nimport { setupPromptRoutes } from './routes/setupPromptRoutes.js';\nimport { executeHandler } from './handlers/executeHandler.js';\n\nexport function setupRoutes(app) {\n  setupPromptRoutes(app);\n  setupGitRoutes(app);\n  app.post('/execute', executeHandler);\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 17,
+      "total_additions": 42
+    },
+    {
+      "filename": "src/backend/routes/setupGitRoutes.js",
       "before": "",
-      "after": "",
+      "after": "import gitStatusHandler from '../handlers/git/gitStatusHandler.js';\nimport commitGitHandler from '../handlers/git/commitGitHandler.js';\nimport resetGitHandler from '../handlers/git/resetGitHandler.js';\n\nexport function setupGitRoutes(app) {\n  app.get('/git/status', gitStatusHandler);\n  app.post('/git/reset', resetGitHandler);\n  app.post('/git/commit', commitGitHandler);\n}",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 9
+    },
+    {
+      "filename": "src/backend/routes/setupPromptRoutes.js",
+      "before": "",
+      "after": "import { generateHandler } from '../handlers/generateHandler.js';\nimport { servePromptDescriptor } from '../handlers/servePromptDescriptor.js';\nimport { listTasks } from '../handlers/listTasks.js';\nimport updateRequirementsHandler from '../handlers/updateRequirementsHandler.js';\nimport { updateTaskHandler } from '../handlers/updateTaskHandler.js';\n\nexport function setupPromptRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n  app.post('/generate', generateHandler);\n  app.post('/requirements', updateRequirementsHandler);\n  app.post('/updatetask', updateTaskHandler);\n}",
+      "total_deletions": 0,
+      "total_additions": 13
+    },
+    {
+      "filename": "src/backend/setupRoutes.js",
+      "before": "import { generateHandler } from './handlers/generateHandler.js';\nimport { servePromptDescriptor } from './handlers/servePromptDescriptor.js';\nimport { listTasks } from './handlers/listTasks.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport gitStatusHandler from './handlers/git/gitStatusHandler.js';\nimport commitGitHandler from './handlers/git/commitGitHandler.js';\nimport resetGitHandler from './handlers/git/resetGitHandler.js';\nimport updateRequirementsHandler from './handlers/updateRequirementsHandler.js';\nimport { updateTaskHandler } from './handlers/updateTaskHandler.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n  app.post('/generate', generateHandler);\n  app.post('/execute', executeHandler);\n  app.get('/git/status', gitStatusHandler);\n  app.post('/git/reset', resetGitHandler);\n  app.post('/git/commit', commitGitHandler);\n  app.post('/requirements', updateRequirementsHandler);\n  app.post('/updatetask', updateTaskHandler);\n}",
+      "after": "import { setupGitRoutes } from './routes/setupGitRoutes.js';\nimport { setupPromptRoutes } from './routes/setupPromptRoutes.js';\nimport { executeHandler } from './handlers/executeHandler.js';\n\nexport function setupRoutes(app) {\n  setupPromptRoutes(app);\n  setupGitRoutes(app);\n  app.post('/execute', executeHandler);\n}",
+      "total_deletions": 16,
+      "total_additions": 4
     }
   ]
 }

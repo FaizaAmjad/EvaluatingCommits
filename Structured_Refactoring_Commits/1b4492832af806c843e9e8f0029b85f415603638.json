@@ -40,11 +40,11 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/08/22/14:40_Improve documentation as described/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Improve documentation as described\"\necho \"Plan:\"\necho \"1. Replace 'penchant' with 'preference'\"\necho \"2. Remove the phrase 'In a bold move'\"\necho \"3. Reorder sections as instructed\"\n\ncat > docs/README.md << 'EOF'\nWarn: This README is AI generated, just like all the source files of this project.\n\n# Junior - Your AI-first IDE \n\n[![Video: Junior codes itself](/assets/video_cover.jpg)](https://youtu.be/NL4uFJSvfW0)\n\n*\"Video: Junior codes itself\"*\n\nJunior is an **AI-first IDE** designed specifically for professional programmers who have a preference for customizing and fine-tuning their tools. \n\nWith Junior, developers get a unique space where they can work hand-in-hand with AI throughout the development process. By using structured task descriptors and spotlighting relevant parts of a project, tasks like code implementation, documentation, and testing can be seamlessly delegated to Junior.\n\nAt its core, Junior embraces a design philosophy that prioritizes simplicity, configurability, and auditability. This ensures that the platform remains both accessible to its users and adaptable to a variety of use-cases.\n\nJunior has been crafted exclusively with AI-powered coding right from its early days, way before its core functionalities were in place. This demonstrates Junior's pioneering approach to harnessing the potential of artificial intelligence in software development.\n\n## Getting Started\n\nFor guidance on using Junior, please refer to [usage.md](usage.md).\n\n## Contributing and Support\n\nYour contributions make a difference! At Junior, we value the collaboration of the community. Your role as a contributor is to monitor the development, provide detailed prompts, and thoroughly review the generated outcomes.\n\nFor questions or assistance, please raise an issue in our GitHub repository.\n\n**Note:** We've tested Junior primarily with the GPT-4 model. However, you're welcome to experiment with similarly capable models and share your findings. It's not compatible with GPT-3.5.\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 39
     }
   ]
 }

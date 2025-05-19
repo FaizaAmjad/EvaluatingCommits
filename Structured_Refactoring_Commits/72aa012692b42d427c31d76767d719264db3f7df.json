@@ -52,11 +52,32 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/09/12/11:32_Refactor file routes and handlers/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor file routes and handlers\"\necho \"Plan:\"\necho \"1. Create handlers/files directory\"\necho \"2. Move and refactor files-related handlers to handlers/files/\"\necho \"3. Create setupFilesRoutes.js to house files routes\"\necho \"4. Update setupRoutes.js to import setupFilesRoutes.js\"\necho \"5. Verify refactoring by listing changes\"\n\n# Step 1: Create handlers/files directory\nmkdir -p ./src/backend/handlers/files\n\n# Step 2: Move and refactor files-related handlers to handlers/files/\nmv ./src/backend/handlers/fileListHandler.js ./src/backend/handlers/files/fileListHandler.js\nmv ./src/backend/handlers/fileReadHandler.js ./src/backend/handlers/files/fileReadHandler.js\n\n# Adjust imports in the moved files\ncat > ./src/backend/handlers/files/fileListHandler.js << 'EOF'\nimport readFileList from '../../fileutils/readFileList.js';\n\nexport async function fileListHandler(req, res) {\n  try {\n    const filesList = await readFileList(\"./\");\n    res.json(filesList);\n  } catch (error) {\n    res.status(500).json({ error: 'Failed to list files' });\n  }\n}\nEOF\n\ncat > ./src/backend/handlers/files/fileReadHandler.js << 'EOF'\nimport fs from 'fs';\nimport { promisify } from 'util';\n\nconst readFileAsync = promisify(fs.readFile);\n\nexport async function fileReadHandler(req, res) {\n  const { filepath } = req.params;\n\n  if (!filepath) {\n    return res.status(400).send({ error: 'File path is required' });\n  }\n\n  try {\n    const fileContent = await readFileAsync(filepath, 'utf8');\n    res.send(fileContent);\n  } catch (error) {\n    res.status(500).send({ error: 'Unable to read file' });\n  }\n}\nEOF\n\n# Step 3: Create setupFilesRoutes.js\ncat > ./src/backend/routes/setupFilesRoutes.js << 'EOF'\nimport { fileListHandler } from '../handlers/files/fileListHandler.js';\nimport { fileReadHandler } from '../handlers/files/fileReadHandler.js';\n\nexport function setupFilesRoutes(app) {\n  app.get('/files/list/', fileListHandler);\n  app.get('/files/read/:filepath', fileReadHandler);\n}\nEOF\n\n# Step 4: Update setupRoutes.js\ncat > ./src/backend/setupRoutes.js << 'EOF'\nimport { setupGitRoutes } from './routes/setupGitRoutes.js';\nimport { setupPromptRoutes } from './routes/setupPromptRoutes.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport { configHandler } from './handlers/configHandler.js';\nimport { setupFilesRoutes } from './routes/setupFilesRoutes.js';  // Added this line\n\nexport function setupRoutes(app) {\n  setupPromptRoutes(app);\n  setupGitRoutes(app);\n  setupFilesRoutes(app);  // Added this line\n  app.post('/execute', executeHandler);\n  app.get('/config', configHandler);\n}\nEOF\n\n# Step 5: List changes to verify refactoring\necho \"\\nChanges made:\"\necho \"- Created handlers/files directory\"\necho \"- Moved files-related handlers to handlers/files/ and adjusted imports\"\necho \"- Created setupFilesRoutes.js for files routes\"\necho \"- Updated setupRoutes.js to import and use setupFilesRoutes.js\"\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 89
+    },
+    {
+      "filename": "src/backend/handlers/files/fileListHandler.js",
+      "before": "import readFileList from '../fileutils/readFileList.js';\n\nexport async function fileListHandler(req, res) {\n  try {",
+      "after": "import readFileList from '../../fileutils/readFileList.js';\n\nexport async function fileListHandler(req, res) {\n  try {",
+      "total_deletions": 1,
+      "total_additions": 1
+    },
+    {
+      "filename": "src/backend/routes/setupFilesRoutes.js",
+      "before": "",
+      "after": "import { fileListHandler } from '../handlers/files/fileListHandler.js';\nimport { fileReadHandler } from '../handlers/files/fileReadHandler.js';\n\nexport function setupFilesRoutes(app) {\n  app.get('/files/list/', fileListHandler);\n  app.get('/files/read/:filepath', fileReadHandler);\n}",
+      "total_deletions": 0,
+      "total_additions": 7
+    },
+    {
+      "filename": "src/backend/setupRoutes.js",
+      "before": "import { setupPromptRoutes } from './routes/setupPromptRoutes.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport { configHandler } from './handlers/configHandler.js';\nimport { fileListHandler } from './handlers/fileListHandler.js';\nimport { fileReadHandler } from './handlers/fileReadHandler.js';  // Added this line\n\nexport function setupRoutes(app) {\n  setupPromptRoutes(app);\n  setupGitRoutes(app);\n  app.post('/execute', executeHandler);\n  app.get('/config', configHandler);\n  app.get('/files/list/', fileListHandler);\n  app.get('/files/read/:filepath', fileReadHandler); // Added this line\n}",
+      "after": "import { setupPromptRoutes } from './routes/setupPromptRoutes.js';\nimport { executeHandler } from './handlers/executeHandler.js';\nimport { configHandler } from './handlers/configHandler.js';\nimport { setupFilesRoutes } from './routes/setupFilesRoutes.js';  // Added this line\n\nexport function setupRoutes(app) {\n  setupPromptRoutes(app);\n  setupGitRoutes(app);\n  setupFilesRoutes(app);  // Added this line\n  app.post('/execute', executeHandler);\n  app.get('/config', configHandler);\n}",
+      "total_deletions": 4,
+      "total_additions": 2
     }
   ]
 }

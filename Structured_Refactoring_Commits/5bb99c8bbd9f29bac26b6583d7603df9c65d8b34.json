@@ -40,10 +40,31 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/08/23/13:23_Move and modify files accordingly/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Move and modify files accordingly\"\necho \"Plan:\"\necho \"1. Rename parseYamlAndGetTask.js to getYamlEntry.js and move it.\"\necho \"2. Update getYamlEntry.js to accept an additional argument for the entry and return the entry.\"\necho \"3. Update TasksList.jsx to use the renamed function and move the prefix removal logic.\"\n\n# Step 1: Rename and move\nmv src/frontend/service/parseYamlAndGetTask.js src/frontend/service/getYamlEntry.js\n\ncat << 'EOF' > src/frontend/service/getYamlEntry.js\nimport YAML from 'yaml';\n\nexport const getYamlEntry = (yamlString, entry) => {\n  const doc = YAML.parse(yamlString);\n  return doc[entry];\n};\nEOF\n\n# Step 2: Update the import in TasksList.jsx\n# and modify the prefix removal logic accordingly.\n\ncat << 'EOF' > src/frontend/components/TasksList.jsx\nimport { onMount, createEffect } from 'solid-js';\nimport { fetchTasks } from '../fetchTasks';\nimport { handleTaskChange } from '../service/handleTaskChange';\nimport { selectedTask, setSelectedTask } from '../model/selectedTask';\nimport { promptDescriptor } from '../model/promptDescriptor';\nimport { getYamlEntry } from '../service/getYamlEntry';\n\nconst TasksList = () => {\n  const tasks = fetchTasks();\n\n  createEffect(() => {\n    const descriptor = promptDescriptor();\n    if (descriptor !== '') {\n      const taskWithPath = getYamlEntry(descriptor, 'task');\n      // Remove 'prompt/task/' prefix here\n      const task = taskWithPath.replace('prompt/task/', '');\n      setSelectedTask(task);\n    }\n  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded border border-border\">\n      <label class=\"text-lg mr-2\">Task:</label>\n      <select class=\"w-full bg-emphasize text-emphasize text-lg\" value={selectedTask()} onChange={e => handleTaskChange(e)}>\n        {tasks().map(task => <option value={task}>{task}</option>)}\n      </select>\n    </div>\n  );\n};\n\nexport default TasksList;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
+      "total_additions": 58
+    },
+    {
+      "filename": "src/frontend/components/TasksList.jsx",
+      "before": "import { handleTaskChange } from '../service/handleTaskChange';\nimport { selectedTask, setSelectedTask } from '../model/selectedTask';\nimport { promptDescriptor } from '../model/promptDescriptor';\nimport { parseYamlAndGetTask } from '../service/parseYamlAndGetTask';\n\nconst TasksList = () => {\n  const tasks = fetchTasks();\n\n  createEffect(() => {\n    const descriptor = promptDescriptor();\n    if (descriptor !== '') {\n      const task = parseYamlAndGetTask(descriptor);\n      setSelectedTask(task);\n    }\n  });",
+      "after": "import { handleTaskChange } from '../service/handleTaskChange';\nimport { selectedTask, setSelectedTask } from '../model/selectedTask';\nimport { promptDescriptor } from '../model/promptDescriptor';\nimport { getYamlEntry } from '../service/getYamlEntry';\n\nconst TasksList = () => {\n  const tasks = fetchTasks();\n\n  createEffect(() => {\n    const descriptor = promptDescriptor();\n    if (descriptor !== '') {\n      const taskWithPath = getYamlEntry(descriptor, 'task');\n      // Remove 'prompt/task/' prefix here\n      const task = taskWithPath.replace('prompt/task/', '');\n      setSelectedTask(task);\n    }\n  });",
+      "total_deletions": 2,
+      "total_additions": 4
+    },
+    {
+      "filename": "src/frontend/service/getYamlEntry.js",
+      "before": "",
+      "after": "import YAML from 'yaml';\n\nexport const getYamlEntry = (yamlString, entry) => {\n  const doc = YAML.parse(yamlString);\n  return doc[entry];\n};",
+      "total_deletions": 0,
+      "total_additions": 6
+    },
+    {
+      "filename": "src/frontend/service/parseYamlAndGetTask.js",
+      "before": "import YAML from 'yaml';\n\nexport const parseYamlAndGetTask = (yamlString) => {\n  const doc = YAML.parse(yamlString);\n  // Remove 'prompt/task/' prefix\n  const task = doc.task.replace('prompt/task/', '');\n  return task;\n};",
+      "after": "",
+      "total_deletions": 8,
       "total_additions": 0
     }
   ]

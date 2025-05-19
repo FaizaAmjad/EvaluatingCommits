@@ -40,11 +40,11 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
+      "filename": "src/vite.config.js",
+      "before": "\nexport default defineConfig({\n  plugins: [solidPlugin()],\n  build: {\n    target: 'esnext',\n  },",
+      "after": "\nexport default defineConfig({\n  plugins: [solidPlugin()],\n  css: {\n    postcss: './src/frontend/postcss.config.cjs'\n  },\n  build: {\n    target: 'esnext',\n  },",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 3
     }
   ]
 }

@@ -40,11 +40,18 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
-      "total_deletions": 0,
-      "total_additions": 0
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Implement clipboard reading fallback with input box\"\necho \"Plan:\"\necho \"1. Modify ExecuteButton.jsx to include a check for navigator.clipboard.readText availability.\"\necho \"2. If unavailable, render an input box inside the button with placeholder.\"\necho \"3. Execute the change when text is pasted into the input box.\"\n\ncat > src/frontend/components/ExecuteButton.jsx << 'EOF'\nimport { createEffect, createSignal } from 'solid-js';\n      {inputAvailable() ? (\n        'Paste & Execute Change'\n      ) : (\n        <input\n          type=\"text\"\n          class=\"w-full px-2 py-2 bg-white text-black\"\n          placeholder=\"Paste the change here to execute\"\n          value={changeInput()}\n          onInput={(e) => setChangeInput(e.currentTarget.value)}",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Replace text input with textarea in ExecuteButton\"\necho \"Plan:\"\necho \"1. Modify the ExecuteButton.jsx file to replace the input field with a single-row textarea.\"\n\ncat > src/frontend/components/ExecuteButton.jsx << 'EOF'\nimport { createEffect, createSignal } from 'solid-js';\n      {inputAvailable() ? (\n        'Paste & Execute Change'\n      ) : (\n        <textarea\n          rows=\"1\"\n          class=\"w-full px-2 py-2 bg-white text-black resize-none\"\n          placeholder=\"Paste the change here to execute\"\n          value={changeInput()}\n          onInput={(e) => setChangeInput(e.currentTarget.value)}",
+      "total_deletions": 7,
+      "total_additions": 5
+    },
+    {
+      "filename": "src/frontend/components/ExecuteButton.jsx",
+      "before": "      {inputAvailable() ? (\n        'Paste & Execute Change'\n      ) : (\n        <input\n          type=\"text\"\n          class=\"w-full px-2 py-2 bg-white text-black\"\n          placeholder=\"Paste the change here to execute\"\n          value={changeInput()}\n          onInput={(e) => setChangeInput(e.currentTarget.value)}",
+      "after": "      {inputAvailable() ? (\n        'Paste & Execute Change'\n      ) : (\n        <textarea\n          rows=\"1\"\n          class=\"w-full px-2 py-2 bg-white text-black resize-none\"\n          placeholder=\"Paste the change here to execute\"\n          value={changeInput()}\n          onInput={(e) => setChangeInput(e.currentTarget.value)}",
+      "total_deletions": 3,
+      "total_additions": 3
     }
   ]
 }

@@ -62,11 +62,11 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
-      "total_deletions": 0,
-      "total_additions": 0
+      "filename": "src/app/layout.tsx",
+      "before": "import '@/styles/globals.css'\n\nexport const metadata = {\n  title: 'Breadit',\n  description: 'A Reddit clone built with Next.js and TypeScript.',\n}\n\nexport default function RootLayout({\n  children,\n}: {\n  children: React.ReactNode\n}) {\n  return (\n    <html lang='en'>\n      <body>{children}</body>\n    </html>\n  )\n}",
+      "after": "import '@/styles/globals.css'\nimport {cn} from '@/lib/utils'\nimport {Inter} from 'next/font/google'\n\n\nexport const metadata = {\n  title: 'Breadit',\n  description: 'A Reddit clone built with Next.js and TypeScript.',\n}\n\nconst inter=Inter({subsets:['latin']});\n\nexport default function RootLayout({\n  children,\n}: {\n  children: React.ReactNode\n}) {\n  return (\n    <html lang='en'\n    className={cn(\n      'bg-white text-slate-900 antialiased light',\n      inter.className\n    )}>\n      <body className='min-h-screen pt-2 bg-slate-50 antialiased'>\n        {/* <Navbar/> */}\n        <div className='container' max-w-7xl max-auto h-full pt-12>\n        {children}\n        </div>\n        </body>\n    </html>\n  )\n}",
+      "total_deletions": 2,
+      "total_additions": 16
     }
   ]
 }

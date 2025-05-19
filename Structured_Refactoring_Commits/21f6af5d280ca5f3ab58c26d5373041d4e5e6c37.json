@@ -40,11 +40,25 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
-      "total_deletions": 0,
-      "total_additions": 0
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Rewrite startVite to use Vite's JS API\"\necho \"Plan:\"\necho \"1. Modify src/frontend/startVite.js to use the Vite JS API.\"\necho \"2. Ensure to open the browser and start from the directory found in the current version of startVite.js.\"\n\ncat << 'EOF' > src/frontend/startVite.js\nimport path from 'path';\nimport { fileURLToPath } from 'url';\nimport { createServer } from 'vite';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\nconst projectRoot = path.resolve(__dirname, '../..');\n\nexport async function startVite() {\n  const server = await createServer({\n    root: projectRoot + '/src/frontend',\n    server: {\n      open: true,\n    },\n  });\n  await server.listen();\n  server.printUrls();\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor package.json as per the task description\"\necho \"Plan:\"\necho \"1. Uninstall babel-preset-solid\"\necho \"2. Move every other item from devDependencies to dependencies\"\necho \"3. Set the description to 'Your AI Contributor which codes itself'\"\n\n# 1. Uninstall babel-preset-solid\nnpm uninstall babel-preset-solid\n\n# 2. Move every other item from devDependencies to dependencies and 3. Set the description\njq '.description = \"Your AI Contributor which codes itself\" | .dependencies += .devDependencies | del(.devDependencies[\"@types/js-yaml\"]) | del(.devDependencies[\"babel-preset-solid\"]) | del(.devDependencies)' package.json > temp.json\nmv temp.json package.json\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 21,
+      "total_additions": 9
+    },
+    {
+      "filename": "package-lock.json",
+      "before": "      },\n      \"bin\": {\n        \"junior\": \"src/main.js\",\n        \"junior-web\": \"src/web.js\"\n      },\n      \"devDependencies\": {\n        \"@types/js-yaml\": \"^4.0.5\",\n        \"autoprefixer\": \"^10.4.14\",\n        \"babel-preset-solid\": \"^1.7.7\",\n        \"highlight.js\": \"^11.8.0\",\n        \"markdown-it\": \"^13.0.1\",\n        \"postcss\": \"^8.4.26\",",
+      "after": "      },\n      \"bin\": {\n        \"junior\": \"src/main.js\",\n        \"junior-init\": \"src/init.js\",\n        \"junior-web\": \"src/web.js\"\n      },\n      \"devDependencies\": {\n        \"@types/js-yaml\": \"^4.0.5\",\n        \"autoprefixer\": \"^10.4.14\",\n        \"highlight.js\": \"^11.8.0\",\n        \"markdown-it\": \"^13.0.1\",\n        \"postcss\": \"^8.4.26\",",
+      "total_deletions": 1,
+      "total_additions": 1
+    },
+    {
+      "filename": "package.json",
+      "before": "{\n  \"name\": \"@aijunior/dev\",\n  \"version\": \"0.0.1\",\n  \"description\": \"Your AI Contributor\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"vite\": \"^4.3.9\",\n    \"vite-plugin-solid\": \"^2.7.0\",\n    \"ws\": \"^8.13.0\",\n    \"xterm\": \"^5.2.1\"\n  },\n  \"directories\": {\n    \"doc\": \"doc\"\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/Junior/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/Junior#readme\",\n  \"devDependencies\": {\n    \"@types/js-yaml\": \"^4.0.5\",\n    \"autoprefixer\": \"^10.4.14\",\n    \"babel-preset-solid\": \"^1.7.7\",\n    \"highlight.js\": \"^11.8.0\",\n    \"markdown-it\": \"^13.0.1\",\n    \"postcss\": \"^8.4.26\",\n    \"tailwindcss\": \"^3.3.3\"\n  }\n}",
+      "after": "{\n  \"name\": \"@aijunior/dev\",\n  \"version\": \"0.0.3\",\n  \"description\": \"Your AI Contributor which codes itself\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"vite\": \"^4.3.9\",\n    \"vite-plugin-solid\": \"^2.7.0\",\n    \"ws\": \"^8.13.0\",\n    \"xterm\": \"^5.2.1\",\n    \"@types/js-yaml\": \"^4.0.5\",\n    \"autoprefixer\": \"^10.4.14\",\n    \"highlight.js\": \"^11.8.0\",\n    \"markdown-it\": \"^13.0.1\",\n    \"postcss\": \"^8.4.26\",\n    \"tailwindcss\": \"^3.3.3\"\n  },\n  \"directories\": {\n    \"doc\": \"doc\"\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/Junior/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/Junior#readme\"\n}",
+      "total_deletions": 13,
+      "total_additions": 10
     }
   ]
 }

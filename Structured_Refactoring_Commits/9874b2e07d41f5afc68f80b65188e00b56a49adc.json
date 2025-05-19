@@ -40,11 +40,25 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
-      "total_deletions": 0,
-      "total_additions": 0
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Hide terminal div when execution result is empty\"\necho \"Plan:\"\necho \"1. Modify ExecutionResultDisplay.jsx to check if executionResult is empty before rendering the div.\"\necho \"2. If executionResult is empty, do not render the div.\"\n\ncat > src/frontend/components/ExecutionResultDisplay.jsx << 'EOF'\nimport { onMount, createEffect } from 'solid-js';\nimport { Terminal } from 'xterm';\nimport 'xterm/css/xterm.css';\nimport { executionResult } from '../stores/executionResult';\n\nconst ExecutionResultDisplay = () => {\n  let container;\n  let term;\n\n  onMount(() => {\n    term = new Terminal({ convertEol: true, rows: 7 });\n    term.open(container);\n  });\n\n  createEffect(() => {\n    if (term && executionResult() !== '') {\n      term.write(executionResult());\n    }\n  });\n\n  return (\n    executionResult() !== '' && <div ref={container} class=\"rounded overflow-auto max-w-full\"></div>\n  );\n};\n\nexport default ExecutionResultDisplay;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Move and rename ResetButton component\"\necho \"Plan:\"\necho \"1. Rename ResetButton.jsx to RollbackButton.jsx and update its content.\"\necho \"2. Update App.jsx to import RollbackButton instead of ResetButton.\"\n\n# Step 1: Rename ResetButton.jsx to RollbackButton.jsx and update its content.\ncat > src/frontend/components/RollbackButton.jsx << 'EOF'\nimport { resetGit } from '../service/resetGit';\n\nconst RollbackButton = () => {\n  const handleReset = async () => {\n    const response = await resetGit();\n\n    console.log(response.message);\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-red-700 text-white rounded\" onClick={handleReset}>Roll Back to Last Commit</button>\n  );\n};\n\nexport default RollbackButton;\nEOF\n\n# Remove the old ResetButton.jsx file\nrm src/frontend/components/ResetButton.jsx\n\n# Step 2: Update App.jsx to import RollbackButton instead of ResetButton.\ncat > src/frontend/App.jsx << 'EOF'\nimport GenerateButton from './components/GenerateButton';\nimport ExecuteButton from './components/ExecuteButton';\nimport RollbackButton from './components/RollbackButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\nimport NavBar from './components/NavBar';\nimport ExecutionResultDisplay from './components/ExecutionResultDisplay';\n\nconst App = () => {\n  return (\n    <div class=\"m-2\">\n      <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n        <NavBar />\n        <TasksList />\n        <PromptDescriptor />\n        <GenerateButton />\n        <PromptDisplay />\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <RollbackButton />\n      </div>\n    </div>\n  );\n};\n\nexport default App;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 26,
+      "total_additions": 50
+    },
+    {
+      "filename": "src/frontend/App.jsx",
+      "before": "import GenerateButton from './components/GenerateButton';\nimport ExecuteButton from './components/ExecuteButton';\nimport ResetButton from './components/ResetButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\n        <PromptDisplay />\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <ResetButton />\n      </div>\n    </div>\n  );",
+      "after": "import GenerateButton from './components/GenerateButton';\nimport ExecuteButton from './components/ExecuteButton';\nimport RollbackButton from './components/RollbackButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\n        <PromptDisplay />\n        <ExecuteButton />\n        <ExecutionResultDisplay />\n        <RollbackButton />\n      </div>\n    </div>\n  );",
+      "total_deletions": 2,
+      "total_additions": 2
+    },
+    {
+      "filename": "src/frontend/components/RollbackButton.jsx",
+      "before": "import { resetGit } from '../service/resetGit';\n\nconst ResetButton = () => {\n  const handleReset = async () => {\n    const response = await resetGit();\n\n    console.log(response.message);\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-red-700 text-white rounded\" onClick={handleReset}>Reset Git</button>\n  );\n};\n\nexport default ResetButton;\n",
+      "after": "import { resetGit } from '../service/resetGit';\n\nconst RollbackButton = () => {\n  const handleReset = async () => {\n    const response = await resetGit();\n\n    console.log(response.message);\n  };\n\n  return (\n    <button class=\"w-64 px-4 py-4 bg-red-700 text-white rounded\" onClick={handleReset}>Roll Back to Last Commit</button>\n  );\n};\n\nexport default RollbackButton;",
+      "total_deletions": 3,
+      "total_additions": 3
     }
   ]
 }

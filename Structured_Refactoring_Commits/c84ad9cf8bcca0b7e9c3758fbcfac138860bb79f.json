@@ -40,11 +40,25 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/08/31/11:22_Refactor readFileList.js with ignore logic/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor readFileList.js with ignore logic\"\necho \"Plan:\"\necho \"1. Add a function to get ignore list from constants, cli args and env vars.\"\necho \"2. Refactor the main function to use the ignore list for filtering.\"\necho \"3. Update the exports and imports as per the project specifics.\"\n\n# 1. Add a function to get ignore list\ncat > src/backend/fileutils/getIgnoreList.js <<EOF\nfunction getIgnoreList() {\n  const DEFAULT_IGNORE = ['.git', 'node_modules', 'prompt'];\n\n  const cliArgs = process.argv.slice(2);\n  const cliIgnore = cliArgs\n    .filter(arg => arg.startsWith('--ignore='))\n    .map(arg => arg.replace('--ignore=', '').split(','))\n    .flat();\n\n  const envIgnore = process.env.JUNIOR_IGNORE ? process.env.JUNIOR_IGNORE.split(',') : [];\n\n  return [...DEFAULT_IGNORE, ...cliIgnore, ...envIgnore];\n}\n\nexport default getIgnoreList;\nEOF\n\n# 2. Refactor the main function\ncat > src/backend/fileutils/readFileList.js <<EOF\nimport fs from 'fs';\nimport path from 'path';\nimport getIgnoreList from './getIgnoreList.js';\n\nasync function readFileList(dir, relativePath = \"\") {\n  const items = await fs.promises.readdir(dir);\n  const ignoreList = getIgnoreList();\n\n  const itemDetails = await Promise.all(\n    items.map(async item => {\n      if (ignoreList.includes(item)) return;\n      const fullPath = path.join(dir, item);\n      const stats = await fs.promises.stat(fullPath);\n      if (stats.isDirectory()) {\n        return {\n          type: \"dir\",\n          name: item,\n          children: await readFileList(fullPath, path.join(relativePath, item))\n        };\n      } else {\n        return {\n          type: \"file\",\n          name: item,\n          path: path.join(relativePath, item)\n        };\n      }\n    })\n  );\n\n  return itemDetails.filter(Boolean);\n}\n\nexport default readFileList;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 65
+    },
+    {
+      "filename": "src/backend/fileutils/getIgnoreList.js",
+      "before": "",
+      "after": "function getIgnoreList() {\n  const DEFAULT_IGNORE = ['.git', 'node_modules', 'prompt'];\n\n  const cliArgs = process.argv.slice(2);\n  const cliIgnore = cliArgs\n    .filter(arg => arg.startsWith('--ignore='))\n    .map(arg => arg.replace('--ignore=', '').split(','))\n    .flat();\n\n  const envIgnore = process.env.JUNIOR_IGNORE ? process.env.JUNIOR_IGNORE.split(',') : [];\n\n  return [...DEFAULT_IGNORE, ...cliIgnore, ...envIgnore];\n}\n\nexport default getIgnoreList;",
+      "total_deletions": 0,
+      "total_additions": 15
+    },
+    {
+      "filename": "src/backend/fileutils/readFileList.js",
+      "before": "import fs from 'fs';\nimport path from 'path';\n\nasync function readFileList(dir, relativePath = \"\") {\n  const items = await fs.promises.readdir(dir);\n  const itemDetails = await Promise.all(\n    items.map(async item => {\n      if (item === \".git\") return; // Ignore .git directory\n      const fullPath = path.join(dir, item);\n      const stats = await fs.promises.stat(fullPath);\n      if (stats.isDirectory()) {\n        if (item !== \"node_modules\" && item !== \"prompt\") {\n          return {\n            type: \"dir\",\n            name: item,\n            children: await readFileList(fullPath, path.join(relativePath, item))\n          };\n        }\n      } else {\n        return {\n          type: \"file\",",
+      "after": "import fs from 'fs';\nimport path from 'path';\nimport getIgnoreList from './getIgnoreList.js';\n\nasync function readFileList(dir, relativePath = \"\") {\n  const items = await fs.promises.readdir(dir);\n  const ignoreList = getIgnoreList();\n\n  const itemDetails = await Promise.all(\n    items.map(async item => {\n      if (ignoreList.includes(item)) return;\n      const fullPath = path.join(dir, item);\n      const stats = await fs.promises.stat(fullPath);\n      if (stats.isDirectory()) {\n        return {\n          type: \"dir\",\n          name: item,\n          children: await readFileList(fullPath, path.join(relativePath, item))\n        };\n      } else {\n        return {\n          type: \"file\",",
+      "total_deletions": 8,
+      "total_additions": 9
     }
   ]
 }

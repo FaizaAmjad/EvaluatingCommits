@@ -40,11 +40,25 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
-      "total_deletions": 0,
-      "total_additions": 0
+      "filename": "change.sh",
+      "before": "#!/bin/sh\n# Goal: Implement \"Paste & Execute change\" button feature with specific color\n# Plan:\n# 1. Create a new JavaScript file named \"executeChange.js\" in the \"src/frontend/service/\" directory. This file will contain a function to send the change to the backend for execution.\n# 2. Modify the \"App.jsx\" file to include the new \"Paste & Execute change\" button.\n# 3. Create a new JavaScript file named \"ExecuteButton.jsx\" in the \"src/frontend/components/\" directory. This file will define the new button and its functionality.\n\n# Step 1: Create \"executeChange.js\"\ncat << EOF > ./src/frontend/service/executeChange.js\nimport { getBaseUrl } from '../getBaseUrl';\n\nconst executeChange = async (change) => {\n  const baseUrl = getBaseUrl();\n  const response = await fetch(\\`\\${baseUrl}/execute\\`, {\n    method: 'POST',\n    headers: { 'Content-Type': 'application/json' },\n    body: JSON.stringify({ change })\n  });\n\n  const data = await response.json();\n\n  return data;\n};\n\nexport { executeChange };\nEOF\n\n# Step 2: Modify \"App.jsx\"\ncat << EOF > ./src/frontend/App.jsx\nimport NotesInput from './components/NotesInput';\nimport StartButton from './components/StartButton';\nimport ExecuteButton from './components/ExecuteButton';\nimport PromptDisplay from './components/PromptDisplay';\nimport TasksList from './components/TasksList';\nimport PromptDescriptor from './components/PromptDescriptor';\nimport NavBar from './components/NavBar';\nimport { notes, setNotes } from './stores/notes';\nimport { setPrompt } from './stores/prompt';\n\nconst App = () => {\n  return (\n    <div class=\"max-w-desktop lg:max-w-desktop md:max-w-full sm:max-w-full xs:max-w-full mx-auto flex flex-col items-center space-y-8 sm:p-0\">\n      <NavBar />\n      <TasksList />\n      <PromptDescriptor />\n      <NotesInput notes={notes} setNotes={setNotes} />\n      <StartButton notes={notes} setPrompt={setPrompt} />\n      <ExecuteButton />\n      <PromptDisplay />\n    </div>\n  );\n};\n\nexport default App;\nEOF\n\n# Step 3: Create \"ExecuteButton.jsx\"\ncat << EOF > ./src/frontend/components/ExecuteButton.jsx\nimport { executeChange } from '../service/executeChange';\n\nconst ExecuteButton = () => {\n  const handleExecuteChange = async () => {\n    const change = await navigator.clipboard.readText();\n    const response = await executeChange(change);\n\n    console.log(response.message);\n  };\n\n  return (\n    // Updated button color to a less flashy orange\n    <button class=\"px-8 py-4 bg-orange-300 text-white rounded\" onClick={handleExecuteChange}>Paste & Execute Change</button>\n  );\n};\n\nexport default ExecuteButton;\nEOF",
+      "after": "#!/bin/sh\n# Goal: Move generateHandler.js to a new handlers directory\n# Plan:\n# 1. Create a new directory named 'handlers' under 'src/backend/'.\n# 2. Move 'generateHandler.js' to the 'handlers' directory.\n# 3. Update the import statement in 'setupRoutes.js' to reflect the new location of 'generateHandler.js'.\n\nmkdir -p src/backend/handlers\n\nmv src/backend/generateHandler.js src/backend/handlers/\n\ncat > src/backend/handlers/generateHandler.js << 'EOF'\nimport processPrompt from '../../prompt/promptProcessing.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n  const { prompt } = await processPrompt(notes);\n  res.json({ prompt: prompt });\n};\nEOF\n\ncat > src/backend/setupRoutes.js << 'EOF'\nimport { generateHandler } from './handlers/generateHandler.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\nimport { updateTaskHandler } from './updateTaskHandler.js';\nimport { listTasks } from './listTasks.js';\n\nexport function setupRoutes(app) {\n  app.get('/descriptor', servePromptDescriptor);\n  app.get('/tasks', (req, res) => res.json({ tasks: listTasks() }));\n\n  app.post('/generate', generateHandler);\n  app.post('/updatetask', updateTaskHandler);\n}\nEOF",
+      "total_deletions": 64,
+      "total_additions": 23
+    },
+    {
+      "filename": "src/backend/handlers/generateHandler.js",
+      "before": "import processPrompt from '../prompt/promptProcessing.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;",
+      "after": "import processPrompt from '../../prompt/promptProcessing.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;",
+      "total_deletions": 1,
+      "total_additions": 1
+    },
+    {
+      "filename": "src/backend/setupRoutes.js",
+      "before": "import { generateHandler } from './generateHandler.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\nimport { updateTaskHandler } from './updateTaskHandler.js';\nimport { listTasks } from './listTasks.js';",
+      "after": "import { generateHandler } from './handlers/generateHandler.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\nimport { updateTaskHandler } from './updateTaskHandler.js';\nimport { listTasks } from './listTasks.js';",
+      "total_deletions": 1,
+      "total_additions": 1
     }
   ]
 }

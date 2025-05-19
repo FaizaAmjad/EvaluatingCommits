@@ -235,11 +235,25 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "src/index.js",
+      "before": "import React from 'react';\nimport { render }from 'react-dom';\nimport { Router } from 'react-router-dom';\nimport * as serviceWorker from './serviceWorker';\nimport { library } from '@fortawesome/fontawesome-svg-core'\nimport { FacebookProvider } from 'react-facebook';\nimport TagManager from 'react-gtm-module'\nimport history from './history';\nimport App from './App';\nimport styles from './styles/App.scss';\n\nimport {\n  faInfinity,\n  faGamepad,\n  faUser,\n  faUserSecret,\n  faUserGraduate,\n  faUserTie,\n  faUserNinja,\n  faCheckSquare,\n} from '@fortawesome/free-solid-svg-icons'\n\nlibrary.add(\n  faInfinity,\n  faGamepad,\n  faUser,\n  faUserSecret,\n  faUserGraduate,\n  faUserTie,\n  faCheckSquare,\n  faUserNinja\n);\n\nconst tagManagerArgs = {\n  gtmId: process.env.REACT_APP_GTM_ID,\n\nrender(\n  <Router history={history}>\n    <FacebookProvider appId=\"536292400544593\">\n      <App />\n    </FacebookProvider>\n  </Router>\n, rootElement\n);\n// If you want your common to work offline and load faster, you can change\n// unregister() to register() below. Note this comes with some pitfalls.\n// Learn more about service workers: http://bit.ly/CRA-PWA",
+      "after": "import React from 'react';\nimport { render } from 'react-dom';\nimport { Router } from 'react-router-dom';\nimport * as serviceWorker from './serviceWorker';\nimport TagManager from 'react-gtm-module';\nimport history from './history';\nimport App from './App';\nimport styles from './styles/App.scss';\nimport SetupFontAwesome from './utils/setupFontAwesome';  // Updated import path\nimport SetupFacebookProvider from './utils/setupFacebookProvider';  // New import\n\nconst tagManagerArgs = {\n  gtmId: process.env.REACT_APP_GTM_ID,\n\nrender(\n  <Router history={history}>\n    <SetupFacebookProvider appId=\"536292400544593\"> {/* Include SetupFacebookProvider */}\n      <SetupFontAwesome />  {/* Included the SetupFontAwesome component */}\n      <App />\n    </SetupFacebookProvider>\n  </Router>,\n  rootElement\n);\n\n// If you want your common to work offline and load faster, you can change\n// unregister() to register() below. Note this comes with some pitfalls.\n// Learn more about service workers: http://bit.ly/CRA-PWA",
+      "total_deletions": 30,
+      "total_additions": 10
+    },
+    {
+      "filename": "src/utils/setupFacebookProvider.js",
       "before": "",
-      "after": "",
+      "after": "import React from 'react';\nimport { FacebookProvider } from 'react-facebook';\n\nconst SetupFacebookProvider = ({ children }) => (\n  <FacebookProvider appId=\"536292400544593\">\n    {children}\n  </FacebookProvider>\n);\n\nexport default SetupFacebookProvider;",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 10
+    },
+    {
+      "filename": "src/utils/setupFontAwesome.js",
+      "before": "",
+      "after": "import { library } from '@fortawesome/fontawesome-svg-core';\nimport {\n  faInfinity,\n  faGamepad,\n  faUser,\n  faUserSecret,\n  faUserGraduate,\n  faUserTie,\n  faUserNinja,\n  faCheckSquare,\n} from '@fortawesome/free-solid-svg-icons';\n\nconst SetupFontAwesome = () => {\n  library.add(\n    faInfinity,\n    faGamepad,\n    faUser,\n    faUserSecret,\n    faUserGraduate,\n    faUserTie,\n    faCheckSquare,\n    faUserNinja\n  );\n  return null;\n};\n\nexport default SetupFontAwesome;",
+      "total_deletions": 0,
+      "total_additions": 27
     }
   ]
 }

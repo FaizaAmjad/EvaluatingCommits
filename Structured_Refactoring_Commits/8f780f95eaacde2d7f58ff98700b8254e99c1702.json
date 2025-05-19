@@ -76,11 +76,25 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Initialize a new git repository for Junior\"\necho \"Plan:\"\necho \"1. Create a new command junior-init in src/init.js\"\necho \"2. Initialize a new git repository\"\necho \"3. Create/Append .gitignore\"\necho \"4. Commit the changes\"\necho \"5. Create prompt.yaml\"\necho \"6. Display a success message\"\n\n# Step 1\ncat <<'EOF' > src/init.js\n#!/usr/bin/env node\nimport { execSync } from 'child_process';\nimport { appendFileSync, writeFileSync, existsSync } from 'fs';\nimport { join } from 'path';\n\nfunction juniorInit() {\n  execSync('git init', { stdio: 'inherit' });\n  \n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['prompt.yaml', 'prompt.md', 'change.sh'].join('\\n');\n\n  if (existsSync(gitignorePath)) {\n    appendFileSync(gitignorePath, `\\n${ignoreContent}`);\n  } else {\n    writeFileSync(gitignorePath, ignoreContent);\n  }\n\n  execSync('git add .gitignore', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });\njuniorInit();\nEOF\n\n# Make the file executable\nchmod +x src/init.js\n\n# Include junior-init in package.json bin section\njq '.bin[\"junior-init\"] = \"src/init.js\"' package.json > temp.json && mv temp.json package.json\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor .gitignore creation and check duplicates\"\necho \"Plan:\"\necho \"1. Create a new file named createGitignore.js in src/git/\"\necho \"2. Move .gitignore related code to createGitignore.js\"\necho \"3. Modify .gitignore creation code to only add unique entries\"\necho \"4. Update the init.js file to import and call the function from createGitignore.js\"\n\n# Step 1: Create a new file in src/git/\ncat > src/git/createGitignore.js << 'EOF'\nimport { appendFileSync, writeFileSync, existsSync, readFileSync } from 'fs';\nimport { join } from 'path';\n\nfunction createGitignore() {\n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['prompt.yaml', 'prompt.md', 'change.sh', 'node_modules'];\n\n  let existingIgnores = [];\n\n  if (existsSync(gitignorePath)) {\n    const gitignoreFileContent = readFileSync(gitignorePath, 'utf-8');\n    existingIgnores = gitignoreFileContent.split('\\n');\n  }\n\n  ignoreContent.forEach((item) => {\n    if (!existingIgnores.includes(item)) {\n      appendFileSync(gitignorePath, `\\n${item}`);\n    }\n  });\n}\n\nexport { createGitignore };\nEOF\n\n# Step 2,3,4: Update init.js\ncat > src/init.js << 'EOF'\n#!/usr/bin/env node\nimport { execSync } from 'child_process';\nimport { writeFileSync } from 'fs';\nimport { join } from 'path';\nimport { createGitignore } from './git/createGitignore.js';\n\nfunction juniorInit() {\n  execSync('git init', { stdio: 'inherit' });\n\n  createGitignore();\n\n  execSync('git add .gitignore', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });\njuniorInit();\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 25,
+      "total_additions": 37
+    },
+    {
+      "filename": "src/git/createGitignore.js",
       "before": "",
-      "after": "",
+      "after": "import { appendFileSync, writeFileSync, existsSync, readFileSync } from 'fs';\nimport { join } from 'path';\n\nfunction createGitignore() {\n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['prompt.yaml', 'prompt.md', 'change.sh', 'node_modules'];\n\n  let existingIgnores = [];\n\n  if (existsSync(gitignorePath)) {\n    const gitignoreFileContent = readFileSync(gitignorePath, 'utf-8');\n    existingIgnores = gitignoreFileContent.split('\\n');\n  }\n\n  ignoreContent.forEach((item) => {\n    if (!existingIgnores.includes(item)) {\n      appendFileSync(gitignorePath, `\\n${item}`);\n    }\n  });\n}\n\nexport { createGitignore };",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 22
+    },
+    {
+      "filename": "src/init.js",
+      "before": "#!/usr/bin/env node\nimport { execSync } from 'child_process';\nimport { appendFileSync, writeFileSync, existsSync } from 'fs';\nimport { join } from 'path';\n\nfunction juniorInit() {\n  execSync('git init', { stdio: 'inherit' });\n  \n  const gitignorePath = join(process.cwd(), '.gitignore');\n  const ignoreContent = ['prompt.yaml', 'prompt.md', 'change.sh'].join('\\n');\n\n  if (existsSync(gitignorePath)) {\n    appendFileSync(gitignorePath, `\\n${ignoreContent}`);\n  } else {\n    writeFileSync(gitignorePath, ignoreContent);\n  }\n\n  execSync('git add .gitignore', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });",
+      "after": "#!/usr/bin/env node\nimport { execSync } from 'child_process';\nimport { writeFileSync } from 'fs';\nimport { join } from 'path';\nimport { createGitignore } from './git/createGitignore.js';\n\nfunction juniorInit() {\n  execSync('git init', { stdio: 'inherit' });\n\n  createGitignore();\n\n  execSync('git add .gitignore', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });",
+      "total_deletions": 9,
+      "total_additions": 3
     }
   ]
 }

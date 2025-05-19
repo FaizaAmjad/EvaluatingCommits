@@ -76,11 +76,18 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
-      "total_deletions": 0,
-      "total_additions": 0
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Implement roadmap, fix index.html, delete files and build docs\"\necho \"Plan:\"\necho \"1. Create the roadmap.md file with required sections\"\necho \"2. Create roadmap.html file and link it from index.html\"\necho \"3. Fix the misplaced link in index.html\"\necho \"4. Modify index.html to mention the project name 'Junior'\"\necho \"5. Delete introduction.html and introduction.md\"\necho \"6. Remove the link to introduction.html from index.html\"\necho \"7. Execute npm run build:doc to generate HTML from Markdown\"\n\n# Step 1\ncat << 'EOF' > ./doc/roadmap.md\n# Roadmap\n## Usability & fixes\n- Details here\n\n## Programming on mobile\n- Details here\n\n## Auto-attention\n- Details here\n\n## Prompt-herd refactors\n- Details here\nEOF\n\n# Step 2\ncat << 'EOF' > ./doc/index.html\n<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <title>Junior Documentation</title>\n  </head>\n  <body>\n    <h1>Welcome to Junior Documentation!</h1>\n    <p>Check out the <a href=\"web.html\">Web Interface Guide</a>.</p>\n    <p><a href=\"roadmap.html\">Roadmap</a></p>\n  </body>\n</html>\nEOF\n\n# Step 3, 4, 5, and 6 are addressed in the above heredoc\n\n# Step 5\nrm ./doc/introduction.html ./doc/introduction.md\n\n# Step 7\nnpm run build:doc\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Improve documentation and roadmap\"\necho \"Plan:\"\necho \"1. Update the roadmap with the provided details.\"\necho \"2. Save changes to doc/roadmap.md.\"\necho \"3. Build the documentation using npm.\"\n\ncat > doc/roadmap.md << 'EOF'\n# Roadmap\n## Usability & fixes\n- Implement the four buttons\n- Fix every major bug\n- Write docs to allow using Junior for developing external projects\n\n## Programming on mobile\n- Develop a file browser to allow the user to select attention files from mobile\n- Create an app by wrapping the frontend\n- Test it by developing at the local Playground and while commuting\n\n## Auto-attention\n- Propose an attention based on the requirements and task the user selected\n- Embed every file in the project\n- Store the embeddings in an (embedded) vector database\n\n## Prompt herds\n- Scan and transform (refactor) the codebase gradually\nEOF\n\nnpm run build:doc\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 37,
+      "total_additions": 16
+    },
+    {
+      "filename": "doc/roadmap.html",
+      "before": "<h1>Roadmap</h1>\n<h2>Usability &amp; fixes</h2>\n<ul>\n<li>Details here</li>\n</ul>\n<h2>Programming on mobile</h2>\n<ul>\n<li>Details here</li>\n</ul>\n<h2>Auto-attention</h2>\n<ul>\n<li>Details here</li>\n</ul>\n<h2>Prompt-herd refactors</h2>\n<ul>\n<li>Details here</li>\n</ul>",
+      "after": "<h1>Roadmap</h1>\n<h2>Usability &amp; fixes</h2>\n<ul>\n<li>Implement the four buttons</li>\n<li>Fix every major bug</li>\n<li>Write docs to allow using Junior for developing external projects</li>\n</ul>\n<h2>Programming on mobile</h2>\n<ul>\n<li>Develop a file browser to allow the user to select attention files from mobile</li>\n<li>Create an app by wrapping the frontend</li>\n<li>Test it by developing at the local Playground and while commuting</li>\n</ul>\n<h2>Auto-attention</h2>\n<ul>\n<li>Propose an attention based on the requirements and task the user selected</li>\n<li>Embed every file in the project</li>\n<li>Store the embeddings in an (embedded) vector database</li>\n</ul>\n<h2>Prompt herds</h2>\n<ul>\n<li>Scan and transform (refactor) the codebase gradually</li>\n</ul>",
+      "total_deletions": 5,
+      "total_additions": 11
     }
   ]
 }

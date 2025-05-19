@@ -40,11 +40,25 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
-      "total_deletions": 0,
-      "total_additions": 0
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Switch the two buttons in ChangeFinalization\"\necho \"Plan:\"\necho \"1. Update the ChangeFinalization.jsx file to switch the positions of the CommitButton and RollbackButton components.\"\n\ncat > src/frontend/components/ChangeFinalization.jsx << 'EOF'\nimport CommitMessageInput from './CommitMessageInput';\nimport CommitButton from './CommitButton';\n  return (\n    <>\n      <CommitMessageInput />\n      <div className=\"flex w-full mt-2 space-x-4\">\n        <RollbackButton />\n        <CommitButton />\n      </div>\n};\n\nexport default ChangeFinalization;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Reduce vertical space between input and buttons\"\necho \"Plan:\"\necho \"1. Remove the 'mt-2' class from the RollbackButton component to reduce the vertical space.\"\necho \"2. Change the 'mt-2' margin class in the container div in ChangeFinalization component to a smaller value like 'mt-1' to reduce the space between the input and the buttons.\"\n\n# Step 1: Update RollbackButton.jsx\ncat > src/frontend/components/RollbackButton.jsx << 'EOF'\nimport { resetGit } from '../service/resetGit';\n\nconst RollbackButton = () => {\n  const handleReset = async () => {\n    const response = await resetGit();\n\n    console.log(response.message);\n  };\n\n  return (\n    <button className=\"w-full px-4 py-4 bg-red-700 text-white rounded\" onClick={handleReset}>Roll Back</button>\n  );\n};\n\nexport default RollbackButton;\n\nEOF\n\n# Step 2: Update ChangeFinalization.jsx\ncat > src/frontend/components/ChangeFinalization.jsx << 'EOF'\nimport CommitMessageInput from './CommitMessageInput';\nimport CommitButton from './CommitButton';\n  return (\n    <>\n      <CommitMessageInput />\n      <div className=\"flex w-full mt-1 space-x-4\">\n        <RollbackButton />\n        <CommitButton />\n      </div>\n};\n\nexport default ChangeFinalization;\n\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 3,
+      "total_additions": 26
+    },
+    {
+      "filename": "src/frontend/components/ChangeFinalization.jsx",
+      "before": "  return (\n    <>\n      <CommitMessageInput />\n      <div className=\"flex w-full mt-2 space-x-4\">\n        <RollbackButton />\n        <CommitButton />\n      </div>\n};\n\nexport default ChangeFinalization;\n",
+      "after": "  return (\n    <>\n      <CommitMessageInput />\n      <div className=\"flex w-full mt-1 space-x-4\">\n        <RollbackButton />\n        <CommitButton />\n      </div>\n};\n\nexport default ChangeFinalization;\n",
+      "total_deletions": 1,
+      "total_additions": 2
+    },
+    {
+      "filename": "src/frontend/components/RollbackButton.jsx",
+      "before": "  };\n\n  return (\n    <button className=\"w-full px-4 py-4 bg-red-700 text-white rounded mt-2\" onClick={handleReset}>Roll Back</button>\n  );\n};\n\nexport default RollbackButton;\n",
+      "after": "  };\n\n  return (\n    <button className=\"w-full px-4 py-4 bg-red-700 text-white rounded\" onClick={handleReset}>Roll Back</button>\n  );\n};\n\nexport default RollbackButton;\n",
+      "total_deletions": 1,
+      "total_additions": 2
     }
   ]
 }

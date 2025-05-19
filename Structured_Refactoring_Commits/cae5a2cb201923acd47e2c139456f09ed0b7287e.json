@@ -40,11 +40,18 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/09/16/21:23_Refactor GitStatusRow component/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor GitStatusRow component\"\necho \"Plan:\"\necho \"1. Split the path to extract filename and base directory.\"\necho \"2. Concatenate index and working_dir fields for the first column.\"\necho \"3. Render filename in the second column.\"\necho \"4. Render base directory in the third column.\"\necho \"5. Add styles to enable scrolling within cells.\"\n\n# Modify the GitStatusRow component to fulfill the requirements\ncat > ./src/frontend/components/GitStatusRow.jsx << 'EOF'\nimport getBackgroundColorForFile from './getBackgroundColorForFile';\n\nconst GitStatusRow = (props) => {\n  const { index, path, working_dir } = props.entry;\n\n  // Split the path to get filename and base directory\n  const splitPath = path.split('/');\n  const fileName = splitPath.pop();\n  const baseDir = splitPath.join('/');\n\n  const bgColor = getBackgroundColorForFile(index, path);\n  return (\n    <div class={`flex ${bgColor ? 'bg-' + bgColor : ''}`}>\n      <span class=\"w-50px overflow-x-auto\">{index + ' ' + working_dir}</span>\n      <span class=\"flex-grow w-60% overflow-x-auto\">{fileName}</span>\n      <span class=\"flex-shrink overflow-x-auto\">{baseDir}</span>\n    </div>\n  );\n};\n\nexport default GitStatusRow;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 36
+    },
+    {
+      "filename": "src/frontend/components/GitStatusRow.jsx",
+      "before": "\nconst GitStatusRow = (props) => {\n  const { index, path, working_dir } = props.entry;\n  const bgColor = getBackgroundColorForFile(index, path);\n  return (\n    <div class={`flex ${bgColor ? 'bg-' + bgColor : ''}`}>\n      <span class=\"w-50px\">{index}</span>\n      <span class=\"flex-grow w-60%\">{path}</span>\n      <span class=\"flex-shrink\">{working_dir}</span>\n    </div>\n  );\n};",
+      "after": "\nconst GitStatusRow = (props) => {\n  const { index, path, working_dir } = props.entry;\n\n  // Split the path to get filename and base directory\n  const splitPath = path.split('/');\n  const fileName = splitPath.pop();\n  const baseDir = splitPath.join('/');\n\n  const bgColor = getBackgroundColorForFile(index, path);\n  return (\n    <div class={`flex ${bgColor ? 'bg-' + bgColor : ''}`}>\n      <span class=\"w-50px overflow-x-auto\">{index + ' ' + working_dir}</span>\n      <span class=\"flex-grow w-60% overflow-x-auto\">{fileName}</span>\n      <span class=\"flex-shrink overflow-x-auto\">{baseDir}</span>\n    </div>\n  );\n};",
+      "total_deletions": 3,
+      "total_additions": 9
     }
   ]
 }

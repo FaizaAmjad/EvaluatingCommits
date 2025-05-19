@@ -52,11 +52,32 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/09/04/12:45_Implement RepoInfo in NavBar/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Implement RepoInfo in NavBar\"\necho \"Plan:\"\necho \"1. Create RepoInfo.jsx component with the given specifications.\"\necho \"2. Import and integrate the RepoInfo component into NavBar.jsx.\"\n\n# Step 1: Create RepoInfo.jsx component\n\ncat > src/frontend/components/RepoInfo.jsx << 'EOF'\nimport { createSignal } from 'solid-js';\n\nconst RepoInfo = () => {\n  return (\n    <span class=\"text-sm font-mono bg-gray-200 px-2 py-1 rounded\">\n      @aijunior/dev main\n    </span>\n  );\n};\n\nexport default RepoInfo;\nEOF\n\n# Step 2: Import and integrate RepoInfo into NavBar.jsx\n\ncat > src/frontend/components/NavBar.jsx << 'EOF'\nimport ThemeSwitcher from './ThemeSwitcher';\nimport SubTitle from './SubTitle';\nimport RepoInfo from './RepoInfo';\n\nconst NavBar = () => {\n  const title = 'Junior';\n\n  return (\n    <div class=\"relative w-full\">\n      <div class=\"absolute top-0 right-0 m-4\">\n        <ThemeSwitcher />\n      </div>\n      <div class=\"flex flex-col items-center justify-center\">\n        <a href=\"https://github.com/tisztamo/Junior\" class=\"text-center text-3xl mt-6 no-underline\">{title}</a>\n        <SubTitle />\n        <RepoInfo />\n      </div>\n    </div>\n  );\n};\n\nexport default NavBar;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 51
+    },
+    {
+      "filename": "prompt/history/2023/09/04/12:47_Refactor RepoInfo for better aesthetics/change.sh",
+      "before": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor RepoInfo for better aesthetics\"\necho \"Plan:\"\necho \"1. Update the RepoInfo.jsx component to use less padding, add some margin-top, and make the background adaptable for dark mode.\"\n\n# Step 1: Update RepoInfo.jsx component\n\ncat > src/frontend/components/RepoInfo.jsx << 'EOF'\nimport { createSignal } from 'solid-js';\n\nconst RepoInfo = () => {\n  return (\n    <span class=\"text-sm font-mono bg-gray-200 dark:bg-gray-700 px-1 py-0.5 mt-2 rounded\">\n      @aijunior/dev main\n    </span>\n  );\n};\n\nexport default RepoInfo;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 0,
+      "total_additions": 23
+    },
+    {
+      "filename": "src/frontend/components/NavBar.jsx",
+      "before": "import ThemeSwitcher from './ThemeSwitcher';\nimport SubTitle from './SubTitle';\n\nconst NavBar = () => {\n  const title = 'Junior';\n      <div class=\"flex flex-col items-center justify-center\">\n        <a href=\"https://github.com/tisztamo/Junior\" class=\"text-center text-3xl mt-6 no-underline\">{title}</a>\n        <SubTitle />\n      </div>\n    </div>\n  );",
+      "after": "import ThemeSwitcher from './ThemeSwitcher';\nimport SubTitle from './SubTitle';\nimport RepoInfo from './RepoInfo';\n\nconst NavBar = () => {\n  const title = 'Junior';\n      <div class=\"flex flex-col items-center justify-center\">\n        <a href=\"https://github.com/tisztamo/Junior\" class=\"text-center text-3xl mt-6 no-underline\">{title}</a>\n        <SubTitle />\n        <RepoInfo />\n      </div>\n    </div>\n  );",
+      "total_deletions": 0,
+      "total_additions": 2
+    },
+    {
+      "filename": "src/frontend/components/RepoInfo.jsx",
+      "before": "",
+      "after": "import { createSignal } from 'solid-js';\n\nconst RepoInfo = () => {\n  return (\n    <span class=\"text-sm font-mono bg-gray-200 dark:bg-gray-700 px-1 py-0.5 mt-2 rounded\">\n      @aijunior/dev main\n    </span>\n  );\n};\n\nexport default RepoInfo;",
+      "total_deletions": 0,
+      "total_additions": 11
     }
   ]
 }

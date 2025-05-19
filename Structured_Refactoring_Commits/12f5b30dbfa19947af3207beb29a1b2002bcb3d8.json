@@ -46,11 +46,11 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "index.html",
       "before": "",
-      "after": "",
+      "after": "<!DOCTYPE html>\n<html>\n<head>\n    <title>Banzuke Surfing Game</title>\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n</head>\n<body>\n    <h1>Welcome to Banzuke Surfing Game!</h1>\n    <p>Select your Rikishi and start playing!</p>\n    <select id=\"rikishi\">\n        <option value=\"1\">Rikishi 1</option>\n        <option value=\"2\">Rikishi 2</option>\n        <!-- more options here -->\n    </select>\n    <button onclick=\"startPlaying()\">Start Playing</button>\n    <script>\n        function startPlaying() {\n            var rikishi = $('#rikishi').val();\n            // This is where you'd connect to your game logic\n            // For example:\n            // sendRikishiToServer(rikishi);\n            alert(\"You selected: \" + rikishi);\n        }\n    </script>\n</body>\n</html>",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 26
     }
   ]
 }

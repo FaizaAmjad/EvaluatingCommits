@@ -52,11 +52,25 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
-      "total_deletions": 0,
-      "total_additions": 0
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Rename deleteBranchesCommand to clearBranchesCommand\"\necho \"Plan:\"\necho \"1. Rename the file src/git/deleteBranchesCommand.js to src/git/clearBranchesCommand.js.\"\necho \"2. Update the reference in package.json from src/deleteBranchesCommand.js to src/clearBranchesCommand.js to ensure coherence.\"\necho \"3. Since there is no reference to the deleteBranchesCommand.js file in the codebase, renaming it will not affect other parts of the code.\"\n\n# Rename deleteBranchesCommand.js to clearBranchesCommand.js\nmv src/git/deleteBranchesCommand.js src/git/clearBranchesCommand.js\n\n# Update the reference in package.json\njq '.scripts[\"delete-branches\"] = \"node ./scripts/clearBranchesCommand.js\"' package.json > tmp.json && mv tmp.json package.json\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Rename delete-branches to clear-branches\"\necho \"Plan:\"\necho \"1. Update the function name deleteBranches to clearBranches in src/git/clearBranches.js file.\"\necho \"2. Update the 'delete-branches' script command in package.json to 'clear-branches'.\"\n\n# Update the function name deleteBranches to clearBranches in the renamed clearBranches.js file\ncat > src/git/clearBranches.js << 'EOF'\nimport { promisify } from 'util';\nimport { exec as execCb } from 'child_process';\n\nconst exec = promisify(execCb);\n\nexport default async function clearBranches(exceptions = []) {\n  try {\n    const { stdout: currentBranch } = await exec('git rev-parse --abbrev-ref HEAD');\n    const { stdout: allBranches } = await exec('git for-each-ref --format=\"%(refname:short)\" refs/heads');\n\n    const branches = allBranches.split('\\n').filter(branch => branch !== currentBranch.trim() && !exceptions.includes(branch));\n\n    for (const branch of branches) {\n      await executeCommand(`git branch -d ${branch}`);\n    }\n  } catch (err) {\n    console.error(`An error occurred: ${err}`);\n  }\n}\n\nasync function executeCommand(command) {\n  try {\n    console.log(`Running command: ${command}`);\n    const { stdout } = await exec(command);\n    console.log(`stdout: ${stdout}`);\n  } catch (err) {\n    throw err;\n  }\n}\nEOF\n\n# Update the 'delete-branches' script command in package.json to 'clear-branches'\njq '.scripts.\"clear-branches\" = .scripts.\"delete-branches\" | del(.scripts.\"delete-branches\")' package.json > package.json.tmp && mv package.json.tmp package.json\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 8,
+      "total_additions": 37
+    },
+    {
+      "filename": "package.json",
+      "before": "    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"update-logo\": \"node ./scripts/updateLogo.js\",\n    \"delete-branches\": \"node ./scripts/clearBranchesCommand.js\"\n  },\n  \"keywords\": [\n    \"cli\",",
+      "after": "    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"update-logo\": \"node ./scripts/updateLogo.js\",\n    \"clear-branches\": \"node ./scripts/clearBranchesCommand.js\"\n  },\n  \"keywords\": [\n    \"cli\",",
+      "total_deletions": 1,
+      "total_additions": 1
+    },
+    {
+      "filename": "src/git/clearBranches.js",
+      "before": "\nconst exec = promisify(execCb);\n\nexport default async function deleteBranches(exceptions = []) {\n  try {\n    const { stdout: currentBranch } = await exec('git rev-parse --abbrev-ref HEAD');\n    const { stdout: allBranches } = await exec('git for-each-ref --format=\"%(refname:short)\" refs/heads');",
+      "after": "\nconst exec = promisify(execCb);\n\nexport default async function clearBranches(exceptions = []) {\n  try {\n    const { stdout: currentBranch } = await exec('git rev-parse --abbrev-ref HEAD');\n    const { stdout: allBranches } = await exec('git for-each-ref --format=\"%(refname:short)\" refs/heads');",
+      "total_deletions": 1,
+      "total_additions": 1
     }
   ]
 }

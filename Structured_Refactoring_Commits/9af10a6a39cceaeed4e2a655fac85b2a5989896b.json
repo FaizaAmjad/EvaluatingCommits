@@ -52,11 +52,25 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/08/23/13:53_Refactor RequirementsEditor for clarity/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor RequirementsEditor for clarity\"\necho \"Plan:\"\necho \"1. Introduce a signal for requirements in the model to handle reactivity.\"\necho \"2. Modify RequirementsEditor.jsx to directly use the new signal without the extra variable.\"\n\n# Step 1: Create a new model for requirements using a signal (remains unchanged)\ncat > ./src/frontend/model/requirements.js << 'EOF'\nimport { createSignal } from 'solid-js';\n\nexport const [requirements, setRequirements] = createSignal('');\nEOF\n\n# Step 2: Modify RequirementsEditor.jsx to use the newly created signal and eliminate the extra variable\ncat > ./src/frontend/components/RequirementsEditor.jsx << 'EOF'\nimport { createEffect } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\nimport { promptDescriptor } from '../model/promptDescriptor';\nimport { requirements, setRequirements } from '../model/requirements';\n\nconst RequirementsEditor = () => {\n  const handleRequirementsChange = async (e) => {\n    setRequirements(e.target.value);\n    await postDescriptor({ requirements: e.target.value });\n  };\n\n  createEffect(() => {\n    const currentRequirements = promptDescriptor().requirements || '';\n    if (currentRequirements !== requirements()) {\n      setRequirements(currentRequirements);\n    }\n  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded border border-border mt-4\">\n      <textarea\n        class=\"w-full bg-emphasize text-emphasize text-lg\"\n        placeholder=\"Enter your requirements...\"\n        value={requirements()}\n        onInput={e => handleRequirementsChange(e)}\n      />\n    </div>\n  );\n};\n\nexport default RequirementsEditor;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 50
+    },
+    {
+      "filename": "src/frontend/components/RequirementsEditor.jsx",
+      "before": "import { createEffect } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\nimport { promptDescriptor } from '../model/promptDescriptor';\n\nconst RequirementsEditor = () => {\n  let requirements = promptDescriptor().requirements || '';\n\n  const handleRequirementsChange = async (e) => {\n    requirements = e.target.value;\n    await postDescriptor({ requirements: requirements });\n  };\n\n  createEffect(() => {\n    requirements = promptDescriptor().requirements || '';\n  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded border border-border mt-4\">\n      <textarea\n        class=\"w-full bg-emphasize text-emphasize text-lg\"\n        placeholder=\"Enter your requirements...\"\n        value={requirements}\n        onInput={e => handleRequirementsChange(e)}\n      />\n    </div>",
+      "after": "import { createEffect } from 'solid-js';\nimport postDescriptor from '../service/postDescriptor';\nimport { promptDescriptor } from '../model/promptDescriptor';\nimport { requirements, setRequirements } from '../model/requirements';\n\nconst RequirementsEditor = () => {\n  const handleRequirementsChange = async (e) => {\n    setRequirements(e.target.value);\n    await postDescriptor({ requirements: e.target.value });\n  };\n\n  createEffect(() => {\n    const currentRequirements = promptDescriptor().requirements || '';\n    if (currentRequirements !== requirements()) {\n      setRequirements(currentRequirements);\n    }\n  });\n\n  return (\n    <div class=\"w-full flex justify-start bg-emphasize text-emphasize p-2 rounded border border-border mt-4\">\n      <textarea\n        class=\"w-full bg-emphasize text-emphasize text-lg\"\n        placeholder=\"Enter your requirements...\"\n        value={requirements()}\n        onInput={e => handleRequirementsChange(e)}\n      />\n    </div>",
+      "total_deletions": 6,
+      "total_additions": 8
+    },
+    {
+      "filename": "src/frontend/model/requirements.js",
+      "before": "",
+      "after": "import { createSignal } from 'solid-js';\n\nexport const [requirements, setRequirements] = createSignal('');",
+      "total_deletions": 0,
+      "total_additions": 3
     }
   ]
 }

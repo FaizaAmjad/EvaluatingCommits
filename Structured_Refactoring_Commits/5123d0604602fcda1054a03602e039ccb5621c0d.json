@@ -64,11 +64,25 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/10/02/12:14_Refine TerminalSummary: Improved cleaning of control sequences/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\n\ngoal=\"Refine TerminalSummary: Improved cleaning of control sequences\"\necho \"Plan:\"\necho \"1. Update the cleaning method to remove ANSI escape codes.\"\necho \"2. Reapply the logic in TerminalSummary with the updated cleaning method.\"\n\n# 1. Update the prependAndExtractLastLine function to remove ANSI escape codes\ncat > ./src/frontend/components/terminal/prependAndExtractLastLine.js << 'EOF'\nexport function prependAndExtractLastLine(lastLine, currentData) {\n  const combinedData = `${lastLine}${currentData}`;\n  // Remove ANSI escape codes\n  const cleanedData = combinedData.replace(/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?/g, '');\n  const lines = cleanedData.split('\\n');\n  return lines[lines.length - 1];\n}\nEOF\n\n# 2. Reapply the logic in TerminalSummary component\ncat > ./src/frontend/components/terminal/TerminalSummary.jsx << 'EOF'\nimport { createEffect, createSignal } from 'solid-js';\nimport { prependAndExtractLastLine } from './prependAndExtractLastLine';\n\nexport function TerminalSummary(props) {\n  const [lastLineSignal, setLastLineSignal] = createSignal(\"\");\n  let localLastLine = \"\";\n\n  createEffect(() => {\n    localLastLine = prependAndExtractLastLine(localLastLine, props.lastWritten);\n    setLastLineSignal(localLastLine);\n  });\n\n  return <span>{lastLineSignal()}</span>;\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 38
+    },
+    {
+      "filename": "src/frontend/components/terminal/TerminalSummary.jsx",
+      "before": "import { createEffect, createSignal } from 'solid-js';\n\nfunction extractLastLine(data) {\n  const lines = data.split('\\n');\n  return lines[lines.length - 1];\n}\n\nexport function TerminalSummary(props) {\n  const [lastLine, setLastLine] = createSignal(\"\");\n\n  createEffect(() => {\n    setLastLine(extractLastLine(props.lastWritten));\n  });\n\n  return <span>{lastLine()}</span>;\n}",
+      "after": "import { createEffect, createSignal } from 'solid-js';\nimport { prependAndExtractLastLine } from './prependAndExtractLastLine';\n\nexport function TerminalSummary(props) {\n  const [lastLineSignal, setLastLineSignal] = createSignal(\"\");\n  let localLastLine = \"\";\n\n  createEffect(() => {\n    localLastLine = prependAndExtractLastLine(localLastLine, props.lastWritten);\n    setLastLineSignal(localLastLine);\n  });\n\n  return <span>{lastLineSignal()}</span>;\n}",
+      "total_deletions": 8,
+      "total_additions": 6
+    },
+    {
+      "filename": "src/frontend/components/terminal/prependAndExtractLastLine.js",
+      "before": "",
+      "after": "export function prependAndExtractLastLine(lastLine, currentData) {\n  const combinedData = `${lastLine}${currentData}`;\n  // Remove ANSI escape codes\n  const cleanedData = combinedData.replace(/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]?/g, '');\n  const lines = cleanedData.split('\\n');\n  return lines[lines.length - 1];\n}",
+      "total_deletions": 0,
+      "total_additions": 7
     }
   ]
 }

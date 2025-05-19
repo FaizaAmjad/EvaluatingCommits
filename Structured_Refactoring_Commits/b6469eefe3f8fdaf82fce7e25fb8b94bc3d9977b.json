@@ -50,11 +50,11 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
-      "total_deletions": 0,
-      "total_additions": 0
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Improve documentation for referencing .md files\"\necho \"Plan:\"\necho \"1. Add a new section called 'Attributes referencing .md files' between 'Attributes' and 'Template Files'\"\necho \"2. Include an example referring to the task: prompt/task/feature/implement.md line in the example yaml\"\necho \"3. Show the content of prompt/task/feature/implement.md to supplement the example\"\n\n# Step 1: Insert the new section\ncat << 'EOF' > docs/temp_descriptor.md\n# Prompt Descriptor\n\nThe prompt descriptor is a YAML file (prompt.yaml) that outlines the details necessary for generating a task prompt for the AI model. It is used to specify the task, attention, requirements, and other attributes.\n- requirements: Describes the actual task in a human-readable format.\n- format: (Optional and half-working) Determines how the output will be formatted. It should be avoided for now.\n- os: (Default: \"Debian\") Specifies the operating system.\n- installedTools: Allows to overwrite attributes in prompt.yaml or create prompt/attributeName.md with the content.\n\n## Attributes referencing .md files\n\n\nEOF\n\n# Step 2: Replace the original descriptor file with the new version\nmv docs/temp_descriptor.md docs/descriptor.md\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Improve the prompt descriptor documentation\"\necho \"Plan:\"\necho \"1. Modify the 'installedTools' section in docs/descriptor.md\"\necho \"2. Explain that users can overwrite attributes or create files with the content for any attribute\"\n\ncat << 'EOF' > docs/descriptor.md\n# Prompt Descriptor\n\nThe prompt descriptor is a YAML file (prompt.yaml) that outlines the details necessary for generating a task prompt for the AI model. It is used to specify the task, attention, requirements, and other attributes.\n- requirements: Describes the actual task in a human-readable format.\n- format: (Optional and half-working) Determines how the output will be formatted. It should be avoided for now.\n- os: (Default: \"Debian\") Specifies the operating system.\n- installedTools: By default, this includes \"npm, jq.\" Allows the user to overwrite attributes in prompt.yaml or create prompt/attributeName.md with the content for any attribute, including those not listed here.\n\n## Attributes referencing .md files\n\n\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 10,
+      "total_additions": 5
     }
   ]
 }

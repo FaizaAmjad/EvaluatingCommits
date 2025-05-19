@@ -40,11 +40,18 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "prompt/history/2023/09/11/14:24_Enhance ExecuteButton component/change.sh",
       "before": "",
-      "after": "",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Enhance ExecuteButton component\"\necho \"Plan:\"\necho \"1. Modify the textarea to have a darker background than the button.\"\necho \"2. Empty the textarea's content after execution.\"\n\n# Step 1: Modify the textarea to have a darker background.\ncat > src/frontend/components/ExecuteButton.jsx << 'EOF'\nimport { createEffect } from 'solid-js';\nimport handleExecuteChange from '../service/handleExecuteChange';\nimport { setChangeInput, changeInput } from '../model/changeInput';\n\nconst ExecuteButton = () => {\n  const clipboardAvailable = !!(navigator.clipboard && navigator.clipboard.readText);\n\n  const handlePaste = async (e) => {\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);\n    handleExecuteChange();\n    setChangeInput(''); // To clear the input after execution\n  };\n\n  // To clear the input content after execution\n  createEffect(() => {\n    if (changeInput()) {\n      handleExecuteChange();\n      setChangeInput('');\n    }\n  });\n\n  return (\n    <button className=\"w-full px-4 py-4 pb-3 bg-orange-300 text-lg text-bg font-semibold rounded\" onClick={handleExecuteChange}>\n      {clipboardAvailable ? (\n        'Paste & Execute Change [X]'\n      ) : (\n        <textarea\n          rows=\"1\"\n          className=\"w-full px-2 py-2 bg-orange-500 text-lg text-bg font-semibold resize-none\"  // Darker background than the button\n          placeholder=\"Paste here to execute\"\n          value={changeInput()}\n          onPaste={handlePaste}\n        />\n      )}\n    </button>\n  );\n};\n\nexport default ExecuteButton;\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 52
+    },
+    {
+      "filename": "src/frontend/components/ExecuteButton.jsx",
+      "before": "import handleExecuteChange from '../service/handleExecuteChange';\nimport { setChangeInput, changeInput } from '../model/changeInput';\n\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);\n    handleExecuteChange();\n  };\n\n  return (\n    <button className=\"w-full px-4 py-4 pb-3 bg-orange-300 text-lg text-bg font-semibold rounded\" onClick={handleExecuteChange}>\n      {clipboardAvailable ? (\n        'Paste & Execute Change [X]'\n      ) : (\n        <textarea\n          rows=\"1\"\n          className=\"w-full px-2 py-2 bg-white text-lg text-bg font-semibold resize-none\"\n          placeholder=\"Paste here to execute\"\n          value={changeInput()}\n          onPaste={handlePaste}",
+      "after": "import { createEffect } from 'solid-js';\nimport handleExecuteChange from '../service/handleExecuteChange';\nimport { setChangeInput, changeInput } from '../model/changeInput';\n\n    const paste = (e.clipboardData || window.clipboardData).getData('text');\n    setChangeInput(paste);\n    handleExecuteChange();\n    setChangeInput(''); // To clear the input after execution\n  };\n\n  // To clear the input content after execution\n  createEffect(() => {\n    if (changeInput()) {\n      handleExecuteChange();\n      setChangeInput('');\n    }\n  });\n\n  return (\n    <button className=\"w-full px-4 py-4 pb-3 bg-orange-300 text-lg text-bg font-semibold rounded\" onClick={handleExecuteChange}>\n      {clipboardAvailable ? (\n        'Paste & Execute Change [X]'\n      ) : (\n        <textarea\n          rows=\"1\"\n          className=\"w-full px-2 py-2 bg-orange-500 text-lg text-bg font-semibold resize-none\"  // Darker background than the button\n          placeholder=\"Paste here to execute\"\n          value={changeInput()}\n          onPaste={handlePaste}",
+      "total_deletions": 1,
+      "total_additions": 11
     }
   ]
 }

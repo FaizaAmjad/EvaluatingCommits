@@ -130,11 +130,32 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "basho.js",
       "before": "",
-      "after": "",
+      "after": "class Basho {\n    constructor(id, waveId) {\n        this.id = id; // To distinguish different bashos\n        this.waveId = waveId; // To associate basho with a wave\n        this.picks = {}; // Dictionary mapping player names to their picks\n    }\n\n    // Function to allow a player to select a wrestler\n    selectWrestler(playerName, wrestler) {\n        // Check if player already has a pick\n        if (this.picks[playerName]) {\n            console.log(`Player ${playerName} already selected a wrestler for this basho.`);\n            return;\n        }\n        this.picks[playerName] = wrestler;\n    }\n\n    // Function to get a player's pick\n    getPlayerPick(playerName) {\n        return this.picks[playerName];\n    }\n\n    // Function to get all player's picks\n    getAllPicks() {\n        return this.picks;\n    }\n\n    // Function to change a player's pick\n    changePick(playerName, newWrestler) {\n        if (!this.picks[playerName]) {\n            console.log(`Player ${playerName} has not selected a wrestler for this basho.`);\n            return;\n        }\n        this.picks[playerName] = newWrestler;\n    }\n}\n\nmodule.exports = Basho;",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 38
+    },
+    {
+      "filename": "basho.test.js",
+      "before": "",
+      "after": "const Basho = require('./basho.js');\n\ndescribe('Basho Class', () => {\n    let basho;\n    beforeEach(() => {\n        basho = new Basho(1, 1); // First argument is bashoId, second is waveId\n    });\n\n    test('selectWrestler() should add player pick to the basho', () => {\n        basho.selectWrestler('player1', 'wrestler1');\n        expect(basho.getPlayerPick('player1')).toBe('wrestler1');\n    });\n\n    test('selectWrestler() should not overwrite existing pick', () => {\n        basho.selectWrestler('player1', 'wrestler1');\n        basho.selectWrestler('player1', 'wrestler2');\n        expect(basho.getPlayerPick('player1')).toBe('wrestler1');\n    });\n\n    test('changePick() should change player pick', () => {\n        basho.selectWrestler('player1', 'wrestler1');\n        basho.changePick('player1', 'wrestler2');\n        expect(basho.getPlayerPick('player1')).toBe('wrestler2');\n    });\n\n    test('getAllPicks() should return all picks', () => {\n        basho.selectWrestler('player1', 'wrestler1');\n        basho.selectWrestler('player2', 'wrestler2');\n        expect(basho.getAllPicks()).toEqual({\n            player1: 'wrestler1',\n            player2: 'wrestler2'\n        });\n    });\n});",
+      "total_deletions": 0,
+      "total_additions": 34
+    },
+    {
+      "filename": "wave.js",
+      "before": "",
+      "after": "class Wave {\n    constructor(id) {\n        this.id = id; // To distinguish different waves\n        this.bashos = []; // Array to hold all Bashos in this wave\n    }\n\n    // Function to add a Basho to the wave\n    addBasho(basho) {\n        this.bashos.push(basho);\n    }\n\n    // Function to get a Basho by id\n    getBasho(bashoId) {\n        return this.bashos.find(basho => basho.id === bashoId);\n    }\n}\n\nmodule.exports = Wave;",
+      "total_deletions": 0,
+      "total_additions": 18
+    },
+    {
+      "filename": "wave.test.js",
+      "before": "",
+      "after": "const Wave = require('./wave.js');\nconst Basho = require('./basho.js');\n\ndescribe('Wave Class', () => {\n    let wave;\n    let basho1;\n    let basho2;\n    beforeEach(() => {\n        wave = new Wave(1);\n        basho1 = new Basho(1, 1);\n        basho2 = new Basho(2, 1);\n    });\n\n    test('addBasho() should add a Basho to the wave', () => {\n        wave.addBasho(basho1);\n        expect(wave.bashos.length).toBe(1);\n        expect(wave.bashos[0]).toBe(basho1);\n    });\n\n    test('getBasho() should return the correct Basho', () => {\n        wave.addBasho(basho1);\n        wave.addBasho(basho2);\n        const retrievedBasho = wave.getBasho(2);\n        expect(retrievedBasho).toBe(basho2);\n    });\n});",
+      "total_deletions": 0,
+      "total_additions": 26
     }
   ]
 }

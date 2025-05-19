@@ -40,11 +40,25 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Fix junior-init to correctly locate prompt files\"\necho \"Plan:\"\necho \"1. Change the path in execSync to include the correct location of prompt/defaults in the installed version of Junior.\"\necho \"2. Update the src/init.js file with the new changes.\"\n\ncat > ./src/init.js << 'EOF'\n#!/usr/bin/env node\nimport { execSync } from 'child_process';\nimport { createPromptYaml } from './prompt/createPromptYaml.js';\nimport { createGitignore } from './git/createGitignore.js';\nimport { createPromptDir } from './prompt/createPromptDir.js';\nimport { fileURLToPath } from 'url';\nimport path from 'path';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\n\n  // Correcting the path to the prompt/defaults folder in the installed version of Junior\n  const defaultsPath = path.join(__dirname, '../prompt/defaults');\n  execSync(`cp -r ${defaultsPath}/* ./prompt/`, { stdio: 'inherit' });\n\n  execSync('git add .', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor copyDefaults, use fs instead of exec\"\necho \"Plan:\"\necho \"1. Create the src/command/init/copyDefaults.js file\"\necho \"2. Move the defaults copying logic into the new file\"\necho \"3. Replace the exec usage with nodejs fs for copying\"\necho \"4. Update the src/init.js to import and use the new function\"\n\n# Step 1: Create the src/command/init/copyDefaults.js file\nmkdir -p src/command/init\ncat << 'EOF' > src/command/init/copyDefaults.js\nimport fs from 'fs';\nimport path from 'path';\n\nasync function copyDefaults(src, dst) {\n  if (!fs.existsSync(dst)) {\n    fs.mkdirSync(dst, { recursive: true });\n  }\n\n  fs.readdirSync(src).forEach(async (file) => {\n    const srcPath = path.join(src, file);\n    const dstPath = path.join(dst, file);\n    \n    if (fs.lstatSync(srcPath).isDirectory()) {\n      await copyDefaults(srcPath, dstPath);\n    } else {\n      fs.copyFileSync(srcPath, dstPath);\n    }\n  });\n}\n\nexport default copyDefaults;\nEOF\n\n# Step 2 and 3: Moved the logic to new file, replaced exec with fs\n\n# Step 4: Update src/init.js to import and use the new function\ncat << 'EOF' > src/init.js\n#!/usr/bin/env node\nimport { execSync } from 'child_process';\nimport { createPromptYaml } from './prompt/createPromptYaml.js';\nimport { createGitignore } from './git/createGitignore.js';\nimport { createPromptDir } from './prompt/createPromptDir.js';\nimport copyDefaults from './command/init/copyDefaults.js';\nimport path from 'path';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\n\n  // Correcting the path to the prompt/defaults folder in the installed version of Junior\n  const defaultsPath = path.join(__dirname, '../prompt/defaults');\n  await copyDefaults(defaultsPath, './prompt/');\n\n  execSync('git add .', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });",
+      "total_deletions": 6,
+      "total_additions": 37
+    },
+    {
+      "filename": "src/command/init/copyDefaults.js",
       "before": "",
-      "after": "",
+      "after": "import fs from 'fs';\nimport path from 'path';\n\nasync function copyDefaults(src, dst) {\n  if (!fs.existsSync(dst)) {\n    fs.mkdirSync(dst, { recursive: true });\n  }\n\n  fs.readdirSync(src).forEach(async (file) => {\n    const srcPath = path.join(src, file);\n    const dstPath = path.join(dst, file);\n    \n    if (fs.lstatSync(srcPath).isDirectory()) {\n      await copyDefaults(srcPath, dstPath);\n    } else {\n      fs.copyFileSync(srcPath, dstPath);\n    }\n  });\n}\n\nexport default copyDefaults;",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 21
+    },
+    {
+      "filename": "src/init.js",
+      "before": "import { createPromptYaml } from './prompt/createPromptYaml.js';\nimport { createGitignore } from './git/createGitignore.js';\nimport { createPromptDir } from './prompt/createPromptDir.js';\nimport { fileURLToPath } from 'url';\nimport path from 'path';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\n\n  // Correcting the path to the prompt/defaults folder in the installed version of Junior\n  const defaultsPath = path.join(__dirname, '../prompt/defaults');\n  execSync(`cp -r ${defaultsPath}/* ./prompt/`, { stdio: 'inherit' });\n\n  execSync('git add .', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });",
+      "after": "import { createPromptYaml } from './prompt/createPromptYaml.js';\nimport { createGitignore } from './git/createGitignore.js';\nimport { createPromptDir } from './prompt/createPromptDir.js';\nimport copyDefaults from './command/init/copyDefaults.js';\nimport path from 'path';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\n\n  // Correcting the path to the prompt/defaults folder in the installed version of Junior\n  const defaultsPath = path.join(__dirname, '../prompt/defaults');\n  await copyDefaults(defaultsPath, './prompt/');\n\n  execSync('git add .', { stdio: 'inherit' });\n  execSync('git commit -m \"Junior init\"', { stdio: 'inherit' });",
+      "total_deletions": 2,
+      "total_additions": 2
     }
   ]
 }

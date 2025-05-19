@@ -72,11 +72,25 @@
   },
   "code": [
     {
-      "filename": "",
+      "filename": "game.js",
+      "before": "function startPlaying() {\n    var rikishi = $('#rikishi').val();\n    // This is where you'd connect to your game logic\n    // For example:\n    // sendRikishiToServer(rikishi);\n    alert(\"You selected: \" + rikishi);\n}\n",
+      "after": "function startPlaying() {\n    var rikishi = $('#rikishi').val();\n    var message = \"You selected: \" + rikishi;\n    return message;\n}\n\nmodule.exports = { startPlaying };",
+      "total_deletions": 4,
+      "total_additions": 4
+    },
+    {
+      "filename": "game.test.js",
+      "before": "const { startPlaying } = require('./game');\n\ntest('check if startPlaying is defined', () => {\n  expect(startPlaying).toBeDefined();\n});",
+      "after": "global.$ = jest.fn(() => ({\n    val: jest.fn(() => '1')\n}));\n\nconst { startPlaying } = require('./game');\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    const result = startPlaying()\n    expect(result).toBe(\"You selected: 1\");\n});",
+      "total_deletions": 2,
+      "total_additions": 7
+    },
+    {
+      "filename": "package.json",
       "before": "",
-      "after": "",
+      "after": "{\n  \"name\": \"banzukesurfing\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"game.js\",\n  \"scripts\": {\n    \"test\": \"jest\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"jest\": \"^29.5.0\",\n    \"jsdom\": \"^22.1.0\"\n  }\n}",
       "total_deletions": 0,
-      "total_additions": 0
+      "total_additions": 16
     }
   ]
 }

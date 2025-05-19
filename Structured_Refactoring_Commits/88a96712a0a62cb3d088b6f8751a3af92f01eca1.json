@@ -40,11 +40,11 @@
   },
   "code": [
     {
-      "filename": "",
-      "before": "",
-      "after": "",
-      "total_deletions": 0,
-      "total_additions": 0
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\n\ngoal=\"Improve documentation\"\necho \"Plan:\"\necho \"1. Update README.md with the desired changes.\"\n\ncat > docs/README.md << 'EOF'\nWarn: This README is AI generated, just like all the source files of this project.\n\nJunior is an **AI-first IDE** designed to utilize the capabilities of language models. Much like how Linus Torvalds oversees Linux Kernel development, Junior provides a space for developers to collaborate directly with AI throughout the development process.\n\nEmbracing a design philosophy of simplicity and configurability, Junior aims to join the ranks of influential tools such as git and LISP in terms of its contribution to software development.\n\nWith a structured task descriptor and by spotlighting relevant parts of your project, you can delegate tasks such as code implementation, documentation, testing, and more, to Junior.\n",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Improve documentation\"\necho \"Plan:\"\necho \"1. Modify design philosophy in README.md\"\n\ncat > docs/README.md << 'EOF'\nWarn: This README is AI generated, just like all the source files of this project.\n\nJunior is an **AI-first IDE** designed to utilize the capabilities of language models. Much like how Linus Torvalds oversees Linux Kernel development, Junior provides a space for developers to collaborate directly with AI throughout the development process.\n\nEmbracing a design philosophy of being simple, configurable and auditable, Junior aims to join the ranks of influential tools such as git and LISP in terms of its contribution to software development.\n\nWith a structured task descriptor and by spotlighting relevant parts of your project, you can delegate tasks such as code implementation, documentation, testing, and more, to Junior.\n",
+      "total_deletions": 3,
+      "total_additions": 2
     }
   ]
 }
