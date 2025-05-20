@@ -9,6 +9,15 @@ INPUT_FOLDER = "Structured_Refactoring_Commits"
 MAX_COMMITS_PER_AUTHOR = 5 #updated to 5
 OUTPUT_FOLDER = "Sampling_And_Manual_Inspection"
 
+EXCLUDED_SHAS_FILE = "already_sampled_shas.json"
+excluded_shas = set()
+
+if os.path.exists(EXCLUDED_SHAS_FILE):
+    with open(EXCLUDED_SHAS_FILE, "r", encoding="utf-8") as f:
+        excluded_shas = set(json.load(f))
+    print(f"🔁 Excluding {len(excluded_shas)} previously sampled SHAs.")
+
+
 # === STEP 1: Load All Commits ===
 json_files = []
 for root, _, files in os.walk(INPUT_FOLDER):
@@ -35,11 +44,19 @@ random.seed(42)
 sampled_commits = []
 
 for author, commits in commits_by_author.items():
-    if len(commits) > MAX_COMMITS_PER_AUTHOR:
-        sampled = random.sample(commits, MAX_COMMITS_PER_AUTHOR)
+    # Exclude commits with already-sampled SHAs
+    valid_commits = [c for c in commits if c.get("sha") not in excluded_shas]
+
+    if not valid_commits:
+        continue  # skip this author if nothing left to sample
+
+    if len(valid_commits) > MAX_COMMITS_PER_AUTHOR:
+        sampled = random.sample(valid_commits, MAX_COMMITS_PER_AUTHOR)
     else:
-        sampled = commits
+        sampled = valid_commits
+
     sampled_commits.extend(sampled)
+
 
 print(f"\nSelected {len(sampled_commits)} commits from {len(commits_by_author)} authors.")
 
