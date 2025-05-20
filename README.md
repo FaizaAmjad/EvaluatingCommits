@@ -14,13 +14,13 @@ This folder (`DevGPT_Commits_Dataset/`) contains commit history data from the [D
 - `DevGPT_Commit_Dataset/`: Raw commit data in JSON format.
     - `remove_htmlcontent.py`: Removes HTML content from raw data
 - `keyword_analysis.py`: Extracts, cleans,and analyzes commit messages from JSON files to find and save frequent improtant words.
-      `word_frequencies.csv` : All words used in commit messages with their frequencies.
+    - `word_frequencies.csv` : All words used in commit messages with their frequencies.
 - `final_keywords_extraction.py`: Combines keywords from commits and literature, checks matches, fills in missing ones using word frequency, and saves the final list.
-      `final_refactoring_keywords.csv`: Output of extracted keywords from dataset (keywords_commit_dataset.csv) and literature (keywords_literature.csv)
+    -`final_refactoring_keywords.csv`: Output of extracted keywords from dataset (keywords_commit_dataset.csv) and literature (keywords_literature.csv)
 - `extract_refactoring_commits.py`: Script to extract unique commit objects with refactoring-related terms
-      `filtered_commits.json` : Filtered commit objects containing refactoring keywords.
+    - `filtered_commits.json` : Filtered commit objects containing refactoring keywords.
 - `structure_commits.py`: Structures refactoring commit data into a new format for data analysis.
-      `Structured_refactoring_commits` : A output folder contaning all commit files under the name of their SHA key.
+    - `Structured_refactoring_commits` : A output folder contaning all commit files under the name of their SHA key.
 - `Github_Fetch.py`: Fetches committed code from github repository and  contributes to fill "Structured_refactoring_commits" dataset with following attributes;
     -Code[
           - Files'name
