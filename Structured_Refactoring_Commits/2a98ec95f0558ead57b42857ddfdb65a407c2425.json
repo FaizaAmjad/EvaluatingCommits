@@ -62,11 +62,11 @@
   },
   "code": [
     {
-      "filename": "prompt.yaml",
-      "before": "task: prompt/task/feature/implement.md\nattention:\n  - ./\n  - src/interactiveSession/startInteractiveSession.js\n  - src/interactiveSession/promptProcessing.js\n  - src/prompt/createPrompt.js\nrequirements: |\n  Print the contents of the prompt descriptor file (in its original format) to the console before asking for notes!\n  Avoid \"prompt.yaml\" to be duplicated in the source code by creating a prompt descriptor loader function\n  that takes an argument \"rawPrinter\" and if provided, prints the name, a colon, a newline and the content of the file using it!\nformat: prompt/format/shell.md\n",
-      "after": "task: prompt/task/doc/improve.md\nattention:\n  - ./\n  - ./README.md\nrequirements: |\n  Add the following new info to the readme:\n    - This readme was _fully_ generated with AI (note at the beginning).\n    - I, the programmer of this project started to communicate only in english. I only read the code, never write it.\n    - npm start starts a local server on port 3000, where you can generate a prompt and auto-copy it to paste to chatgpt.\n    - The cli uses the chatgpt api, so need an api key in OPENAI_API_KEY env var\n    - You need gpt-4 to get meaningful results.\n    - licence: gpl-3.0\n  \n  Be concise!\nformat: prompt/format/new_file_version.md",
-      "total_deletions": 8,
-      "total_additions": 12
+      "filename": "",
+      "before": "",
+      "after": "",
+      "total_deletions": 0,
+      "total_additions": 0
     }
   ]
 }

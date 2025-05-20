@@ -59,13 +59,6 @@
       "total_additions": 11
     },
     {
-      "filename": "package.json",
-      "before": "  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/server.js --prompt=current_prompt.yaml -s & vite src --open \"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "after": "  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/server.js --prompt=prompt.yaml -s & vite src --open \"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
       "filename": "src/prompt/createPrompt.js",
       "before": "const readFile = util.promisify(fs.readFile);\n\nconst createPrompt = async (userInput) => {\n  const promptDescriptor = yaml.load(await readFile(getPromptFlag() || \"current_prompt.yaml\", \"utf8\"));\n  let templateVars = extractTemplateVars(promptDescriptor);\n\n  templateVars = await resolveTemplateVariables(templateVars);",
       "after": "const readFile = util.promisify(fs.readFile);\n\nconst createPrompt = async (userInput) => {\n  const promptDescriptor = yaml.load(await readFile(getPromptFlag() || \"prompt.yaml\", \"utf8\"));\n  let templateVars = extractTemplateVars(promptDescriptor);\n\n  templateVars = await resolveTemplateVariables(templateVars);",

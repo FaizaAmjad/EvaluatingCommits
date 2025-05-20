@@ -75,7 +75,7 @@ if __name__ == "__main__":
     process_commits(
         input_folder="structured_Refactoring_Commits",
         output_csv_path="evaluation_results.csv",
-        top_k=500,
+        top_k=100,
         ngram_range=(1, 4),
         file_limit=None # Or use an integer like 5 for testing
     )

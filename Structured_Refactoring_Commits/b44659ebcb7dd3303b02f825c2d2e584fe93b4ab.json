@@ -62,11 +62,11 @@
   },
   "code": [
     {
-      "filename": "prompt.yaml",
-      "before": "attention:\n  - ./\n  - ./README.md\nrequirements: |\n  Add the following new info to the readme:\n    - This readme was _fully_ generated with AI (note at the beginning).\n    - I, the programmer of this project started to communicate only in english. I only read the code, never write it.\n    - npm start starts a local server on port 3000, where you can generate a prompt and auto-copy it to paste to chatgpt.\n    - The cli uses the chatgpt api, so need an api key in OPENAI_API_KEY env var\n    - You need gpt-4 to get meaningful results.\n    - licence: gpl-3.0\n  \n  Be concise!\nformat: prompt/format/new_file_version.md",
-      "after": "attention:\n  - ./\n  - ./README.md\nrequirements: >\n  Add the following new info to the readme:\n  There is a cli and a web interface.\n  How to install\n  How to run: \"npm start\" starts a local server on port 3000, where you can generate a prompt and auto-copy it to paste to chatgpt.\n  How to use. What are tasks like \"feature/implement\" and \"bug/fix\", \"refactor/\".\n  The cli uses the chatgpt api, so need an api key in OPENAI_API_KEY env var\n  You need gpt-4 or a better model to get meaningful results (A note at the end).\n  \n  Be concise!\nformat: prompt/format/new_file_version.md",
-      "total_deletions": 7,
-      "total_additions": 7
+      "filename": "",
+      "before": "",
+      "after": "",
+      "total_deletions": 0,
+      "total_additions": 0
     }
   ]
 }

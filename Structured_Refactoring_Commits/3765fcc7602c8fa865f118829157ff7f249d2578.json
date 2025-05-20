@@ -57,13 +57,6 @@
       "after": "#!/bin/sh\n# Goal: Rename the project to @aijunior/dev and change description\n# Plan:\n# 1. Change the name field in package.json to \"@aijunior/dev\".\n# 2. Change the description field in package.json to \"Your AI Contributor\".\n# 3. No new files are needed for this task.\n\n# Updating package.json with new project name and description\njq '.name = \"@aijunior/dev\"' package.json > package_temp.json && mv package_temp.json package.json\njq '.description = \"Your AI Contributor\"' package.json > package_temp.json && mv package_temp.json package.json\n\necho \"Project renamed to @aijunior/dev and description changed to 'Your AI Contributor' successfully\"",
       "total_deletions": 129,
       "total_additions": 8
-    },
-    {
-      "filename": "package.json",
-      "before": "{\n  \"name\": \"gpcontrib\",\n  \"version\": \"0.0.1\",\n  \"description\": \"Build large documents with AI\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {",
-      "after": "{\n  \"name\": \"@aijunior/dev\",\n  \"version\": \"0.0.1\",\n  \"description\": \"Your AI Contributor\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {",
-      "total_deletions": 2,
-      "total_additions": 2
     }
   ]
 }
