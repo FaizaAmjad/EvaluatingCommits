@@ -1,0 +1,91 @@
+{
+  "sha": "60271b3e8e1f7aeda9daedf7b9e0f96c79afbcb8",
+  "url": "https://github.com/GillyRabutTsurwa/su-2025-rest-api/commit/60271b3e8e1f7aeda9daedf7b9e0f96c79afbcb8",
+  "author": "GillyRabutTsurwa",
+  "repoName": "GillyRabutTsurwa/su-2025-rest-api",
+  "repoLanguage": "CSS",
+  "message": "Using Form to Make Post Request to Add Plugin\n- https://chat.openai.com/share/914fb3d5-3520-490d-999f-15e3185caf5a\n- the link above is the reason i switched from fetching data from the client to the traditional EJS form method\n- it explains a lot. i reverted to the traditional way and it works great; redirect works as intended\n- i don't know what i want to work on next\n- i'm tired so i will stop coding for a while",
+  "authorAt": "2023-06-29T20:03:06.000-04:00",
+  "commitAt": "2023-06-29T20:03:06.000-04:00",
+  "chatgpt_sharing": {
+    "title": "Redirect Not Working",
+    "url": "https://chat.openai.com/share/914fb3d5-3520-490d-999f-15e3185caf5a",
+    "mention": {
+      "mentioned_url": "https://github.com/GillyRabutTsurwa/su-2025-rest-api/commit/60271b3e8e1f7aeda9daedf7b9e0f96c79afbcb8",
+      "mentioned_property": "message",
+      "mentioned_author": "GillyRabutTsurwa",
+      "mentioned_text": "Using Form to Make Post Request to Add Plugin\n- https://chat.openai.com/share/914fb3d5-3520-490d-999f-15e3185caf5a\n- the link above is the reason i switched from fetching data from the client to the traditional EJS form method\n- it explains a lot. i reverted to the traditional way and it works great; redirect works as intended\n- i don't know what i want to work on next\n- i'm tired so i will stop coding for a while"
+    },
+    "status": 200,
+    "dateOfConversation": "June 30, 2023",
+    "dateOfAccess": "2023-07-27 13:34:24.450041",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 372,
+    "tokensOfAnswers": 615,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "Why is my redirect not working? Here is my client side code\nDOM.btnSubmitPlugin.addEventListener(\"click\", async () => {\n    const pluginData = {\n        name: DOM.inputPluginName.value,\n        creator: DOM.inputPluginCreator.value,\n        currentVersion: DOM.inputPluginVersion.value,\n        latestVersion: radioValuetoBoolean().version,\n        isNetworkActive: radioValuetoBoolean().network,\n    };\n    // console.log(pluginData);\n\n    try {\n        const response = await fetch(\"/plugins\", {\n            method: \"POST\",\n            headers: {\n                \"Content-Type\": \"application/json\",\n            },\n            body: JSON.stringify(pluginData),\n        });\n\n        if (response.ok) {\n            console.log(\"Data sent to server\");\n        } else {\n            const errorData = await response.json();\n            throw errorData;\n        }\n    } catch (e) {\n        console.error(e.error);\n    } finally {\n       \n    }\n});\n\nAnd here is my relevant server-side code\nrouter.post(\"/\", async (request, response) => {\n    const plugin = new Plugin({\n        name: request.body.name,\n        creator: request.body.creator,\n        currentVersion: request.body.currentVersion,\n        latestVersion: request.body.latestVersion,\n        isNetworkActive: request.body.isNetworkActive,\n        sitesActivated: request.body.sitesActivated,\n    });\n\n    console.log(plugin);\n\n    try {\n        await Plugin.create(plugin);\n        return response.redirect(`/plugins/${plugin._id}`);\n    } catch (error) {\n        console.error(error);\n    }\n});\n\nEverything else works as intended, except that it will not redirect. What is the issue here?\n",
+        "answer": "The issue with your code is that you are performing an AJAX request (using fetch) on the client side, which means you are sending the data asynchronously to the server and handling the response in JavaScript. The response.redirect method on the server side, which performs a redirect, only affects the server's response, not the client's browser.To achieve a redirect on the client side, you can modify your client-side code to handle the redirect after receiving a successful response from the server. Here's an example of how you can modify your code to achieve the desired redirect:[CODE_BLOCK_0]In the modified code, after receiving a successful response (response.ok), window.location.href is set to the URL provided by the server in the response. This will trigger a redirect on the client side, and the browser will navigate to the specified URL.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "javascript",
+            "Content": "DOM.btnSubmitPlugin.addEventListener(\"click\", async () => {\n    const pluginData = {\n        name: DOM.inputPluginName.value,\n        creator: DOM.inputPluginCreator.value,\n        currentVersion: DOM.inputPluginVersion.value,\n        latestVersion: radioValuetoBoolean().version,\n        isNetworkActive: radioValuetoBoolean().network,\n    };\n\n    try {\n        const response = await fetch(\"/plugins\", {\n            method: \"POST\",\n            headers: {\n                \"Content-Type\": \"application/json\",\n            },\n            body: JSON.stringify(pluginData),\n        });\n\n        if (response.ok) {\n            console.log(\"Data sent to server\");\n            window.location.href = response.url; // Perform the redirect\n        } else {\n            const errorData = await response.json();\n            throw errorData;\n        }\n    } catch (e) {\n        console.error(e.error);\n    }\n});\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p2",
+        "prompt": "I see. That clarifies some things. Could you also explain to me why submitting a form using EJS and body-parser works with no issues instead? What's the difference?",
+        "answer": "When you submit a form using EJS and body-parser, the form submission triggers a traditional synchronous POST request from the client's browser to the server. In this case, the server can respond with a redirect, and the client's browser will automatically follow that redirect and navigate to the specified URL.The key difference between this approach and the previous AJAX approach is the nature of the request and the way the client handles the response. In the AJAX approach, the JavaScript code on the client side sends the request asynchronously and receives the response in JavaScript without triggering a full page reload. This allows for more dynamic and interactive web applications.When you use EJS and body-parser to submit a form, the browser sends a regular form submission request synchronously, causing the browser to navigate to the URL specified in the form's action attribute. This behavior is the default behavior of HTML forms. The server can then respond with a redirect using the response.redirect method, and the browser will automatically follow that redirect, resulting in a page navigation.In summary, the difference lies in how the request is sent and how the response is handled. The AJAX approach allows for asynchronous communication between the client and the server, enabling dynamic updates without page reloads. On the other hand, submitting a form using EJS and body-parser triggers a synchronous request-response cycle that causes the browser to navigate to the redirected URL.",
+        "list_of_code": []
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "app.js",
+      "before": "app.use(express.json());\napp.use(secretSession);\napp.use(bodyParser.urlencoded({ extended: true }));\napp.set(\"view engine\", \"ejs\");\napp.use(express.static(__dirname + \"/public\"));\napp.use(passport.initialize());",
+      "after": "app.use(express.json());\napp.use(secretSession);\napp.use(bodyParser.urlencoded({ extended: true }));\napp.use(bodyParser.json());\napp.set(\"view engine\", \"ejs\");\napp.use(express.static(__dirname + \"/public\"));\napp.use(passport.initialize());",
+      "total_deletions": 0,
+      "total_additions": 1
+    },
+    {
+      "filename": "models/plugins.js",
+      "before": "        },\n        latestVersion: {\n            type: Boolean,\n            required: true,\n        },\n        isNetworkActive: {\n            type: Boolean,\n            required: true,\n        },\n        sitesActivated: {\n            type: Array,",
+      "after": "        },\n        latestVersion: {\n            type: Boolean,\n            // required: true,\n            required: false,\n        },\n        isNetworkActive: {\n            type: Boolean,\n            // required: true,\n            required: false,\n        },\n        sitesActivated: {\n            type: Array,",
+      "total_deletions": 2,
+      "total_additions": 4
+    },
+    {
+      "filename": "public/js/scripts.js",
+      "before": "const DOM = (() => {\n    const elements = {\n        inputPluginName: document.querySelector(\"#pluginName\"),\n        inputPluginCreator: document.querySelector(\"#pluginCreator\"),\n        inputPluginVersion: document.querySelector(\"#pluginCurrentVersion\"),\n        btnSubmitPlugin: document.querySelector(\"#btnSubmitPlugin\"),\n        radioPluginVersion: document.getElementsByName(\"pluginVersion\"),\n        radioPluginNetwork: document.getElementsByName(\"pluginNetwork\"),\n    };\n    return elements;\n})();\n\nconst radioValuetoBoolean = () => {\n    /**\n     * NEW\n     * how to get value of radio button in JavaScript\n     * radio buttons are associated together via the name attribute\n     * so, above in the DOM iife, radioVersion is a collection of radio buttons that share the name version\n     */\n    const versionValue = Array.from(DOM.radioPluginVersion).find((currentValue) => currentValue.checked).value;\n    const networkValue = Array.from(DOM.radioPluginNetwork).find((currentValue) => currentValue.checked).value;\n    return {\n        version: versionValue === \"yes\" ? true : false,\n        network: networkValue === \"yes\" ? true : false,\n    };\n};\n\nDOM.btnSubmitPlugin.addEventListener(\"click\", async () => {\n    const pluginData = {\n        name: DOM.inputPluginName.value,\n        creator: DOM.inputPluginCreator.value,\n        currentVersion: DOM.inputPluginVersion.value,\n        latestVersion: radioValuetoBoolean().version,\n        isNetworkActive: radioValuetoBoolean().network,\n    };\n    // console.log(pluginData);\n\n    try {\n        const response = await fetch(\"/plugins\", {\n            method: \"POST\",\n            headers: {\n                \"Content-Type\": \"application/json\",\n            },\n            body: JSON.stringify(pluginData),\n        });\n\n        if (response.ok) {\n            console.log(\"Data sent to server\");\n        } else {\n            const errorData = await response.json();\n            throw errorData;\n        }\n    } catch (e) {\n        console.error(e.error);\n    } finally {\n        DOM.inputPluginName.value = \"\";\n    }\n});",
+      "after": "",
+      "total_deletions": 58,
+      "total_additions": 0
+    },
+    {
+      "filename": "router/plugins.js",
+      "before": "const express = require(\"express\");\nconst router = express.Router();\n\nconst Plugin = require(\"../models/plugins\");\n\nrouter.get(\"/\", async (request, response) => {\n    });\n});\n\nrouter.get(\"/:name\", async (request, response) => {\n    try {\n        const plugin = await Plugin.findOne({ codebaseName: request.params.name });\n        if (!plugin) throw new Error(\"Plugin could not be found\");\n        // response.json(plugin); // will do this in the /api/plugin/:name route\n        response.render(\"plugin\", {\n});\n\nrouter.post(\"/\", async (request, response) => {\n    console.log(request.body);\n    const plugin = new Plugin({\n        name: request.body.name,\n        creator: request.body.creator,\n        currentVersion: request.body.currentVersion,\n        latestVersion: request.body.latestVersion,\n        isNetworkActive: request.body.isNetworkActive,\n        sitesActivated: request.body.sitesActivated,\n    });\n\n    try {\n        const newPlugin = await Plugin.create(plugin);\n        console.log(newPlugin);\n    } catch (error) {\n        //\n    }\n});\n",
+      "after": "const express = require(\"express\");\nconst bodyParser = require(\"body-parser\");\nconst router = express.Router();\n\nrouter.use(bodyParser.urlencoded({ extended: true }));\nrouter.use(bodyParser.json());\n\nconst Plugin = require(\"../models/plugins\");\n\nrouter.get(\"/\", async (request, response) => {\n    });\n});\n\nrouter.get(\"/:id\", async (request, response) => {\n    try {\n        const plugin = await Plugin.findOne({ _id: request.params.id }).exec();\n        if (!plugin) throw new Error(\"Plugin could not be found\");\n        // response.json(plugin); // will do this in the /api/plugin/:name route\n        response.render(\"plugin\", {\n});\n\nrouter.post(\"/\", async (request, response) => {\n    const plugin = new Plugin({\n        name: request.body.name,\n        creator: request.body.creator,\n        currentVersion: request.body.currentVersion,\n        latestVersion: request.body.pluginVersion,\n        isNetworkActive: request.body.pluginNetwork,\n        sitesActivated: request.body.sitesActivated,\n    });\n\n    console.log(plugin);\n\n    try {\n        await Plugin.create(plugin);\n        response.redirect(`/plugins/${plugin._id}`);\n    } catch (error) {\n        console.error(error);\n    }\n});\n",
+      "total_deletions": 8,
+      "total_additions": 13
+    },
+    {
+      "filename": "views/create-plugin.ejs",
+      "before": "<div class=\"login-register-container\">\n    <div class=\"centre\">\n        <img src=\"/img/su-logo.png\" alt=\"SU Logo\">\n        <div class=\"input-container\">\n            <input type=\"text\" name=\"name\" id=\"pluginName\" placeholder=\"Plugin Name\" required>\n            <input type=\"text\" name=\"creator\" id=\"pluginCreator\" placeholder=\"Created By\" required>\n            <input type=\"text\" name=\"currentVersion\" id=\"pluginCurrentVersion\" placeholder=\"Current Version\" required>\n                <label for=\"networkFalse\">No</label>\n            </div>\n            <button id=\"btnSubmitPlugin\">Add Plugin</button>\n        </div>\n    </div>\n</div>",
+      "after": "<div class=\"login-register-container\">\n    <div class=\"centre\">\n        <img src=\"/img/su-logo.png\" alt=\"SU Logo\">\n        <form action=\"/plugins\" method=\"POST\" class=\"input-container\">\n            <input type=\"text\" name=\"name\" id=\"pluginName\" placeholder=\"Plugin Name\" required>\n            <input type=\"text\" name=\"creator\" id=\"pluginCreator\" placeholder=\"Created By\" required>\n            <input type=\"text\" name=\"currentVersion\" id=\"pluginCurrentVersion\" placeholder=\"Current Version\" required>\n                <label for=\"networkFalse\">No</label>\n            </div>\n            <button id=\"btnSubmitPlugin\">Add Plugin</button>\n        </form>\n    </div>\n</div>",
+      "total_deletions": 2,
+      "total_additions": 2
+    },
+    {
+      "filename": "views/plugins.ejs",
+      "before": "</div>\n    <div class=\"plugins-container\">\n        <% plugins.forEach((currentPlugin)=> { %>\n            <a href=\"/plugins/<%= currentPlugin.codebaseName %>\" class=\"joke\">\n                    <%= currentPlugin.name %>\n            </a>\n        <% }) %>",
+      "after": "</div>\n    <div class=\"plugins-container\">\n        <% plugins.forEach((currentPlugin)=> { %>\n            <a href=\"/plugins/<%= currentPlugin._id %>\" class=\"joke\">\n                    <%= currentPlugin.name %>\n            </a>\n        <% }) %>",
+      "total_deletions": 1,
+      "total_additions": 1
+    }
+  ]
+}

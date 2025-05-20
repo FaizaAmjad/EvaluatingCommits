@@ -1,0 +1,56 @@
+{
+  "sha": "36f0e57b9d2f89587446eb08c2ae8500e8068544",
+  "url": "https://github.com/harryallerston/RPI-Wireless-Hotspot/commit/36f0e57b9d2f89587446eb08c2ae8500e8068544",
+  "author": "tomcatt360",
+  "repoName": "harryallerston/RPI-Wireless-Hotspot",
+  "repoLanguage": "Shell",
+  "message": "Re-word feature list\n\nI wasn't sure about how to improve this feature list, but it felt a bit clunky, so I asked ChatGPT. \r\n\r\nhttps://chat.openai.com/share/d59b3439-1980-4146-9ef3-56a080da9f5c",
+  "authorAt": "2023-06-01T21:42:06.000-06:00",
+  "commitAt": "2023-06-01T21:42:06.000-06:00",
+  "chatgpt_sharing": {
+    "title": "Improved WiFi Setup.",
+    "url": "https://chat.openai.com/share/d59b3439-1980-4146-9ef3-56a080da9f5c",
+    "mention": {
+      "mentioned_url": "https://github.com/harryallerston/RPI-Wireless-Hotspot/commit/36f0e57b9d2f89587446eb08c2ae8500e8068544",
+      "mentioned_property": "message",
+      "mentioned_author": "tomcatt360",
+      "mentioned_text": "Re-word feature list\n\nI wasn't sure about how to improve this feature list, but it felt a bit clunky, so I asked ChatGPT. \r\n\r\nhttps://chat.openai.com/share/d59b3439-1980-4146-9ef3-56a080da9f5c"
+    },
+    "status": 200,
+    "dateOfConversation": "June 2, 2023",
+    "dateOfAccess": "2023-08-31 06:32:50.647471",
+    "numberOfPrompts": 2,
+    "tokensOfPrompts": 161,
+    "tokensOfAnswers": 261,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "How could I improve these bullet points to make them more concise and readable?\n\"\n\n    Configured hotspot starts automatically on boot, no extra configuration necessary\n\n    Configured WiFi network is WPA encrypted.\n\n    Default SSID of \"RaspberryPiFi\" and WPA key of \"0123456789A\" can be modified during install\n\n    Once set up, the local network facilites of the Pi will still operate as normal\n\n    Easy setup of either a custom or preconfigured DNS server (including unblock-us for removing netflix geoblocks)\n\n    Router enumeration for WiFi network\n\n    Allows chromecast compatibility with unblock-us by intercepting google's DNS requests on the pi\"",
+        "answer": "Here are the revised bullet points for improved conciseness and readability:Hotspot automatically starts on boot without extra configuration.Configured WiFi network uses WPA encryption.The default SSID is \"RaspberryPiFi\" and the WPA key is \"0123456789A,\" which can be changed during installation.Pi's local network functions continue to operate normally after setup.Easy setup of custom or preconfigured DNS server, including unblock-us for bypassing Netflix geoblocks.Router enumeration for WiFi network.Enables Chromecast compatibility with unblock-us by intercepting Google's DNS requests on the Pi.",
+        "list_of_code": []
+      },
+      {
+        "prompt_id": "p2",
+        "prompt": "Great! Can you output that again in markdown, so that I can add it to my README.md?",
+        "answer": "Certainly! Here are the revised bullet points in Markdown format:[CODE_BLOCK_0]Feel free to copy and paste this directly into your README.md file.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "vbnet",
+            "Content": "- Hotspot automatically starts on boot without extra configuration.\n- Configured WiFi network uses WPA encryption.\n- The default SSID is \"RaspberryPiFi\" and the WPA key is \"0123456789A,\" which can be changed during installation.\n- Pi's local network functions continue to operate normally after setup.\n- Easy setup of custom or preconfigured DNS server, including unblock-us for bypassing Netflix geoblocks.\n- Router enumeration for WiFi network.\n- Enables Chromecast compatibility with unblock-us by intercepting Google's DNS requests on the Pi.\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "",
+      "before": "",
+      "after": "",
+      "total_deletions": 0,
+      "total_additions": 0
+    }
+  ]
+}

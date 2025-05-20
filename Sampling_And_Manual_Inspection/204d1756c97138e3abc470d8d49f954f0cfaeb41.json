@@ -1,0 +1,74 @@
+{
+  "sha": "204d1756c97138e3abc470d8d49f954f0cfaeb41",
+  "url": "https://github.com/PrivateBin/PrivateBin/commit/204d1756c97138e3abc470d8d49f954f0cfaeb41",
+  "author": "rugk",
+  "repoName": "PrivateBin/PrivateBin",
+  "repoLanguage": "CSS",
+  "message": "refactor: redirect support questions to discussions including form + more links\nDiscussions apparently onyl support forms see,\nso I quickly used ChatGPT to convert the Markdown file into the YAMl format\nand after telling the format it seems to have done that in a good eay:\nhttps://chat.openai.com/share/99718495-28d0-4382-ab5e-6a4a733c1ccb\n\n(maybe GitHub introduced that after end of 2021 hehe, so the LLM could not know that)",
+  "authorAt": "2023-08-07T17:56:38.000Z",
+  "commitAt": "2023-08-07T17:59:07.000Z",
+  "chatgpt_sharing": {
+    "title": "GitHub Support: Form Conversion",
+    "url": "https://chat.openai.com/share/99718495-28d0-4382-ab5e-6a4a733c1ccb",
+    "mention": {
+      "mentioned_url": "https://github.com/PrivateBin/PrivateBin/commit/204d1756c97138e3abc470d8d49f954f0cfaeb41",
+      "mentioned_property": "message",
+      "mentioned_author": "rugk",
+      "mentioned_text": "refactor: redirect support questions to discussions including form + more links\nDiscussions apparently onyl support forms see,\nso I quickly used ChatGPT to convert the Markdown file into the YAMl format\nand after telling the format it seems to have done that in a good eay:\nhttps://chat.openai.com/share/99718495-28d0-4382-ab5e-6a4a733c1ccb\n\n(maybe GitHub introduced that after end of 2021 hehe, so the LLM could not know that)"
+    },
+    "status": 200,
+    "dateOfConversation": "August 7, 2023",
+    "dateOfAccess": "2023-08-10 12:43:08.409443",
+    "numberOfPrompts": 3,
+    "tokensOfPrompts": 757,
+    "tokensOfAnswers": 1359,
+    "model": "Default",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "Convert this Markdown file to a GitHub discussion category form:\n\n```md\n---\nname: Question and support\nabout: Your setup is not working and you need help or you have a question regarding\n  PrivateBin\ntitle: ''\nlabels: question/support\nassignees: ''\n\n---\n\n<-- Describe the problem/question: A clear and concise description of what the bug is. -->\n\n<!-- Please tick this to confirm, you did it.-->\n* [ ] Yes I have read [the FAQ](https://github.com/PrivateBin/PrivateBin/wiki/FAQ) and I found no solution/answer there.\n\n## What you did\n<!-- Tell us how to reproduce the problem. -->\n1.\n2.\n\n### What happens\n\n\n### What should happen\n\n\n## Additional information\n<!--\nHere you can add screenshots. If the issue is e.g. a client-side issue (= an issue, which happens in your browser) press F12 and copy and paste the console output or add a screenshot.\nIf you have access to the server log files, also copy them here.\n-->\n\n## Basic information\n\n<!-- If you use a public server enter the address of it here. -->\n**Server address**:\n\n<!-- The Operation System of your server -->\n**Server OS:**\n\n<!-- The webserver running on your server, preferably including the version -->\n**Webserver:**\n\n<!-- The version of your browser (when it is a client-side issue) -->\n**Browser:**\n\n<!-- The version of PrivateBin, if you use an unstable version paste the commit hash or the GitHub link to the commit here (you can get it by running `git rev-parse HEAD`) -->\n**PrivateBin version:**\n\nI can reproduce this issue on <https://privatebin.net>: Yes / No\n```",
+        "answer": "To convert your Markdown file into a GitHub discussion category form, you can follow the GitHub-flavored Markdown syntax and structure for discussions. Here's the converted version:[CODE_BLOCK_0]Note that GitHub Discussions do not directly support custom forms like the one you provided, but you can structure your post using the available Markdown elements to capture the necessary information. Also, make sure to replace 'Your Title Here' with an appropriate title for your discussion post.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "markdown",
+            "Content": "---\nname: Question and support\nabout: Your setup is not working and you need help or you have a question regarding PrivateBin\ntitle: 'Your Title Here'\nlabels: question/support\nassignees: ''\n\n---\n\n## Describe the problem/question\n\nA clear and concise description of what the bug is.\n\n<!-- Please tick this to confirm, you did it.-->\n* [ ] Yes, I have read [the FAQ](https://github.com/PrivateBin/PrivateBin/wiki/FAQ) and I found no solution/answer there.\n\n## What you did\n\nTell us how to reproduce the problem.\n\n1. Step 1\n2. Step 2\n\n### What happens\n\nDescribe what currently happens when you follow the steps mentioned above.\n\n### What should happen\n\nDescribe what you expect to happen when you follow the steps mentioned above.\n\n## Additional information\n\n<!-- Here you can add screenshots. If the issue is e.g. a client-side issue (= an issue, which happens in your browser) press F12 and copy and paste the console output or add a screenshot.\nIf you have access to the server log files, also copy them here. -->\n\n## Basic information\n\n<!-- If you use a public server enter the address of it here. -->\n**Server address**: \n\n<!-- The Operating System of your server -->\n**Server OS**: \n\n<!-- The webserver running on your server, preferably including the version -->\n**Webserver**: \n\n<!-- The version of your browser (when it is a client-side issue) -->\n**Browser**: \n\n<!-- The version of PrivateBin, if you use an unstable version paste the commit hash or the GitHub link to the commit here (you can get it by running `git rev-parse HEAD`) -->\n**PrivateBin version**: \n\nI can reproduce this issue on [https://privatebin.net](https://privatebin.net): Yes / No\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p2",
+        "prompt": "No I meant the YAML-based syntax for discussion category forms.",
+        "answer": "Apologies for the misunderstanding. Here's the YAML-based syntax for your GitHub discussion category form:[CODE_BLOCK_0]You can copy and paste this YAML-based syntax into a new discussion in your GitHub repository to create the desired category form. Make sure to replace 'Your Title Here' with an appropriate title for your discussion post.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "yaml",
+            "Content": "name: Question and support\nabout: Your setup is not working and you need help or you have a question regarding PrivateBin\ntitle: 'Your Title Here'\nlabels: question/support\nassignees: ''\n\n---\n## Describe the problem/question\n\nA clear and concise description of what the bug is.\n\n<!-- Please tick this to confirm, you did it.-->\n* [ ] Yes, I have read [the FAQ](https://github.com/PrivateBin/PrivateBin/wiki/FAQ) and I found no solution/answer there.\n\n## What you did\n\nTell us how to reproduce the problem.\n\n1. Step 1\n2. Step 2\n\n### What happens\n\nDescribe what currently happens when you follow the steps mentioned above.\n\n### What should happen\n\nDescribe what you expect to happen when you follow the steps mentioned above.\n\n## Additional information\n\n<!-- Here you can add screenshots. If the issue is e.g. a client-side issue (= an issue, which happens in your browser) press F12 and copy and paste the console output or add a screenshot.\nIf you have access to the server log files, also copy them here. -->\n\n## Basic information\n\n<!-- If you use a public server enter the address of it here. -->\n**Server address**: \n\n<!-- The Operating System of your server -->\n**Server OS**: \n\n<!-- The webserver running on your server, preferably including the version -->\n**Webserver**: \n\n<!-- The version of your browser (when it is a client-side issue) -->\n**Browser**: \n\n<!-- The version of PrivateBin, if you use an unstable version paste the commit hash or the GitHub link to the commit here (you can get it by running `git rev-parse HEAD`) -->\n**PrivateBin version**: \n\nI can reproduce this issue on [https://privatebin.net](https://privatebin.net): Yes / No\n"
+          }
+        ]
+      },
+      {
+        "prompt_id": "p3",
+        "prompt": "No, here is an example for such a form syntax:\n```yaml\ntitle: \"[General] \"\nlabels: [\"General Introduction\"]\nbody:\n  - type: markdown\n    attributes:\n      value: |\n        This is text that will show up in the template!\n  - type: textarea\n    id: improvements\n    attributes:\n      label: Top 3 improvements\n      description: \"What are the top 3 improvements we could make to this project?\"\n      value: |\n        1.\n        2.\n        3.\n        ...\n      render: bash\n    validations:\n      required: true\n  - type: markdown\n    attributes:\n      value: |\n        ## Markdown header\n        And some more markdown\n  - type: input\n    id: has-id\n    attributes:\n      label: Suggestions\n      description: A description about suggestions to help you\n    validations:\n      required: true\n  - type: dropdown\n    id: download\n    attributes:\n      label: Which area of this project could be most improved?\n      options:\n        - Documentation\n        - Pull request review time\n        - Bug fix time\n        - Release cadence\n    validations:\n      required: true\n  - type: checkboxes\n    attributes:\n      label: Check that box!\n      options:\n        - label: This one!\n          required: true\n        - label: I won't stop you if you check this one, too\n  - type: markdown\n    attributes:\n      value: |\n        ### The thrilling conclusion\n        _to our template_\n\n```\n\nAnd here is the top-level syntax:\n```yaml\nbody:\n- type: input\n  id: suggestion\n  attributes:\n    label: Suggestion\n    description: \"How might we make this project better?\"\n    placeholder: \"Adding a CODE_OF_CONDUCT.md file would be a great idea.\"\n  validations:\n    required: true\n```\n\n",
+        "answer": "Understood! Here's the GitHub discussion category form you provided, converted into the format you're looking for:[CODE_BLOCK_0]This YAML structure represents the GitHub discussion category form with different input types and labels as you provided. You can copy and paste this YAML code into your GitHub repository's discussion settings to create the desired form for the \"Question and support\" category. Just make sure to customize the labels and options as needed.",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "yaml",
+            "Content": "title: \"[Question and support] \"\nlabels: [\"question/support\"]\nbody:\n  - type: markdown\n    attributes:\n      value: |\n        Describe the problem/question: A clear and concise description of what the bug is.\n  - type: checkboxes\n    attributes:\n      label: Please tick this to confirm\n      options:\n        - label: Yes, I have read [the FAQ](https://github.com/PrivateBin/PrivateBin/wiki/FAQ) and I found no solution/answer there.\n  - type: markdown\n    attributes:\n      value: |\n        ## What you did\n        Tell us how to reproduce the problem.\n\n        1.\n        2.\n  - type: textarea\n    id: what_happens\n    attributes:\n      label: What happens\n  - type: textarea\n    id: what_should_happen\n    attributes:\n      label: What should happen\n  - type: textarea\n    id: additional_info\n    attributes:\n      label: Additional information\n      description: If you have access to the server log files, copy them here.\n  - type: input\n    id: server_address\n    attributes:\n      label: Server address\n  - type: input\n    id: server_os\n    attributes:\n      label: Server OS\n  - type: input\n    id: webserver\n    attributes:\n      label: Webserver\n  - type: input\n    id: browser\n    attributes:\n      label: Browser\n  - type: input\n    id: privatebin_version\n    attributes:\n      label: PrivateBin version\n  - type: radio\n    id: reproduce_issue\n    attributes:\n      label: I can reproduce this issue on [https://privatebin.net](https://privatebin.net)\n      options:\n        - label: Yes\n          value: Yes\n        - label: No\n          value: No\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "",
+      "before": "",
+      "after": "",
+      "total_deletions": 0,
+      "total_additions": 0
+    }
+  ]
+}
