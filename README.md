@@ -11,33 +11,32 @@ This folder (`DevGPT_Commits_Dataset/`) contains commit history data from the [D
 
 ### Contents
 
-
-
-
-
-- `DevGPT_Commit_Dataset/`: Raw commit data in JSON format
+- `DevGPT_Commit_Dataset/`: Raw commit data in JSON format.
+    - `remove_htmlcontent.py`: Removes HTML content from raw data
 - `keyword_analysis.py`: Extracts, cleans,and analyzes commit messages from JSON files to find and save frequent improtant words.
+      `word_frequencies.csv` : All words used in commit messages with their frequencies.
 - `final_keywords_extraction.py`: Combines keywords from commits and literature, checks matches, fills in missing ones using word frequency, and saves the final list.
-- `Structured_Refactoring_Commits/`: Restructured data of filtered refactoring commits (each file named by its SHA key)
-- `filtered_commits.json` : Filtered commit objects containing refactoring keywords
+      `final_refactoring_keywords.csv`: Output of extracted keywords from dataset (keywords_commit_dataset.csv) and literature (keywords_literature.csv)
 - `extract_refactoring_commits.py`: Script to extract unique commit objects with refactoring-related terms
-- `Github_Fetch.py`: Fetches: committed code from github repository
-  Contributes: to fill dataset with following attributes
-    - Changed files'name
-    - Number of additions and deletions
-    - Code before and after changes
-- `utils/`:  contains helper modules for analyzing code using n-grams and for tokenizing source code.
-- `ngrams_analysis.py`:It collects frequently repeated n-grams (word patterns) from the dataset.
-- `tokenization.py`:Preprocesses code by stripping comments, tokenizing, and extracting n-grams.
-- `bad_urls.json`: It lists broken or inaccessible GitHub commit URLs to exclude from analysis.
-- `evaluate_crystalbleu.py`: Finds which AI-generated code is most similar to the final code by comparing words and skipping common ones.
-- `evaluate_dev_gpt_score.py`: This code checks how much of the new code written by the developer is similar to the AI’s suggestion. It compares lines from the final version with both the original and AI-generated versions. It calculates two scores, one for how much the developer changed on their own and how much the developer reused from the AI’s code.
-- `evaluate_line_match.py`: This code compares lines between AI code and commited code and returns the percentage of exact matches.
-- `crystalBLEU_comparison.py`: This script calculates BLEU scores and line matches between developer and GPT code, processing JSON commit files and saving the results in a CSV.
-- `evaluation_results.csv`: It shows evaluation results.
+      `filtered_commits.json` : Filtered commit objects containing refactoring keywords.
+- `structure_commits.py`: Structures refactoring commit data into a new format for data analysis.
+      `Structured_refactoring_commits` : A output folder contaning all commit files under the name of their SHA key.
+- `Github_Fetch.py`: Fetches committed code from github repository and  contributes to fill "Structured_refactoring_commits" dataset with following attributes;
+    -Code[
+          - Files'name
+          - Before 
+          - After 
+          - Number of additions
+          - Number of deletions
+    ]
 - `process_commits.py`: It processes commit data from JSON files, calculates CrystalBLEU, line match scores, and developer-GPT change scores, then saves the results to a CSV file- carries out all comparison and evaluation procedures.
-- `remove_htmlcontent.py`: Removes HTML content from raw data
-- `structure_commits.py`: Structures refactoring commit data into a new format for data analysis
+    - `utils/`:  contains helper modules for analyzing code using n-grams and for tokenizing source code.
+      - `ngrams_analysis.py`:It collects frequently repeated n-grams (word patterns) from the dataset.
+      - `tokenization.py`:Preprocesses code by stripping comments, tokenizing, and extracting n-grams.
+    - `evaluate_crystalbleu.py`: Finds which AI-generated code is most similar to the final code by comparing words and skipping common ones.
+    - `evaluate_dev_gpt_score.py`: This code checks how much of the new code written by the developer is similar to the AI’s suggestion. It compares lines from the final version with both the original and AI-generated versions. It calculates two scores, one for how much the developer changed on their own and how much the developer reused from the AI’s code.
+    - `evaluate_line_match.py`: This code compares lines between AI code and commited code and returns the percentage of exact matches.
+    - `evaluation_results.csv`: It shows evaluation results.
 
 ## Dependencies
 
@@ -48,6 +47,11 @@ This folder (`DevGPT_Commits_Dataset/`) contains commit history data from the [D
 #### Install CrystalBLEU packages:
 
 ```pip install crystalbleu```
+
+#### GitHub Token
+
+```Github_Fetch.py``` requires a GitHub personal access token to access commit details.
+You can set it using a [Personal Access Token (PAT)](https://github.com/settings/tokens).
 
 ## Installation
 
@@ -70,11 +74,6 @@ Run the following script in order:
 8. Fetch code changes for all commits ``` python Github_Fetch.py```
 9. Run comparisons crystalBLEU, line match and dev_gpt_score and create the evaluation results CSV ``` python process_commits.py```
 10. View results in ``` evaluation_results.csv```
-
-## GitHub Token
-
-```Github_Fetch.py``` requires a GitHub personal access token to access commit details.
-You can set it using a [Personal Access Token (PAT)](https://github.com/settings/tokens).
 
 ## Results
 Our analysis showed that:
