@@ -64,13 +64,6 @@
       "total_additions": 39
     },
     {
-      "filename": "package.json",
-      "before": "  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/server.js --prompt=prompt.yaml -s & vite src --open \"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "after": "  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/backend/server.js --prompt=prompt.yaml -s & vite src --open \"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
       "filename": "src/backend/handlers.js",
       "before": "",
       "after": "import processPrompt from '../prompt/promptProcessing.js';\nimport { servePromptDescriptor } from './servePromptDescriptor.js';\n\nexport const generateHandler = async (req, res) => {\n  const { notes } = req.body;\n  const { prompt } = await processPrompt(notes);\n  res.json({ prompt: prompt });\n};\n\nexport const descriptorHandler = servePromptDescriptor;",

@@ -84,13 +84,6 @@
       "after": "global.$ = jest.fn(() => ({\n    val: jest.fn(() => '1')\n}));\n\nconst { startPlaying } = require('./game');\n\ntest('check if startPlaying is defined and returns expected value', () => {\n    const result = startPlaying()\n    expect(result).toBe(\"You selected: 1\");\n});",
       "total_deletions": 2,
       "total_additions": 7
-    },
-    {
-      "filename": "package.json",
-      "before": "",
-      "after": "{\n  \"name\": \"banzukesurfing\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"game.js\",\n  \"scripts\": {\n    \"test\": \"jest\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"devDependencies\": {\n    \"jest\": \"^29.5.0\",\n    \"jsdom\": \"^22.1.0\"\n  }\n}",
-      "total_deletions": 0,
-      "total_additions": 16
     }
   ]
 }

@@ -45,13 +45,6 @@
       "after": "#!/bin/sh\nset -e\ngoal=\"Move convert-svg-to-png.cjs, create npm run command\"\necho \"Plan:\"\necho \"1. Move convert-svg-to-png.cjs to ./scripts directory\"\necho \"2. Update package.json with a new npm run command for logo updating workflow\"\n\n# Create the scripts directory if it doesn't exist\nmkdir -p ./scripts\n\n# Move convert-svg-to-png.cjs to the new location\nmv convert-svg-to-png.cjs ./scripts/convert-svg-to-png.cjs\n\n# Add a new npm run command to the package.json file\njq '.scripts += {\"update-logo\": \"node ./scripts/convert-svg-to-png.cjs\"}' package.json > package.tmp.json\nmv package.tmp.json package.json\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
       "total_deletions": 32,
       "total_additions": 10
-    },
-    {
-      "filename": "package.json",
-      "before": "  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "after": "  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"update-logo\": \"node ./scripts/convert-svg-to-png.cjs\"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "total_deletions": 1,
-      "total_additions": 2
     }
   ]
 }

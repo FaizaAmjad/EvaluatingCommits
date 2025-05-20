@@ -57,13 +57,6 @@
       "after": "#!/bin/sh\n# Goal: Rename build:docs to build:doc in package.json\n# Plan:\n# 1. Use jq to rename the \"build:docs\" property to \"build:doc\" in the \"scripts\" object of the package.json file.\n# 2. Save the modified JSON back to package.json.\n\njq '.scripts |= with_entries(if .key == \"build:docs\" then .key = \"build:doc\" else . end)' ./package.json > temp.json && mv temp.json package.json",
       "total_deletions": 32,
       "total_additions": 4
-    },
-    {
-      "filename": "package.json",
-      "before": "    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"build:docs\": \"node ./src/doc/buildDoc.js\"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "after": "    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"build:doc\": \"node ./src/doc/buildDoc.js\"\n  },\n  \"keywords\": [\n    \"cli\",",
-      "total_deletions": 1,
-      "total_additions": 1
     }
   ]
 }

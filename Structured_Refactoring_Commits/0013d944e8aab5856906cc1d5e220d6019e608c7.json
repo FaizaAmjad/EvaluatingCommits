@@ -100,13 +100,6 @@
       "total_additions": 22
     },
     {
-      "filename": "package.json",
-      "before": "  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"junior\": \"src/main.js\",\n    \"junior-web\": \"npm start\"\n  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",",
-      "after": "  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"junior\": \"src/main.js\",\n    \"junior-web\": \"src/web.js\"\n  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",",
-      "total_deletions": 1,
-      "total_additions": 1
-    },
-    {
       "filename": "src/backend/server.js",
       "before": "import { listTasks } from './listTasks.js';\n\nexport function startServer() {\n  const app = express();\n\n  app.use(cors());",
       "after": "import { listTasks } from './listTasks.js';\n\nexport function startServer() {\n  console.log(process.cwd())\n  const app = express();\n\n  app.use(cors());",
