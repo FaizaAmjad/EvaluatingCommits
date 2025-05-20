@@ -1,4 +1,4 @@
-# Refactoring With ChatGPT: Evaluating Human Responses to LLM Refactoring Suggestions
+# Understanding Developer Use of LLM-Generated Refactoring Suggestions
 
 
 Bachelor Thesis in Software Engineering and Management.
@@ -16,7 +16,7 @@ This folder (`DevGPT_Commits_Dataset/`) contains commit history data from the [D
 - `keyword_analysis.py`: Extracts, cleans,and analyzes commit messages from JSON files to find and save frequent improtant words.
     - `word_frequencies.csv` : All words used in commit messages with their frequencies.
 - `final_keywords_extraction.py`: Combines keywords from commits and literature, checks matches, fills in missing ones using word frequency, and saves the final list.
-    -`final_refactoring_keywords.csv`: Output of extracted keywords from dataset (keywords_commit_dataset.csv) and literature (keywords_literature.csv)
+    - `final_refactoring_keywords.csv`: Output of extracted keywords from dataset (keywords_commit_dataset.csv) and literature (keywords_literature.csv)
 - `extract_refactoring_commits.py`: Script to extract unique commit objects with refactoring-related terms
     - `filtered_commits.json` : Filtered commit objects containing refactoring keywords.
 - `structure_commits.py`: Structures refactoring commit data into a new format for data analysis.
