@@ -1,4 +1,4 @@
-sha,file,prompt_id,crystalbleu_after_vs_chatgpt,line_match_after_vs_chatgpt,dev_changed_lines_score,gpt_reused_lines_score
+sha,file,prompt_id,crystalbleu_after_vs_chatgpt,line_match_after_vs_chatgpt,dev_own_lines,dev_modified_gpt_lines
 0013d944e8aab5856906cc1d5e220d6019e608c7,change.sh,p1,0.4021,0.4615,0.6154,0.3846
 0013d944e8aab5856906cc1d5e220d6019e608c7,src/backend/server.js,p5,0.0323,0.0,0.2,0.8
 0013d944e8aab5856906cc1d5e220d6019e608c7,src/startVite.js,p5,0.8493,0.8889,0.1111,0.8889
