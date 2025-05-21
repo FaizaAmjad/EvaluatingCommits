@@ -6,7 +6,7 @@ from tqdm import tqdm
 
 # === CONFIG ===
 INPUT_FOLDER = "Structured_Refactoring_Commits"
-MAX_COMMITS_PER_AUTHOR = 5 #updated to 5
+MAX_COMMITS_PER_AUTHOR = 2 #updated to 2
 OUTPUT_FOLDER = "Sampling_And_Manual_Inspection"
 
 EXCLUDED_SHAS_FILE = "already_sampled_shas.json"
@@ -39,7 +39,7 @@ for path in tqdm(json_files, desc="Reading commit files"):
     except Exception as e:
         print(f"⚠️ Failed to load {path}: {e}")
 
-# === STEP 2: Randomly Cap to 5 Commits Per Author ===
+# === STEP 2: Randomly Cap to 2 Commits Per Author ===
 random.seed(42)
 sampled_commits = []
 
