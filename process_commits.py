@@ -51,10 +51,10 @@ def process_commits(input_folder: str, output_csv_path: str, top_k: int, ngram_r
                     "sha": sha,
                     "file": filename,
                     "prompt_id": best_prompt_id,
-                    "crystalbleu_after_vs_chatgpt": round(best_crystalbleu_score, 4),
-                    "line_match_after_vs_chatgpt": round(line_match_score, 4),
-                    "dev_own_lines": round(dev_changed_score, 4),
-                    "dev_modified_gpt_lines": round(gpt_reused_score, 4)
+                    "crystalbleu_after_vs_chatgpt": round(best_crystalbleu_score, 2),
+                    "line_match_after_vs_chatgpt": round(line_match_score, 2),
+                    "dev_own_lines": round(dev_changed_score, 2),
+                    "dev_modified_gpt_lines": round(gpt_reused_score, 2)
                 }) 
 
             except Exception as e:
