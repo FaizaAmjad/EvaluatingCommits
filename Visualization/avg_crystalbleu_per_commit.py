@@ -32,7 +32,10 @@ output_dir = os.path.join(os.path.dirname(__file__), 'images')
 os.makedirs(output_dir, exist_ok=True)
 
 # Save plot as PDF
-output_path = os.path.join(output_dir, 'crystalbleu_per_commit.pdf')
+output_path = os.path.join(output_dir, 'avg_crystalbleu_per_commit.pdf')
 plt.savefig(output_path, format='pdf')
+
+#save plot as png
+plt.savefig(os.path.join(output_dir, 'avg_crystalbleu_per_commit.png'), format='png')
 
 plt.show()
