@@ -6,10 +6,17 @@ from tqdm import tqdm
 
 # === CONFIG ===
 INPUT_FOLDER = "Structured_Refactoring_Commits"
-MAX_COMMITS_PER_AUTHOR = 2
-RESEARCHERS = ["r1", "r2", "r3"]
-ASSIGNMENT_PREFIX = "assigned_shas_"  # Output: assigned_shas_r1.json etc.
+MAX_COMMITS_PER_AUTHOR = 5 #updated to 5
 OUTPUT_FOLDER = "Sampling_And_Manual_Inspection"
+
+EXCLUDED_SHAS_FILE = "already_sampled_shas.json"
+excluded_shas = set()
+
+if os.path.exists(EXCLUDED_SHAS_FILE):
+    with open(EXCLUDED_SHAS_FILE, "r", encoding="utf-8") as f:
+        excluded_shas = set(json.load(f))
+    print(f"🔁 Excluding {len(excluded_shas)} previously sampled SHAs.")
+
 
 # === STEP 1: Load All Commits ===
 json_files = []
@@ -32,16 +39,24 @@ for path in tqdm(json_files, desc="Reading commit files"):
     except Exception as e:
         print(f"⚠️ Failed to load {path}: {e}")
 
-# === STEP 2: Randomly Cap to 2 Commits Per Author ===
+# === STEP 2: Randomly Cap to 5 Commits Per Author ===
 random.seed(42)
 sampled_commits = []
 
 for author, commits in commits_by_author.items():
-    if len(commits) > MAX_COMMITS_PER_AUTHOR:
-        sampled = random.sample(commits, MAX_COMMITS_PER_AUTHOR)
+    # Exclude commits with already-sampled SHAs
+    valid_commits = [c for c in commits if c.get("sha") not in excluded_shas]
+
+    if not valid_commits:
+        continue  # skip this author if nothing left to sample
+
+    if len(valid_commits) > MAX_COMMITS_PER_AUTHOR:
+        sampled = random.sample(valid_commits, MAX_COMMITS_PER_AUTHOR)
     else:
-        sampled = commits
+        sampled = valid_commits
+
     sampled_commits.extend(sampled)
+
 
 print(f"\nSelected {len(sampled_commits)} commits from {len(commits_by_author)} authors.")
 
@@ -66,34 +81,9 @@ for commit in sampled_commits:
     else:
         print(f"✅ Saved sampled commits to {OUTPUT_FOLDER}")
 
-# === STEP 3: Assign Each SHA to 2 Researchers ===
-shas = [commit["sha"] for commit in sampled_commits if "sha" in commit]
-assignments = {r: set() for r in RESEARCHERS}
-researcher_load = Counter({r: 0 for r in RESEARCHERS})
 
-for sha in shas:
-    # Pick 2 researchers with the least current load
-    least_loaded = sorted(RESEARCHERS, key=lambda r: researcher_load[r])
-    chosen = random.sample(least_loaded[:2], 2)  # Break ties randomly
-    for r in chosen:
-        assignments[r].add(sha)
-        researcher_load[r] += 1
-
-# === Save Assignment Lists ===
-for r in RESEARCHERS:
-    path = f"{ASSIGNMENT_PREFIX}{r}.json"
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(sorted(assignments[r]), f, indent=2)
-    print(f"✅ Saved {len(assignments[r])} SHAs to {path}")
-
-# === Final Check: Each SHA assigned to exactly 2 researchers ===
-sha_counts = Counter()
-for r in RESEARCHERS:
-    for sha in assignments[r]:
-        sha_counts[sha] += 1
-
-errors = [sha for sha, count in sha_counts.items() if count != 2]
-if errors:
-    print(f"⚠️ {len(errors)} SHAs were not assigned to exactly 2 researchers.")
-else:
-    print("✅ All SHAs assigned to exactly 2 researchers.")
+# === Save List of Sampled SHA Keys ===
+sha_list = [commit["sha"] for commit in sampled_commits if "sha" in commit]
+with open("sampled_shas.json", "w", encoding="utf-8") as f:
+    json.dump(sorted(sha_list), f, indent=2)
+print(f"✅ Saved list of {len(sha_list)} SHAs to sampled_shas.json")

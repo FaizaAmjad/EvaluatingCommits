@@ -1,0 +1,50 @@
+{
+  "sha": "21f6af5d280ca5f3ab58c26d5373041d4e5e6c37",
+  "url": "https://github.com/tisztamo/Junior/commit/21f6af5d280ca5f3ab58c26d5373041d4e5e6c37",
+  "author": "tisztamo",
+  "repoName": "tisztamo/Junior",
+  "repoLanguage": "CSS",
+  "message": "Refactor package.json as per the task description https://chat.openai.com/share/3aa5fd83-f63a-4ca9-9feb-076b415e220b",
+  "authorAt": "2023-07-31T15:23:34.000+02:00",
+  "commitAt": "2023-07-31T15:23:34.000+02:00",
+  "chatgpt_sharing": {
+    "title": "Refactor Package.json: Uninstall & Move",
+    "url": "https://chat.openai.com/share/3aa5fd83-f63a-4ca9-9feb-076b415e220b",
+    "mention": {
+      "mentioned_url": "https://github.com/tisztamo/Junior/commit/21f6af5d280ca5f3ab58c26d5373041d4e5e6c37",
+      "mentioned_property": "message",
+      "mentioned_author": "tisztamo",
+      "mentioned_text": "Refactor package.json as per the task description https://chat.openai.com/share/3aa5fd83-f63a-4ca9-9feb-076b415e220b"
+    },
+    "status": 200,
+    "dateOfConversation": "July 31, 2023",
+    "dateOfAccess": "2023-08-03 09:51:19.314528",
+    "numberOfPrompts": 1,
+    "tokensOfPrompts": 724,
+    "tokensOfAnswers": 181,
+    "model": "",
+    "conversations": [
+      {
+        "prompt_id": "p1",
+        "prompt": "# Working set\n\npackage.json:\n```\n{\n  \"name\": \"@aijunior/dev\",\n  \"version\": \"0.0.1\",\n  \"description\": \"Your AI Contributor\",\n  \"type\": \"module\",\n  \"main\": \"src/main.js\",\n  \"bin\": {\n    \"junior\": \"src/main.js\",\n    \"junior-web\": \"src/web.js\",\n    \"junior-init\": \"src/init.js\"\n  },\n  \"scripts\": {\n    \"cli\": \"node src/main.js\",\n    \"start\": \"node src/web.js\",\n    \"build:css\": \"postcss ./src/frontend/styles.css -o ./dist/styles.css\",\n    \"build:doc\": \"node ./src/doc/buildDoc.js\"\n  },\n  \"keywords\": [\n    \"cli\",\n    \"uppercase\"\n  ],\n  \"author\": \"\",\n  \"license\": \"GPL\",\n  \"dependencies\": {\n    \"chatgpt\": \"^5.2.4\",\n    \"clipboard-copy\": \"^4.0.1\",\n    \"cors\": \"^2.8.5\",\n    \"ejs\": \"^3.1.9\",\n    \"express\": \"^4.18.2\",\n    \"js-yaml\": \"^4.1.0\",\n    \"marked\": \"^5.1.0\",\n    \"postcss-nested\": \"^6.0.1\",\n    \"simple-git\": \"^3.19.1\",\n    \"solid-js\": \"^1.7.7\",\n    \"vite\": \"^4.3.9\",\n    \"vite-plugin-solid\": \"^2.7.0\",\n    \"ws\": \"^8.13.0\",\n    \"xterm\": \"^5.2.1\"\n  },\n  \"directories\": {\n    \"doc\": \"doc\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/tisztamo/Junior.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/tisztamo/Junior/issues\"\n  },\n  \"homepage\": \"https://github.com/tisztamo/Junior#readme\",\n  \"devDependencies\": {\n    \"@types/js-yaml\": \"^4.0.5\",\n    \"autoprefixer\": \"^10.4.14\",\n    \"babel-preset-solid\": \"^1.7.7\",\n    \"highlight.js\": \"^11.8.0\",\n    \"markdown-it\": \"^13.0.1\",\n    \"postcss\": \"^8.4.26\",\n    \"tailwindcss\": \"^3.3.3\"\n  }\n}\n\n```\n\n\n# Task\n\nRefactor!\n\nUninstall babel-preset-solid!\nMove every other items from devDependencies to dependencies\nSet description to &#34;Your AI Contributor which codes itself&#34;\n\n\n# Output Format\n\nEncode and enclose your results as ./change.sh, a shell script that creates and changes files and does everything to solve the task.\nFiles are small, prefer heredoc-ing full files using 'EOF' to prevent substitution.\n\nOS: OSX\n\nInstalled tools: npm, jq\n\n\nDo NOT write any text outside the script!\n\nEXAMPLE START\n\n```sh\n#!/bin/sh\nset -e\ngoal=[Task description, max 7 words]\necho \"Plan:\"\necho \"1. [...]\"\n[Commands solving the task]\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n```\n\nEXAMPLE END\n\n",
+        "answer": "[CODE_BLOCK_0]",
+        "list_of_code": [
+          {
+            "ReplaceString": "[CODE_BLOCK_0]",
+            "Type": "sh",
+            "Content": "#!/bin/sh\nset -e\ngoal=\"Refactor package.json as per the task description\"\necho \"Plan:\"\necho \"1. Uninstall babel-preset-solid\"\necho \"2. Move every other item from devDependencies to dependencies\"\necho \"3. Set the description to 'Your AI Contributor which codes itself'\"\n\n# 1. Uninstall babel-preset-solid\nnpm uninstall babel-preset-solid\n\n# 2. Move every other item from devDependencies to dependencies and 3. Set the description\njq '.description = \"Your AI Contributor which codes itself\" | .dependencies += .devDependencies | del(.devDependencies[\"@types/js-yaml\"]) | del(.devDependencies[\"babel-preset-solid\"]) | del(.devDependencies)' package.json > temp.json\nmv temp.json package.json\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"\n"
+          }
+        ]
+      }
+    ]
+  },
+  "code": [
+    {
+      "filename": "change.sh",
+      "before": "#!/bin/sh\nset -e\ngoal=\"Rewrite startVite to use Vite's JS API\"\necho \"Plan:\"\necho \"1. Modify src/frontend/startVite.js to use the Vite JS API.\"\necho \"2. Ensure to open the browser and start from the directory found in the current version of startVite.js.\"\n\ncat << 'EOF' > src/frontend/startVite.js\nimport path from 'path';\nimport { fileURLToPath } from 'url';\nimport { createServer } from 'vite';\n\nconst __dirname = path.dirname(fileURLToPath(import.meta.url));\nconst projectRoot = path.resolve(__dirname, '../..');\n\nexport async function startVite() {\n  const server = await createServer({\n    root: projectRoot + '/src/frontend',\n    server: {\n      open: true,\n    },\n  });\n  await server.listen();\n  server.printUrls();\n}\nEOF\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "after": "#!/bin/sh\nset -e\ngoal=\"Refactor package.json as per the task description\"\necho \"Plan:\"\necho \"1. Uninstall babel-preset-solid\"\necho \"2. Move every other item from devDependencies to dependencies\"\necho \"3. Set the description to 'Your AI Contributor which codes itself'\"\n\n# 1. Uninstall babel-preset-solid\nnpm uninstall babel-preset-solid\n\n# 2. Move every other item from devDependencies to dependencies and 3. Set the description\njq '.description = \"Your AI Contributor which codes itself\" | .dependencies += .devDependencies | del(.devDependencies[\"@types/js-yaml\"]) | del(.devDependencies[\"babel-preset-solid\"]) | del(.devDependencies)' package.json > temp.json\nmv temp.json package.json\n\necho \"\\033[32mDone: $goal\\033[0m\\n\"",
+      "total_deletions": 21,
+      "total_additions": 9
+    }
+  ]
+}
