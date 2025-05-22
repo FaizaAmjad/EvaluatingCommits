@@ -45,7 +45,7 @@ def process_commits(input_folder: str, output_csv_path: str, top_k: int, ngram_r
             try:
                 best_crystalbleu_score, best_prompt_id, best_gpt_code = find_prompt_with_highest_crystalbleu_score(after, conversations, trivially_shared)
                 line_match_score= evaluate_lines(after, best_gpt_code)
-                dev_changed_score, gpt_reused_score =  score_dev_vs_gpt_changes(before, after, best_gpt_code)
+                exact_gpt_lines, modified_gpt_lines, dev_own_lines =  score_dev_vs_gpt_changes(before, after, best_gpt_code)
 
                 results.append({
                     "sha": sha,
@@ -53,8 +53,9 @@ def process_commits(input_folder: str, output_csv_path: str, top_k: int, ngram_r
                     "prompt_id": best_prompt_id,
                     "crystalbleu_after_vs_chatgpt": round(best_crystalbleu_score, 2),
                     "line_match_after_vs_chatgpt": round(line_match_score, 2),
-                    "dev_own_lines": round(dev_changed_score, 2),
-                    "dev_modified_gpt_lines": round(gpt_reused_score, 2)
+                    "dev_used_as_is": round(exact_gpt_lines, 2),
+                    "dev_modified": round(modified_gpt_lines, 2),
+                    "dev_own_lines": round(dev_own_lines, 2)
                 }) 
 
             except Exception as e:
