@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -33,4 +34,16 @@ ax.grid(True, axis='y', linestyle='--', alpha=0.5)
 plt.tight_layout()
 plt.xticks([])  # hides x-tick labels
 plt.xlabel('')  # removes x-axis label text
+
+# Ensure 'images' folder exists
+output_dir = os.path.join(os.path.dirname(__file__), 'images')
+os.makedirs(output_dir, exist_ok=True)
+
+# Save plot as PDF
+output_path = os.path.join(output_dir, 'exact_modified_original.pdf')
+plt.savefig(output_path, format='pdf')
+
+#save plot as png
+plt.savefig(os.path.join(output_dir, 'exact_modified_original.png'), format='png')
+
 plt.show()
