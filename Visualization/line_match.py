@@ -37,17 +37,17 @@ commit_avg['file_count'] = df.groupby('short_sha')['file'].count().values
 # Plot
 plt.figure(figsize=(10, 6))
 sns.scatterplot(
-    data=commit_avg,
+    data=df,
     x='line_match_after_vs_chatgpt',
     y='crystalbleu_after_vs_chatgpt',
-    size='file_count',
-    hue='file_count',  # or change to another variable
-    sizes=(50, 300),
     palette='viridis',
-    legend='brief'
+    hue='short_sha',
+    legend=False,
+    alpha=0.8,
+    s=100  # Dot size
 )
 
-plt.title('CrystalBLEU vs. Line Match per Commit', fontsize=14)
+plt.title('CrystalBLEU vs. Line Match per file', fontsize=14)
 plt.xlabel('Average Line Match')
 plt.ylabel('Average CrystalBLEU')
 plt.tight_layout()
