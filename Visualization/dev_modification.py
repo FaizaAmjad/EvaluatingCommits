@@ -2,9 +2,28 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+import json
 
-# Load your data
-df = pd.read_csv('../evaluation_results.csv')
+# Load data
+df = pd.read_csv('./evaluation_results.csv')
+with open('valid_shas.json') as f:
+    valid_shas = json.load(f)
+
+# Filter DataFrame to include only SHAs that we manually inspected and found valid
+df = df[df['sha'].isin(valid_shas)]
+
+# Check which SHAs are missing from the data
+actual_shas = set(df['sha'].unique())
+expected_shas = set(valid_shas)
+
+missing_shas = expected_shas - actual_shas
+
+if missing_shas:
+    print(f"Missing {len(missing_shas)} SHAs from data:")
+    for sha in sorted(missing_shas):
+        print(sha)
+else:
+    print("All SHAs found in the data.")
 
 # Group by commit SHA and compute mean scores
 grouped = df.groupby('sha')[['dev_used_as_is', 'dev_modified', 'dev_own_lines']].mean()
